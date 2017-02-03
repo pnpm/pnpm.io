@@ -1,4 +1,60 @@
 <html>
   <title>pnpm - Performant npm installations</title>
+  <style>
+  * {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif}
+  .container {
+    width: 900px;
+    margin: auto;
+  }
+  .header {
+    text-align: center;
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 30;
+  }
+  .body {
+    margin-top: 30px;
+  }
+  h3 {
+    color: #eb4b4c;
+    margin-top: 45px;
+    font-size: 22px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 34px;
+  }
+  </style>
 <body>
-  <h1>pnpm</h1>
+  <div class="container">
+    <div class="header">
+      <img src="logo.png">
+      <h1>pnpm</h1>
+      <div>Fast, disk space efficient npm installs</div>
+    </div>
+
+    <div class="body">
+      <h2>A package manager that cares</h2>
+
+      <h3>About speed</h3>
+      <p>pnpm is 10 times faster than npm and 30% faster than Yarn</p>
+
+      <h3>About disk space usage</h3>
+      <p>
+        Packages are saved once per machine. Pnpm never copies, always links.
+        It saves dozens of gigabytes of memory!
+      </p>
+
+      <h3>About best practices</h3>
+      <p>
+        pnpm doesn't focus on the reimplementation of other package manager's flaws,
+        like flat dependency trees. But it does focus on complete Node.js compatibility.
+      </p>
+
+      <h3>About simplicity</h3>
+      <p>
+        pnpm's algorithms are a lot easier than other Node.js package manager's.
+        pnpm doesn't try to replicate the complex algorithms used by npm and yarn for deduplication.
+        pnpm's node_modules design has a sane structure without the problems that npm@2 had.
+      </p>
+    </div>
+  </div>
