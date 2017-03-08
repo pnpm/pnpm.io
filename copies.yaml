@@ -1,0 +1,91 @@
+en:
+  title: pnpm - Fast, disk space efficient npm installs
+  description: Fast, disk space efficient package manager
+  keywords: node.js, npm, package manager, fast package manager, disk space efficient package manager, dependency manager
+  h1: Fast, disk space efficient package manager
+  features: features
+  speed: Speed
+  speedCopy: >
+    pnpm is <strong>10 times faster</strong> than npm and 30% faster than
+    Yarn. See benchmarks <a class="link black-70 underline" target="_blank"
+    href="https://github.com/pnpm/node-package-manager-benchmark">here</a>.
+  efficiency: Efficiency
+  efficiencyCopy: >
+    Packages are saved once per machine. Pnpm never copies, always links.
+    It <strong>saves dozens of gigabytes of memory!</strong>
+  sanity: Sanity
+  sanityCopy: >
+    pnpm doesn't focus on the reimplementation of other package manager's flaws,
+    like flat dependency trees. But it does focus on complete Node.js compatibility.
+  simplicity: Simplicity
+  simplicityCopy: >
+    pnpm's algorithms are a lot easier than other Node.js package manager's.
+    pnpm doesn't try to replicate the complex algorithms used by npm and yarn for deduplication.
+    pnpm's node_modules design has a sane structure without the problems that npm@2 had.
+hu:
+  title: pnpm - npm install gyorsabb és hatékonyabb memória használattal
+  description: npm install gyorsabb és hatékonyabb memória használattal
+  keywords: node.js, npm, csomagkezelő, gyors csomagkezelő, hatékony memória használat
+  h1: Egy nagyon gyors és effektív csomagkezelő
+  features: funkciók
+  speed: Gyorsasság
+  speedCopy: pnpm 10szer gyorsabb mint npm és 30%-al gyorsabb mint Yarn
+  efficiency: Takarékosság
+  efficiencyCopy: >
+    A csomagok mindig csupán egyszer vannak mentve a lemezen. Pnpm sosem másol,
+    mindig rögzített hivatkozást (hard link-et) használ. Rengeteg gigabájtnyi helyet spórol!
+  sanity: Elegancia
+  sanityCopy: >
+    pnpm nem fókuszál más csomagkezelők hibáinak utánzásán,
+    mint a lapos függőségi fák (flat dependency trees). Azonban garantálja a teljes Node.js kompatibilitást.
+  simplicity: Egyszerüség
+  simplicityCopy: >
+    pnpm sokkal egyszerübb a többi Node.js csomagkezelőnél.
+    pnpm nem próbálja utánozni npm s yarn bonyolult algoritmusait, melyekre a függőségi fa lapositásá miatt van szükség.
+    pnpm-nek a node_modules modelje roppant egyszerü, mégis az npm@2-re jellemző problémák nélkül.
+uk:
+  title: pnpm - швидкий та ефективний менеджер пакетів
+  description: швидкий та ефективний менеджер пакетів
+  keywords: node.js, npm, менеджер пакетів, швидкий менеджер пакетів, ефективний менеджер пакетів
+  h1: Швидкий та ефективний менеджер пакетів
+  features: властивості
+  speed: Швидкість
+  speedCopy: pnpm в 10 разів швидший за npm і на 30% швидший за Yarn
+  efficiency: Економність
+  efficiencyCopy: >
+    Пакети зберігаються на диску завжди тільки один раз. Pnpm ніколи не копіює,
+    а натомість використовує жорсткі посилання (hard link). Це економить гігабайти пам'яті!
+  sanity: Вишуканість
+  sanityCopy: >
+    pnpm не намагається повторювати недостатки інших менеджерів пакетів,
+    такі як, до прикладу, плоскі дерева залежностей (flat dependency trees).
+    В той же час, pnpm гарантує повну сумісність з Node.js.
+  simplicity: Простота
+  simplicityCopy: >
+    pnpm має набагато простіший код, ніж інші Node.js менеджери пакетів.
+    pnpm не потребує таких складних алгоритмів як npm чи yarn, тому що він використовує
+    набагато простішу структуру для зберігання залежностей у папці node_modules. Попри це
+    pnpm не має тих проблем, які мав npm@2.
+ru:
+  title: pnpm - быстрый и эффективный менеджер пакетов
+  description: быстрый и эффективный менеджер пакетов
+  keywords: node.js, npm, менеджер пакетов, быстрый менеджер пакетов, эффективный менеджер пакетов
+  h1: Быстрый и эффективный менеджер пакетов
+  features: свойства
+  speed: Скорость
+  speedCopy: pnpm в 10 раз быстрее npm и на 30% быстрее Yarn
+  efficiency: Экономность
+  efficiencyCopy: >
+    Пакеты хранятся на диске всегда только один раз. Pnpm никогда не копирует,
+    он использует жесткие ссылки (hard link). Это экономит гигабайты памяти!
+  sanity: Изысканность
+  sanityCopy: >
+    pnpm не пытается повторять недостатки других менеджеров пакетов,
+    такие как, к примеру, плоские дерева зависимостей (flat dependency trees).
+    В то же время, pnpm гарантирует полную совместимость с Node.js.
+  simplicity: Простота
+  simplicityCopy: >
+    У pnpm код гораздо более прост, чем у других Node.js менеджеров пакетов.
+    pnpm не требует таких сложных алгоритмов как npm или yarn, так как он использует
+    гораздо более простую структуру для хранения пакетов в папке node_modules. Несмотря на это
+    pnpm не имеет тех проблем, которые встречаются с npm@2.

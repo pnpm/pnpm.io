@@ -1,0 +1,24 @@
+{
+  "name": "pnpm.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pnpm/pnpm.github.io.git"
+  },
+  "author": "Zoltan Kochan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pnpm/pnpm.github.io/issues"
+  },
+  "homepage": "https://github.com/pnpm/pnpm.github.io#readme",
+  "dependencies": {
+    "load-yaml-file": "^0.1.0",
+    "mz": "^2.6.0",
+    "pug": "^2.0.0-beta11"
+  }
+}
