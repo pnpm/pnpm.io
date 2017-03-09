@@ -22,6 +22,8 @@ en:
     pnpm's algorithms are a lot easier than other Node.js package manager's.
     pnpm doesn't try to replicate the complex algorithms used by npm and yarn for deduplication.
     pnpm's node_modules design has a sane structure without the problems that npm@2 had.
+  followOnTwitter: Follow @pnpmjs
+  joinOnGitter: Need Help? Join our Gitter Chat Room
 hu:
   title: pnpm - npm install gyorsabb és hatékonyabb memória használattal
   description: npm install gyorsabb és hatékonyabb memória használattal
@@ -43,6 +45,8 @@ hu:
     pnpm sokkal egyszerübb a többi Node.js csomagkezelőnél.
     pnpm nem próbálja utánozni npm s yarn bonyolult algoritmusait, melyekre a függőségi fa lapositásá miatt van szükség.
     pnpm-nek a node_modules modelje roppant egyszerü, mégis az npm@2-re jellemző problémák nélkül.
+  followOnTwitter: Kövess @pnpmjs
+  joinOnGitter: Segitség kell? Csatlakozz hozzánk Gitteren
 uk:
   title: pnpm - швидкий та ефективний менеджер пакетів
   description: швидкий та ефективний менеджер пакетів
@@ -66,6 +70,8 @@ uk:
     pnpm не потребує таких складних алгоритмів як npm чи yarn, тому що він використовує
     набагато простішу структуру для зберігання залежностей у папці node_modules. Попри це
     pnpm не має тих проблем, які мав npm@2.
+  followOnTwitter: Читай @pnpmjs
+  joinOnGitter: Потрібна допомога? Приєднуйся до нас на Gitter
 ru:
   title: pnpm - быстрый и эффективный менеджер пакетов
   description: быстрый и эффективный менеджер пакетов
@@ -89,3 +95,5 @@ ru:
     pnpm не требует таких сложных алгоритмов как npm или yarn, так как он использует
     гораздо более простую структуру для хранения пакетов в папке node_modules. Несмотря на это
     pnpm не имеет тех проблем, которые встречаются с npm@2.
+  followOnTwitter: Читай @pnpmjs
+  joinOnGitter: Нужна помощь? Присоединяйся к нам на Gitter
