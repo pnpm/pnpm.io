@@ -24,6 +24,29 @@ en:
     pnpm's node_modules design has a sane structure without the problems that npm@2 had.
   followOnTwitter: Follow @pnpmjs
   joinOnGitter: Need Help? Join our Gitter Chat Room
+de:
+  title: pnpm - Schneller und effektiver Paketmanager
+  description: Schneller und effektiver Paketmanager
+  keywords: node.js, npm, Paketmanager, Schneller Paketmanager, effektiver Paketmanager
+  h1: Schneller und effektiver Paketmanager
+  features: eigenschaften
+  speed: Schnelle
+  speedCopy: >
+    pnpm ist 10-mal schneller, als npm und 30% schneller, als Yarn
+  efficiency: Sparsamkeit
+  efficiencyCopy: >
+    Die Pakete werden immer nur einmal auf der Festplatte gespeichert. pnpm kopiert nie, und benutzt stattdessen Hardlinks. Das erspart viele Gigabyte Speicher.
+  sanity: Eleganz
+  sanityCopy: >
+    pnpm kopiert keine Nachteile von anderen Paketmanager, solche, wie z.B flache Abhängigkeitsbäume (flat dependency trees)
+    pnpm gewährleistet jedoch volle Kompabilität mit Node.js
+  simplicity: Einfachheit
+  simplicityCopy: >
+    pnpm hat einen viel einfacheren Kode, als andere Node.js Paketmanager. pnpm erfordert keine solchen komplizierten
+    Algorithmen, wie npm oder Yarn, weil er eine viel einfachere Struktur für die Aufbewahrung von Abhängigkeiten im Ordner
+    node_modules benutzt. Trotzdem hat pnpm keine solchen Probleme, wie npm@2 bisher hatte.
+  followOnTwitter: Folgen @pnpmjs
+  joinOnGitter: Hilfe gebraucht? Treten Sie unserem Gitter Chat Room bei
 hu:
   title: pnpm - npm install gyorsabb és hatékonyabb memória használattal
   description: npm install gyorsabb és hatékonyabb memória használattal

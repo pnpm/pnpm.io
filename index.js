@@ -11,6 +11,10 @@ const langs = [
     label: 'English'
   },
   {
+    code: 'de',
+    label: 'Deutsch'
+  },
+  {
     code: 'hu',
     label: 'Magyar'
   },
