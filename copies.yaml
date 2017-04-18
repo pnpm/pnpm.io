@@ -12,7 +12,7 @@ en:
   efficiency: Efficiency
   efficiencyCopy: >
     Packages are saved once per machine. Pnpm never copies, always links.
-    It <strong>saves dozens of gigabytes of memory!</strong>
+    It <strong>saves dozens of gigabytes of disk space!</strong>
   sanity: Sanity
   sanityCopy: >
     pnpm doesn't focus on the reimplementation of other package manager's flaws,
