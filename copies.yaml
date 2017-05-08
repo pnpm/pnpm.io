@@ -22,6 +22,7 @@ en:
     pnpm's algorithms are a lot easier than other Node.js package manager's.
     pnpm doesn't try to replicate the complex algorithms used by npm and yarn for deduplication.
     pnpm's node_modules design has a sane structure without the problems that npm@2 had.
+  whatDevsSay: What developers are saying
   followOnTwitter: Follow @pnpmjs
   joinOnGitter: Need Help? Join our Gitter Chat Room
 de:
@@ -45,6 +46,7 @@ de:
     pnpm hat einen viel einfacheren Kode, als andere Node.js Paketmanager. pnpm erfordert keine solchen komplizierten
     Algorithmen, wie npm oder Yarn, weil er eine viel einfachere Struktur für die Aufbewahrung von Abhängigkeiten im Ordner
     node_modules benutzt. Trotzdem hat pnpm keine solchen Probleme, wie npm@2 bisher hatte.
+  whatDevsSay: Was Entwickler sagen
   followOnTwitter: Folgen @pnpmjs
   joinOnGitter: Hilfe gebraucht? Treten Sie unserem Gitter Chat Room bei
 hu:
@@ -68,6 +70,7 @@ hu:
     pnpm sokkal egyszerübb a többi Node.js csomagkezelőnél.
     pnpm nem próbálja utánozni npm s yarn bonyolult algoritmusait, melyekre a függőségi fa lapositásá miatt van szükség.
     pnpm-nek a node_modules modelje roppant egyszerü, mégis az npm@2-re jellemző problémák nélkül.
+  whatDevsSay: Mit mondanak a programozók
   followOnTwitter: Kövess @pnpmjs
   joinOnGitter: Segitség kell? Csatlakozz hozzánk Gitteren
 uk:
@@ -93,6 +96,7 @@ uk:
     pnpm не потребує таких складних алгоритмів як npm чи yarn, тому що він використовує
     набагато простішу структуру для зберігання залежностей у папці node_modules. Попри це
     pnpm не має тих проблем, які мав npm@2.
+  whatDevsSay: Що кажуть розробники
   followOnTwitter: Читай @pnpmjs
   joinOnGitter: Потрібна допомога? Приєднуйся до нас на Gitter
 ru:
@@ -118,5 +122,6 @@ ru:
     pnpm не требует таких сложных алгоритмов как npm или yarn, так как он использует
     гораздо более простую структуру для хранения пакетов в папке node_modules. Несмотря на это
     pnpm не имеет тех проблем, которые встречаются с npm@2.
+  whatDevsSay: Что говорят разработчики
   followOnTwitter: Читай @pnpmjs
   joinOnGitter: Нужна помощь? Присоединяйся к нам на Gitter
