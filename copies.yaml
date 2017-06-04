@@ -6,8 +6,7 @@ en:
   features: features
   speed: Speed
   speedCopy: >
-    pnpm is <strong>10 times faster</strong> than npm and 30% faster than
-    Yarn. See benchmarks <a class="link black-70 underline" target="_blank"
+    pnpm is faster than both npm and Yarn. See benchmarks <a class="link black-70 underline" target="_blank"
     href="https://github.com/pnpm/node-package-manager-benchmark">here</a>.
   efficiency: Efficiency
   efficiencyCopy: >
@@ -33,7 +32,7 @@ de:
   features: eigenschaften
   speed: Schnelle
   speedCopy: >
-    pnpm ist 10-mal schneller, als npm und 30% schneller, als Yarn
+    pnpm ist schneller, als npm und, als Yarn
   efficiency: Sparsamkeit
   efficiencyCopy: >
     Die Pakete werden immer nur einmal auf der Festplatte gespeichert. pnpm kopiert nie, und benutzt stattdessen Hardlinks. Das erspart viele Gigabyte Speicher.
@@ -56,7 +55,7 @@ hu:
   h1: Egy nagyon gyors és effektív csomagkezelő
   features: funkciók
   speed: Gyorsasság
-  speedCopy: pnpm 10szer gyorsabb mint npm és 30%-al gyorsabb mint Yarn
+  speedCopy: pnpm gyorsabb mint npm és Yarn
   efficiency: Takarékosság
   efficiencyCopy: >
     A csomagok mindig csupán egyszer vannak mentve a lemezen. Pnpm sosem másol,
@@ -80,7 +79,7 @@ uk:
   h1: Швидкий та ефективний менеджер пакетів
   features: властивості
   speed: Швидкість
-  speedCopy: pnpm в 10 разів швидший за npm і на 30% швидший за Yarn
+  speedCopy: pnpm швидший за npm і Yarn
   efficiency: Економність
   efficiencyCopy: >
     Пакети зберігаються на диску завжди тільки один раз. Pnpm ніколи не копіює,
@@ -106,7 +105,7 @@ ru:
   h1: Быстрый и эффективный менеджер пакетов
   features: свойства
   speed: Скорость
-  speedCopy: pnpm в 10 раз быстрее npm и на 30% быстрее Yarn
+  speedCopy: pnpm быстрее чем npm и Yarn
   efficiency: Экономность
   efficiencyCopy: >
     Пакеты хранятся на диске всегда только один раз. Pnpm никогда не копирует,
