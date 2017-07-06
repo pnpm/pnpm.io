@@ -124,3 +124,24 @@ ru:
   whatDevsSay: Что говорят разработчики
   followOnTwitter: Читай @pnpmjs
   joinOnGitter: Нужна помощь? Присоединяйся к нам на Gitter
+pt-br:
+  title: pnpm - Um gerenciador de pacotes npm muito rápido e eficaz
+  description: Um gerenciador de pacotes muito rápido e eficaz
+  keywords: node.js, npm, gerenciador de pacote, gerenciador de pacote rápido, gerenciador de pacotes eficiente em espaço de disco, gerenciador de dependências
+  h1: Um gerenciador de pacotes muito rápido e eficaz
+  features: funcionalidades
+  speed: Velocidade
+  speedCopy: >
+    pnpm é mais rápido que ambos npm and Yarn. Veja benchmarks <a class="link black-70 underline" target="_blank" href="https://github.com/pnpm/node-package-manager-benchmark">aqui</a>.
+  efficiency: Eficiência
+  efficiencyCopy: >
+    Os pacotes são salvos uma única vez na máquina. Pnpm nunca copia, sempre vincúla. Isso <strong>economiza dezenas de gigabytes de espaço em disco!</strong>
+  sanity: Sanidade
+  sanityCopy: >
+    pnpm não foca na reimplementação de falhas de outros gerenciadores de pacotes, como dependência plana em árvores. Ele é focado na compatibilidade completa com Node.js.
+  simplicity: Simplicidade
+  simplicityCopy: >
+    Os algoritmos do pnpm são muito mais simples que outros gerenciadores de pacotes Node.js. pnpm não tenta replicar algoritmos complexos usado por npm e yarn para desduplicação. O design node_modules do pnpm tem uma estrutura sã sem os problemas que o npm@2 teve.
+  whatDevsSay: O que os desenvolvedores estão dizendo
+  followOnTwitter: Siga @pnpmjs
+  joinOnGitter: Precisa de ajuda? Entre em nosso sala de chat no Gitter

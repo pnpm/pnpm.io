@@ -25,6 +25,10 @@ const langs = [
   {
     code: 'ru',
     label: 'Русский'
+  },
+  {
+    code: 'pt-br',
+    label: 'Português (Brasil)'
   }
 ]
 
