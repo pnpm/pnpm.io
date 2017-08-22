@@ -145,3 +145,29 @@ pt-br:
   whatDevsSay: O que os desenvolvedores estão dizendo
   followOnTwitter: Siga @pnpmjs
   joinOnGitter: Precisa de ajuda? Entre em nosso sala de chat no Gitter
+es:
+  title: pnpm - Manejador de paquetes npm rápido y eficiente
+  description: Manejador de paquetes rápido y eficiente
+  keywords: node.js, npm, manejador de paquetes, manejador de paquetes rápido, manejador de paquetes eficiente en manejo de memoria, manejo de dependencias
+  h1: Manejador de paquetes rápido y eficiente
+  features: funcionalidades
+  speed: Velocidad
+  speedCopy: >
+    pnpm más rápido que npm y Yarn. Ver benchmark <a class="link black-70 underline" target="_blank"
+    href="https://github.com/pnpm/node-package-manager-benchmark">acá</a>.
+  efficiency: Eficiencia
+  efficiencyCopy: >
+    Los paquetes se guardan una sola vez en la máquina. Pnpm nunca copia, siempre enlaza.
+    Esto <strong>ahorra docenas de gigabytes en disco!</strong>
+  sanity: Sanidad
+  sanityCopy: >
+    pnpm no se enfoca en la reimplementación de las faltas de otros packetes,
+    como árboles planos de dependencias. Este se enfoca en compatibilidad completa de Node.js.
+  simplicity: Simplicidad
+  simplicityCopy: >
+    los algoritmos de pnpm son mucho más sencillos que los otros manejadores de packetes de Node.js.
+    pnpm no intenta replicar los algoritmos complejos que usan npm o yarn para desduplicación.
+    El diseño de los node_modules de pnpm tiene una estructura segura pero sin los problemas que npm@2 tenía.
+  whatDevsSay: Lo que los desarrolladores están dicendo
+  followOnTwitter: Siga @pnpmjs
+  joinOnGitter: Necesita ayuda? Unase a nuestro chat en Gitter
