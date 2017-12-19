@@ -1,0 +1,146 @@
+<h1>PNPM</h1>
+
+<blockquote>Fast, disk space efficient package manager.</blockquote>
+
+<h2>FEATURES</h2>
+
+<ul class="feature">
+  <li>
+    <h3 class="feature--name">Speed</h3>
+    <span class="feature--desc">pnpm is faster than both npm and yarn. See benchmarks
+      <a href="https://github.com/pnpm/node-package-manager-benchmark">here</a>.</span>
+  </li>
+  <li>
+    <h3 class="feature--name">Efficiency</h3>
+    <span class="feature--desc">Packages are saved once per machine. pnpm never copies, always links. It saves dozens of gigabytes of disk space!</span>
+  </li>
+  <li>
+    <h3 class="feature--name">Sanity</h3>
+    <span class="feature--desc">pnpm doesn't focus on the reimplementation of other package manager's flaws, like flat dependency trees. But it does
+      focus on complete Node.js compatibility.</span>
+  </li>
+  <li>
+    <h3 class="feature--name">Simplicity</h3>
+    <span class="feature--desc">pnpm's algorithms are a lot easier than other Node.js package manager's. pnpm doesn't try to replicate the complex algorithms
+      used by npm and yarn for deduplication. pnpm's node_modules design has a sane structure without the problems that npm@2
+      had.
+    </span>
+  </li>
+</ul>
+
+<div class="landing-buttons">
+  <a class="landing-button" target="_blank" href="https://github.com/deadcoder0904/pnpm-site">
+    GitHub
+  </a>
+
+  <a class="landing-button" router-link="/home">
+    View
+  </a>
+</div>
+
+<style>
+  *,
+  *:after,
+  *:before {
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  h1 {
+    margin: 0;
+    margin-top: -50px;
+    font-weight: normal;
+    font-size: 40px;
+    letter-spacing: 1px;
+  }
+
+  .landing {
+    padding: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    height: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  .feature {
+    margin-top: 20px;
+    margin-bottom: 60px;
+    font-size: 16px;
+    line-height: 1.7;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .feature li {
+    width: 100%;
+    flex: 0 50%;
+    padding: 20px;
+  }
+
+  .feature--name {}
+
+  .feature--desc {}
+
+  .landing-button {
+    border: 1px solid #ccc;
+    border-radius: 33px;
+    padding: 10px 30px;
+    background-color: white;
+    display: inline-block;
+    margin-right: 20px;
+    color: #333;
+  }
+
+  .landing-button:hover {
+    border-color: #42b983;
+    color: #42b983;
+    text-decoration: none;
+  }
+
+  blockquote {
+    position: relative;
+    margin: 0;
+    padding: 30px 120px;
+    text-align: center;
+    font-size: 30px;
+    color: #999;
+  }
+
+  blockquote:before,
+  blockquote:after {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    font-size: 120px;
+    line-height: 1;
+  }
+
+  blockquote:before {
+    top: 0;
+    left: 0;
+    content: "\201C";
+  }
+
+  blockquote:after {
+    top: 0;
+    right: 0;
+    content: "\201D";
+  }
+</style>
