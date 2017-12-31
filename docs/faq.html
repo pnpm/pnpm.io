@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Frequently Asked Questions · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="installation.html" />
+    <link rel="next" href="support.html" />
     
     
 
@@ -89,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -299,7 +299,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2" data-path="faq.html">
+        <li class="chapter active" data-level="5.2" data-path="faq.html">
             
                 <a href="faq.html">
             
@@ -368,7 +368,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Frequently Asked Questions</a>
     </h1>
 </div>
 
@@ -383,30 +383,35 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pnpm">pnpm</h1>
-<blockquote>
-<p>Fast, disk space efficient package manager</p>
-</blockquote>
-<p>Features:</p>
+                                <h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
+<h2 id="why-does-my-nodemodules-folder-use-disk-space-if-packages-are-stored-in-a-global-store">Why does my <code>node_modules</code> folder use disk space if packages are stored in a global store?</h2>
+<p>pnpm creates <a href="https://en.wikipedia.org/wiki/Hard_link" target="_blank">hard links</a> from the global store to project&apos;s <code>node_modules</code> folders.
+Hard links point to the same place on the disk where the original files are.
+So, for example, if you have <code>foo</code> in your project as a dependency and it occupies 1MB of space,
+then it will look like it occupies 1MB of space in the project&apos;s <code>node_modules</code> folder and
+the same amount of space in the global store. However, that 1MB is <em>the same space</em> on the disk
+addressed from two different locations. So in total <code>foo</code> occupies 1MB,
+not 2MB.</p>
+<p>For more on this subject:</p>
 <ul>
-<li><strong>Fast.</strong> Faster than npm and Yarn.</li>
-<li><strong>Efficient.</strong> One version of a package is saved only ever once on a disk.</li>
-<li><strong>Deterministic.</strong> Has a lockfile called <code>shrinkwrap.yaml</code>.</li>
-<li><strong>Strict.</strong> A package can access only dependencies that are specified in its <code>package.json</code>.</li>
-<li><strong>Works everywhere.</strong> Works on Windows, Linux and OS X.</li>
-<li><strong>Hooks.</strong> <code>node_modules</code> is not a black box anymore.</li>
-<li><strong>Aliases.</strong> Install different versions of the same package or import it using a different name.</li>
+<li><a href="https://unix.stackexchange.com/questions/88423/why-do-hard-links-seem-to-take-the-same-space-as-the-originals" target="_blank">Why do hard links seem to take the same space as the originals?</a></li>
+<li><a href="https://gist.github.com/zkochan/106cfef49f8476b753a9cbbf9c65aff1" target="_blank">A thread from the pnpm chat room</a></li>
+<li><a href="https://github.com/pnpm/pnpm/issues/794" target="_blank">An issue in the pnpm repo</a></li>
 </ul>
-<p>Like this project? Let people know with a <a href="https://bit.ly/tweet-pnpm" target="_blank">tweet</a>.</p>
-<h2 id="background">Background</h2>
-<p>pnpm uses hard links and symlinks to save one version of a module only ever once on a disk.
-When using npm or Yarn for example, if you have 100 projects using the same version
-of lodash, you will have 100 copies of lodash on disk. With pnpm, lodash will be saved in a
-single place on the disk and a hard link will put it into the <code>node_modules</code> where it should
-be installed.</p>
-<p>As a result, you save gigabytes of space on your disk and you have a lot faster installations!
-If you&apos;d like more details about the unique <code>node_modules</code> structure that pnpm creates and
-why it works fine with the Node.js ecosystem, read this small article: <a href="https://www.kochan.io/nodejs/why-should-we-use-pnpm.html" target="_blank">Why should we use pnpm?</a></p>
+<h2 id="does-it-work-on-windows-it-is-harder-to-create-symlinks-on-windows">Does it work on Windows? It is harder to create symlinks on Windows</h2>
+<p>Using symlinks on Windows is problematic indeed. That is why pnpm uses junctions instead of symlinks on Windows OS.</p>
+<h2 id="does-it-work-on-windows-nested-nodemodules-approach-is-basically-incompatible-with-windows">Does it work on Windows? Nested <code>node_modules</code> approach is basically incompatible with Windows</h2>
+<p>Early versions of npm had issues because of nesting all <code>node_modules</code> (see <a href="https://github.com/nodejs/node-v0.x-archive/issues/6960" target="_blank">Node&apos;s nested node_modules approach is basically incompatible with Windows</a>). However, pnpm does not create deep folders, it stores all packages flatly and uses symlinks to create the dependency tree structure.</p>
+<h2 id="what-about-circular-symlinks">What about circular symlinks?</h2>
+<p>Although pnpm uses symlinks to put dependencies into <code>node_modules</code> folders, circular symlinks are avoided because parent packages are placed into the same <code>node_modules</code> folder in which their dependencies are. So <code>foo</code>&apos;s dependencies are not in <code>foo/node_modules</code> but <code>foo</code> is in <code>node_modules/foo</code>, together with its own dependencies.</p>
+<h2 id="why-have-hard-links-at-all-why-not-symlink-directly-to-the-global-store">Why have hard links at all? Why not symlink directly to the global store?</h2>
+<p>One package can have different sets of dependencies on one machine.</p>
+<p>In project <strong>A</strong> <code>foo@1.0.0</code> can have dependency resolved to <code>bar@1.0.0</code> but in project <strong>B</strong> the same dependency of <code>foo</code> might
+resolve to <code>bar@1.1.0</code>. So pnpm hard links <code>foo@1.0.0</code> to every project where it is used, in order to create different sets
+of dependencies for it.</p>
+<p>Direct symlinking to the global store would work with Node&apos;s <code>--preserve-symlinks</code> flag. But <code>--preserve-symlinks</code> comes
+with a bunch of different issues, so we decided to stick with hard links.
+For more details about why this decision was made, see: <a href="https://github.com/nodejs/node-eps/issues/46" target="_blank">https://github.com/nodejs/node-eps/issues/46</a>.</p>
 
                                 
                                 </section>
@@ -435,7 +440,7 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
             
                 
                 
-                <a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Installation">
+                <a href="support.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Support">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -446,7 +451,7 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-12-31T20:23:09.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Frequently Asked Questions","level":"5.2","depth":1,"next":{"title":"Support","level":"5.3","depth":1,"path":"support.md","ref":"support.md","articles":[]},"previous":{"title":"Awesome list","level":"5.1","depth":1,"url":"https://github.com/pnpm/awesome-pnpm","ref":"https://github.com/pnpm/awesome-pnpm","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"faq.md","mtime":"2017-12-31T19:38:36.429Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

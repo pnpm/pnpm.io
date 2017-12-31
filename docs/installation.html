@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>Installation · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="installation.html" />
+    <link rel="next" href="usage/pnpm-cli.html" />
     
+    
+    <link rel="prev" href="./" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -102,7 +104,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="installation.html">
+        <li class="chapter active" data-level="1.2" data-path="installation.html">
             
                 <a href="installation.html">
             
@@ -368,7 +370,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >Installation</a>
     </h1>
 </div>
 
@@ -383,30 +385,16 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pnpm">pnpm</h1>
-<blockquote>
-<p>Fast, disk space efficient package manager</p>
+                                <h1 id="installation">Installation</h1>
+<p>Using a <a href="https://github.com/pnpm/pnpm/blob/master/.scripts/self-installer/README.md" target="_blank">standalone script</a>:</p>
+<pre><code>curl -L https://unpkg.com/@pnpm/self-installer | node
+</code></pre><p>Via npm:</p>
+<pre><code>npm install -g pnpm
+</code></pre><p>Once you first installed pnpm, you can upgrade it using pnpm:</p>
+<pre><code>pnpm install -g pnpm
+</code></pre><blockquote>
+<p>Do you wanna use pnpm on CI servers? See: <a href="recipes/continuous-integration.html">Continuous Integration</a>.</p>
 </blockquote>
-<p>Features:</p>
-<ul>
-<li><strong>Fast.</strong> Faster than npm and Yarn.</li>
-<li><strong>Efficient.</strong> One version of a package is saved only ever once on a disk.</li>
-<li><strong>Deterministic.</strong> Has a lockfile called <code>shrinkwrap.yaml</code>.</li>
-<li><strong>Strict.</strong> A package can access only dependencies that are specified in its <code>package.json</code>.</li>
-<li><strong>Works everywhere.</strong> Works on Windows, Linux and OS X.</li>
-<li><strong>Hooks.</strong> <code>node_modules</code> is not a black box anymore.</li>
-<li><strong>Aliases.</strong> Install different versions of the same package or import it using a different name.</li>
-</ul>
-<p>Like this project? Let people know with a <a href="https://bit.ly/tweet-pnpm" target="_blank">tweet</a>.</p>
-<h2 id="background">Background</h2>
-<p>pnpm uses hard links and symlinks to save one version of a module only ever once on a disk.
-When using npm or Yarn for example, if you have 100 projects using the same version
-of lodash, you will have 100 copies of lodash on disk. With pnpm, lodash will be saved in a
-single place on the disk and a hard link will put it into the <code>node_modules</code> where it should
-be installed.</p>
-<p>As a result, you save gigabytes of space on your disk and you have a lot faster installations!
-If you&apos;d like more details about the unique <code>node_modules</code> structure that pnpm creates and
-why it works fine with the Node.js ecosystem, read this small article: <a href="https://www.kochan.io/nodejs/why-should-we-use-pnpm.html" target="_blank">Why should we use pnpm?</a></p>
 
                                 
                                 </section>
@@ -434,8 +422,12 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
 
             
                 
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Installation">
+                
+                <a href="usage/pnpm-cli.html" class="navigation navigation-next " aria-label="Next page: pnpm CLI">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -446,7 +438,7 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-12-31T20:23:09.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Installation","level":"1.2","depth":1,"next":{"title":"pnpm CLI","level":"2.1","depth":1,"path":"usage/pnpm-cli.md","ref":"usage/pnpm-cli.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"installation.md","mtime":"2017-12-31T20:22:26.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

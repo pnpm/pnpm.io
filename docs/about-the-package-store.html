@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>About the package store · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="installation.html" />
+    <link rel="next" href="symlinked-node-modules-structure.html" />
     
+    
+    <link rel="prev" href="limitations.html" />
     
 
     </head>
@@ -89,7 +91,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -240,7 +242,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3" data-path="about-the-package-store.html">
+        <li class="chapter active" data-level="4.3" data-path="about-the-package-store.html">
             
                 <a href="about-the-package-store.html">
             
@@ -368,7 +370,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >About the package store</a>
     </h1>
 </div>
 
@@ -383,30 +385,36 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pnpm">pnpm</h1>
-<blockquote>
-<p>Fast, disk space efficient package manager</p>
-</blockquote>
-<p>Features:</p>
-<ul>
-<li><strong>Fast.</strong> Faster than npm and Yarn.</li>
-<li><strong>Efficient.</strong> One version of a package is saved only ever once on a disk.</li>
-<li><strong>Deterministic.</strong> Has a lockfile called <code>shrinkwrap.yaml</code>.</li>
-<li><strong>Strict.</strong> A package can access only dependencies that are specified in its <code>package.json</code>.</li>
-<li><strong>Works everywhere.</strong> Works on Windows, Linux and OS X.</li>
-<li><strong>Hooks.</strong> <code>node_modules</code> is not a black box anymore.</li>
-<li><strong>Aliases.</strong> Install different versions of the same package or import it using a different name.</li>
-</ul>
-<p>Like this project? Let people know with a <a href="https://bit.ly/tweet-pnpm" target="_blank">tweet</a>.</p>
-<h2 id="background">Background</h2>
-<p>pnpm uses hard links and symlinks to save one version of a module only ever once on a disk.
-When using npm or Yarn for example, if you have 100 projects using the same version
-of lodash, you will have 100 copies of lodash on disk. With pnpm, lodash will be saved in a
-single place on the disk and a hard link will put it into the <code>node_modules</code> where it should
-be installed.</p>
-<p>As a result, you save gigabytes of space on your disk and you have a lot faster installations!
-If you&apos;d like more details about the unique <code>node_modules</code> structure that pnpm creates and
-why it works fine with the Node.js ecosystem, read this small article: <a href="https://www.kochan.io/nodejs/why-should-we-use-pnpm.html" target="_blank">Why should we use pnpm?</a></p>
+                                <h1 id="about-the-package-store">About the package store</h1>
+<p>A store is a folder that contains packages and information about projects that are using them.
+The store does not include the <code>node_modules</code> folder of any of the packages, unless the package has
+<a href="https://docs.npmjs.com/files/package.json#bundleddependencies" target="_blank">bundled dependencies</a>.</p>
+<p>The store is immutable. Execution of modules from the store cannot remove/add files in the store,
+because modules are executed in the context of the projects they are linked into.</p>
+<h2 id="store-directory-structure">Store directory structure</h2>
+<p>Path structure: <code>&lt;package source&gt;/&lt;package id&gt;</code>. The path to a package in the store is the package&apos;s ID.</p>
+<h3 id="packages-from-npm-compatible-registries">Packages from npm-compatible registries</h3>
+<p><code>&lt;registry URL&gt;/&lt;package name&gt;/&lt;package version&gt;</code></p>
+<p>E.g.:</p>
+<pre><code>registry.npmjs.org/gulp/2.1.0
+registry.npmjs.org/@cycle/dom/14.1.0
+registry.node-modules.io/@wmhilton/log/1.1.0
+</code></pre><h3 id="packages-from-git">Packages from Git</h3>
+<p><code>&lt;Git URL domain&gt;/&lt;Git path&gt;/&lt;commit hash&gt;</code></p>
+<p>E.g.: <code>github.com/alexGugel/ied/b246270b53e43f1dc469df0c9b9ce19bb881e932</code></p>
+<h2 id="storejson"><code>store.json</code></h2>
+<p>A file in the root of store that contains information about projects depending on specific packages from the store.</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;/home/john_smith/src/ied&quot;</span>: [
+    <span class="hljs-string">&quot;registry.npmjs.org/npm/3.10.2&quot;</span>
+  ],
+  <span class="hljs-string">&quot;/home/john_smith/src/ied&quot;</span>: [
+    <span class="hljs-string">&quot;registry.npmjs.org/arr-flatten/1.0.1&quot;</span>,
+    <span class="hljs-string">&quot;registry.npmjs.org/byline/5.0.0&quot;</span>,
+    <span class="hljs-string">&quot;registry.npmjs.org/cache-manager/2.2.0&quot;</span>
+  ]
+}
+</code></pre>
 
                                 
                                 </section>
@@ -434,8 +442,12 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
 
             
                 
+                <a href="limitations.html" class="navigation navigation-prev " aria-label="Previous page: Limitations">
+                    <i class="fa fa-angle-left"></i>
+                </a>
                 
-                <a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Installation">
+                
+                <a href="symlinked-node-modules-structure.html" class="navigation navigation-next " aria-label="Next page: Symlinked node_modules structure">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -446,7 +458,7 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-12-31T20:23:09.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"About the package store","level":"4.3","depth":1,"next":{"title":"Symlinked node_modules structure","level":"4.4","depth":1,"path":"symlinked-node-modules-structure.md","ref":"symlinked-node-modules-structure.md","articles":[]},"previous":{"title":"Limitations","level":"4.2","depth":1,"path":"limitations.md","ref":"limitations.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"about-the-package-store.md","mtime":"2017-12-31T19:34:11.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

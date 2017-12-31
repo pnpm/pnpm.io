@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Introduction · GitBook</title>
+        <title>How peers are resolved · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,8 +57,8 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="installation.html" />
     
+    <link rel="prev" href="symlinked-node-modules-structure.html" />
     
 
     </head>
@@ -89,7 +89,7 @@
         
         
     
-        <li class="chapter active" data-level="1.1" data-path="./">
+        <li class="chapter " data-level="1.1" data-path="./">
             
                 <a href="./">
             
@@ -266,7 +266,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.5" data-path="how-peers-are-resolved.html">
+        <li class="chapter active" data-level="4.5" data-path="how-peers-are-resolved.html">
             
                 <a href="how-peers-are-resolved.html">
             
@@ -368,7 +368,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Introduction</a>
+        <a href="." >How peers are resolved</a>
     </h1>
 </div>
 
@@ -383,30 +383,117 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="pnpm">pnpm</h1>
-<blockquote>
-<p>Fast, disk space efficient package manager</p>
-</blockquote>
-<p>Features:</p>
-<ul>
-<li><strong>Fast.</strong> Faster than npm and Yarn.</li>
-<li><strong>Efficient.</strong> One version of a package is saved only ever once on a disk.</li>
-<li><strong>Deterministic.</strong> Has a lockfile called <code>shrinkwrap.yaml</code>.</li>
-<li><strong>Strict.</strong> A package can access only dependencies that are specified in its <code>package.json</code>.</li>
-<li><strong>Works everywhere.</strong> Works on Windows, Linux and OS X.</li>
-<li><strong>Hooks.</strong> <code>node_modules</code> is not a black box anymore.</li>
-<li><strong>Aliases.</strong> Install different versions of the same package or import it using a different name.</li>
-</ul>
-<p>Like this project? Let people know with a <a href="https://bit.ly/tweet-pnpm" target="_blank">tweet</a>.</p>
-<h2 id="background">Background</h2>
-<p>pnpm uses hard links and symlinks to save one version of a module only ever once on a disk.
-When using npm or Yarn for example, if you have 100 projects using the same version
-of lodash, you will have 100 copies of lodash on disk. With pnpm, lodash will be saved in a
-single place on the disk and a hard link will put it into the <code>node_modules</code> where it should
-be installed.</p>
-<p>As a result, you save gigabytes of space on your disk and you have a lot faster installations!
-If you&apos;d like more details about the unique <code>node_modules</code> structure that pnpm creates and
-why it works fine with the Node.js ecosystem, read this small article: <a href="https://www.kochan.io/nodejs/why-should-we-use-pnpm.html" target="_blank">Why should we use pnpm?</a></p>
+                                <h1 id="how-peers-are-resolved">How peers are resolved</h1>
+<p>One of the very great features of pnpm is that in one project, a specific version of a package will always have
+one set of dependencies. There is one exclusion from it though - packages with <a href="https://docs.npmjs.com/files/package.json#peerdependencies" target="_blank">peer dependencies</a>.</p>
+<p>Peer dependencies are resolved from dependencies installed higher in the dependency tree.
+That means if <code>foo@1.0.0</code> has two peers (<code>bar@^1</code> and <code>baz@^1</code>) then it might have different sets of dependencies
+in the same project.</p>
+<pre><code>- foo-parent-1
+  - bar@1.0.0
+  - baz@1.0.0
+  - foo@1.0.0
+- foo-parent-2
+  - bar@1.0.0
+  - baz@1.1.0
+  - foo@1.0.0
+</code></pre><p>In the example above, <code>foo@1.0.0</code> is installed for <code>foo-parent-1</code> and <code>foo-parent-2</code>. Both packages have <code>bar</code> and <code>baz</code>as well, but
+they depend on different versions of <code>baz</code>. As a result, <code>foo@1.0.0</code> has two different sets of dependencies: one with <code>baz@1.0.0</code>
+and the other one with <code>baz@1.1.0</code>. In order to support these use cases, pnpm has to hard link <code>foo@1.0.0</code> as many times as many different dependency sets it has.</p>
+<p>Normally, if a package does not have peer dependencies, it is hard linked to a <code>node_modules</code> folder next to symlinks of its dependencies.</p>
+<pre>
+- .registry.npmjs.org / foo / 1.0.0 / node_modules
+  <sub>hard link to the specific foo package in the store</sub>
+  - foo
+  <sub>dependencies of foo, symlinks to folders where these deps are resolved with their deps</sub>
+  - qux
+  - plugh
+</pre>
+
+<p>However, if <code>foo</code> has peer dependencies, there cannot be one single set of dependencies for it, so
+we create different sets, for different peer dependency resolutions:</p>
+<pre>
+- .registry.npmjs.org / foo / 1.0.0
+
+  - bar@1.0.0+baz@1.0.0 / node_modules
+    <sub>hard link</sub>
+    - foo
+    <sub>symlinks to peer dependencies</sub>
+    - bar <sub>v1.0.0</sub>
+    - baz <sub>v1.0.0</sub>
+    <sub>regular dependencies of foo</sub>
+    - qux
+    - plugh
+
+  - bar@1.0.0+baz@1.1.0 / node_modules
+    <sub>hard link</sub>
+    - foo
+    <sub>symlinks to peer dependencies</sub>
+    - bar <sub>v1.0.0</sub>
+    - baz <sub>v1.1.0</sub>
+    <sub>regular dependencies of foo</sub>
+    - qux
+    - plugh
+</pre>
+
+<p>We create symlinks either to the <code>foo</code> that is inside <code>bar@1.0.0+bar@1.0.0/node_modules</code> or to the one in <code>bar@1.0.0+bar@1.1.0/node_modules</code>.
+As a consequence, the Node.js module resolver algorithm will find the correct peers.</p>
+<p><em>If the resolved peer is a direct dependency of the project</em>, it is not grouped separately with the dependent package.
+This is done to make it easier to make predictable and fast named (<code>pnpm i foo</code>) and general (<code>pnpm i</code>) installations.
+So if the project dependends on <code>bar@1.0.0</code>, the dependencies from our example will be grouped like this:</p>
+<pre>
+- bar <sub>v1.0.0</sub>
+- .registry.npmjs.org / foo / 1.0.0
+
+  - baz@1.0.0 / node_modules
+    <sub>hard link</sub>
+    - foo
+    <sub>symlinks to peer dependencies</sub>
+    - baz <sub>v1.0.0</sub>
+    <sub>regular dependencies of foo</sub>
+    - qux
+    - plugh
+
+  - baz@1.1.0 / node_modules
+    <sub>hard link</sub>
+    - foo
+    <sub>symlinks to peer dependencies</sub>
+    - baz <sub>v1.1.0</sub>
+    <sub>regular dependencies of foo</sub>
+    - qux
+    - plugh
+</pre>
+
+<p><em>If a package has no peer dependencies but has dependencies with peers that are resolved higher in the tree</em>, then
+that transitive package can appear in the project with different sets of dependencies. For instance, there&apos;s package <code>a@1.0.0</code>
+with a single dependency <code>framework@1.0.0</code>. <code>framework@1.0.0</code> has a peer dependency <code>plugin@^1</code>. <code>a@1.0.0</code> will never resolve the
+peers of <code>framework@1.0.0</code>, so it becomes dependent from the peers of <code>framework@1.0.0</code> as well.</p>
+<p>Here&apos;s how it will look like in <code>node_modules/.registry.npmjs.org</code>, in case if <code>a@1.0.0</code> will need to appear twice in the project&apos;s
+<code>node_modules</code>, once resolved with <code>plugin@1.0.0</code> and once with <code>plugin@1.1.0</code>.</p>
+<pre>
+- .registry.npmjs.org
+  - a / 1.0.0
+    - plugin@1.0.0 / node_modules
+      - a
+      <sub>-&gt; .registry.npmjs.org / framework / 1.0.0 / plugin@1.0.0 / node_modules / framework</sub>
+      - framework <sub>v1.0.0 but dependent on plugin@1.0.0</sub>
+    - plugin@1.1.0 / node_modules
+      - a
+      <sub>-&gt; .registry.npmjs.org / framework / 1.0.0 / plugin@1.1.0 / node_modules / framework</sub>
+      - framework <sub>v1.0.0 but dependent on plugin@1.1.0</sub>
+
+  - framework / 1.0.0
+    - plugin@1.0.0 / node_modules
+      - framework
+      - plugin <sub>v1.0.0</sub>
+    - plugin@1.1.0 / node_modules
+      - framework
+      - plugin <sub>v1.1.0</sub>
+
+  - plugin
+    - 1.0.0 / node_modules / plugin
+    - 1.1.0 / node_modules / plugin
+</pre>
 
                                 
                                 </section>
@@ -434,10 +521,10 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
 
             
                 
-                
-                <a href="installation.html" class="navigation navigation-next navigation-unique" aria-label="Next page: Installation">
-                    <i class="fa fa-angle-right"></i>
+                <a href="symlinked-node-modules-structure.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Symlinked node_modules structure">
+                    <i class="fa fa-angle-left"></i>
                 </a>
+                
                 
             
         
@@ -446,7 +533,7 @@ why it works fine with the Node.js ecosystem, read this small article: <a href="
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-12-31T20:23:09.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"How peers are resolved","level":"4.5","depth":1,"next":{"title":"Awesome list","level":"5.1","depth":1,"url":"https://github.com/pnpm/awesome-pnpm","ref":"https://github.com/pnpm/awesome-pnpm","articles":[]},"previous":{"title":"Symlinked node_modules structure","level":"4.4","depth":1,"path":"symlinked-node-modules-structure.md","ref":"symlinked-node-modules-structure.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"how-peers-are-resolved.md","mtime":"2017-12-31T19:34:31.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-12-31T20:30:10.238Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
