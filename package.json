@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node index.js"
+    "build": "node index.js && gitbook build src/docs docs",
+    "start": "npm run build && live-server"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/pnpm/pnpm.github.io#readme",
   "dependencies": {
+    "gitbook-cli": "^2.3.2",
+    "live-server": "^1.2.0",
     "load-yaml-file": "^0.1.0",
     "mz": "^2.6.0",
     "pug": "^2.0.0-beta11"
