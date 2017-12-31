@@ -1,4 +1,14 @@
 {
   "gitbook": "3.2.3",
-  "title": "pnpm"
+  "title": "pnpm",
+  "plugins": ["edit-link", "github"],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/pnpm/pnpm.github.io/tree/master/src/docs",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/pnpm/pnpm/"
+    }
+  }
 }
