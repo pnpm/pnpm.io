@@ -59,6 +59,8 @@ Can be passed in via a CLI option. `--no-lock` to set it to false. E.g.: `pnpm i
 
 ## ignore-pnpmfile
 
+Added in: v1.25.0
+
 * Default: **false**
 * Type: **Boolean**
 
@@ -75,6 +77,8 @@ packages that have no dependencies of their own. Setting this config to `true` m
 that rely on location but gives an average of **8% installation speed improvement**.
 
 ## verify-store-integrity
+
+Added in: v1.8.0
 
 * Default: **true**
 * Type: **Boolean**
