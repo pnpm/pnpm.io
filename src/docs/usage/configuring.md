@@ -92,3 +92,12 @@ Controls the way packages are imported from the store.
 * **hardlink** - hardlink packages from the store
 * **copy** - copy packages from the store
 * **reflink** - reflink (aka copy-on-write) packages from the store
+
+## shrinkwrap-only
+
+Added in: v1.26.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When used, only updates `shrinkwrap.yaml` and `package.json` instead of checking `node_modules` and downloading dependencies.
