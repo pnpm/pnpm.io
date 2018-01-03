@@ -83,6 +83,8 @@ If false, doesn't check whether packages in the store were mutated.
 
 ## package-import-method
 
+Added in: v1.25.0
+
 * Default: **auto**
 * Type: **auto**, **hardlink**, **copy**, **reflink**
 
