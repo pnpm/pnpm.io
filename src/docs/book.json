@@ -1,7 +1,7 @@
 {
   "gitbook": "3.2.3",
   "title": "pnpm",
-  "plugins": ["edit-link", "github"],
+  "plugins": ["edit-link", "github", "analytics"],
   "pluginsConfig": {
     "edit-link": {
       "base": "https://github.com/pnpm/pnpm.github.io/tree/master/src/docs",
@@ -9,6 +9,9 @@
     },
     "github": {
       "url": "https://github.com/pnpm/pnpm/"
+    },
+    "analytics": {
+      "google": "UA-91385296-1"
     }
   }
 }
