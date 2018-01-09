@@ -23,3 +23,72 @@ function readPackage (pkg) {
   return pkg
 }
 ```
+
+## Substitute a package with your fork
+
+Lets' suppose you forked a package with an important fix and you want the fixed
+version installed.
+
+The following hook substitutes `resolve` with `@zkochan`'s fork.
+
+```js
+'use strict'
+module.exports = {
+  hooks: {
+    readPackage
+  }
+}
+
+function readPackage (pkg) {
+  if (pkg.dependencies && pkg.dependencies.resolve) {
+    pkg.dependencies.resolve = 'zkochan/node-resolve'
+  }
+
+  return pkg
+}
+```
+
+## Packages validation
+
+You want only packages with MIT license in your `node_modules`? Check the licenses
+and throw an exception if you don't like the package's license:
+
+```js
+'use strict'
+module.exports = {
+  hooks: {
+    readPackage
+  }
+}
+
+function readPackage (pkg) {
+  if (pkg.license !== 'MIT') {
+    throw new Error('Invalid license!')
+  }
+
+  return pkg
+}
+```
+
+## Renaming bins
+
+You want to rename a package's bin? Just replace it:
+
+```js
+'use strict'
+module.exports = {
+  hooks: {
+    readPackage
+  }
+}
+
+function readPackage (pkg) {
+  if (pkg.name === 'eslint') {
+    pkg.bin = {jslint: pkg.bin}
+  }
+
+  return pkg
+}
+```
+
+Now you can run `jslint fix` instead of `eslint fix`.
