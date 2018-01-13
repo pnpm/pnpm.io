@@ -409,6 +409,14 @@ Hard links are possible only inside a filesystem.</p>
 </ul>
 <p>If true, pnpm will use only packages already available in the store.
 If a package won&apos;t be found locally, the installation will fail.</p>
+<h3 id="prefer-offline">prefer-offline</h3>
+<p>Added in: v1.28.0</p>
+<ul>
+<li>Default: <strong>false</strong></li>
+<li>Type: <strong>Boolean</strong></li>
+</ul>
+<p>If true, staleness checks for cached data will be bypassed, but missing data will be requested from the server.
+To force full offline mode, use <code>--offline</code>.</p>
 <h2 id="network-concurrency">network-concurrency</h2>
 <ul>
 <li>Default: <strong>16</strong></li>
@@ -519,7 +527,7 @@ that rely on location but gives an average of <strong>8% installation speed impr
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Configuring pnpm","level":"2.3","depth":1,"next":{"title":"Hooks","level":"2.4","depth":1,"path":"usage/hooks.md","ref":"usage/hooks.md","articles":[]},"previous":{"title":"pnpx CLI","level":"2.2","depth":1,"path":"usage/pnpx-cli.md","ref":"usage/pnpx-cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"usage/configuring.md","mtime":"2018-01-03T19:31:05.893Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T01:39:08.682Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Configuring pnpm","level":"2.3","depth":1,"next":{"title":"Hooks","level":"2.4","depth":1,"path":"usage/hooks.md","ref":"usage/hooks.md","articles":[]},"previous":{"title":"pnpx CLI","level":"2.2","depth":1,"path":"usage/pnpx-cli.md","ref":"usage/pnpx-cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"usage/configuring.md","mtime":"2018-01-13T18:09:00.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-13T18:09:08.418Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
