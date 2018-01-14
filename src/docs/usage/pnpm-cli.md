@@ -45,8 +45,6 @@ Added in v1.24.0
 Starts a service that does all interactions with the store.
 Other commands will delegate any store-related tasks to this service.
 
-`pnpm help server`:
-
 Related configs:
 
 ### protocol
@@ -67,13 +65,25 @@ If port is specified and **protocol** is set to auto, **tcp** protocol is used.
 
 Other configs that are used by `pnpm server`: **store**, **lock**.
 
-## recursive [concurrency] <install|update> [options passed to install/update]
+## recursive
 
 Added in v1.24.0
 
 > Stability: Experimental
 
+```
+pnpm recursive [concurrency] <install [arguments] | update [arguments]>
+```
+
 Concurrently runs install or update in all subdirectories with a `package.json` (excluding node_modules).
+
+Usage examples:
+
+```
+pnpm recursive 10 install --ignore-scripts
+pnpm recursive update
+pnpm recursive update --depth 100
+```
 
 ***
 
