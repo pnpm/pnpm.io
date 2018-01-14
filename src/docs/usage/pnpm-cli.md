@@ -20,19 +20,62 @@ npm commands that are re-implemented in pnpm:
 * `root`
 * `help`
 
-Also, pnpm has some custom commands:
+Also, pnpm has some custom commands.
 
-* `dislink`
+## dislink
 
-  Unlinks a package. Like `yarn unlink` but pnpm re-installs the dependency
-  after removing the external link.
-* `store status`
+Unlinks a package. Like `yarn unlink` but pnpm re-installs the dependency
+after removing the external link.
 
-  Returns a 0 exit code if packages in the store are not modified, i.e. the
-  content of the package is the same as it was at the time of unpacking.
-* `store prune`
+## store status
 
-  Removes unreferenced (extraneous, orphan) packages from the store.
+Returns a 0 exit code if packages in the store are not modified, i.e. the
+content of the package is the same as it was at the time of unpacking.
+
+## store prune
+
+Removes unreferenced (extraneous, orphan) packages from the store.
+
+## server
+
+Added in v1.24.0
+
+> Stability: Experimental
+
+Starts a service that does all interactions with the store.
+Other commands will delegate any store-related tasks to this service.
+
+`pnpm help server`:
+
+Related configs:
+
+### protocol
+
+* Default: **auto**
+* Type: **auto**, **tcp**, **ipc**
+
+The communication protocol used by the server.
+When **auto** is used, **ipc** used on non-Windows servers and **tcp** on Windows.
+
+### port
+
+* Default: **5813**
+* Type: **port number**
+
+The port number to use, when TCP is used for communication.
+If port is specified and **protocol** is set to auto, **tcp** protocol is used.
+
+Other configs that are used by `pnpm server`: **store**, **lock**.
+
+## recursive [concurrency] <install|update> [options passed to install/update]
+
+Added in v1.24.0
+
+> Stability: Experimental
+
+Concurrently runs install or update in all subdirectories with a `package.json` (excluding node_modules).
+
+***
 
 The rest of the commands pass through to npm.
 
