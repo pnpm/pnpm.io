@@ -132,3 +132,13 @@ the installation progress.
 * **default** - the default reporter when the stdout is TTY
 * **append-only** (Added in v1.29.1) - the output is always appended to the end. No cursor manipulations are performed
 * **ndjson** - the most verbose reporter. Prints all logs in [ndjson](http://ndjson.org/) format
+
+## use-store-server
+
+Added in: v1.30.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Starts a store server in the background. The store server will keep running after installation is done.
+To stop the store server, run `pnpm server stop`

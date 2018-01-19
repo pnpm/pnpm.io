@@ -36,16 +36,23 @@ content of the package is the same as it was at the time of unpacking.
 
 Removes unreferenced (extraneous, orphan) packages from the store.
 
-## server
+## server start
 
-Added in v1.24.0
+Added in: v1.30.0
 
 > Stability: Experimental
 
-Starts a service that does all interactions with the store.
-Other commands will delegate any store-related tasks to this service.
+Starts a server that does all interactions with the store.
+Other commands will delegate any store-related tasks to this server.
 
 Related configs:
+
+### background
+
+* Default: **false**
+* Type: **Boolean**
+
+Runs the server in the background.
 
 ### protocol
 
@@ -65,9 +72,17 @@ If port is specified and **protocol** is set to auto, **tcp** protocol is used.
 
 Other configs that are used by `pnpm server`: **store**, **lock**.
 
+## server stop
+
+Added in: v1.30.0
+
+> Stability: Experimental
+
+Stops the store server.
+
 ## recursive
 
-Added in v1.24.0
+Added in: v1.24.0
 
 > Stability: Experimental
 
