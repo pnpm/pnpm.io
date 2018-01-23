@@ -49,12 +49,16 @@ Related configs:
 
 ### background
 
+Added in: v1.30.0
+
 * Default: **false**
 * Type: **Boolean**
 
 Runs the server in the background.
 
 ### protocol
+
+Added in: v1.30.0
 
 * Default: **auto**
 * Type: **auto**, **tcp**, **ipc**
@@ -64,6 +68,8 @@ When **auto** is used, **ipc** used on non-Windows servers and **tcp** on Window
 
 ### port
 
+Added in: v1.30.0
+
 * Default: **5813**
 * Type: **port number**
 
@@ -71,6 +77,15 @@ The port number to use, when TCP is used for communication.
 If port is specified and **protocol** is set to auto, **tcp** protocol is used.
 
 Other configs that are used by `pnpm server`: **store**, **lock**.
+
+### ignore-stop-requests
+
+Added in: v1.30.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Disallows stopping the server using `pnpm server stop`.
 
 ## server stop
 

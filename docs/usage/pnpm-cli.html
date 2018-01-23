@@ -420,12 +420,14 @@ content of the package is the same as it was at the time of unpacking.</p>
 Other commands will delegate any store-related tasks to this server.</p>
 <p>Related configs:</p>
 <h3 id="background">background</h3>
+<p>Added in: v1.30.0</p>
 <ul>
 <li>Default: <strong>false</strong></li>
 <li>Type: <strong>Boolean</strong></li>
 </ul>
 <p>Runs the server in the background.</p>
 <h3 id="protocol">protocol</h3>
+<p>Added in: v1.30.0</p>
 <ul>
 <li>Default: <strong>auto</strong></li>
 <li>Type: <strong>auto</strong>, <strong>tcp</strong>, <strong>ipc</strong></li>
@@ -433,6 +435,7 @@ Other commands will delegate any store-related tasks to this server.</p>
 <p>The communication protocol used by the server.
 When <strong>auto</strong> is used, <strong>ipc</strong> used on non-Windows servers and <strong>tcp</strong> on Windows.</p>
 <h3 id="port">port</h3>
+<p>Added in: v1.30.0</p>
 <ul>
 <li>Default: <strong>5813</strong></li>
 <li>Type: <strong>port number</strong></li>
@@ -440,6 +443,13 @@ When <strong>auto</strong> is used, <strong>ipc</strong> used on non-Windows ser
 <p>The port number to use, when TCP is used for communication.
 If port is specified and <strong>protocol</strong> is set to auto, <strong>tcp</strong> protocol is used.</p>
 <p>Other configs that are used by <code>pnpm server</code>: <strong>store</strong>, <strong>lock</strong>.</p>
+<h3 id="ignore-stop-requests">ignore-stop-requests</h3>
+<p>Added in: v1.30.0</p>
+<ul>
+<li>Default: <strong>false</strong></li>
+<li>Type: <strong>Boolean</strong></li>
+</ul>
+<p>Disallows stopping the server using <code>pnpm server stop</code>.</p>
 <h2 id="server-stop">server stop</h2>
 <p>Added in: v1.30.0</p>
 <blockquote>
@@ -503,7 +513,7 @@ pnpm recursive update --depth 100
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"pnpm CLI","level":"2.1","depth":1,"next":{"title":"pnpx CLI","level":"2.2","depth":1,"path":"usage/pnpx-cli.md","ref":"usage/pnpx-cli.md","articles":[]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"usage/pnpm-cli.md","mtime":"2018-01-19T00:25:17.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-19T00:25:24.826Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"pnpm CLI","level":"2.1","depth":1,"next":{"title":"pnpx CLI","level":"2.2","depth":1,"path":"usage/pnpx-cli.md","ref":"usage/pnpx-cli.md","articles":[]},"previous":{"title":"Installation","level":"1.2","depth":1,"path":"installation.md","ref":"installation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"usage/pnpm-cli.md","mtime":"2018-01-23T20:04:02.648Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-23T20:04:21.464Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
