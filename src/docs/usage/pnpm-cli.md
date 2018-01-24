@@ -87,6 +87,15 @@ Added in: v1.30.0
 
 Disallows stopping the server using `pnpm server stop`.
 
+### ignore-upload-requests
+
+Added in: v1.31.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Disallows creating new side effect cache during install.
+
 ## server stop
 
 Added in: v1.30.0

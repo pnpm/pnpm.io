@@ -142,3 +142,25 @@ Added in: v1.30.0
 
 Starts a store server in the background. The store server will keep running after installation is done.
 To stop the store server, run `pnpm server stop`
+
+## side-effects-cache
+
+Added in: v1.31.0
+
+> Stability: Experimental
+
+* Default: **false**
+* Type: **Boolean**
+
+Use and cache the results of (pre/post)install hooks.
+
+## side-effects-cache-readonly
+
+Added in: v1.31.0
+
+> Stability: Experimental
+
+* Default: **false**
+* Type: **Boolean**
+
+Only use the side effects cache if present, do not create it for new packages.
