@@ -18,8 +18,6 @@ en:
     like flat dependency trees. But it does focus on complete Node.js compatibility.
   simplicity: Simplicity
   simplicityCopy: >
-    pnpm's algorithms are a lot easier than other Node.js package manager's.
-    pnpm doesn't try to replicate the complex algorithms used by npm and yarn for deduplication.
     pnpm's node_modules design has a sane structure without the problems that npm@2 had.
   whatDevsSay: What developers are saying
   followOnTwitter: Follow @pnpmjs
@@ -66,8 +64,6 @@ hu:
     mint a lapos függőségi fák (flat dependency trees). Azonban garantálja a teljes Node.js kompatibilitást.
   simplicity: Egyszerüség
   simplicityCopy: >
-    pnpm sokkal egyszerübb a többi Node.js csomagkezelőnél.
-    pnpm nem próbálja utánozni npm s yarn bonyolult algoritmusait, melyekre a függőségi fa lapositásá miatt van szükség.
     pnpm-nek a node_modules modelje roppant egyszerü, mégis az npm@2-re jellemző problémák nélkül.
   whatDevsSay: Mit mondanak a programozók
   followOnTwitter: Kövess @pnpmjs
