@@ -33,6 +33,10 @@ const langs = [
   {
     code: 'es',
     label: 'Español'
+  },
+  {
+    code: 'zh-cn',
+    label: '简体中文'
   }
 ]
 
