@@ -167,3 +167,25 @@ es:
   whatDevsSay: Lo que los desarrolladores están dicendo
   followOnTwitter: Siga @pnpmjs
   joinOnGitter: Necesita ayuda? Unase a nuestro chat en Gitter
+zh-cn:
+  title: pnpm - 快速而省容量的 npm 包安装
+  description: 以较小的磁盘使用快速安装 npm 包
+  keywords: node.js, npm, 包管理器, 快速的包管理器, 较小磁盘使用的包管理器, 依赖管理
+  h1: 以较小的磁盘使用量，快速地安装 npm 包
+  features: 特性
+  speed: 速度
+  speedCopy: >
+    pnpm 比 npm 和 Yarn 跑得都快。可以在<a class="link black-70 underline" target="_blank"
+    href="https://github.com/pnpm/node-package-manager-benchmark">这里</a>看到性能测试结果。
+  efficiency: 高效
+  efficiencyCopy: >
+    每台机器上只存一份相同的 npm 包。pnpm 从不复制包，只会建立链接。这个做法可以<strong>节省好几个 GB 的磁盘空间</strong>！
+  sanity: 老实
+  sanityCopy: >
+    pnpm 不会急着去重蹈别的包管理器的覆辙，如扁平依赖树等。但是 pnpm 关注完整的 Node.js 兼容性。
+  simplicity: 简单
+  simplicityCopy: >
+    pnpm 的 node_modules 有着与 npm@2 兼容的常规结构。
+  whatDevsSay: 几百个开发者们一致通过
+  followOnTwitter: 关注 @pnpmjs
+  joinOnGitter: 需要帮助？加入我们的 Gitter 社区
