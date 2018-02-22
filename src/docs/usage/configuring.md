@@ -177,3 +177,15 @@ Added in: v1.31.0
 * Type: **Boolean**
 
 Only use the side effects cache if present, do not create it for new packages.
+
+## shamefully-flatten
+
+Added in: v1.34.0
+
+* Default: **false**
+* Type: **Boolean**
+
+If true, pnpm creates a flat `node_modules` that look almost like a `node_modules` created by npm or Yarn.
+Please only use this option when there is no other way to make a project work with pnpm.
+The strict `node_modules` created by pnpm should always work, if it does not, most likely a dependency is
+missing from `package.json`. Use this config only as a temporary fix.
