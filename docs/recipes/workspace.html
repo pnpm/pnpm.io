@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Aliases · pnpm</title>
+        <title>Workspace · pnpm</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../recipes/continuous-integration.html" />
+    <link rel="next" href="../benchmark.html" />
     
     
-    <link rel="prev" href="hooks.html" />
+    <link rel="prev" href="continuous-integration.html" />
     
 
     </head>
@@ -124,9 +124,9 @@
         
         
     
-        <li class="chapter " data-level="2.1" data-path="pnpm-cli.html">
+        <li class="chapter " data-level="2.1" data-path="../usage/pnpm-cli.html">
             
-                <a href="pnpm-cli.html">
+                <a href="../usage/pnpm-cli.html">
             
                     
                     pnpm CLI
@@ -137,9 +137,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.2" data-path="pnpx-cli.html">
+        <li class="chapter " data-level="2.2" data-path="../usage/pnpx-cli.html">
             
-                <a href="pnpx-cli.html">
+                <a href="../usage/pnpx-cli.html">
             
                     
                     pnpx CLI
@@ -150,9 +150,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.3" data-path="configuring.html">
+        <li class="chapter " data-level="2.3" data-path="../usage/configuring.html">
             
-                <a href="configuring.html">
+                <a href="../usage/configuring.html">
             
                     
                     Configuring pnpm
@@ -163,9 +163,9 @@
             
         </li>
     
-        <li class="chapter " data-level="2.4" data-path="hooks.html">
+        <li class="chapter " data-level="2.4" data-path="../usage/hooks.html">
             
-                <a href="hooks.html">
+                <a href="../usage/hooks.html">
             
                     
                     Hooks
@@ -176,9 +176,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="2.5" data-path="aliases.html">
+        <li class="chapter " data-level="2.5" data-path="../usage/aliases.html">
             
-                <a href="aliases.html">
+                <a href="../usage/aliases.html">
             
                     
                     Aliases
@@ -196,9 +196,9 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="../recipes/continuous-integration.html">
+        <li class="chapter " data-level="3.1" data-path="continuous-integration.html">
             
-                <a href="../recipes/continuous-integration.html">
+                <a href="continuous-integration.html">
             
                     
                     Continuous Integration
@@ -209,9 +209,9 @@
             
         </li>
     
-        <li class="chapter " data-level="3.2" data-path="../recipes/workspace.html">
+        <li class="chapter active" data-level="3.2" data-path="workspace.html">
             
-                <a href="../recipes/workspace.html">
+                <a href="workspace.html">
             
                     
                     Workspace
@@ -383,7 +383,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Aliases</a>
+        <a href=".." >Workspace</a>
     </h1>
 </div>
 
@@ -398,35 +398,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="aliases">Aliases</h1>
-<p>Aliases let you install packages with custom names.</p>
-<p>Lets&apos; assume you use <code>lodash</code> all over your project. There is a bug in <code>lodash</code> that breaks your project.
-You have a fix but <code>lodash</code> won&apos;t merge it. Normally you would either install <code>lodash</code> from your fork
-directly (as a git-hosted dependency) or publish it with a different name. If you use the second solution
-you have to replace all the requires in your project with the new dependency name (<code>require(&apos;lodash&apos;)</code> =&gt; <code>require(&apos;awesome-lodash&apos;)</code>)`.
-With aliases, you have a third option.</p>
-<p>Publish a new package called <code>awesome-lodash</code> and install it using <code>lodash</code> as its alias:</p>
-<pre><code>pnpm install lodash@npm:awesome-lodash
-</code></pre><p>No changes in code are needed. All the requires of <code>lodash</code> will import <code>awesome-lodash</code>.</p>
-<p>Sometimes you&apos;ll want to use two different versions of a package in your project. Easy:</p>
-<pre><code>pnpm install lodash1@npm:lodash@1
-pnpm install lodash2@npm:lodash@2
-</code></pre><p>Now you can require the first version of lodash via <code>require(&apos;lodash1&apos;)</code> and the second via <code>require(&apos;lodash2&apos;)</code>.</p>
-<p>This gets even more powerful when combined with hooks. Maybe you want to replace <code>lodash</code> with <code>awesome-lodash</code>
-in all the packages in <code>node_modules</code>. You can easily achieve that with the following <code>pnpmfile.js</code>:</p>
-<pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
-  hooks: {
-    readPackage
-  }
-}
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readPackage</span> (<span class="hljs-params">pkg</span>) </span>{
-  <span class="hljs-keyword">if</span> (pkg.dependencies &amp;&amp; pkg.dependencies.lodash) {
-    pkg.dependencies.lodash = <span class="hljs-string">&apos;npm:awesome-lodash@^1.0.0&apos;</span>
-  }
-  <span class="hljs-keyword">return</span> pkg
-}
+                                <h1 id="workspace">Workspace</h1>
+<p>pnpm supports concurrent actions in multi-package repositories (workspaces).</p>
+<p>By default, when you run the <a href="../usage/pnpm-cli.html#recursive-install"><code>pnpm recursive [action]</code></a> commands,
+all the directories are searched for packages (directories with <code>package.json</code> file).
+From <code>v1.35.0</code>, you can control what directories are searched by passing an array of globs to <code>packages</code> in <code>pnpm-workspace.yaml</code>.</p>
+<p>An example of a <code>pnpm-workspace.yaml</code>:</p>
+<pre><code class="lang-yaml"><span class="hljs-attr">packages:</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">&apos;packages/**&apos;</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">&apos;components/**&apos;</span>
+<span class="hljs-bullet">  -</span> <span class="hljs-string">&apos;!**/test/**&apos;</span>
 </code></pre>
+<p><code>pnpm-workspace.yaml</code> should be in the root of the workspace.</p>
 <script src="../_gitbook_plugin_analytics.js"></script>
                                 
                                 </section>
@@ -454,12 +437,12 @@ in all the packages in <code>node_modules</code>. You can easily achieve that wi
 
             
                 
-                <a href="hooks.html" class="navigation navigation-prev " aria-label="Previous page: Hooks">
+                <a href="continuous-integration.html" class="navigation navigation-prev " aria-label="Previous page: Continuous Integration">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../recipes/continuous-integration.html" class="navigation navigation-next " aria-label="Next page: Continuous Integration">
+                <a href="../benchmark.html" class="navigation navigation-next " aria-label="Next page: Benchmark">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -470,7 +453,7 @@ in all the packages in <code>node_modules</code>. You can easily achieve that wi
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Aliases","level":"2.5","depth":1,"next":{"title":"Continuous Integration","level":"3.1","depth":1,"path":"recipes/continuous-integration.md","ref":"recipes/continuous-integration.md","articles":[]},"previous":{"title":"Hooks","level":"2.4","depth":1,"path":"usage/hooks.md","ref":"usage/hooks.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"usage/aliases.md","mtime":"2018-02-25T14:30:06.697Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-25T16:55:29.427Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Workspace","level":"3.2","depth":1,"next":{"title":"Benchmark","level":"4.1","depth":1,"path":"benchmark.md","ref":"benchmark.md","articles":[]},"previous":{"title":"Continuous Integration","level":"3.1","depth":1,"path":"recipes/continuous-integration.md","ref":"recipes/continuous-integration.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"recipes/workspace.md","mtime":"2018-02-25T16:55:07.596Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-25T16:55:29.427Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

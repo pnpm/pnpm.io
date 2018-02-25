@@ -16,6 +16,7 @@
 ## Recipes
 
 * [Continuous Integration](recipes/continuous-integration.md)
+* [Workspace](recipes/workspace.md)
 
 ## Advanced
 
