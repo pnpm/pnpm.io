@@ -73,7 +73,7 @@ function readPackage(pkg) {
       // Use a local symlink for testing.
       'metro-resolver': 'link:~/dev/metro/packages/metro-resolver',
       // Use a npm published package after you have checked it works.
-      //'metro-resolver': '@user/metro-resolver',
+      //'metro-resolver': 'metro-resolver-patch',
     })
   }
 }
