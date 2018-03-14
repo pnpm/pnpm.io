@@ -48,6 +48,40 @@ function readPackage (pkg) {
 }
 ```
 
+### Tips 
+
+If the package you want to replace is a transitive dep (dep of a dep), 
+you will need to find the packages that depend on this package, 
+as you will need to modify their dependency manifests.
+
+```
+$ pnpm ls metro-resolver
+
+└─┬ react-native@0.54.2
+  └─┬ metro@0.28.0
+    └── metro-resolver@0.28.0
+```
+
+Notice how `metro` depends on `metro-resolver`.
+
+Your hook function would then look like this:
+
+```js
+function readPackage(pkg) {
+  if (pkg.name === 'metro') {
+    Object.assign(pkg.dependencies, {
+      // Use a local symlink for testing.
+      'metro-resolver': 'link:~/dev/metro/packages/metro-resolver',
+      // Use a npm published package after you have checked it works.
+      //'metro-resolver': '@user/metro-resolver',
+    })
+  }
+}
+```
+
+After making changes to your `pnpmfile.js`, you may need to run 
+`pnpm up --depth=100` to ensure your fork is used.
+
 ## Packages validation
 
 You want only packages with MIT license in your `node_modules`? Check the licenses
