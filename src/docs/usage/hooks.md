@@ -50,7 +50,7 @@ function readPackage (pkg) {
 
 ### Tips 
 
-If the package you want to replace is a transitive dep (dep of a dep), 
+- If the package you want to replace is a transitive dep (dep of a dep), 
 you will need to find the packages that depend on this package, 
 as you will need to modify their dependency manifests.
 
@@ -79,8 +79,11 @@ function readPackage(pkg) {
 }
 ```
 
-After making changes to your `pnpmfile.js`, you may need to run 
+- After making changes to your `pnpmfile.js`, you may need to run 
 `pnpm up --depth=100` to ensure your fork is used.
+
+- When using `console.log` statements inside your hooks, it may help to add
+`--reporter append-only` to ensure they are not overridden.
 
 ## Packages validation
 
