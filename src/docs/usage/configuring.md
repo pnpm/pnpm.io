@@ -189,3 +189,23 @@ If true, pnpm creates a flat `node_modules` that look almost like a `node_module
 Please only use this option when there is no other way to make a project work with pnpm.
 The strict `node_modules` created by pnpm should always work, if it does not, most likely a dependency is
 missing from `package.json`. Use this config only as a temporary fix.
+
+## frozen-shrinkwrap
+
+Added in: v1.37.1
+
+* Default: **false**
+* Type: **Boolean**
+
+If `true`, pnpm doesn't generate a shrinkwrap file and fails if an update is needed.
+
+## prefer-frozen-shrinkwrap
+
+Added in: v1.37.1
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true` and the available `shrinkwrap.yaml` satisfies the `package.json`
+then a headless installation is performed. A headless installation is faster than a regular one
+because it skips dependencies resolution and peers resolution.

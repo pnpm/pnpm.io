@@ -560,6 +560,22 @@ To stop the store server, run <code>pnpm server stop</code></p>
 Please only use this option when there is no other way to make a project work with pnpm.
 The strict <code>node_modules</code> created by pnpm should always work, if it does not, most likely a dependency is
 missing from <code>package.json</code>. Use this config only as a temporary fix.</p>
+<h2 id="frozen-shrinkwrap">frozen-shrinkwrap</h2>
+<p>Added in: v1.37.1</p>
+<ul>
+<li>Default: <strong>false</strong></li>
+<li>Type: <strong>Boolean</strong></li>
+</ul>
+<p>If <code>true</code>, pnpm doesn&apos;t generate a shrinkwrap file and fails if an update is needed.</p>
+<h2 id="prefer-frozen-shrinkwrap">prefer-frozen-shrinkwrap</h2>
+<p>Added in: v1.37.1</p>
+<ul>
+<li>Default: <strong>false</strong></li>
+<li>Type: <strong>Boolean</strong></li>
+</ul>
+<p>When <code>true</code> and the available <code>shrinkwrap.yaml</code> satisfies the <code>package.json</code>
+then a headless installation is performed. A headless installation is faster than a regular one
+because it skips dependencies resolution and peers resolution.</p>
 <script src="../_gitbook_plugin_analytics.js"></script>
                                 
                                 </section>
@@ -603,7 +619,7 @@ missing from <code>package.json</code>. Use this config only as a temporary fix.
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Configuring pnpm","level":"2.3","depth":1,"next":{"title":"Hooks","level":"2.4","depth":1,"path":"usage/hooks.md","ref":"usage/hooks.md","articles":[]},"previous":{"title":"pnpx CLI","level":"2.2","depth":1,"path":"usage/pnpx-cli.md","ref":"usage/pnpx-cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"usage/configuring.md","mtime":"2018-02-25T14:30:06.697Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-02-25T16:55:29.427Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Configuring pnpm","level":"2.3","depth":1,"next":{"title":"Hooks","level":"2.4","depth":1,"path":"usage/hooks.md","ref":"usage/hooks.md","articles":[]},"previous":{"title":"pnpx CLI","level":"2.2","depth":1,"path":"usage/pnpx-cli.md","ref":"usage/pnpx-cli.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","github","analytics","anchorjs"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"github":{"url":"https://github.com/pnpm/pnpm/"},"analytics":{"google":"UA-91385296-1"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/pnpm/pnpm.github.io/tree/master/src/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"pnpm","gitbook":"3.2.3"},"file":{"path":"usage/configuring.md","mtime":"2018-03-24T15:28:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-24T15:28:26.232Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -621,7 +637,7 @@ missing from <code>package.json</code>. Use this config only as a temporary fix.
         
     
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/3.1.1/anchor.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"></script>
         
     
         
