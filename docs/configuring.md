@@ -37,7 +37,7 @@ Hard links are possible only inside a filesystem.
 If true, pnpm will use only packages already available in the store.
 If a package won't be found locally, the installation will fail.
 
-### prefer-offline
+## prefer-offline
 
 Added in: v1.28.0
 

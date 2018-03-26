@@ -3,11 +3,6 @@ id: intro
 title: pnpm
 ---
 
-[![npm version](https://img.shields.io/npm/v/pnpm.svg)](https://www.npmjs.com/package/pnpm)
-[![GitHub stars](https://img.shields.io/github/stars/pnpm/pnpm.svg?style=social&label=Stars)](https://github.com/pnpm/pnpm)
-[![Twitter Follow](https://img.shields.io/twitter/follow/pnpmjs.svg?style=social&label=Follow)](https://twitter.com/pnpmjs)
-[![Join the chat at https://gitter.im/pnpm/pnpm](https://badges.gitter.im/pnpm/pnpm.svg)](https://gitter.im/pnpm/pnpm?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 > Fast, disk space efficient package manager
 
 Features:

@@ -50,15 +50,9 @@ const SplashContainer = props => (
   </div>
 );
 
-const Logo = props => (
-  <div className="projectLogo">
-    <img src={props.img_src} />
-  </div>
-);
-
 const ProjectTitle = props => (
   <h2 className="projectTitle">
-    {siteConfig.title}
+    <img src={imgUrl('pnpm-big-logo.png')} alt="pnpm" />
     <small>{siteConfig.tagline}</small>
   </h2>
 );
@@ -76,7 +70,6 @@ class HomeSplash extends React.Component {
     let language = this.props.language || '';
     return (
       <SplashContainer>
-        <Logo img_src={imgUrl('pnpm.svg')} />
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
@@ -102,40 +95,25 @@ const Features = props => (
   <Block layout="fourColumn">
     {[
       {
-        content: 'pnpm is faster than both npm and Yarn.',
-        image: imgUrl('docusaurus.svg'),
+        content: 'pnpm is as fast and sometimes even faster than npm and Yarn (see [benchmarks](https://github.com/pnpm/node-package-manager-benchmark))',
+        image: imgUrl('features/fast.svg'),
         imageAlign: 'top',
-        title: 'Speed',
+        title: 'Fast',
       },
       {
-        content: 'Packages are saved once per machine. Pnpm never copies, always links. It saves dozens of gigabytes of disk space!',
-        image: imgUrl('docusaurus.svg'),
+        content: 'One version of a package is saved only ever once on a disk. So you save dozens of gigabytes of disk space!',
+        image: imgUrl('features/efficient.svg'),
         imageAlign: 'top',
-        title: 'Efficiency',
+        title: 'Efficient',
       },
       {
-        content: "pnpm doesn't focus on the reimplementation of other package manager's flaws, like flat dependency trees. But it does focus on complete Node.js compatibility.",
-        image: imgUrl('docusaurus.svg'),
+        content: "pnpm creates a non-flat `node_modules`, so code has no access to arbitrary packages",
+        image: imgUrl('features/strict.svg'),
         imageAlign: 'top',
-        title: 'Sanity',
-      },
-      {
-        content: "pnpm's node_modules design has a sane structure without the problems that npm@2 had.",
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'top',
-        title: 'Simplicity',
+        title: 'Strict',
       },
     ]}
   </Block>
-);
-
-const FeatureCallout = props => (
-  <div
-    className="productShowcaseSection paddingBottom"
-    style={{textAlign: 'center'}}>
-    <h2>Feature Callout</h2>
-    <MarkdownBlock>These are features of this project</MarkdownBlock>
-  </div>
 );
 
 const LearnHow = props => (
@@ -216,11 +194,39 @@ class Index extends React.Component {
         <HomeSplash language={language} />
         <div className="mainContainer">
           <Features />
-          <FeatureCallout />
-          <LearnHow />
-          <TryOut />
-          <Description />
+          <Container background="light" padding={["bottom", "top"]}>
+            <h2>Background</h2>
+            <p>
+              <MarkdownBlock>
+              pnpm uses hard links and symlinks to save one version of a module only ever once on a disk.
+              When using npm or Yarn for example, if you have 100 projects using the same version
+              of lodash, you will have 100 copies of lodash on disk. With pnpm, lodash will be saved in a
+              single place on the disk and a hard link will put it into the `node_modules` where it should
+              be installed.
+              </MarkdownBlock>
+            <p>
+            </p>
+              <MarkdownBlock>
+              As a result, you save gigabytes of space on your disk and you have a lot faster installations!
+              If you'd like more details about the unique `node_modules` structure that pnpm creates and
+              why it works fine with the Node.js ecosystem, read this small article: [Why should we use pnpm?](https://www.kochan.io/nodejs/why-should-we-use-pnpm.html)
+              </MarkdownBlock>
+            </p>
+          </Container>
           <Showcase language={language} />
+          <Container background="light" padding={["bottom", "top"]}>
+            <h2>What developers are saying</h2>
+            <blockquote class="twitter-tweet" data-cards="hidden" data-lang="en">
+              <p lang="en" dir="ltr">
+                Between npm and yarn, I&#39;ve been very happy using *pnpm* lately <a href="https://t.co/HkXnR97wlZ">https://t.co/HkXnR97wlZ</a> simple, very fast, space efficient, unobtrusive</p>
+                &mdash; André Staltz (@andrestaltz) <a href="https://twitter.com/andrestaltz/status/860444660505989120">May 5, 2017</a>
+            </blockquote>
+            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+              Simple and genius idea, so that you always will wonder why you didn&#39;t think of it yourself <a href="https://t.co/jIMa2U4yym">https://t.co/jIMa2U4yym</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> (but, pruning?)</p>&mdash; Michel Weststrate (@mweststrate) <a href="https://twitter.com/mweststrate/status/861533946668089346">May 8, 2017</a></blockquote>
+            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I&#39;ve been long advocating for <a href="https://twitter.com/pnpmjs">@pnpmjs</a> — it&#39;s like a hidden gem in Node ecosystem. Try it, it is mature and performant. <a href="https://t.co/ie91RMYlSP">https://t.co/ie91RMYlSP</a></p>&mdash; Andrey Popp (@andreypopp) <a href="https://twitter.com/andreypopp/status/861550953526206464">May 8, 2017</a></blockquote>
+            <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/wmhilton">@wmhilton</a> <a href="https://twitter.com/yarnpkg">@yarnpkg</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> just installed it and it worked like a charm. I&#39;m impressed!</p>&mdash; Stephan Hoyer (@cmx66) <a href="https://twitter.com/cmx66/status/854596611690942465">April 19, 2017</a></blockquote>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </Container>
         </div>
       </div>
     );
