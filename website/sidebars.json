@@ -1,0 +1,26 @@
+{
+  "docs": {
+    "Introduction": [
+      "intro",
+      "installation"
+    ],
+    "Usage": [
+      "pnpm-cli",
+      "pnpx-cli",
+      "configuring",
+      "hooks",
+      "aliases"
+    ],
+    "Recipes": [
+      "continuous-integration",
+      "workspace"
+    ],
+    "Advanced": [
+      "benchmark",
+      "limitations",
+      "about-package-store",
+      "symlinked-node-modules-structure",
+      "how-peers-are-resolved"
+    ]
+  }
+}
