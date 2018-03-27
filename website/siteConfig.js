@@ -56,6 +56,7 @@ const siteConfig = {
     'Copyright © ' +
     new Date().getFullYear() +
     ' contributors of pnpm',
+  cname: 'pnpm.js.org' /* your website url */,
   organizationName: 'pnpm', // or set an env variable ORGANIZATION_NAME
   projectName: 'pnpm.github.io', // or set an env variable PROJECT_NAME
   highlight: {
