@@ -27,41 +27,12 @@ and the other one with `baz@1.1.0`. In order to support these use cases, pnpm ha
 
 Normally, if a package does not have peer dependencies, it is hard linked to a `node_modules` folder next to symlinks of its dependencies.
 
-<pre>
-- .registry.npmjs.org / foo / 1.0.0 / node_modules
-  <sub>hard link to the specific foo package in the store</sub>
-  - foo
-  <sub>dependencies of foo, symlinks to folders where these deps are resolved with their deps</sub>
-  - qux
-  - plugh
-</pre>
+![](/img/how-peers-are-resolved/1.png)
 
 However, if `foo` has peer dependencies, there cannot be one single set of dependencies for it, so
 we create different sets, for different peer dependency resolutions:
 
-<pre>
-- .registry.npmjs.org / foo / 1.0.0
-
-  - bar@1.0.0+baz@1.0.0 / node_modules
-    <sub>hard link</sub>
-    - foo
-    <sub>symlinks to peer dependencies</sub>
-    - bar <sub>v1.0.0</sub>
-    - baz <sub>v1.0.0</sub>
-    <sub>regular dependencies of foo</sub>
-    - qux
-    - plugh
-
-  - bar@1.0.0+baz@1.1.0 / node_modules
-    <sub>hard link</sub>
-    - foo
-    <sub>symlinks to peer dependencies</sub>
-    - bar <sub>v1.0.0</sub>
-    - baz <sub>v1.1.0</sub>
-    <sub>regular dependencies of foo</sub>
-    - qux
-    - plugh
-</pre>
+![](/img/how-peers-are-resolved/2.png)
 
 We create symlinks either to the `foo` that is inside `bar@1.0.0+bar@1.0.0/node_modules` or to the one in `bar@1.0.0+bar@1.1.0/node_modules`.
 As a consequence, the Node.js module resolver algorithm will find the correct peers.
@@ -70,28 +41,7 @@ As a consequence, the Node.js module resolver algorithm will find the correct pe
 This is done to make it easier to make predictable and fast named (`pnpm i foo`) and general (`pnpm i`) installations.
 So if the project dependends on `bar@1.0.0`, the dependencies from our example will be grouped like this:
 
-<pre>
-- bar <sub>v1.0.0</sub>
-- .registry.npmjs.org / foo / 1.0.0
-
-  - baz@1.0.0 / node_modules
-    <sub>hard link</sub>
-    - foo
-    <sub>symlinks to peer dependencies</sub>
-    - baz <sub>v1.0.0</sub>
-    <sub>regular dependencies of foo</sub>
-    - qux
-    - plugh
-
-  - baz@1.1.0 / node_modules
-    <sub>hard link</sub>
-    - foo
-    <sub>symlinks to peer dependencies</sub>
-    - baz <sub>v1.1.0</sub>
-    <sub>regular dependencies of foo</sub>
-    - qux
-    - plugh
-</pre>
+![](/img/how-peers-are-resolved/3.png)
 
 *If a package has no peer dependencies but has dependencies with peers that are resolved higher in the tree*, then
 that transitive package can appear in the project with different sets of dependencies. For instance, there's package `a@1.0.0`
@@ -101,27 +51,4 @@ peers of `framework@1.0.0`, so it becomes dependent from the peers of `framework
 Here's how it will look like in `node_modules/.registry.npmjs.org`, in case if `a@1.0.0` will need to appear twice in the project's
 `node_modules`, once resolved with `plugin@1.0.0` and once with `plugin@1.1.0`.
 
-<pre>
-- .registry.npmjs.org
-  - a / 1.0.0
-    - plugin@1.0.0 / node_modules
-      - a
-      <sub>-> .registry.npmjs.org / framework / 1.0.0 / plugin@1.0.0 / node_modules / framework</sub>
-      - framework <sub>v1.0.0 but dependent on plugin@1.0.0</sub>
-    - plugin@1.1.0 / node_modules
-      - a
-      <sub>-> .registry.npmjs.org / framework / 1.0.0 / plugin@1.1.0 / node_modules / framework</sub>
-      - framework <sub>v1.0.0 but dependent on plugin@1.1.0</sub>
-
-  - framework / 1.0.0
-    - plugin@1.0.0 / node_modules
-      - framework
-      - plugin <sub>v1.0.0</sub>
-    - plugin@1.1.0 / node_modules
-      - framework
-      - plugin <sub>v1.1.0</sub>
-
-  - plugin
-    - 1.0.0 / node_modules / plugin
-    - 1.1.0 / node_modules / plugin
-</pre>
+![](/img/how-peers-are-resolved/4.png)
