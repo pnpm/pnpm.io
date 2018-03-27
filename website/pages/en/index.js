@@ -225,15 +225,25 @@ class Index extends React.Component {
           <Showcase language={language} />
           <Container background="light" padding={["bottom", "top"]}>
             <h2>What developers are saying</h2>
-            <blockquote class="twitter-tweet" data-cards="hidden" data-lang="en">
-              <p lang="en" dir="ltr">
-                Between npm and yarn, I&#39;ve been very happy using *pnpm* lately <a href="https://t.co/HkXnR97wlZ">https://t.co/HkXnR97wlZ</a> simple, very fast, space efficient, unobtrusive</p>
-                &mdash; André Staltz (@andrestaltz) <a href="https://twitter.com/andrestaltz/status/860444660505989120">May 5, 2017</a>
-            </blockquote>
-            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
-              Simple and genius idea, so that you always will wonder why you didn&#39;t think of it yourself <a href="https://t.co/jIMa2U4yym">https://t.co/jIMa2U4yym</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> (but, pruning?)</p>&mdash; Michel Weststrate (@mweststrate) <a href="https://twitter.com/mweststrate/status/861533946668089346">May 8, 2017</a></blockquote>
-            <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I&#39;ve been long advocating for <a href="https://twitter.com/pnpmjs">@pnpmjs</a> — it&#39;s like a hidden gem in Node ecosystem. Try it, it is mature and performant. <a href="https://t.co/ie91RMYlSP">https://t.co/ie91RMYlSP</a></p>&mdash; Andrey Popp (@andreypopp) <a href="https://twitter.com/andreypopp/status/861550953526206464">May 8, 2017</a></blockquote>
-            <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/wmhilton">@wmhilton</a> <a href="https://twitter.com/yarnpkg">@yarnpkg</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> just installed it and it worked like a charm. I&#39;m impressed!</p>&mdash; Stephan Hoyer (@cmx66) <a href="https://twitter.com/cmx66/status/854596611690942465">April 19, 2017</a></blockquote>
+            <div className="gridBlock">
+              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
+                <blockquote className="twitter-tweet" data-cards="hidden" data-lang="en">
+                  <p lang="en" dir="ltr">
+                    Between npm and yarn, I&#39;ve been very happy using *pnpm* lately <a href="https://t.co/HkXnR97wlZ">https://t.co/HkXnR97wlZ</a> simple, very fast, space efficient, unobtrusive</p>
+                    &mdash; André Staltz (@andrestaltz) <a href="https://twitter.com/andrestaltz/status/860444660505989120">May 5, 2017</a>
+                </blockquote>
+              </div>
+              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
+                <blockquote className="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+                Simple and genius idea, so that you always will wonder why you didn&#39;t think of it yourself <a href="https://t.co/jIMa2U4yym">https://t.co/jIMa2U4yym</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> (but, pruning?)</p>&mdash; Michel Weststrate (@mweststrate) <a href="https://twitter.com/mweststrate/status/861533946668089346">May 8, 2017</a></blockquote>
+              </div>
+              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
+                <blockquote className="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I&#39;ve been long advocating for <a href="https://twitter.com/pnpmjs">@pnpmjs</a> — it&#39;s like a hidden gem in Node ecosystem. Try it, it is mature and performant. <a href="https://t.co/ie91RMYlSP">https://t.co/ie91RMYlSP</a></p>&mdash; Andrey Popp (@andreypopp) <a href="https://twitter.com/andreypopp/status/861550953526206464">May 8, 2017</a></blockquote>
+              </div>
+              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
+                <blockquote className="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/wmhilton">@wmhilton</a> <a href="https://twitter.com/yarnpkg">@yarnpkg</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> just installed it and it worked like a charm. I&#39;m impressed!</p>&mdash; Stephan Hoyer (@cmx66) <a href="https://twitter.com/cmx66/status/854596611690942465">April 19, 2017</a></blockquote>
+              </div>
+            </div>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           </Container>
         </div>
