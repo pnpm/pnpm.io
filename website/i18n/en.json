@@ -32,6 +32,7 @@
     "Advanced": "Advanced"
   },
   "pages-strings": {
+    "Fast, disk space efficient package manager|no description given": "Fast, disk space efficient package manager",
     "Help Translate|recruit community translators for your project": "Help Translate",
     "Edit this Doc|recruitment message asking to edit the doc source": "Edit",
     "Translate this Doc|recruitment message asking to translate the docs": "Translate"

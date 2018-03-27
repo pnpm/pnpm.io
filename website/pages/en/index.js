@@ -7,6 +7,7 @@
 
 const React = require('react');
 
+const translate = require("../../server/translate.js").translate;
 const CompLibrary = require('../../core/CompLibrary.js');
 const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
 const Container = CompLibrary.Container;
@@ -53,7 +54,7 @@ const SplashContainer = props => (
 const ProjectTitle = props => (
   <h2 className="projectTitle">
     <img src={imgUrl('pnpm-big-logo.png')} alt="pnpm" />
-    <small>{siteConfig.tagline}</small>
+    <small><translate>Fast, disk space efficient package manager</translate></small>
   </h2>
 );
 
