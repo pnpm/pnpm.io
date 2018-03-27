@@ -22,19 +22,20 @@ const siteConfig = {
   baseUrl: '/' /* base url for your project */,
   projectName: 'pnpm-site',
   headerLinks: [
-    {doc: 'intro', label: 'Docs'},
+    {doc: 'motivation', label: 'Docs'},
     {doc: 'faq', label: 'FAQ'},
-    {page: 'help', label: 'Help'},
-    {blog: true, label: 'Blog'},
+    {href: 'https://medium.com/pnpm', label: 'Blog'},
   ],
   users,
   /* path to images for header/footer */
-  headerIcon: 'img/pnpm-light-no-name.svg',
+  headerIcon: 'img/pnpm-no-name-with-frame.svg',
+  // headerIcon: 'img/pnpm-light-no-name.svg',
   footerIcon: 'img/pnpm-light.svg',
   favicon: 'img/favicon.png',
   /* colors for website */
   colors: {
-    primaryColor: '#4e4e4e',
+    primaryColor: '#f69220',
+    // primaryColor: '#4e4e4e',
     secondaryColor: '#f9ad00',
     // primaryColor: '#2E8555',
     // secondaryColor: '#205C3B',

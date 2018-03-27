@@ -1,23 +1,7 @@
 ---
-id: intro
-title: pnpm
+id: motivation
+title: Motivation
 ---
-
-> Fast, disk space efficient package manager
-
-Features:
-
-* **Fast.** Faster than npm and Yarn.
-* **Efficient.** One version of a package is saved only ever once on a disk.
-* **Deterministic.** Has a lockfile called `shrinkwrap.yaml`.
-* **Strict.** A package can access only dependencies that are specified in its `package.json`.
-* **Works everywhere.** Works on Windows, Linux and OS X.
-* **Hooks.** `node_modules` is not a black box anymore.
-* **Aliases.** Install different versions of the same package or import it using a different name.
-
-Like this project? Let people know with a [tweet](https://bit.ly/tweet-pnpm).
-
-## Background
 
 pnpm uses hard links and symlinks to save one version of a module only ever once on a disk.
 When using npm or Yarn for example, if you have 100 projects using the same version

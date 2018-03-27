@@ -74,7 +74,15 @@ class HomeSplash extends React.Component {
           <ProjectTitle />
           <PromoSection>
             <Button href="https://github.com/pnpm/pnpm">GitHub</Button>
-            <Button href={docUrl('intro.html', language)}>Docs</Button>
+            <Button href={docUrl('installation.html', language)}>Getting Started</Button>
+            <iframe
+              src={"https://ghbtns.com/github-btn.html?user=pnpm&repo=pnpm&type=star&count=true&size=large"}
+              frameborder="0"
+              scrolling="0"
+              width="160px"
+              height="30px"
+              style={{marginTop: '8px'}}
+          />
           </PromoSection>
         </div>
       </SplashContainer>
