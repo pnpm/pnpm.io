@@ -35,10 +35,7 @@ const siteConfig = {
   /* colors for website */
   colors: {
     primaryColor: '#f69220',
-    // primaryColor: '#4e4e4e',
     secondaryColor: '#f9ad00',
-    // primaryColor: '#2E8555',
-    // secondaryColor: '#205C3B',
   },
   /* custom fonts for website */
   /*fonts: {
@@ -59,6 +56,7 @@ const siteConfig = {
   cname: 'pnpm.js.org' /* your website url */,
   organizationName: 'pnpm', // or set an env variable ORGANIZATION_NAME
   projectName: 'pnpm.github.io', // or set an env variable PROJECT_NAME
+  editUrl: 'https://github.com/pnpm/pnpm.github.io/edit/source/docs/',
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks
     theme: 'default',
@@ -67,7 +65,9 @@ const siteConfig = {
   // You may provide arbitrary config keys to be used as needed by your template.
   repoUrl: 'https://github.com/pnpm/pnpm',
   /* On page navigation for the current documentation page */
-  // onPageNav: 'separate',
+  onPageNav: 'separate',
+  gaTrackingId: 'UA-91385296-1',
+  translationRecruitingLink: 'https://crowdin.com/project/pnpm',
 };
 
 module.exports = siteConfig;
