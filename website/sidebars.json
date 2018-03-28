@@ -11,6 +11,14 @@
       "hooks",
       "aliases"
     ],
+    "CLI commands": [
+      "pnpm-install",
+      "pnpm-install-pkg",
+      "pnpm-dislink",
+      "pnpm-store",
+      "pnpm-recursive",
+      "pnpm-server"
+    ],
     "Recipes": [
       "continuous-integration",
       "workspace"
