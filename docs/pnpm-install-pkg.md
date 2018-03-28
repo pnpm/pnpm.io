@@ -6,16 +6,25 @@ title: pnpm install <pkg>
 Installs a package and any packages that it depends on.
 By default, any new package is installed as a prod dependency.
 
-## Usage examples
+## tl;dr
 
-```
-pnpm install express
-pnpm i express
-pnpm install express@nightly
-pnpm install express@1.0.0
-pnpm install express react
-pnpm install --save-dev standard
-```
+|Command|Meaning|
+|--|--|
+|`pnpm i sax`                          |npm package (save to `dependencies`)            |
+|`pnpm i -D sax`                       |save to `devDependencies`|
+|`pnpm i -O sax`                       |save to `optionalDependencies`|
+|`pnpm i -P sax`                       |save to `dependencies`|
+|`pnpm i sax@next`                     |Specify tag `latest`   |
+|`pnpm i sax@3.0.0`                    |Specify version `3.0.0`|
+|`pnpm i sax@">=1 <2.0"`               |Specify version range  |
+|`pnpm i user/repo`                    |GitHub                 |
+|`pnpm i user/repo#master`             |GitHub                 |
+|`pnpm i user/repo#semver:^2.0.0`      |GitHub                 |
+|`pnpm i github:user/repo`             |GitHub                 |
+|`pnpm i gitlab:user/repo`             |GitHub                 |
+|`pnpm i /path/to/repo`                |Absolute path          |
+|`pnpm i ./archive.tgz`                |Tarball                |
+|`pnpm i https://site.com/archive.tgz` |Tarball via HTTP       |
 
 ## Supported package locations
 
@@ -41,7 +50,7 @@ There are two ways to install from the local file system:
 
 Examples:
 
-```
+```sh
 pnpm install ./package.tgz
 pnpm install ./some-directory
 ```
@@ -56,13 +65,13 @@ The argument must start with "http://" or "https://".
 
 Example:
 
-```
+```sh
 pnpm install https://github.com/indexzero/forever/tarball/v0.5.6
 ```
 
 ### Install from Git repository
 
-```
+```sh
 npm install <git remote url>
 ```
 

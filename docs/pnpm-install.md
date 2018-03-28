@@ -5,6 +5,14 @@ title: pnpm install
 
 `pnpm install` is used to install all dependencies for a project.
 
+## tl;dr
+
+|Command|Meaning|
+|--|--|
+|`pnpm i --offline` |no network requests |
+|`pnpm i --frozen-shrinkwrap` |`shrinkwrap.yaml` is not updated |
+|`pnpm i --prefer-frozen-shrinkwrap` |when possible, `shrinkwrap.yaml` is not updated |
+
 ## store
 
 * Default: **~/.pnpm-store**
