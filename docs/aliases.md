@@ -21,7 +21,7 @@ No changes in code are needed. All the requires of `lodash` will import `awesome
 
 Sometimes you'll want to use two different versions of a package in your project. Easy:
 
-```
+```sh
 pnpm install lodash1@npm:lodash@1
 pnpm install lodash2@npm:lodash@2
 ```

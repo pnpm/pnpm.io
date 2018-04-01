@@ -9,7 +9,7 @@ Added in: v1.24.0
 
 > Stability: Experimental
 
-```
+```sh
 pnpm recursive [concurrency] install [arguments]
 ```
 
@@ -17,7 +17,7 @@ Concurrently runs install in all subdirectories with a `package.json` (excluding
 
 Usage examples:
 
-```
+```sh
 pnpm recursive install
 pnpm recursive 10 install --ignore-scripts
 ```
@@ -28,7 +28,7 @@ Added in: v1.24.0
 
 > Stability: Experimental
 
-```
+```sh
 pnpm recursive [concurrency] update [arguments]
 ```
 
@@ -36,7 +36,7 @@ Concurrently runs update in all subdirectories with a `package.json` (excluding 
 
 Usage examples:
 
-```
+```sh
 pnpm recursive update
 pnpm recursive update --depth 100
 ```
@@ -47,7 +47,7 @@ Added in: v1.32.0
 
 > Stability: Experimental
 
-```
+```sh
 pnpm recursive [concurrency] link [arguments]
 ```
 
@@ -56,7 +56,7 @@ If a package is available locally, the local version is linked.
 
 Usage examples:
 
-```
+```sh
 pnpm recursive link
 pnpm recursive link --ignore-scripts
 ```
@@ -67,7 +67,7 @@ Added in: v1.32.0
 
 > Stability: Experimental
 
-```
+```sh
 pnpm recursive [concurrency] dislink [arguments]
 ```
 
@@ -75,12 +75,6 @@ Removes links to local packages and reinstalls them from the registry.
 
 Usage examples:
 
-```
+```sh
 pnpm recursive dislink
 ```
-
-***
-
-The rest of the commands pass through to npm.
-
-For using the programmatic API, use pnpm's engine: [supi](https://github.com/pnpm/supi).
