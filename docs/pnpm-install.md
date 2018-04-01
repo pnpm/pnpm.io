@@ -146,7 +146,7 @@ If `true`, pnpm doesn't generate a shrinkwrap file and fails if an update is nee
 
 Added in: v1.37.1
 
-* Default: **false**
+* Default: **true** (from v1.38.0)
 * Type: **Boolean**
 
 When `true` and the available `shrinkwrap.yaml` satisfies the `package.json`
