@@ -10,7 +10,7 @@ Added in: v1.24.0
 > Stability: Experimental
 
 ```sh
-pnpm recursive [concurrency] install [arguments]
+pnpm recursive install [arguments]
 ```
 
 Concurrently runs install in all subdirectories with a `package.json` (excluding node_modules).
@@ -29,7 +29,7 @@ Added in: v1.24.0
 > Stability: Experimental
 
 ```sh
-pnpm recursive [concurrency] update [arguments]
+pnpm recursive update [arguments]
 ```
 
 Concurrently runs update in all subdirectories with a `package.json` (excluding node_modules).
@@ -48,7 +48,7 @@ Added in: v1.32.0
 > Stability: Experimental
 
 ```sh
-pnpm recursive [concurrency] link [arguments]
+pnpm recursive link [arguments]
 ```
 
 Concurrently runs installation in all subdirectories with a `package.json` (excluding node_modules).
@@ -68,7 +68,7 @@ Added in: v1.32.0
 > Stability: Experimental
 
 ```sh
-pnpm recursive [concurrency] dislink [arguments]
+pnpm recursive dislink [arguments]
 ```
 
 Removes links to local packages and reinstalls them from the registry.
