@@ -19,6 +19,12 @@ const users = [
     infoLink: 'https://pin.gy/',
     pinned: true,
   },
+  {
+    caption: 'Rush',
+    image: '/img/users/rush.png',
+    infoLink: 'https://www.npmjs.com/package/@microsoft/rush',
+    pinned: true,
+  },
 ];
 
 const siteConfig = {
