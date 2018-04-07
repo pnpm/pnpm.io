@@ -11,7 +11,7 @@ pnpm install lodash
 
 npm commands that are re-implemented in pnpm:
 
-* `install`
+* [install](pnpm-install.md)
 * `update`
 * `uninstall`
 * `link`
