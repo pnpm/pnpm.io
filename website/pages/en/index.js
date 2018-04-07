@@ -234,7 +234,7 @@ class Index extends React.Component {
                 </blockquote>
               </div>
               <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote className="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">
+                <blockquote className="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">
                 Simple and genius idea, so that you always will wonder why you didn&#39;t think of it yourself <a href="https://t.co/jIMa2U4yym">https://t.co/jIMa2U4yym</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> (but, pruning?)</p>&mdash; Michel Weststrate (@mweststrate) <a href="https://twitter.com/mweststrate/status/861533946668089346">May 8, 2017</a></blockquote>
               </div>
               <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
