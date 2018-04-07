@@ -8,6 +8,12 @@
 /* List of projects/orgs using your project for the users page */
 const users = [
   {
+    caption: 'Glitch',
+    image: '/img/users/glitch.svg',
+    infoLink: 'https://glitch.com/',
+    pinned: true,
+  },
+  {
     caption: 'Pingy',
     image: '/img/users/pingy.svg',
     infoLink: 'https://pin.gy/',
