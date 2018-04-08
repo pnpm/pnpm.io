@@ -83,6 +83,29 @@ Added in: v1.25.0
 `pnpmfile.js` will be ignored. Useful together with `--ignore-scripts` when you want to make sure that
 no script gets executed during install.
 
+## pnpmfile
+
+Added in: v1.39.0
+
+* Default: **pnpmfile.js**
+* Type: **path**
+* Example: **.pnpm/pnpmfile.js**
+
+The location of the local pnpmfile.
+
+## global-pnpmfile
+
+Added in: v1.39.0
+
+* Default: **null**
+* Type: **path**
+* Example: **~/.pnpm/global_pnpmfile.js**
+
+The location of a global pnpmfile. A global pnpmfile is used by all projects during installation.
+
+**NOTE:** It is recommended to use local pnpmfiles. Only use a global pnpmfile, if you use pnpm on projects
+that don't use pnpm as the primary package manager.
+
 ## independent-leaves
 
 * Default: **false**
