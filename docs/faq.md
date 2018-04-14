@@ -35,9 +35,7 @@ Although pnpm uses symlinks to put dependencies into `node_modules` folders, cir
 
 One package can have different sets of dependencies on one machine.
 
-In project **A** `foo@1.0.0` can have dependency resolved to `bar@1.0.0` but in project **B** the same dependency of `foo` might
-resolve to `bar@1.1.0`. So pnpm hard links `foo@1.0.0` to every project where it is used, in order to create different sets
-of dependencies for it.
+In project **A** `foo@1.0.0` can have dependency resolved to `bar@1.0.0` but in project **B** the same dependency of `foo` might resolve to `bar@1.1.0`. So pnpm hard links `foo@1.0.0` to every project where it is used, in order to create different sets of dependencies for it.
 
 Direct symlinking to the global store would work with Node's `--preserve-symlinks` flag. But `--preserve-symlinks` comes
 with a bunch of different issues, so we decided to stick with hard links.
@@ -50,14 +48,14 @@ For more details about why this decision was made, see: https://github.com/nodej
 ## `pnpm` does not work with <YOUR-PROJECT-HERE>?
 
 In most cases it means that one of the dependencies require packages not declared in `package.json`.
-It is a common mistake caused by flat `node_modules`. If this happens, this is an erro in the dependency and the
+It is a common mistake caused by flat `node_modules`. If this happens, this is an error in the dependency and the
 dependency should be fixed. That might take time though, so pnpm supports workarounds to make the buggy packages work.
 
 ### Solution 1
 
 One of the solutions is to use [hooks](#hooks) for adding the missing dependencies to the package's `package.json`.
 
-An example was [Webpack Dashboard](https://github.com/pnpm/pnpm/issues/1043) which wasn't working with `pnpm`. Notice, it has been since resolved such that it works with `pnpm` now.
+An example was [Webpack Dashboard](https://github.com/pnpm/pnpm/issues/1043) which wasn't working with `pnpm`. It has since been resolved such that it works with `pnpm` now.
 
 It used to throw an error:
 
@@ -66,7 +64,7 @@ Error: Cannot find module 'babel-traverse'
   at /node_modules/.registry.npmjs.org/inspectpack/2.2.3/node_modules/inspectpack/lib/actions/parse
 ```
 
-The problem was `babel-traverse` was used in `inspectpack` library which was used by `webpack-dashboard`. But `babel-traverse` wasn't specified in `inspectpack`'s `package.json`. It still worked with `npm` and `yarn` because they create flat `node_modules`.
+The problem was that `babel-traverse` was used in `inspectpack` library which was used by `webpack-dashboard`. But `babel-traverse` wasn't specified in `inspectpack`'s `package.json`. It still worked with `npm` and `yarn` because they create flat `node_modules`.
 
 Solution was to create a `pnpmfile.js` with the following contents:
 
