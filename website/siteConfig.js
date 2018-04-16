@@ -21,8 +21,8 @@ const users = [
   },
   {
     caption: 'Rush',
-    image: '/img/users/rush.png',
-    infoLink: 'https://www.npmjs.com/package/@microsoft/rush',
+    image: '/img/users/rush.svg',
+    infoLink: 'https://rushjs.io/',
     pinned: true,
   },
 ];
