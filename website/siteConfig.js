@@ -37,7 +37,7 @@ const users = [
 const siteConfig = {
   title: 'pnpm' /* title for your website */,
   tagline: 'Fast, disk space efficient package manager',
-  url: 'https://pnpm.js.org/' /* your website url */,
+  url: 'https://pnpm.js.org' /* your website url */,
   baseUrl: '/' /* base url for your project */,
   projectName: 'pnpm-site',
   headerLinks: [
