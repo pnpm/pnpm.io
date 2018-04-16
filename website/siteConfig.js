@@ -87,6 +87,7 @@ const siteConfig = {
   onPageNav: 'separate',
   gaTrackingId: 'UA-91385296-1',
   translationRecruitingLink: 'https://crowdin.com/project/pnpm',
+  ogImage: 'img/ogimage.png',
 };
 
 module.exports = siteConfig;
