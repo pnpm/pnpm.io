@@ -18,6 +18,7 @@ const users = [
     image: '/img/users/microsoft.svg',
     infoLink: 'https://microsoft.com/',
     pinned: true,
+    width: 250,
   },
   {
     caption: 'Pingy',
