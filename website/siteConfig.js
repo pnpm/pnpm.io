@@ -14,6 +14,12 @@ const users = [
     pinned: true,
   },
   {
+    caption: 'Microsoft',
+    image: '/img/users/microsoft.svg',
+    infoLink: 'https://microsoft.com/',
+    pinned: true,
+  },
+  {
     caption: 'Pingy',
     image: '/img/users/pingy.svg',
     infoLink: 'https://pin.gy/',
