@@ -7,8 +7,6 @@ title: pnpm recursive
 
 Added in: v1.24.0
 
-> Stability: Experimental
-
 ```sh
 pnpm recursive install [arguments]
 ```
@@ -19,14 +17,12 @@ Usage examples:
 
 ```sh
 pnpm recursive install
-pnpm recursive 10 install --ignore-scripts
+pnpm recursive install --ignore-scripts
 ```
 
 ## pnpm recursive update
 
 Added in: v1.24.0
-
-> Stability: Experimental
 
 ```sh
 pnpm recursive update [arguments]
@@ -45,8 +41,6 @@ pnpm recursive update --depth 100
 
 Added in: v1.32.0
 
-> Stability: Experimental
-
 ```sh
 pnpm recursive link [arguments]
 ```
@@ -64,8 +58,6 @@ pnpm recursive link --ignore-scripts
 ## pnpm recursive dislink
 
 Added in: v1.32.0
-
-> Stability: Experimental
 
 ```sh
 pnpm recursive dislink [arguments]
