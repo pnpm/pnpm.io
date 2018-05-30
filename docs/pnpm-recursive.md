@@ -70,3 +70,36 @@ Usage examples:
 ```sh
 pnpm recursive dislink
 ```
+
+## pnpm recursive outdated
+
+Added in: v2.2.0
+
+```sh
+pnpm recursive outdated [[<@scope>/]<pkg> ...]
+```
+
+Check for outdated packages in every project of the multi-package repo.
+
+Usage examples:
+
+```sh
+pnpm recursive outdated
+```
+
+## pnpm recursive list
+
+Added in: v2.2.0
+
+```sh
+pnpm recursive list [[<@scope>/]<pkg> ...]
+```
+
+List packages in each project of the multi-package repo.
+Accepts the same arguments and flags as the regular `pnpm list` command.
+
+Usage examples:
+
+```sh
+pnpm recursive list
+```
