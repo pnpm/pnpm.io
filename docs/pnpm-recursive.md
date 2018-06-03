@@ -35,6 +35,8 @@ Usage examples:
 ```sh
 pnpm recursive update
 pnpm recursive update --depth 100
+# update typescript to the latest version in every package
+pnpm recursive update typescript@latest
 ```
 
 ## pnpm recursive link
@@ -102,4 +104,30 @@ Usage examples:
 
 ```sh
 pnpm recursive list
+```
+
+## pnpm recursive run <command> [-- <args>...]
+
+Added in: v2.3.0
+
+This runs an arbitrary command from each package's "scripts" object.
+If a package doesn't have the command, it is skipped.
+If none of the packages have the command, the command fails.
+
+Usage examples:
+
+```sh
+pnpm recursive run build
+```
+
+## pnpm recursive test [-- <args>...]
+
+Added in: v2.3.0
+
+This runs each package's "test" script, if one was provided.
+
+Usage examples:
+
+```sh
+pnpm recursive test
 ```
