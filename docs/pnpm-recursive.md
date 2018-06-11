@@ -106,9 +106,13 @@ Usage examples:
 pnpm recursive list
 ```
 
-## pnpm recursive run <command> [-- <args>...]
+## pnpm recursive run
 
 Added in: v2.3.0
+
+```sh
+pnpm recursive run <command> [-- <args>...]
+```
 
 This runs an arbitrary command from each package's "scripts" object.
 If a package doesn't have the command, it is skipped.
@@ -120,9 +124,13 @@ Usage examples:
 pnpm recursive run build
 ```
 
-## pnpm recursive test [-- <args>...]
+## pnpm recursive test
 
 Added in: v2.3.0
+
+```sh
+pnpm recursive test [-- <args>...]
+```
 
 This runs each package's "test" script, if one was provided.
 
@@ -130,4 +138,20 @@ Usage examples:
 
 ```sh
 pnpm recursive test
+```
+
+## pnpm recursive rebuild
+
+Added in: v2.4.0
+
+```sh
+pnpm recursive rebuild [[<@scope>/<name>]...]
+```
+
+This command runs the **pnpm build** command in every package of the multi-package repo.
+
+Usage examples:
+
+```sh
+pnpm recursive rebuild
 ```
