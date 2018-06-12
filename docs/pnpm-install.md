@@ -201,6 +201,15 @@ Added in: v1.30.0
 Starts a store server in the background. The store server will keep running after installation is done.
 To stop the store server, run `pnpm server stop`
 
+## use-running-store-server
+
+Added in: v2.5.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Only allows installation with a store server. If no store server is running, installation will fail.
+
 ## side-effects-cache
 
 Added in: v1.31.0

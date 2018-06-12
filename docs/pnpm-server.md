@@ -7,8 +7,6 @@ title: pnpm server
 
 Added in: v1.30.0
 
-> Stability: Experimental
-
 Starts a server that does all interactions with the store.
 Other commands will delegate any store-related tasks to this server.
 
@@ -65,6 +63,10 @@ Disallows creating new side effect cache during install.
 
 Added in: v1.30.0
 
-> Stability: Experimental
-
 Stops the store server.
+
+## pnpm server status
+
+Added in: v2.5.0
+
+Prints information about the running server.
