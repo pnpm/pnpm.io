@@ -8,6 +8,13 @@
 /* List of projects/orgs using your project for the users page */
 const users = [
   {
+    caption: 'Compass',
+    image: '/img/users/compass.svg',
+    infoLink: 'https://compass.com',
+    pinned: true,
+    width: 150,
+  },
+  {
     caption: 'Glitch',
     image: '/img/users/glitch.svg',
     infoLink: 'https://glitch.com/',
