@@ -3,6 +3,26 @@ id: pnpm-recursive
 title: pnpm recursive
 ---
 
+## tl;dr
+
+|Command|Meaning|
+|--|--|
+|`pnpm recursive run build --scope foo-*` |builds all packages with names that start with `foo-` |
+
+## Options
+
+### scope
+
+Added in: v2.6.0
+
+Restricts the scope to package names matching the given glob.
+
+Usage examples:
+
+```sh
+pnpm recursive link --scope @babel/*
+```
+
 ## pnpm recursive install
 
 Added in: v1.24.0
