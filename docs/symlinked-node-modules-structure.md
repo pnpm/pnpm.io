@@ -23,7 +23,7 @@ node_modules
 ```
 
 These are the only "real files" in `node_modules`. Once all the packages are hard linked to `node_modules`, symlinks are
-created to build the nested dependency tree structure.
+created to build the nested dependency graph structure.
 
 As you might have noticed, both packages are hard linked into a subfolder inside a `node_modules` folder (`foo/1.0.0/node_modules/foo`).
 This is needed to:
@@ -57,7 +57,7 @@ node_modules
 ```
 
 This is a very simple example. However, the layout will stay flat in the file system regardless of the number of dependencies
-and the depth of the dependency tree.
+and the depth of the dependency graph.
 
 Let's add `qar@2.0.0` as a dependency of `bar` and `foo`. This is how the `node_modules` will look like:
 
@@ -75,7 +75,7 @@ node_modules
       └─ bar -> ../../../bar/1.0.0/node_modules/bar
 ```
 
-As you can see, even though the depth of the tree is bigger (`foo > bar > qar`), the directory depth in the file system is still the same.
+As you can see, even though the depth of the graph is bigger (`foo > bar > qar`), the directory depth in the file system is still the same.
 
 This layout might look weird at first glance, but it is completely Node.js-compatible! When resolving modules, Node.js ignores symlinks.
 So when `bar` is required from `foo/1.0.0/node_modules/foo/index.js`, Node.js is not using `bar` from `foo/1.0.0/node_modules/bar`.

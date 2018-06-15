@@ -6,7 +6,7 @@ title: How peers are resolved
 One of the very great features of pnpm is that in one project, a specific version of a package will always have
 one set of dependencies. There is one exclusion from it though - packages with [peer dependencies](https://docs.npmjs.com/files/package.json#peerdependencies).
 
-Peer dependencies are resolved from dependencies installed higher in the dependency tree.
+Peer dependencies are resolved from dependencies installed higher in the dependency graph.
 That means if `foo@1.0.0` has two peers (`bar@^1` and `baz@^1`) then it might have different sets of dependencies
 in the same project.
 
@@ -43,7 +43,7 @@ So if the project dependends on `bar@1.0.0`, the dependencies from our example w
 
 ![](/img/how-peers-are-resolved/3.png)
 
-*If a package has no peer dependencies but has dependencies with peers that are resolved higher in the tree*, then
+*If a package has no peer dependencies but has dependencies with peers that are resolved higher in the graph*, then
 that transitive package can appear in the project with different sets of dependencies. For instance, there's package `a@1.0.0`
 with a single dependency `framework@1.0.0`. `framework@1.0.0` has a peer dependency `plugin@^1`. `a@1.0.0` will never resolve the
 peers of `framework@1.0.0`, so it becomes dependent from the peers of `framework@1.0.0` as well.
