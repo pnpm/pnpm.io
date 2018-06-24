@@ -175,3 +175,19 @@ Usage examples:
 ```sh
 pnpm recursive rebuild
 ```
+
+## pnpm recursive exec
+
+Added in: v2.9.0
+
+```sh
+pnpm recursive exec -- <command> [args...]
+```
+
+This command runs a command in each package of the multi-package repo.
+
+Usage examples:
+
+```sh
+pnpm recursive exec -- rm -rf node_modules
+```
