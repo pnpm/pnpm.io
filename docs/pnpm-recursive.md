@@ -7,6 +7,7 @@ title: pnpm recursive
 
 |Command|Meaning|
 |--|--|
+|`pnpm recursive link` | link all packages in the monorepo and install their dependencies |
 |`pnpm recursive run build --scope foo-*` |builds all packages with names that start with `foo-` |
 
 ## Options
@@ -59,6 +60,22 @@ pnpm recursive update --depth 100
 pnpm recursive update typescript@latest
 ```
 
+## pnpm recursive uninstall
+
+Added in: v2.10.0
+
+```sh
+pnpm recursive uninstall [<@scope>/]<pkg>...
+```
+
+Uninstall a dependency from each package
+
+Usage examples:
+
+```sh
+pnpm recursive uninstall webpack
+```
+
 ## pnpm recursive link
 
 Added in: v1.32.0
@@ -80,6 +97,8 @@ pnpm recursive link --ignore-scripts
 ## pnpm recursive dislink
 
 Added in: v1.32.0
+
+An alias of `recursive unlink` from v2.0.0
 
 ```sh
 pnpm recursive dislink [arguments]
