@@ -174,7 +174,7 @@ const Showcase = props => {
     })
     .map((user, i) => {
       return (
-        <a href={user.infoLink} key={i}>
+        <a href={user.infoLink} key={i} rel="noopener">
           <img src={user.image} title={user.caption} style={{width: user.width ? `${user.width}px` : null}} />
         </a>
       );
