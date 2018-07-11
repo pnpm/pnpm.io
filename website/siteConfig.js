@@ -46,6 +46,12 @@ const users = [
     pinned: true,
     width: 250,
   },
+  {
+    caption: 'OAX Foundation',
+    image: '/img/users/oax.svg',
+    infoLink: 'https://www.oax.org/',
+    pinned: true,
+  },
 ];
 
 const siteConfig = {
