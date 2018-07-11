@@ -39,6 +39,12 @@ const users = [
     infoLink: 'https://rushjs.io/',
     pinned: true,
   },
+  {
+    caption: 'OAX Foundation',
+    image: '/img/users/oax.svg',
+    infoLink: 'https://www.oax.org/',
+    pinned: true,
+  },
 ];
 
 const siteConfig = {
