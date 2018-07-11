@@ -1,5 +1,13 @@
 # pnpm.js.org
 
+## Testing locally
+
+```
+cd website
+pnpm install
+pnpm start
+```
+
 ## How to publish
 
 ```
