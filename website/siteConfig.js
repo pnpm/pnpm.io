@@ -39,6 +39,13 @@ const users = [
     infoLink: 'https://rushjs.io/',
     pinned: true,
   },
+  {
+    caption: 'Enuma Technologies',
+    image: '/img/users/enuma.svg',
+    infoLink: 'https://enuma.io/',
+    pinned: true,
+    width: 250,
+  },
 ];
 
 const siteConfig = {
