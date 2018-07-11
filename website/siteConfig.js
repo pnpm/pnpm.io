@@ -40,6 +40,13 @@ const users = [
     pinned: true,
   },
   {
+    caption: 'Enuma Technologies',
+    image: '/img/users/enuma.svg',
+    infoLink: 'https://enuma.io/',
+    pinned: true,
+    width: 250,
+  },
+  {
     caption: 'OAX Foundation',
     image: '/img/users/oax.svg',
     infoLink: 'https://www.oax.org/',
