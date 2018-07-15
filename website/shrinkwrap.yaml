@@ -197,7 +197,7 @@ packages:
   /autoprefixer/6.7.7:
     dependencies:
       browserslist: 1.7.7
-      caniuse-db: 1.0.30000865
+      caniuse-db: 1.0.30000867
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       postcss: 5.2.18
@@ -904,8 +904,9 @@ packages:
       integrity: sha1-uneWLhLf+WnWt2cR6RS3N4V79qc=
   /browserslist/1.7.7:
     dependencies:
-      caniuse-db: 1.0.30000865
+      caniuse-db: 1.0.30000867
       electron-to-chromium: 1.3.52
+    deprecated: Browserslist 2 could fail on reading Browserslist >3.0 config used in other tools.
     dev: true
     hasBin: true
     resolution:
@@ -990,16 +991,16 @@ packages:
   /caniuse-api/1.6.1:
     dependencies:
       browserslist: 1.7.7
-      caniuse-db: 1.0.30000865
+      caniuse-db: 1.0.30000867
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
     resolution:
       integrity: sha1-tTTnxzTE+B7F++isoq0kNUuWLGw=
-  /caniuse-db/1.0.30000865:
+  /caniuse-db/1.0.30000867:
     dev: true
     resolution:
-      integrity: sha1-gv+2TUD3VnYgqsAtOmMgeWiavGs=
+      integrity: sha1-tVpuz6wxB5iJQMnH3+GGYxUxLJc=
   /caniuse-lite/1.0.30000865:
     dev: true
     resolution:
@@ -1796,13 +1797,13 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-luO3DVd59q1JzQMmc9HDEnZ7pYE=
-  /esprima/4.0.0:
+  /esprima/4.0.1:
     dev: true
     engines:
       node: '>=4'
     hasBin: true
     resolution:
-      integrity: sha512-oftTcaMu/EGrEIu904mWteKIv8vMuOgGYo7EhVJJN00R/EED9DCua/xxHRdYnKtcECzVg7xOWhflvJMnqcFZjw==
+      integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
   /esutils/2.0.2:
     dev: true
     engines:
@@ -3091,10 +3092,10 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha1-9g7PSumZwL2tLp+83ytvCYHnops=
-  /js-base64/2.4.5:
+  /js-base64/2.4.6:
     dev: true
     resolution:
-      integrity: sha512-aUnNwqMOXw3yvErjMPSQu6qIIzUmT1e5KcU1OZxRDU1g/am6mzBvcrmLAYwzmB59BHPrh5/tKaiF4OPhqRWESQ==
+      integrity: sha512-O9SR2NVICx6rCqh1qsU91QZ5IoNa+2T1ROJ0OQlfvATKGmnjsAvg3r0E5ufPZ4a95jdKTPXhFWiE/sOZ7a5Rtg==
   /js-tokens/3.0.2:
     dev: true
     resolution:
@@ -3106,7 +3107,7 @@ packages:
   /js-yaml/3.10.0:
     dependencies:
       argparse: 1.0.10
-      esprima: 4.0.0
+      esprima: 4.0.1
     dev: true
     hasBin: true
     resolution:
@@ -3114,7 +3115,7 @@ packages:
   /js-yaml/3.12.0:
     dependencies:
       argparse: 1.0.10
-      esprima: 4.0.0
+      esprima: 4.0.1
     dev: true
     hasBin: true
     resolution:
@@ -4139,7 +4140,7 @@ packages:
   /postcss/5.2.18:
     dependencies:
       chalk: 1.1.3
-      js-base64: 2.4.5
+      js-base64: 2.4.6
       source-map: 0.5.7
       supports-color: 3.2.3
     dev: true
