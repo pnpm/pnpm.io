@@ -17,6 +17,7 @@ Hooks can be declared in a file called `pnpmfile.js`. `pnpmfile.js` should live 
 
 Allows to mutate every dependency's `package.json`.
 An example of a `pnpmfile.js` that changes the dependencies field of a dependency:
+You will need to delete the `shrinkwrap.yaml` if you have already resolved the dependency you want change.
 
 ```js
 module.exports = {
@@ -25,15 +26,21 @@ module.exports = {
   }
 }
 
-// This hook will override the manifest of foo@1 after downloading it from the registry
-// foo@1 will always be installed with the second version of bar
 function readPackage (pkg, context) {
+  // Override the manifest of foo@1 after downloading it from the registry
+  // Replace all dependencies with bar@2
   if (pkg.name === 'foo' && pkg.version.startsWith('1.')) {
     pkg.dependencies = {
       bar: '^2.0.0'
     }
     context.log('bar@1 => bar@2 in dependencies of foo')
   }
+  
+  // This will fix any dependencies on baz to 1.2.3
+  if (pkg.dependencies && pkg.dependencies.baz === '*') {
+    pkg.dependencies.baz = '1.2.3';
+  }
+  
   return pkg
 }
 ```
