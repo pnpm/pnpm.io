@@ -8,20 +8,54 @@ title: pnpm recursive
 |Command|Meaning|
 |--|--|
 |`pnpm recursive link` | link all packages in the monorepo and install their dependencies |
-|`pnpm recursive run build --scope foo-*` |builds all packages with names that start with `foo-` |
+|`pnpm recursive run build --filter foo-*` |builds all packages with names that start with `foo-` |
 
 ## Options
 
-### scope
+### filter
 
-Added in: v2.6.0
+Added in: v2.13.0
 
 Restricts the scope to package names matching the given glob.
 
 Usage examples:
 
 ```sh
-pnpm recursive link --scope @babel/*
+pnpm recursive link --filter @babel/*
+```
+
+Also allows to select all the dependencies (direct and non-direct ones).
+To select all the dependencies of a package, prefix the name of the package with `...`.
+
+Usage examples:
+
+```sh
+pnpm recursive link --filter @babel/preset-2018...
+pnpm recursive link --filter @babel/preset-*...
+```
+
+### workspace-concurrency
+
+Added in: v2.13.0
+
+* Default: **4**
+* Type: **Number**
+
+Set the maximum number of concurrency. For unlimited concurrency use `Infinity`.
+
+### bail
+
+Added in: v2.13.0
+
+* Default: **true**
+* Type: **Boolean**
+
+If true, stops when a task throws an error.
+
+Usage example. Run tests in every package. Continue if tests fail in one of the packages:
+
+```
+pnpm recursive test --no-bail
 ```
 
 ## pnpm recursive install
