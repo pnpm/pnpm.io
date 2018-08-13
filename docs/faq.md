@@ -53,6 +53,21 @@ dependency should be fixed. That might take time though, so pnpm supports workar
 
 ### Solution 1
 
+In the following example, a dependency does **not** have the `iterall` module in its own list of deps.
+
+The easiest solution to resolve missing dependencies of the buggy packages is to **add `optionalDependencies` to our project's `package.json`**.
+
+```json
+  "devDependencies": {
+    ...
+  },
+  "optionalDependencies": {
+    "iterall": "^1.2.2"
+  }
+```
+
+### Solution 2
+
 One of the solutions is to use [hooks](#hooks) for adding the missing dependencies to the package's `package.json`.
 
 An example was [Webpack Dashboard](https://github.com/pnpm/pnpm/issues/1043) which wasn't working with `pnpm`. It has since been resolved such that it works with `pnpm` now.
@@ -85,7 +100,7 @@ module.exports = {
 
 After creating `pnpmfile.js`, delete `shrinkwrap.yaml` only. No need to delete `node_modules`. Then install the dependencies & it should be working.
 
-### Solution 2
+### Solution 3
 
 In case there are too many issues, you can use the `shamefully-flatten` config. This creates a flat `node_modules` structure similar to the one created by `npm` or `yarn`.
 
