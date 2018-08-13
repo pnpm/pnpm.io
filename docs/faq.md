@@ -57,6 +57,12 @@ In the following example, a dependency does **not** have the `iterall` module in
 
 The easiest solution to resolve missing dependencies of the buggy packages is to **add `optionalDependencies` to our project's `package.json`**.
 
+You can do so, by installing it via:
+
+`pnpm i -O iterall`
+
+It will be automatically added to your project's `package.json`.
+
 ```json
   "devDependencies": {
     ...
