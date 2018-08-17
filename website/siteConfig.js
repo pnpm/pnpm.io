@@ -15,6 +15,13 @@ const users = [
     width: 150,
   },
   {
+    caption: 'Cycle.js',
+    image: '/img/users/cyclejs.svg',
+    infoLink: 'https://cycle.js.org/',
+    pinned: true,
+    width: 150,
+  },
+  {
     caption: 'Glitch',
     image: '/img/users/glitch.svg',
     infoLink: 'https://glitch.com/',
