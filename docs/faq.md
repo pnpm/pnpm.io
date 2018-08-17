@@ -55,20 +55,19 @@ dependency should be fixed. That might take time though, so pnpm supports workar
 
 In the following example, a dependency does **not** have the `iterall` module in its own list of deps.
 
-The easiest solution to resolve missing dependencies of the buggy packages is to **add `optionalDependencies` to our project's `package.json`**.
+The easiest solution to resolve missing dependencies of the buggy packages is to **add `iterall` as a dependency to our project's `package.json`**.
 
 You can do so, by installing it via:
 
-`pnpm i -O iterall`
+`pnpm i iterall`
 
 It will be automatically added to your project's `package.json`.
 
 ```json
-  "devDependencies": {
+  "dependencies": {
     ...
-  },
-  "optionalDependencies": {
-    "iterall": "^1.2.2"
+    "iterall": "^1.2.2",
+    ...
   }
 ```
 
