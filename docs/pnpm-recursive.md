@@ -7,31 +7,93 @@ title: pnpm recursive
 
 |Command|Meaning|
 |--|--|
-|`pnpm recursive link` | link all packages in the monorepo and install their dependencies |
+|`pnpm recursive install` | runs installation for every package in every subfolder |
 |`pnpm recursive run build --filter foo-*` |builds all packages with names that start with `foo-` |
 
 ## Options
 
-### filter
+### link-workspace-packages
+
+Added in: v2.14.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
+This is very convinient in a multi-package repository.
+
+#### Usage
+
+Create a `.npmrc` file in the root of your multi-package repository with the following content:
+
+```
+link-workspace-packages = true
+```
+
+Create a [pnpm-workspace.yaml](workspace.md) file with the following content:
+
+```yaml
+packages:
+  - '**'
+```
+
+Run `pnpm recursive install`.
+
+### --filter <selector>
 
 Added in: v2.13.0
 
-Restricts the scope to package names matching the given glob.
+Filters allow to restrict commands to a subset of packages.
+A rich selector syntax is supported for picking packages by name
+or by relation.
+
+#### --filter <package_name>
+
+Added in: v2.13.0
+
+To select an exact package, just specify its name (`@babel/core`) or use a pattern
+to select a set of packages (`@babel/*`).
 
 Usage examples:
 
 ```sh
-pnpm recursive link --filter @babel/*
+pnpm recursive install --filter @babel/core
+pnpm recursive install --filter @babel/*
 ```
 
-Also allows to select all the dependencies (direct and non-direct ones).
-To select all the dependencies of a package, prefix the name of the package with `...`.
+#### --filter <package_name>...
 
-Usage examples:
+Added in: v2.13.0
+
+To select a package and its dependencies (direct and non-direct), suffix the package name with 3 dots: `<package_name>...`.
+For instance, the next command will run installation in all dependencies of `foo` and in `foo`:
 
 ```sh
-pnpm recursive link --filter @babel/preset-2018...
-pnpm recursive link --filter @babel/preset-*...
+pnpm recursive install --filter foo...
+```
+
+You may use a pattern to select a set of "root" packages:
+
+```sh
+pnpm recursive install --filter @babel/preset-*...
+```
+
+#### --filter ...<package_name>
+
+Added in: 2.14.0
+
+To select a package and its dependent packages (direct and non-direct), prefix the package name with 3 dots: `...<package_name>`.
+For instance, the next command will run installation in all dependents of `foo` and in `foo`:
+
+```sh
+pnpm recursive install --filter ...foo
+```
+
+When packages in the workspace are filtered, every package is taken that matches at least one of
+the selectors. You can use as many filters as you want:
+
+```sh
+pnpm recursive install --filter ...foo --filter bar --filter qar...
 ```
 
 ### workspace-concurrency
@@ -56,6 +118,21 @@ Usage example. Run tests in every package. Continue if tests fail in one of the 
 
 ```
 pnpm recursive test --no-bail
+```
+
+### sort
+
+Added in: v2.14.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When `true`, packages are sorted topologically (dependencies before dependents). Pass `--no-sort` to disable.
+
+Usage examples:
+
+```sh
+pnpm recursive test --no-sort
 ```
 
 ## pnpm recursive install
@@ -108,24 +185,6 @@ Usage examples:
 
 ```sh
 pnpm recursive uninstall webpack
-```
-
-## pnpm recursive link
-
-Added in: v1.32.0
-
-```sh
-pnpm recursive link [arguments]
-```
-
-Concurrently runs installation in all subdirectories with a `package.json` (excluding node_modules).
-If a package is available locally, the local version is linked.
-
-Usage examples:
-
-```sh
-pnpm recursive link
-pnpm recursive link --ignore-scripts
 ```
 
 ## pnpm recursive dislink

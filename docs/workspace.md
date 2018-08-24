@@ -22,7 +22,7 @@ packages:
 
 ## Linking packages inside a workspace
 
-(This example will work with pnpm v2.11.0 or newer)
+(This example will work with pnpm v2.14.0 or newer)
 
 When working inside a workspace, you want your dependencies to be linked from the monorepo but declared as regular dependencies.
 Let's suppose that you have this workspace:
@@ -35,20 +35,12 @@ Let's suppose that you have this workspace:
    └─ garage
 ```
 
-If you want to install `car` as a dependency of `garage`, you can
-run these commands:
+If you create a `.npmrc` file in the root of your repository and set the value of `link-workspace-packages` to `true`, the install
+command will try to find packages in the repository before resolving them from the registry.
 
-```bash
-cd packages/garage
-pnpm link car
-# or
-pnpm link car --prefix packages/garage
-```
-
-This command will not only link `car` to `garage/node_modules/car` (from `packages/car`) but also add `car` to the `package.json` of `garage`.
-
-`car` will be added as a regular semver dependency of `garage`. So if the version of `car` in the workspace is `1.0.0` then this is
-how the `package.json` of `garage` will look like after running `pnpm link car`:
+So when you run `pnpm install car` in `/packages/garage`, pnpm will link `car` to `garage/node_modules/car` from `packages/car`.
+Even though `car` will be linked, it will be added as a regular semver dependency to the dependencies of `garage`. So if the version of `car` in the workspace is `1.0.0` then this is
+how the `package.json` of `garage` will look like after running `pnpm install car`:
 
 ```json
 {
@@ -59,6 +51,3 @@ how the `package.json` of `garage` will look like after running `pnpm link car`:
   }
 }
 ```
-
-The link command respects the `--save-prod`, `--save-dev` and `--save-optional` flags, so you may run `pnpm link car --save-dev` in order
-to link `car` and add it as a dev dependency.
