@@ -39,7 +39,7 @@ packages:
 
 Run `pnpm recursive install`.
 
-### --filter <selector>
+### --filter
 
 Added in: v2.13.0
 
