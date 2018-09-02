@@ -9,6 +9,7 @@ title: pnpm recursive
 |--|--|
 |`pnpm recursive install` | runs installation for every package in every subfolder |
 |`pnpm recursive run build --filter foo-*` |builds all packages with names that start with `foo-` |
+|`pnpm recursive update -- login-page...` |updates dependencies in `login-page` and any dependencies of `login-page` that are also in the repository |
 
 ## Options
 
@@ -39,9 +40,11 @@ packages:
 
 Run `pnpm recursive install`.
 
-### --filter
+### -- <package_selector>..., --filter <package_selector>
 
 Added in: v2.13.0
+
+Ability to pass selectors after `--` added in v2.15.0
 
 Filters allow to restrict commands to a subset of packages.
 A rich selector syntax is supported for picking packages by name
@@ -59,6 +62,9 @@ Usage examples:
 ```sh
 pnpm recursive install --filter @babel/core
 pnpm recursive install --filter @babel/*
+# or
+pnpm recursive install -- @babel/core
+pnpm recursive install -- @babel/*
 ```
 
 #### --filter <package_name>...
@@ -70,12 +76,16 @@ For instance, the next command will run installation in all dependencies of `foo
 
 ```sh
 pnpm recursive install --filter foo...
+# or
+pnpm recursive install -- foo...
 ```
 
 You may use a pattern to select a set of "root" packages:
 
 ```sh
 pnpm recursive install --filter @babel/preset-*...
+# or
+pnpm recursive install -- @babel/preset-*...
 ```
 
 #### --filter ...<package_name>
@@ -87,6 +97,8 @@ For instance, the next command will run installation in all dependents of `foo` 
 
 ```sh
 pnpm recursive install --filter ...foo
+# or
+pnpm recursive install -- ...foo
 ```
 
 When packages in the workspace are filtered, every package is taken that matches at least one of
@@ -94,7 +106,13 @@ the selectors. You can use as many filters as you want:
 
 ```sh
 pnpm recursive install --filter ...foo --filter bar --filter qar...
+# or
+pnpm recursive install -- ...foo bar qar...
 ```
+
+#### --filter ./<directory>
+
+Added in: v2.15.0
 
 ### workspace-concurrency
 

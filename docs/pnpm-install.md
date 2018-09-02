@@ -243,3 +243,12 @@ If true, pnpm creates a flat `node_modules` that look almost like a `node_module
 Please only use this option when there is no other way to make a project work with pnpm.
 The strict `node_modules` created by pnpm should always work, if it does not, most likely a dependency is
 missing from `package.json`. Use this config only as a temporary fix.
+
+## strict-peer-dependencies
+
+Added in: v2.15.0
+
+* Default: **false**
+* Type: **Boolean**
+
+If true, commands fail on missing or invalid peer dependencies.

@@ -17,7 +17,8 @@
       "pnpm-dislink",
       "pnpm-store",
       "pnpm-recursive",
-      "pnpm-server"
+      "pnpm-server",
+      "pnpm-import"
     ],
     "Recipes": [
       "continuous-integration",
