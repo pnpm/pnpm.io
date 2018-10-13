@@ -59,6 +59,12 @@ const users = [
     infoLink: 'https://www.oax.org/',
     pinned: true,
   },
+  {
+    caption: 'BerryNodes LTD',
+    image: '/img/users/berrynodes.svg',
+    infoLink: 'https://www.berrynodes.com',
+    pinned: true,
+  },
 ];
 
 const siteConfig = {
