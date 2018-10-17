@@ -8,6 +8,18 @@
 /* List of projects/orgs using your project for the users page */
 const users = [
   {
+    caption: 'SheetJS',
+    image: '/img/users/sheetjs.png',
+    infoLink: 'https://sheetjs.com',
+    pinned: true,
+  },
+  {
+    caption: 'BerryNodes LTD',
+    image: '/img/users/berrynodes.svg',
+    infoLink: 'https://www.berrynodes.com',
+    pinned: true,
+  },
+  {
     caption: 'Compass',
     image: '/img/users/compass.svg',
     infoLink: 'https://compass.com',
@@ -57,12 +69,6 @@ const users = [
     caption: 'OAX Foundation',
     image: '/img/users/oax.svg',
     infoLink: 'https://www.oax.org/',
-    pinned: true,
-  },
-  {
-    caption: 'BerryNodes LTD',
-    image: '/img/users/berrynodes.svg',
-    infoLink: 'https://www.berrynodes.com',
     pinned: true,
   },
 ];
