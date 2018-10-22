@@ -40,7 +40,20 @@ packages:
 
 Run `pnpm recursive install`.
 
-### -- <package_selector>..., --filter <package_selector>
+### shared-workspace-shrinkwrap
+
+Added in: v2.17.0
+
+Creates a single `shrinkwrap.yaml` file in the root of the workspace.
+A shared shrinkwrap also means that all dependencies of all workspace packages will be in a single `node_modules`.
+
+Advantages of this option:
+
+* every dependency is a singleton
+* faster installations in a monorepo
+* less changes in code reviews
+
+### -- &lt;package_selector>..., --filter &lt;package_selector>
 
 Added in: v2.13.0
 
@@ -50,7 +63,7 @@ Filters allow to restrict commands to a subset of packages.
 A rich selector syntax is supported for picking packages by name
 or by relation.
 
-#### --filter <package_name>
+#### --filter &lt;package_name>
 
 Added in: v2.13.0
 
@@ -67,7 +80,7 @@ pnpm recursive install -- @babel/core
 pnpm recursive install -- @babel/*
 ```
 
-#### --filter <package_name>...
+#### --filter &lt;package_name>...
 
 Added in: v2.13.0
 
@@ -88,7 +101,7 @@ pnpm recursive install --filter @babel/preset-*...
 pnpm recursive install -- @babel/preset-*...
 ```
 
-#### --filter ...<package_name>
+#### --filter ...&lt;package_name>
 
 Added in: 2.14.0
 
@@ -110,7 +123,7 @@ pnpm recursive install --filter ...foo --filter bar --filter qar...
 pnpm recursive install -- ...foo bar qar...
 ```
 
-#### --filter ./<directory>
+#### --filter ./&lt;directory>
 
 Added in: v2.15.0
 
