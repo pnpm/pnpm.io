@@ -44,14 +44,20 @@ Run `pnpm recursive install`.
 
 Added in: v2.17.0
 
-Creates a single `shrinkwrap.yaml` file in the root of the workspace.
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, pnpm creates a single `shrinkwrap.yaml` file in the root of the workspace (in the directory that contains the `pnpm-workspace.yaml` file).
 A shared shrinkwrap also means that all dependencies of all workspace packages will be in a single `node_modules`.
 
 Advantages of this option:
 
 * every dependency is a singleton
-* faster installations in a monorepo
-* less changes in code reviews
+* faster installations in a multi-package repository
+* fewer changes in code reviews
+
+**NOTE:** even though all the dependencies will be hard linked into the root `node_modules`, packages will have access only to those dependencies
+that are declared in their `package.json`. So pnpm's strictness is preserved.
 
 ### -- &lt;package_selector>..., --filter &lt;package_selector>
 
