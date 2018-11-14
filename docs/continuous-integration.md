@@ -26,3 +26,17 @@ install:
   - curl -L https://unpkg.com/@pnpm/self-installer | node
   - pnpm install
 ```
+
+## Sail CI
+
+On [Sail CI](https://sail.ci/), you can use pnpm for installing your dependencies by adding this to your `.sail.yml` file:
+
+```yaml
+install:
+  image: znck/docker-pnpm:10
+  command:
+    - pnpm
+  args:
+    - install
+```
+To get the exact Node version and pnpm version you require you can always make your own Docker image and push to [Docker Hub](https://hub.docker.com/).
