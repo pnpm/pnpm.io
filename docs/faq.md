@@ -41,6 +41,30 @@ Direct symlinking to the global store would work with Node's `--preserve-symlink
 with a bunch of different issues, so we decided to stick with hard links.
 For more details about why this decision was made, see: https://github.com/nodejs/node-eps/issues/46.
 
+## Does pnpm work across multiple hard drives or filesystems?
+
+The package store should be on the same disk as installations. 
+Otherwise packages will be copied, not linked. 
+This is due to a OS limitation in hard-linking. See [Issue #712](https://github.com/pnpm/pnpm/issues/712) for more details.
+
+pnpm functions differently based on the 2 cases below:
+
+### Store path is specified
+
+If the store path is specified via [the store config](configuring.md), then copying occurs between the store and any projects that are on a different disk.
+
+If you run `pnpm install` on disk `D:`, then the pnpm store must be on disk `D:`.
+If the pnpm store is located on disk `C:`, then all required packages will be directly copied to the project location.
+This severely reduces the benefits of pnpm.
+
+### Store path is NOT specified
+
+If the store path is not set, then multiple stores are created (one per each drive or filesystem).
+
+If installation is run on disk `D:`, the store will be created in `D:\.pnpm-store`. 
+If later the installation is run on disk `C:`, an independent store will be created in `C:\.pnpm-store`.
+The projects would still maintain the benefits of pnpm, but each drive may have redundant packages.
+
 ## What does `pnpm` stand for?
 
 `pnpm` stands for `performant npm`. [Rico Sta. Cruz](https://github.com/rstacruz/) came up with the name.
