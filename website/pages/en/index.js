@@ -78,7 +78,7 @@ class HomeSplash extends React.Component {
             <Button href={docUrl('installation.html', language)}>Getting Started</Button>
             <iframe
               src={"https://ghbtns.com/github-btn.html?user=pnpm&repo=pnpm&type=star&count=true&size=large"}
-              frameborder="0"
+              frameBorder="0"
               scrolling="0"
               width="160px"
               height="30px"
@@ -227,13 +227,13 @@ class Index extends React.Component {
             <h2>What developers are saying</h2>
             <div className="gridBlock">
               <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr">Shoutout to the people behind pnpm; it makes looking at node module source code so much easier because I don&#39;t have to sift through the hundreds of modules everything pulls in to find the one I want &lt;3</p>&mdash; 🏳️‍🌈👩‍💻 Opal Symes (she/her) (@software_opal) <a href="https://twitter.com/software_opal/status/1033834325039505408?ref_src=twsrc%5Etfw">August 26, 2018</a></blockquote>
+                <blockquote className="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr">Shoutout to the people behind pnpm; it makes looking at node module source code so much easier because I don&#39;t have to sift through the hundreds of modules everything pulls in to find the one I want &lt;3</p>&mdash; 🏳️‍🌈👩‍💻 Opal Symes (she/her) (@software_opal) <a href="https://twitter.com/software_opal/status/1033834325039505408?ref_src=twsrc%5Etfw">August 26, 2018</a></blockquote>
               </div>
               <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote class="twitter-tweet" data-cards="hidden" data-partner="tweetdeck"><p lang="en" dir="ltr">PNPM is good, even on small apps. My node_modules for a little SPA using Gulp went from 86.7Mb to 44.1Mb. And it&#39;s way faster than NPM. <a href="https://t.co/aiZTCvMU3z">https://t.co/aiZTCvMU3z</a><a href="https://twitter.com/hashtag/nodejs?src=hash&amp;ref_src=twsrc%5Etfw">#nodejs</a> via <a href="https://twitter.com/pnpmjs?ref_src=twsrc%5Etfw">@pnpmjs</a></p>&mdash; | :::::::: | (@Paralellos) <a href="https://twitter.com/Paralellos/status/1031695443489566721?ref_src=twsrc%5Etfw">August 21, 2018</a></blockquote>
+                <blockquote className="twitter-tweet" data-cards="hidden" data-partner="tweetdeck"><p lang="en" dir="ltr">PNPM is good, even on small apps. My node_modules for a little SPA using Gulp went from 86.7Mb to 44.1Mb. And it&#39;s way faster than NPM. <a href="https://t.co/aiZTCvMU3z">https://t.co/aiZTCvMU3z</a><a href="https://twitter.com/hashtag/nodejs?src=hash&amp;ref_src=twsrc%5Etfw">#nodejs</a> via <a href="https://twitter.com/pnpmjs?ref_src=twsrc%5Etfw">@pnpmjs</a></p>&mdash; | :::::::: | (@Paralellos) <a href="https://twitter.com/Paralellos/status/1031695443489566721?ref_src=twsrc%5Etfw">August 21, 2018</a></blockquote>
               </div>
               <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr">pnpm is gr8 tbh and 💚 the devs. Have you given it a whirl yet? <a href="https://t.co/WB9IkkElAB">https://t.co/WB9IkkElAB</a></p>&mdash; actually a kat girl (@maybekatz) <a href="https://twitter.com/maybekatz/status/1031821440411086848?ref_src=twsrc%5Etfw">August 21, 2018</a></blockquote>
+                <blockquote className="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr">pnpm is gr8 tbh and 💚 the devs. Have you given it a whirl yet? <a href="https://t.co/WB9IkkElAB">https://t.co/WB9IkkElAB</a></p>&mdash; actually a kat girl (@maybekatz) <a href="https://twitter.com/maybekatz/status/1031821440411086848?ref_src=twsrc%5Etfw">August 21, 2018</a></blockquote>
               </div>
               <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
                 <blockquote className="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">
@@ -246,7 +246,7 @@ class Index extends React.Component {
                 <blockquote className="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/wmhilton">@wmhilton</a> <a href="https://twitter.com/yarnpkg">@yarnpkg</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> just installed it and it worked like a charm. I&#39;m impressed!</p>&mdash; Stephan Hoyer (@cmx66) <a href="https://twitter.com/cmx66/status/854596611690942465">April 19, 2017</a></blockquote>
               </div>
             </div>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
           </Container>
         </div>
       </div>
