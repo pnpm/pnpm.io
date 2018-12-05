@@ -15,4 +15,8 @@ If configuring pnpm to work across multiple hard drives or filesystems, please r
 Furthermore, pnpm uses the same configs that npm uses for doing installations. If you have a private registry and npm is configured
 to work with it, pnpm should be able to authorize requests as well, with no additional configuration.
 
-However, pnpm has some unique configs as well:
+In addition to those options, pnpm also allows you to use all parameters that are flags (for example `--filter` or `--workspace-concurrency`) as option:
+```
+workspace-concurrency = 1
+filter = @my-scope/*
+```
