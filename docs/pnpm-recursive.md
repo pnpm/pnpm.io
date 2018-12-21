@@ -335,8 +335,11 @@ pnpm recursive exec -- <command> [args...]
 
 This command runs a command in each package of the multi-package repo.
 
+The name of the current package is available through the environment variable `PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0).
+
 Usage examples:
 
 ```sh
 pnpm recursive exec -- rm -rf node_modules
+pnpm recursive exec -- pnpm view $PNPM_PACKAGE_NAME
 ```
