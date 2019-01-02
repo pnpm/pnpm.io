@@ -21,7 +21,7 @@ Added in: v2.14.0
 * Type: **Boolean**
 
 When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
-This is very convinient in a multi-package repository.
+This is very convenient in a multi-package repository.
 
 #### Usage
 
