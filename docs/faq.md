@@ -117,7 +117,7 @@ It will be automatically added to your project's `package.json`.
 
 ### Solution 2
 
-One of the solutions is to use [hooks](#hooks) for adding the missing dependencies to the package's `package.json`.
+One of the solutions is to use [hooks](hooks.md) for adding the missing dependencies to the package's `package.json`.
 
 An example was [Webpack Dashboard](https://github.com/pnpm/pnpm/issues/1043) which wasn't working with `pnpm`. It has since been resolved such that it works with `pnpm` now.
 
