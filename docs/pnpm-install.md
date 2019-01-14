@@ -5,6 +5,8 @@ title: pnpm install
 
 `pnpm install` is used to install all dependencies for a project.
 
+![](/img/demos/pnpm-install.svg)
+
 ## tl;dr
 
 |Command|Meaning|

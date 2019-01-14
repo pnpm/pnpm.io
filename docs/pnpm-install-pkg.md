@@ -6,6 +6,8 @@ title: pnpm install <pkg>
 Installs a package and any packages that it depends on.
 By default, any new package is installed as a prod dependency.
 
+![](/img/demos/pnpm-install-package.svg)
+
 ## tl;dr
 
 |Command|Meaning|
