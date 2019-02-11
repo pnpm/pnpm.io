@@ -34,7 +34,7 @@ we create different sets, for different peer dependency resolutions:
 
 ![](/img/how-peers-are-resolved/2.png)
 
-We create symlinks either to the `foo` that is inside `bar@1.0.0+bar@1.0.0/node_modules` or to the one in `bar@1.0.0+bar@1.1.0/node_modules`.
+We create symlinks either to the `foo` that is inside `bar@1.0.0+baz@1.0.0/node_modules` or to the one in `bar@1.0.0+baz@1.1.0/node_modules`.
 As a consequence, the Node.js module resolver algorithm will find the correct peers.
 
 *If the resolved peer is a direct dependency of the project*, it is not grouped separately with the dependent package.
