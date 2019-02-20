@@ -31,7 +31,7 @@ blocks:
   - name: Install dependencies
     task:
       jobs:
-        - name: npm install
+        - name: pnpm install
           commands:
             - curl -L https://unpkg.com/@pnpm/self-installer | node
             - checkout
