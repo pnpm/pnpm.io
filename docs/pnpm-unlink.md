@@ -1,9 +1,11 @@
 ---
-id: pnpm-dislink
-title: pnpm dislink
+id: pnpm-unlink
+title: pnpm unlink
 ---
 
-## pnpm dislink
+## pnpm unlink
+
+Alias: `pnpm dislink`
 
 Unlinks a package. Like `yarn unlink` but pnpm re-installs the dependency
 after removing the external link.

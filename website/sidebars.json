@@ -14,7 +14,7 @@
     "CLI commands": [
       "pnpm-install",
       "pnpm-install-pkg",
-      "pnpm-dislink",
+      "pnpm-unlink",
       "pnpm-store",
       "pnpm-recursive",
       "pnpm-server",

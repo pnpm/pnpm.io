@@ -1,6 +1,7 @@
 ---
-id: pnpm-install
+id: version-2-pnpm-install
 title: pnpm install
+original_id: pnpm-install
 ---
 
 `pnpm install` is used to install all dependencies for a project.
@@ -12,8 +13,8 @@ title: pnpm install
 |Command|Meaning|
 |--|--|
 |`pnpm i --offline` |no network requests |
-|`pnpm i --frozen-lockfile` |`pnpm-lock.yaml` is not updated |
-|`pnpm i --prefer-frozen-lockfile` |when possible, `pnpm-lock.yaml` is not updated |
+|`pnpm i --frozen-shrinkwrap` |`shrinkwrap.yaml` is not updated |
+|`pnpm i --prefer-frozen-shrinkwrap` |when possible, `shrinkwrap.yaml` is not updated |
 
 ## store
 
@@ -140,41 +141,41 @@ Controls the way packages are imported from the store.
 * **copy** - copy packages from the store
 * **reflink** - reflink (aka copy-on-write) packages from the store
 
-## lockfile
+## shrinkwrap
 
-Added in: v1.32.0 (initially named `shrinkwrap`)
+Added in: v1.32.0
 
 * Default: **true**
 * Type: **Boolean**
 
-When set to `false`, pnpm won't read or generate a `pnpm-lock.yaml` file.
+When set to `false`, pnpm won't read or generate a `shrinkwrap.yaml` file.
 
-## lockfile-only
+## shrinkwrap-only
 
-Added in: v1.26.0 (initially named `shrinkwrap-only`)
-
-* Default: **false**
-* Type: **Boolean**
-
-When used, only updates `pnpm-lock.yaml` and `package.json` instead of checking `node_modules` and downloading dependencies.
-
-## frozen-lockfile
-
-Added in: v1.37.1 (initially named `frozen-shrinkwrap`)
+Added in: v1.26.0
 
 * Default: **false**
 * Type: **Boolean**
 
-If `true`, pnpm doesn't generate a lockfile and fails if an update is needed.
+When used, only updates `shrinkwrap.yaml` and `package.json` instead of checking `node_modules` and downloading dependencies.
 
-## prefer-frozen-lockfile
+## frozen-shrinkwrap
 
-Added in: v1.37.1 (initially named `prefer-frozen-shrinkwrap`)
+Added in: v1.37.1
+
+* Default: **false**
+* Type: **Boolean**
+
+If `true`, pnpm doesn't generate a shrinkwrap file and fails if an update is needed.
+
+## prefer-frozen-shrinkwrap
+
+Added in: v1.37.1
 
 * Default: **true** (from v1.38.0)
 * Type: **Boolean**
 
-When `true` and the available `pnpm-lock.yaml` satisfies the `package.json`
+When `true` and the available `shrinkwrap.yaml` satisfies the `package.json`
 then a headless installation is performed. A headless installation is faster than a regular one
 because it skips dependencies resolution and peers resolution.
 

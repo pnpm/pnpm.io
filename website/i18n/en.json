@@ -41,9 +41,6 @@
       "pnpm-cli": {
         "title": "pnpm CLI"
       },
-      "pnpm-dislink": {
-        "title": "pnpm dislink"
-      },
       "pnpm-import": {
         "title": "pnpm import"
       },
@@ -61,6 +58,9 @@
       },
       "pnpm-store": {
         "title": "pnpm store"
+      },
+      "pnpm-unlink": {
+        "title": "pnpm unlink"
       },
       "pnpm-vs-npm": {
         "title": "pnpm vs npm"
@@ -81,6 +81,81 @@
         "title": "Symlinked `node_modules` structure"
       },
       "workspace": {
+        "title": "Workspace"
+      },
+      "version-2-about-package-store": {
+        "title": "About the package store"
+      },
+      "version-2-aliases": {
+        "title": "Aliases"
+      },
+      "version-2-benchmark": {
+        "title": "Benchmark"
+      },
+      "version-2-configuring": {
+        "title": "Configuring"
+      },
+      "version-2-continuous-integration": {
+        "title": "Continuous Integration"
+      },
+      "version-2-faq": {
+        "title": "Frequently Asked Questions"
+      },
+      "version-2-hooks": {
+        "title": "Hooks"
+      },
+      "version-2-how-peers-are-resolved": {
+        "title": "How peers are resolved"
+      },
+      "version-2-installation": {
+        "title": "Installation"
+      },
+      "version-2-limitations": {
+        "title": "Limitations"
+      },
+      "version-2-motivation": {
+        "title": "Motivation"
+      },
+      "version-2-pnpm-cli": {
+        "title": "pnpm CLI"
+      },
+      "version-2-pnpm-dislink": {
+        "title": "pnpm dislink"
+      },
+      "version-2-pnpm-import": {
+        "title": "pnpm import"
+      },
+      "version-2-pnpm-install-pkg": {
+        "title": "pnpm install <pkg>"
+      },
+      "version-2-pnpm-install": {
+        "title": "pnpm install"
+      },
+      "version-2-pnpm-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-2-pnpm-server": {
+        "title": "pnpm server"
+      },
+      "version-2-pnpm-store": {
+        "title": "pnpm store"
+      },
+      "version-2-pnpm-vs-npm": {
+        "title": "pnpm vs npm"
+      },
+      "version-2-pnpx-cli": {
+        "title": "pnpx CLI"
+      },
+      "version-2-releasing-apps": {
+        "title": "Releasing apps"
+      },
+      "version-2-support": {
+        "title": "Support"
+      },
+      "version-2-symlinked-node-modules-structure": {
+        "title": "Symlinked `node_modules` structure"
+      },
+      "version-2-workspace": {
         "title": "Workspace"
       }
     },

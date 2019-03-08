@@ -1,0 +1,35 @@
+{
+  "version-2-docs": {
+    "Introduction": [
+      "version-2-motivation",
+      "version-2-installation"
+    ],
+    "Usage": [
+      "version-2-pnpm-cli",
+      "version-2-pnpx-cli",
+      "version-2-configuring",
+      "version-2-hooks",
+      "version-2-aliases"
+    ],
+    "CLI commands": [
+      "version-2-pnpm-install",
+      "version-2-pnpm-install-pkg",
+      "version-2-pnpm-dislink",
+      "version-2-pnpm-store",
+      "version-2-pnpm-recursive",
+      "version-2-pnpm-server",
+      "version-2-pnpm-import"
+    ],
+    "Recipes": [
+      "version-2-continuous-integration",
+      "version-2-workspace"
+    ],
+    "Advanced": [
+      "version-2-benchmark",
+      "version-2-limitations",
+      "version-2-about-package-store",
+      "version-2-symlinked-node-modules-structure",
+      "version-2-how-peers-are-resolved"
+    ]
+  }
+}

@@ -1,15 +1,16 @@
 ---
-id: pnpm-recursive
+id: version-2-pnpm-recursive
 title: pnpm recursive
+original_id: pnpm-recursive
 ---
 
 ## tl;dr
 
 |Command|Meaning|
 |--|--|
-|`pnpm install -r` | runs installation for every package in every subfolder |
-|`pnpm run build --filter foo-*` |builds all packages with names that start with `foo-` |
-|`pnpm update -- login-page...` |updates dependencies in `login-page` and any dependencies of `login-page` that are also in the repository |
+|`pnpm recursive install` | runs installation for every package in every subfolder |
+|`pnpm recursive run build --filter foo-*` |builds all packages with names that start with `foo-` |
+|`pnpm recursive update -- login-page...` |updates dependencies in `login-page` and any dependencies of `login-page` that are also in the repository |
 
 ## Options
 
@@ -17,7 +18,7 @@ title: pnpm recursive
 
 Added in: v2.14.0
 
-* Default: **true**
+* Default: **false**
 * Type: **Boolean**
 
 When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
@@ -40,15 +41,15 @@ packages:
 
 Run `pnpm recursive install`.
 
-### shared-workspace-lockfile
+### shared-workspace-shrinkwrap
 
-Added in: v2.17.0 (initially named `shared-workspace-shrinkwrap`)
+Added in: v2.17.0
 
-* Default: **true**
+* Default: **false**
 * Type: **Boolean**
 
-When `true`, pnpm creates a single `pnpm-lock.yaml` file in the root of the workspace (in the directory that contains the `pnpm-workspace.yaml` file).
-A shared lockfile also means that all dependencies of all workspace packages will be in a single `node_modules`.
+When `true`, pnpm creates a single `shrinkwrap.yaml` file in the root of the workspace (in the directory that contains the `pnpm-workspace.yaml` file).
+A shared shrinkwrap also means that all dependencies of all workspace packages will be in a single `node_modules`.
 
 Advantages of this option:
 
