@@ -157,6 +157,18 @@
       },
       "version-2-workspace": {
         "title": "Workspace"
+      },
+      "version-3.0.0-pnpm-install": {
+        "title": "pnpm install"
+      },
+      "version-3.0.0-pnpm-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-3.0.0-pnpm-unlink": {
+        "title": "pnpm unlink"
+      },
+      "version-3.0.0-workspace": {
+        "title": "Workspace"
       }
     },
     "links": {
