@@ -169,6 +169,9 @@
       },
       "version-3.0.0/version-3.0.0-workspace": {
         "title": "Workspace"
+      },
+      "version-3.1.0/version-3.1.0-pnpm-install": {
+        "title": "pnpm install"
       }
     },
     "links": {
