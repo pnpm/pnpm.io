@@ -75,6 +75,13 @@ Can be passed in via a CLI option. `--no-lock` to set it to false. E.g.: `pnpm i
 > If you experience issues similar to the ones described in [#594](https://github.com/pnpm/pnpm/issues/594), use this option to disable locking.
 > In the meanwhile, we'll try to find a solution that will make locking work for everyone.
 
+## ignore-scripts
+
+* Default: **false**
+* Type: **Boolean**
+
+Do not execute any scripts defined in the project `package.json` and its dependencies.
+
 ## ignore-pnpmfile
 
 Added in: v1.25.0
@@ -94,6 +101,15 @@ Added in: v1.39.0
 * Example: **.pnpm/pnpmfile.js**
 
 The location of the local pnpmfile.
+
+## production[=true|false]
+
+* Default: **false**
+* Type: **Boolean**
+
+pnpm will not install any package listed in `devDependencies` if the `NODE_ENV` environment variable is set to production. Use this flag to instruct pnpm to ignore `NODE_ENV` and take its production-or-not status from this flag instead.
+
+> Notes: `--production` is the same as `--production=true`. `--prod` is an alias of `--production`.
 
 ## global-pnpmfile
 
