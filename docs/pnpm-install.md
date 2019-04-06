@@ -270,3 +270,15 @@ Added in: v2.15.0
 * Type: **Boolean**
 
 If true, commands fail on missing or invalid peer dependencies.
+
+## resolution-strategy
+
+Added in: 3.1.0
+
+* Default: **fast**
+* Type: **fast**, **fewer-dependencies**
+
+Sets the resolutions strategy used during installation.
+
+* **fast** - the default resolution strategy. Speed is preferred over deduplication
+* **fewer-dependencies** - already installed dependencies are preferred even if newer versions satisfy a range
