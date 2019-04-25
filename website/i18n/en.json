@@ -62,6 +62,9 @@
       "pnpm-unlink": {
         "title": "pnpm unlink"
       },
+      "pnpm-update": {
+        "title": "pnpm update"
+      },
       "pnpm-vs-npm": {
         "title": "pnpm vs npm"
       },
@@ -172,6 +175,12 @@
       },
       "version-3.1.0-pnpm-install": {
         "title": "pnpm install"
+      },
+      "version-3.2-pnpm-install-pkg": {
+        "title": "pnpm install <pkg>"
+      },
+      "version-3.2-pnpm-update": {
+        "title": "pnpm update"
       }
     },
     "links": {
