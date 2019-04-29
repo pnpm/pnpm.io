@@ -13,6 +13,9 @@ Hooks can be declared in a file called `pnpmfile.js`. `pnpmfile.js` should live 
 |`hooks.readPackage(pkg, context): pkg` | Allows to mutate every dependency's `package.json` |
 |`hooks.afterAllResolved(shrinkwrap, context): shrinkwrap` | Is called after resolution stage. Allows to mutate the shrinkwrap object. |
 
+It's recommended to use the [`@pnpm/hook-utils`](https://www.npmjs.com/package/@pnpm/hook-utils)
+package for `pnpmfile.js` hook creation and type information.
+
 ## `hooks.readPackage(pkg, context): pkg`
 
 Allows to mutate every dependency's `package.json`.
