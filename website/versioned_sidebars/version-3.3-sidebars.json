@@ -1,0 +1,36 @@
+{
+  "version-3.3-docs": {
+    "Introduction": [
+      "version-3.3-motivation",
+      "version-3.3-installation"
+    ],
+    "Usage": [
+      "version-3.3-pnpm-cli",
+      "version-3.3-pnpx-cli",
+      "version-3.3-configuring",
+      "version-3.3-hooks",
+      "version-3.3-aliases"
+    ],
+    "CLI commands": [
+      "version-3.3-pnpm-install",
+      "version-3.3-pnpm-install-pkg",
+      "version-3.3-pnpm-unlink",
+      "version-3.3-pnpm-store",
+      "version-3.3-pnpm-recursive",
+      "version-3.3-pnpm-server",
+      "version-3.3-pnpm-import",
+      "version-3.3-pnpm-publish"
+    ],
+    "Recipes": [
+      "version-3.3-continuous-integration",
+      "version-3.3-workspace"
+    ],
+    "Advanced": [
+      "version-3.3-benchmark",
+      "version-3.3-limitations",
+      "version-3.3-about-package-store",
+      "version-3.3-symlinked-node-modules-structure",
+      "version-3.3-how-peers-are-resolved"
+    ]
+  }
+}

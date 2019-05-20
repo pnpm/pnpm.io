@@ -50,6 +50,9 @@
       "pnpm-install": {
         "title": "pnpm install"
       },
+      "pnpm-publish": {
+        "title": "pnpm publish"
+      },
       "pnpm-recursive": {
         "title": "pnpm recursive"
       },
@@ -181,6 +184,9 @@
       },
       "version-3.2-pnpm-update": {
         "title": "pnpm update"
+      },
+      "version-3.3-pnpm-publish": {
+        "title": "pnpm publish"
       }
     },
     "links": {

@@ -18,7 +18,8 @@
       "pnpm-store",
       "pnpm-recursive",
       "pnpm-server",
-      "pnpm-import"
+      "pnpm-import",
+      "pnpm-publish"
     ],
     "Recipes": [
       "continuous-integration",
