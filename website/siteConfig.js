@@ -71,6 +71,13 @@ const users = [
     infoLink: 'https://www.oax.org/',
     pinned: true,
   },
+  {
+    caption: 'Panascais',
+    image: '/img/users/panascais.svg',
+    infoLink: 'https://panascais.net/',
+    pinned: true,
+    width: 250,
+  },
 ];
 
 const siteConfig = {
