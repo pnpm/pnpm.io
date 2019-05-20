@@ -19,7 +19,7 @@ class Users extends React.Component {
     }
     const showcase = siteConfig.users.map((user, i) => {
       return (
-        <a href={user.infoLink} key={i} rel="noopener">
+        <a href={user.infoLink} target="_blank" key={i} rel="noopener">
           <img src={user.image} title={user.caption} style={{width: user.width ? `${user.width}px` : null}} />
         </a>
       );
