@@ -26,6 +26,7 @@
       "workspace"
     ],
     "Advanced": [
+      "logos",
       "benchmark",
       "limitations",
       "about-package-store",
