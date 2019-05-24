@@ -28,3 +28,36 @@ pnpm add foo@next
 ## --access &lt;public|restricted>
 
 Tells the registry whether the published package should be public or restricted.
+
+## package.json publishConfig
+
+Added in: v3.4.0
+
+It is possible to override some fields in the manifest, before the package is packed.
+The following fields may be overriden: `typings`, `types`, `main` and `module`.
+To override a field, add the publish version of the field to `publishConfig`.
+
+For instance, the following `package.json`:
+
+```json
+{
+    "name": "foo",
+    "version": "1.0.0",
+    "main": "src/index.ts",
+    "publishConfig": {
+        "main": "lib/index.js",
+        "typings": "lib/index.d.ts"
+    }
+}
+```
+
+Will be published as:
+
+```json
+{
+    "name": "foo",
+    "version": "1.0.0",
+    "main": "lib/index.js",
+    "typings": "lib/index.d.ts"
+}
+```
