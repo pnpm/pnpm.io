@@ -20,6 +20,13 @@ const users = [
     pinned: true,
   },
   {
+    caption: 'JustAnswer',
+    image: '/img/users/justanswer.svg',
+    infoLink: 'https://www.justanswer.com',
+    pinned: true,
+    width: 200,
+  },
+  {
     caption: 'Compass',
     image: '/img/users/compass.svg',
     infoLink: 'https://compass.com',
