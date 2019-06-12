@@ -59,6 +59,9 @@
       "pnpm-recursive": {
         "title": "pnpm recursive"
       },
+      "pnpm-run": {
+        "title": "pnpm run"
+      },
       "pnpm-server": {
         "title": "pnpm server"
       },
