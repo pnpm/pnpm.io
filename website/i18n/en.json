@@ -199,6 +199,12 @@
       },
       "version-3.4-pnpm-publish": {
         "title": "pnpm publish"
+      },
+      "version-3.5-pnpm-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-3.5-pnpm-run": {
+        "title": "pnpm run"
       }
     },
     "links": {
