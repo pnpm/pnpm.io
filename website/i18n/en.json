@@ -190,6 +190,12 @@
       },
       "version-3.3-pnpm-publish": {
         "title": "pnpm publish"
+      },
+      "version-3.4-logos": {
+        "title": "Logos"
+      },
+      "version-3.4-pnpm-publish": {
+        "title": "pnpm publish"
       }
     },
     "links": {
