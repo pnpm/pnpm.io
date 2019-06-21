@@ -6,7 +6,6 @@
  */
 
 const React = require('react');
-const translate = require("../../server/translate.js").translate;
 
 const CompLibrary = require('../../core/CompLibrary.js');
 const Container = CompLibrary.Container;
@@ -21,7 +20,7 @@ class Users extends React.Component {
     const showcase = siteConfig.users.map((user, i) => {
       return (
         <a href={user.infoLink} target="_blank" key={i} rel="noopener">
-          <img src={user.image} title={user.caption} style={{ width: user.width ? `${user.width}px` : null }} />
+          <img src={user.image} title={user.caption} style={{width: user.width ? `${user.width}px` : null}} />
         </a>
       );
     });
@@ -31,15 +30,15 @@ class Users extends React.Component {
         <Container padding={['bottom', 'top']}>
           <div className="showcaseSection">
             <div className="prose">
-              <h1><translate>Who's Using This?</translate></h1>
-              <p><translate>This project is used by many folks</translate></p>
+              <h1>Who's Using This?</h1>
+              <p>This project is used by many folks</p>
             </div>
             <div className="logos">{showcase}</div>
-            <p><translate>Are you using this project?</translate></p>
+            <p>Are you using this project?</p>
             <a
               href="https://github.com/pnpm/pnpm.github.io/edit/source/website/siteConfig.js"
               className="button">
-              <translate>Add your company</translate>
+              Add your company
             </a>
           </div>
         </Container>
