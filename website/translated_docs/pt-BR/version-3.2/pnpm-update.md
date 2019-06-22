@@ -12,7 +12,7 @@ O `pnpm update` atualiza os pacotes para sua versão mais recente baseada no int
 | - | - |
 | `pnpm up` | atualiza todas as dependências. Adere intervalos especificados em `package.json` |
 | `pnpm up --latest` | atualiza todas as dependências. Ignora os intervalos especificados em `package.json` |
-| `pnpm up foo @ 2` | atualiza o` foo` para o ultimo v2 |
+| `pnpm up foo @ 2` | atualiza o `foo` para o ultimo v2 |
 
 ## Opções
 

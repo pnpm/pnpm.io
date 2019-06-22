@@ -11,11 +11,11 @@ O `pnpm install` é usado para instalar todas as dependências de um projeto.
 
 | Comando | Significado |
 | - | - |
-| pnpm i --offline` | sem pedidos de rede |
-| `pnpm i --frozen-lockfile` |` pnpm-lock.yaml` não é atualizado |
-| pnpm i --prefer-frozen-lockfile` | quando possível, `pnpm-lock.yaml` não é atualizado |
+| `pnpm i --offline` | sem pedidos de rede |
+| `pnpm i --frozen-lockfile` |`pnpm-lock.yaml` não é atualizado |
+| `pnpm i --prefer-frozen-lockfile` | quando possível, `pnpm-lock.yaml` não é atualizado |
 
-## loja
+## store
 
 * Padrão: **~/pnpm-store**
 * Tipo: **caminho**
@@ -30,7 +30,7 @@ então a loja será criada em `D: \. pnpm-store`.
 É possível definir uma loja a partir de um disco diferente, mas, nesse caso, o pnpm copia, e não vincula, pacotes da loja.
 Links rígidos são possíveis somente dentro de um sistema de arquivos.
 
-## desligada
+## offline
 
 * Padrão: **false**
 * Tipo: **Boolean**
@@ -107,9 +107,9 @@ A localização do arquivo pnpm local.
 * Padrão: **false**
 * Tipo: **Boolean**
 
-O pnpm não instalará nenhum pacote listado em `devDependencies` se a variável de ambiente` NODE_ENV` estiver configurada para produção. Use esse sinalizador para instruir o pnpm a ignorar `NODE_ENV` e obter seu status de produção ou não desse sinalizador.
+O pnpm não instalará nenhum pacote listado em `devDependencies` se a variável de ambiente `NODE_ENV` estiver configurada para produção. Use esse sinalizador para instruir o pnpm a ignorar `NODE_ENV` e obter seu status de produção ou não desse sinalizador.
 
-> Notas: `--production` é o mesmo que` --production=true`. `--prod` é um pseudônimo de` --production`.
+> Notas: `--production` é o mesmo que `--production=true`. `--prod` é um pseudônimo de` --production`.
 
 ## global-pnpmfile
 
@@ -172,7 +172,7 @@ Adicionado em: v1.26.0 (inicialmente chamado `shrinkwrap-only`)
 * Padrão: **false**
 * Tipo: **Boolean**
 
-Quando usado, somente atualiza `pnpm-lock.yaml` e` package.json` em vez de verificar `node_modules` e baixar dependências.
+Quando usado, somente atualiza `pnpm-lock.yaml` e `package.json` em vez de verificar `node_modules` e baixar dependências.
 
 ## frozen-lockfile
 
@@ -190,11 +190,11 @@ Adicionado em: v1.37.1 (inicialmente chamado `prefer-frozen-shrinkwrap`)
 * Padrão: **true** (da v1.38.0)
 * Tipo: **Boolean**
 
-Quando `true` e o disponível` pnpm-lock.yaml` satisfaz o `package.json`
+Quando `true` e o disponível `pnpm-lock.yaml` satisfaz o `package.json`
 então uma instalação sem cabeça é executada. Uma instalação sem cabeça é mais rápida que uma instalação normal
 porque pula a resolução de dependências e a resolução de pares.
 
-# # repórter
+## reporter
 
 * Padrão:
     * Para stdout TTY: **padrão**
@@ -271,7 +271,7 @@ Adicionado em: v2.15.0
 
 Se true, os comandos falham em dependências de peer ausentes ou inválidas.
 
-## estratégia de resolução
+## resolution-strategy
 
 Adicionado em: 3.1.0
 

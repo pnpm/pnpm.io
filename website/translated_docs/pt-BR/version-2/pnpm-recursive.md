@@ -10,7 +10,7 @@ original_id: pnpm-recursive
 | - | - |
 | `pnpm recursive install` | executa a instalação para cada pacote em cada subpasta |
 | `pnpm recursive run build --filter foo-*` | constrói todos os pacotes com nomes que começam com` foo-`|
-| `pnpm recursive update -- login-page...` || atualiza dependências em `login-page` e qualquer dependência de` login-page` que também está no repositório |
+| `pnpm recursive update -- login-page...` || atualiza dependências em `login-page` e qualquer dependência de `login-page` que também está no repositório |
 
 ## Opções
 
@@ -21,7 +21,7 @@ Adicionado em: v2.14.0
 * Padrão: **false**
 * Tipo: **Boolean**
 
-Quando pacotes `true`, localmente disponíveis, são vinculados a` node_modules` em vez de serem baixados do registro.
+Quando pacotes `true`, localmente disponíveis, são vinculados a `node_modules` em vez de serem baixados do registro.
 Isso é muito conveniente em um repositório de vários pacotes.
 
 #### Uso
@@ -48,7 +48,7 @@ Adicionado em: v2.17.0
 * Padrão: **false**
 * Tipo: **Boolean**
 
-Quando `true`, o pnpm cria um único arquivo` shrinkwrap.yaml` na raiz da área de trabalho (no diretório que contém o arquivo `pnpm-workspace.yaml`).
+Quando `true`, o pnpm cria um único arquivo `shrinkwrap.yaml` na raiz da área de trabalho (no diretório que contém o arquivo `pnpm-workspace.yaml`).
 Um shrinkwrap compartilhado também significa que todas as dependências de todos os pacotes do espaço de trabalho estarão em um único `node_modules`.
 
 Vantagens desta opção:
@@ -74,8 +74,8 @@ ou por relação.
 
 Adicionado em: v2.13.0
 
-Para selecionar um pacote exato, basta especificar seu nome (`@ babel / core`) ou usar um padrão
-para selecionar um conjunto de pacotes (`@ babel / *`).
+Para selecionar um pacote exato, basta especificar seu nome (`@babel/core`) ou usar um padrão
+para selecionar um conjunto de pacotes (`@babel/*`).
 
 Exemplos de uso:
 
@@ -93,7 +93,7 @@ pnpm recursive install -- @babel/*
 Adicionado em: v2.13.0
 
 Para selecionar um pacote e suas dependências (diretas e não diretas), sufixar o nome do pacote com 3 pontos: `<nome_do_pacote> ...`.
-Por exemplo, o próximo comando executará a instalação em todas as dependências de `foo` e em` foo`:
+Por exemplo, o próximo comando executará a instalação em todas as dependências de `foo` e em `foo`:
 
 ```sh
 pnpm recursive install --filter foo...
@@ -114,7 +114,7 @@ pnpm recursive install -- @babel/preset-*...
 Adicionado em: 2.14.0
 
 Para selecionar um pacote e seus pacotes dependentes (direto e não direto), prefixar o nome do pacote com 3 pontos: `... <nome_do_pacote>`.
-Por exemplo, o próximo comando executará a instalação em todos os dependentes de `foo` e em` foo`:
+Por exemplo, o próximo comando executará a instalação em todos os dependentes de `foo` e em `foo`:
 
 ```sh
 pnpm recursive install --filter ...foo
@@ -191,7 +191,7 @@ pnpm recursive install
 pnpm recursive install --ignore-scripts
 ```
 
-Atualização recursiva ## pnpm
+## pnpm recursive update
 
 Adicionado em: v1.24.0
 
@@ -226,14 +226,14 @@ Exemplos de uso:
 pnpm recursive uninstall webpack
 ```
 
-## pnpm dislink recursivo
+## pnpm recursive dislink
 
 Adicionado em: v1.32.0
 
 Um alias de "unlink recursivo" da v2.0.0
 
 ```sh
-pnpm recursive dislink [arguments]
+pnpm recursive dislink [argumentos]
 ```
 
 Remove links para pacotes locais e os reinstala do registro.
@@ -244,7 +244,7 @@ Exemplos de uso:
 pnpm recursive dislink
 ```
 
-## pnpm recursiva desatualizada
+## pnpm recursive outdated
 
 Adicionado em: v2.2.0
 
@@ -260,7 +260,7 @@ Exemplos de uso:
 pnpm recursive outdated
 ```
 
-## pnpm lista recursiva
+## pnpm recursive list
 
 Adicionado em: v2.2.0
 
@@ -277,7 +277,7 @@ Exemplos de uso:
 pnpm recursive list
 ```
 
-Corrida recursiva ## pnpm
+## pnpm recursive run
 
 Adicionado em: v2.3.0
 
@@ -296,7 +296,7 @@ Exemplos de uso:
 pnpm recursive run build
 ```
 
-teste recursivo ## pnpm
+## pnpm recursive test
 
 Adicionado em: v2.3.0
 
@@ -312,7 +312,7 @@ Exemplos de uso:
 pnpm recursive test
 ```
 
-reconstrução recursiva ## pnpm
+## pnpm recursive rebuild
 
 Adicionado em: v2.4.0
 
@@ -320,7 +320,7 @@ Adicionado em: v2.4.0
 pnpm recursive rebuild [[<@scope>/<name>]...]
 ```
 
-Esse comando executa o comando ** pnpm build ** em todos os pacotes do repositório de vários pacotes.
+Esse comando executa o comando **pnpm build** em todos os pacotes do repositório de vários pacotes.
 
 Exemplos de uso:
 

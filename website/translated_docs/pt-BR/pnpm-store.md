@@ -5,13 +5,13 @@ title: pnpm store
 
 Comandos relacionados ao repositório de pacotes [pnpm](about-the-package-store.md).
 
-## pnpm status da loja
+## pnpm status da store
 
 ```sh
 pnpm store status
 ```
 
-Verifica pacotes modificados na loja.
+Verifica pacotes modificados na store.
 
 Retorna o código de saída 0 se o conteúdo do pacote for o mesmo que estava no momento da descompactação.
 
@@ -24,12 +24,12 @@ pnpm store add [<scope> /] <pkg> ...
 ```
 
 Adiciona novos pacotes ao armazenamento pnpm diretamente.
-Não modifica nenhum projeto ou arquivo fora da loja.
+Não modifica nenhum projeto ou arquivo fora da store.
 
 Exemplos de uso:
 
 ```sh
-loja pnpm add express @ 4 typescript @ 2
+store pnpm add express @ 4 typescript @ 2
 ```
 
 ## pnpm store usages
@@ -37,10 +37,10 @@ loja pnpm add express @ 4 typescript @ 2
 Adicionado em: v2.21.0
 
 ```sh
-Usos da loja pnpm [<@scope> /] <pkg> ...
+Usos da store pnpm [<@scope> /] <pkg> ...
 ```
 
-Lista todos os projetos pnpm no sistema de arquivos atual que dependem dos pacotes especificados na loja.
+Lista todos os projetos pnpm no sistema de arquivos atual que dependem dos pacotes especificados na store.
 
 Exemplos de uso:
 
@@ -50,7 +50,7 @@ pnpm store usages is-odd@3.0.0 is-even@2.0.0
 pnpm store usages @babel/core ansi-regex
 ```
 
-> Note que este comando pode ser lento para lojas muito grandes.
+> Note que este comando pode ser lento para stores muito grandes.
 > Estamos trabalhando para melhorar o desempenho.
 
 ## pnpm store prune
@@ -59,10 +59,10 @@ pnpm store usages @babel/core ansi-regex
 pnpm store prune
 ```
 
-Remove pacotes não referenciados (estranhos, órfãos) da loja.
+Remove pacotes não referenciados (estranhos, órfãos) da store.
 
-Podar a loja não é prejudicial, mas pode retardar futuras instalações.
+Podar a store não é prejudicial, mas pode retardar futuras instalações.
 
 Por favor, leia [o FAQ] (faq.md # what-does-pnpm-store-prune-do-é-ele-prejudicial) para obter mais informações sobre pacotes não referenciados e as melhores práticas do `pnpm store prune`.
 
-> Este comando é proibido quando um [servidor de armazenamento](pnpm-server.md) está sendo executado.
+> Este comando é proibido quando um [store server](pnpm-server.md) está sendo executado.

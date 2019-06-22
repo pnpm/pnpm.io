@@ -8,7 +8,7 @@ O pnpm suporta ações simultâneas em repositórios multi-pacotes (espaços de 
 
 Por padrão, quando você executa os comandos [`pnpm recursive [action]`](pnpm-recursive.md),
 todos os diretórios são procurados por pacotes (diretórios com o arquivo `package.json`).
-Você pode controlar quais diretórios são procurados passando uma matriz de globs para `packages` em` pnpm-workspace.yaml`.
+Você pode controlar quais diretórios são procurados passando uma matriz de globs para `packages` em `pnpm-workspace.yaml`.
 
 Um exemplo de um `pnpm-workspace.yaml`:
 

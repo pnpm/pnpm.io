@@ -44,7 +44,7 @@ node_modules
       └─ bar -> ../../../bar/1.0.0/node_modules/bar
 ```
 
-`foo` vai ser ligado por links simbólicos à pasta root` node_modules` porque `foo` é uma dependência do projeto:
+`foo` vai ser ligado por links simbólicos à pasta root `node_modules` porque `foo` é uma dependência do projeto:
 
 ```
 node_modules
@@ -78,8 +78,8 @@ node_modules
 Como você pode ver, mesmo que a profundidade do gráfico seja maior (`foo> bar> qar`), a profundidade do diretório no sistema de arquivos ainda é a mesma.
 
 Este layout pode parecer estranho à primeira vista, mas é completamente compatível com o Node.js! Ao resolver os módulos, o Node.js ignora os links simbólicos.
-Então, quando `bar` é requerido de` foo/1.0.0/node_modules/foo/index.js`, o Node.js não está usando `bar` de` foo/1.0.0/node_modules/bar`.
-`bar` é resolvido para sua localização real:` bar/1.0.0/node_modules/bar`. Como conseqüência, o `bar` também pode resolver suas dependências
+Então, quando `bar` é requerido de `foo/1.0.0/node_modules/foo/index.js`, o Node.js não está usando `bar` de `foo/1.0.0/node_modules/bar`.
+`bar` é resolvido para sua localização real: `bar/1.0.0/node_modules/bar`. Como conseqüência, o `bar` também pode resolver suas dependências
 que estão em `bar/1.0.0/node_modules`.
 
 Um ótimo bônus deste layout é que somente os pacotes que estão realmente nas dependências estão acessíveis. Com `node_modules` aplanados, todos hasteados

@@ -29,8 +29,8 @@ criado para construir a estrutura do gráfico de dependência aninhada.
 Como você deve ter notado, ambos os pacotes são hard linkados em uma subpasta dentro de uma pasta `node_modules` (`foo/1.0.0/node_modules/foo`).
 Isso é necessário para:
 
-1. **permite que os pacotes exijam a si mesmos.** `foo` deve ser capaz de fazer ` require'foo/package.json') `.
-2. ** Evite links simbólicos circulares. ** As dependências dos pacotes são colocadas na mesma pasta em que estão os pacotes dependentes.
+1. **permite que os pacotes exijam a si mesmos.** `foo` deve ser capaz de fazer `require'foo/package.json') `.
+2. **Evite links simbólicos circulares.** As dependências dos pacotes são colocadas na mesma pasta em que estão os pacotes dependentes.
 Para o Node.js não faz diferença se as dependências estão dentro do `node_modules` do pacote ou em qualquer outro
 `node_modules` nos diretórios pai.
 
@@ -45,7 +45,7 @@ node_modules
       └─ bar -> ../../../bar/1.0.0/node_modules/bar
 ```
 
-`foo` vai ser ligado por links simbólicos à pasta root` node_modules` porque `foo` é uma dependência do projeto:
+`foo` vai ser ligado por links simbólicos à pasta root `node_modules` porque `foo` é uma dependência do projeto:
 
 ```
 node_modules
@@ -60,7 +60,7 @@ node_modules
 Este é um exemplo muito simples. No entanto, o layout permanecerá plano no sistema de arquivos, independentemente do número de dependências
 e a profundidade do gráfico de dependência.
 
-Vamos adicionar `qar@2.0.0` como uma dependência de` bar` e `foo`. É assim que o `node_modules` se parecerá:
+Vamos adicionar `qar@2.0.0` como uma dependência de `bar` e `foo`. É assim que o `node_modules` se parecerá:
 
 ```
 node_modules

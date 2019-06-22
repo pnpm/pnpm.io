@@ -49,7 +49,7 @@ Você também pode instalar pacotes por:
 
 Existem duas maneiras de instalar a partir do sistema de arquivos local:
 
-1. de um arquivo tarball (`.tar`,` .tar.gz` ou `.tgz`)
+1. de um arquivo tarball (`.tar`,`.tar.gz` ou `.tgz`)
 2. de um diretório
 
 Exemplos:
@@ -95,11 +95,11 @@ Isto irá instalar um ou mais pacotes nas suas `dependencies`.
 
 ### --save-dev, -D
 
-Usar `--save-dev` ou` -D` instalará um ou mais pacotes em seu `devDependencies`.
+Usar `--save-dev` ou `-D` instalará um ou mais pacotes em seu `devDependencies`.
 
-### --save-opcional, -O
+### --save-optional, -O
 
-Usar `--save-optional` ou` -O` instalará um ou mais pacotes em seu `optionalDependencies`.
+Usar `--save-optional` ou `-O` instalará um ou mais pacotes em seu `optionalDependencies`.
 
 ### --save-exact, -E
 

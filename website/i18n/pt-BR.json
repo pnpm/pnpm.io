@@ -5,8 +5,8 @@
 		"tagline": "Rápido, gerenciador de pacotes eficiente em espaço em disco",
 		"docs": {
 			"about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"aliases": {
 				"title": "Aliases",
@@ -125,8 +125,8 @@
 				"sidebar_label": "Área de trabalho"
 			},
 			"version-2-about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"version-2-aliases": {
 				"title": "Aliases",
@@ -225,8 +225,8 @@
 				"sidebar_label": "Área de trabalho"
 			},
 			"version-3.0.0-about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"version-3.0.0-aliases": {
 				"title": "Aliases",
@@ -341,8 +341,8 @@
 				"sidebar_label": "Área de trabalho"
 			},
 			"version-3.1.0-about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"version-3.1.0-aliases": {
 				"title": "Aliases",
@@ -457,8 +457,8 @@
 				"sidebar_label": "Área de trabalho"
 			},
 			"version-3.2-about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"version-3.2-aliases": {
 				"title": "Aliases",
@@ -573,8 +573,8 @@
 				"sidebar_label": "Área de trabalho"
 			},
 			"version-3.3-about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"version-3.3-aliases": {
 				"title": "Aliases",
@@ -689,8 +689,8 @@
 				"sidebar_label": "Área de trabalho"
 			},
 			"version-3.4-about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"version-3.4-aliases": {
 				"title": "Aliases",
@@ -805,8 +805,8 @@
 				"sidebar_label": "Área de trabalho"
 			},
 			"version-3.5-about-package-store": {
-				"title": "Sobre a loja de pacotes",
-				"sidebar_label": "Sobre a loja de pacotes"
+				"title": "Sobre a loja de pacotes (Store)",
+				"sidebar_label": "Sobre a loja de pacotes (Store)"
 			},
 			"version-3.5-aliases": {
 				"title": "Aliases",
