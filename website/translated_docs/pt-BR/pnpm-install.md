@@ -72,7 +72,7 @@ loja pode funcionar simultaneamente.
 
 Pode ser passado através de uma opção CLI. `--no-lock` para configurá-lo para false. Por exemplo: `pnpm install --no-lock`.
 
-> Se você tiver problemas semelhantes aos descritos em [# 594] (https://github.com/pnpm/pnpm/issues/594), use esta opção para desativar o bloqueio.
+> Se você tiver problemas semelhantes aos descritos em [#594](https://github.com/pnpm/pnpm/issues/594), use esta opção para desativar o bloqueio.
 > Enquanto isso, tentaremos encontrar uma solução que faça o trabalho de bloqueio para todos.
 
 ## ignore-scripts
@@ -109,7 +109,7 @@ A localização do arquivo pnpm local.
 
 O pnpm não instalará nenhum pacote listado em `devDependencies` se a variável de ambiente` NODE_ENV` estiver configurada para produção. Use esse sinalizador para instruir o pnpm a ignorar `NODE_ENV` e obter seu status de produção ou não desse sinalizador.
 
-> Notas: `--production` é o mesmo que` --production = true`. `--prod` é um pseudônimo de` --production`.
+> Notas: `--production` é o mesmo que` --production=true`. `--prod` é um pseudônimo de` --production`.
 
 ## global-pnpmfile
 

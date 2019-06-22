@@ -4,7 +4,7 @@ title: Hooks
 original_id: hooks
 ---
 
-O pnpm permite entrar diretamente no processo de instalação através de funções especiais chamadas * hooks *.
+O pnpm permite entrar diretamente no processo de instalação através de funções especiais chamadas *hooks*.
 Ganchos podem ser declarados em um arquivo chamado `pnpmfile.js`. `pnpmfile.js` deve viver na raiz do projeto.
 
 ## tl; dr
