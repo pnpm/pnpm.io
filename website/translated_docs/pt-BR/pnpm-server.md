@@ -7,8 +7,8 @@ title: pnpm server
 
 Adicionado em: v1.30.0
 
-Inicia um servidor que faz todas as interações com a loja.
-Outros comandos delegarão tarefas relacionadas à loja a esse servidor.
+Inicia um servidor que faz todas as interações com a store.
+Outros comandos delegarão tarefas relacionadas à store a esse servidor.
 
 ### fundo
 
@@ -63,7 +63,7 @@ Não permite criar novo cache de efeitos colaterais durante a instalação.
 
 Adicionado em: v1.30.0
 
-Pára o servidor da loja.
+Pára o servidor da store.
 
 ## pnpm server status
 

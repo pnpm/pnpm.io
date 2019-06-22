@@ -8,8 +8,8 @@ Qual nós recomendamos fazer de qualquer maneira. E então no prod você terá a
 Você terá certeza de que as mesmas dependências serão usadas, com as quais você testou seu aplicativo em outros ambientes.
 
 Se você gostaria de copiar pacotes para prod, você terá que cometer `shrinkwrap.yaml` de qualquer maneira. E você terá que
-Copie e cole a loja global para produção. O local da loja global é configurável
+Copie e cole a store global para produção. O local da store global é configurável
 através da chave de configuração `store`.
 Então você pode executar o `pnpm install --offline` no seu aplicativo e o pnpm estará usando pacotes que já estão no
-loja global sem fazer qualquer solicitação para o registro npm.
+store global sem fazer qualquer solicitação para o registro npm.
 

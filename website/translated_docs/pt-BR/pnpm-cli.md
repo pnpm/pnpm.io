@@ -26,7 +26,7 @@ Comandos npm que são reimplementados no pnpm:
 Além disso, existem alguns comandos exclusivos para o pnpm:
 
 * [recursivo](pnpm-recursive.md)
-* [loja](pnpm-store.md)
+* [store](pnpm-store.md)
 * [servidor](pnpm-server.md)
 * [import](pnpm-import.md)
 

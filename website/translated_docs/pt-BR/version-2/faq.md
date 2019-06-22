@@ -6,11 +6,11 @@ original_id: versão-2-faq
 
 ## Por que minha pasta `node_modules` usa espaço em disco se os pacotes são armazenados em um armazenamento global?
 
-O pnpm cria [hard links](https://en.wikipedia.org/wiki/Hard_link) da loja global para as pastas `node_modules` do projeto.
+O pnpm cria [hard links](https://en.wikipedia.org/wiki/Hard_link) da store global para as pastas `node_modules` do projeto.
 Os links físicos apontam para o mesmo lugar no disco onde estão os arquivos originais.
 Então, por exemplo, se você tem `foo` no seu projeto como uma dependência e ocupa 1MB de espaço,
 então parecerá que ocupa 1MB de espaço na pasta `node_modules` do projeto e
-a mesma quantidade de espaço na loja global. No entanto, esse 1MB é * o mesmo espaço * no disco
+a mesma quantidade de espaço na store global. No entanto, esse 1MB é * o mesmo espaço * no disco
 abordada a partir de dois locais diferentes. Então, no total, 'foo` ocupa 1MB,
 não 2MB.
 
@@ -32,7 +32,7 @@ Versões anteriores do npm tinham problemas por causa do aninhamento de todos os
 
 Embora o pnpm use links simbólicos para colocar dependências em pastas `node_modules`, links simbólicos circulares são evitados porque os pacotes pai são colocados na mesma pasta` node_modules` na qual suas dependências estão. Portanto, as dependências de `foo` não estão em` foo/node_modules`, mas `foo` está em` node_modules/foo`, junto com suas próprias dependências.
 
-## Por que tem links rígidos? Por que não ligar diretamente à loja global?
+## Por que tem links rígidos? Por que não ligar diretamente à store global?
 
 Um pacote pode ter diferentes conjuntos de dependências em uma máquina.
 
@@ -50,7 +50,7 @@ Isso é devido a uma limitação do sistema operacional em hard-linking. Veja [I
 
 O pnpm funciona de maneira diferente com base nos dois casos abaixo:
 
-### O caminho da loja é especificado
+### O caminho da store é especificado
 
 Se o caminho de armazenamento for especificado por meio da [configuração de armazenamento](configuring.md), a cópia ocorrerá entre o armazenamento e todos os projetos que estiverem em um disco diferente.
 
@@ -58,12 +58,12 @@ Se você executar `pnpm install` no disco`D: `, então o armazenamento pnpm deve
 Se o repositório pnpm estiver localizado no disco `C:`, todos os pacotes requeridos serão copiados diretamente para o local do projeto.
 Isso reduz severamente os benefícios do pnpm.
 
-### O caminho da loja NÃO está especificado
+### O caminho da store NÃO está especificado
 
-Se o caminho da loja não estiver configurado, várias lojas serão criadas (uma para cada unidade ou sistema de arquivos).
+Se o caminho da store não estiver configurado, várias stores serão criadas (uma para cada unidade ou sistema de arquivos).
 
 Se a instalação for executada no disco `D:`, o armazenamento será criado em `D:\.pnpm-store`.
-Se mais tarde a instalação for executada no disco `C:`, uma loja independente será criada em `C:\.pnpm-store`.
+Se mais tarde a instalação for executada no disco `C:`, uma store independente será criada em `C:\.pnpm-store`.
 Os projetos ainda manteriam os benefícios do pnpm, mas cada unidade pode ter pacotes redundantes.
 
 ## O que o `pnpm store prune` faz? Isso é prejudicial?
@@ -74,14 +74,14 @@ Pacotes não referenciados são pacotes que não são usados ​​por nenhum pr
 Os pacotes podem se tornar não referenciados após a maioria das operações de instalação.
 
 Por exemplo: durante o `pnpm install`, o pacote`foo@1.0.0` é atualizado para `foo@1.0.1`.
-O pnpm manterá o `foo@1.0.0` na loja, já que ele não remove pacotes automaticamente.
+O pnpm manterá o `foo@1.0.0` na store, já que ele não remove pacotes automaticamente.
 Se o pacote `foo@1.0.0` não for usado por nenhum outro projeto no sistema, ele não será referenciado.
-Rodar `pnpm store prune` removeria`foo@1.0.0` da loja.
+Rodar `pnpm store prune` removeria`foo@1.0.0` da store.
 
 Rodar `pnpm store prune` não é prejudicial e não tem efeitos colaterais em seus projetos.
 Se futuras instalações exigirem pacotes removidos, o pnpm irá baixá-los novamente.
 
-É uma prática recomendada executar o `pnpm store prune` ocasionalmente para limpar a loja, mas não com muita freqüência.
+É uma prática recomendada executar o `pnpm store prune` ocasionalmente para limpar a store, mas não com muita freqüência.
 Às vezes, os pacotes não referenciados tornam-se obrigatórios novamente.
 Isso pode ocorrer ao alternar ramificações e instalar dependências mais antigas.
 Em seguida, o pnpm precisaria baixar novamente todos os pacotes removidos, abreviando o processo de instalação.

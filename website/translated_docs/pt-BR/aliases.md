@@ -37,7 +37,7 @@ module.exports = {
   }
 }
 
-função readPackage (pkg) {
+function readPackage (pkg) {
   if (pkg.dependencies && pkg.dependencies.lodash) {
     pkg.dependencies.lodash = 'npm: awesome-lodash@^1.0.0'
   }
