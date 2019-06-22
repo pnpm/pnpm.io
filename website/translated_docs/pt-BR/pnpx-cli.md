@@ -10,5 +10,5 @@ O comando a seguir instala um aplicativo criar e reagir temporário e o chama,
 sem poluir instalações globais ou exigir mais de um passo!
 
 ```
-pnpx criar-reagir-app meu-incrivel-novo-app
+pnpx create-react-app my-cool-new-app
 ```

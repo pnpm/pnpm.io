@@ -9,7 +9,7 @@ Os aliases permitem instalar pacotes com nomes personalizados.
 Vamos supor que você usa 'lodash' em todo o seu projeto. Existe um bug no `lodash` que quebra o seu projeto.
 Você tem uma correção, mas o `lodash` não irá se fundir. Normalmente você instalaria o `lodash` do seu fork
 diretamente (como uma dependência hospedada por git) ou publicá-lo com um nome diferente. Se você usar a segunda solução
-você tem que substituir todos os requerimentos em seu projeto pelo novo nome de dependência (`require ('lodash')` => `require ('awesome-lodash')`) `.
+você tem que substituir todos os requerimentos em seu projeto pelo novo nome de dependência (`require ('lodash')` => `require ('awesome-lodash')`).
 Com aliases, você tem uma terceira opção.
 
 Publique um novo pacote chamado `awesome-lodash` e instale-o usando o` lodash` como seu alias:

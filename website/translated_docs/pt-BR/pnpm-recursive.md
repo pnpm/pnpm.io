@@ -8,7 +8,7 @@ title: pnpm recursive
 | Comando | Significado |
 | - | - |
 | `pnpm install -r` | executa a instalação para cada pacote em cada subpasta |
-| pnpm run build --filter foo * `| constrói todos os pacotes com nomes que começam com` foo-`|
+| `pnpm run build --filter foo * `| constrói todos os pacotes com nomes que começam com` foo-`|
 | `pnpm update - login-page ...` | atualiza dependências em `login-page` e quaisquer dependências de` login-page` que também estão no repositório |
 
 ## Opções
@@ -63,7 +63,7 @@ que são declarados em seu `package.json`. Portanto, o rigor do pnpm é preserva
 
 Adicionado em: v2.13.0
 
-Capacidade de passar seletores após `-` adicionado na v2.15.0
+Capacidade de passar seletores após `--` adicionado na v2.15.0
 
 Filtros permitem restringir comandos a um subconjunto de pacotes.
 Uma rica sintaxe de seletor é suportada para escolher pacotes por nome
@@ -73,8 +73,8 @@ ou por relação.
 
 Adicionado em: v2.13.0
 
-Para selecionar um pacote exato, basta especificar seu nome (`@ babel / core`) ou usar um padrão
-para selecionar um conjunto de pacotes (`@ babel / *`).
+Para selecionar um pacote exato, basta especificar seu nome (`@babel/core`) ou usar um padrão
+para selecionar um conjunto de pacotes (`@babel/*`).
 
 Exemplos de uso:
 

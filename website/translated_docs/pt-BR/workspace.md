@@ -11,7 +11,7 @@ Você pode controlar quais diretórios são procurados passando uma matriz de gl
 
 Um exemplo de um `pnpm-workspace.yaml`:
 
-`` `yaml
+```yaml
 packages:
   # the root package.json
   - '.'
@@ -19,8 +19,8 @@ packages:
   - 'packages/**'
   - 'components/**'
   # exclui pacotes que estão dentro de testes / diretórios
-  - '!**/teste/**'
-`` `
+  - '!**/test/**'
+```
 
 `pnpm-workspace.yaml` deve estar na raiz da área de trabalho.
 

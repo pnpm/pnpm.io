@@ -6,7 +6,7 @@ title: pnpm publish
 Publica um pacote no registro.
 
 ```
-pnpm publish [<tarball> | <pasta>] [- tag <tag>] [--acesso <público | restrito>]
+pnpm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
 ```
 
 Ao publicar um pacote dentro de um [espaço de trabalho] (workspace.md), o arquivo LICENSE
