@@ -7,7 +7,6 @@
 
 const React = require('react');
 
-
 const CompLibrary = require('../../core/CompLibrary');
 const translate = require("../../server/translate.js").translate;
 
