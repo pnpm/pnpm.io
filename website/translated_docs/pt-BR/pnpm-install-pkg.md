@@ -12,16 +12,16 @@ Por padrão, qualquer novo pacote é instalado como uma dependência de produto.
 
 | Comando | Significado |
 | - | - |
-| pnpm i sax` | npm package (salve para `dependencies`) |
-| `pnpm i -D sax` | salvar em` devDependencies` |
-| `pnpm i -O sax` | salvar em` optionalDependencies` |
-| `pnpm i -P sax` | salvar em` dependências` |
-| `pnpm i sax @ next` | Especifique a tag` next` |
-| `pnpm i sax @ 3.0.0` | Especifique a versão` 3.0.0` |
-| pnpm i sax @ "> = 1 <2.0" `| Especifique o intervalo de versões |
+| `pnpm i sax` | npm package (salve para `dependencies`) |
+| `pnpm i -D sax` | salvar em `devDependencies` |
+| `pnpm i -O sax` | salvar em `optionalDependencies` |
+| `pnpm i -P sax` | salvar em `dependências` |
+| `pnpm i sax @ next` | Especifique a tag `next` |
+| `pnpm i sax @ 3.0.0` | Especifique a versão `3.0.0` |
+| `pnpm i sax @ "> = 1 <2.0" `| Especifique o intervalo de versões |
 | `pnpm i usuário / repo` | GitHub |
 | `pnpm i usuário / repo # master` | GitHub |
-| pnpm i usuário / repo # semver: ^ 2.0.0` | GitHub |
+| `pnpm i usuário / repo # semver: ^ 2.0.0` | GitHub |
 | `pnpm i github: user / repo` | GitHub |
 | `pnpm i gitlab: usuário / repo` | GitHub |
 | `pnpm i / caminho / para / repo` | Caminho absoluto |
@@ -47,7 +47,7 @@ Você também pode instalar pacotes por:
 
 Existem duas maneiras de instalar a partir do sistema de arquivos local:
 
-1. de um arquivo tarball (`.tar`,` .tar.gz` ou `.tgz`)
+1. de um arquivo tarball (`.tar`,`.tar.gz` ou `.tgz`)
 2. de um diretório
 
 Exemplos:
@@ -93,11 +93,11 @@ Isto irá instalar um ou mais pacotes nas suas `dependências`.
 
 ### --save-dev, -D
 
-Usar `--save-dev` ou` -D` instalará um ou mais pacotes em seu `devDependencies`.
+Usar `--save-dev` ou `-D` instalará um ou mais pacotes em seu `devDependencies`.
 
-### --save-opcional, -O
+### --save-optional, -O
 
-Usar `--save-optional` ou` -O` instalará um ou mais pacotes em seu `optionalDependencies`.
+Usar `--save-optional` ou `-O` instalará um ou mais pacotes em seu `optionalDependencies`.
 
 ### --save-exact, -E
 
@@ -107,4 +107,4 @@ As dependências salvas serão configuradas com uma versão exata, em vez de usa
 
 Adicionado em: v3.2.0
 
-Usar `--save-peer` adicionará um ou mais pacotes a` peerDependencies` e os instalará como dependências dev.
+Usar `--save-peer` adicionará um ou mais pacotes a `peerDependencies` e os instalará como dependências dev.

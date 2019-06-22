@@ -9,8 +9,8 @@ original_id: pnpm-recursive
 | Comando | Significado |
 | - | - |
 | `pnpm install -r` | executa a instalação para cada pacote em cada subpasta |
-| `pnpm run build --filter foo * `| constrói todos os pacotes com nomes que começam com` foo-`|
-| `pnpm update - login-page ...` | atualiza dependências em `login-page` e quaisquer dependências de` login-page` que também estão no repositório |
+| `pnpm run build --filter foo * `| constrói todos os pacotes com nomes que começam com `foo-`|
+| `pnpm update - login-page ...` | atualiza dependências em `login-page` e quaisquer dependências de `login-page` que também estão no repositório |
 
 ## Opções
 
@@ -21,7 +21,7 @@ Adicionado em: v2.14.0
 * Padrão: **true**
 * Tipo: **Boolean**
 
-Quando pacotes `true`, localmente disponíveis, são vinculados a` node_modules` em vez de serem baixados do registro.
+Quando pacotes `true`, localmente disponíveis, são vinculados a `node_modules` em vez de serem baixados do registro.
 Isso é muito conveniente em um repositório de vários pacotes.
 
 #### Uso
@@ -48,7 +48,7 @@ Adicionado em: v2.17.0 (inicialmente chamado `shared-workspace-shrinkwrap`)
 * Padrão: **true**
 * Tipo: **Boolean**
 
-Quando `true`, o pnpm cria um único arquivo` pnpm-lock.yaml` na raiz da área de trabalho (no diretório que contém o arquivo `pnpm-workspace.yaml`).
+Quando `true`, o pnpm cria um único arquivo `pnpm-lock.yaml` na raiz da área de trabalho (no diretório que contém o arquivo `pnpm-workspace.yaml`).
 Um arquivo de bloqueio compartilhado também significa que todas as dependências de todos os pacotes do espaço de trabalho estarão em um único `node_modules`.
 
 Vantagens desta opção:
@@ -75,7 +75,7 @@ ou por relação.
 Adicionado em: v2.13.0
 
 Para selecionar um pacote exato, basta especificar seu nome (`@babel/core`) ou usar um padrão
-para selecionar um conjunto de pacotes (`@ babel/*`).
+para selecionar um conjunto de pacotes (`@babel/*`).
 
 Exemplos de uso:
 
@@ -92,7 +92,7 @@ pnpm recursive install -- @babel/*
 Adicionado em: v2.13.0
 
 Para selecionar um pacote e suas dependências (diretas e não diretas), sufixar o nome do pacote com 3 pontos: `<nome_do_pacote> ...`.
-Por exemplo, o próximo comando executará a instalação em todas as dependências de `foo` e em` foo`:
+Por exemplo, o próximo comando executará a instalação em todas as dependências de `foo` e em `foo`:
 
 ```sh
 pnpm recursive install --filter foo...
@@ -113,7 +113,7 @@ pnpm recursive install -- @babel/preset-*...
 Adicionado em: 2.14.0
 
 Para selecionar um pacote e seus pacotes dependentes (direto e não direto), prefixar o nome do pacote com 3 pontos: `... <nome_do_pacote>`.
-Por exemplo, o próximo comando executará a instalação em todos os dependentes de `foo` e em` foo`:
+Por exemplo, o próximo comando executará a instalação em todos os dependentes de `foo` e em `foo`:
 
 ```sh
 pnpm recursive install --filter ...foo
@@ -246,7 +246,7 @@ Exemplos de uso:
 pnpm recursive dislink
 ```
 
-## pnpm recursiva desatualizada
+## pnpm recursive outdated
 
 Adicionado em: v2.2.0
 
@@ -262,7 +262,7 @@ Exemplos de uso:
 pnpm recursive outdated
 ```
 
-## pnpm lista recursiva
+## pnpm recursive list
 
 Adicionado em: v2.2.0
 
@@ -299,8 +299,8 @@ pnpm recursive run build
 ```
 
 Além do "PATH" pré-existente do shell, o `pnpm run` adiciona `node_modules/.bin`
-para o `PATH` fornecido para` scripts`. A partir da v3.5, quando executado dentro de um espaço de trabalho,
-`<raiz da área de trabalho>/node_modules/.bin` também é adicionado ao` PATH`, portanto, se uma ferramenta
+para o `PATH` fornecido para `scripts`. A partir da v3.5, quando executado dentro de um espaço de trabalho,
+`<raiz da área de trabalho>/node_modules/.bin` também é adicionado ao `PATH`, portanto, se uma ferramenta
 está instalado na raiz do espaço de trabalho, ele pode ser chamado em `scripts` de qualquer pacote de espaço de trabalho.
 
 ## pnpm recursive test

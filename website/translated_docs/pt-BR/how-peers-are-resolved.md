@@ -21,8 +21,8 @@ no mesmo projeto.
   - foo@1.0.0
 ```
 
-No exemplo acima, `foo@1.0.0` é instalado para` foo-parent-1` e `foo-parent-2`. Ambos os pacotes tem `bar` e` baz`as bem, mas
-eles dependem de diferentes versões do `baz`. Como resultado, `foo@1.0.0` tem dois conjuntos diferentes de dependências: um com` baz@1.0.0`
+No exemplo acima, `foo@1.0.0` é instalado para `foo-parent-1` e `foo-parent-2`. Ambos os pacotes tem `bar` e `baz`as bem, mas
+eles dependem de diferentes versões do `baz`. Como resultado, `foo@1.0.0` tem dois conjuntos diferentes de dependências: um com `baz@1.0.0`
 e o outro com `baz@1.1.0`. Para suportar estes casos de uso, o pnpm tem que linkar rigidamente o `foo@1.0.0` tantas vezes quantos conjuntos de dependências ele tiver.
 
 Normalmente, se um pacote não tem dependências de peer, ele é ligado a uma pasta `node_modules` ao lado de links simbólicos de suas dependências.
@@ -38,7 +38,7 @@ Nós criamos links simbólicos para o `foo` que está dentro de `bar@1.0.0 + baz
 Como consequência, o algoritmo do resolvedor do módulo Node.js encontrará os pares corretos.
 
 *Se o par resolvido for uma dependência direta do projeto*, ele não será agrupado separadamente com o pacote dependente.
-Isso é feito para facilitar a criação de instalações com um nome previsível e rápido (`pnpm i foo`) e geral (` pnpm i`).
+Isso é feito para facilitar a criação de instalações com um nome previsível e rápido (`pnpm i foo`) e geral (`pnpm i`).
 Então, se o projeto depender de `bar@1.0.0`, as dependências do nosso exemplo serão agrupadas assim:
 
 ![](/img/how-peers-are-resolved/3.png)

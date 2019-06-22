@@ -5,9 +5,9 @@ title: pnpm CLI
 
 Basta usar o pnpm no lugar do npm:
 
-`` `sh
+```sh
 pnpm instalar o lodash
-`` `
+```
 
 Comandos npm que são reimplementados no pnpm:
 

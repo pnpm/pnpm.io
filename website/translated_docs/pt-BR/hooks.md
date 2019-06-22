@@ -52,12 +52,12 @@ function readPackage (pkg, contexto) {
 
 ### Uso
 
-#### Substitua um pacote pelo garfo
+#### Substitua um pacote pelo fork
 
 Vamos supor que você tenha bifurcado um pacote com uma correção importante e queira o fixo
 versão instalada.
 
-O seguinte gancho substitui `resolve` pelo fork do` @ zkochan`.
+O seguinte gancho substitui `resolve` pelo fork do `@zkochan`.
 
 ```js
 'use strict'
@@ -98,7 +98,7 @@ function readPackage (pkg) {
 }
 ```
 
-#### Renomeando caixas
+#### Renomeando bins
 
 Você deseja renomear a caixa de um pacote? Apenas substitua:
 
@@ -119,7 +119,7 @@ function readPackage (pkg) {
 }
 ```
 
-Agora você pode executar `jslint fix` em vez de` eslint fix`.
+Agora você pode executar `jslint fix` em vez de `eslint fix`.
 
 ## `hooks.afterAllResolved (shrinkwrap, context): shrinkwrap`
 
@@ -129,7 +129,7 @@ Adicionado em: v1.41.0
 
 ### Argumentos
 
-* `shrinkwrap` - _object_ - O objeto que é salvo no` shrinkwrap.yaml`.
+* `shrinkwrap` - _object_ - O objeto que é salvo no `shrinkwrap.yaml`.
 * `context.log (msg)` - _Function_ - Permite registrar mensagens.
 
 ### Uso

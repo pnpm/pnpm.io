@@ -22,9 +22,9 @@
 
 * [Referência](benchmark.md)
 * [Limitações](limitations.md)
-* [Sobre a loja de pacotes] (about-the-package-store.md)
-* [Symlinked `node_modules` estrutura] (symlinked-node-modules-structure.md)
-* [Como os pares são resolvidos] (how-peers-are-resolved.md)
+* [Sobre a loja de pacotes](about-the-package-store.md)
+* [Symlinked `node_modules` estrutura](symlinked-node-modules-structure.md)
+* [Como os pares são resolvidos](how-peers-are-resolved.md)
 
 ----
 

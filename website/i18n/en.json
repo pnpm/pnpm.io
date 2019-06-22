@@ -5,8 +5,8 @@
     "previous": "Previous",
     "tagline": "Fast, disk space efficient package manager",
     "docs": {
-      "about-package-store": {
-        "title": "About the package store"
+      "about-the-package-store": {
+        "title": "about-the-package-store"
       },
       "aliases": {
         "title": "Aliases"

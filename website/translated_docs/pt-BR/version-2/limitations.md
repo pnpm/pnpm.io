@@ -4,8 +4,8 @@ title: Limitações
 original_id: limitações
 ---
 
-1. `npm-shrinkwrap.json` e` package-lock.json` são ignorados. Ao contrário do pnpm, o npm pode instalar o
-mesmo `name @ version` várias vezes e com diferentes conjuntos de dependências.
+1. `npm-shrinkwrap.json` e `package-lock.json` são ignorados. Ao contrário do pnpm, o npm pode instalar o
+mesmo `name@version` várias vezes e com diferentes conjuntos de dependências.
 O arquivo shrinkwrap do npm é projetado para refletir o layout `node_modules` criado
 por npm. pnpm não pode criar um layout semelhante, por isso não pode respeitar
 formato de arquivo de bloqueio do npm. No entanto, consulte [pnpm import](pnpm-import.md).

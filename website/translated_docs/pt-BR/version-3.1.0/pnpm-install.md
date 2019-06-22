@@ -13,22 +13,22 @@ O `pnpm install` é usado para instalar todas as dependências de um projeto.
 | Comando | Significado |
 | - | - |
 | `pnpm i --offline` | sem pedidos de rede |
-| `pnpm i --frozen-lockfile` |` pnpm-lock.yaml` não é atualizado |
+| `pnpm i --frozen-lockfile` |`pnpm-lock.yaml` não é atualizado |
 | `pnpm i --prefer-frozen-lockfile` | quando possível, `pnpm-lock.yaml` não é atualizado |
 
-## loja
+## store
 
 * Padrão: **~/.pnpm-store**
 * Tipo: **path**
 
 O local onde todos os pacotes são salvos no disco.
 
-A loja deve estar sempre no mesmo disco em que a instalação está acontecendo. Então, haverá um armazenamento por disco.
+A store deve estar sempre no mesmo disco em que a instalação está acontecendo. Então, haverá um armazenamento por disco.
 Se houver um diretório inicial no disco atual, o armazenamento será criado em `<home dir>/.pnpm-store`. Se não há
-homedir no disco, a loja é criada na raiz. Por exemplo, se a instalação está acontecendo no disco `D`
-então a loja será criada em `D:\.pnpm-store`.
+homedir no disco, a store é criada na raiz. Por exemplo, se a instalação está acontecendo no disco `D`
+então a store será criada em `D:\.pnpm-store`.
 
-É possível definir uma loja a partir de um disco diferente, mas, nesse caso, o pnpm copia, e não vincula, pacotes da loja.
+É possível definir uma store a partir de um disco diferente, mas, nesse caso, o pnpm copia, e não vincula, pacotes da store.
 Links rígidos são possíveis somente dentro de um sistema de arquivos.
 
 ## offline
@@ -36,7 +36,7 @@ Links rígidos são possíveis somente dentro de um sistema de arquivos.
 * Padrão: **false**
 * Tipo: **Boolean**
 
-Se for verdade, o pnpm usará apenas pacotes já disponíveis na loja.
+Se for verdade, o pnpm usará apenas pacotes já disponíveis na store.
 Se um pacote não for encontrado localmente, a instalação falhará.
 
 ## prefer-offline
@@ -68,8 +68,8 @@ Controla o número de processos filhos executados paralelamente para construir m
 * Padrão: **true**
 * Tipo: **Boolean**
 
-Perigoso! Se falso, a loja não está bloqueada. Isso significa que várias instalações usando o mesmo
-loja pode funcionar simultaneamente.
+Perigoso! Se falso, a store não está bloqueada. Isso significa que várias instalações usando o mesmo
+store pode funcionar simultaneamente.
 
 Pode ser passado através de uma opção CLI. `--no-lock` para configurá-lo para false. Por exemplo: `pnpm install --no-lock`.
 
@@ -103,14 +103,14 @@ Adicionado em: v1.39.0
 
 A localização do arquivo pnpm local.
 
-## production [= verdadeiro | falso]
+## production[=true|false]
 
 * Padrão: **false**
 * Tipo: **Boolean**
 
 O pnpm não instalará nenhum pacote listado em `devDependencies` se a variável de ambiente` NODE_ENV` estiver configurada para produção. Use esse sinalizador para instruir o pnpm a ignorar `NODE_ENV` e obter seu status de produção ou não desse sinalizador.
 
-> Notas: `--production` é o mesmo que` --production = true`. `--prod` é um pseudônimo de` --production`.
+> Notas: `--production` é o mesmo que `--production = true`. `--prod` é um pseudônimo de` --production`.
 
 ## global-pnpmfile
 
@@ -141,7 +141,7 @@ Adicionado em: v1.8.0
 * Padrão: **true**
 * Tipo: **Boolean**
 
-Se false, não verifica se os pacotes na loja foram modificados.
+Se false, não verifica se os pacotes na store foram modificados.
 
 ## package-import-method
 
@@ -150,12 +150,12 @@ Adicionado em: v1.25.0
 * Padrão:  **auto**
 * Tipo: **auto**, **hardlink**, **copy**, **reflink**
 
-Controla a maneira como os pacotes são importados da loja.
+Controla a maneira como os pacotes são importados da store.
 
-*  **auto** - tente vincular os pacotes da loja. Se falhar, recuar para copiar
-* **hardlink** - pacotes de hardlink da loja
-*  **copy** - copie os pacotes da loja
-* **reflink** - pacotes de reflink (aka copy-on-write) da loja
+*  **auto** - tente vincular os pacotes da store. Se falhar, recuar para copiar
+* **hardlink** - pacotes de hardlink da store
+*  **copy** - copie os pacotes da store
+* **reflink** - pacotes de reflink (aka copy-on-write) da store
 
 ## lockfile
 
@@ -173,7 +173,7 @@ Adicionado em: v1.26.0 (inicialmente chamado `shrinkwrap-only`)
 * Padrão: **false**
 * Tipo: **Boolean**
 
-Quando usado, somente atualiza `pnpm-lock.yaml` e` package.json` em vez de verificar `node_modules` e baixar dependências.
+Quando usado, somente atualiza `pnpm-lock.yaml` e `package.json` em vez de verificar `node_modules` e baixar dependências.
 
 ## frozen-lockfile
 
@@ -191,11 +191,11 @@ Adicionado em: v1.37.1 (inicialmente chamado `prefer-frozen-shrinkwrap`)
 * Padrão: **true** (da v1.38.0)
 * Tipo: **Boolean**
 
-Quando `true` e o disponível` pnpm-lock.yaml` satisfaz o `package.json`
+Quando `true` e o disponível `pnpm-lock.yaml` satisfaz o `package.json`
 então uma instalação sem cabeça é executada. Uma instalação sem cabeça é mais rápida que uma instalação normal
 porque pula a resolução de dependências e a resolução de pares.
 
-# # repórter
+## reporter
 
 * Padrão:
     * Para stdout TTY: **default**
@@ -218,7 +218,7 @@ Adicionado em: v1.30.0
 * Tipo: **Boolean**
 
 Inicia um servidor de armazenamento em segundo plano. O servidor de armazenamento continuará em execução após a conclusão da instalação.
-Para parar o servidor da loja, execute o comando `pnpm server stop`
+Para parar o servidor da store, execute o comando `pnpm server stop`
 
 ## use-running-store-server
 
@@ -272,7 +272,7 @@ Adicionado em: v2.15.0
 
 Se true, os comandos falham em dependências de peer ausentes ou inválidas.
 
-## estratégia de resolução
+## resolution-strategy
 
 Adicionado em: 3.1.0
 

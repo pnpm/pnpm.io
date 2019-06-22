@@ -16,7 +16,7 @@ raiz do espaço de trabalho é embalado com o pacote (a menos que o pacote tenha
 ## --tag &lt;tag>
 
 
-Publica o pacote com a tag dada. Por padrão, o `pnpm publish` atualiza a tag` latest`.
+Publica o pacote com a tag dada. Por padrão, o `pnpm publish` atualiza a tag `latest`.
 
 Por exemplo:
 

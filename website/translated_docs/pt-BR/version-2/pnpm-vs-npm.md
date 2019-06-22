@@ -19,7 +19,7 @@ que não estão especificados no `package.json` do projeto.
 
 O pnpm não permite a instalação de pacotes sem salvá-los em `package.json`.
 Se nenhum parâmetro for passado para o `pnpm install`, os pacotes serão salvos como dependências regulares.
-Como com npm, `--save-dev` e` --save-optional` podem ser usados ​​para instalar pacotes como dev ou dependências opcionais.
+Como com npm, `--save-dev` e `--save-optional` podem ser usados ​​para instalar pacotes como dev ou dependências opcionais.
 
 Como conseqüência dessa limitação, os projetos não terão pacotes estranhos quando usarem o pnpm.
 É por isso que a implementação do pnpm do comando [prune](https://docs.npmjs.com/cli/prune) não

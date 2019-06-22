@@ -8,7 +8,7 @@ O pnpm pode ser facilmente usado em vários sistemas de integração contínua.
 
 ## Travis
 
-Em [Travis CI] (https://travis-ci.org/), você pode usar o pnpm para instalar suas dependências adicionando isto ao seu arquivo `.travis.yml`:
+Em [Travis CI](https://travis-ci.org/), você pode usar o pnpm para instalar suas dependências adicionando isto ao seu arquivo `.travis.yml`:
 
 ```yaml
 before_install:

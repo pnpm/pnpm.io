@@ -14,7 +14,7 @@ raiz do espaço de trabalho é embalado com o pacote (a menos que o pacote tenha
 
 tag ## --tag & lt;
 
-Publica o pacote com a tag dada. Por padrão, o `pnpm publish` atualiza a tag` latest`.
+Publica o pacote com a tag dada. Por padrão, o `pnpm publish` atualiza a tag `latest`.
 
 Por exemplo:
 
@@ -34,7 +34,7 @@ Informa ao registro se o pacote publicado deve ser público ou restrito.
 Adicionado em: v3.4.0
 
 É possível sobrescrever alguns campos no manifesto antes que o pacote seja empacotado.
-Os seguintes campos podem ser sobrescritos: `typings`,` types`, `main` e` module`.
+Os seguintes campos podem ser sobrescritos: `typings`, `types`, `main` e `module`.
 Para sobrescrever um campo, adicione a versão de publicação do campo ao `publishConfig`.
 
 Por exemplo, o seguinte `package.json`:

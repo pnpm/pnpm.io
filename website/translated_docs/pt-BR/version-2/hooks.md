@@ -11,8 +11,8 @@ Ganchos podem ser declarados em um arquivo chamado `pnpmfile.js`. `pnpmfile.js` 
 
 | Opção | Significado |
 | - | - |
-| hooks.readPackage (pkg, context): pkg` | Permite a mutação de cada pacote `package.json` |
-| hooks.afterAllResolved (shrinkwrap, context): shrinkwrap` | É chamado depois da fase de resolução. Permite alterar o objeto shrinkwrap. |
+| `hooks.readPackage (pkg, context): pkg `| Permite a mutação de cada pacote `package.json` |
+| `hooks.afterAllResolved (shrinkwrap, context): shrinkwrap` | É chamado depois da fase de resolução. Permite alterar o objeto shrinkwrap. |
 
 ## `hooks.readPackage (pkg, context): pkg`
 
@@ -22,7 +22,7 @@ Você precisará excluir o `shrinkwrap.yaml` se já tiver resolvido a dependênc
 
 ```js
 module.exports = {
-  ganchos: {
+  hooks: {
     readPackage
   }
 }
@@ -53,7 +53,7 @@ function readPackage (pkg, contexto) {
 
 ### Uso
 
-#### Substitua um pacote pelo garfo
+#### Substitua um pacote pelo fork
 
 Vamos supor que você tenha bifurcado um pacote com uma correção importante e queira o fixo
 versão instalada.
@@ -99,7 +99,7 @@ function readPackage (pkg) {
 }
 ```
 
-#### Renomeando caixas
+#### Renomeando bins
 
 Você deseja renomear a caixa de um pacote? Apenas substitua:
 

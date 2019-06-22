@@ -16,7 +16,7 @@ Se estiver configurando o pnpm para funcionar em vários discos rígidos ou sist
 Além disso, o pnpm usa as mesmas configurações que o npm usa para fazer instalações. Se você tem um registro privado e o npm está configurado
 para trabalhar com ele, o pnpm deve ser capaz de autorizar solicitações, sem configuração adicional.
 
-Além dessas opções, o pnpm também permite que você use todos os parâmetros que são flags (por exemplo `--filter` ou` --workspace-concurrency`) como opção:
+Além dessas opções, o pnpm também permite que você use todos os parâmetros que são flags (por exemplo `--filter` ou `--workspace-concurrency`) como opção:
 ```
 workspace-concurrency = 1
 filter = @my-scope/*

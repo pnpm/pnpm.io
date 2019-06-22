@@ -54,7 +54,7 @@ O pnpm funciona de maneira diferente com base nos dois casos abaixo:
 
 Se o caminho de armazenamento for especificado por meio da [configuração de armazenamento](configuring.md), a cópia ocorrerá entre o armazenamento e todos os projetos que estiverem em um disco diferente.
 
-Se você executar `pnpm install` no disco` D: `, então o armazenamento pnpm deve estar no disco` D: `.
+Se você executar `pnpm install` no disco `D: `, então o armazenamento pnpm deve estar no disco `D: `.
 Se o repositório pnpm estiver localizado no disco `C:`, todos os pacotes requeridos serão copiados diretamente para o local do projeto.
 Isso reduz severamente os benefícios do pnpm.
 
@@ -88,9 +88,9 @@ Em seguida, o pnpm precisaria baixar novamente todos os pacotes removidos, abrev
 
 ## O que significa `pnpm`?
 
-`pnpm` significa` performance_npm`. [Rico Sta. Cruz](https://github.com/rstacruz/) veio com o nome.
+`pnpm` significa `performance_npm`. [Rico Sta. Cruz](https://github.com/rstacruz/) veio com o nome.
 
-## `pnpm` não funciona com o <YOUR-PROJECT-HERE>?
+## `pnpm` não funciona com o <SEU-PROJETO>?
 
 Na maioria dos casos, isso significa que uma das dependências requer pacotes não declarados em `package.json`.
 É um erro comum causado pelo flat `node_modules`. Se isso acontecer, isso é um erro na dependência e
@@ -100,7 +100,7 @@ dependência deve ser corrigida. Isso pode levar algum tempo, portanto, o pnpm s
 
 No exemplo a seguir, uma dependência **não** tem o módulo `iterall` em sua própria lista de dependências.
 
-A solução mais fácil para resolver dependências ausentes dos pacotes com bugs é **adicionar `iterall` como uma dependência do` package.json`** do nosso projeto.
+A solução mais fácil para resolver dependências ausentes dos pacotes com bugs é **adicionar `iterall` como uma dependência do `package.json`** do nosso projeto.
 
 Você pode fazê-lo, instalando-o via:
 
@@ -129,7 +129,7 @@ Erro: Não é possível encontrar o módulo 'babel-traverse'
  at /node_modules/.registry.npmjs.org/inspectpack/2.2.3/node_modules/inspectpack/lib/actions/parse
 ```
 
-O problema era que o `babel-traverse` era usado na biblioteca` inspectpack` que era usada pelo `webpack-dashboard`. Mas `babel-traverse` não foi especificado em` package.json` do `inspectpack`. Ele ainda trabalhava com `npm` e` yarn` porque eles criam flat `node_modules`.
+O problema era que o `babel-traverse` era usado na biblioteca `inspectpack` que era usada pelo `webpack-dashboard`. Mas `babel-traverse` não foi especificado em `package.json` do `inspectpack`. Ele ainda trabalhava com `npm` e `yarn` porque eles criam flat `node_modules`.
 
 A solução foi criar um `pnpmfile.js` com o seguinte conteúdo:
 
@@ -148,10 +148,10 @@ module.exports = {
 }
 ```
 
-Depois de criar `pnpmfile.js`, exclua` shrinkwrap.yaml` apenas. Não há necessidade de deletar `node_modules`. Em seguida, instale as dependências e ele deve estar funcionando.
+Depois de criar `pnpmfile.js`, exclua `shrinkwrap.yaml` apenas. Não há necessidade de deletar `node_modules`. Em seguida, instale as dependências e ele deve estar funcionando.
 
 ### Solução 3
 
-Caso haja muitos problemas, você pode usar a configuração `shamefully-flatten`. Isto cria uma estrutura plana `node_modules` semelhante à criada pelo` npm` ou `yarn`.
+Caso haja muitos problemas, você pode usar a configuração `shamefully-flatten`. Isto cria uma estrutura plana `node_modules` semelhante à criada pelo `npm` ou `yarn`.
 
 Para usá-lo, tente `pnpm install --shaefish-flatten`.
