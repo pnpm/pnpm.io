@@ -12,21 +12,11 @@ By default, any new package is installed as a prod dependency.
 
 |Command|Meaning|
 |--|--|
-|`pnpm add sax`                          |npm package (save to `dependencies`)|
+|`pnpm add sax`                          |save to `dependencies`              |
 |`pnpm add -D sax`                       |save to `devDependencies`           |
 |`pnpm add -O sax`                       |save to `optionalDependencies`      |
-|`pnpm add -P sax`                       |save to `dependencies`              |
 |`pnpm add sax@next`                     |Specify tag `next`                  |
 |`pnpm add sax@3.0.0`                    |Specify version `3.0.0`             |
-|`pnpm add sax@">=1 <2.0"`               |Specify version range               |
-|`pnpm add user/repo`                    |GitHub                              |
-|`pnpm add user/repo#master`             |GitHub                              |
-|`pnpm add user/repo#semver:^2.0.0`      |GitHub                              |
-|`pnpm add github:user/repo`             |GitHub                              |
-|`pnpm add gitlab:user/repo`             |GitHub                              |
-|`pnpm add /path/to/repo`                |Absolute path                       |
-|`pnpm add ./archive.tgz`                |Tarball                             |
-|`pnpm add https://site.com/archive.tgz` |Tarball via HTTP                    |
 
 ## Supported package locations
 
@@ -74,13 +64,14 @@ pnpm add https://github.com/indexzero/forever/tarball/v0.5.6
 ### Install from Git repository
 
 ```sh
-npm install <git remote url>
+pnpm install <git remote url>
 ```
 
 Installs the package from the hosted Git provider, cloning it with Git.
 
 You may install from Git by:
 
+* latest commit from master: `pnpm add kevva/is-positive`
 * commit: `pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678`
 * branch: `pnpm add kevva/is-positive#master`
 * version range: `pnpm add kevva/is-positive#semver:^2.0.0`
