@@ -1,6 +1,7 @@
 ---
-id: pnpm-install-pkg
+id: version-3.6-pnpm-install-pkg
 title: pnpm install <pkg>
+original_id: pnpm-install-pkg
 ---
 
 Installs a package and any packages that it depends on.

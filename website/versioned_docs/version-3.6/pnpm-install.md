@@ -1,6 +1,7 @@
 ---
-id: pnpm-install
+id: version-3.6-pnpm-install
 title: pnpm install
+original_id: pnpm-install
 ---
 
 `pnpm install` is used to install all dependencies for a project.

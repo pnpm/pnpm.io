@@ -205,6 +205,12 @@
       },
       "version-3.5-pnpm-run": {
         "title": "pnpm run"
+      },
+      "version-3.6-pnpm-install-pkg": {
+        "title": "pnpm install <pkg>"
+      },
+      "version-3.6-pnpm-install": {
+        "title": "pnpm install"
       }
     },
     "links": {
