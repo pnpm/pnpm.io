@@ -24,7 +24,8 @@
     ],
     "Recipes": [
       "continuous-integration",
-      "workspace"
+      "workspace",
+      "only-allow-pnpm"
     ],
     "Advanced": [
       "logos",

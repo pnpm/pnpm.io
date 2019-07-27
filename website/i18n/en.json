@@ -41,6 +41,9 @@
       "motivation": {
         "title": "Motivation"
       },
+      "only-allow-pnpm": {
+        "title": "Only allow pnpm"
+      },
       "pnpm-add-pkg": {
         "title": "pnpm add <pkg>"
       },
@@ -82,9 +85,6 @@
       },
       "releasing-apps": {
         "title": "Releasing apps"
-      },
-      "SUMMARY": {
-        "title": "SUMMARY"
       },
       "support": {
         "title": "Support"
