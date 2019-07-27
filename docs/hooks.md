@@ -11,13 +11,13 @@ Hooks can be declared in a file called `pnpmfile.js`. `pnpmfile.js` should live 
 |Option|Meaning|
 |--|--|
 |`hooks.readPackage(pkg, context): pkg` | Allows to mutate every dependency's `package.json` |
-|`hooks.afterAllResolved(shrinkwrap, context): shrinkwrap` | Is called after resolution stage. Allows to mutate the shrinkwrap object. |
+|`hooks.afterAllResolved(lockfile, context): lockfile` | Is called after resolution stage. Allows to mutate the lockfile object. |
 
 ## `hooks.readPackage(pkg, context): pkg`
 
 Allows to mutate every dependency's `package.json`.
 An example of a `pnpmfile.js` that changes the dependencies field of a dependency:
-You will need to delete the `shrinkwrap.yaml` if you have already resolved the dependency you want change.
+You will need to delete the `pnpm-lock.yaml` if you have already resolved the dependency you want change.
 
 ```js
 module.exports = {
@@ -121,15 +121,15 @@ function readPackage (pkg) {
 
 Now you can run `jslint fix` instead of `eslint fix`.
 
-## `hooks.afterAllResolved(shrinkwrap, context): shrinkwrap`
+## `hooks.afterAllResolved(lockfile, context): lockfile`
 
 Added in: v1.41.0
 
-Is called after resolution stage. Allows to mutate the shrinkwrap object.
+Is called after resolution stage. Allows to mutate the lockfile object.
 
 ### Arguments
 
-* `shrinkwrap` - _object_ - The object that is saved to `shrinkwrap.yaml`.
+* `lockfile` - _object_ - The object that is saved to `pnpm-lock.yaml`.
 * `context.log(msg)` - _Function_ - Allows to log messages.
 
 ### Usage
@@ -141,8 +141,8 @@ module.exports = {
   }
 }
 
-function afterAllResolved (shrinkwrap, context) {
+function afterAllResolved (lockfile, context) {
   // ...
-  return shrinkwrap
+  return lockfile
 }
 ```

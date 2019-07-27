@@ -147,7 +147,7 @@ module.exports = {
 }
 ```
 
-After creating `pnpmfile.js`, delete `shrinkwrap.yaml` only. No need to delete `node_modules`. Then install the dependencies & it should be working.
+After creating `pnpmfile.js`, delete `pnpm-lock.yaml` only. No need to delete `node_modules`. Then install the dependencies & it should be working.
 
 ### Solution 3
 
