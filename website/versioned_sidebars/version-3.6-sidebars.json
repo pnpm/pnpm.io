@@ -1,0 +1,38 @@
+{
+  "version-3.6-docs": {
+    "Introduction": [
+      "version-3.6-motivation",
+      "version-3.6-installation"
+    ],
+    "Usage": [
+      "version-3.6-pnpm-cli",
+      "version-3.6-pnpx-cli",
+      "version-3.6-configuring",
+      "version-3.6-hooks",
+      "version-3.6-aliases"
+    ],
+    "CLI commands": [
+      "version-3.6-pnpm-import",
+      "version-3.6-pnpm-add-pkg",
+      "version-3.6-pnpm-install",
+      "version-3.6-pnpm-publish",
+      "version-3.6-pnpm-recursive",
+      "version-3.6-pnpm-run",
+      "version-3.6-pnpm-server",
+      "version-3.6-pnpm-store",
+      "version-3.6-pnpm-unlink"
+    ],
+    "Recipes": [
+      "version-3.6-continuous-integration",
+      "version-3.6-workspace"
+    ],
+    "Advanced": [
+      "version-3.6-logos",
+      "version-3.6-benchmark",
+      "version-3.6-limitations",
+      "version-3.6-about-package-store",
+      "version-3.6-symlinked-node-modules-structure",
+      "version-3.6-how-peers-are-resolved"
+    ]
+  }
+}
