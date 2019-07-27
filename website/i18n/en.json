@@ -209,11 +209,26 @@
       "version-3.6-aliases": {
         "title": "Aliases"
       },
+      "version-3.6-faq": {
+        "title": "Frequently Asked Questions"
+      },
+      "version-3.6-hooks": {
+        "title": "Hooks"
+      },
+      "version-3.6-only-allow-pnpm": {
+        "title": "Only allow pnpm"
+      },
       "version-3.6-pnpm-add-pkg": {
         "title": "pnpm add <pkg>"
       },
+      "version-3.6-pnpm-import": {
+        "title": "pnpm import"
+      },
       "version-3.6-pnpm-install": {
         "title": "pnpm install"
+      },
+      "version-3.6-releasing-apps": {
+        "title": "Releasing apps"
       }
     },
     "links": {
