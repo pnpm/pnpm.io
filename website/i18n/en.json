@@ -41,14 +41,14 @@
       "motivation": {
         "title": "Motivation"
       },
+      "pnpm-add-pkg": {
+        "title": "pnpm add <pkg>"
+      },
       "pnpm-cli": {
         "title": "pnpm CLI"
       },
       "pnpm-import": {
         "title": "pnpm import"
-      },
-      "pnpm-install-pkg": {
-        "title": "pnpm install <pkg>"
       },
       "pnpm-install": {
         "title": "pnpm install"

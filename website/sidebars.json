@@ -13,7 +13,7 @@
     ],
     "CLI commands": [
       "pnpm-import",
-      "pnpm-install-pkg",
+      "pnpm-add-pkg",
       "pnpm-install",
       "pnpm-publish",
       "pnpm-recursive",

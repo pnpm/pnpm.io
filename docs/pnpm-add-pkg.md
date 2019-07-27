@@ -1,6 +1,6 @@
 ---
-id: pnpm-install-pkg
-title: pnpm install <pkg>
+id: pnpm-add-pkg
+title: pnpm add <pkg>
 ---
 
 Installs a package and any packages that it depends on.
@@ -12,21 +12,21 @@ By default, any new package is installed as a prod dependency.
 
 |Command|Meaning|
 |--|--|
-|`pnpm i sax`                          |npm package (save to `dependencies`)|
-|`pnpm i -D sax`                       |save to `devDependencies`           |
-|`pnpm i -O sax`                       |save to `optionalDependencies`      |
-|`pnpm i -P sax`                       |save to `dependencies`              |
-|`pnpm i sax@next`                     |Specify tag `next`                  |
-|`pnpm i sax@3.0.0`                    |Specify version `3.0.0`             |
-|`pnpm i sax@">=1 <2.0"`               |Specify version range               |
-|`pnpm i user/repo`                    |GitHub                              |
-|`pnpm i user/repo#master`             |GitHub                              |
-|`pnpm i user/repo#semver:^2.0.0`      |GitHub                              |
-|`pnpm i github:user/repo`             |GitHub                              |
-|`pnpm i gitlab:user/repo`             |GitHub                              |
-|`pnpm i /path/to/repo`                |Absolute path                       |
-|`pnpm i ./archive.tgz`                |Tarball                             |
-|`pnpm i https://site.com/archive.tgz` |Tarball via HTTP                    |
+|`pnpm add sax`                          |npm package (save to `dependencies`)|
+|`pnpm add -D sax`                       |save to `devDependencies`           |
+|`pnpm add -O sax`                       |save to `optionalDependencies`      |
+|`pnpm add -P sax`                       |save to `dependencies`              |
+|`pnpm add sax@next`                     |Specify tag `next`                  |
+|`pnpm add sax@3.0.0`                    |Specify version `3.0.0`             |
+|`pnpm add sax@">=1 <2.0"`               |Specify version range               |
+|`pnpm add user/repo`                    |GitHub                              |
+|`pnpm add user/repo#master`             |GitHub                              |
+|`pnpm add user/repo#semver:^2.0.0`      |GitHub                              |
+|`pnpm add github:user/repo`             |GitHub                              |
+|`pnpm add gitlab:user/repo`             |GitHub                              |
+|`pnpm add /path/to/repo`                |Absolute path                       |
+|`pnpm add ./archive.tgz`                |Tarball                             |
+|`pnpm add https://site.com/archive.tgz` |Tarball via HTTP                    |
 
 ## Supported package locations
 
@@ -34,14 +34,14 @@ A package can be installed from different locations:
 
 ### Install from npm registry
 
-`pnpm install package-name` will install the latest version
+`pnpm add package-name` will install the latest version
 of `package-name` from the [npm registry](https://www.npmjs.com/).
 
 You may also install packages by:
 
-* tag: `pnpm install express@nightly`
-* version: `pnpm install express@1.0.0`
-* version range: `pnpm install express@2 react@">=0.1.0 <0.2.0"`
+* tag: `pnpm add express@nightly`
+* version: `pnpm add express@1.0.0`
+* version range: `pnpm add express@2 react@">=0.1.0 <0.2.0"`
 
 ### Install from local file system
 
@@ -53,8 +53,8 @@ There are two ways to install from the local file system:
 Examples:
 
 ```sh
-pnpm install ./package.tgz
-pnpm install ./some-directory
+pnpm add ./package.tgz
+pnpm add ./some-directory
 ```
 
 When you install from a directory, a symlink will be created in the
@@ -68,7 +68,7 @@ The argument must start with "http://" or "https://".
 Example:
 
 ```sh
-pnpm install https://github.com/indexzero/forever/tarball/v0.5.6
+pnpm add https://github.com/indexzero/forever/tarball/v0.5.6
 ```
 
 ### Install from Git repository
@@ -81,9 +81,9 @@ Installs the package from the hosted Git provider, cloning it with Git.
 
 You may install from Git by:
 
-* commit: `pnpm install kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678`
-* branch: `pnpm install kevva/is-positive#master`
-* version range: `pnpm install kevva/is-positive#semver:^2.0.0`
+* commit: `pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678`
+* branch: `pnpm add kevva/is-positive#master`
+* version range: `pnpm add kevva/is-positive#semver:^2.0.0`
 
 ## Options
 

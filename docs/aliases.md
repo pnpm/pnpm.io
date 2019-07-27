@@ -14,7 +14,7 @@ With aliases, you have a third option.
 Publish a new package called `awesome-lodash` and install it using `lodash` as its alias:
 
 ```
-pnpm install lodash@npm:awesome-lodash
+pnpm add lodash@npm:awesome-lodash
 ```
 
 No changes in code are needed. All the requires of `lodash` will import `awesome-lodash`.
@@ -22,8 +22,8 @@ No changes in code are needed. All the requires of `lodash` will import `awesome
 Sometimes you'll want to use two different versions of a package in your project. Easy:
 
 ```sh
-pnpm install lodash1@npm:lodash@1
-pnpm install lodash2@npm:lodash@2
+pnpm add lodash1@npm:lodash@1
+pnpm add lodash2@npm:lodash@2
 ```
 
 Now you can require the first version of lodash via `require('lodash1')` and the second via `require('lodash2')`.
