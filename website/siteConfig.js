@@ -96,8 +96,13 @@ const siteConfig = {
   headerLinks: [
     {doc: 'motivation', label: 'Docs'},
     {doc: 'faq', label: 'FAQ'},
+    { search: true },
     {href: 'https://medium.com/pnpm', label: 'Blog'},
   ],
+  algolia: {
+    apiKey: '[YOUR_KEY]',
+    indexName: 'pnpmjs'
+  },
   users,
   /* path to images for header/footer */
   headerIcon: 'img/pnpm-no-name-with-frame.svg',
