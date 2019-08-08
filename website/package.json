@@ -2,8 +2,8 @@
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start",
-    "build": "docusaurus-build",
-    "publish-gh-pages": "docusaurus-publish",
+    "build": "docusaurus-build --skip-image-compression",
+    "publish-gh-pages": "docusaurus-publish --skip-image-compression",
     "write-translations": "docusaurus-write-translations",
     "version": "docusaurus-version",
     "rename-version": "docusaurus-rename-version",
