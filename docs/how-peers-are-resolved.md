@@ -23,7 +23,7 @@ in the same project.
 
 In the example above, `foo@1.0.0` is installed for `foo-parent-1` and `foo-parent-2`. Both packages have `bar` and `baz`as well, but
 they depend on different versions of `baz`. As a result, `foo@1.0.0` has two different sets of dependencies: one with `baz@1.0.0`
-and the other one with `baz@1.1.0`. In order to support these use cases, pnpm has to hard link `foo@1.0.0` as many times as many different dependency sets it has.
+and the other one with `baz@1.1.0`. To support these use cases, pnpm has to hard link `foo@1.0.0` as many times as many different dependency sets it has.
 
 Normally, if a package does not have peer dependencies, it is hard linked to a `node_modules` folder next to symlinks of its dependencies.
 
@@ -36,12 +36,6 @@ we create different sets, for different peer dependency resolutions:
 
 We create symlinks either to the `foo` that is inside `bar@1.0.0+baz@1.0.0/node_modules` or to the one in `bar@1.0.0+baz@1.1.0/node_modules`.
 As a consequence, the Node.js module resolver algorithm will find the correct peers.
-
-*If the resolved peer is a direct dependency of the project*, it is not grouped separately with the dependent package.
-This is done to make it easier to make predictable and fast named (`pnpm i foo`) and general (`pnpm i`) installations.
-So if the project dependends on `bar@1.0.0`, the dependencies from our example will be grouped like this:
-
-![](/img/how-peers-are-resolved/3.png)
 
 *If a package has no peer dependencies but has dependencies with peers that are resolved higher in the graph*, then
 that transitive package can appear in the project with different sets of dependencies. For instance, there's package `a@1.0.0`
