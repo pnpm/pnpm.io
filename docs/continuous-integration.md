@@ -10,6 +10,8 @@ pnpm can easily be used in various continuous integration systems.
 On [Travis CI](https://travis-ci.org/), you can use pnpm for installing your dependencies by adding this to your `.travis.yml` file:
 
 ```yaml
+cache:
+  npm: false
 before_install:
   - curl -L https://unpkg.com/@pnpm/self-installer | node
 install:
