@@ -235,6 +235,21 @@
       },
       "version-3.6/version-3.6-releasing-apps": {
         "title": "Releasing apps"
+      },
+      "version-3.7/version-3.7-continuous-integration": {
+        "title": "Continuous Integration"
+      },
+      "version-3.7/version-3.7-how-peers-are-resolved": {
+        "title": "How peers are resolved"
+      },
+      "version-3.7/version-3.7-pnpm-list": {
+        "title": "pnpm list"
+      },
+      "version-3.7/version-3.7-pnpm-outdated": {
+        "title": "pnpm outdated"
+      },
+      "version-3.7/version-3.7-workspace": {
+        "title": "Workspace"
       }
     },
     "links": {
