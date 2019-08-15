@@ -20,7 +20,8 @@
       "pnpm-run",
       "pnpm-server",
       "pnpm-store",
-      "pnpm-unlink"
+      "pnpm-unlink",
+      "pnpm-list"
     ],
     "Recipes": [
       "continuous-integration",

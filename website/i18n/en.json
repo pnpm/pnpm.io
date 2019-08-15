@@ -56,6 +56,9 @@
       "pnpm-install": {
         "title": "pnpm install"
       },
+      "pnpm-list": {
+        "title": "pnpm list"
+      },
       "pnpm-publish": {
         "title": "pnpm publish"
       },
