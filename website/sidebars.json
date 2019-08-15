@@ -21,7 +21,8 @@
       "pnpm-server",
       "pnpm-store",
       "pnpm-unlink",
-      "pnpm-list"
+      "pnpm-list",
+      "pnpm-outdated"
     ],
     "Recipes": [
       "continuous-integration",

@@ -59,6 +59,9 @@
       "pnpm-list": {
         "title": "pnpm list"
       },
+      "pnpm-outdated": {
+        "title": "pnpm outdated"
+      },
       "pnpm-publish": {
         "title": "pnpm publish"
       },
