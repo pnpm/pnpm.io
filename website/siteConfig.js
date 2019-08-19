@@ -100,8 +100,8 @@ const siteConfig = {
     {href: 'https://medium.com/pnpm', label: 'Blog'},
   ],
   algolia: {
-    apiKey: '[YOUR_KEY]',
-    indexName: 'pnpmjs'
+    apiKey: '802b1d6ee5450a4296581a8e14aff417',
+    indexName: 'pnpm'
   },
   users,
   /* path to images for header/footer */
