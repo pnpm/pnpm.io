@@ -7,9 +7,7 @@
     "Usage": [
       "pnpm-cli",
       "pnpx-cli",
-      "configuring",
-      "hooks",
-      "aliases"
+      "configuring"
     ],
     "CLI commands": [
       "cli/import",
@@ -24,9 +22,13 @@
       "cli/list",
       "cli/outdated"
     ],
+    "Features": [
+      "workspaces",
+      "hooks",
+      "aliases"
+    ],
     "Recipes": [
       "continuous-integration",
-      "workspace",
       "only-allow-pnpm"
     ],
     "Advanced": [

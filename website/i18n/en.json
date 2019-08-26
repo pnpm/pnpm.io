@@ -98,8 +98,8 @@
       "symlinked-node-modules-structure": {
         "title": "Symlinked `node_modules` structure"
       },
-      "workspace": {
-        "title": "Workspace"
+      "workspaces": {
+        "title": "Workspaces"
       },
       "version-2/version-2-about-package-store": {
         "title": "About the package store"
@@ -261,6 +261,7 @@
       "Introduction": "Introduction",
       "Usage": "Usage",
       "CLI commands": "CLI commands",
+      "Features": "Features",
       "Recipes": "Recipes",
       "Advanced": "Advanced"
     }

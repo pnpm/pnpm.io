@@ -1,6 +1,6 @@
 ---
-id: workspace
-title: Workspace
+id: workspaces
+title: Workspaces
 ---
 
 pnpm supports concurrent actions in multi-package repositories (workspaces).
