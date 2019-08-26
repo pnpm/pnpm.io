@@ -119,6 +119,7 @@ const siteConfig = {
   },
   cleanUrl: true,
   docsUrl: '',
+  docsSideNavCollapsible: true,
   /* custom fonts for website */
   /*fonts: {
     myFont: [
