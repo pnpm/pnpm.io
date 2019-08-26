@@ -12,17 +12,17 @@
       "aliases"
     ],
     "CLI commands": [
-      "pnpm-import",
-      "pnpm-add-pkg",
-      "pnpm-install",
-      "pnpm-publish",
-      "pnpm-recursive",
-      "pnpm-run",
-      "pnpm-server",
-      "pnpm-store",
-      "pnpm-unlink",
-      "pnpm-list",
-      "pnpm-outdated"
+      "cli/import",
+      "cli/add",
+      "cli/install",
+      "cli/publish",
+      "cli/recursive",
+      "cli/run",
+      "cli/server",
+      "cli/store",
+      "cli/unlink",
+      "cli/list",
+      "cli/outdated"
     ],
     "Recipes": [
       "continuous-integration",

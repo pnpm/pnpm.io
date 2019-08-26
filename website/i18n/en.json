@@ -14,6 +14,42 @@
       "benchmark": {
         "title": "Benchmark"
       },
+      "cli/add": {
+        "title": "pnpm add <pkg>"
+      },
+      "cli/import": {
+        "title": "pnpm import"
+      },
+      "cli/install": {
+        "title": "pnpm install"
+      },
+      "cli/list": {
+        "title": "pnpm list"
+      },
+      "cli/outdated": {
+        "title": "pnpm outdated"
+      },
+      "cli/publish": {
+        "title": "pnpm publish"
+      },
+      "cli/recursive": {
+        "title": "pnpm recursive"
+      },
+      "cli/run": {
+        "title": "pnpm run"
+      },
+      "cli/server": {
+        "title": "pnpm server"
+      },
+      "cli/store": {
+        "title": "pnpm store"
+      },
+      "cli/unlink": {
+        "title": "pnpm unlink"
+      },
+      "cli/update": {
+        "title": "pnpm update"
+      },
       "configuring": {
         "title": "Configuring"
       },
@@ -44,44 +80,8 @@
       "only-allow-pnpm": {
         "title": "Only allow pnpm"
       },
-      "pnpm-add-pkg": {
-        "title": "pnpm add <pkg>"
-      },
       "pnpm-cli": {
         "title": "pnpm CLI"
-      },
-      "pnpm-import": {
-        "title": "pnpm import"
-      },
-      "pnpm-install": {
-        "title": "pnpm install"
-      },
-      "pnpm-list": {
-        "title": "pnpm list"
-      },
-      "pnpm-outdated": {
-        "title": "pnpm outdated"
-      },
-      "pnpm-publish": {
-        "title": "pnpm publish"
-      },
-      "pnpm-recursive": {
-        "title": "pnpm recursive"
-      },
-      "pnpm-run": {
-        "title": "pnpm run"
-      },
-      "pnpm-server": {
-        "title": "pnpm server"
-      },
-      "pnpm-store": {
-        "title": "pnpm store"
-      },
-      "pnpm-unlink": {
-        "title": "pnpm unlink"
-      },
-      "pnpm-update": {
-        "title": "pnpm update"
       },
       "pnpm-vs-npm": {
         "title": "pnpm vs npm"

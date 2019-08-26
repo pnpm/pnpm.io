@@ -1,5 +1,5 @@
 ---
-id: pnpm-recursive
+id: recursive
 title: pnpm recursive
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: pnpm-store
+id: store
 title: pnpm store
 ---
 

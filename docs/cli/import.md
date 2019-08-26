@@ -1,5 +1,5 @@
 ---
-id: pnpm-import
+id: import
 title: pnpm import
 ---
 

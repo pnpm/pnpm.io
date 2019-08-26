@@ -1,5 +1,5 @@
 ---
-id: pnpm-run
+id: run
 title: pnpm run
 ---
 

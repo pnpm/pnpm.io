@@ -1,5 +1,5 @@
 ---
-id: pnpm-outdated
+id: outdated
 title: pnpm outdated
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: pnpm-unlink
+id: unlink
 title: pnpm unlink
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: pnpm-add-pkg
+id: add
 title: pnpm add <pkg>
 ---
 

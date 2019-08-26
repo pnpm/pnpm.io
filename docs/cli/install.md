@@ -1,5 +1,5 @@
 ---
-id: pnpm-install
+id: install
 title: pnpm install
 ---
 

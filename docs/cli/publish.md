@@ -1,5 +1,5 @@
 ---
-id: pnpm-publish
+id: publish
 title: pnpm publish
 ---
 

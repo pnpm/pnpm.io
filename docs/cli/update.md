@@ -1,5 +1,5 @@
 ---
-id: pnpm-update
+id: update
 title: pnpm update
 ---
 

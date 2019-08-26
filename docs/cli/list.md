@@ -1,5 +1,5 @@
 ---
-id: pnpm-list
+id: list
 title: pnpm list
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: pnpm-server
+id: server
 title: pnpm server
 ---
 
