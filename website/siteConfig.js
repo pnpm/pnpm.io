@@ -117,6 +117,8 @@ const siteConfig = {
     primaryColor: '#f69220',
     secondaryColor: '#f9ad00',
   },
+  cleanUrl: true,
+  docsUrl: '',
   /* custom fonts for website */
   /*fonts: {
     myFont: [
