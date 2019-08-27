@@ -19,10 +19,6 @@ function imgUrl(img) {
   return siteConfig.baseUrl + 'img/' + img;
 }
 
-function docUrl(doc, language) {
-  return siteConfig.baseUrl + 'docs/' + (language ? language + '/' : '') + doc;
-}
-
 function pageUrl(page, language) {
   return siteConfig.baseUrl + (language ? language + '/' : '') + page;
 }
@@ -75,7 +71,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle />
           <PromoSection>
             <Button href="https://github.com/pnpm/pnpm">GitHub</Button>
-            <Button href={docUrl('installation.html', language)}>Getting Started</Button>
+            <Button href={pageUrl('installation.html', language)}>Getting Started</Button>
             <iframe
               src={"https://ghbtns.com/github-btn.html?user=pnpm&repo=pnpm&type=star&count=true&size=large"}
               frameBorder="0"
