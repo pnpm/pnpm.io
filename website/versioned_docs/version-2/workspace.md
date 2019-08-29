@@ -60,6 +60,6 @@ how the `package.json` of `garage` will look like after running `pnpm install ca
 ## Using a shared `shrinkwrap.yaml`
 
 As of v2, pnpm creates a dedicated `shrinkwrap.yaml` and `node_modules` folder for each workspace package by default.
-But from `v2.17.0`, it is possible to add [shared-workspace-shrinkwrap=true](pnpm-recursive.md#shared-workspace-shrinkwrap) to the root `.npmrc` of your monorepo.
+But from `v2.17.0`, it is possible to add [shared-workspace-shrinkwrap=true](pnpm-recursive#shared-workspace-shrinkwrap) to the root `.npmrc` of your monorepo.
 When and `shared-workspace-shrinkwrap` is `true`, packages use a single `shrinkwrap.yaml` in the root of the monorepo.
 This config will be `true` by default from pnpm v3.
