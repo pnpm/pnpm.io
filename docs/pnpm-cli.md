@@ -11,7 +11,7 @@ pnpm install lodash
 
 npm commands that are re-implemented in pnpm:
 
-* [install](cli/install.md)
+* [install](cli/install)
 * `update`
 * `uninstall`
 * `link`
@@ -25,10 +25,10 @@ npm commands that are re-implemented in pnpm:
 
 Also, there are some commands unique to pnpm:
 
-* [recursive](cli/recursive.md)
-* [store](cli/store.md)
-* [server](cli/server.md)
-* [import](cli/import.md)
+* [recursive](cli/recursive)
+* [store](cli/store)
+* [server](cli/server)
+* [import](cli/import)
 
 The rest of the commands pass through to npm.
 
