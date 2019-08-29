@@ -32,4 +32,4 @@ Also, there are some commands unique to pnpm:
 
 The rest of the commands pass through to npm.
 
-For using the programmatic API, use pnpm's engine: [supi](https://github.com/pnpm/supi).
+For using the programmatic API, use pnpm's engine: [supi](https://github.com/pnpm/pnpm/tree/master/packages/supi).
