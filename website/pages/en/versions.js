@@ -37,7 +37,7 @@ function Versions(props) {
               <tr>
                 <th>{latestVersion}</th>
                 <td>
-                  <a href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${
+                  <a href={`${siteConfig.baseUrl}${siteConfig.docsUrl}${
                     props.language
                     }/installation`}><translate>Documentation</translate></a>
                 </td>
@@ -57,7 +57,7 @@ function Versions(props) {
                     <tr>
                       <th>{version}</th>
                       <td>
-                        <a href={`${siteConfig.baseUrl}${siteConfig.docsUrl}/${
+                        <a href={`${siteConfig.baseUrl}${siteConfig.docsUrl}${
                           props.language
                           }/${version}/installation`}><translate>Documentation</translate></a>
                       </td>
