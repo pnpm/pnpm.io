@@ -22,4 +22,4 @@ Depois de instalar o pnpm pela primeira vez, você pode atualizá-lo usando o pn
 pnpm install -g pnpm
 ```
 
-> Você quer usar o pnpm nos servidores de CI? Veja: [Integração Contínua](continuous-integration.md).
+> Você quer usar o pnpm nos servidores de CI? Veja: [Integração Contínua](continuous-integration).

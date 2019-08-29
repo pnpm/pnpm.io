@@ -4,11 +4,11 @@ title: Symlinked `node_modules` structure
 ---
 
 > This article only describes how pnpm's `node_modules` are structured when there are no packages with peer dependencies.
-> For the more complex scenario of dependencies with peers, see [How peers are resolved](how-peers-are-resolved.md).
+> For the more complex scenario of dependencies with peers, see [How peers are resolved](how-peers-are-resolved).
 
 pnpm's `node_modules` layout uses symbolic links to create a nested structure of dependencies.
 
-Every `package@version` is linked to `node_modules` from the [global store](about-the-package-store.md) only once.
+Every `package@version` is linked to `node_modules` from the [global store](about-the-package-store) only once.
 Let's say you install `foo@1.0.0` that depends on `bar@1.0.0`. pnpm will hard link both packages to `node_modules` like this:
 
 ```

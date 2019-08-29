@@ -31,7 +31,7 @@ Crie um arquivo `.npmrc` na raiz do seu repositório multi-pacote com o seguinte
 link-workspace-packages = true
 ```
 
-Crie um arquivo [pnpm-workspace.yaml](workspace.md) com o seguinte conteúdo:
+Crie um arquivo [pnpm-workspace.yaml](workspace) com o seguinte conteúdo:
 
 ```yaml
 packages:

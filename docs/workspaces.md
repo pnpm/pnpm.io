@@ -5,7 +5,7 @@ title: Workspaces
 
 pnpm supports concurrent actions in multi-package repositories (workspaces).
 
-By default, when you run the [`pnpm recursive [action]`](cli/recursive.md) commands,
+By default, when you run the [`pnpm recursive [action]`](cli/recursive) commands,
 all the directories are searched for packages (directories with `package.json` file).
 You can control what directories are searched by passing an array of globs to `packages` in `pnpm-workspace.yaml`.
 

@@ -5,11 +5,11 @@ original_id: symlinked-node-modules-structure
 ---
 
 > Este artigo descreve apenas como os `node_modules` do pnpm são estruturados quando não há pacotes com dependências peer.
-> Para o cenário mais complexo de dependências com pares, consulte [Como os pares são resolvidos](how-peers-are-resolved.md).
+> Para o cenário mais complexo de dependências com pares, consulte [Como os pares são resolvidos](how-peers-are-resolved).
 
 O layout `node_modules` do pnpm usa links simbólicos para criar uma estrutura aninhada de dependências.
 
-Cada `package @ version` está ligado a` node_modules` do [global store](about-the-package-store.md) apenas uma vez.
+Cada `package @ version` está ligado a` node_modules` do [global store](about-the-package-store) apenas uma vez.
 Vamos supor que você instale o `foo@1.0.0` que depende do `bar@1.0.0`. O pnpm irá linkar ambos os pacotes para `node_modules` assim:
 
 ```

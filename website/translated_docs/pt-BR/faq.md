@@ -52,7 +52,7 @@ O pnpm funciona de maneira diferente com base nos dois casos abaixo:
 
 ### O caminho da store é especificado
 
-Se o caminho de armazenamento for especificado por meio da [configuração de armazenamento](configuring.md), a cópia ocorrerá entre o armazenamento e todos os projetos que estiverem em um disco diferente.
+Se o caminho de armazenamento for especificado por meio da [configuração de armazenamento](configuring), a cópia ocorrerá entre o armazenamento e todos os projetos que estiverem em um disco diferente.
 
 Se você executar `pnpm install` no disco `D: `, então o armazenamento pnpm deve estar no disco `D: `.
 Se o repositório pnpm estiver localizado no disco `C:`, todos os pacotes requeridos serão copiados diretamente para o local do projeto.
@@ -118,7 +118,7 @@ Ele será automaticamente adicionado ao `package.json` do seu projeto.
 
 ### Solução 2
 
-Uma das soluções é usar [hooks](hooks.md) para adicionar as dependências ausentes ao pacote `package.json`.
+Uma das soluções é usar [hooks](hooks) para adicionar as dependências ausentes ao pacote `package.json`.
 
 Um exemplo foi o [Webpack Dashboard](https://github.com/pnpm/pnpm/issues/1043) que não estava funcionando com o `pnpm`. Desde então, foi resolvido de forma que funciona com o `pnpm` agora.
 

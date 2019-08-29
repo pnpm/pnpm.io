@@ -2,34 +2,34 @@
 
 ## Começando
 
-* [Introdução](README.md)
-* [Instalação](installation.md)
+* [Introdução](README)
+* [Instalação](installation)
 
 ## Uso
 
-* [pnpm CLI](usage/pnpm-cli.md)
-* [pnpx CLI](usage/pnpx-cli.md)
-* [Configurando o pnpm](usage/configuring.md)
-* [Hooks](usage/hooks.md)
-* [Aliases](usage/aliases.md)
+* [pnpm CLI](usage/pnpm-cli)
+* [pnpx CLI](usage/pnpx-cli)
+* [Configurando o pnpm](usage/configuring)
+* [Hooks](usage/hooks)
+* [Aliases](usage/aliases)
 
 ## Recipes
 
-* [Integração Contínua](recipes/continuous-integration.md)
-* [Espaço de trabalho](recipes/workspace.md)
+* [Integração Contínua](recipes/continuous-integration)
+* [Espaço de trabalho](recipes/workspace)
 
 ## Avançado
 
-* [Referência](benchmark.md)
-* [Limitações](limitations.md)
-* [Sobre a loja de pacotes](about-the-package-store.md)
-* [Symlinked `node_modules` estrutura](symlinked-node-modules-structure.md)
-* [Como os pares são resolvidos](how-peers-are-resolved.md)
+* [Referência](benchmark)
+* [Limitações](limitations)
+* [Sobre a loja de pacotes](about-the-package-store)
+* [Symlinked `node_modules` estrutura](symlinked-node-modules-structure)
+* [Como os pares são resolvidos](how-peers-are-resolved)
 
 ----
 
 * [Lista impressionante](https://github.com/pnpm/awesome-pnpm)
-* [Perguntas frequentes](faq.md)
-* [Suporte](support.md)
-* [Contribuindo](https://github.com/pnpm/pnpm/blob/master/CONTRIBUTING.md)
+* [Perguntas frequentes](faq)
+* [Suporte](support)
+* [Contribuindo](https://github.com/pnpm/pnpm/blob/master/CONTRIBUTING)
 

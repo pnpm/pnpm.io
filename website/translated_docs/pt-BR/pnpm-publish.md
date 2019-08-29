@@ -9,7 +9,7 @@ Publica um pacote no registro.
 pnpm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
 ```
 
-Ao publicar um pacote dentro de um [espaço de trabalho] (workspace.md), o arquivo LICENSE
+Ao publicar um pacote dentro de um [espaço de trabalho] (workspace), o arquivo LICENSE
 raiz do espaço de trabalho é embalado com o pacote (a menos que o pacote tenha uma licença própria).
 
 tag ## --tag & lt;

@@ -12,7 +12,7 @@ pnpm install lodash
 
 Comandos npm que são reimplementados no pnpm:
 
-* [install](pnpm-install.md)
+* [install](pnpm-install)
 * `update`
 * `uninstall`
 * `link`
@@ -26,10 +26,10 @@ Comandos npm que são reimplementados no pnpm:
 
 Além disso, existem alguns comandos exclusivos para o pnpm:
 
-* [recursive](pnpm-recursive.md)
-* [store](pnpm-store.md)
-* [server](pnpm-server.md)
-* [import](pnpm-import.md)
+* [recursive](pnpm-recursive)
+* [store](pnpm-store)
+* [server](pnpm-server)
+* [import](pnpm-import)
 
 Os demais comandos passam para o npm.
 

@@ -22,5 +22,5 @@ pnpm install -g pnpm
 ```
 
 
-> Você quer usar o pnpm nos servidores de CI? Veja: [Integração Contínua](continuous-integration.md).
+> Você quer usar o pnpm nos servidores de CI? Veja: [Integração Contínua](continuous-integration).
 

@@ -8,7 +8,7 @@ title: pnpm vs npm
 O npm mantém uma [árvore de dependência simplificada](https://github.com/npm/npm/issues/6912) a partir da versão 3.
 Isto leva a menos inchaço do espaço em disco, com um diretório `node_modules` bagunçado como um efeito colateral.
 
-Por outro lado, o pnpm gerencia `node_modules` como um armazenamento endereçável em seu [store layout](about-the-package-store.md).
+Por outro lado, o pnpm gerencia `node_modules` como um armazenamento endereçável em seu [store layout](about-the-package-store).
 Isso te dá os benefícios de menos uso de espaço em disco, enquanto mantém seu `node_modules` limpo.
 
 A coisa boa sobre a estrutura `node_modules` adequada do pnpm é que ela [ajuda a evitar bugs bobo](https://www.kochan.io/nodejs/pnpms-strictness-helps-to-avoid-silly-bugs.html) por impossibilitando o uso de módulos

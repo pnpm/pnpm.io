@@ -9,7 +9,7 @@ original_id: pnpm-vs-npm
 npm maintains a [flattened dependency tree](https://github.com/npm/npm/issues/6912) as of version 3.
 This leads to less disk space bloat, with a messy `node_modules` directory as a side effect.
 
-On the other hand, pnpm manages `node_modules` as an addressable storage in its [store layout](about-the-package-store.md).
+On the other hand, pnpm manages `node_modules` as an addressable storage in its [store layout](about-the-package-store).
 This nets you the benefits of less disk space usage, while keeping your `node_modules` clean.
 
 The good thing about pnpm's proper `node_modules` structure is that it [helps to avoid silly bugs](https://www.kochan.io/nodejs/pnpms-strictness-helps-to-avoid-silly-bugs.html) by making it impossible to use modules
