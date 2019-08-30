@@ -1,0 +1,43 @@
+{
+  "version-3.8-docs": {
+    "Introduction": [
+      "version-3.8-motivation",
+      "version-3.8-installation"
+    ],
+    "Usage": [
+      "version-3.8-pnpm-cli",
+      "version-3.8-pnpx-cli",
+      "version-3.8-configuring"
+    ],
+    "CLI commands": [
+      "version-3.8-cli/import",
+      "version-3.8-cli/add",
+      "version-3.8-cli/install",
+      "version-3.8-cli/publish",
+      "version-3.8-cli/recursive",
+      "version-3.8-cli/run",
+      "version-3.8-cli/server",
+      "version-3.8-cli/store",
+      "version-3.8-cli/unlink",
+      "version-3.8-cli/list",
+      "version-3.8-cli/outdated"
+    ],
+    "Features": [
+      "version-3.8-workspaces",
+      "version-3.8-hooks",
+      "version-3.8-aliases"
+    ],
+    "Recipes": [
+      "version-3.8-continuous-integration",
+      "version-3.8-only-allow-pnpm"
+    ],
+    "Advanced": [
+      "version-3.8-logos",
+      "version-3.8-benchmark",
+      "version-3.8-limitations",
+      "version-3.8-about-package-store",
+      "version-3.8-symlinked-node-modules-structure",
+      "version-3.8-how-peers-are-resolved"
+    ]
+  }
+}

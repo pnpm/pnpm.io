@@ -250,6 +250,51 @@
       },
       "version-3.7/version-3.7-workspace": {
         "title": "Workspace"
+      },
+      "version-3.8/cli/version-3.8-add": {
+        "title": "pnpm add <pkg>"
+      },
+      "version-3.8/cli/version-3.8-import": {
+        "title": "pnpm import"
+      },
+      "version-3.8/cli/version-3.8-install": {
+        "title": "pnpm install"
+      },
+      "version-3.8/cli/version-3.8-list": {
+        "title": "pnpm list"
+      },
+      "version-3.8/cli/version-3.8-outdated": {
+        "title": "pnpm outdated"
+      },
+      "version-3.8/cli/version-3.8-publish": {
+        "title": "pnpm publish"
+      },
+      "version-3.8/cli/version-3.8-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-3.8/cli/version-3.8-run": {
+        "title": "pnpm run"
+      },
+      "version-3.8/cli/version-3.8-server": {
+        "title": "pnpm server"
+      },
+      "version-3.8/cli/version-3.8-store": {
+        "title": "pnpm store"
+      },
+      "version-3.8/cli/version-3.8-unlink": {
+        "title": "pnpm unlink"
+      },
+      "version-3.8/cli/version-3.8-update": {
+        "title": "pnpm update"
+      },
+      "version-3.8/version-3.8-limitations": {
+        "title": "Limitations"
+      },
+      "version-3.8/version-3.8-pnpm-cli": {
+        "title": "pnpm CLI"
+      },
+      "version-3.8/version-3.8-workspaces": {
+        "title": "Workspaces"
       }
     },
     "links": {
