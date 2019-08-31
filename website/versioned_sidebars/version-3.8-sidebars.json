@@ -7,7 +7,8 @@
     "Usage": [
       "version-3.8-pnpm-cli",
       "version-3.8-pnpx-cli",
-      "version-3.8-configuring"
+      "version-3.8-configuring",
+      "version-3.8-filtering"
     ],
     "CLI commands": [
       "version-3.8-cli/import",

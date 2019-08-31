@@ -293,3 +293,7 @@ Added in: v3.6.0
 
 When `true`, beta features of the CLI are used. This means that you may get some changes to the CLI functionality
 that are breaking changes.
+
+## --filter &lt;package_selector>
+
+[Read more about filtering.](../filtering)
