@@ -47,3 +47,7 @@ Display only the dependency tree for packages in `dependencies`.
 ### --dev, --only dev
 
 Display only the dependency tree for packages in `devDependencies`.
+
+### --filter &lt;package_selector>
+
+[Read more about filtering.](../filtering)
