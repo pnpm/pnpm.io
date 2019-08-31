@@ -7,7 +7,8 @@
     "Usage": [
       "pnpm-cli",
       "pnpx-cli",
-      "configuring"
+      "configuring",
+      "filtering"
     ],
     "CLI commands": [
       "cli/import",

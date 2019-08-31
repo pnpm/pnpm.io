@@ -59,6 +59,9 @@
       "faq": {
         "title": "Frequently Asked Questions"
       },
+      "filtering": {
+        "title": "Filtering"
+      },
       "hooks": {
         "title": "Hooks"
       },
