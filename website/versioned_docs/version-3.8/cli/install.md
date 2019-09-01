@@ -83,7 +83,7 @@ Can be passed in via a CLI option. `--no-lock` to set it to false. E.g.: `pnpm i
 
 Do not execute any scripts defined in the project `package.json` and its dependencies.
 
-> Note: this flag does not prevent the executioni of [pnpmfile.js](../pnpmfile)
+> Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
 
 ## production[=true|false]
 
