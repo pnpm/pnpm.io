@@ -11,17 +11,37 @@
       "version-3.8-filtering"
     ],
     "CLI commands": [
-      "version-3.8-cli/import",
-      "version-3.8-cli/add",
-      "version-3.8-cli/install",
+      {
+        "type": "subcategory",
+        "label": "Manage dependencies",
+        "ids": [
+          "version-3.8-cli/add",
+          "version-3.8-cli/install",
+          "version-3.8-cli/remove",
+          "version-3.8-cli/link",
+          "version-3.8-cli/unlink",
+          "version-3.8-cli/import"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Review dependencies",
+        "ids": [
+          "version-3.8-cli/list",
+          "version-3.8-cli/outdated"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Run scripts",
+        "ids": [
+          "version-3.8-cli/run"
+        ]
+      },
       "version-3.8-cli/publish",
       "version-3.8-cli/recursive",
-      "version-3.8-cli/run",
       "version-3.8-cli/server",
-      "version-3.8-cli/store",
-      "version-3.8-cli/unlink",
-      "version-3.8-cli/list",
-      "version-3.8-cli/outdated"
+      "version-3.8-cli/store"
     ],
     "Features": [
       "version-3.8-workspaces",

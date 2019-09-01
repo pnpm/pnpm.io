@@ -44,7 +44,7 @@ function readPackage (pkg, context) {
   }
   
   // This will fix any dependencies on baz to 1.2.3
-  if (pkg.dependencies && pkg.dependencies.baz === '*') {
+  if (pkg.dependencies.baz === '*') {
     pkg.dependencies.baz = '1.2.3';
   }
   
@@ -69,13 +69,11 @@ The following hook substitutes `resolve` with `@zkochan`'s fork.
 ```js
 'use strict'
 module.exports = {
-  hooks: {
-    readPackage
-  }
+  hooks: { readPackage }
 }
 
 function readPackage (pkg) {
-  if (pkg.dependencies && pkg.dependencies.resolve) {
+  if (pkg.dependencies.resolve) {
     pkg.dependencies.resolve = 'zkochan/node-resolve'
   }
 
@@ -91,9 +89,7 @@ and throw an exception if you don't like the package's license:
 ```js
 'use strict'
 module.exports = {
-  hooks: {
-    readPackage
-  }
+  hooks: { readPackage }
 }
 
 function readPackage (pkg) {
@@ -112,14 +108,12 @@ You want to rename a package's bin? Just replace it:
 ```js
 'use strict'
 module.exports = {
-  hooks: {
-    readPackage
-  }
+  hooks: { readPackage }
 }
 
 function readPackage (pkg) {
   if (pkg.name === 'eslint') {
-    pkg.bin = {jslint: pkg.bin}
+    pkg.bin = { jslint: pkg.bin }
   }
 
   return pkg
@@ -143,9 +137,7 @@ Is called after resolution stage. Allows to mutate the lockfile object.
 
 ```js
 module.exports = {
-  hooks: {
-    afterAllResolved
-  }
+  hooks: { afterAllResolved }
 }
 
 function afterAllResolved (lockfile, context) {

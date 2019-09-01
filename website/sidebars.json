@@ -11,17 +11,37 @@
       "filtering"
     ],
     "CLI commands": [
-      "cli/import",
-      "cli/add",
-      "cli/install",
+      {
+        "type": "subcategory",
+        "label": "Manage dependencies",
+        "ids": [
+          "cli/add",
+          "cli/install",
+          "cli/remove",
+          "cli/link",
+          "cli/unlink",
+          "cli/import"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Review dependencies",
+        "ids": [
+          "cli/list",
+          "cli/outdated"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Run scripts",
+        "ids": [
+          "cli/run"
+        ]
+      },
       "cli/publish",
       "cli/recursive",
-      "cli/run",
       "cli/server",
-      "cli/store",
-      "cli/unlink",
-      "cli/list",
-      "cli/outdated"
+      "cli/store"
     ],
     "Features": [
       "workspaces",

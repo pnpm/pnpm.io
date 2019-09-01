@@ -23,6 +23,9 @@
       "cli/install": {
         "title": "pnpm install"
       },
+      "cli/link": {
+        "title": "pnpm link"
+      },
       "cli/list": {
         "title": "pnpm list"
       },
@@ -34,6 +37,9 @@
       },
       "cli/recursive": {
         "title": "pnpm recursive"
+      },
+      "cli/remove": {
+        "title": "pnpm remove"
       },
       "cli/run": {
         "title": "pnpm run"
@@ -263,6 +269,9 @@
       "version-3.8/cli/version-3.8-install": {
         "title": "pnpm install"
       },
+      "version-3.8/cli/version-3.8-link": {
+        "title": "pnpm link"
+      },
       "version-3.8/cli/version-3.8-list": {
         "title": "pnpm list"
       },
@@ -274,6 +283,9 @@
       },
       "version-3.8/cli/version-3.8-recursive": {
         "title": "pnpm recursive"
+      },
+      "version-3.8/cli/version-3.8-remove": {
+        "title": "pnpm remove"
       },
       "version-3.8/cli/version-3.8-run": {
         "title": "pnpm run"
