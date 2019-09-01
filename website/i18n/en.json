@@ -62,9 +62,6 @@
       "filtering": {
         "title": "Filtering"
       },
-      "hooks": {
-        "title": "Hooks"
-      },
       "how-peers-are-resolved": {
         "title": "How peers are resolved"
       },
@@ -88,6 +85,9 @@
       },
       "pnpm-vs-npm": {
         "title": "pnpm vs npm"
+      },
+      "pnpmfile": {
+        "title": "pnpmfile"
       },
       "pnpx-cli": {
         "title": "pnpx CLI"
@@ -290,6 +290,9 @@
       "version-3.8/cli/version-3.8-update": {
         "title": "pnpm update"
       },
+      "version-3.8/version-3.8-faq": {
+        "title": "Frequently Asked Questions"
+      },
       "version-3.8/version-3.8-filtering": {
         "title": "Filtering"
       },
@@ -298,6 +301,9 @@
       },
       "version-3.8/version-3.8-pnpm-cli": {
         "title": "pnpm CLI"
+      },
+      "version-3.8/version-3.8-pnpmfile": {
+        "title": "pnpmfile"
       },
       "version-3.8/version-3.8-workspaces": {
         "title": "Workspaces"

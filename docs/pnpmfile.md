@@ -1,19 +1,25 @@
 ---
-id: hooks
-title: Hooks
+id: pnpmfile
+title: pnpmfile
 ---
 
 pnpm allows to step directly into the installation process via special functions called *hooks*.
-Hooks can be declared in a file called `pnpmfile.js`. `pnpmfile.js` should live in the root of the project.
+Hooks can be declared in a file called `pnpmfile.js`.
 
-## tl;dr
+By default, `pnpmfile.js` should be located in the same directory in which the lockfile is.
+So in a [workspace](workspaces) with a shared lockfile, the `pnpmfile.js` should be in the root
+of the monorepo.
+
+## Hooks
+
+### tl;dr
 
 |Option|Meaning|
 |--|--|
 |`hooks.readPackage(pkg, context): pkg` | Allows to mutate every dependency's `package.json` |
 |`hooks.afterAllResolved(lockfile, context): lockfile` | Is called after resolution stage. Allows to mutate the lockfile object. |
 
-## `hooks.readPackage(pkg, context): pkg`
+### `hooks.readPackage(pkg, context): pkg`
 
 Allows to mutate every dependency's `package.json`.
 An example of a `pnpmfile.js` that changes the dependencies field of a dependency:
@@ -45,14 +51,14 @@ function readPackage (pkg, context) {
 }
 ```
 
-### Arguments
+#### Arguments
 
 * `pkg` - _Manifest_ - The manifest of the package. Either the response from the registry or the `package.json` content.
 * `context.log(msg)` - _Function_ - Allows to log messages.
 
-### Usage
+#### Usage
 
-#### Substitute a package with your fork
+##### Substitute a package with your fork
 
 Lets' suppose you forked a package with an important fix and you want the fixed
 version installed.
@@ -76,7 +82,7 @@ function readPackage (pkg) {
 }
 ```
 
-#### Packages validation
+##### Packages validation
 
 You want only packages with MIT license in your `node_modules`? Check the licenses
 and throw an exception if you don't like the package's license:
@@ -98,7 +104,7 @@ function readPackage (pkg) {
 }
 ```
 
-#### Renaming bins
+##### Renaming bins
 
 You want to rename a package's bin? Just replace it:
 
@@ -121,18 +127,18 @@ function readPackage (pkg) {
 
 Now you can run `jslint fix` instead of `eslint fix`.
 
-## `hooks.afterAllResolved(lockfile, context): lockfile`
+### `hooks.afterAllResolved(lockfile, context): lockfile`
 
 Added in: v1.41.0
 
 Is called after resolution stage. Allows to mutate the lockfile object.
 
-### Arguments
+#### Arguments
 
 * `lockfile` - _object_ - The object that is saved to `pnpm-lock.yaml`.
 * `context.log(msg)` - _Function_ - Allows to log messages.
 
-### Usage
+#### Usage
 
 ```js
 module.exports = {
@@ -146,3 +152,38 @@ function afterAllResolved (lockfile, context) {
   return lockfile
 }
 ```
+
+## Configs
+
+### ignore-pnpmfile
+
+Added in: v1.25.0
+
+* Default: **false**
+* Type: **Boolean**
+
+`pnpmfile.js` will be ignored. Useful together with `--ignore-scripts` when you want to make sure that
+no script gets executed during install.
+
+### pnpmfile
+
+Added in: v1.39.0
+
+* Default: **pnpmfile.js**
+* Type: **path**
+* Example: **.pnpm/pnpmfile.js**
+
+The location of the local pnpmfile.
+
+### global-pnpmfile
+
+Added in: v1.39.0
+
+* Default: **null**
+* Type: **path**
+* Example: **~/.pnpm/global_pnpmfile.js**
+
+The location of a global pnpmfile. A global pnpmfile is used by all projects during installation.
+
+**NOTE:** It is recommended to use local pnpmfiles. Only use a global pnpmfile, if you use pnpm on projects
+that don't use pnpm as the primary package manager.

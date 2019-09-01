@@ -25,7 +25,7 @@
     ],
     "Features": [
       "version-3.8-workspaces",
-      "version-3.8-hooks",
+      "version-3.8-pnpmfile",
       "version-3.8-aliases"
     ],
     "Recipes": [

@@ -1,6 +1,7 @@
 ---
-id: faq
+id: version-3.8-faq
 title: Frequently Asked Questions
+original_id: faq
 ---
 
 ## Why does my `node_modules` folder use disk space if packages are stored in a global store?

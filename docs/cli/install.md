@@ -82,25 +82,7 @@ Can be passed in via a CLI option. `--no-lock` to set it to false. E.g.: `pnpm i
 
 Do not execute any scripts defined in the project `package.json` and its dependencies.
 
-## ignore-pnpmfile
-
-Added in: v1.25.0
-
-* Default: **false**
-* Type: **Boolean**
-
-`pnpmfile.js` will be ignored. Useful together with `--ignore-scripts` when you want to make sure that
-no script gets executed during install.
-
-## pnpmfile
-
-Added in: v1.39.0
-
-* Default: **pnpmfile.js**
-* Type: **path**
-* Example: **.pnpm/pnpmfile.js**
-
-The location of the local pnpmfile.
+> Note: this flag does not prevent the executioni of [pnpmfile.js](../pnpmfile)
 
 ## production[=true|false]
 
@@ -110,19 +92,6 @@ The location of the local pnpmfile.
 pnpm will not install any package listed in `devDependencies` if the `NODE_ENV` environment variable is set to production. Use this flag to instruct pnpm to ignore `NODE_ENV` and take its production-or-not status from this flag instead.
 
 > Notes: `--production` is the same as `--production=true`. `--prod` is an alias of `--production`.
-
-## global-pnpmfile
-
-Added in: v1.39.0
-
-* Default: **null**
-* Type: **path**
-* Example: **~/.pnpm/global_pnpmfile.js**
-
-The location of a global pnpmfile. A global pnpmfile is used by all projects during installation.
-
-**NOTE:** It is recommended to use local pnpmfiles. Only use a global pnpmfile, if you use pnpm on projects
-that don't use pnpm as the primary package manager.
 
 ## independent-leaves
 
