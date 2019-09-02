@@ -17,6 +17,7 @@
         "ids": [
           "cli/add",
           "cli/install",
+          "cli/update",
           "cli/remove",
           "cli/link",
           "cli/unlink",

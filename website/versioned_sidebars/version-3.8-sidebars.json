@@ -17,6 +17,7 @@
         "ids": [
           "version-3.8-cli/add",
           "version-3.8-cli/install",
+          "version-3.8-cli/update",
           "version-3.8-cli/remove",
           "version-3.8-cli/link",
           "version-3.8-cli/unlink",
