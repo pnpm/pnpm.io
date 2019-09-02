@@ -71,7 +71,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle />
           <PromoSection>
             <Button href="https://github.com/pnpm/pnpm">GitHub</Button>
-            <Button href={pageUrl('installation.html', language)}><translate>Getting Started</translate></Button>
+            <Button href={pageUrl('installation', language)}><translate>Getting Started</translate></Button>
             <iframe
               src={"https://ghbtns.com/github-btn.html?user=pnpm&repo=pnpm&type=star&count=true&size=large"}
               frameBorder="0"

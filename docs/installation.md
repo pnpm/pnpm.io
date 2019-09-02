@@ -12,13 +12,13 @@ curl -L https://unpkg.com/@pnpm/self-installer | node
 Via npm:
 
 ```sh
-npm install -g pnpm
+npm add -g pnpm
 ```
 
 Once you first installed pnpm, you can upgrade it using pnpm:
 
 ```sh
-pnpm install -g pnpm
+pnpm add -g pnpm
 ```
 
 > Do you wanna use pnpm on CI servers? See: [Continuous Integration](continuous-integration).
