@@ -20,6 +20,9 @@
       "cli/import": {
         "title": "pnpm import"
       },
+      "cli/install-test": {
+        "title": "pnpm install-test"
+      },
       "cli/install": {
         "title": "pnpm install"
       },
@@ -32,8 +35,14 @@
       "cli/outdated": {
         "title": "pnpm outdated"
       },
+      "cli/prune": {
+        "title": "pnpm prune"
+      },
       "cli/publish": {
         "title": "pnpm publish"
+      },
+      "cli/rebuild": {
+        "title": "pnpm rebuild"
       },
       "cli/recursive": {
         "title": "pnpm recursive"
@@ -46,6 +55,12 @@
       },
       "cli/server": {
         "title": "pnpm server"
+      },
+      "cli/start": {
+        "title": "pnpm start"
+      },
+      "cli/stop": {
+        "title": "pnpm stop"
       },
       "cli/store": {
         "title": "pnpm store"

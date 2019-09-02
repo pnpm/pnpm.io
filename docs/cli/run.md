@@ -3,10 +3,19 @@ id: run
 title: pnpm run
 ---
 
+Aliases: `run-script`
+
 Runs a defined package script.
 
-```
-pnpm run <command> [-- <args>...]
+## Synopsis
+
+```text
+pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=&lt;number>]]
+     &lt;command> [-- &lt;args>...]
+
+pnpm multi run &lt;command> [-- &lt;args>...]
+
+pnpm recursive run &lt;command> [-- &lt;args>...]
 ```
 
 In addition to the shell’s pre-existing `PATH`, `pnpm run` adds `node_modules/.bin`

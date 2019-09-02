@@ -20,7 +20,10 @@
           "cli/remove",
           "cli/link",
           "cli/unlink",
-          "cli/import"
+          "cli/import",
+          "cli/rebuild",
+          "cli/prune",
+          "cli/install-test"
         ]
       },
       {
@@ -35,7 +38,9 @@
         "type": "subcategory",
         "label": "Run scripts",
         "ids": [
-          "cli/run"
+          "cli/run",
+          "cli/start",
+          "cli/stop"
         ]
       },
       "cli/publish",

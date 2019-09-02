@@ -82,6 +82,10 @@ Added in: v2.13.0
 
 If true, stops when a task throws an error.
 
+This config does not affect the exit code.
+Even if `--no-bail` is used, all tasks will finish but if any of the tasks fail, the
+command will exit with a non-zero code.
+
 Usage example. Run tests in every package. Continue if tests fail in one of the packages:
 
 ```

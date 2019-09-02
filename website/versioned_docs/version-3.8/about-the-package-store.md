@@ -1,6 +1,7 @@
 ---
-id: about-package-store
+id: version-3.8-about-package-store
 title: About the package store
+original_id: about-package-store
 ---
 
 A store is a folder that contains packages and information about projects that are using them.

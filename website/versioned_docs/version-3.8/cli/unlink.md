@@ -9,10 +9,10 @@ after removing the external link.
 
 If called witout arguments, all linked-in dependencies will be unlinked.
 
-```sh
-pnpm unlink [-r] [--filter <package_selector>] [<pkg>...]
-pnpm recursive unlink [--filter <package_selector>] [<pkg>...]
-pnpm multi unlink [--filter <package_selector>] [<pkg>...]
+```text
+pnpm unlink [-r] [--filter &lt;package_selector>] [&lt;pkg>...]
+pnpm recursive unlink [--filter &lt;package_selector>] [&lt;pkg>...]
+pnpm multi unlink [--filter &lt;package_selector>] [&lt;pkg>...]
 ```
 
 Alias: dislink

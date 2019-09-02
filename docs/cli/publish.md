@@ -5,8 +5,8 @@ title: pnpm publish
 
 Publishes a package to the registry.
 
-```
-pnpm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
+```text
+pnpm publish [&lt;tarball>|&lt;folder>] [--tag &lt;tag>] [--access &lt;public|restricted>]
 ```
 
 When publishing a package inside a [workspace](workspace), the LICENSE file from the

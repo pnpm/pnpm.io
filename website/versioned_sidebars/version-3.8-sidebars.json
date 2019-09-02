@@ -20,7 +20,10 @@
           "version-3.8-cli/remove",
           "version-3.8-cli/link",
           "version-3.8-cli/unlink",
-          "version-3.8-cli/import"
+          "version-3.8-cli/import",
+          "version-3.8-cli/rebuild",
+          "version-3.8-cli/prune",
+          "version-3.8-cli/install-test"
         ]
       },
       {
@@ -35,7 +38,9 @@
         "type": "subcategory",
         "label": "Run scripts",
         "ids": [
-          "version-3.8-cli/run"
+          "version-3.8-cli/run",
+          "version-3.8-cli/start",
+          "version-3.8-cli/stop"
         ]
       },
       "version-3.8-cli/publish",
