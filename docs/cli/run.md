@@ -25,6 +25,12 @@ is installed in the workspace root, it may be called in any workspace package's 
 
 ## Options
 
+### --recursive, -r
+
+This runs an arbitrary command from each package's "scripts" object.
+If a package doesn't have the command, it is skipped.
+If none of the packages have the command, the command fails.
+
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering)

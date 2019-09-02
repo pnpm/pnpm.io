@@ -4,7 +4,7 @@ title: pnpm rebuild
 original_id: rebuild
 ---
 
-Aliases: rb
+Aliases: `rb`
 
 Rebuild a package.
 
@@ -14,3 +14,13 @@ Rebuild a package.
 pnpm rebuild [-r [--workspace-concurrency=&lt;number>] [--no-sort]]
      [&lt;pkg>...]
 ```
+
+## Options
+
+### --recursive, -r
+
+This command runs the **pnpm build** command in every package of the multi-package repo.
+
+### --filter &lt;package_selector>
+
+[Read more about filtering.](../filtering)

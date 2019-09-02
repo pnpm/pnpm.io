@@ -67,3 +67,51 @@ Will be transformed into:
 ```
 
 This feature allows you to not have to depend on something else than your local workspace packages, while still being able to publish the resulting packages to the remote registry without having to run intermediary publish steps - your consumers will be able to use your published workspaces as any other package, still benefiting from the guarantees semver offers.
+
+## Options
+
+### link-workspace-packages
+
+Added in: v2.14.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
+This is very convenient in a multi-package repository.
+
+#### Usage
+
+Create a `.npmrc` file in the root of your multi-package repository with the following content:
+
+```
+link-workspace-packages = true
+```
+
+Create a `pnpm-workspace.yaml` file with the following content:
+
+```yaml
+packages:
+  - '**'
+```
+
+Run `pnpm recursive install`.
+
+### shared-workspace-lockfile
+
+Added in: v2.17.0 (initially named `shared-workspace-shrinkwrap`)
+
+* Default: **true**
+* Type: **Boolean**
+
+When `true`, pnpm creates a single `pnpm-lock.yaml` file in the root of the workspace (in the directory that contains the `pnpm-workspace.yaml` file).
+A shared lockfile also means that all dependencies of all workspace packages will be in a single `node_modules`.
+
+Advantages of this option:
+
+* every dependency is a singleton
+* faster installations in a multi-package repository
+* fewer changes in code reviews
+
+**NOTE:** even though all the dependencies will be hard linked into the root `node_modules`, packages will have access only to those dependencies
+that are declared in their `package.json`. So pnpm's strictness is preserved.

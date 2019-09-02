@@ -14,52 +14,6 @@ original_id: recursive
 
 ## Options
 
-### link-workspace-packages
-
-Added in: v2.14.0
-
-* Default: **true**
-* Type: **Boolean**
-
-When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
-This is very convenient in a multi-package repository.
-
-#### Usage
-
-Create a `.npmrc` file in the root of your multi-package repository with the following content:
-
-```
-link-workspace-packages = true
-```
-
-Create a [pnpm-workspace.yaml](../workspaces) file with the following content:
-
-```yaml
-packages:
-  - '**'
-```
-
-Run `pnpm recursive install`.
-
-### shared-workspace-lockfile
-
-Added in: v2.17.0 (initially named `shared-workspace-shrinkwrap`)
-
-* Default: **true**
-* Type: **Boolean**
-
-When `true`, pnpm creates a single `pnpm-lock.yaml` file in the root of the workspace (in the directory that contains the `pnpm-workspace.yaml` file).
-A shared lockfile also means that all dependencies of all workspace packages will be in a single `node_modules`.
-
-Advantages of this option:
-
-* every dependency is a singleton
-* faster installations in a multi-package repository
-* fewer changes in code reviews
-
-**NOTE:** even though all the dependencies will be hard linked into the root `node_modules`, packages will have access only to those dependencies
-that are declared in their `package.json`. So pnpm's strictness is preserved.
-
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering)
@@ -124,115 +78,6 @@ pnpm recursive install
 pnpm recursive install --ignore-scripts
 ```
 
-## pnpm recursive update
-
-Added in: v1.24.0
-
-```sh
-pnpm recursive update [arguments]
-```
-
-Concurrently runs update in all subdirectories with a `package.json` (excluding node_modules).
-
-Usage examples:
-
-```sh
-pnpm recursive update
-pnpm recursive update --depth 100
-# update typescript to the latest version in every package
-pnpm recursive update typescript@latest
-```
-
-## pnpm recursive uninstall
-
-Added in: v2.10.0
-
-```sh
-pnpm recursive uninstall [<@scope>/]<pkg>...
-```
-
-Uninstall a dependency from each package
-
-Usage examples:
-
-```sh
-pnpm recursive uninstall webpack
-```
-
-## pnpm recursive dislink
-
-Added in: v1.32.0
-
-An alias of `recursive unlink` from v2.0.0
-
-```sh
-pnpm recursive dislink [arguments]
-```
-
-Removes links to local packages and reinstalls them from the registry.
-
-Usage examples:
-
-```sh
-pnpm recursive dislink
-```
-
-## pnpm recursive outdated
-
-Added in: v2.2.0
-
-```sh
-pnpm recursive outdated [[<@scope>/]<pkg> ...]
-```
-
-Check for outdated packages in every project of the multi-package repo.
-
-Usage examples:
-
-```sh
-pnpm recursive outdated
-```
-
-## pnpm recursive list
-
-Added in: v2.2.0
-
-```sh
-pnpm recursive list [[<@scope>/]<pkg> ...]
-```
-
-List packages in each project of the multi-package repo.
-Accepts the same arguments and flags as the regular `pnpm list` command.
-
-Usage examples:
-
-```sh
-pnpm recursive list
-```
-
-## pnpm recursive run
-
-Added in: v2.3.0
-
-```sh
-pnpm recursive run <command> [-- <args>...]
-```
-
-This runs an arbitrary command from each package's "scripts" object.
-If a package doesn't have the command, it is skipped.
-If none of the packages have the command, the command fails.
-
-Usage examples:
-
-```sh
-pnpm recursive run build
-```
-
-In addition to the shell’s pre-existing `PATH`, `pnpm run` adds `node_modules/.bin`
-to the `PATH` provided to `scripts`. As of v3.5, when executed inside a workspace,
-`<workspace root>/node_modules/.bin` is also added to the `PATH`, so if a tool
-is installed in the workspace root, it may be called in any workspace package's `scripts`.
-
 ## pnpm recursive test
 
 Added in: v2.3.0
@@ -247,22 +92,6 @@ Usage examples:
 
 ```sh
 pnpm recursive test
-```
-
-## pnpm recursive rebuild
-
-Added in: v2.4.0
-
-```sh
-pnpm recursive rebuild [[<@scope>/<name>]...]
-```
-
-This command runs the **pnpm build** command in every package of the multi-package repo.
-
-Usage examples:
-
-```sh
-pnpm recursive rebuild
 ```
 
 ## pnpm recursive exec
