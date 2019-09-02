@@ -65,6 +65,9 @@
       "cli/store": {
         "title": "pnpm store"
       },
+      "cli/test": {
+        "title": "pnpm test"
+      },
       "cli/unlink": {
         "title": "pnpm unlink"
       },
@@ -328,6 +331,9 @@
       },
       "version-3.8/cli/version-3.8-store": {
         "title": "pnpm store"
+      },
+      "version-3.8/cli/version-3.8-test": {
+        "title": "pnpm test"
       },
       "version-3.8/cli/version-3.8-unlink": {
         "title": "pnpm unlink"

@@ -40,6 +40,7 @@
         "label": "Run scripts",
         "ids": [
           "version-3.8-cli/run",
+          "version-3.8-cli/test",
           "version-3.8-cli/start",
           "version-3.8-cli/stop"
         ]

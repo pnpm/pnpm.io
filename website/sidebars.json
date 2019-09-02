@@ -40,6 +40,7 @@
         "label": "Run scripts",
         "ids": [
           "cli/run",
+          "cli/test",
           "cli/start",
           "cli/stop"
         ]
