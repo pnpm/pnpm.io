@@ -12,5 +12,5 @@ Rebuild a package.
 
 ```text
 pnpm rebuild [-r [--workspace-concurrency=&lt;number>] [--no-sort]]
-     [<pkg>...]
+     [&lt;pkg>...]
 ```

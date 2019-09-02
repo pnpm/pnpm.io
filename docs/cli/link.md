@@ -5,10 +5,10 @@ title: pnpm link
 
 Connect the local project to another one.
 
-```sh
+```text
 pnpm link (in package dir)
-pnpm link [<@scope>/]<pkg>
-pnpm link <folder>
+pnpm link &lt;pkg>
+pnpm link &lt;folder>
 ```
 
 Alias: ln

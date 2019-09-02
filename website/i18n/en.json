@@ -275,11 +275,17 @@
       "version-3.7/version-3.7-workspace": {
         "title": "Workspace"
       },
+      "version-3.8/version-3.8-about-package-store": {
+        "title": "About the package store"
+      },
       "version-3.8/cli/version-3.8-add": {
         "title": "pnpm add <pkg>"
       },
       "version-3.8/cli/version-3.8-import": {
         "title": "pnpm import"
+      },
+      "version-3.8/cli/version-3.8-install-test": {
+        "title": "pnpm install-test"
       },
       "version-3.8/cli/version-3.8-install": {
         "title": "pnpm install"
@@ -293,8 +299,14 @@
       "version-3.8/cli/version-3.8-outdated": {
         "title": "pnpm outdated"
       },
+      "version-3.8/cli/version-3.8-prune": {
+        "title": "pnpm prune"
+      },
       "version-3.8/cli/version-3.8-publish": {
         "title": "pnpm publish"
+      },
+      "version-3.8/cli/version-3.8-rebuild": {
+        "title": "pnpm rebuild"
       },
       "version-3.8/cli/version-3.8-recursive": {
         "title": "pnpm recursive"
@@ -307,6 +319,12 @@
       },
       "version-3.8/cli/version-3.8-server": {
         "title": "pnpm server"
+      },
+      "version-3.8/cli/version-3.8-start": {
+        "title": "pnpm start"
+      },
+      "version-3.8/cli/version-3.8-stop": {
+        "title": "pnpm stop"
       },
       "version-3.8/cli/version-3.8-store": {
         "title": "pnpm store"
