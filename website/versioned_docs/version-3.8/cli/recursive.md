@@ -61,45 +61,12 @@ Usage examples:
 pnpm recursive test --no-sort
 ```
 
-## pnpm recursive install
-
-Added in: v1.24.0
-
-```sh
-pnpm recursive install [arguments]
-```
-
-Concurrently runs install in all subdirectories with a `package.json` (excluding node_modules).
-
-Usage examples:
-
-```sh
-pnpm recursive install
-pnpm recursive install --ignore-scripts
-```
-
-## pnpm recursive test
-
-Added in: v2.3.0
-
-```sh
-pnpm recursive test [-- <args>...]
-```
-
-This runs each package's "test" script, if one was provided.
-
-Usage examples:
-
-```sh
-pnpm recursive test
-```
-
 ## pnpm recursive exec
 
 Added in: v2.9.0
 
-```sh
-pnpm recursive exec -- <command> [args...]
+```test
+pnpm recursive exec -- &lt;command> [args...]
 ```
 
 This command runs a command in each package of the multi-package repo.

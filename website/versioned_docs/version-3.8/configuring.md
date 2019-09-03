@@ -1,6 +1,7 @@
 ---
-id: configuring
+id: version-3.8-configuring
 title: Configuring
+original_id: configuring
 ---
 
 pnpm uses [npm's configs](https://docs.npmjs.com/misc/config). Hence, you should set configs the same way you would for npm. For example,
