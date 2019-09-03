@@ -101,6 +101,9 @@
       "motivation": {
         "title": "Motivation"
       },
+      "npmrc": {
+        "title": ".npmrc"
+      },
       "only-allow-pnpm": {
         "title": "Only allow pnpm"
       },
@@ -356,6 +359,12 @@
       "version-3.8/version-3.8-limitations": {
         "title": "Limitations"
       },
+      "version-3.8/version-3.8-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-3.8/version-3.8-only-allow-pnpm": {
+        "title": "Only allow pnpm"
+      },
       "version-3.8/version-3.8-pnpm-cli": {
         "title": "pnpm CLI"
       },
@@ -375,6 +384,7 @@
       "Introduction": "Introduction",
       "Usage": "Usage",
       "CLI commands": "CLI commands",
+      "Configuration": "Configuration",
       "Features": "Features",
       "Recipes": "Recipes",
       "Advanced": "Advanced"

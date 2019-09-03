@@ -45,10 +45,19 @@
           "version-3.8-cli/stop"
         ]
       },
-      "version-3.8-cli/publish",
-      "version-3.8-cli/recursive",
-      "version-3.8-cli/server",
-      "version-3.8-cli/store"
+      {
+        "type": "subcategory",
+        "label": "Misc.",
+        "ids": [
+          "version-3.8-cli/publish",
+          "version-3.8-cli/recursive",
+          "version-3.8-cli/server",
+          "version-3.8-cli/store"
+        ]
+      }
+    ],
+    "Configuration": [
+      "version-3.8-npmrc"
     ],
     "Features": [
       "version-3.8-workspaces",

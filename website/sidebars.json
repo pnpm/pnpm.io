@@ -45,10 +45,19 @@
           "cli/stop"
         ]
       },
-      "cli/publish",
-      "cli/recursive",
-      "cli/server",
-      "cli/store"
+      {
+        "type": "subcategory",
+        "label": "Misc.",
+        "ids": [
+          "cli/publish",
+          "cli/recursive",
+          "cli/server",
+          "cli/store"
+        ]
+      }
+    ],
+    "Configuration": [
+      "npmrc"
     ],
     "Features": [
       "workspaces",
