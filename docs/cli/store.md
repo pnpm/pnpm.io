@@ -3,11 +3,13 @@ id: store
 title: pnpm store
 ---
 
-Commands related to the [pnpm package store](about-the-package-store).
+Managing the [package store](../about-the-package-store).
 
-## pnpm store status
+## Commands
 
-```sh
+### pnpm store status
+
+```text
 pnpm store status
 ```
 
@@ -15,12 +17,12 @@ Checks for modified packages in the store.
 
 Returns exit code 0 if the content of the package is the same as it was at the time of unpacking.
 
-## pnpm store add
+### pnpm store add
 
 Added in: v2.12.0
 
-```sh
-pnpm store add [<@scope>/]<pkg>...
+```text
+pnpm store add &lt;pkg>...
 ```
 
 Adds new packages to the pnpm store directly. 
@@ -32,12 +34,12 @@ Usage examples:
 pnpm store add express@4 typescript@2
 ```
 
-## pnpm store usages
+### pnpm store usages
 
 Added in: v2.21.0
 
-```sh
-pnpm store usages [<@scope>/]<pkg>...
+```text
+pnpm store usages &lt;pkg>...
 ```
 
 Lists all pnpm projects on the current filesystem that depend on the specified packages in the store.
@@ -53,7 +55,7 @@ pnpm store usages @babel/core ansi-regex
 > Note that this command might be slow for very large stores.
 > We are working on improving performance.
 
-## pnpm store prune
+### pnpm store prune
 
 ```sh
 pnpm store prune

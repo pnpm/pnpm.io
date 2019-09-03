@@ -26,3 +26,7 @@ from every package found in subdirectories.
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering)
+
+### --global
+
+Remove a global package.

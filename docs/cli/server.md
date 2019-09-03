@@ -3,14 +3,32 @@ id: server
 title: pnpm server
 ---
 
-## pnpm server start
+Manage a store server.
+
+## Commands
+
+### pnpm server start
 
 Added in: v1.30.0
 
 Starts a server that does all interactions with the store.
 Other commands will delegate any store-related tasks to this server.
 
-### background
+### pnpm server stop
+
+Added in: v1.30.0
+
+Stops the store server.
+
+### pnpm server status
+
+Added in: v2.5.0
+
+Prints information about the running server.
+
+## Options
+
+### --background
 
 Added in: v1.30.0
 
@@ -19,7 +37,7 @@ Added in: v1.30.0
 
 Runs the server in the background.
 
-### protocol
+### --protocol
 
 Added in: v1.30.0
 
@@ -29,7 +47,7 @@ Added in: v1.30.0
 The communication protocol used by the server.
 When **auto** is used, **ipc** used on non-Windows servers and **tcp** on Windows.
 
-### port
+### --port
 
 Added in: v1.30.0
 
@@ -41,7 +59,7 @@ If port is specified and **protocol** is set to auto, **tcp** protocol is used.
 
 Other configs that are used by `pnpm server`: **store**, **lock**.
 
-### ignore-stop-requests
+### --ignore-stop-requests
 
 Added in: v1.30.0
 
@@ -50,7 +68,7 @@ Added in: v1.30.0
 
 Disallows stopping the server using `pnpm server stop`.
 
-### ignore-upload-requests
+### --ignore-upload-requests
 
 Added in: v1.31.0
 
@@ -58,15 +76,3 @@ Added in: v1.31.0
 * Type: **Boolean**
 
 Disallows creating new side effect cache during install.
-
-## pnpm server stop
-
-Added in: v1.30.0
-
-Stops the store server.
-
-## pnpm server status
-
-Added in: v2.5.0
-
-Prints information about the running server.

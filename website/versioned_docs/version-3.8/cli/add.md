@@ -108,6 +108,10 @@ Added in: v3.6.0
 Adding a new dependency to the root workspace package fails, unless the `--ignore-workspace-root-check` or `-W` flag is used.
 For instance, `pnpm add debug -W`.
 
+### --global
+
+Install a package globally.
+
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering)

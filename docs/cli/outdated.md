@@ -33,3 +33,7 @@ or in every workspace package, when executed inside a workspace.
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering)
+
+### --global
+
+List outdated global packages.
