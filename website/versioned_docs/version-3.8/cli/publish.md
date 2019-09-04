@@ -13,7 +13,7 @@ pnpm publish [&lt;tarball>|&lt;folder>] [--tag &lt;tag>] [--access &lt;public|re
 When publishing a package inside a [workspace](workspace), the LICENSE file from the
 root of the workspace is packed with the package (unless the package has a license of its own).
 
-You may override some fields before publish, using the [publishConfig](../package_json#publishConfig)
+You may override some fields before publish, using the [publishConfig](../package_json#publishconfig)
 field in `package.json`.
 
 ## Options
