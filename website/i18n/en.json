@@ -107,14 +107,20 @@
       "only-allow-pnpm": {
         "title": "Only allow pnpm"
       },
+      "package_json": {
+        "title": "package.json"
+      },
       "pnpm-cli": {
         "title": "pnpm CLI"
       },
       "pnpm-vs-npm": {
         "title": "pnpm vs npm"
       },
+      "pnpm-workspace_yaml": {
+        "title": "pnpm-workspace.yaml"
+      },
       "pnpmfile": {
-        "title": "pnpmfile"
+        "title": "pnpmfile.js"
       },
       "pnpx-cli": {
         "title": "pnpx CLI"
@@ -362,11 +368,17 @@
       "version-3.8/version-3.8-only-allow-pnpm": {
         "title": "Only allow pnpm"
       },
+      "version-3.8/version-3.8-package_json": {
+        "title": "package.json"
+      },
       "version-3.8/version-3.8-pnpm-cli": {
         "title": "pnpm CLI"
       },
+      "version-3.8/version-3.8-pnpm-workspace_yaml": {
+        "title": "pnpm-workspace.yaml"
+      },
       "version-3.8/version-3.8-pnpmfile": {
-        "title": "pnpmfile"
+        "title": "pnpmfile.js"
       },
       "version-3.8/version-3.8-workspaces": {
         "title": "Workspaces"

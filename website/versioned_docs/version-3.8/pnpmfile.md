@@ -1,6 +1,6 @@
 ---
 id: version-3.8-pnpmfile
-title: pnpmfile
+title: pnpmfile.js
 original_id: pnpmfile
 ---
 

@@ -57,11 +57,13 @@
       }
     ],
     "Configuration": [
-      "npmrc"
+      "package_json",
+      "npmrc",
+      "pnpm-workspace_yaml",
+      "pnpmfile"
     ],
     "Features": [
       "workspaces",
-      "pnpmfile",
       "aliases"
     ],
     "Recipes": [

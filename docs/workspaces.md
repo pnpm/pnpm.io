@@ -3,26 +3,8 @@ id: workspaces
 title: Workspaces
 ---
 
-pnpm supports concurrent actions in multi-package repositories (workspaces).
-
-By default, when you run the [`pnpm recursive [action]`](cli/recursive) commands,
-all the directories are searched for packages (directories with `package.json` file).
-You can control what directories are searched by passing an array of globs to `packages` in `pnpm-workspace.yaml`.
-
-An example of a `pnpm-workspace.yaml`:
-
-```yaml
-packages:
-  # the root package.json
-  - '.'
-  # all packages in subdirs of packages/ and components/
-  - 'packages/**'
-  - 'components/**'
-  # exclude packages that are inside test/ directories
-  - '!**/test/**'
-```
-
-`pnpm-workspace.yaml` should be in the root of the workspace.
+pnpm supports concurrent actions in multi-package repositories (workspaces). A workspace must have a [pnpm-workspace.yaml](pnpm-workspace_yaml) file in
+its root. A workspace also may have a [.npmrc](npmrc) in its root.
 
 ## Workspace ranges (workspace:)
 

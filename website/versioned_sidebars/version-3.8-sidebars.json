@@ -57,11 +57,13 @@
       }
     ],
     "Configuration": [
-      "version-3.8-npmrc"
+      "version-3.8-package_json",
+      "version-3.8-npmrc",
+      "version-3.8-pnpm-workspace_yaml",
+      "version-3.8-pnpmfile"
     ],
     "Features": [
       "version-3.8-workspaces",
-      "version-3.8-pnpmfile",
       "version-3.8-aliases"
     ],
     "Recipes": [

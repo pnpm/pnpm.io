@@ -1,6 +1,6 @@
 ---
 id: pnpmfile
-title: pnpmfile
+title: pnpmfile.js
 ---
 
 pnpm allows to step directly into the installation process via special functions called *hooks*.
