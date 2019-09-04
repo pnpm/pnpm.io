@@ -344,9 +344,6 @@
       "version-3.8/cli/version-3.8-update": {
         "title": "pnpm update"
       },
-      "version-3.8/version-3.8-configuring": {
-        "title": "Configuring"
-      },
       "version-3.8/version-3.8-faq": {
         "title": "Frequently Asked Questions"
       },
