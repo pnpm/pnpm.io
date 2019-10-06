@@ -74,6 +74,9 @@
       "cli/update": {
         "title": "pnpm update"
       },
+      "cli/why": {
+        "title": "pnpm why"
+      },
       "configuring": {
         "title": "Configuring"
       },

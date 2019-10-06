@@ -37,3 +37,15 @@ or in every workspace package, when executed inside a workspace.
 ### --global
 
 List outdated global packages.
+
+### --long
+
+Added in: v4.0.0
+
+Print details.
+
+### --no-table
+
+Added in: 4.0.0
+
+Prints the outdated dependencies in a list, not in a table. Good for small consoles.

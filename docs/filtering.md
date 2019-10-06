@@ -3,7 +3,7 @@ id: filtering
 title: Filtering
 ---
 
-Added in: v2.13.0 (Ability to pass selectors after `--` added in v2.15.0)
+Added in: v2.13.0
 
 Filtering allows to restrict commands to subsets of packages.
 
@@ -14,13 +14,6 @@ Selectors may be specified via the `--filter` flag:
 
 ```text
 pnpm &lt;command> --filter &lt;package_selector>
-```
-
-Most of the commands, also allow passing selectors after `--`.
-Except commands that run scripts (`pnpm run`, `pnpm start`, `pnpm test`, etc).
-
-```text
-pnpm &lt;command> -- &lt;package_selectors>...
 ```
 
 > An article that compares Lerna's filtering to pnpm's: https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a
@@ -37,9 +30,6 @@ Usage examples:
 ```sh
 pnpm install --filter @babel/core
 pnpm install --filter @babel/*
-# or
-pnpm install -- @babel/core
-pnpm install -- @babel/*
 ```
 
 ## --filter &lt;package_name>...
@@ -51,8 +41,6 @@ For instance, the next command will run installation in all dependencies of `foo
 
 ```sh
 pnpm install --filter foo...
-# or
-pnpm install -- foo...
 ```
 
 You may use a pattern to select a set of "root" packages:
@@ -72,8 +60,6 @@ For instance, the next command will run installation in all dependents of `foo` 
 
 ```sh
 pnpm install --filter ...foo
-# or
-pnpm install -- ...foo
 ```
 
 When packages in the workspace are filtered, every package is taken that matches at least one of
@@ -81,8 +67,6 @@ the selectors. You can use as many filters as you want:
 
 ```sh
 pnpm install --filter ...foo --filter bar --filter qar...
-# or
-pnpm install -- ...foo bar qar...
 ```
 
 ## --filter ./&lt;directory>

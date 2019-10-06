@@ -151,6 +151,6 @@ After creating `pnpmfile.js`, delete `pnpm-lock.yaml` only. No need to delete `n
 
 ### Solution 3
 
-In case there are too many issues, you can use the `shamefully-flatten` config. This creates a flat `node_modules` structure similar to the one created by `npm` or `yarn`.
+In case there are too many issues, you can use the `shamefully-hoist` config. This creates a flat `node_modules` structure similar to the one created by `npm` or `yarn`.
 
-To use it, try `pnpm install --shamefully-flatten`.
+To use it, try `pnpm install --shamefully-hoist`.

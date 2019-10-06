@@ -137,14 +137,14 @@ If false, doesn't check whether packages in the store were mutated.
 Added in: v1.25.0
 
 * Default: **auto**
-* Type: **auto**, **hardlink**, **copy**, **reflink**
+* Type: **auto**, **hardlink**, **copy**, **clone**
 
 Controls the way packages are imported from the store.
 
-* **auto** - try to hardlink packages from the store. If it fails, fallback to copy
+* **auto** - try to clone packages from the store. If cloning is not supported then hardlink packages from the store. If neither cloning nor linking is possible, falls back to copying
 * **hardlink** - hardlink packages from the store
 * **copy** - copy packages from the store
-* **reflink** - reflink (aka copy-on-write) packages from the store
+* **clone** - clone (aka copy-on-write or reflink) packages from the store
 
 ### lockfile
 
@@ -197,17 +197,43 @@ Added in: v1.31.0
 
 Only use the side effects cache if present, do not create it for new packages.
 
-### shamefully-flatten
+### hoist
 
-Added in: v1.34.0
+Added in: v4.0.0
+
+* Default: **true**
+* Type: **boolean**
+
+When `true`, all dependencies are hoisted to `node_modules/.pnpm`. This makes unlisted dependencies accessible to
+all packages inside `node_modules`.
+
+### hoist-pattern
+
+Added in: v4.0.0
+
+* Default: **['\*']**
+* Type: **string[]**
+
+Tells pnpm, which packages should be hoisted to `node_modules/.pnpm`. By default, all packages are hoisted.
+However, if you know that only some buggy packages are requiring unlisted dependencies, you may hoist just them.
+
+For instance:
+
+```
+hoist-pattern[]=*eslint*
+hoist-pattern[]=*babel*
+```
+
+### shamefully-hoist
+
+Added in: v1.34.0 (Renamed from `shamefully-flatten` in v4.0.0)
 
 * Default: **false**
 * Type: **Boolean**
 
-If true, pnpm creates a flat `node_modules` that look almost like a `node_modules` created by npm or Yarn.
-Please only use this option when there is no other way to make a project work with pnpm.
-The strict `node_modules` created by pnpm should always work, if it does not, most likely a dependency is
-missing from `package.json`. Use this config only as a temporary fix.
+By default, pnpm creates a semistrict `node_modules`. It means that your dependencies have access to undeclared dependencies
+but your code does not. With this layout, most of the packages in the ecosystem work with no issues.
+However, if some tooling only works when the hoisted dependencies are in the root of `node_modules`, you can set this config to `true`. 
 
 ### strict-peer-dependencies
 
@@ -222,13 +248,13 @@ If true, commands fail on missing or invalid peer dependencies.
 
 Added in: v3.1.0
 
-* Default: **fast**
+* Default: **fewer-dependencies**
 * Type: **fast**, **fewer-dependencies**
 
 Sets the resolutions strategy used during installation.
 
-* **fast** - the default resolution strategy. Speed is preferred over deduplication
-* **fewer-dependencies** - already installed dependencies are preferred even if newer versions satisfy a range
+* **fewer-dependencies** - the default resolution strategy. Already installed dependencies are preferred even if newer versions satisfy a range
+* **fast** - speed is preferred over deduplication
 
 ### use-beta-cli
 
