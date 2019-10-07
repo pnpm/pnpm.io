@@ -385,6 +385,27 @@
       },
       "version-3.8/version-3.8-workspaces": {
         "title": "Workspaces"
+      },
+      "version-4.0/cli/version-4.0-outdated": {
+        "title": "pnpm outdated"
+      },
+      "version-4.0/cli/version-4.0-store": {
+        "title": "pnpm store"
+      },
+      "version-4.0/cli/version-4.0-why": {
+        "title": "pnpm why"
+      },
+      "version-4.0/version-4.0-faq": {
+        "title": "Frequently Asked Questions"
+      },
+      "version-4.0/version-4.0-filtering": {
+        "title": "Filtering"
+      },
+      "version-4.0/version-4.0-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-4.0/version-4.0-symlinked-node-modules-structure": {
+        "title": "Symlinked `node_modules` structure"
       }
     },
     "links": {

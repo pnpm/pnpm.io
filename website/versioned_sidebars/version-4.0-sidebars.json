@@ -1,0 +1,83 @@
+{
+  "version-4.0-docs": {
+    "Introduction": [
+      "version-4.0-motivation",
+      "version-4.0-installation"
+    ],
+    "Usage": [
+      "version-4.0-pnpm-cli",
+      "version-4.0-pnpx-cli",
+      "version-4.0-configuring",
+      "version-4.0-filtering"
+    ],
+    "CLI commands": [
+      {
+        "type": "subcategory",
+        "label": "Manage dependencies",
+        "ids": [
+          "version-4.0-cli/add",
+          "version-4.0-cli/install",
+          "version-4.0-cli/update",
+          "version-4.0-cli/remove",
+          "version-4.0-cli/link",
+          "version-4.0-cli/unlink",
+          "version-4.0-cli/import",
+          "version-4.0-cli/rebuild",
+          "version-4.0-cli/prune",
+          "version-4.0-cli/install-test"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Review dependencies",
+        "ids": [
+          "version-4.0-cli/list",
+          "version-4.0-cli/outdated",
+          "version-4.0-cli/why"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Run scripts",
+        "ids": [
+          "version-4.0-cli/run",
+          "version-4.0-cli/test",
+          "version-4.0-cli/start",
+          "version-4.0-cli/stop"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Misc.",
+        "ids": [
+          "version-4.0-cli/publish",
+          "version-4.0-cli/recursive",
+          "version-4.0-cli/server",
+          "version-4.0-cli/store"
+        ]
+      }
+    ],
+    "Configuration": [
+      "version-4.0-package_json",
+      "version-4.0-npmrc",
+      "version-4.0-pnpm-workspace_yaml",
+      "version-4.0-pnpmfile"
+    ],
+    "Features": [
+      "version-4.0-workspaces",
+      "version-4.0-aliases"
+    ],
+    "Recipes": [
+      "version-4.0-continuous-integration",
+      "version-4.0-only-allow-pnpm"
+    ],
+    "Advanced": [
+      "version-4.0-logos",
+      "version-4.0-benchmark",
+      "version-4.0-limitations",
+      "version-4.0-about-package-store",
+      "version-4.0-symlinked-node-modules-structure",
+      "version-4.0-how-peers-are-resolved"
+    ]
+  }
+}
