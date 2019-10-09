@@ -404,6 +404,9 @@
       "version-4.0/version-4.0-npmrc": {
         "title": ".npmrc"
       },
+      "version-4.0/version-4.0-pnpm-workspace_yaml": {
+        "title": "pnpm-workspace.yaml"
+      },
       "version-4.0/version-4.0-symlinked-node-modules-structure": {
         "title": "Symlinked `node_modules` structure"
       }
