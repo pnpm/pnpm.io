@@ -1,6 +1,7 @@
 ---
-id: pnpm-workspace_yaml
+id: version-4.0-pnpm-workspace_yaml
 title: pnpm-workspace.yaml
+original_id: pnpm-workspace_yaml
 ---
 
 `pnpm-workspace.yaml` defines the root of the [workspace](workspaces) and it allows to
