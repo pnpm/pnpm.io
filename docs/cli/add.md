@@ -64,7 +64,7 @@ pnpm add https://github.com/indexzero/forever/tarball/v0.5.6
 ### Install from Git repository
 
 ```sh
-pnpm install <git remote url>
+pnpm add <git remote url>
 ```
 
 Installs the package from the hosted Git provider, cloning it with Git.
