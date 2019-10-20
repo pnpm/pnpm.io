@@ -72,6 +72,21 @@ cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 
 It is not the path to a certificate file (and there is no "certfile" option).
 
+### color
+
+Added in: v4.1.0
+
+* Default: **auto**
+* Type: **auto**, **always**, **never**
+
+Controls colors in the output.
+
+* **auto** - output uses colors when the stdout is a TTY (i.e. when the output goes straight to a terminal).
+* **always** - ignore the difference between terminals and pipes. You’ll rarely want this; in most scenarios,
+  if you want color codes in your redirected output, you can instead pass a `--color` flag to the pnpm command
+  to force it to use color codes. The default setting is almost always what you’ll want.
+* **never** - turns off colors. You can also turn off colors via the `--no-color` flag.
+
 ### store
 
 * Default: **~/.pnpm-store**
@@ -131,6 +146,23 @@ Added in: v1.8.0
 * Type: **Boolean**
 
 If false, doesn't check whether packages in the store were mutated.
+
+### virtual-store-dir
+
+Added in: v4.1.0
+
+* Default: **node_modules/.pnpm**
+* Types: **path**
+
+The directory with links to the store. All direct and indirect dependencies of the project are linked into this directory.
+
+This is a useful setting that can solve issues with long paths on Windows. If you have some dependencies with very long paths,
+you can select a virtual store in the root of your drive (for instance `C:\my-project-store`).
+
+Or you can set the virtual store to `.pnpm` and add it to `.gitignore`. This will make the stacktraces nicer as paths to
+dependencies will have one directory less.
+
+**NOTE:** the virtual store cannot be shared between several projects. Every project should have its own virtual store.
 
 ### package-import-method
 
