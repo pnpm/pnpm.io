@@ -9,7 +9,7 @@ To prevent devs from using other package managers, add the following `preinstall
 ```json
 {
   "scripts": {
-    "preinstall": "node -e '!process.env.npm_config_user_agent.startsWith(\"pnpm/\")&&!console.log(\"Use `npx pnpm install` to install dependencies in this repository\\n\")&&process.exit(1)'"
+    "preinstall": "node -e \"!process.env.npm_config_user_agent.startsWith('pnpm/')&&!console.log('Use `npx pnpm install` to install dependencies in this repository\\n')&&process.exit(1)\""
   }
 }
 ```
