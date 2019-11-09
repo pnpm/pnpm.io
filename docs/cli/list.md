@@ -43,7 +43,7 @@ Show parseable output instead of tree view.
 
 ### --global
 
-List packages in the global install prefix instead of in the current project.
+List packages in the global install directory instead of in the current project.
 
 ### --depth &lt;number>
 

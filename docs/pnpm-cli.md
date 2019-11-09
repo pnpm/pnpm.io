@@ -9,4 +9,8 @@ Just use pnpm in place of npm:
 pnpm add lodash
 ```
 
-For using the programmatic API, use pnpm's engine: [supi](https://github.com/pnpm/pnpm/tree/master/packages/supi).
+## Options
+
+### -C lt;path>, --dir lt;path>
+
+Run as if pnpm was started in `&path>` instead of the current working directory.

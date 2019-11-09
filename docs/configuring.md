@@ -6,7 +6,7 @@ title: Configuring
 pnpm uses [npm's configs](https://docs.npmjs.com/misc/config). Hence, you should set configs the same way you would for npm. For example,
 
 ```
-npm config set store /path/to/.pnpm-store
+npm config set store-dir /path/to/.pnpm-store
 ```
 
 If no store is configured, then pnpm will automatically create a store on the same drive.

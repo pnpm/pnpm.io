@@ -87,7 +87,9 @@ Controls colors in the output.
   to force it to use color codes. The default setting is almost always what you’ll want.
 * **never** - turns off colors. You can also turn off colors via the `--no-color` flag.
 
-### store
+### store-dir
+
+Added in: v4.2.0 (renamed from `store`)
 
 * Default: **~/.pnpm-store**
 * Type: **path**
@@ -418,3 +420,12 @@ Also the tag that is added to the `package@version` specified by the `pnpm tag` 
 
 Set to true to suppress the UID/GID switching when running package scripts.
 If set explicitly to false, then installing as a non-root user will fail.
+
+### global-dir
+
+Added in: v4.2.0
+
+* Default: **&lt;Node path>/pnpm-global**
+* Type: **path**
+
+Specify a custom directory to store global packages.
