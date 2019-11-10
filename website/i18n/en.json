@@ -415,6 +415,27 @@
       },
       "version-4.1/version-4.1-npmrc": {
         "title": ".npmrc"
+      },
+      "version-4.2/cli/version-4.2-list": {
+        "title": "pnpm list"
+      },
+      "version-4.2/cli/version-4.2-why": {
+        "title": "pnpm why"
+      },
+      "version-4.2/version-4.2-configuring": {
+        "title": "Configuring"
+      },
+      "version-4.2/version-4.2-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-4.2/version-4.2-only-allow-pnpm": {
+        "title": "Only allow pnpm"
+      },
+      "version-4.2/version-4.2-package_json": {
+        "title": "package.json"
+      },
+      "version-4.2/version-4.2-pnpm-cli": {
+        "title": "pnpm CLI"
       }
     },
     "links": {
