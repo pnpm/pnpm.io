@@ -35,9 +35,17 @@ If true, the selected peer dependency will be marked as optional by the package 
 
 ```json
 {
+    "peerDependencies": {
+        "react-dom": "1"
+    },
     "peerDependenciesMeta": {
         "react-dom": {
-            "optional": true,
+            "optional": true
+        },
+        // express is not specified in the peerDependencies field,
+        // so pnpm will assume that any version of express is fine
+        "express": {
+            "optional": true
         }
     }
 }
