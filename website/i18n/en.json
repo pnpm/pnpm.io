@@ -17,6 +17,9 @@
       "cli/add": {
         "title": "pnpm add <pkg>"
       },
+      "cli/audit": {
+        "title": "pnpm audit"
+      },
       "cli/import": {
         "title": "pnpm import"
       },

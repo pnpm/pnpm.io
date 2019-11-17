@@ -31,6 +31,7 @@
         "type": "subcategory",
         "label": "Review dependencies",
         "ids": [
+          "cli/audit",
           "cli/list",
           "cli/outdated",
           "cli/why"
