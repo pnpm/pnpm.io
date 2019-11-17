@@ -19,6 +19,9 @@ Luckily, pnpm supports the `workspace:` protocol (same as in Yarn v2). When this
 to resolve to anything else than a local workspace package. So if you set `"foo": "workspace:2.0.0"` installation
 will fail telling that no `"foo@2.0.0"` is present in the workspace.
 
+This protocol is especially useful when the [link-workspace-packages](#link-workspace-packages) config is set to `false`.
+In that case, pnpm will only link packages from the workspace if the `workspace:` protocol is used.
+
 ##  Publishing workspace packages
 
 When a workspace package is packed into an archive (whether it's through `pnpm pack` or one of the publish commands like `pnpm publish`), we dynamically replace any `workspace:` dependency by:
@@ -61,6 +64,8 @@ Added in: v2.14.0
 
 When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
 This is very convenient in a multi-package repository.
+
+When `false`, packages are downloaded and installed from the registry. However, workspace packages can still be linked by using the `workspace:` range protocol. e.g. `pnpm add batman@workspace:*`
 
 #### Usage
 
