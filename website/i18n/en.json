@@ -439,6 +439,15 @@
       },
       "version-4.2/version-4.2-pnpm-cli": {
         "title": "pnpm CLI"
+      },
+      "version-4.3/cli/version-4.3-add": {
+        "title": "pnpm add <pkg>"
+      },
+      "version-4.3/cli/version-4.3-audit": {
+        "title": "pnpm audit"
+      },
+      "version-4.3/version-4.3-workspaces": {
+        "title": "Workspaces"
       }
     },
     "links": {

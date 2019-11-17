@@ -1,0 +1,84 @@
+{
+  "version-4.3-docs": {
+    "Introduction": [
+      "version-4.3-motivation",
+      "version-4.3-installation"
+    ],
+    "Usage": [
+      "version-4.3-pnpm-cli",
+      "version-4.3-pnpx-cli",
+      "version-4.3-configuring",
+      "version-4.3-filtering"
+    ],
+    "CLI commands": [
+      {
+        "type": "subcategory",
+        "label": "Manage dependencies",
+        "ids": [
+          "version-4.3-cli/add",
+          "version-4.3-cli/install",
+          "version-4.3-cli/update",
+          "version-4.3-cli/remove",
+          "version-4.3-cli/link",
+          "version-4.3-cli/unlink",
+          "version-4.3-cli/import",
+          "version-4.3-cli/rebuild",
+          "version-4.3-cli/prune",
+          "version-4.3-cli/install-test"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Review dependencies",
+        "ids": [
+          "version-4.3-cli/audit",
+          "version-4.3-cli/list",
+          "version-4.3-cli/outdated",
+          "version-4.3-cli/why"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Run scripts",
+        "ids": [
+          "version-4.3-cli/run",
+          "version-4.3-cli/test",
+          "version-4.3-cli/start",
+          "version-4.3-cli/stop"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Misc.",
+        "ids": [
+          "version-4.3-cli/publish",
+          "version-4.3-cli/recursive",
+          "version-4.3-cli/server",
+          "version-4.3-cli/store"
+        ]
+      }
+    ],
+    "Configuration": [
+      "version-4.3-package_json",
+      "version-4.3-npmrc",
+      "version-4.3-pnpm-workspace_yaml",
+      "version-4.3-pnpmfile"
+    ],
+    "Features": [
+      "version-4.3-workspaces",
+      "version-4.3-aliases"
+    ],
+    "Recipes": [
+      "version-4.3-continuous-integration",
+      "version-4.3-only-allow-pnpm"
+    ],
+    "Advanced": [
+      "version-4.3-logos",
+      "version-4.3-benchmark",
+      "version-4.3-limitations",
+      "version-4.3-about-package-store",
+      "version-4.3-symlinked-node-modules-structure",
+      "version-4.3-how-peers-are-resolved"
+    ]
+  }
+}
