@@ -102,3 +102,12 @@ Advantages of this option:
 
 **NOTE:** even though all the dependencies will be hard linked into the root `node_modules`, packages will have access only to those dependencies
 that are declared in their `package.json`. So pnpm's strictness is preserved.
+
+### save-workspace-protocol
+
+* Default: **true**
+* Type: **Boolean**
+
+When true, new dependencies will be added with the workspace protocol, if they are present in the workspace.
+
+You might want to change this setting to `false`, if the tooling in your repository does not understand the workspace protocol.
