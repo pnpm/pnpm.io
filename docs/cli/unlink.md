@@ -8,7 +8,7 @@ Alias: `dislink`
 Unlinks a package. Like `yarn unlink` but pnpm re-installs the dependency
 after removing the external link.
 
-If called witout arguments, all linked-in dependencies will be unlinked.
+If called without arguments, all linked-in dependencies will be unlinked.
 
 ## Synopsis
 
