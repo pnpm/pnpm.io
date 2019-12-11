@@ -448,6 +448,21 @@
       },
       "version-4.3/version-4.3-workspaces": {
         "title": "Workspaces"
+      },
+      "version-4.4/cli/version-4.4-add": {
+        "title": "pnpm add <pkg>"
+      },
+      "version-4.4/cli/version-4.4-unlink": {
+        "title": "pnpm unlink"
+      },
+      "version-4.4/cli/version-4.4-update": {
+        "title": "pnpm update"
+      },
+      "version-4.4/version-4.4-filtering": {
+        "title": "Filtering"
+      },
+      "version-4.4/version-4.4-workspaces": {
+        "title": "Workspaces"
       }
     },
     "links": {
