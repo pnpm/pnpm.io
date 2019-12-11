@@ -43,3 +43,19 @@ Ignores the version range specified in `package.json`. Instead, the version spec
 ### --global
 
 Update global packages.
+
+### --workspace
+
+Added in: v4.4.0
+
+```text
+pnpm [-r] update --workspace [&lt;pkg>...]
+```
+
+Tries to link all packages from the workspace. Versions are updated to match the
+versions of packages inside the workspace.
+
+If specific packages are updated, the command will fail if any of the updated
+dependencies is not found inside the workspace. For instance, the following
+command fails if `express` is not a workspace package:
+`pnpm up -r --workspace express`.

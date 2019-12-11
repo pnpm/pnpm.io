@@ -50,9 +50,19 @@ You may use a pattern to select a set of "root" packages:
 pnpm install --filter @babel/preset-*...
 ```
 
+## --filter &lt;package_name>^...
+
+Added in: v4.4.0
+
+Selects dependencies of a package (both direct and non-direct). For instance:
+
+```text
+pnpm install --filter foo^...
+```
+
 ## --filter ...&lt;package_name>
 
-Added in: 2.14.0
+Added in: v2.14.0
 
 To select a package and its dependent packages (direct and non-direct), prefix the package name with 3 dots: `...<package_name>`.
 For instance, the next command will run installation in all dependents of `foo` and in `foo`:
@@ -66,6 +76,16 @@ the selectors. You can use as many filters as you want:
 
 ```text
 pnpm install --filter ...foo --filter bar --filter qar...
+```
+
+## --filter ...^&lt;package_name>
+
+Added in: v4.4.0
+
+Selects dependent of a package (both direct and non-direct). For instance:
+
+```text
+pnpm install --filter ...^foo
 ```
 
 ## --filter ./&lt;directory>
