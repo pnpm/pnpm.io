@@ -31,6 +31,14 @@ This runs an arbitrary command from each package's "scripts" object.
 If a package doesn't have the command, it is skipped.
 If none of the packages have the command, the command fails.
 
+### --if-present
+
+Added in: v4.5.0
+
+You can use the `--if-present` flag to avoid exiting with a non-zero exit code
+when the script is undefined. This lets you run potentially undefined scripts
+without breaking the execution chain.
+
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering)
