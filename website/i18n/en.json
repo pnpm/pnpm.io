@@ -463,6 +463,9 @@
       },
       "version-4.4/version-4.4-workspaces": {
         "title": "Workspaces"
+      },
+      "version-4.5/cli/version-4.5-run": {
+        "title": "pnpm run"
       }
     },
     "links": {
