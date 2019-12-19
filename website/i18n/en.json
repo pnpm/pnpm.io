@@ -466,6 +466,12 @@
       },
       "version-4.5/cli/version-4.5-run": {
         "title": "pnpm run"
+      },
+      "version-4.6/cli/version-4.6-publish": {
+        "title": "pnpm publish"
+      },
+      "version-4.6/version-4.6-filtering": {
+        "title": "Filtering"
       }
     },
     "links": {
