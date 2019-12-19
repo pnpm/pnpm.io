@@ -6,7 +6,7 @@ title: pnpm publish
 Publishes a package to the registry.
 
 ```text
-pnpm publish [&lt;tarball>|&lt;folder>] [--tag &lt;tag>] [--access &lt;public|restricted>]
+pnpm [-r] publish [&lt;tarball>|&lt;folder>] [--tag &lt;tag>] [--access &lt;public|restricted>]
 ```
 
 When publishing a package inside a [workspace](workspace), the LICENSE file from the
@@ -14,6 +14,9 @@ root of the workspace is packed with the package (unless the package has a licen
 
 You may override some fields before publish, using the [publishConfig](../package_json#publishconfig)
 field in `package.json`.
+
+When running this command recursively (`pnpm -r publish`), pnpm will publish all
+the packages that have versions not yet published to the registry.
 
 ## Options
 
@@ -33,3 +36,9 @@ pnpm add foo@next
 ### --access &lt;public|restricted>
 
 Tells the registry whether the published package should be public or restricted.
+
+### --filter &lt;package_selector>
+
+Added in: 4.6.0
+
+[Read more about filtering.](../filtering)

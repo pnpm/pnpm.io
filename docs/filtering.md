@@ -91,3 +91,17 @@ pnpm install --filter ...^foo
 ## --filter ./&lt;directory>
 
 Added in: v2.15.0
+
+## --filter [&lt;since>]
+
+Added in: v4.6.0
+
+Selects all the packages changed since the specified commit/branch. May be
+suffixed or prefixed with `...` to include dependencies/dependents.
+
+For example, the next command will run test in all changed packages since
+`master` and on any dependent packages.
+
+```text
+pnpm test --filter ...[origin/master]
+```
