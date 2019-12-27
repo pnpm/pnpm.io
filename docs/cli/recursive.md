@@ -68,7 +68,7 @@ Added in: v2.9.0
 pnpm recursive exec -- &lt;command> [args...]
 ```
 
-This command runs a command in each package of the multi-package repo.
+This command runs a command in each package of the monorepo.
 
 The name of the current package is available through the environment variable `PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0).
 

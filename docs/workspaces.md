@@ -3,7 +3,11 @@ id: workspaces
 title: Workspaces
 ---
 
-pnpm supports concurrent actions in multi-package repositories (workspaces). A workspace must have a [pnpm-workspace.yaml](pnpm-workspace_yaml) file in
+pnpm has built-in support for monorepos (a.k.a. multi-package repositories,
+multi-project repositories or monolithic repositories). You can create a
+workspace to unite multiple projects inside a single repository.
+
+A workspace must have a [pnpm-workspace.yaml](pnpm-workspace_yaml) file in
 its root. A workspace also may have a [.npmrc](npmrc) in its root.
 
 ## Workspace ranges (workspace:)
@@ -63,13 +67,13 @@ Added in: v2.14.0
 * Type: **Boolean**
 
 When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
-This is very convenient in a multi-package repository.
+This is very convenient in a monorepo.
 
 When `false`, packages are downloaded and installed from the registry. However, workspace packages can still be linked by using the `workspace:` range protocol. e.g. `pnpm add batman@workspace:*`
 
 #### Usage
 
-Create a `.npmrc` file in the root of your multi-package repository with the following content:
+Create a `.npmrc` file in the root of your monorepo with the following content:
 
 ```
 link-workspace-packages = true
@@ -97,7 +101,7 @@ A shared lockfile also means that all dependencies of all workspace packages wil
 Advantages of this option:
 
 * every dependency is a singleton
-* faster installations in a multi-package repository
+* faster installations in a monorepo
 * fewer changes in code reviews
 
 **NOTE:** even though all the dependencies will be hard linked into the root `node_modules`, packages will have access only to those dependencies

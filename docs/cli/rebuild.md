@@ -18,7 +18,7 @@ pnpm rebuild [-r [--workspace-concurrency=&lt;number>] [--no-sort]]
 
 ### --recursive, -r
 
-This command runs the **pnpm build** command in every package of the multi-package repo.
+This command runs the **pnpm build** command in every package of the monorepo.
 
 ### --filter &lt;package_selector>
 
