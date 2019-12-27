@@ -470,8 +470,17 @@
       "version-4.6/cli/version-4.6-publish": {
         "title": "pnpm publish"
       },
+      "version-4.6/cli/version-4.6-rebuild": {
+        "title": "pnpm rebuild"
+      },
+      "version-4.6/cli/version-4.6-recursive": {
+        "title": "pnpm recursive"
+      },
       "version-4.6/version-4.6-filtering": {
         "title": "Filtering"
+      },
+      "version-4.6/version-4.6-workspaces": {
+        "title": "Workspaces"
       }
     },
     "links": {
