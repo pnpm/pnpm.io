@@ -59,3 +59,16 @@ If specific packages are updated, the command will fail if any of the updated
 dependencies is not found inside the workspace. For instance, the following
 command fails if `express` is not a workspace package:
 `pnpm up -r --workspace express`.
+
+### --production
+
+Update packages only in `dependencies` and `optionalDependencies`.
+
+### --dev
+
+Update packages only in `devDependencies`.
+
+### --no-optional
+
+Don't update packages in `optionalDependencies`.
+
