@@ -8,11 +8,11 @@ Removes extraneous packages
 ## Synopsis
 
 ```text
-pnpm prune [--production | --prod]
+pnpm prune [--prod]
 ```
 
 ## Options
 
-### --prod, --production
+### --prod
 
 Remove the packages specified in `devDependencies`.

@@ -62,7 +62,7 @@ Added in: v4.7.0
 
 Checks only `devDependencies`.
 
-### --production
+### --prod
 
 Added in: v4.7.0
 

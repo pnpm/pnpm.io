@@ -48,14 +48,11 @@ Do not execute any scripts defined in the project `package.json` and its depende
 
 > Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
 
-### --production[=true|false]
-
-* Default: **false**
-* Type: **Boolean**
+### --prod
 
 pnpm will not install any package listed in `devDependencies` if the `NODE_ENV` environment variable is set to production. Use this flag to instruct pnpm to ignore `NODE_ENV` and take its production-or-not status from this flag instead.
 
-> Notes: `--production` is the same as `--production=true`. `--prod` is an alias of `--production`.
+> Notes: `--prod` is the same as `--prod=true`. `--production` is an alias of `--prod`.
 
 ### --lockfile-only
 

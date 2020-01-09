@@ -27,3 +27,7 @@ Only audit dev dependencies.
 ### --prod
 
 Only audit prod dependencies.
+
+### --no-optional
+
+Don't audit "optionalDependencies".
