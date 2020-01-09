@@ -92,6 +92,38 @@ pnpm install --filter ...^foo
 
 Added in: v2.15.0
 
+## --filter {&lt;directory>}
+
+Added in: v4.7.0
+
+Includes all projects that are under the specified directory.
+
+It may be used with "..." to select dependents/dependencies as well:
+
+```text
+pnpm &lt;cmd> --filter ...{&lt;directory>}
+pnpm &lt;cmd> --filter {&lt;directory>}...
+pnpm &lt;cmd> --filter ...{&lt;directory>}...
+```
+
+It may be combined with `[<since>]`. For instance, to select all changed projects
+inside a directory:
+
+```text
+pnpm &lt;cmd> --filter {packages}[origin/master]
+pnpm &lt;cmd> --filter ...{packages}[origin/master]
+pnpm &lt;cmd> --filter {packages}[origin/master]...
+pnpm &lt;cmd> --filter ...{packages}[origin/master]...
+```
+
+Or you may select all packages from a directory with names matching the given pattern:
+
+```text
+pnpm &lt;cmd> --filter @babel/*{components}
+pnpm &lt;cmd> --filter @babel/*{components}[origin/master]
+pnpm &lt;cmd> --filter ...@babel/*{components}[origin/master]
+```
+
 ## --filter [&lt;since>]
 
 Added in: v4.6.0

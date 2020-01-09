@@ -46,6 +46,30 @@ Print details.
 
 ### --no-table
 
-Added in: 4.0.0
+Added in: v4.0.0
 
 Prints the outdated dependencies in a list, not in a table. Good for small consoles.
+
+### --compatible
+
+Added in: v4.7.0
+
+Prints only versions that satisfy specs in `package.json`.
+
+### --dev
+
+Added in: v4.7.0
+
+Checks only `devDependencies`.
+
+### --production
+
+Added in: v4.7.0
+
+Checks only `dependencies` and `optionalDependencies`.
+
+### --no-optional
+
+Added in: v4.7.0
+
+Doesn't check `optionalDependencies`.
