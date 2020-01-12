@@ -30,3 +30,16 @@ from every package found in subdirectories.
 ### --global
 
 Remove a global package.
+
+### --save-dev, -D
+
+Remove the dependency only from `devDependencies`.
+
+### --save-optional, -O
+
+Remove the dependency only from `optionalDependencies`.
+
+### --save-prod, -P
+
+Remove the dependency only from `dependencies`.
+
