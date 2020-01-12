@@ -482,17 +482,35 @@
       "version-4.6/version-4.6-workspaces": {
         "title": "Workspaces"
       },
+      "version-4.7/cli/version-4.7-audit": {
+        "title": "pnpm audit"
+      },
+      "version-4.7/cli/version-4.7-install": {
+        "title": "pnpm install"
+      },
       "version-4.7/cli/version-4.7-list": {
         "title": "pnpm list"
       },
       "version-4.7/cli/version-4.7-outdated": {
         "title": "pnpm outdated"
       },
+      "version-4.7/cli/version-4.7-prune": {
+        "title": "pnpm prune"
+      },
+      "version-4.7/cli/version-4.7-remove": {
+        "title": "pnpm remove"
+      },
       "version-4.7/cli/version-4.7-update": {
         "title": "pnpm update"
       },
+      "version-4.7/cli/version-4.7-why": {
+        "title": "pnpm why"
+      },
       "version-4.7/version-4.7-filtering": {
         "title": "Filtering"
+      },
+      "version-4.7/version-4.7-only-allow-pnpm": {
+        "title": "Only allow pnpm"
       }
     },
     "links": {

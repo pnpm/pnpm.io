@@ -61,7 +61,7 @@ dependencies is not found inside the workspace. For instance, the following
 command fails if `express` is not a workspace package:
 `pnpm up -r --workspace express`.
 
-### --production
+### --prod
 
 Update packages only in `dependencies` and `optionalDependencies`.
 
