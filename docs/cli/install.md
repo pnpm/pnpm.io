@@ -54,6 +54,14 @@ pnpm will not install any package listed in `devDependencies` if the `NODE_ENV` 
 
 > Notes: `--prod` is the same as `--prod=true`. `--production` is an alias of `--prod`.
 
+### --dev
+
+Only `devDependencies` are installed regardless of the `NODE_ENV`.
+
+### --no-optional
+
+`optionalDependencies` are not installed.
+
 ### --lockfile-only
 
 Added in: v1.26.0 (initially named `shrinkwrap-only`)
