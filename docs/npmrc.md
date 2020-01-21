@@ -429,3 +429,11 @@ Added in: v4.2.0
 * Type: **path**
 
 Specify a custom directory to store global packages.
+
+### npm-path
+
+Added in: v4.8.0
+
+* Type: **path**
+
+The location of the npm binary that pnpm uses for some actions (like publishing).

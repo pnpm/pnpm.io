@@ -72,3 +72,8 @@ Update packages only in `devDependencies`.
 
 Don't update packages in `optionalDependencies`.
 
+### --interactive, -i
+
+Added in: v4.8.0
+
+Show outdated dependencies and select which ones to update.
