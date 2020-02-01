@@ -7,6 +7,19 @@ Aliases: `up`
 
 `pnpm update` updates packages to their latest version based on the specified range.
 
+When used without arguments, updates all dependencies.
+You can use patterns to update all dependencies that match it.
+
+## Synopsis
+
+```text
+pnpm update [-r] [--filter &lt;package selector>]
+              [&lt;package pattern> ...]
+
+pnpm recursive update [--filter &lt;package selector>]
+                        [&lt;package pattern> ...]
+```
+
 ## tl;dr
 
 |Command|Meaning|
@@ -14,6 +27,7 @@ Aliases: `up`
 |`pnpm up` |updates all dependencies. Adheres ranges specified in `package.json` |
 |`pnpm up --latest` |updates all dependencies. Ignores ranges specified in `package.json` |
 |`pnpm up foo@2` |updates `foo` to the latest v2 |
+|`pnpm up @babel/*` |updates all dependencies with the `@babel` scope |
 
 ## Options
 
