@@ -7,7 +7,7 @@ Aliases: `up`
 
 `pnpm update` updates packages to their latest version based on the specified range.
 
-When used without arguments, updates all dependencies.
+When used without arguments, updates all dopependencies.
 You can use patterns to update all dependencies that match it.
 
 ## Synopsis

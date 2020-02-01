@@ -80,6 +80,9 @@
       "cli/why": {
         "title": "pnpm why"
       },
+      "completion": {
+        "title": "Command line tab-comletion"
+      },
       "configuring": {
         "title": "Configuring"
       },
