@@ -422,6 +422,24 @@
       "version-4.1/version-4.1-npmrc": {
         "title": ".npmrc"
       },
+      "version-4.10/cli/version-4.10-audit": {
+        "title": "pnpm audit"
+      },
+      "version-4.10/cli/version-4.10-install": {
+        "title": "pnpm install"
+      },
+      "version-4.10/cli/version-4.10-list": {
+        "title": "pnpm list"
+      },
+      "version-4.10/cli/version-4.10-outdated": {
+        "title": "pnpm outdated"
+      },
+      "version-4.10/cli/version-4.10-update": {
+        "title": "pnpm update"
+      },
+      "version-4.10/cli/version-4.10-why": {
+        "title": "pnpm why"
+      },
       "version-4.2/cli/version-4.2-list": {
         "title": "pnpm list"
       },
