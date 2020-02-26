@@ -52,11 +52,11 @@ Max display depth of the dependency tree.
 `pnpm ls --depth 0` will list direct dependencies only.
 `pnpm ls --depth -1` will list projects only. Useful inside a workspace when used with the `-r` option.
 
-### --prod
+### --prod, -P
 
 Display only the dependency graph for packages in `dependencies` and `optionalDependencies`.
 
-### --dev
+### --dev, -D
 
 Display only the dependency graph for packages in `devDependencies`.
 

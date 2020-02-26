@@ -20,11 +20,11 @@ Only print advisories with severity greater than or equal to `<severity>`.
 
 Output audit report in JSON format.
 
-### --dev
+### --dev, -D
 
 Only audit dev dependencies.
 
-### --prod
+### --prod, -P
 
 Only audit prod dependencies.
 

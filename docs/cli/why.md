@@ -40,11 +40,11 @@ Show parseable output instead of tree view.
 
 List packages in the global install directory instead of in the current project.
 
-### --prod
+### --prod, -P
 
 Display only the dependency tree for packages in `dependencies`.
 
-### --dev, --only dev
+### --dev, -D
 
 Display only the dependency tree for packages in `devDependencies`.
 

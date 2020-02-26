@@ -5,6 +5,9 @@ title: pnpm install
 
 `pnpm install` is used to install all dependencies for a project.
 
+In a CI environment, installation fails if a lockfile is present but needs an
+update.
+
 ![](/img/demos/pnpm-install.svg)
 
 ## tl;dr
@@ -48,13 +51,11 @@ Do not execute any scripts defined in the project `package.json` and its depende
 
 > Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
 
-### --prod
+### --prod, -P
 
 pnpm will not install any package listed in `devDependencies` if the `NODE_ENV` environment variable is set to production. Use this flag to instruct pnpm to ignore `NODE_ENV` and take its production-or-not status from this flag instead.
 
-> Notes: `--prod` is the same as `--prod=true`. `--production` is an alias of `--prod`.
-
-### --dev
+### --dev, -D
 
 Only `devDependencies` are installed regardless of the `NODE_ENV`.
 

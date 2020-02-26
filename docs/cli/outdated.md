@@ -56,13 +56,13 @@ Added in: v4.7.0
 
 Prints only versions that satisfy specs in `package.json`.
 
-### --dev
+### --dev, -D
 
 Added in: v4.7.0
 
 Checks only `devDependencies`.
 
-### --prod
+### --prod, -P
 
 Added in: v4.7.0
 
