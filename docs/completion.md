@@ -1,6 +1,6 @@
 ---
 id: completion
-title: Command line tab-comletion
+title: Command line tab-completion
 ---
 
 Added in: v4.9.0
