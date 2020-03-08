@@ -76,10 +76,13 @@ When used, only updates `pnpm-lock.yaml` and `package.json` instead of checking 
 
 Added in: v1.37.1 (initially named `frozen-shrinkwrap`)
 
-* Default: **false**
+* Default:
+  * For non-CI: **false**
+  * For CI: **true**, if a lockfile is present
 * Type: **Boolean**
 
-If `true`, pnpm doesn't generate a lockfile and fails if an update is needed.
+If `true`, pnpm doesn't generate a lockfile and fails if an update is needed or
+no lockfile is present.
 
 ### --reporter=&lt;name>
 
