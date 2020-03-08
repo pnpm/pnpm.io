@@ -440,6 +440,9 @@
       "version-4.10/cli/version-4.10-why": {
         "title": "pnpm why"
       },
+      "version-4.11/cli/version-4.11-install": {
+        "title": "pnpm install"
+      },
       "version-4.11/version-4.11-npmrc": {
         "title": ".npmrc"
       },
