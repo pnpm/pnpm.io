@@ -85,6 +85,13 @@ const users = [
     pinned: true,
     width: 250,
   },
+  {
+    caption: 'SwissDev Jobs',
+    image: '/img/users/swissdev-javascript-jobs.svg',
+    infoLink: 'https://swissdevjobs.ch/jobs/JavaScript/All/',
+    pinned: true,
+    width: 200,
+  },
 ];
 
 const siteConfig = {
