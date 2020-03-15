@@ -9,10 +9,10 @@ Using a [standalone script](https://github.com/pnpm/self-installer#readme):
 curl -L https://unpkg.com/@pnpm/self-installer | node
 ```
 
-Via npm:
+Via npx:
 
 ```sh
-npm add -g pnpm
+npx pnpm add -g pnpm
 ```
 
 Once you first installed pnpm, you can upgrade it using pnpm:
