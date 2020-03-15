@@ -12,8 +12,11 @@ On [Travis CI](https://travis-ci.org/), you can use pnpm for installing your dep
 ```yaml
 cache:
   npm: false
+  directories:
+    - "~/.pnpm-store"
 before_install:
   - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
 ```
