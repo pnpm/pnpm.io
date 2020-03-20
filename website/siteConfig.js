@@ -92,6 +92,13 @@ const users = [
     pinned: true,
     width: 200,
   },
+  {
+    caption: 'Tokopedia',
+    image: '/img/users/tokopedia.svg',
+    infoLink: 'https://www.tokopedia.com/',
+    pinned: true,
+    width: 200,
+  },
 ];
 
 const siteConfig = {
