@@ -446,6 +446,15 @@
       "version-4.11/version-4.11-npmrc": {
         "title": ".npmrc"
       },
+      "version-4.12/cli/version-4.12-remove": {
+        "title": "pnpm remove"
+      },
+      "version-4.12/version-4.12-continuous-integration": {
+        "title": "Continuous Integration"
+      },
+      "version-4.12/version-4.12-installation": {
+        "title": "Installation"
+      },
       "version-4.2/cli/version-4.2-list": {
         "title": "pnpm list"
       },
