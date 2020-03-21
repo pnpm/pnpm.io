@@ -6,7 +6,7 @@ title: Installation
 Using a [standalone script](https://github.com/pnpm/self-installer#readme):
 
 ```sh
-curl -L https://unpkg.com/@pnpm/self-installer | node
+curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
 ```
 
 Via npx:
