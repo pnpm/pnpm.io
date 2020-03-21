@@ -3,7 +3,7 @@ id: remove
 title: pnpm remove
 ---
 
-Removes packages from `node_modules` and from the project's `packages.json`.
+Removes packages from `node_modules` and from the project's `package.json`.
 
 ```text
 pnpm remove [-r] [--filter &lt;package_selector>] &lt;pkg>...
