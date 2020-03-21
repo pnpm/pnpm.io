@@ -11,7 +11,7 @@ pnpm recursive remove [--filter &lt;package_selector>] &lt;pkg>...
 pnpm multi remove [--filter &lt;package_selector>] &lt;pkg>...
 ```
 
-Aliases: rm, r, uninstall, un
+Aliases: rm, uninstall, un
 
 ## Options
 
