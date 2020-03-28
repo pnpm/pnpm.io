@@ -99,6 +99,12 @@ const users = [
     pinned: true,
     width: 200,
   },
+  {
+    caption: 'Tradie Training',
+    image: '/img/users/tradie-training.png',
+    infoLink: 'https://tt.edu.au/',
+    pinned: true,
+  },
 ];
 
 const siteConfig = {
