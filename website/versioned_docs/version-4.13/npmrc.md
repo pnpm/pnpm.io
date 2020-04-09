@@ -1,6 +1,7 @@
 ---
-id: npmrc
+id: version-4.13-npmrc
 title: .npmrc
+original_id: npmrc
 ---
 
 pnpm gets its config settings from the command line, environment variables, and `.npmrc` files.
