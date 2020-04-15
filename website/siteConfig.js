@@ -105,6 +105,12 @@ const users = [
     infoLink: 'https://tt.edu.au/',
     pinned: true,
   },
+  {
+    caption: 'Telia Company',
+    image: '/img/users/telia.png',
+    infoLink: 'https://www.telia.se/',
+    pinned: true,
+  }
 ];
 
 const siteConfig = {
