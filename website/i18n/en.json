@@ -458,6 +458,9 @@
       "version-4.13/version-4.13-npmrc": {
         "title": ".npmrc"
       },
+      "version-4.14/version-4.14-npmrc": {
+        "title": ".npmrc"
+      },
       "version-4.2/cli/version-4.2-list": {
         "title": "pnpm list"
       },
