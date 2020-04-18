@@ -104,6 +104,15 @@ then the store will be created in `D:\.pnpm-store`.
 It is possible to set a store from a different disk but in that case pnpm will copy, not link, packages from the store.
 Hard links are possible only inside a filesystem.
 
+### modules-dir
+
+Added in: v4.14.0
+
+* Default: **node_modules**
+* Type: **path**
+
+The directory in which dependencies will be installed (instead of `node_modules`).
+
 ### network-concurrency
 
 * Default: **16**
