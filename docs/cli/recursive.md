@@ -65,7 +65,7 @@ pnpm recursive test --no-sort
 Added in: v2.9.0
 
 ```test
-pnpm recursive exec -- &lt;command> [args...]
+pnpm recursive exec -- <command> [args...]
 ```
 
 This command runs a command in each package of the monorepo.
