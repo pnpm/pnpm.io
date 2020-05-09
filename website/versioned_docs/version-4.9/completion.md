@@ -1,6 +1,6 @@
 ---
 id: version-4.9-completion
-title: Command line tab-comletion
+title: Command line tab-completion
 original_id: completion
 ---
 
