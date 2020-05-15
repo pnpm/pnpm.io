@@ -110,6 +110,13 @@ const users = [
     image: '/img/users/telia.png',
     infoLink: 'https://www.telia.se/',
     pinned: true,
+  },
+  {
+    caption: 'TakeShape',
+    image: '/img/users/takeshape.svg',
+    infoLink: 'https://www.takeshape.io/',
+    pinned: true,
+    width: 290,
   }
 ];
 
