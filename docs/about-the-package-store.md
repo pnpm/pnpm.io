@@ -38,13 +38,13 @@ A file in the root of store that contains information about projects depending o
 
 ```json
 {
-  "/home/john_smith/src/ied": [
-    "registry.npmjs.org/npm/3.10.2"
+  "registry.npmjs.org/npm/3.10.2": [
+    "/home/john_smith/src/ied"
   ],
-  "/home/john_smith/src/ied": [
-    "registry.npmjs.org/arr-flatten/1.0.1",
-    "registry.npmjs.org/byline/5.0.0",
-    "registry.npmjs.org/cache-manager/2.2.0"
+  "registry.npmjs.org/arr-flatten/1.0.1": [
+    "/home/john_smith/src/ied",
+    "/home/john_smith/src/new_project",
+    "/home/betsy_smith/src/abc",
   ]
 }
 ```
