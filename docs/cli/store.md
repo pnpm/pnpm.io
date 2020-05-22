@@ -34,27 +34,6 @@ Usage examples:
 pnpm store add express@4 typescript@2
 ```
 
-### pnpm store usages
-
-Added in: v2.21.0
-
-```text
-pnpm store usages &lt;pkg>...
-```
-
-Lists all pnpm projects on the current filesystem that depend on the specified packages in the store.
-
-Usage examples:
-
-```sh
-pnpm store usages flatmap-stream
-pnpm store usages is-odd@3.0.0 is-even@2.0.0
-pnpm store usages @babel/core ansi-regex
-```
-
-> Note that this command might be slow for very large stores.
-> We are working on improving performance.
-
 ### pnpm store prune
 
 ```sh

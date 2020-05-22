@@ -3,6 +3,8 @@ id: about-package-store
 title: About the package store
 ---
 
+**This page is outdated and should be rewritten for pnpm v5**
+
 A store is a folder that contains packages and information about projects that are using them.
 The store does not include the `node_modules` folder of any of the packages, unless the package has
 [bundled dependencies](https://docs.npmjs.com/files/package.json#bundleddependencies).

@@ -64,10 +64,10 @@ This feature allows you to not have to depend on something else than your local 
 Added in: v2.14.0
 
 * Default: **true**
-* Type: **Boolean**
+* Type: **true**, **false**, **deep**
 
 When `true`, locally available packages are linked to `node_modules` instead of being downloaded from the registry.
-This is very convenient in a monorepo.
+This is very convenient in a monorepo. If you need local packages also be linked to subdependencies, you can use the `deep` setting (since v5).
 
 When `false`, packages are downloaded and installed from the registry. However, workspace packages can still be linked by using the `workspace:` range protocol. e.g. `pnpm add batman@workspace:*`
 

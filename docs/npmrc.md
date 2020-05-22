@@ -127,19 +127,6 @@ Controls the maximum number of HTTP requests that can be done simultaneously.
 
 Controls the number of child processes run parallelly to build node modules.
 
-### lock
-
-* Default: **true**
-* Type: **Boolean**
-
-Dangerous! If false, the store is not locked. It means that several installations using the same
-store can run simultaneously.
-
-Can be passed in via a CLI option. `--no-lock` to set it to false. E.g.: `pnpm install --no-lock`.
-
-> If you experience issues similar to the ones described in [#594](https://github.com/pnpm/pnpm/issues/594), use this option to disable locking.
-> In the meanwhile, we'll try to find a solution that will make locking work for everyone.
-
 ### loglevel
 
 Added in: v4.13.0
@@ -149,15 +136,6 @@ Added in: v4.13.0
 
 What level of logs to report. Any logs at or higher than the given level will be shown.
 Or use `--silent` to turn off all logging.
-
-### independent-leaves
-
-* Default: **false**
-* Type: **Boolean**
-
-If true, symlinks leaf dependencies directly from the global store. Leaf dependencies are
-packages that have no dependencies of their own. Setting this config to `true` might break some packages
-that rely on location but gives an average of **8% installation speed improvement**.
 
 ### verify-store-integrity
 
@@ -306,18 +284,6 @@ Added in: v2.15.0
 
 If true, commands fail on missing or invalid peer dependencies.
 
-### resolution-strategy
-
-Added in: v3.1.0
-
-* Default: **fewer-dependencies**
-* Type: **fast**, **fewer-dependencies**
-
-Sets the resolutions strategy used during installation.
-
-* **fewer-dependencies** - the default resolution strategy. Already installed dependencies are preferred even if newer versions satisfy a range
-* **fast** - speed is preferred over deduplication
-
 ### use-beta-cli
 
 Added in: v3.6.0
@@ -453,7 +419,7 @@ If set explicitly to false, then installing as a non-root user will fail.
 
 Added in: v4.11.0
 
-* Default : **false**
+* Default : **true** (since v5)
 * Type: **Boolean**
 
 When true, `pnpm publish` checks if current branch is your publish branch
