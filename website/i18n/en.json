@@ -144,7 +144,7 @@
         "title": "Symlinked `node_modules` structure"
       },
       "workspaces": {
-        "title": "Workspaces"
+        "title": "Workspace"
       },
       "version-2/version-2-about-package-store": {
         "title": "About the package store"
@@ -571,6 +571,30 @@
       },
       "version-4.9/version-4.9-completion": {
         "title": "Command line tab-completion"
+      },
+      "version-5.0/version-5.0-about-package-store": {
+        "title": "About the package store"
+      },
+      "version-5.0/cli/version-5.0-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-5.0/cli/version-5.0-store": {
+        "title": "pnpm store"
+      },
+      "version-5.0/cli/version-5.0-update": {
+        "title": "pnpm update"
+      },
+      "version-5.0/version-5.0-installation": {
+        "title": "Installation"
+      },
+      "version-5.0/version-5.0-motivation": {
+        "title": "Motivation"
+      },
+      "version-5.0/version-5.0-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-5.0/version-5.0-workspaces": {
+        "title": "Workspace"
       }
     },
     "links": {
