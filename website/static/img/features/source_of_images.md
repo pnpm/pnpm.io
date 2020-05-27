@@ -1,5 +1,4 @@
-speed: https://commons.wikimedia.org/wiki/File:Speed_ballonicon2.svg
-author: pixelbuddha
+speed: https://www.svgrepo.com/svg/280658/races-speed
 
 efficiency: https://www.svgrepo.com/svg/16928/hard-disk
 
