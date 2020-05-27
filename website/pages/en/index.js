@@ -100,19 +100,19 @@ const Features = props => (
   <Block layout="fourColumn">
     {[
       {
-        content: <translate>pnpm is up to 2x faster than the alternatives (see [benchmarks](https://github.com/pnpm/node-package-manager-benchmark))</translate>,
+        content: <translate>pnpm is up to **2x faster** than the alternatives (see [benchmarks](https://github.com/pnpm/node-package-manager-benchmark))</translate>,
         image: imgUrl('features/fast.svg'),
         imageAlign: 'top',
         title: <translate>Fast</translate>,
       },
       {
-        content: <translate>One version of a package is saved only ever once on a disk. So you save dozens of gigabytes of disk space!</translate>,
+        content: <translate>Files inside **node_modules** are linked from a single **content-addressable storage**</translate>,
         image: imgUrl('features/efficient.svg'),
         imageAlign: 'top',
         title: <translate>Efficient</translate>,
       },
       {
-        content: <translate>pnpm creates a non-flat `node_modules`, so code has no access to arbitrary packages</translate>,
+        content: <translate>pnpm creates a non-flat **node_modules**, so code has no access to arbitrary packages</translate>,
         image: imgUrl('features/strict.svg'),
         imageAlign: 'top',
         title: <translate>Strict</translate>,
@@ -199,37 +199,6 @@ class Index extends React.Component {
         <HomeSplash language={language} />
         <div className="mainContainer">
           <Features />
-          <Container background="light" padding={["bottom", "top"]}>
-            <h2><translate>Background</translate></h2>
-            <p>
-              <MarkdownBlock>
-                <translate>
-                  pnpm uses a content-addressable filesystem to store all files from all module directories on a disk.
-                  When using npm or Yarn, if you have 100 projects using lodash, you will have 100 copies of lodash on disk.
-                  With pnpm, lodash will be stored in a content-addressable storage, so:
-
-                  1. If you depend on different versions of lodash, only the files that differ are added to the store.
-                    If lodash has 100 files, and a new version has a change only in one of those files,
-                    `pnpm update` will only add 1 new file to the storage.
-                  1. All the files are saved in a single place on the disk. When packages are installed, their files are hard-linked
-                    from that single place consuming no additional disk space.
-
-                  As a result, you save gigabytes of space on your disk and you have a lot faster installations!
-                  If you'd like more details about the unique `node_modules` structure that pnpm creates and
-                  why it works fine with the Node.js ecosystem, read this small article: [Flat node_modules is not the only way](https://medium.com/pnpm/flat-node-modules-is-not-the-only-way-d2e40f7296a3).
-              </translate>
-              </MarkdownBlock>
-              <p>
-              </p>
-              <MarkdownBlock>
-                <translate>
-                  As a result, you save gigabytes of space on your disk and you have a lot faster installations!
-                  If you'd like more details about the unique `node_modules` structure that pnpm creates and
-                  why it works fine with the Node.js ecosystem, read this small article: [Flat node_modules is not the only way](https://medium.com/pnpm/flat-node-modules-is-not-the-only-way-d2e40f7296a3).
-              </translate>
-              </MarkdownBlock>
-            </p>
-          </Container>
           <Showcase language={language} />
           <Container background="light" padding={["bottom", "top"]}>
             <h2><translate>What developers are saying</translate></h2>
