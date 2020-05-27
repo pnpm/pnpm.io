@@ -130,7 +130,7 @@ const siteConfig = {
     {doc: 'motivation', label: 'Docs'},
     {doc: 'faq', label: 'FAQ'},
     { search: true },
-    {href: 'https://medium.com/pnpm', label: 'Blog'},
+    {blog: true, label: 'Blog'},
   ],
   algolia: {
     apiKey: '802b1d6ee5450a4296581a8e14aff417',
