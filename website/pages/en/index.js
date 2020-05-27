@@ -112,6 +112,12 @@ const Features = props => (
         title: <translate>Efficient</translate>,
       },
       {
+        content: <translate>pnpm has built-in support for multiple packages in a repository</translate>,
+        image: imgUrl('features/monorepo.svg'),
+        imageAlign: 'top',
+        title: <translate>Supports monorepos</translate>,
+      },
+      {
         content: <translate>pnpm creates a non-flat **node_modules**, so code has no access to arbitrary packages</translate>,
         image: imgUrl('features/strict.svg'),
         imageAlign: 'top',
@@ -200,31 +206,7 @@ class Index extends React.Component {
         <div className="mainContainer">
           <Features />
           <Showcase language={language} />
-          <Container background="light" padding={["bottom", "top"]}>
-            <h2><translate>What developers are saying</translate></h2>
-            <div className="gridBlock">
-              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote className="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr"><translate>Shoutout to the people behind pnpm; it makes looking at node module source code so much easier because I don&#39;t have to sift through the hundreds of modules everything pulls in to find the one I want &lt;3</translate></p>&mdash; 🏳️‍🌈👩‍💻 Opal Symes (she/her) (@software_opal) <a href="https://twitter.com/software_opal/status/1033834325039505408?ref_src=twsrc%5Etfw"><translate>August 26, 2018</translate></a></blockquote>
-              </div>
-              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote className="twitter-tweet" data-cards="hidden" data-partner="tweetdeck"><p lang="en" dir="ltr"><translate>PNPM is good, even on small apps. My node_modules for a little SPA using Gulp went from 86.7Mb to 44.1Mb. And it&#39;s way faster than NPM.</translate> <a href="https://t.co/aiZTCvMU3z">https://t.co/aiZTCvMU3z</a><a href="https://twitter.com/hashtag/nodejs?src=hash&amp;ref_src=twsrc%5Etfw">#nodejs</a> via <a href="https://twitter.com/pnpmjs?ref_src=twsrc%5Etfw">@pnpmjs</a></p>&mdash; | :::::::: | (@Paralellos) <a href="https://twitter.com/Paralellos/status/1031695443489566721?ref_src=twsrc%5Etfw"><translate>August 21, 2018</translate></a></blockquote>
-              </div>
-              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote className="twitter-tweet" data-partner="tweetdeck"><p lang="en" dir="ltr"><translate>pnpm is gr8 tbh and 💚 the devs. Have you given it a whirl yet?</translate> <a href="https://t.co/WB9IkkElAB">https://t.co/WB9IkkElAB</a></p>&mdash; actually a kat girl (@maybekatz) <a href="https://twitter.com/maybekatz/status/1031821440411086848?ref_src=twsrc%5Etfw"><translate>August 21, 2018</translate></a></blockquote>
-              </div>
-              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote className="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">
-                  <translate>Simple and genius idea, so that you always will wonder why you didn&#39;t think of it yourself </translate><a href="https://t.co/jIMa2U4yym">https://t.co/jIMa2U4yym</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> <translate>(but, pruning?)</translate></p>&mdash; Michel Weststrate (@mweststrate) <a href="https://twitter.com/mweststrate/status/861533946668089346">May 8, 2017</a></blockquote>
-              </div>
-              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote className="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><translate>I&#39;ve been long advocating for</translate> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> — <translate>it&#39;s like a hidden gem in Node ecosystem. Try it, it is mature and performant.</translate> <a href="https://t.co/ie91RMYlSP">https://t.co/ie91RMYlSP</a></p>&mdash; Andrey Popp (@andreypopp) <a href="https://twitter.com/andreypopp/status/861550953526206464"><translate>May 8, 2017</translate></a></blockquote>
-              </div>
-              <div className="blockElement alignCenter threeByGridBlock imageAlignTop">
-                <blockquote className="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/wmhilton">@wmhilton</a> <a href="https://twitter.com/yarnpkg">@yarnpkg</a> <a href="https://twitter.com/pnpmjs">@pnpmjs</a> <translate>just installed it and it worked like a charm. I&#39;m impressed!</translate></p>&mdash; Stephan Hoyer (@cmx66) <a href="https://twitter.com/cmx66/status/854596611690942465"><translate>April 19, 2017</translate></a></blockquote>
-              </div>
-            </div>
-            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8" />
-          </Container>
+          <div style={{textAlign: 'right'}}>The octopus icon made by <a href="https://www.flaticon.com/authors/flat-icons">Flat Icons</a> from <a href="https://www.flaticon.com">flaticon.com</a></div>
         </div>
       </div>
     );
