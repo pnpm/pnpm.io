@@ -4,7 +4,7 @@ title: pnpm store
 original_id: store
 ---
 
-Managing the [package store](../about-the-package-store).
+Managing the [package store](../about-package-store).
 
 ## Commands
 
@@ -26,7 +26,7 @@ Added in: v2.12.0
 pnpm store add &lt;pkg>...
 ```
 
-Adds new packages to the pnpm store directly. 
+Adds new packages to the pnpm store directly.
 Does not modify any projects or files outside the store.
 
 Usage examples:
