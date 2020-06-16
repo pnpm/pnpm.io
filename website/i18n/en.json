@@ -598,6 +598,12 @@
       },
       "version-5.1/cli/version-5.1-run": {
         "title": "pnpm run"
+      },
+      "version-5.2/cli/version-5.2-store": {
+        "title": "pnpm store"
+      },
+      "version-5.2/version-5.2-npmrc": {
+        "title": ".npmrc"
       }
     },
     "links": {
