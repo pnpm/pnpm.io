@@ -12,11 +12,23 @@ Runs a defined package script.
 ```text
 pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=&lt;number>]]
      &lt;command> [-- &lt;args>...]
-
-pnpm multi run &lt;command> [-- &lt;args>...]
-
-pnpm recursive run &lt;command> [-- &lt;args>...]
 ```
+
+## Examples
+
+Run the `watch` task:
+
+```text
+pnpm run watch
+```
+
+Same thing without the `run` keyword will work as well:
+
+```text
+pnpm watch
+```
+
+## Details
 
 In addition to the shell’s pre-existing `PATH`, `pnpm run` adds `node_modules/.bin`
 to the `PATH` provided to `scripts`. As of v3.5, when executed inside a workspace,
