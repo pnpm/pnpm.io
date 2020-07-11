@@ -607,6 +607,12 @@
       },
       "version-5.3/cli/version-5.3-run": {
         "title": "pnpm run"
+      },
+      "version-5.4/cli/version-5.4-install": {
+        "title": "pnpm install"
+      },
+      "version-5.4/version-5.4-npmrc": {
+        "title": ".npmrc"
       }
     },
     "links": {
