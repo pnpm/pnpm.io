@@ -50,7 +50,7 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>More</h5>
-            <a href="https://medium.com/pnpm">Blog</a>
+            <a href="/blog/">Blog</a>
             <a href="https://github.com/pnpm/pnpm">GitHub</a>
             <a
               className="github-button"

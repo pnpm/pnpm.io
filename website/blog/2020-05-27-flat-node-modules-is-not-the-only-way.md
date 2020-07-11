@@ -123,4 +123,4 @@ So as you can see, even though pnpm's `node_modules` structure seems unusual at 
 1. it is completely Node.js compatible
 2. packages are nicely grouped with their dependencies
 
-The structure is a little bit [more complex](https://pnpm.js.org/docs/en/how-peers-are-resolved.html) for packages with peer dependencies but the idea is the same: using symlinks to create a nesting with a flat directory structure.
+The structure is a little bit [more complex](https://pnpm.js.org/en/how-peers-are-resolved.html) for packages with peer dependencies but the idea is the same: using symlinks to create a nesting with a flat directory structure.
