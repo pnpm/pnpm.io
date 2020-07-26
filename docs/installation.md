@@ -29,12 +29,10 @@ Via npx:
 npx pnpm add -g pnpm
 ```
 
-Once you first installed pnpm, you can upgrade it using pnpm (but see the NOTE below):
+Once you first installed pnpm, you can upgrade it using pnpm:
 
 ```sh
 pnpm add -g pnpm
 ```
-
-**NOTE!** There are [some issues](https://github.com/pnpm/pnpm/issues/1203) with `pnpm add -g <pkg>` on some systems. Any help is appreciated.
 
 > Do you wanna use pnpm on CI servers? See: [Continuous Integration](continuous-integration).
