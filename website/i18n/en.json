@@ -613,6 +613,18 @@
       },
       "version-5.4/version-5.4-npmrc": {
         "title": ".npmrc"
+      },
+      "version-5.5/cli/version-5.5-add": {
+        "title": "pnpm add <pkg>"
+      },
+      "version-5.5/version-5.5-installation": {
+        "title": "Installation"
+      },
+      "version-5.5/version-5.5-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-5.5/version-5.5-pnpm-cli": {
+        "title": "pnpm CLI"
       }
     },
     "links": {
