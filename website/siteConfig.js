@@ -117,6 +117,13 @@ const users = [
     infoLink: 'https://www.takeshape.io/',
     pinned: true,
     width: 290,
+  },
+  {
+    caption: 'Kretes',
+    image: '/img/users/kretes.svg',
+    infoLink: 'https://kretes.dev',
+    pinned: true,
+    width: 150,
   }
 ];
 
