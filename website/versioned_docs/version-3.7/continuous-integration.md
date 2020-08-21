@@ -60,7 +60,7 @@ On [Sail CI](https://sail.ci/), you can use pnpm for installing your dependencie
 
 ```yaml
 install:
-  image: znck/docker-pnpm:10
+  image: znck/pnpm:latest
   command:
     - pnpm
   args:
