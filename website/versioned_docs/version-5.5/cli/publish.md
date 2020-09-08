@@ -1,6 +1,7 @@
 ---
-id: publish
+id: version-5.5-publish
 title: pnpm publish
+original_id: publish
 ---
 
 Publishes a package to the registry.

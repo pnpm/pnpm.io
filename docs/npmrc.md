@@ -177,15 +177,6 @@ Controls the way packages are imported from the store.
 * **copy** - copy packages from the store
 * **clone** - clone (aka copy-on-write or reflink) packages from the store
 
-### publish-branch
-
-Added in: v4.11.0
-
-* Default: **master**
-* Types: **String**
-
-The main branch of the repository which is used for publishing the latest changes.
-
 ### lockfile
 
 Added in: v1.32.0 (initially named `shrinkwrap`)
@@ -446,16 +437,6 @@ Also the tag that is added to the `package@version` specified by the `pnpm tag` 
 
 Set to true to suppress the UID/GID switching when running package scripts.
 If set explicitly to false, then installing as a non-root user will fail.
-
-### git-checks
-
-Added in: v4.11.0
-
-* Default : **true** (since v5)
-* Type: **Boolean**
-
-When true, `pnpm publish` checks if current branch is your publish branch
-(master by default), clean, and up-to-date.
 
 ### global-dir
 

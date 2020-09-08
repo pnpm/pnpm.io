@@ -617,6 +617,9 @@
       "version-5.5/cli/version-5.5-add": {
         "title": "pnpm add <pkg>"
       },
+      "version-5.5/cli/version-5.5-publish": {
+        "title": "pnpm publish"
+      },
       "version-5.5/version-5.5-installation": {
         "title": "Installation"
       },
