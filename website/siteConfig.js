@@ -124,6 +124,13 @@ const users = [
     infoLink: 'https://kretes.dev',
     pinned: true,
     width: 150,
+  },
+  {
+    caption: 'tinyhttp',
+    image: '/img/users/tinyhttp.svg',
+    infoLink: 'https://tinyhttp.v1rtl.site',
+    pinned: true,
+    width: 180
   }
 ];
 
