@@ -1,0 +1,86 @@
+{
+  "version-5.5-docs": {
+    "Introduction": [
+      "version-5.5-motivation",
+      "version-5.5-installation"
+    ],
+    "Usage": [
+      "version-5.5-pnpm-cli",
+      "version-5.5-pnpx-cli",
+      "version-5.5-configuring",
+      "version-5.5-filtering"
+    ],
+    "CLI commands": [
+      {
+        "type": "subcategory",
+        "label": "Manage dependencies",
+        "ids": [
+          "version-5.5-cli/add",
+          "version-5.5-cli/install",
+          "version-5.5-cli/update",
+          "version-5.5-cli/remove",
+          "version-5.5-cli/link",
+          "version-5.5-cli/unlink",
+          "version-5.5-cli/import",
+          "version-5.5-cli/rebuild",
+          "version-5.5-cli/prune",
+          "version-5.5-cli/install-test"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Review dependencies",
+        "ids": [
+          "version-5.5-cli/audit",
+          "version-5.5-cli/list",
+          "version-5.5-cli/outdated",
+          "version-5.5-cli/why"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Run scripts",
+        "ids": [
+          "version-5.5-cli/run",
+          "version-5.5-cli/test",
+          "version-5.5-cli/start",
+          "version-5.5-cli/stop"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Misc.",
+        "ids": [
+          "version-5.5-cli/publish",
+          "version-5.5-cli/recursive",
+          "version-5.5-cli/server",
+          "version-5.5-cli/store"
+        ]
+      }
+    ],
+    "Configuration": [
+      "version-5.5-package_json",
+      "version-5.5-npmrc",
+      "version-5.5-pnpm-workspace_yaml",
+      "version-5.5-pnpmfile"
+    ],
+    "Features": [
+      "version-5.5-workspaces",
+      "version-5.5-aliases",
+      "version-5.5-completion"
+    ],
+    "Recipes": [
+      "version-5.5-using-changesets",
+      "version-5.5-continuous-integration",
+      "version-5.5-only-allow-pnpm"
+    ],
+    "Advanced": [
+      "version-5.5-logos",
+      "version-5.5-benchmark",
+      "version-5.5-limitations",
+      "version-5.5-about-package-store",
+      "version-5.5-symlinked-node-modules-structure",
+      "version-5.5-how-peers-are-resolved"
+    ]
+  }
+}

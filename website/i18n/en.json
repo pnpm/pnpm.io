@@ -143,6 +143,9 @@
       "symlinked-node-modules-structure": {
         "title": "Symlinked `node_modules` structure"
       },
+      "using-changesets": {
+        "title": "Using Changesets with pnpm"
+      },
       "workspaces": {
         "title": "Workspace"
       },
@@ -628,6 +631,12 @@
       },
       "version-5.5/version-5.5-pnpm-cli": {
         "title": "pnpm CLI"
+      },
+      "version-5.5/version-5.5-using-changesets": {
+        "title": "Using Changesets with pnpm"
+      },
+      "version-5.5/version-5.5-workspaces": {
+        "title": "Workspace"
       }
     },
     "links": {
