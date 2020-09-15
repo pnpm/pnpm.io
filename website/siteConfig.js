@@ -131,7 +131,15 @@ const users = [
     infoLink: 'https://tinyhttp.v1rtl.site',
     pinned: true,
     width: 180
+  },
+  {
+    caption: 'Secure Code Warrior',
+    image: 'https://media.securecodewarrior.com/images/current_logo_v.png',
+    infoLink: 'https://securecodewarrior.com/',
+    pinned: true,
+    width: 200
   }
+
 ];
 
 const siteConfig = {
