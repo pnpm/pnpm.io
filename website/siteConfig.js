@@ -138,8 +138,14 @@ const users = [
     infoLink: 'https://securecodewarrior.com/',
     pinned: true,
     width: 200
-  }
-
+  },
+  {
+    caption: 'Jublia',
+    image: '/img/users/jublia.png',
+    infoLink: 'https://jublia.com/',
+    pinned: true,
+    width: 200,
+  },
 ];
 
 const siteConfig = {
