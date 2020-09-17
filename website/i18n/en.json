@@ -637,6 +637,12 @@
       },
       "version-5.5/version-5.5-workspaces": {
         "title": "Workspace"
+      },
+      "version-5.6/version-5.6-installation": {
+        "title": "Installation"
+      },
+      "version-5.6/version-5.6-pnpm-cli": {
+        "title": "pnpm CLI"
       }
     },
     "links": {

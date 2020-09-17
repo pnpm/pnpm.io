@@ -1,6 +1,7 @@
 ---
-id: pnpm-cli
+id: version-5.6-pnpm-cli
 title: pnpm CLI
+original_id: pnpm-cli
 ---
 
 Just use pnpm in place of npm:
