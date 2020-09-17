@@ -36,3 +36,14 @@ pnpm add -g pnpm
 ```
 
 > Do you wanna use pnpm on CI servers? See: [Continuous Integration](continuous-integration).
+
+## Compatibility
+
+Here is a list of past pnpm versions with respective Node.js version support.
+
+| Node.js | pnpm |
+| -- | -- |
+| 4 | 1 |
+| 6 | 2 |
+| 8 | 3 |
+| 10, 12, 14 | 4, 5 |
