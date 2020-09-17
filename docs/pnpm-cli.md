@@ -25,3 +25,9 @@ CLI options. In this case, you have the following options:
 ### -C &lt;path>, --dir &lt;path>
 
 Run as if pnpm was started in `<path>` instead of the current working directory.
+
+### -w, --workspace-root
+
+Added in: 5.6.0
+
+Run as if pnpm was started in the root of the workspace instead of the current working directory.
