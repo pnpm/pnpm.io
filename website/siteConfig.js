@@ -146,6 +146,13 @@ const users = [
     pinned: true,
     width: 200,
   },
+  {
+    caption: 'Wix',
+    image: '/img/users/wix.svg',
+    infoLink: 'https://wix.com/',
+    pinned: true,
+    width: 200,
+  },
 ];
 
 const siteConfig = {
