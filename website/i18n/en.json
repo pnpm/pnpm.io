@@ -643,6 +643,12 @@
       },
       "version-5.6/version-5.6-pnpm-cli": {
         "title": "pnpm CLI"
+      },
+      "version-5.8/cli/version-5.8-run": {
+        "title": "pnpm run"
+      },
+      "version-5.8/version-5.8-filtering": {
+        "title": "Filtering"
       }
     },
     "links": {
