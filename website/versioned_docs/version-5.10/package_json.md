@@ -1,6 +1,7 @@
 ---
-id: package_json
+id: version-5.10-package_json
 title: package.json
+original_id: package_json
 ---
 
 The manifest file of a package.
