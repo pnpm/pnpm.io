@@ -72,7 +72,8 @@
     "Recipes": [
       "using-changesets",
       "continuous-integration",
-      "only-allow-pnpm"
+      "only-allow-pnpm",
+      "git"
     ],
     "Advanced": [
       "logos",

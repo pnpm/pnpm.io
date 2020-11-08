@@ -95,6 +95,9 @@
       "filtering": {
         "title": "Filtering"
       },
+      "git": {
+        "title": "Working with Git"
+      },
       "how-peers-are-resolved": {
         "title": "How peers are resolved"
       },
@@ -607,6 +610,9 @@
       },
       "version-5.10/version-5.10-package_json": {
         "title": "package.json"
+      },
+      "version-5.11/version-5.11-git": {
+        "title": "Working with Git"
       },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"

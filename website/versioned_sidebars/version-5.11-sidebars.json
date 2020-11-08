@@ -1,0 +1,87 @@
+{
+  "version-5.11-docs": {
+    "Introduction": [
+      "version-5.11-motivation",
+      "version-5.11-installation"
+    ],
+    "Usage": [
+      "version-5.11-pnpm-cli",
+      "version-5.11-pnpx-cli",
+      "version-5.11-configuring",
+      "version-5.11-filtering"
+    ],
+    "CLI commands": [
+      {
+        "type": "subcategory",
+        "label": "Manage dependencies",
+        "ids": [
+          "version-5.11-cli/add",
+          "version-5.11-cli/install",
+          "version-5.11-cli/update",
+          "version-5.11-cli/remove",
+          "version-5.11-cli/link",
+          "version-5.11-cli/unlink",
+          "version-5.11-cli/import",
+          "version-5.11-cli/rebuild",
+          "version-5.11-cli/prune",
+          "version-5.11-cli/install-test"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Review dependencies",
+        "ids": [
+          "version-5.11-cli/audit",
+          "version-5.11-cli/list",
+          "version-5.11-cli/outdated",
+          "version-5.11-cli/why"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Run scripts",
+        "ids": [
+          "version-5.11-cli/run",
+          "version-5.11-cli/test",
+          "version-5.11-cli/start",
+          "version-5.11-cli/stop"
+        ]
+      },
+      {
+        "type": "subcategory",
+        "label": "Misc.",
+        "ids": [
+          "version-5.11-cli/publish",
+          "version-5.11-cli/recursive",
+          "version-5.11-cli/server",
+          "version-5.11-cli/store"
+        ]
+      }
+    ],
+    "Configuration": [
+      "version-5.11-package_json",
+      "version-5.11-npmrc",
+      "version-5.11-pnpm-workspace_yaml",
+      "version-5.11-pnpmfile"
+    ],
+    "Features": [
+      "version-5.11-workspaces",
+      "version-5.11-aliases",
+      "version-5.11-completion"
+    ],
+    "Recipes": [
+      "version-5.11-using-changesets",
+      "version-5.11-continuous-integration",
+      "version-5.11-only-allow-pnpm",
+      "version-5.11-git"
+    ],
+    "Advanced": [
+      "version-5.11-logos",
+      "version-5.11-benchmark",
+      "version-5.11-limitations",
+      "version-5.11-about-package-store",
+      "version-5.11-symlinked-node-modules-structure",
+      "version-5.11-how-peers-are-resolved"
+    ]
+  }
+}
