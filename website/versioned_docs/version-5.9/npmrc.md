@@ -283,7 +283,7 @@ hoist-pattern[]=*babel*
 
 Added in: v5.2.0
 
-* Default: **['@types/\*', 'eslint-plugin-*']**
+* Default: **['\*types\*', '\*eslint\*']**
 * Type: **string[]**
 
 Unlike `hoist-pattern`, which hoists dependencies to a hidden modules directory inside
