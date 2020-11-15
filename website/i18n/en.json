@@ -614,6 +614,12 @@
       "version-5.11/version-5.11-git": {
         "title": "Working with Git"
       },
+      "version-5.12/version-5.12-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-5.12/version-5.12-workspaces": {
+        "title": "Workspace"
+      },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"
       },
