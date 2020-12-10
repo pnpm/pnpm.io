@@ -49,7 +49,6 @@ jobs:
   version:
     timeout-minutes: 15
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/5.x' && github.repository == 'verdaccio/verdaccio'
     steps:
       - name: checkout code repository
         uses: actions/checkout@v2
