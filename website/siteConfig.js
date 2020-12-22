@@ -160,6 +160,13 @@ const users = [
     pinned: true,
     width: 250,
   },
+  {
+    caption: 'Prezi',
+    image: '/img/users/prezi.svg',
+    infoLink: 'https://prezi.com/',
+    pinned: true,
+    width: 200,
+  },
 ];
 
 const siteConfig = {
