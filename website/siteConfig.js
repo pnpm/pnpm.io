@@ -156,9 +156,16 @@ const users = [
   {
     caption: 'art solution',
     image: 'https://artsolution.de/wp-content/uploads/2020/10/logo.jpg',
-    infoLink: 'https:/artsolution.de/',
+    infoLink: 'https://artsolution.de/',
     pinned: true,
     width: 250,
+  },
+  {
+    caption: 'Prezi',
+    image: '/img/users/prezi.svg',
+    infoLink: 'https://prezi.com/',
+    pinned: true,
+    width: 200,
   },
 ];
 
