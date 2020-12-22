@@ -156,7 +156,7 @@ const users = [
   {
     caption: 'art solution',
     image: 'https://artsolution.de/wp-content/uploads/2020/10/logo.jpg',
-    infoLink: 'https:/artsolution.de/',
+    infoLink: 'https://artsolution.de/',
     pinned: true,
     width: 250,
   },
