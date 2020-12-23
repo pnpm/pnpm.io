@@ -1,6 +1,7 @@
 ---
-id: workspaces
+id: version-5.14-workspaces
 title: Workspace
+original_id: workspaces
 ---
 
 pnpm has built-in support for monorepos (a.k.a. multi-package repositories,
