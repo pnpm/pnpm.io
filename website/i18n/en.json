@@ -620,6 +620,15 @@
       "version-5.12/version-5.12-workspaces": {
         "title": "Workspace"
       },
+      "version-5.14/cli/version-5.14-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-5.14/version-5.14-filtering": {
+        "title": "Filtering"
+      },
+      "version-5.14/version-5.14-using-changesets": {
+        "title": "Using Changesets with pnpm"
+      },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"
       },
