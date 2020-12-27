@@ -37,6 +37,7 @@ function readPackage (pkg, context) {
   // Replace all dependencies with bar@2
   if (pkg.name === 'foo' && pkg.version.startsWith('1.')) {
     pkg.dependencies = {
+      ...pkg.dependencies,
       bar: '^2.0.0'
     }
     context.log('bar@1 => bar@2 in dependencies of foo')
