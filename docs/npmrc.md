@@ -282,7 +282,7 @@ hoist-pattern[]=*babel*
 
 Added in: v5.2.0
 
-* Default: **['@types/\*', 'eslint-plugin-*', '@prettier/plugin-*', '*prettier-plugin-*']**
+* Default: **['@types/\*', 'eslint-plugin-\*', '@prettier/plugin-\*', '\*prettier-plugin-\*']**
 * Type: **string[]**
 
 Unlike `hoist-pattern`, which hoists dependencies to a hidden modules directory inside
