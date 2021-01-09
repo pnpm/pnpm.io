@@ -44,7 +44,7 @@ class Footer extends React.Component {
               target="_blank">
               Stack Overflow
             </a>
-            <a href="https://discord.gg/mThkzAT"><translate>Project Chat</translate></a>
+            <a href="https://bit.ly/pnpm-discord-invite"><translate>Project Chat</translate></a>
             <a href="https://twitter.com/pnpmjs" target="_blank">
               Twitter
             </a>
