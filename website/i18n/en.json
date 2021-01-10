@@ -629,6 +629,24 @@
       "version-5.14/version-5.14-using-changesets": {
         "title": "Using Changesets with pnpm"
       },
+      "version-5.14/version-5.14-workspaces": {
+        "title": "Workspace"
+      },
+      "version-5.15/cli/version-5.15-link": {
+        "title": "pnpm link"
+      },
+      "version-5.15/version-5.15-completion": {
+        "title": "Command line tab-completion"
+      },
+      "version-5.15/version-5.15-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-5.15/version-5.15-pnpmfile": {
+        "title": "pnpmfile.js"
+      },
+      "version-5.15/version-5.15-support": {
+        "title": "Support"
+      },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"
       },

@@ -1,6 +1,7 @@
 ---
-id: completion
+id: version-5.15-completion
 title: Command line tab-completion
+original_id: completion
 ---
 
 Added in: v4.9.0
