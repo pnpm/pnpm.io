@@ -5,6 +5,14 @@ title: Continuous Integration
 
 pnpm can easily be used in various continuous integration systems.
 
+## Tips
+### Speeding-up
+You can speed things up by:
+##### - Disable store signature verification
+```shell
+pnpm set verify-store-integrity false
+```
+
 ## Travis
 
 On [Travis CI](https://travis-ci.org/), you can use pnpm for installing your dependencies by adding this to your `.travis.yml` file:
@@ -69,3 +77,45 @@ install:
     - install
 ```
 To get the exact Node version and pnpm version you require you can always make your own Docker image and push to [Docker Hub](https://hub.docker.com/).
+
+## GitHub Actions
+
+On [GitHub](https://github.com/), this is an example of how pnpm can be used with GitHub Actions.
+This config locate in`.github/workflows/[yourworkflowname].yaml`:
+
+```yaml
+name: Pnpm Example Workflow
+on:
+  push:
+    branches: 
+    - main
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [15]
+    steps:
+    - uses: actions/checkout@main
+    - name: Use Node.js ${{ matrix.node-version }}.x
+      uses: actions/setup-node@main
+      with:
+        node-version: ${{ matrix.node-version }}
+        check-latest: true
+    - name: Cache ~/.pnpm-store
+      uses: actions/cache@main
+      env:
+        cache-name: cache-pnpm-store
+      with:
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-${{ matrix.node-version }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-${{ matrix.node-version }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-${{ matrix.node-version }}-build-
+          ${{ runner.os }}-
+    - name: Install pnpm
+      run: npm i -g pnpm
+    - name: Npm Build
+      run: |
+        pnpm i
+```
