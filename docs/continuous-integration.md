@@ -10,7 +10,7 @@ pnpm can easily be used in various continuous integration systems.
 You can speed things up by:
 ##### - Disable store signature verification
 ```shell
-npm set verify-store-integrity false
+pnpm set verify-store-integrity false
 ```
 
 ## Travis
