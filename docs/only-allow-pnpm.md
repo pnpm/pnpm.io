@@ -15,3 +15,13 @@ To prevent devs from using other package managers, add the following `preinstall
 ```
 
 Next time, when someone runs `npm install` or `yarn install`, they'll get an error message in the console.
+
+If you use npm v7, this is the command that needs to be added to `package.json`:
+
+```json
+{
+  "scripts": {
+    "preinstall": "npx -y only-allow pnpm"
+  }
+}
+```
