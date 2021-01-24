@@ -11,16 +11,16 @@ npm install -g pnpm
 
 Other solutions are:
 
-Using a [standalone script](https://github.com/pnpm/self-installer#readme):
+Using a standalone script:
 
 ```sh
-curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | node
+curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm
 ```
 
 On Windows (PowerShell):
 
 ```powershell
-(Invoke-WebRequest 'https://raw.githubusercontent.com/pnpm/self-installer/master/install.js').Content | node
+(Invoke-WebRequest 'https://pnpm.js.org/pnpm.js' -UseBasicParsing).Content | node - add --global pnpm
 ```
 
 Via npx:
