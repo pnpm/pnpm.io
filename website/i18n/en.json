@@ -647,6 +647,24 @@
       "version-5.15/version-5.15-support": {
         "title": "Support"
       },
+      "version-5.16/version-5.16-continuous-integration": {
+        "title": "Continuous Integration"
+      },
+      "version-5.16/version-5.16-faq": {
+        "title": "Frequently Asked Questions"
+      },
+      "version-5.16/version-5.16-installation": {
+        "title": "Installation"
+      },
+      "version-5.16/version-5.16-only-allow-pnpm": {
+        "title": "Only allow pnpm"
+      },
+      "version-5.16/version-5.16-package_json": {
+        "title": "package.json"
+      },
+      "version-5.16/version-5.16-pnpmfile": {
+        "title": "pnpmfile.js"
+      },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"
       },
