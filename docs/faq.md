@@ -41,9 +41,9 @@ Direct symlinking to the global store would work with Node's `--preserve-symlink
 with a bunch of different issues, so we decided to stick with hard links.
 For more details about why this decision was made, see: https://github.com/nodejs/node-eps/issues/46.
 
-## Does pnpm work across multiple hard drives or filesystems?
+## Does pnpm work across multiple drives or filesystems?
 
-The package store should be on the same disk as installations. 
+The package store should be on the same drive and filesystem as installations.
 Otherwise packages will be copied, not linked. 
 This is due to a OS limitation in hard-linking. See [Issue #712](https://github.com/pnpm/pnpm/issues/712) for more details.
 
