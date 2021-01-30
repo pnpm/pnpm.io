@@ -215,7 +215,7 @@ The base URL of the npm package registry.
 The npm registry that should be used for packages of the specified scope. For instance:
 
 ```text
-@babel:registry=https://registry.example.com/
+@babel:registry=https://gitlab.com/api/v4/packages/npm/
 ```
 
 When `pnpm add @babel/core` will be used, `@babel/core` will be fetched from `https://registry.example.com/` instead of the default registry.
@@ -225,13 +225,13 @@ When `pnpm add @babel/core` will be used, `@babel/core` will be fetched from `ht
 Defines the authentication bearer token to use when accessing the specified registry. For example:
 
 ```text
-https://registry.npmjs.org/:_authToken=ffffffff-ffff-ffff-ffff-ffffffffffff 
+//registry.npmjs.org/:_authToken=ffffffff-ffff-ffff-ffff-ffffffffffff 
 ```
 
 If the token is saved in an environment variable, it can be used as the value:
 
 ```text
-https://registry.npmjs.org/:_authToken=${NPM_TOKEN}
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 
 ### &lt;URL>:always-auth
@@ -242,11 +242,11 @@ https://registry.npmjs.org/:_authToken=${NPM_TOKEN}
 Force pnpm to always require authentication (even for GET requests), when accessing the specified registry. For example:
 
 ```text
-@babel:registry=https://registry.example.com/
-https://registry.example.com/:always-auth=true
+@babel:registry=https://gitlab.com/api/v4/packages/npm/
+//gitlab.com/api/v4/packages/npm/:always-auth=true
 
 registry=https://registry.npmjs.org/
-https://registry.npmjs.org/:always-auth=true
+//registry.npmjs.org/:always-auth=true
 ```
 
 ## Request Settings
