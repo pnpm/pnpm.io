@@ -656,6 +656,9 @@
       "version-5.16/version-5.16-installation": {
         "title": "Installation"
       },
+      "version-5.16/version-5.16-npmrc": {
+        "title": ".npmrc"
+      },
       "version-5.16/version-5.16-only-allow-pnpm": {
         "title": "Only allow pnpm"
       },
