@@ -668,6 +668,15 @@
       "version-5.16/version-5.16-pnpmfile": {
         "title": "pnpmfile.js"
       },
+      "version-5.17/cli/version-5.17-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-5.17/version-5.17-filtering": {
+        "title": "Filtering"
+      },
+      "version-5.17/version-5.17-installation": {
+        "title": "Installation"
+      },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"
       },
