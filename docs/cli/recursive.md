@@ -60,6 +60,19 @@ Usage examples:
 pnpm -r --no-sort test
 ```
 
+### reverse
+
+Added in: v5.17.1
+
+* Default: **false**
+* Type: **boolean**
+
+When `true`, the order of packages is reversed.
+
+```
+pnpm -r --reverse run clean
+```
+
 ## pnpm -r exec
 
 Added in: v2.9.0
