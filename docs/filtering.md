@@ -29,8 +29,8 @@ Usage examples:
 
 ```text
 pnpm test --filter @babel/core
-pnpm test --filter @babel/*
-pnpm test --filter *core
+pnpm test --filter "@babel/*"
+pnpm test --filter "*core"
 ```
 
 ## --filter &lt;package_name>...
@@ -47,7 +47,7 @@ pnpm install --filter foo...
 You may use a pattern to select a set of "root" packages:
 
 ```text
-pnpm install --filter @babel/preset-*...
+pnpm install --filter "@babel/preset-*..."
 ```
 
 ## --filter &lt;package_name>^...
@@ -110,21 +110,21 @@ It may be combined with `[<since>]`. For instance, to select all changed project
 inside a directory:
 
 ```text
-pnpm &lt;cmd> --filter {packages}[origin/master]
-pnpm &lt;cmd> --filter ...{packages}[origin/master]
-pnpm &lt;cmd> --filter {packages}[origin/master]...
-pnpm &lt;cmd> --filter ...{packages}[origin/master]...
+pnpm &lt;cmd> --filter "{packages}[origin/master]"
+pnpm &lt;cmd> --filter "...{packages}[origin/master]"
+pnpm &lt;cmd> --filter "{packages}[origin/master]..."
+pnpm &lt;cmd> --filter "...{packages}[origin/master]..."
 ```
 
 Or you may select all packages from a directory with names matching the given pattern:
 
 ```text
-pnpm &lt;cmd> --filter @babel/*{components}
-pnpm &lt;cmd> --filter @babel/*{components}[origin/master]
-pnpm &lt;cmd> --filter ...@babel/*{components}[origin/master]
+pnpm &lt;cmd> --filter "@babel/*{components}"
+pnpm &lt;cmd> --filter "@babel/*{components}[origin/master]"
+pnpm &lt;cmd> --filter "...@babel/*{components}[origin/master]"
 ```
 
-## --filter [&lt;since>]
+## --filter "[&lt;since>]"
 
 Added in: v4.6.0
 
@@ -135,19 +135,25 @@ For example, the next command will run tests in all changed packages since
 `master` and on any dependent packages:
 
 ```text
-pnpm test --filter ...[origin/master]
+pnpm test --filter "...[origin/master]"
 ```
 
 ## Excluding
 
 Added in: v5.8.0
 
-Any of the filter selectors may work as excluders, when they have a leading "!".
+Any of the filter selectors may work as excluders, when they have a leading "!". In zsh "!" should be escaped: \\!.
 
 For instance, this will run the command in all projects except `foo`:
 
 ```text
 pnpm &lt;cmd> --filter=!foo
+```
+
+On zsh:
+
+```text
+pnpm &lt;cmd> --filter=\!foo
 ```
 
 And this one will run tests in all projects that are not under the `lib` directory:
@@ -156,7 +162,13 @@ And this one will run tests in all projects that are not under the `lib` directo
 pnpm &lt;cmd> --filter=!./lib
 ```
 
-## --test-pattern [glob]
+On zsh:
+
+```text
+pnpm &lt;cmd> --filter=\!./lib
+```
+
+## --test-pattern &lt;glob>
 
 Added in: v5.14.0
 
@@ -165,5 +177,5 @@ Added in: v5.14.0
 This option is useful with the "changed since" filter. For instance, the next command will run tests in all changed packages, and if the changes are in the source code of the package, tests will run in the dependent packages as well:
 
 ```text
-pnpm --filter=...[origin/master] --test-pattern=test/* test
+pnpm --filter="...[origin/master]" --test-pattern="test/*" test
 ```
