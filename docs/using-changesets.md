@@ -25,7 +25,7 @@ To generate a new changeset, run `pnpx changeset` in the root of the repository.
 
 ## Releasing changes
 
-1. Run `pnpx changeset version`. This will bump the versions of the packages previously specified with `pnpx changeset` and update the changelog files.
+1. Run `pnpx changeset version`. This will bump the versions of the packages previously specified with `pnpx changeset` (and any dependents of those) and update the changelog files.
 1. Run `pnpm install`. This will update the lockfile.
 1. Commit the changes.
 1. Run `pnpm publish -r`. This command will publish all packages that have bumped versions not yet present in the registry.
