@@ -50,14 +50,14 @@ You may use a pattern to select a set of "root" packages:
 pnpm install --filter "@babel/preset-*..."
 ```
 
-## --filter &lt;package_name>^...
+## --filter "&lt;package_name>^..."
 
 Added in: v4.4.0
 
 Selects dependencies of a package (both direct and non-direct). For instance:
 
 ```text
-pnpm install --filter foo^...
+pnpm install --filter "foo^..."
 ```
 
 ## --filter ...&lt;package_name>
@@ -78,14 +78,14 @@ the selectors. You can use as many filters as you want:
 pnpm install --filter ...foo --filter bar --filter qar...
 ```
 
-## --filter ...^&lt;package_name>
+## --filter "...^&lt;package_name>"
 
 Added in: v4.4.0
 
 Selects dependent of a package (both direct and non-direct). For instance:
 
 ```text
-pnpm install --filter ...^foo
+pnpm install --filter "...^foo"
 ```
 
 ## --filter ./&lt;directory>
