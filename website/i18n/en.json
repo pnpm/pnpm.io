@@ -5,9 +5,6 @@
     "previous": "Previous",
     "tagline": "Fast, disk space efficient package manager",
     "docs": {
-      "about-package-store": {
-        "title": "About the package store"
-      },
       "aliases": {
         "title": "Aliases"
       },
@@ -674,8 +671,17 @@
       "version-5.17/version-5.17-filtering": {
         "title": "Filtering"
       },
+      "version-5.17/version-5.17-how-peers-are-resolved": {
+        "title": "How peers are resolved"
+      },
       "version-5.17/version-5.17-installation": {
         "title": "Installation"
+      },
+      "version-5.17/version-5.17-symlinked-node-modules-structure": {
+        "title": "Symlinked `node_modules` structure"
+      },
+      "version-5.17/version-5.17-using-changesets": {
+        "title": "Using Changesets with pnpm"
       },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"
