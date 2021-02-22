@@ -3,40 +3,47 @@ id: pnpmfile
 title: pnpmfile.js
 ---
 
-pnpm allows to step directly into the installation process via special functions called *hooks*.
-Hooks can be declared in a file called `pnpmfile.js`.
+pnpm lets you hook directly into the installation process via special functions
+(hooks). Hooks can be declared in a file called `pnpmfile.js`.
 
-By default, `pnpmfile.js` should be located in the same directory in which the lockfile is.
-So in a [workspace](workspaces) with a shared lockfile, the `pnpmfile.js` should be in the root
-of the monorepo.
+By default, `pnpmfile.js` should be located in the same directory as the
+lockfile. For instance, in a [workspace](workspaces) with a shared lockfile,
+`pnpmfile.js` should be in the root of the monorepo.
 
 ## Hooks
 
-### tl;dr
+### TL;DR
 
-|Option|Meaning|
-|--|--|
-|`hooks.readPackage(pkg, context): pkg` | Allows to mutate every dependency's `package.json` |
-|`hooks.afterAllResolved(lockfile, context): lockfile` | Is called after resolution stage. Allows to mutate the lockfile object. |
+| Hook Function | Process | Uses |
+|-------------------------------------------------------|------------------------------------------------------------|----------------------------------------------------|
+| `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json` |
+| `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                 |
 
 ### `hooks.readPackage(pkg, context): pkg`
 
-Allows to mutate every dependency's `package.json` during resolution. These mutations are not saved to the filesystem but they can affect what gets installed.
+Allows you to mutate a dependency's `package.json` after parsing and prior to
+resolution. These mutations are not saved to the filesystem, however, they will
+affect what gets resolved in the lockfile and therefore what gets installed.
 
-An example of a `pnpmfile.js` that changes the dependencies field of a dependency:
-You will need to delete the `pnpm-lock.yaml` if you have already resolved the dependency you want change.
+Note that you will need to delete the `pnpm-lock.yaml` if you have already
+resolved the dependency you want to modify.
+
+#### Arguments
+
+* `pkg` - The manifest of the package. Either the response from the registry or
+the `package.json` content.
+* `context` - Context object for the step. Method `#log(msg)` allows you to use
+a debug log for the step.
+
+#### Usage
+
+Example `pnpmfile.js` (changes the dependencies of a dependency):
 
 ```js
-module.exports = {
-  hooks: {
-    readPackage
-  }
-}
-
-function readPackage (pkg, context) {
-  // Override the manifest of foo@1 after downloading it from the registry
-  // Replace all dependencies with bar@2
+function readPackage(pkg, context) {
+  // Override the manifest of foo@1.x after downloading it from the registry
   if (pkg.name === 'foo' && pkg.version.startsWith('1.')) {
+    // Replace bar@x.x.x with bar@2.0.0
     pkg.dependencies = {
       ...pkg.dependencies,
       bar: '^2.0.0'
@@ -44,114 +51,65 @@ function readPackage (pkg, context) {
     context.log('bar@1 => bar@2 in dependencies of foo')
   }
   
-  // This will fix any dependencies on baz to 1.2.3
-  if (pkg.dependencies.baz === '*') {
+  // This will change any packages using baz@x.x.x to use baz@1.2.3
+  if (pkg.dependencies.baz) {
     pkg.dependencies.baz = '1.2.3';
   }
   
   return pkg
 }
-```
 
-#### Arguments
-
-* `pkg` - _Manifest_ - The manifest of the package. Either the response from the registry or the `package.json` content.
-* `context.log(msg)` - _Function_ - Allows to log messages.
-
-#### Usage
-
-##### Substitute a package with your fork
-
-Lets' suppose you forked a package with an important fix and you want the fixed
-version installed.
-
-The following hook substitutes `resolve` with `@zkochan`'s fork.
-
-```js
-'use strict'
 module.exports = {
-  hooks: { readPackage }
-}
-
-function readPackage (pkg) {
-  if (pkg.dependencies.resolve) {
-    pkg.dependencies.resolve = 'zkochan/node-resolve'
+  hooks: {
+    readPackage
   }
-
-  return pkg
 }
 ```
 
-##### Packages validation
+#### Known limitations
 
-You want only packages with MIT license in your `node_modules`? Check the licenses
-and throw an exception if you don't like the package's license:
-
-```js
-'use strict'
-module.exports = {
-  hooks: { readPackage }
-}
-
-function readPackage (pkg) {
-  if (pkg.license !== 'MIT') {
-    throw new Error('Invalid license!')
-  }
-
-  return pkg
-}
-```
-
-##### Renaming bins
-
-You want to rename a package's bin? Just replace it:
-
-```js
-'use strict'
-module.exports = {
-  hooks: { readPackage }
-}
-
-function readPackage (pkg) {
-  if (pkg.name === 'eslint') {
-    pkg.bin = { jslint: pkg.bin }
-  }
-
-  return pkg
-}
-```
-
-Now you can run `jslint fix` instead of `eslint fix`.
-
-#### What you cannot do with readPackage
-
-Removing the `scripts` field from the manifest of a dependency will not prevent pnpm from building that dependency. When building a dependency, pnpm reads the `package.json` of the package from the package's archive, which is not affected by the hook. In order to ignore a package's build, use the [pnpm.neverBuiltDependencies](package_json#pnpmneverbuiltdependencies) field.
+Removing the `scripts` field from a dependency's manifest via `readPackage` will
+not prevent pnpm from building the dependency. When building a dependency, pnpm
+reads the `package.json` of the package from the package's archive, which is not
+affected by the hook. In order to ignore a package's build, use the
+[pnpm.neverBuiltDependencies](package_json#pnpmneverbuiltdependencies) field.
 
 ### `hooks.afterAllResolved(lockfile, context): lockfile`
 
-Added in: v1.41.0
+Added in v1.41.0.
 
-Is called after resolution stage. Allows to mutate the lockfile object.
+Allows you to mutate the lockfile output before it is serialized.
 
 #### Arguments
 
-* `lockfile` - _object_ - The object that is saved to `pnpm-lock.yaml`.
-* `context.log(msg)` - _Function_ - Allows to log messages.
+* `lockfile` - The lockfile resolutions object that is serialized to
+`pnpm-lock.yaml`.
+* `context` - Context object for the step. Method `#log(msg)` allows you to use
+a debug log for the step.
 
 #### Usage
 
-```js
-module.exports = {
-  hooks: { afterAllResolved }
-}
+Example pnpmfile.js:
 
-function afterAllResolved (lockfile, context) {
+```js
+function afterAllResolved(lockfile, context) {
   // ...
   return lockfile
 }
+
+module.exports = {
+  hooks: {
+    afterAllResolved
+  }
+}
 ```
 
-## Configs
+#### Known Limitations
+
+There are none - anything that can be done with the lockfile can be modified via
+this function, and you can even extend the lockfile's functionality.
+
+## Related Configuration
 
 ### ignore-pnpmfile
 
@@ -160,8 +118,8 @@ Added in: v1.25.0
 * Default: **false**
 * Type: **Boolean**
 
-`pnpmfile.js` will be ignored. Useful together with `--ignore-scripts` when you want to make sure that
-no script gets executed during install.
+`pnpmfile.js` will be ignored. Useful together with `--ignore-scripts` when you
+want to make sure that no script gets executed during install.
 
 ### pnpmfile
 
@@ -181,7 +139,8 @@ Added in: v1.39.0
 * Type: **path**
 * Example: **~/.pnpm/global_pnpmfile.js**
 
-The location of a global pnpmfile. A global pnpmfile is used by all projects during installation.
+The location of a global pnpmfile. A global pnpmfile is used by all projects
+during installation.
 
-**NOTE:** It is recommended to use local pnpmfiles. Only use a global pnpmfile, if you use pnpm on projects
-that don't use pnpm as the primary package manager.
+**NOTE:** It is recommended to use local pnpmfiles. Only use a global pnpmfile
+if you use pnpm on projects that don't use pnpm as the primary package manager.

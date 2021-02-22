@@ -3,13 +3,15 @@ id: package_json
 title: package.json
 ---
 
-The manifest file of a package.
+The manifest file of a package. It contains all the package's metadata,
+including dependencies, title, author, et cetera. This is a standard preserved
+across all major Node.JS package managers, including pnpm.
 
 ## Fields
 
 ### engines
 
-You can specify the version of Node and pnpm that your stuff works on:
+You can specify the version of Node and pnpm that your software works on:
 
 ```json
 {
@@ -21,17 +23,24 @@ You can specify the version of Node and pnpm that your stuff works on:
 ```
 
 During local development, pnpm will always fail with an error message
-when its version will not match the one in `engines.pnpm`.
+if its version does not match the one specified in the `engines` field.
 
-Unless the user has set the `engine-strict` config flag, this field is advisory only and will only produce warnings when your package is installed as a dependency.
+Unless the user has set the `engine-strict` config flag (see [.npmrc]), this
+field is advisory only and will only produce warnings when your package is
+installed as a dependency.
+
+[.npmrc]: https://pnpm.js.org/en/npmrc#engine-strict
 
 ### peerDependenciesMeta
 
-This field lists some extra information related to the dependencies listed in the `peerDependencies` field.
+This field lists some extra information related to the dependencies listed in
+the `peerDependencies` field.
 
 #### peerDependenciesMeta[pkg].optional
 
-If true, the selected peer dependency will be marked as optional by the package manager and the consumer omitting it won't be reported as an error.
+If true, the selected peer dependency will be marked as optional by the package
+manager. Therefore, the consumer omitting it will no longer be reported as an
+error.
 
 ```json
 {
@@ -55,7 +64,8 @@ If true, the selected peer dependency will be marked as optional by the package 
 
 Added in: v3.4.0
 
-It is possible to override some fields in the manifest, before the package is packed.
+It is possible to override some fields in the manifest, before the package is
+packed.
 The following fields may be overridden:
 [`bin`](https://github.com/stereobooster/package.json#bin),
 [`main`](https://github.com/stereobooster/package.json#main),
@@ -99,7 +109,9 @@ Will be published as:
 
 Added in: v5.10.1
 
-This field allows you to instruct pnpm to override any dependency in the dependency graph. This is useful to enforce all your packages to use a single version of a dependency, backport a fix, or replace a dependency with a fork.
+This field allows you to instruct pnpm to override any dependency in the
+dependency graph. This is useful to enforce all your packages to use a single
+version of a dependency, backport a fix, or replace a dependency with a fork.
 
 Note that the overrides field can only be set at the root of the project.
 
@@ -117,7 +129,10 @@ An example of the `"pnpm"."overrides"` field:
 }
 ```
 
-You may specify the package to which the overriden dependency belongs by separating the package selector from the dependency selector with a ">", for example `qar@1>zoo` will only override the `zoo` dependency of any `qar@1` dependency.
+You may specify the package the overriden dependency belongs to by
+separating the package selector from the dependency selector with a ">", for
+example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
+any other dependencies.
 
 ### pnpm.neverBuiltDependencies
 
