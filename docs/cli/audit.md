@@ -9,7 +9,7 @@ Checks for known security issues with the installed packages.
 
 ## Options
 
-### --audit-level &lt;severity>
+### --audit-level \<severity>
 
 * Type: **low**, **moderate**, **high**, **critical**
 * Default: **low**
@@ -26,8 +26,8 @@ Only audit dev dependencies.
 
 ### --prod, -P
 
-Only audit prod dependencies.
+Only audit production dependencies.
 
 ### --no-optional
 
-Don't audit "optionalDependencies".
+Don't audit `optionalDependencies`.

@@ -5,10 +5,8 @@ title: pnpm stop
 
 Aliases: `run stop`
 
-Runs a package's `"stop"` script, if one was provided.
+Runs an arbitrary command specified in the package's `stop` property of its
+`scripts` object. 
 
-##  Synopsis
-
-```text
-pnpm stop [-- &lt;args>...]
-```
+The intended usage of the property is to specify a command that halts or
+suspends your program.

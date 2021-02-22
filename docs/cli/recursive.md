@@ -3,30 +3,32 @@ id: recursive
 title: pnpm recursive
 ---
 
-## tl;dr
+Runs a pnpm command recursively on all subdirectories in the package or every
+available workspace. Currently, only the following commands can be used
+recursively: `add`, `exec`, `install`, `list`, `outdated`, `publish`, `rebuild`,
+`remove`, `run`, `test`, `unlink`, `update`, `why`
 
-|Command|Meaning|
-|--|--|
-|`pnpm install -r` | runs installation for every package in every subfolder |
-|`pnpm run build --filter foo-*` |builds all packages with names that start with `foo-` |
-|`pnpm update -- login-page...` |updates dependencies in `login-page` and any dependencies of `login-page` that are also in the repository |
+Aliases: `m`, `multi`, `<command> -r`
 
 ## Options
 
-### --filter &lt;package_selector>
+### --link-workspace-packages
 
-[Read more about filtering.](../filtering)
+Link locally available packages in workspaces of a monorepo into `node_modules`
+instead of re-downloading them from the registry. This emulates functionality
+similar to `yarn workspaces`.
 
-### workspace-concurrency
+### --workspace-concurrency
 
 Added in: v2.13.0
 
 * Default: **4**
 * Type: **Number**
 
-Set the maximum number of concurrency. For unlimited concurrency use `Infinity`.
+Set the maximum number of tasks to run simultaneously. For unlimited concurrency
+use `Infinity`.
 
-### bail
+### --[no-]bail
 
 Added in: v2.13.0
 
@@ -36,31 +38,30 @@ Added in: v2.13.0
 If true, stops when a task throws an error.
 
 This config does not affect the exit code.
-Even if `--no-bail` is used, all tasks will finish but if any of the tasks fail, the
-command will exit with a non-zero code.
+Even if `--no-bail` is used, all tasks will finish but if any of the tasks fail,
+the command will exit with a non-zero code.
 
-Usage example. Run tests in every package. Continue if tests fail in one of the packages:
-
-```
+Example (run tests in every package, continue if tests fail in one of them):
+```sh
 pnpm -r --no-bail test
 ```
 
-### sort
+### --[no-]sort
 
 Added in: v2.14.0
 
 * Default: **true**
 * Type: **Boolean**
 
-When `true`, packages are sorted topologically (dependencies before dependents). Pass `--no-sort` to disable.
+When `true`, packages are sorted topologically (dependencies before dependents).
+Pass `--no-sort` to disable.
 
-Usage examples:
-
+Example:
 ```sh
 pnpm -r --no-sort test
 ```
 
-### reverse
+### --reverse
 
 Added in: v5.17.1
 
@@ -77,17 +78,23 @@ pnpm -r --reverse run clean
 
 Added in: v2.9.0
 
-```test
+```sh
 pnpm -r exec -- <command> [args...]
 ```
 
 This command runs a command in each package of the monorepo.
 
-The name of the current package is available through the environment variable `PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0).
+The name of the current package is available through the environment variable
+`PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0 onwards).
 
-Usage examples:
-
+Examples:
 ```sh
+# prune node_modules installations for all packages
 pnpm -r exec -- rm -rf node_modules
+# view package information for all packages
 pnpm -r exec -- pnpm view $PNPM_PACKAGE_NAME
 ```
+
+### --filter \<package_selector>
+
+[Read more about filtering.](../filtering)

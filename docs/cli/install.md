@@ -3,23 +3,28 @@ id: install
 title: pnpm install
 ---
 
+Aliases: `i`
+
 `pnpm install` is used to install all dependencies for a project.
 
 In a CI environment, installation fails if a lockfile is present but needs an
 update.
 
-Inside a [workspace](../workspaces.md), `pnpm install` installs all dependencies in all the projects.
-If you want to disable this behavior, set the `recursive-install` setting to `false`.
+Inside a [workspace], `pnpm install` installs all dependencies in all the
+projects. If you want to disable this behavior, set the `recursive-install`
+setting to `false`.
 
 ![](/img/demos/pnpm-install.svg)
 
-## tl;dr
+[workspace]: ../workspaces.md
 
-|Command|Meaning|
-|--|--|
-|`pnpm i --offline` |no network requests |
-|`pnpm i --frozen-lockfile` |`pnpm-lock.yaml` is not updated |
-|`pnpm i --prefer-frozen-lockfile` |when possible, `pnpm-lock.yaml` is not updated |
+## TL;DR
+
+| Command                           | Meaning                             |
+|-----------------------------------|-------------------------------------|
+| `pnpm i --offline`                | Install offline from the store only |
+| `pnpm i --frozen-lockfile`        | `pnpm-lock.yaml` is not updated     |
+| `pnpm i --lockfile-only`          | Only `pnpm-lock.yaml` is updated    |
 
 ## Options
 
@@ -38,21 +43,24 @@ Added in: v1.28.0
 * Default: **false**
 * Type: **Boolean**
 
-If true, staleness checks for cached data will be bypassed, but missing data will be requested from the server.
-To force full offline mode, use `--offline`.
+If true, staleness checks for cached data will be bypassed, but missing data
+will be requested from the server. To force full offline mode, use `--offline`.
 
 ### --ignore-scripts
 
 * Default: **false**
 * Type: **Boolean**
 
-Do not execute any scripts defined in the project `package.json` and its dependencies.
+Do not execute any scripts defined in the project `package.json` and its
+dependencies.
 
 > Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
 
 ### --prod, -P
 
-pnpm will not install any package listed in `devDependencies` if the `NODE_ENV` environment variable is set to production. Use this flag to instruct pnpm to ignore `NODE_ENV` and take its production-or-not status from this flag instead.
+pnpm will not install any package listed in `devDependencies` if the `NODE_ENV`
+environment variable is set to production. Use this flag to instruct pnpm to
+ignore `NODE_ENV` and take its production status from this flag instead.
 
 ### --dev, -D
 
@@ -69,7 +77,8 @@ Added in: v1.26.0 (initially named `shrinkwrap-only`)
 * Default: **false**
 * Type: **Boolean**
 
-When used, only updates `pnpm-lock.yaml` and `package.json` instead of checking `node_modules` and downloading dependencies.
+When used, only updates `pnpm-lock.yaml` and `package.json` instead of checking
+`node_modules` and downloading dependencies.
 
 ### --frozen-lockfile
 
@@ -80,17 +89,18 @@ Added in: v1.37.1 (initially named `frozen-shrinkwrap`)
   * For CI: **true**, if a lockfile is present
 * Type: **Boolean**
 
-If `true`, pnpm doesn't generate a lockfile and fails if an update is needed or
-no lockfile is present.
+If `true`, pnpm doesn't generate a lockfile and fails to install if the lockfile
+is out of sync with the manifest / an update is needed or no lockfile is
+present.
 
-### --reporter=&lt;name>
+### --reporter=\<name>
 
 * Default:
     * For TTY stdout: **default**
     * For non-TTY stdout: **append-only**
 * Type: **default**, **append-only**, **ndjson**, **silent**
 
-Allows to choose the reporter that will print info about
+Allows you to choose the reporter that will log debug info to the terminal about
 the installation progress.
 
 * **silent** - no output is logged to the console, except fatal errors
@@ -105,9 +115,9 @@ Added in: v1.30.0
 * Default: **false**
 * Type: **Boolean**
 
-Starts a store server in the background. The store server will keep running after installation is done.
-To stop the store server, run `pnpm server stop`
+Starts a store server in the background. The store server will keep running
+after installation is done. To stop the store server, run `pnpm server stop`
 
-### --filter &lt;package_selector>
+### --filter \<package_selector>
 
 [Read more about filtering.](../filtering)

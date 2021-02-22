@@ -3,26 +3,22 @@ id: server
 title: pnpm server
 ---
 
+Added in: v1.30.0
+
 Manage a store server.
 
 ## Commands
 
 ### pnpm server start
 
-Added in: v1.30.0
-
-Starts a server that does all interactions with the store.
+Starts a server that performs all interactions with the store.
 Other commands will delegate any store-related tasks to this server.
 
 ### pnpm server stop
 
-Added in: v1.30.0
-
 Stops the store server.
 
 ### pnpm server status
-
-Added in: v2.5.0
 
 Prints information about the running server.
 
@@ -30,49 +26,65 @@ Prints information about the running server.
 
 ### --background
 
-Added in: v1.30.0
-
 * Default: **false**
 * Type: **Boolean**
 
-Runs the server in the background.
+Runs the server in the background, similar to daemonizing on UNIX systems.
+
+### --network-concurrency
+
+* Default: **null**
+* Type: **Number**
+
+The maximum number of network requests to process simultaneously.
 
 ### --protocol
-
-Added in: v1.30.0
 
 * Default: **auto**
 * Type: **auto**, **tcp**, **ipc**
 
 The communication protocol used by the server.
-When **auto** is used, **ipc** used on non-Windows servers and **tcp** on Windows.
+When this is set to `auto`, IPC is used on all systems except for Windows,
+which uses TCP.
 
 ### --port
-
-Added in: v1.30.0
 
 * Default: **5813**
 * Type: **port number**
 
-The port number to use, when TCP is used for communication.
-If port is specified and **protocol** is set to auto, **tcp** protocol is used.
+The port number to use when TCP is used for communication.
+If a port is specified and the protocol is set to `auto`, regardless of system
+type, the protocol is automatically set to use TCP.
 
-Other configs that are used by `pnpm server`: **store**, **lock**.
+### --store-dir
+
+* Default: 
+* Type: **Path**
+
+### --[no-]lock
+
+* Default: **false**
+* Type: **Boolean**
+
+Set whether to make the package store immutable to external processes while
+the server is running or not.
+
+### --store
+
+* Type: **Path**
+
+Set the directory to use for the store.
 
 ### --ignore-stop-requests
 
-Added in: v1.30.0
-
 * Default: **false**
 * Type: **Boolean**
 
-Disallows stopping the server using `pnpm server stop`.
+Prevents you from stopping the server using `pnpm server stop`.
 
 ### --ignore-upload-requests
 
-Added in: v1.31.0
-
 * Default: **false**
 * Type: **Boolean**
 
-Disallows creating new side effect cache during install.
+Prevents creating a new side effect cache during install.

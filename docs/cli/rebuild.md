@@ -7,19 +7,12 @@ Aliases: `rb`
 
 Rebuild a package.
 
-## Synopsis
-
-```text
-pnpm rebuild [-r [--workspace-concurrency=&lt;number>] [--no-sort]]
-     [&lt;pkg>...]
-```
-
 ## Options
 
 ### --recursive, -r
 
-This command runs the **pnpm build** command in every package of the monorepo.
+This command runs the **pnpm rebuild** command in every package of the monorepo.
 
-### --filter &lt;package_selector>
+### --filter \<package_selector>
 
 [Read more about filtering.](../filtering)
