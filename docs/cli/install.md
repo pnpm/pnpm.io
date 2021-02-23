@@ -118,6 +118,14 @@ Added in: v1.30.0
 Starts a store server in the background. The store server will keep running
 after installation is done. To stop the store server, run `pnpm server stop`
 
+### --shamefully-hoist
+
+* Default: **false**
+* Type: **Boolean**
+
+Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
+**WARNING**: This is highly discouraged.
+
 ### --filter \<package_selector>
 
 [Read more about filtering.](../filtering)
