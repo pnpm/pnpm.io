@@ -167,6 +167,13 @@ const users = [
     pinned: true,
     width: 200,
   },
+  {
+    caption: 'ByteDance',
+    image: '/img/users/bytedance.png',
+    infoLink: 'https://bytedance.com/',
+    pinned: true,
+    width: 250,
+  }
 ];
 
 const siteConfig = {
