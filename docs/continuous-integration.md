@@ -114,10 +114,10 @@ jobs:
           ${{ runner.os }}-${{ matrix.node-version }}-build-
           ${{ runner.os }}-
     - name: Install pnpm
-      run: 
+      run: npm i -g pnpm
     - name: Npm Build
       run: |
         pnpm i
 ```
 
-> Using `actions/setup-node@v2` you need to install with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo npm i -g pnpm`
+> Using `actions/setup-node@v2` you need to install with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo `
