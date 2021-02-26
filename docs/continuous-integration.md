@@ -98,7 +98,7 @@ jobs:
     steps:
     - uses: actions/checkout@main
     - name: Use Node.js ${{ matrix.node-version }}.x
-      uses: actions/setup-node@main
+      uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
         check-latest: true
@@ -114,8 +114,10 @@ jobs:
           ${{ runner.os }}-${{ matrix.node-version }}-build-
           ${{ runner.os }}-
     - name: Install pnpm
-      run: npm i -g pnpm
+      run: 
     - name: Npm Build
       run: |
         pnpm i
 ```
+
+> Using `actions/setup-node@v2` you need to install with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo npm i -g pnpm`
