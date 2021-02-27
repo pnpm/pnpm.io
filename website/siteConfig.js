@@ -14,12 +14,6 @@ const users = [
     pinned: true,
   },
   {
-    caption: 'BerryNodes LTD',
-    image: '/img/users/berrynodes.svg',
-    infoLink: 'https://www.berrynodes.com',
-    pinned: true,
-  },
-  {
     caption: 'JustAnswer',
     image: '/img/users/justanswer.svg',
     infoLink: 'https://www.justanswer.com',
