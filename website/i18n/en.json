@@ -683,6 +683,18 @@
       "version-5.17/version-5.17-using-changesets": {
         "title": "Using Changesets with pnpm"
       },
+      "version-5.18/cli/version-5.18-outdated": {
+        "title": "pnpm outdated"
+      },
+      "version-5.18/cli/version-5.18-publish": {
+        "title": "pnpm publish"
+      },
+      "version-5.18/cli/version-5.18-update": {
+        "title": "pnpm update"
+      },
+      "version-5.18/version-5.18-continuous-integration": {
+        "title": "Continuous Integration"
+      },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"
       },
