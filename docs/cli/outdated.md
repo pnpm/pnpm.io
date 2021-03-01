@@ -20,7 +20,7 @@ pnpm recursive outdated [--filter &lt;package selector>]
 
 ```
 pnpm outdated
-pnpm outdated gulp-* @babel/core
+pnpm outdated "gulp-*" @babel/core
 ```
 
 ## Options

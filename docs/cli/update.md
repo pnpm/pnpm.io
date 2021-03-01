@@ -27,7 +27,7 @@ pnpm recursive update [--filter &lt;package selector>]
 |`pnpm up` |updates all dependencies. Adheres ranges specified in `package.json` |
 |`pnpm up --latest` |updates all dependencies. Ignores ranges specified in `package.json` |
 |`pnpm up foo@2` |updates `foo` to the latest v2 |
-|`pnpm up @babel/*` |updates all dependencies with the `@babel` scope |
+|`pnpm up "@babel/*"` |updates all dependencies with the `@babel` scope |
 
 ## Options
 
