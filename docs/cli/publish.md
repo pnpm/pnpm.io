@@ -43,6 +43,12 @@ Added in: 4.6.0
 
 [Read more about filtering.](../filtering)
 
+### --force
+
+Added in: v5.18.0
+
+`pnpm publish -r --force` will try to publish packages even if their current version is already in the registry.
+
 ### git-checks
 
 Added in: v4.11.0
