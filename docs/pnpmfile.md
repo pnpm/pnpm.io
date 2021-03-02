@@ -14,7 +14,7 @@ lockfile. For instance, in a [workspace](workspaces) with a shared lockfile,
 
 ### TL;DR
 
-| Hook Function | Process | Uses |
+| Hook Function                                         | Process                                                    | Uses                                               |
 |-------------------------------------------------------|------------------------------------------------------------|----------------------------------------------------|
 | `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json` |
 | `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                 |
