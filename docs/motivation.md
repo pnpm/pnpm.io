@@ -29,4 +29,3 @@ article, and our corresponding documentation about the content-addressable
 store:
 - [Flat node_modules is not the only way](/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
 - [Symlinked node_modules structure](symlinked-node-modules-structure)
-- [About the package store](about-the-package-store)
