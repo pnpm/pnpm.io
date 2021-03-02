@@ -3,12 +3,27 @@ id: pnpx-cli
 title: pnpx CLI
 ---
 
-npm has a great package runner called [npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b).
-pnpm offers the same tool via the `pnpx` command. The only difference is that `pnpx` uses pnpm for installing packages.
+## For new users
 
-The following command installs a temporary create-react-app and calls it,
-without polluting global installs or requiring more than one step!
+`pnpx` (PNPm eXecute) is a command line tool that fetches a package from the
+registry without installing it as a dependency, hotloads it, and runs whatever
+default command binary it exposes.
 
+For example, to use `create-react-app` anywhere to bootstrap a react app without
+needing to install it under another project, you can run:
+
+```sh
+pnpx create-react-app my-project
 ```
-pnpx create-react-app my-cool-new-app
-```
+
+This will fetch `create-react-app` from the registry and run it with the given
+arguments. For more information, you may want to look at [npx] from npm, as it
+offers the same interface, except it uses pnpm instead of npm under the hood.
+
+## For npm users
+
+npm has a great package runner called [npx]. pnpm offers the same tool via the
+`pnpx` command. The only difference is that `pnpx` uses pnpm for installing
+packages.
+
+[npx]: https://www.npmjs.com/package/npx
