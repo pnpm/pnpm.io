@@ -5,7 +5,7 @@ title: pnpm publish
 
 Publishes a package to the registry.
 
-```text
+```sh
 pnpm [-r] publish [<tarball|folder>] [--tag <tag>]
      [--access <public|restricted>]
 ```
@@ -42,12 +42,6 @@ pnpm add foo@next
 
 Tells the registry whether the published package should be public or restricted.
 
-### --filter \<package_selector>
-
-Added in: 4.6.0
-
-[Read more about filtering.](../filtering)
-
 ### --force
 
 Added in: v5.18.0
@@ -73,3 +67,16 @@ Added in: v4.11.0
 
 The primary branch of the repository which is used for publishing the latest
 changes.
+
+### --force
+
+Added in: v5.18.0
+
+Try to publish packages even if their current version is already found in the
+registry or any other checks fail.
+
+### --filter \<package_selector>
+
+Added in: 4.6.0
+
+[Read more about filtering.](../filtering)
