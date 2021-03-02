@@ -36,35 +36,17 @@ installed as a dependency.
 This field lists some extra information related to the dependencies listed in
 the `peerDependencies` field.
 
-#### peerDependenciesMeta[pkg].optional
+#### peerDependenciesMeta.*.optional
 
-If true, the selected peer dependency will be marked as optional by the package
-manager. Therefore, the consumer omitting it will no longer be reported as an
-error.
-
-```json
-{
-    "peerDependencies": {
-        "react-dom": "1"
-    },
-    "peerDependenciesMeta": {
-        "react-dom": {
-            "optional": true
-        },
-        // express is not specified in the peerDependencies field,
-        // so pnpm will assume that any version of express is fine
-        "express": {
-            "optional": true
-        }
-    }
-}
-```
+If this is set to true, the selected peer dependency will be marked as optional
+by the package manager. Therefore, the consumer omitting it will no longer be
+reported as an error.
 
 ### publishConfig
 
 Added in: v3.4.0
 
-It is possible to override some fields in the manifest, before the package is
+It is possible to override some fields in the manifest before the package is
 packed.
 The following fields may be overridden:
 [`bin`](https://github.com/stereobooster/package.json#bin),
