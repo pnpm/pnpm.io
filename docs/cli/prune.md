@@ -3,16 +3,14 @@ id: prune
 title: pnpm prune
 ---
 
-Removes extraneous packages
-
-## Synopsis
-
-```text
-pnpm prune [--prod]
-```
+Removes unnecessary packages.
 
 ## Options
 
 ### --prod
 
 Remove the packages specified in `devDependencies`.
+
+### --no-optional
+
+Remove the packages specified in `optionalDependencies`.

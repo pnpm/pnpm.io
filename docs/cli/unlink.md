@@ -3,28 +3,20 @@ id: unlink
 title: pnpm unlink
 ---
 
-Alias: `dislink`
+Unlinks a system-wide package (inverse of [`pnpm link`](link)).
 
-Unlinks a package. Like `yarn unlink` but pnpm re-installs the dependency
-after removing the external link.
+If called without arguments, all linked dependencies will be unlinked.
 
-If called without arguments, all linked-in dependencies will be unlinked.
-
-## Synopsis
-
-```text
-pnpm unlink [-r] [--filter &lt;package_selector>] [&lt;pkg>...]
-pnpm recursive unlink [--filter &lt;package_selector>] [&lt;pkg>...]
-pnpm multi unlink [--filter &lt;package_selector>] [&lt;pkg>...]
-```
+This is similar to `yarn unlink`, except pnpm re-installs the dependency after
+removing the external link.
 
 ## Options
 
 ### --recursive, -r
 
-Unlink in every package found in subdirectories
-or in every workspace package, when executed inside a [workspace](../workspaces).
+Unlink in every package found in subdirectories or in every workspace package,
+when executed inside a [workspace](../workspaces).
 
-### --filter &lt;package_selector>
+### --filter \<package_selector>
 
 [Read more about filtering.](../filtering)

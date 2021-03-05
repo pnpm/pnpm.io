@@ -3,45 +3,57 @@ id: using-changesets
 title: Using Changesets with pnpm
 ---
 
-> At the time of writing this documentation, the latest pnpm version was v5.5.12. The latest Changesets version was v2.10.2
+> At the time of writing this documentation, the latest pnpm version was 
+> v5.17.3. The latest Changesets version was v2.14.1.
 
 ## Setup
 
-To setup changesets on a pnpm workspace, install changesets as a dev dependency in the root of the workspace:
+To setup changesets on a pnpm workspace, install changesets as a dev dependency
+in the root of the workspace:
 
-```text
+```sh
 pnpm add -DW @changesets/cli
 ```
 
-Then run the init command of changesets:
+Then changesets' init command:
 
-```text
+```sh
 pnpx changeset init
 ```
 
 ## Adding new changesets
 
-To generate a new changeset, run `pnpx changeset` in the root of the repository. The generated markdown files in the `.changeset` directory should be committed to the repository.
+To generate a new changeset, run `pnpx changeset` in the root of the repository.
+The generated markdown files in the `.changeset` directory should be committed
+to the repository.
 
 ## Releasing changes
 
-1. Run `pnpx changeset version`. This will bump the versions of the packages previously specified with `pnpx changeset` (and any dependents of those) and update the changelog files.
-1. Run `pnpm install`. This will update the lockfile.
-1. Commit the changes.
-1. Run `pnpm publish -r`. This command will publish all packages that have bumped versions not yet present in the registry.
+1. Run `pnpx changeset version`. This will bump the versions of the packages
+previously specified with `pnpx changeset` (and any dependents of those) and
+update the changelog files.
+2. Run `pnpm install`. This will update the lockfile and rebuild packages.
+3. Commit the changes.
+4. Run `pnpm publish -r`. This command will publish all packages that have
+bumped versions not yet present in the registry.
 
 ## Using GitHub Actions
 
 To automate the process, you can use `changeset version` with GitHub actions.
 
-In a nuthshell, the action will detect for new changesets in the `main` branch and open a Pull Request and will bump up all your packages, you could also publish your packages, more info can be read it [here](https://github.com/changesets/action).
+In a nutshell, the action will detect new changesets on the `master` branch,
+apply them, commit the updated metadata and changelogs, and open a Pull Request.
+You could also publish your packages automatically.
 
-```
+More info and documentation regarding this action can be found
+[here](https://github.com/changesets/action).
+
+```yaml
 name: Changesets
 on:
   push:
     branches:
-      - main
+      - master
 env:
   CI: true
   PNPM_CACHE_FOLDER: .pnpm-store
@@ -55,7 +67,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup node.js
-        uses: actions/setup-node@v2-beta
+        uses: actions/setup-node@v2
         with:
           node-version: 14
       - name: install pnpm

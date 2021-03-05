@@ -3,24 +3,14 @@ id: why
 title: pnpm why
 ---
 
-Shows the packages that depend on &lt;pkg>
-
-## Synopsis
-
-```text
-pnpm why [-r] [--filter &lt;package selector>]
-         [&lt;package pattern> ...]
-
-pnpm recursive why [--filter &lt;package selector>]
-                   [&lt;package pattern> ...]
-```
+Shows all packages that depend on the specified package.
 
 ## Options
 
 ### --recursive, -r
 
-Perform command on every package in subdirectories
-or on every workspace package, when executed inside a workspace.
+Show the dependency tree for the specified package on every package in
+subdirectories or on every workspace package when executed inside a workspace.
 
 ### --json
 
@@ -30,7 +20,7 @@ Show information in JSON format.
 
 ### --long
 
-Show extended information.
+Show verbose output.
 
 ### --parseable
 
@@ -42,12 +32,12 @@ List packages in the global install directory instead of in the current project.
 
 ### --prod, -P
 
-Display only the dependency tree for packages in `dependencies`.
+Only display the dependency tree for packages in `dependencies`.
 
 ### --dev, -D
 
-Display only the dependency tree for packages in `devDependencies`.
+Only display the dependency tree for packages in `devDependencies`.
 
-### --filter &lt;package_selector>
+### --filter \<package_selector>
 
 [Read more about filtering.](../filtering)

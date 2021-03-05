@@ -3,18 +3,21 @@ id: link
 title: pnpm link
 ---
 
-Connect the local project to another one.
+Aliases: `ln`
+
+Makes the current local package accessible system-wide, or in another location.
 
 ```text
-pnpm link &lt;destination>
+pnpm link
+pnpm link <pkg>
+pnpm link <dir>
 ```
 
-Alias: ln
+## Options
 
-## Examples
+### --dir \<dir>, -C
 
-Link webpack from a local directory:
+* **Default**: Current working directory
+* **Type**: Path string
 
-```sh
-pnpm link ../webpack
-```
+Changes the link location to `<dir>`.

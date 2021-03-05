@@ -3,19 +3,22 @@ id: pnpm-workspace_yaml
 title: pnpm-workspace.yaml
 ---
 
-`pnpm-workspace.yaml` defines the root of the [workspace](workspaces) and it allows to
-include/exclude directories from the workspace. By default, all packages
-of all subdirectories are included.
+`pnpm-workspace.yaml` defines the root of the [workspace] and enables you to
+include / exclude directories from the workspace. By default, all packages of
+all subdirectories are included.
 
-An example of a `pnpm-workspace.yaml`:
+For example:
 
 ```yaml
 packages:
   # all packages in subdirs of packages/ and components/
   - 'packages/**'
   - 'components/**'
-  # exclude packages that are inside test/ directories
+  # exclude packages that are inside test directories
   - '!**/test/**'
 ```
 
-The root `package.json` is always included, even when custom location wildcards are used.
+The root package is always included, even when custom location wildcards are
+used.
+
+[workspace]: workspaces

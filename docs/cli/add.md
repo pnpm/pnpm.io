@@ -4,26 +4,25 @@ title: pnpm add <pkg>
 ---
 
 Installs a package and any packages that it depends on.
-By default, any new package is installed as a prod dependency.
+By default, any new package is installed as a production dependency.
 
-## tl;dr
+## TL;DR
 
-|Command|Meaning|
-|--|--|
-|`pnpm add sax`                          |save to `dependencies`              |
-|`pnpm add -D sax`                       |save to `devDependencies`           |
-|`pnpm add -O sax`                       |save to `optionalDependencies`      |
-|`pnpm add sax@next`                     |Specify tag `next`                  |
-|`pnpm add sax@3.0.0`                    |Specify version `3.0.0`             |
+| Command                                | Meaning                            |
+|----------------------------------------|------------------------------------|
+| `pnpm add sax`                         | Save to `dependencies`             |
+| `pnpm add -D sax`                      | Save to `devDependencies`          |
+| `pnpm add -O sax`                      | Save to `optionalDependencies`     |
+| `pnpm add sax@next`                    | Install from the `next` tag        |
+| `pnpm add sax@3.0.0`                   | Specify version `3.0.0`            |
 
 ## Supported package locations
 
-A package can be installed from different locations:
-
 ### Install from npm registry
 
-`pnpm add package-name` will install the latest version
-of `package-name` from the [npm registry](https://www.npmjs.com/).
+`pnpm add package-name` will install the latest version of `package-name` from
+the [npm registry](https://www.npmjs.com/) by default. To install a package from
+another registry, you can use the tarball link (see [the corresponding guide].
 
 You may also install packages by:
 
@@ -31,11 +30,18 @@ You may also install packages by:
 * version: `pnpm add express@1.0.0`
 * version range: `pnpm add express@2 react@">=0.1.0 <0.2.0"`
 
+[the corresponding guide]: #install-from-remote-tarball
+
 ### Install from the workspace
 
-Note that when adding dependencies and working within a [workspace](../workspaces),
-packages will be installed from the configured sources, depending on whether or not
-[`link-workspace-packages`](../workspaces#link-workspace-packages) is set, and use of the [`workspace: range protocol`](../workspaces#workspace-ranges-workspace).
+Note that when adding dependencies and working within a [workspace], packages
+will be installed from the configured sources, depending on whether or not
+[`link-workspace-packages`] is set, and use of the
+[`workspace: range protocol`].
+
+[workspace]: ../workspaces
+[`link-workspace-packages`]: ../workspaces#link-workspace-packages
+[`workspace: range protocol`]: ../workspaces#workspace-ranges-workspace
 
 ### Install from local file system
 
@@ -47,17 +53,16 @@ There are two ways to install from the local file system:
 Examples:
 
 ```sh
-pnpm add ./package.tgz
+pnpm add ./package.tar.gz
 pnpm add ./some-directory
 ```
 
-When you install from a directory, a symlink will be created in the
-current project's `node_modules`, so it is the same as running
-`pnpm link`.
+When you install from a directory, a symlink will be created in the current
+project's `node_modules`, so it is the same as running `pnpm link`.
 
-### Install from remote gzipped tarball
+### Install from remote tarball
 
-The argument must start with "http://" or "https://".
+The argument must be a fetchable URL starting with "http://" or "https://".
 
 Example:
 
@@ -72,6 +77,8 @@ pnpm add <git remote url>
 ```
 
 Installs the package from the hosted Git provider, cloning it with Git.
+You can use a protocol for certain Git providers. Exempli gratia,
+`pnpm add github:user/repo`
 
 You may install from Git by:
 
@@ -84,43 +91,47 @@ You may install from Git by:
 
 ### --save-prod, -P
 
-This will install one or more packages in your `dependencies`.
+Install the specified packages as regular `dependencies`.
 
 ### --save-dev, -D
 
-Using `--save-dev` or `-D` will install one or more packages in your `devDependencies`.
+Install the specified packages as `devDependencies`.
 
 ### --save-optional, -O
 
-Using `--save-optional` or `-O` will install one or more packages in your `optionalDependencies`.
+Install the specified packages as `optionalDependencies`.
 
 ### --save-exact, -E
 
-Saved dependencies will be configured with an exact version rather than using pnpm's default semver range operator.
+Saved dependencies will be configured with an exact version rather than using
+pnpm's default semver range operator.
 
 ### --save-peer
 
 Added in: v3.2.0
 
-Using `--save-peer` will add one or more packages to `peerDependencies` and install them as dev dependencies.
+Using `--save-peer` will add one or more packages to `peerDependencies` and
+install them as dev dependencies.
 
 ### --ignore-workspace-root-check, -W
 
 Added in: v3.6.0
 
-Adding a new dependency to the root workspace package fails, unless the `--ignore-workspace-root-check` or `-W` flag is used.
+Adding a new dependency to the root workspace package fails, unless the
+`--ignore-workspace-root-check` or `-W` flag is used.
+
 For instance, `pnpm add debug -W`.
 
 ### --global
 
 Install a package globally.
 
-### --filter &lt;package_selector>
-
-[Read more about filtering.](../filtering)
-
 ### --workspace
 
 Added in: v4.4.0
 
 Only adds the new dependency if it is found in the workspace.
+
+### --filter \<package_selector>
+
+[Read more about filtering.](../filtering)

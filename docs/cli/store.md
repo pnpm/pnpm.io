@@ -7,43 +7,35 @@ Managing the [package store](../about-package-store).
 
 ## Commands
 
-### pnpm store status
-
-```text
-pnpm store status
-```
+### status
 
 Checks for modified packages in the store.
 
-Returns exit code 0 if the content of the package is the same as it was at the time of unpacking.
+Returns exit code 0 if the content of the package is the same as it was at the
+time of unpacking.
 
-### pnpm store add
+### add
 
 Added in: v2.12.0
 
-```text
-pnpm store add &lt;pkg>...
-```
+Functionally equivalent to [`pnpm add`], except this adds new packages to the
+store directly without modifying any projects or files outside of the store.
 
-Adds new packages to the pnpm store directly. 
-Does not modify any projects or files outside the store.
+[`pnpm add`]: add
 
-Usage examples:
+### prune
 
-```sh
-pnpm store add express@4 typescript@2
-```
+Removes orphan packages from the store.
 
-### pnpm store prune
+Pruning the store will save disk space, however may slow down future
+installations involving pruned packages. Ultimately, it is a safe operation,
+however not recommended if you have orphaned packages from a package you intend
+to reinstall.
 
-```sh
-pnpm store prune
-```
+Please read [the FAQ] for more information on unreferenced packages and best
+practices.
 
-Removes unreferenced (extraneous, orphan) packages from the store.
+Please note that this is prohibited when a [store server] is running.
 
-Pruning the store is not harmful, but might slow down future installations.
-
-Please read [the FAQ](faq.md#what-does-pnpm-store-prune-do-is-it-harmful) for more information on unreferenced packages and `pnpm store prune` best practices.
-
-> This command is prohibited when a [store server](server) is running.
+[the FAQ]: faq.md#what-does-pnpm-store-prune-do-is-it-harmful
+[store server]: server

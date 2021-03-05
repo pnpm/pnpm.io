@@ -5,35 +5,41 @@ title: pnpm run
 
 Aliases: `run-script`
 
-Runs a defined package script.
-
-## Synopsis
-
-```text
-pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=&lt;number>]]
-     &lt;command> [-- &lt;args>...]
-```
+Runs a script defined in the package's manifest file.
 
 ## Examples
 
-Run the `watch` task:
+Let's say you have a `watch` script configured in your `package.json`, like so:
 
-```text
-pnpm run watch
+```json
+"scripts": {
+    "watch": "build-command --watch"
+}
 ```
 
-Same thing without the `run` keyword will work as well:
-
-```text
-pnpm watch
-```
+You can now run that script by using `pnpm run watch`! Simple, right?
+Another thing to note for those that like to save keystrokes and time is that
+all scripts get aliased in as pnpm commands, so ultimately `pnpm watch` is just
+shorthand for `pnpm run watch` (ONLY for scripts that do not share the same name
+as already existing pnpm commands).
 
 ## Details
 
-In addition to the shell’s pre-existing `PATH`, `pnpm run` adds `node_modules/.bin`
-to the `PATH` provided to `scripts`. As of v3.5, when executed inside a workspace,
-`<workspace root>/node_modules/.bin` is also added to the `PATH`, so if a tool
-is installed in the workspace root, it may be called in any workspace package's `scripts`.
+In addition to the shell’s pre-existing `PATH`, `pnpm run` includes
+`node_modules/.bin` in the `PATH` provided to `scripts`. This means that so
+long as you have a package installed, you can use it in a script like a regular
+command. For example, if you have `eslint` installed, you can write up a script
+like so:
+
+```json
+"lint": "eslint src --fix"
+```
+
+And even though `eslint` is not installed globally in your shell, it will run.
+
+For workspaces, as of v3.5, `<workspace root>/node_modules/.bin` is also added
+to the `PATH`, so if a tool is installed in the workspace root, it may be called
+in any workspace package's `scripts`.
 
 ## Options
 
@@ -46,10 +52,10 @@ Added in: v5.10.0
 
 The shell to use for scripts run with the `pnpm run` command.
 
-Probably the most useful example of usage is forcing Git's bash shell on Windows:
+For instance, to force usage of Git Bash on Windows:
 
 ```
-pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe
+pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
 ### shell-emulator
@@ -59,18 +65,22 @@ Added in: v5.8.0
 * Default: **false**
 * Type: **Boolean**
 
-When `true`, pnpm will use a JavaScript implementation of a [bash-like shell](https://www.npmjs.com/package/@yarnpkg/shell) to execute scripts.
+When `true`, pnpm will use a JavaScript implementation of a [bash-like shell] to
+execute scripts.
 
-This option simplifies cross-platform scripting. For instance, by default the next script will fail on Windows:
+This option simplifies cross-platform scripting. For instance, by default, the
+next script will fail on non-POSIX-compliant systems:
 
+```json
+"scripts": {
+  "test": "NODE_ENV=test node test.js"
+}
 ```
-{
-  "scripts": {
-    "test": "NODE_ENV=test node test.js"
-  }
-```
 
-But if the `shell-emulator` setting is set to `true`, it will work on all platforms.
+But if the `shell-emulator` setting is set to `true`, it will work on all
+platforms.
+
+[bash-like shell]: https://www.npmjs.com/package/@yarnpkg/shell
 
 ### --recursive, -r
 
@@ -92,19 +102,16 @@ Added in: v5.1.0
 
 Completely disregard concurrency and topological sorting, running a given script
 immediately in all matching packages with prefixed streaming output. This is the
-preferred flag for long-running processes such as watch run over many packages.
-
-```text
-pnpm run --parallel watch
-```
+preferred flag for long-running processes over many packages, for instance, a
+lengthy build process.
 
 ### --stream
 
 Added in: v5.1.0
 
-Stream output from child processes immediately, prefixed with the originating package directory.
-This allows output from different packages to be interleaved.
+Stream output from child processes immediately, prefixed with the originating
+package directory. This allows output from different packages to be interleaved.
 
-### --filter &lt;package_selector>
+### --filter \<package_selector>
 
 [Read more about filtering.](../filtering)
