@@ -10,7 +10,7 @@ well as their dependencies, in a tree-structure.
 
 Positional arguments are `name-pattern@version-range` identifiers, which will
 limit the results to only the packages named. For example,
-`pnpm list babel-* eslint-* semver@5`.
+`pnpm list "babel-*" "eslint-*" semver@5`.
 
 ## Options
 
@@ -37,7 +37,7 @@ Outputs package directories in a parseable format instead of their tree view.
 
 List packages in the global install directory instead of in the current project.
 
-### --depth <number>
+### --depth \<number>
 
 Max display depth of the dependency tree.
 

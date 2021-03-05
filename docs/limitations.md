@@ -9,7 +9,10 @@ dependencies. npm's lockfile is designed to reflect the flat `node_modules`
 layout, however, as pnpm cannot create a similar layout, it cannot respect
 npm's lockfile format. See [pnpm import] if you wish to convert a lockfile to
 pnpm's format, though.
-2. pnpm can't publish npm packages with `bundledDependencies` yet.
+2. pnpm can't publish npm packages with `bundledDependencies`. Currently, there
+are no plans to add support for `bundledDependencies` either, as they do not
+work very consistently in publishing, even on npm. Instead, we recommend you use
+an actual package bundler, like webpack, rollup, or ESBuild.
 3. Binstubs (files in `node_modules/.bin`) are always shell files, not
 symlinks to JS files. The shell files are created to help pluggable CLI apps
 in finding their plugins in the unusual `node_modules` structure. This is very

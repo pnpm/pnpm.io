@@ -55,7 +55,7 @@ node_modules
     `-- foo@1.0.0
         `-- node_modules
             |-- foo -> <store>/foo
-            `-- bar -> ../../../bar@1.0.0/node_modules/bar
+            `-- bar -> ../../bar@1.0.0/node_modules/bar
 ```
 
 Next, direct dependencies are handled. `foo` is going to be symlinked into the
@@ -71,7 +71,7 @@ node_modules
     `-- foo@1.0.0
         `-- node_modules
             |-- foo -> <store>/foo
-            `-- bar -> ../../../bar@1.0.0/node_modules/bar
+            `-- bar -> ../../bar@1.0.0/node_modules/bar
 ```
 
 This is a very simple example. However, the layout will maintain this structure
@@ -87,12 +87,12 @@ node_modules
     |-- bar@1.0.0
     |   `-- node_modules
     |       |-- bar -> <store>/bar
-    |       `-- qar -> ../../../qar@2.0.0/node_modules/qar
+    |       `-- qar -> ../../qar@2.0.0/node_modules/qar
     |-- foo@1.0.0
     |   `-- node_modules
     |       |-- foo -> <store>/foo
-    |       |-- bar -> ../../../bar@1.0.0/node_modules/bar
-    |       `-- qar -> ../../../qar@2.0.0/node_modules/qar
+    |       |-- bar -> ../../bar@1.0.0/node_modules/bar
+    |       `-- qar -> ../../qar@2.0.0/node_modules/qar
     `-- qar@2.0.0
         `-- node_modules
             `-- qar -> <store>/qar

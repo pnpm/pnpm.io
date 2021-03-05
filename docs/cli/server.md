@@ -58,8 +58,12 @@ type, the protocol is automatically set to use TCP.
 
 ### --store-dir
 
-* Default: 
+* Default: **\<home>/.pnpm-store**
 * Type: **Path**
+
+Added in: v1 as `store`
+
+The directory to use for the content addressable store.
 
 ### --[no-]lock
 
@@ -68,12 +72,6 @@ type, the protocol is automatically set to use TCP.
 
 Set whether to make the package store immutable to external processes while
 the server is running or not.
-
-### --store
-
-* Type: **Path**
-
-Set the directory to use for the store.
 
 ### --ignore-stop-requests
 

@@ -42,6 +42,27 @@ If this is set to true, the selected peer dependency will be marked as optional
 by the package manager. Therefore, the consumer omitting it will no longer be
 reported as an error.
 
+For example:
+```json
+{
+    "peerDependencies": {
+        "foo": "1"
+    },
+    "peerDependenciesMeta": {
+        "foo": {
+            "optional": true
+        },
+        "bar": {
+            "optional": true
+        }
+    }
+}
+```
+
+Note that even though `bar` was not specified in `peerDependencies`, it is
+marked as optional. pnpm will therefore assume that any version of bar is fine.
+However, `foo` is optional, but only to the required version specification.
+
 ### publishConfig
 
 Added in: v3.4.0

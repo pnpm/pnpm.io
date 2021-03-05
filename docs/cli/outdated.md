@@ -9,7 +9,7 @@ installed packages by providing arguments (patterns are supported).
 Examples:
 ```sh
 pnpm outdated
-pnpm outdated "*gulp-**" @babel/core
+pnpm outdated "*gulp-*" @babel/core
 ```
 
 ## Options

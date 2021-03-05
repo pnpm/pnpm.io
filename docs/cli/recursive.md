@@ -14,9 +14,20 @@ Aliases: `m`, `multi`, `<command> -r`
 
 ### --link-workspace-packages
 
+* Default: **true**
+* Type: **true, false, deep**
+
 Link locally available packages in workspaces of a monorepo into `node_modules`
 instead of re-downloading them from the registry. This emulates functionality
 similar to `yarn workspaces`.
+
+When this is set to deep, local packages can also be linked to subdependencies.
+
+Be advised that it is encouraged instead to use [npmrc] for this setting, to
+enforce the same behaviour in all environments. This option exists solely so you
+may override that if necessary.
+
+[npmrc]: ../workspaces#link-workspace-packages
 
 ### --workspace-concurrency
 

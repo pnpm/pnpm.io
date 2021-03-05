@@ -33,7 +33,7 @@ however, pnpm has a workaround. For Windows, we use [junctions] instead.
 
 Early versions of npm had issues because of nesting all `node_modules` (see
 [this issue]. However, pnpm does not create deep folders, it stores all packages
-flatly and uses hard links to create the dependency tree structure.
+flatly and uses symbolic links to create the dependency tree structure.
 
 [this issue]: https://github.com/nodejs/node-v0.x-archive/issues/6960
 
@@ -87,10 +87,11 @@ inhibits the storage and performance benefits of pnpm.
 If the store path is not set, then multiple stores are created (one per drive or
 filesystem).
 
-If installation is run on disk `A`, the store will be created on `A` at
-`.pnpm-store`.  If later the installation is run on disk `B`, an independent
-store will be created on `B` at `.pnpm-store`. The projects would still maintain
-the benefits of pnpm, but each drive may have redundant packages.
+If installation is run on disk `A`, the store will be created on `A`
+`.pnpm-store` under the filesystem root.  If later the installation is run on
+disk `B`, an independent store will be created on `B` at `.pnpm-store`. The
+projects would still maintain the benefits of pnpm, but each drive may have
+redundant packages.
 
 ## What does `pnpm store prune` do? Is it harmful?
 
@@ -137,8 +138,8 @@ its own list of deps.
 The easiest solution to resolve missing dependencies of the buggy packages is to
 **add `iterall` as a dependency to our project's `package.json`**.
 
-You can do so, by installing it via `pnpm i iterall`, and will be automatically
-added to your project's `package.json`.
+You can do so, by installing it via `pnpm add iterall`, and will be
+automatically added to your project's `package.json`.
 
 ```json
   "dependencies": {
@@ -160,7 +161,7 @@ It used to throw an error:
 
 ```console
 Error: Cannot find module 'babel-traverse'
-  at /node_modules/inspectpack/2.2.3/node_modules/inspectpack/lib/actions/parse
+  at /node_modules/inspectpack@2.2.3/node_modules/inspectpack/lib/actions/parse
 ```
 
 The problem was that `babel-traverse` was used in `inspectpack` which
@@ -194,6 +195,6 @@ rebuild the dependencies & it should be working.
 In case there are too many issues, you can use the `shamefully-hoist` option.
 This creates a flat `node_modules` structure similar to the one created by `npm`
 or `yarn`, which is not recommended as avoiding this structure is the primary
-purpose of pnpm.
+purpose of pnpm's `node_modules` approach.
 
 To use it, try `pnpm install --shamefully-hoist`.

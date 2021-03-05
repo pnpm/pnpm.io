@@ -5,7 +5,7 @@ title: pnpm run
 
 Aliases: `run-script`
 
-Runs a script defined in the package's metadata.
+Runs a script defined in the package's manifest file.
 
 ## Examples
 

@@ -1,4 +1,4 @@
----=
+---
 id: pnpm-workspace_yaml
 title: pnpm-workspace.yaml
 ---

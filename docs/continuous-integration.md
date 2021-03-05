@@ -5,16 +5,6 @@ title: Continuous Integration
 
 pnpm can easily be used in various continuous integration systems.
 
-## Tips
-
-### Improving performance
-
-##### - Disable store signature verification
-
-```shell
-pnpm set verify-store-integrity false
-```
-
 ## Travis
 
 On [Travis CI], you can use pnpm for installing your dependencies by adding this

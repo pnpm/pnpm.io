@@ -18,8 +18,10 @@ time of unpacking.
 
 Added in: v2.12.0
 
-Adds new packages to the store directly without modifying any projects or files
-outside of the store.
+Functionally equivalent to [`pnpm add`], except this adds new packages to the
+store directly without modifying any projects or files outside of the store.
+
+[`pnpm add`]: add
 
 ### prune
 

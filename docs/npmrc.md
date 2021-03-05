@@ -86,10 +86,10 @@ Added in: v1.34.0 as `shamefully-flatten`, renamed in v4.0.0
 * Type: **Boolean**
 
 By default, pnpm creates a semistrict `node_modules`, meaning dependencies have
-access to undeclared dependencies but main libraries themselves do not. With
-this layout, most of the packages in the ecosystem work with no issues. However,
-if some tooling only works when the hoisted dependencies are in the root of
-`node_modules`, you can set this to `true` to hoist them for you.
+access to undeclared dependencies but modules outside of `node_modules` do not.
+With this layout, most of the packages in the ecosystem work with no issues.
+However, if some tooling only works when the hoisted dependencies are in the
+root of `node_modules`, you can set this to `true` to hoist them for you.
 
 ## Node-Modules Settings
 
@@ -164,15 +164,6 @@ filesystem in userspace (FUSE). There is an experimental CLI that allows you to
 mount a modules directory with FUSE: [@pnpm/mount-modules].
 
 [@pnpm/mount-modules]: https://www.npmjs.com/package/@pnpm/mount-modules
-
-### verify-store-integrity
-
-Added in: v1.8.0
-
-* Default: **true**
-* Type: **Boolean**
-
-If false, doesn't check whether packages in the store were mutated.
 
 ### virtual-store-dir
 
@@ -262,6 +253,12 @@ registry. For example:
 
 ```sh
 //registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
+```
+
+You may also use an environment variable. For example:
+
+```sh
+//registry.npmjs.org/:_authToken={NPM_TOKEN}
 ```
 
 ### \<URL>:always-auth
@@ -470,12 +467,15 @@ potentially bugs.
 
 Added in: v5.4.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
-If this is enabled, the default behaviour of `pnpm install` becomes that of
+If this is enabled, the primary behaviour of `pnpm install` becomes that of
 `pnpm install -r`, meaning the install is performed on all workspace or
 subdirectory packages.
+
+Else, `pnpm install` will exclusively build the package in the current
+directory.
 
 ### engine-strict
 

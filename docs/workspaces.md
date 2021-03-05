@@ -40,7 +40,7 @@ the `workspace:` protocol is used.
 Added in 5.12.0
 
 Let's say you have a package in the workspace named `foo`. Usually, you would
-reference it as `"foo": "workspace:foo"`.
+reference it as `"foo": "workspace:*"`.
 
 If you want to use a different alias, the following syntax will work too:
 `"bar": "workspace:foo@*"`.
@@ -161,7 +161,7 @@ be in a single `node_modules` (and get symlinked to their package `node_modules`
 folder for Node's module resolution).
 
 Advantages of this option:
-* every dependency is a standalone
+* every dependency is a singleton
 * faster installations in a monorepo
 * fewer changes in code reviews as they are all in one file
 

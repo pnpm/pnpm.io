@@ -13,8 +13,8 @@ stored in a content-addressable store, so:
 1. If you depend on different versions of the dependency, only the files that
 differ are added to the store. For instance, if it has 100 files, and a new
 version has a change in only one of those files, `pnpm update` will only add 1
-new file to the store, instead of cloning the entire dependency bar the 1
-change.
+new file to the store, instead of cloning the entire dependency just for the
+singular change.
 1. All the files are saved in a single place on the disk. When packages are
 installed, their files are hard-linked from that single place, consuming no
 additional disk space. This allows you to share dependencies of the same version
