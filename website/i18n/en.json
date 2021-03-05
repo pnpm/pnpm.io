@@ -686,17 +686,146 @@
       "version-5.17/version-5.17-using-changesets": {
         "title": "Using Changesets with pnpm"
       },
+      "version-5.18/version-5.18-aliases": {
+        "title": "Aliases"
+      },
+      "version-5.18/version-5.18-benchmark": {
+        "title": "Benchmark"
+      },
+      "version-5.18/cli/version-5.18-add": {
+        "title": "pnpm add <pkg>"
+      },
+      "version-5.18/cli/version-5.18-audit": {
+        "title": "pnpm audit"
+      },
+      "version-5.18/cli/version-5.18-config": {
+        "title": "pnpm config"
+      },
+      "version-5.18/cli/version-5.18-exec": {
+        "title": "pnpm exec"
+      },
+      "version-5.18/cli/version-5.18-import": {
+        "title": "pnpm import"
+      },
+      "version-5.18/cli/version-5.18-install-test": {
+        "title": "pnpm install-test"
+      },
+      "version-5.18/cli/version-5.18-install": {
+        "title": "pnpm install"
+      },
+      "version-5.18/cli/version-5.18-link": {
+        "title": "pnpm link"
+      },
+      "version-5.18/cli/version-5.18-list": {
+        "title": "pnpm list"
+      },
       "version-5.18/cli/version-5.18-outdated": {
         "title": "pnpm outdated"
+      },
+      "version-5.18/cli/version-5.18-prune": {
+        "title": "pnpm prune"
       },
       "version-5.18/cli/version-5.18-publish": {
         "title": "pnpm publish"
       },
+      "version-5.18/cli/version-5.18-rebuild": {
+        "title": "pnpm rebuild"
+      },
+      "version-5.18/cli/version-5.18-recursive": {
+        "title": "pnpm recursive"
+      },
+      "version-5.18/cli/version-5.18-remove": {
+        "title": "pnpm remove"
+      },
+      "version-5.18/cli/version-5.18-run": {
+        "title": "pnpm run"
+      },
+      "version-5.18/cli/version-5.18-server": {
+        "title": "pnpm server"
+      },
+      "version-5.18/cli/version-5.18-start": {
+        "title": "pnpm start"
+      },
+      "version-5.18/cli/version-5.18-store": {
+        "title": "pnpm store"
+      },
+      "version-5.18/cli/version-5.18-test": {
+        "title": "pnpm test"
+      },
+      "version-5.18/cli/version-5.18-unlink": {
+        "title": "pnpm unlink"
+      },
       "version-5.18/cli/version-5.18-update": {
         "title": "pnpm update"
       },
+      "version-5.18/cli/version-5.18-why": {
+        "title": "pnpm why"
+      },
+      "version-5.18/version-5.18-completion": {
+        "title": "Command line tab-completion"
+      },
+      "version-5.18/version-5.18-configuring": {
+        "title": "Configuring"
+      },
       "version-5.18/version-5.18-continuous-integration": {
         "title": "Continuous Integration"
+      },
+      "version-5.18/version-5.18-faq": {
+        "title": "Frequently Asked Questions"
+      },
+      "version-5.18/version-5.18-filtering": {
+        "title": "Filtering"
+      },
+      "version-5.18/version-5.18-git": {
+        "title": "Working with Git"
+      },
+      "version-5.18/version-5.18-how-peers-are-resolved": {
+        "title": "How peers are resolved"
+      },
+      "version-5.18/version-5.18-installation": {
+        "title": "Installation"
+      },
+      "version-5.18/version-5.18-limitations": {
+        "title": "Limitations"
+      },
+      "version-5.18/version-5.18-motivation": {
+        "title": "Motivation"
+      },
+      "version-5.18/version-5.18-npmrc": {
+        "title": ".npmrc"
+      },
+      "version-5.18/version-5.18-only-allow-pnpm": {
+        "title": "Only allow pnpm"
+      },
+      "version-5.18/version-5.18-package_json": {
+        "title": "package.json"
+      },
+      "version-5.18/version-5.18-pnpm-cli": {
+        "title": "pnpm CLI"
+      },
+      "version-5.18/version-5.18-pnpm-vs-npm": {
+        "title": "pnpm vs npm"
+      },
+      "version-5.18/version-5.18-pnpm-workspace_yaml": {
+        "title": "pnpm-workspace.yaml"
+      },
+      "version-5.18/version-5.18-pnpmfile": {
+        "title": "pnpmfile.js"
+      },
+      "version-5.18/version-5.18-pnpx-cli": {
+        "title": "pnpx CLI"
+      },
+      "version-5.18/version-5.18-production": {
+        "title": "Production"
+      },
+      "version-5.18/version-5.18-symlinked-node-modules-structure": {
+        "title": "Symlinked `node_modules` structure"
+      },
+      "version-5.18/version-5.18-using-changesets": {
+        "title": "Using Changesets with pnpm"
+      },
+      "version-5.18/version-5.18-workspaces": {
+        "title": "Workspace"
       },
       "version-5.2/cli/version-5.2-store": {
         "title": "pnpm store"

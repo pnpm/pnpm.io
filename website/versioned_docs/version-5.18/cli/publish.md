@@ -6,24 +6,29 @@ original_id: publish
 
 Publishes a package to the registry.
 
-```text
-pnpm [-r] publish [&lt;tarball>|&lt;folder>] [--tag &lt;tag>] [--access &lt;public|restricted>]
+```sh
+pnpm [-r] publish [<tarball|folder>] [--tag <tag>]
+     [--access <public|restricted>]
 ```
 
-When publishing a package inside a [workspace](../workspaces), the LICENSE file from the
-root of the workspace is packed with the package (unless the package has a license of its own).
+When publishing a package inside a [workspace](../workspaces), the LICENSE file
+from the root of the workspace is packed with the package (unless the package
+has a license of its own).
 
-You may override some fields before publish, using the [publishConfig](../package_json#publishconfig)
-field in `package.json`.
+You may override some fields before publish, using the
+[publishConfig] field in `package.json`.
 
 When running this command recursively (`pnpm -r publish`), pnpm will publish all
 the packages that have versions not yet published to the registry.
 
+[publishConfig]: ../package_json#publishconfig
+
 ## Options
 
-### --tag &lt;tag>
+### --tag \<tag>
 
-Publishes the package with the given tag. By default, `pnpm publish` updates the `latest` tag.
+Publishes the package with the given tag. By default, `pnpm publish` updates
+the `latest` tag.
 
 For example:
 
@@ -34,15 +39,9 @@ pnpm publish --tag next
 pnpm add foo@next
 ```
 
-### --access &lt;public|restricted>
+### --access \<public|restricted>
 
 Tells the registry whether the published package should be public or restricted.
-
-### --filter &lt;package_selector>
-
-Added in: 4.6.0
-
-[Read more about filtering.](../filtering)
 
 ### --force
 
@@ -57,7 +56,7 @@ Added in: v4.11.0
 * Default : **true** (since v5)
 * Type: **Boolean**
 
-When true, `pnpm publish` checks if current branch is your publish branch
+When true, `pnpm publish` checks if the current branch is your publish branch
 (master by default), clean, and up-to-date.
 
 ### publish-branch
@@ -67,5 +66,18 @@ Added in: v4.11.0
 * Default: **master**
 * Types: **String**
 
-The main branch of the repository which is used for publishing the latest changes.
+The primary branch of the repository which is used for publishing the latest
+changes.
 
+### --force
+
+Added in: v5.18.0
+
+Try to publish packages even if their current version is already found in the
+registry or any other checks fail.
+
+### --filter \<package_selector>
+
+Added in: 4.6.0
+
+[Read more about filtering.](../filtering)
