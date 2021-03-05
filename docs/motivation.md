@@ -3,8 +3,6 @@ id: motivation
 title: Motivation
 ---
 
-# Flat `node_modules`
-
 When using npm or Yarn, if you have 100 projects using a dependency, you will
 have 100 copies of that dependency saved on disk. This is caused by the use of
 a flat `node_modules` structure. However, with pnpm, the dependency will be

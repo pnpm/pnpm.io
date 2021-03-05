@@ -17,6 +17,12 @@
       "cli/audit": {
         "title": "pnpm audit"
       },
+      "cli/config": {
+        "title": "pnpm config"
+      },
+      "cli/exec": {
+        "title": "pnpm exec"
+      },
       "cli/import": {
         "title": "pnpm import"
       },
@@ -58,9 +64,6 @@
       },
       "cli/start": {
         "title": "pnpm start"
-      },
-      "cli/stop": {
-        "title": "pnpm stop"
       },
       "cli/store": {
         "title": "pnpm store"
@@ -134,8 +137,8 @@
       "pnpx-cli": {
         "title": "pnpx CLI"
       },
-      "releasing-apps": {
-        "title": "Releasing apps"
+      "production": {
+        "title": "Production"
       },
       "support": {
         "title": "Support"

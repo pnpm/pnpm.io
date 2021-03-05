@@ -3,15 +3,13 @@ id: installation
 title: Installation
 ---
 
-# Using npm
+## Using npm
 
 This is by far the fastest and easiest solution.
 
 ```sh
 npm install -g pnpm
 ```
-
-# Other solutions
 
 ## Using a standalone script
 
@@ -31,7 +29,7 @@ On Windows (PowerShell):
 npx pnpm add -g pnpm
 ```
 
-# Upgrading
+## Upgrading
 
 Once you have installed pnpm, there is no need to use other package managers to
 update it. You can upgrade pnpm using itself, like so:
