@@ -213,6 +213,11 @@ module.exports={
           "position": "left"
         },
         {
+          "to": "blog",
+          "label": "Blog",
+          "position": "left"
+        },
+        {
           "to": "/faq",
           "label": "FAQ",
           "position": "left"
@@ -225,8 +230,39 @@ module.exports={
     },
     "image": "img/ogimage.png",
     "footer": {
-      "links": [],
-      "copyright": "Copyright © 2021 contributors of pnpm",
+      "links": [
+        {
+          title: 'Docs',
+          items: [
+            {
+              label: 'Getting Started',
+              to: 'installation'
+            },
+          ]
+        },
+        {
+          title: 'Community',
+          items: [
+            {
+              label: 'User Showcase',
+              to: 'users'
+            },
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/pnpm'
+            },
+            {
+              label: 'Project Chat',
+              href: 'https://bit.ly/pnpm-discord-invite',
+            },
+            {
+              label: 'Twitter',
+              href: 'https://twitter.com/pnpmjs'
+            }
+          ]
+        },
+      ],
+      "copyright": "Copyright © 2015-2021 contributors of pnpm",
       "logo": {
         "src": "img/pnpm-light.svg"
       }
