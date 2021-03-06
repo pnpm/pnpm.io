@@ -59,7 +59,7 @@ type, the protocol is automatically set to use TCP.
 
 ### --store-dir
 
-* Default: **\<home>/.pnpm-store**
+* Default: **\<home\>/.pnpm-store**
 * Type: **Path**
 
 Added in: v1 as `store`

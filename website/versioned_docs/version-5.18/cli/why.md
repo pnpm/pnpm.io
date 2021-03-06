@@ -39,6 +39,6 @@ Only display the dependency tree for packages in `dependencies`.
 
 Only display the dependency tree for packages in `devDependencies`.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

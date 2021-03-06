@@ -51,7 +51,7 @@ You may use a pattern to select a set of root packages:
 pnpm test --filter "@babel/preset-*..."
 ```
 
-## --filter \<package_name>^...
+## --filter \<package_name\>^...
 
 Added in: v4.4.0
 

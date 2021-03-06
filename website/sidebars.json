@@ -43,8 +43,7 @@
         "items": [
           "cli/run",
           "cli/test",
-          "cli/start",
-          "cli/stop"
+          "cli/start"
         ]
       },
       {
@@ -79,7 +78,6 @@
       "logos",
       "benchmark",
       "limitations",
-      "about-package-store",
       "symlinked-node-modules-structure",
       "how-peers-are-resolved"
     ]

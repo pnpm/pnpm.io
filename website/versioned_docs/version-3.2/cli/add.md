@@ -132,6 +132,6 @@ Added in: v4.4.0
 
 Only adds the new dependency if it is found in the workspace.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

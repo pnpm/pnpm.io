@@ -123,7 +123,7 @@ briefly slowing down the installation process.
 `pnpm` stands for `performant npm`.
 [Rico Sta. Cruz](https://github.com/rstacruz/) came up with the name.
 
-## `pnpm` does not work with <YOUR-PROJECT-HERE>?
+## `pnpm` does not work with \<YOUR-PROJECT-HERE\>?
 
 In most cases it means that one of the dependencies require packages not
 declared in `package.json`. It is a common mistake caused by flat
