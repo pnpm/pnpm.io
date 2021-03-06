@@ -204,9 +204,14 @@ module.exports={
       '@docusaurus/plugin-client-redirects',
       {
         createRedirects: (existingPath) => {
+          const alternatives = []
           if (!existingPath.match(/^\/[a-z]{2}\//)) {
-            return [`/en${existingPath}`];
+            alternatives.push(`/en${existingPath}`);
           }
+          if (!existingPath.startsWith('/5.x/')) {
+            alternatives.push(`/5.x${existingPath}`);
+          }
+          return alternatives;
         }
       }
     ]
