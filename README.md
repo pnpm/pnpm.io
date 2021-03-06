@@ -12,7 +12,7 @@ pnpm start
 
 ```
 cd website
-USE_SSH=true GIT_USER=zkochan npm run publish-gh-pages
+NODE_OPTIONS=--max-old-space-size=10000 USE_SSH=true GIT_USER=zkochan pnpm deploy
 ```
 
 ## Algolia Search
