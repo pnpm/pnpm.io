@@ -94,7 +94,7 @@ If `true`, pnpm doesn't generate a lockfile and fails to install if the lockfile
 is out of sync with the manifest / an update is needed or no lockfile is
 present.
 
-### --reporter=\<name\>
+### --reporter=&lt;name\>
 
 * Default:
     * For TTY stdout: **default**
@@ -127,6 +127,6 @@ after installation is done. To stop the store server, run `pnpm server stop`
 Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 **WARNING**: This is highly discouraged.
 
-### --filter \<package_selector\>
+### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering)

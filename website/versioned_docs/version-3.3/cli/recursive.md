@@ -106,6 +106,6 @@ pnpm -r exec -- rm -rf node_modules
 pnpm -r exec -- pnpm view $PNPM_PACKAGE_NAME
 ```
 
-### --filter \<package_selector\>
+### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering)

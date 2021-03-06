@@ -239,7 +239,7 @@ modify the lockfile.
 
 The base URL of the npm package registry (trailing slash included).
 
-#### \<scope\>:registry
+#### &lt;scope\>:registry
 
 The npm registry that should be used for packages of the specified scope. For
 example, setting `@babel:registry=https://example.com/packages/npm/`
@@ -247,7 +247,7 @@ will enforce that when you use `pnpm add @babel/core`, or any `@babel` scoped
 package, the package will be fetched from `https://example.com/packages/npm`
 instead of the default registry.
 
-### \<URL\>:_authToken
+### &lt;URL\>:_authToken
 
 Define the authentication bearer token to use when accessing the specified
 registry. For example:
@@ -262,7 +262,7 @@ You may also use an environment variable. For example:
 //registry.npmjs.org/:_authToken={NPM_TOKEN}
 ```
 
-### \<URL\>:always-auth
+### &lt;URL\>:always-auth
 
 * Default: **false**
 * Type: **Boolean**
@@ -580,7 +580,7 @@ This also sets the tag that is added to the `package@version` specified by the
 
 Added in: v4.2.0
 
-* Default: **\<path to node\>/pnpm-global**
+* Default: **&lt;path to node\>/pnpm-global**
 * Type: **path**
 
 Specify a custom directory to store global packages.

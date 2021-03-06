@@ -78,6 +78,6 @@ Added in: v4.8.0
 
 Show outdated dependencies and select which ones to update.
 
-### --filter \<package_selector\>
+### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering)

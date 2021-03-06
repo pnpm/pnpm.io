@@ -13,6 +13,6 @@ Rebuild a package.
 
 This command runs the **pnpm rebuild** command in every package of the monorepo.
 
-### --filter \<package_selector\>
+### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering)

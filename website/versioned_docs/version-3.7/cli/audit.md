@@ -9,7 +9,7 @@ Checks for known security issues with the installed packages.
 
 ## Options
 
-### --audit-level \<severity\>
+### --audit-level &lt;severity\>
 
 * Type: **low**, **moderate**, **high**, **critical**
 * Default: **low**

@@ -17,6 +17,6 @@ removing the external link.
 Unlink in every package found in subdirectories or in every workspace package,
 when executed inside a [workspace](../workspaces).
 
-### --filter \<package_selector\>
+### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering)
