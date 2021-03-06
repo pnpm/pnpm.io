@@ -225,8 +225,12 @@ module.exports={
         {
           type: 'docsVersionDropdown',
           "position": "right",
-        }
-      ]
+        },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
+      ],
     },
     "image": "img/ogimage.png",
     "footer": {
@@ -280,5 +284,14 @@ module.exports={
     "gtag": {
       "trackingID": "UA-91385296-1"
     }
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+      },
+    },
   }
 }
