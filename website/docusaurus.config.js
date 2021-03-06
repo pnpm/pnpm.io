@@ -199,7 +199,18 @@ module.exports={
       }
     ]
   ],
-  "plugins": [],
+  "plugins": [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        createRedirects: (existingPath) => {
+          if (!existingPath.match(/^\/[a-z]{2}\//)) {
+            return [`/en${existingPath}`];
+          }
+        }
+      }
+    ]
+  ],
   "themeConfig": {
     "navbar": {
       "title": "pnpm",
