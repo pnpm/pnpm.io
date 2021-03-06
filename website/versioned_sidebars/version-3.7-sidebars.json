@@ -1,41 +1,142 @@
 {
-  "version-3.7-docs": {
-    "Introduction": [
-      "version-3.7-motivation",
-      "version-3.7-installation"
-    ],
-    "Usage": [
-      "version-3.7-pnpm-cli",
-      "version-3.7-pnpx-cli",
-      "version-3.7-configuring",
-      "version-3.7-hooks",
-      "version-3.7-aliases"
-    ],
-    "CLI commands": [
-      "version-3.7-pnpm-import",
-      "version-3.7-pnpm-add-pkg",
-      "version-3.7-pnpm-install",
-      "version-3.7-pnpm-publish",
-      "version-3.7-pnpm-recursive",
-      "version-3.7-pnpm-run",
-      "version-3.7-pnpm-server",
-      "version-3.7-pnpm-store",
-      "version-3.7-pnpm-unlink",
-      "version-3.7-pnpm-list",
-      "version-3.7-pnpm-outdated"
-    ],
-    "Recipes": [
-      "version-3.7-continuous-integration",
-      "version-3.7-workspace",
-      "version-3.7-only-allow-pnpm"
-    ],
-    "Advanced": [
-      "version-3.7-logos",
-      "version-3.7-benchmark",
-      "version-3.7-limitations",
-      "version-3.7-about-package-store",
-      "version-3.7-symlinked-node-modules-structure",
-      "version-3.7-how-peers-are-resolved"
-    ]
-  }
+  "version-3.7/docs": [
+    {
+      "type": "category",
+      "label": "Introduction",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.7/motivation"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/installation"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Usage",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpx-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/configuring"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/hooks"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/aliases"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "CLI commands",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-import"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-add-pkg"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-publish"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-recursive"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-run"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-server"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-unlink"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-list"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/pnpm-outdated"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Recipes",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.7/continuous-integration"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/workspace"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/only-allow-pnpm"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.7/logos"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/benchmark"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/limitations"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/about-package-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/symlinked-node-modules-structure"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.7/how-peers-are-resolved"
+        }
+      ]
+    }
+  ]
 }

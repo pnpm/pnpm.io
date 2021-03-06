@@ -1,5 +1,5 @@
 ---
-id: version-5.18-store
+id: store
 title: pnpm store
 original_id: store
 ---

@@ -1,5 +1,5 @@
 ---
-id: version-5.18-git
+id: git
 title: Working with Git
 original_id: git
 ---

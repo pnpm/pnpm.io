@@ -1,5 +1,5 @@
 ---
-id: version-5.18-completion
+id: completion
 title: Command line tab-completion
 original_id: completion
 ---

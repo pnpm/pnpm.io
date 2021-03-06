@@ -1,5 +1,5 @@
 ---
-id: version-5.18-limitations
+id: limitations
 title: Limitations
 original_id: limitations
 ---

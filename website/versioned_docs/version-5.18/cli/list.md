@@ -1,5 +1,5 @@
 ---
-id: version-5.18-list
+id: list
 title: pnpm list
 original_id: list
 ---

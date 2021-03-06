@@ -1,0 +1,238 @@
+{
+  "version-4.7/docs": [
+    {
+      "type": "category",
+      "label": "Introduction",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-4.7/motivation"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/installation"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Usage",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-4.7/pnpm-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/pnpx-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/configuring"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/filtering"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "CLI commands",
+      "items": [
+        {
+          "type": "category",
+          "label": "Manage dependencies",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/add"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/install"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/update"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/remove"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/link"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/unlink"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/import"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/rebuild"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/prune"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/install-test"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Review dependencies",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/audit"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/list"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/outdated"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/why"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Run scripts",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/run"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/test"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/start"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/stop"
+            }
+          ]
+        },
+        {
+          "type": "category",
+          "label": "Misc.",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/publish"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/recursive"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/server"
+            },
+            {
+              "type": "doc",
+              "id": "version-4.7/cli/store"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Configuration",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-4.7/package_json"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/npmrc"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/pnpm-workspace_yaml"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/pnpmfile"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Features",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-4.7/workspaces"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/aliases"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Recipes",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-4.7/continuous-integration"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/only-allow-pnpm"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-4.7/logos"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/benchmark"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/limitations"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/about-package-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/symlinked-node-modules-structure"
+        },
+        {
+          "type": "doc",
+          "id": "version-4.7/how-peers-are-resolved"
+        }
+      ]
+    }
+  ]
+}

@@ -1,38 +1,130 @@
 {
-  "version-3.5-docs": {
-    "Introduction": [
-      "version-3.5-motivation",
-      "version-3.5-installation"
-    ],
-    "Usage": [
-      "version-3.5-pnpm-cli",
-      "version-3.5-pnpx-cli",
-      "version-3.5-configuring",
-      "version-3.5-hooks",
-      "version-3.5-aliases"
-    ],
-    "CLI commands": [
-      "version-3.5-pnpm-import",
-      "version-3.5-pnpm-install-pkg",
-      "version-3.5-pnpm-install",
-      "version-3.5-pnpm-publish",
-      "version-3.5-pnpm-recursive",
-      "version-3.5-pnpm-run",
-      "version-3.5-pnpm-server",
-      "version-3.5-pnpm-store",
-      "version-3.5-pnpm-unlink"
-    ],
-    "Recipes": [
-      "version-3.5-continuous-integration",
-      "version-3.5-workspace"
-    ],
-    "Advanced": [
-      "version-3.5-logos",
-      "version-3.5-benchmark",
-      "version-3.5-limitations",
-      "version-3.5-about-package-store",
-      "version-3.5-symlinked-node-modules-structure",
-      "version-3.5-how-peers-are-resolved"
-    ]
-  }
+  "version-3.5/docs": [
+    {
+      "type": "category",
+      "label": "Introduction",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.5/motivation"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/installation"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Usage",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpx-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/configuring"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/hooks"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/aliases"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "CLI commands",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-import"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-install-pkg"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-publish"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-recursive"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-run"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-server"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/pnpm-unlink"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Recipes",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.5/continuous-integration"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/workspace"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.5/logos"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/benchmark"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/limitations"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/about-package-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/symlinked-node-modules-structure"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.5/how-peers-are-resolved"
+        }
+      ]
+    }
+  ]
 }

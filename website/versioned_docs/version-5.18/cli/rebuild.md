@@ -1,5 +1,5 @@
 ---
-id: version-5.18-rebuild
+id: rebuild
 title: pnpm rebuild
 original_id: rebuild
 ---

@@ -1,5 +1,5 @@
 ---
-id: version-5.17-how-peers-are-resolved
+id: how-peers-are-resolved
 title: How peers are resolved
 original_id: how-peers-are-resolved
 ---

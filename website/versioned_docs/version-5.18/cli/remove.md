@@ -1,5 +1,5 @@
 ---
-id: version-5.18-remove
+id: remove
 title: pnpm remove
 original_id: remove
 ---

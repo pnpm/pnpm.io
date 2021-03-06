@@ -1,5 +1,5 @@
 ---
-id: version-5.18-run
+id: run
 title: pnpm run
 original_id: run
 ---

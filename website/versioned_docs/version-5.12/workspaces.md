@@ -1,5 +1,5 @@
 ---
-id: version-5.12-workspaces
+id: workspaces
 title: Workspace
 original_id: workspaces
 ---

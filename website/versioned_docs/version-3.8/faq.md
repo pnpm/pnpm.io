@@ -1,5 +1,5 @@
 ---
-id: version-3.8-faq
+id: faq
 title: Frequently Asked Questions
 original_id: faq
 ---

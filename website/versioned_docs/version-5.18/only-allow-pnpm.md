@@ -1,5 +1,5 @@
 ---
-id: version-5.18-only-allow-pnpm
+id: only-allow-pnpm
 title: Only allow pnpm
 original_id: only-allow-pnpm
 ---

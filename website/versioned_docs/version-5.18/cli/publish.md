@@ -1,5 +1,5 @@
 ---
-id: version-5.18-publish
+id: publish
 title: pnpm publish
 original_id: publish
 ---

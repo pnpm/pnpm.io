@@ -1,5 +1,5 @@
 ---
-id: version-5.18-package_json
+id: package_json
 title: package.json
 original_id: package_json
 ---

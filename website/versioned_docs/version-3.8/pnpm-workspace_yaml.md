@@ -1,5 +1,5 @@
 ---
-id: version-3.8-pnpm-workspace_yaml
+id: pnpm-workspace_yaml
 title: pnpm-workspace.yaml
 original_id: pnpm-workspace_yaml
 ---

@@ -1,6 +1,6 @@
 ---
-id: version-5.18-add
-title: pnpm add <pkg>
+id: add
+title: "pnpm add <pkg>"
 original_id: add
 ---
 

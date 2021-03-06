@@ -1,5 +1,5 @@
 ---
-id: version-5.18-recursive
+id: recursive
 title: pnpm recursive
 original_id: recursive
 ---

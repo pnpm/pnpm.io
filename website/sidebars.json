@@ -12,9 +12,9 @@
     ],
     "CLI commands": [
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Manage dependencies",
-        "ids": [
+        "items": [
           "cli/add",
           "cli/install",
           "cli/update",
@@ -28,9 +28,9 @@
         ]
       },
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Review dependencies",
-        "ids": [
+        "items": [
           "cli/audit",
           "cli/list",
           "cli/outdated",
@@ -38,9 +38,9 @@
         ]
       },
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Run scripts",
-        "ids": [
+        "items": [
           "cli/run",
           "cli/test",
           "cli/start",
@@ -48,9 +48,9 @@
         ]
       },
       {
-        "type": "subcategory",
+        "type": "category",
         "label": "Misc.",
-        "ids": [
+        "items": [
           "cli/publish",
           "cli/recursive",
           "cli/server",

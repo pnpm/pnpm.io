@@ -1,5 +1,5 @@
 ---
-id: version-5.18-production
+id: production
 title: Production
 original_id: production
 ---

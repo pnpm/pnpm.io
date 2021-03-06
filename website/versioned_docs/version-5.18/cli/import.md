@@ -1,5 +1,5 @@
 ---
-id: version-5.18-import
+id: import
 title: pnpm import
 original_id: import
 ---

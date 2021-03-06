@@ -1,5 +1,5 @@
 ---
-id: version-5.18-test
+id: test
 title: pnpm test
 original_id: test
 ---

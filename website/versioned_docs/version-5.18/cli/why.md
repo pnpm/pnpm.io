@@ -1,5 +1,5 @@
 ---
-id: version-5.18-why
+id: why
 title: pnpm why
 original_id: why
 ---

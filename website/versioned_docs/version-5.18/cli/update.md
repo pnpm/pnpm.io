@@ -1,5 +1,5 @@
 ---
-id: version-5.18-update
+id: update
 title: pnpm update
 original_id: update
 ---

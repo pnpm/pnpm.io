@@ -1,6 +1,6 @@
 ---
-id: version-4.3-add
-title: pnpm add <pkg>
+id: add
+title: "pnpm add <pkg>"
 original_id: add
 ---
 

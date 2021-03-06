@@ -1,5 +1,5 @@
 ---
-id: version-5.18-install
+id: install
 title: pnpm install
 original_id: install
 ---

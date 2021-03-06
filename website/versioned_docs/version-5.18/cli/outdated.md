@@ -1,5 +1,5 @@
 ---
-id: version-5.18-outdated
+id: outdated
 title: pnpm outdated
 original_id: outdated
 ---

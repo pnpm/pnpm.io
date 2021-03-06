@@ -15,7 +15,7 @@ pnpm link <dir>
 
 ## Options
 
-### --dir \<dir>, -C
+### --dir \<dir\>, -C
 
 * **Default**: Current working directory
 * **Type**: Path string

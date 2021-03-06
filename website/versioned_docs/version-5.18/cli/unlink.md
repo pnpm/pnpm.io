@@ -1,5 +1,5 @@
 ---
-id: version-5.18-unlink
+id: unlink
 title: pnpm unlink
 original_id: unlink
 ---

@@ -1,5 +1,5 @@
 ---
-id: version-5.18-audit
+id: audit
 title: pnpm audit
 original_id: audit
 ---
@@ -10,7 +10,7 @@ Checks for known security issues with the installed packages.
 
 ## Options
 
-### --audit-level \<severity>
+### --audit-level \<severity\>
 
 * Type: **low**, **moderate**, **high**, **critical**
 * Default: **low**
