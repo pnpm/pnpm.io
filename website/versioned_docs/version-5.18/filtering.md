@@ -40,16 +40,16 @@ Added in: v2.13.0
 
 To select a package and its dependencies (direct and non-direct), suffix the
 package name with an ellipsis: `<package_name>...`. For instance, the next
-command will perform an installation for `foo` and all of its dependencies:
+command will run tests of `foo` and all of its dependencies:
 
 ```sh
-pnpm install --filter foo...
+pnpm test --filter foo...
 ```
 
 You may use a pattern to select a set of root packages:
 
 ```sh
-pnpm install --filter "@babel/preset-*..."
+pnpm test --filter "@babel/preset-*..."
 ```
 
 ## --filter \<package_name>^...
@@ -58,11 +58,11 @@ Added in: v4.4.0
 
 To ONLY select the dependencies of a package (both direct and non-direct),
 suffix the name with the aforementioned ellipsis preceded by a chevron. For
-instance, the next command will perform an installation for all of `foo`'s
+instance, the next command will run tests for all of `foo`'s
 dependencies:
 
 ```sh
-pnpm install --filter "foo^..."
+pnpm test --filter "foo^..."
 ```
 
 ## --filter ...\<package_name>
@@ -71,10 +71,10 @@ Added in: v2.14.0
 
 To select a package and its dependent packages (direct and non-direct), prefix
 the package name with an ellipsis: `...<package_name>`. For instance, this will
-run an installation for all `foo` and all packages dependent on it:
+run the tests of `foo` and all packages dependent on it:
 
 ```sh
-pnpm install --filter ...foo
+pnpm test --filter ...foo
 ```
 
 ## --filter "...^\<package_name>"
@@ -83,10 +83,10 @@ Added in: v4.4.0
 
 To ONLY select a package's dependents (both direct and non-direct), prefix the
 package name with an ellipsis followed by a chevron. For instance, this will
-run an installation for all packages dependent on `foo`:
+run tests for all packages dependent on `foo`:
 
 ```text
-pnpm install --filter "...^foo"
+pnpm test --filter "...^foo"
 ```
 
 ## --filter ./\<directory>
@@ -150,7 +150,7 @@ When packages are filtered, every package is taken that matches at least one of
 the selectors. You can use as many filters as you want:
 
 ```sh
-pnpm install --filter ...foo --filter bar --filter baz...
+pnpm test --filter ...foo --filter bar --filter baz...
 ```
 
 ## Excluding
