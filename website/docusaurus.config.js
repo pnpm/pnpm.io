@@ -173,7 +173,6 @@ module.exports={
         "width": 250
       }
     ],
-    "docsUrl": "",
     "repoUrl": "https://github.com/pnpm/pnpm",
     "translationRecruitingLink": "https://crowdin.com/project/pnpm"
   },
@@ -188,6 +187,7 @@ module.exports={
           "showLastUpdateTime": true,
           "editUrl": "https://github.com/pnpm/pnpm.github.io/edit/source/docs/",
           "path": "../docs",
+          "routeBasePath": "/",
           "sidebarPath": "../website/sidebars.json"
         },
         "blog": {
@@ -208,199 +208,18 @@ module.exports={
       },
       "items": [
         {
-          "to": "docs/",
+          "to": "motivation",
           "label": "Docs",
           "position": "left"
         },
         {
-          "to": "docs/faq",
+          "to": "/faq",
           "label": "FAQ",
           "position": "left"
         },
         {
-          "label": "Version",
-          "to": "docs",
+          type: 'docsVersionDropdown',
           "position": "right",
-          "items": [
-            {
-              "label": "5.18",
-              "to": "docs/",
-              "activeBaseRegex": "docs/(?!2|3.0.0|3.1.0|3.2|3.3|3.4|3.5|3.6|3.7|3.8|4.0|4.1|4.2|4.3|4.4|4.5|4.6|4.7|4.8|4.9|4.10|4.11|4.12|4.13|4.14|5.0|5.1|5.2|5.3|5.4|5.5|5.6|5.7|5.8|5.9|5.10|5.11|5.12|5.14|5.15|5.16|5.17|5.18|next)"
-            },
-            {
-              "label": "5.17",
-              "to": "docs/5.17/"
-            },
-            {
-              "label": "5.16",
-              "to": "docs/5.16/"
-            },
-            {
-              "label": "5.15",
-              "to": "docs/5.15/"
-            },
-            {
-              "label": "5.14",
-              "to": "docs/5.14/"
-            },
-            {
-              "label": "5.12",
-              "to": "docs/5.12/"
-            },
-            {
-              "label": "5.11",
-              "to": "docs/5.11/"
-            },
-            {
-              "label": "5.10",
-              "to": "docs/5.10/"
-            },
-            {
-              "label": "5.9",
-              "to": "docs/5.9/"
-            },
-            {
-              "label": "5.8",
-              "to": "docs/5.8/"
-            },
-            {
-              "label": "5.7",
-              "to": "docs/5.7/"
-            },
-            {
-              "label": "5.6",
-              "to": "docs/5.6/"
-            },
-            {
-              "label": "5.5",
-              "to": "docs/5.5/"
-            },
-            {
-              "label": "5.4",
-              "to": "docs/5.4/"
-            },
-            {
-              "label": "5.3",
-              "to": "docs/5.3/"
-            },
-            {
-              "label": "5.2",
-              "to": "docs/5.2/"
-            },
-            {
-              "label": "5.1",
-              "to": "docs/5.1/"
-            },
-            {
-              "label": "5.0",
-              "to": "docs/5.0/"
-            },
-            {
-              "label": "4.14",
-              "to": "docs/4.14/"
-            },
-            {
-              "label": "4.13",
-              "to": "docs/4.13/"
-            },
-            {
-              "label": "4.12",
-              "to": "docs/4.12/"
-            },
-            {
-              "label": "4.11",
-              "to": "docs/4.11/"
-            },
-            {
-              "label": "4.10",
-              "to": "docs/4.10/"
-            },
-            {
-              "label": "4.9",
-              "to": "docs/4.9/"
-            },
-            {
-              "label": "4.8",
-              "to": "docs/4.8/"
-            },
-            {
-              "label": "4.7",
-              "to": "docs/4.7/"
-            },
-            {
-              "label": "4.6",
-              "to": "docs/4.6/"
-            },
-            {
-              "label": "4.5",
-              "to": "docs/4.5/"
-            },
-            {
-              "label": "4.4",
-              "to": "docs/4.4/"
-            },
-            {
-              "label": "4.3",
-              "to": "docs/4.3/"
-            },
-            {
-              "label": "4.2",
-              "to": "docs/4.2/"
-            },
-            {
-              "label": "4.1",
-              "to": "docs/4.1/"
-            },
-            {
-              "label": "4.0",
-              "to": "docs/4.0/"
-            },
-            {
-              "label": "3.8",
-              "to": "docs/3.8/"
-            },
-            {
-              "label": "3.7",
-              "to": "docs/3.7/"
-            },
-            {
-              "label": "3.6",
-              "to": "docs/3.6/"
-            },
-            {
-              "label": "3.5",
-              "to": "docs/3.5/"
-            },
-            {
-              "label": "3.4",
-              "to": "docs/3.4/"
-            },
-            {
-              "label": "3.3",
-              "to": "docs/3.3/"
-            },
-            {
-              "label": "3.2",
-              "to": "docs/3.2/"
-            },
-            {
-              "label": "3.1.0",
-              "to": "docs/3.1.0/"
-            },
-            {
-              "label": "3.0.0",
-              "to": "docs/3.0.0/"
-            },
-            {
-              "label": "2",
-              "to": "docs/2/"
-            },
-            {
-              "label": "Master/Unreleased",
-              "to": "docs/next/",
-              "activeBaseRegex": "docs/next/(?!support|team|resources)"
-            }
-          ]
         }
       ]
     },
