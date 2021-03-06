@@ -1,5 +1,5 @@
 ---
-id: version-5.18-link
+id: link
 title: pnpm link
 original_id: link
 ---
@@ -16,7 +16,7 @@ pnpm link <dir>
 
 ## Options
 
-### --dir \<dir>, -C
+### --dir \<dir\>, -C
 
 * **Default**: Current working directory
 * **Type**: Path string

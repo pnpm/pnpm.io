@@ -1,5 +1,5 @@
 ---
-id: version-5.18-rebuild
+id: rebuild
 title: pnpm rebuild
 original_id: rebuild
 ---
@@ -14,6 +14,6 @@ Rebuild a package.
 
 This command runs the **pnpm rebuild** command in every package of the monorepo.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

@@ -1,6 +1,6 @@
 ---
-id: version-5.15-npmrc
-title: .npmrc
+id: npmrc
+title: ".npmrc"
 original_id: npmrc
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: version-5.18-benchmark
+id: benchmark
 title: Benchmark
 original_id: benchmark
 ---

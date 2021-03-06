@@ -1,36 +1,122 @@
 {
-  "version-3.3-docs": {
-    "Introduction": [
-      "version-3.3-motivation",
-      "version-3.3-installation"
-    ],
-    "Usage": [
-      "version-3.3-pnpm-cli",
-      "version-3.3-pnpx-cli",
-      "version-3.3-configuring",
-      "version-3.3-hooks",
-      "version-3.3-aliases"
-    ],
-    "CLI commands": [
-      "version-3.3-pnpm-install",
-      "version-3.3-pnpm-install-pkg",
-      "version-3.3-pnpm-unlink",
-      "version-3.3-pnpm-store",
-      "version-3.3-pnpm-recursive",
-      "version-3.3-pnpm-server",
-      "version-3.3-pnpm-import",
-      "version-3.3-pnpm-publish"
-    ],
-    "Recipes": [
-      "version-3.3-continuous-integration",
-      "version-3.3-workspace"
-    ],
-    "Advanced": [
-      "version-3.3-benchmark",
-      "version-3.3-limitations",
-      "version-3.3-about-package-store",
-      "version-3.3-symlinked-node-modules-structure",
-      "version-3.3-how-peers-are-resolved"
-    ]
-  }
+  "version-3.3/docs": [
+    {
+      "type": "category",
+      "label": "Introduction",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.3/motivation"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/installation"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Usage",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpx-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/configuring"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/hooks"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/aliases"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "CLI commands",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-install-pkg"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-unlink"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-recursive"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-server"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-import"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/pnpm-publish"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Recipes",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.3/continuous-integration"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/workspace"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.3/benchmark"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/limitations"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/about-package-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/symlinked-node-modules-structure"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.3/how-peers-are-resolved"
+        }
+      ]
+    }
+  ]
 }

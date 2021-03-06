@@ -1,5 +1,5 @@
 ---
-id: version-5.18-pnpx-cli
+id: pnpx-cli
 title: pnpx CLI
 original_id: pnpx-cli
 ---

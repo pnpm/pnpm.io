@@ -1,5 +1,5 @@
 ---
-id: version-5.18-exec
+id: exec
 title: pnpm exec
 original_id: exec
 ---

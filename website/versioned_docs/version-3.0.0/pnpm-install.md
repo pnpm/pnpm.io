@@ -1,5 +1,5 @@
 ---
-id: version-3.0.0-pnpm-install
+id: pnpm-install
 title: pnpm install
 original_id: pnpm-install
 ---

@@ -1,5 +1,5 @@
 ---
-id: version-5.18-aliases
+id: aliases
 title: Aliases
 original_id: aliases
 ---

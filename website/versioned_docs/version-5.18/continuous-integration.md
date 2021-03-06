@@ -1,5 +1,5 @@
 ---
-id: version-5.18-continuous-integration
+id: continuous-integration
 title: Continuous Integration
 original_id: continuous-integration
 ---

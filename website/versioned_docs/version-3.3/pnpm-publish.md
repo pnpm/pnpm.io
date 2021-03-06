@@ -1,5 +1,5 @@
 ---
-id: version-3.3-pnpm-publish
+id: pnpm-publish
 title: pnpm publish
 original_id: pnpm-publish
 ---

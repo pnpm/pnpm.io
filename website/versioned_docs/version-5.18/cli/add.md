@@ -1,6 +1,6 @@
 ---
-id: version-5.18-add
-title: pnpm add <pkg>
+id: add
+title: "pnpm add <pkg>"
 original_id: add
 ---
 
@@ -133,6 +133,6 @@ Added in: v4.4.0
 
 Only adds the new dependency if it is found in the workspace.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

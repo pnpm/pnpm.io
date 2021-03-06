@@ -1,5 +1,5 @@
 ---
-id: version-3.8-store
+id: store
 title: pnpm store
 original_id: store
 ---

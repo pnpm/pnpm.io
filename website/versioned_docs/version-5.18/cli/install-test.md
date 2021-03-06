@@ -1,5 +1,5 @@
 ---
-id: version-5.18-install-test
+id: install-test
 title: pnpm install-test
 original_id: install-test
 ---

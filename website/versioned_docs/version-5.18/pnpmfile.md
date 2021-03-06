@@ -1,5 +1,5 @@
 ---
-id: version-5.18-pnpmfile
+id: pnpmfile
 title: pnpmfile.js
 original_id: pnpmfile
 ---

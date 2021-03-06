@@ -1,5 +1,5 @@
 ---
-id: version-5.18-prune
+id: prune
 title: pnpm prune
 original_id: prune
 ---

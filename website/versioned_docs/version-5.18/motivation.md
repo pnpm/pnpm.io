@@ -1,5 +1,5 @@
 ---
-id: version-5.18-motivation
+id: motivation
 title: Motivation
 original_id: motivation
 ---

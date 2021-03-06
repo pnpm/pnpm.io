@@ -1,5 +1,5 @@
 ---
-id: version-5.18-using-changesets
+id: using-changesets
 title: Using Changesets with pnpm
 original_id: using-changesets
 ---

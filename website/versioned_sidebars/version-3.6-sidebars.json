@@ -1,39 +1,134 @@
 {
-  "version-3.6-docs": {
-    "Introduction": [
-      "version-3.6-motivation",
-      "version-3.6-installation"
-    ],
-    "Usage": [
-      "version-3.6-pnpm-cli",
-      "version-3.6-pnpx-cli",
-      "version-3.6-configuring",
-      "version-3.6-hooks",
-      "version-3.6-aliases"
-    ],
-    "CLI commands": [
-      "version-3.6-pnpm-import",
-      "version-3.6-pnpm-add-pkg",
-      "version-3.6-pnpm-install",
-      "version-3.6-pnpm-publish",
-      "version-3.6-pnpm-recursive",
-      "version-3.6-pnpm-run",
-      "version-3.6-pnpm-server",
-      "version-3.6-pnpm-store",
-      "version-3.6-pnpm-unlink"
-    ],
-    "Recipes": [
-      "version-3.6-continuous-integration",
-      "version-3.6-workspace",
-      "version-3.6-only-allow-pnpm"
-    ],
-    "Advanced": [
-      "version-3.6-logos",
-      "version-3.6-benchmark",
-      "version-3.6-limitations",
-      "version-3.6-about-package-store",
-      "version-3.6-symlinked-node-modules-structure",
-      "version-3.6-how-peers-are-resolved"
-    ]
-  }
+  "version-3.6/docs": [
+    {
+      "type": "category",
+      "label": "Introduction",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.6/motivation"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/installation"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Usage",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpx-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/configuring"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/hooks"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/aliases"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "CLI commands",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-import"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-add-pkg"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-publish"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-recursive"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-run"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-server"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/pnpm-unlink"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Recipes",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.6/continuous-integration"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/workspace"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/only-allow-pnpm"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Advanced",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-3.6/logos"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/benchmark"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/limitations"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/about-package-store"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/symlinked-node-modules-structure"
+        },
+        {
+          "type": "doc",
+          "id": "version-3.6/how-peers-are-resolved"
+        }
+      ]
+    }
+  ]
 }

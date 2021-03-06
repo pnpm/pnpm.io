@@ -1,6 +1,6 @@
 ---
-id: version-3.8-npmrc
-title: .npmrc
+id: npmrc
+title: ".npmrc"
 original_id: npmrc
 ---
 

@@ -1,5 +1,5 @@
 ---
-id: version-5.18-why
+id: why
 title: pnpm why
 original_id: why
 ---
@@ -39,6 +39,6 @@ Only display the dependency tree for packages in `dependencies`.
 
 Only display the dependency tree for packages in `devDependencies`.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

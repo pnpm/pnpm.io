@@ -1,5 +1,5 @@
 ---
-id: version-5.18-remove
+id: remove
 title: pnpm remove
 original_id: remove
 ---
@@ -34,6 +34,6 @@ Only remove the dependency from `optionalDependencies`.
 
 Only remove the dependency from `dependencies`.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

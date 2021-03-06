@@ -1,5 +1,5 @@
 ---
-id: version-5.18-update
+id: update
 title: pnpm update
 original_id: update
 ---
@@ -78,6 +78,6 @@ Added in: v4.8.0
 
 Show outdated dependencies and select which ones to update.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

@@ -1,5 +1,5 @@
 ---
-id: version-5.18-symlinked-node-modules-structure
+id: symlinked-node-modules-structure
 title: Symlinked `node_modules` structure
 original_id: symlinked-node-modules-structure
 ---

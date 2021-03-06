@@ -1,5 +1,5 @@
 ---
-id: version-5.18-configuring
+id: configuring
 title: Configuring
 original_id: configuring
 ---

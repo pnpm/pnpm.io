@@ -1,5 +1,5 @@
 ---
-id: version-5.5-pnpm-cli
+id: pnpm-cli
 title: pnpm CLI
 original_id: pnpm-cli
 ---

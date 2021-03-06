@@ -1,5 +1,5 @@
 ---
-id: version-4.6-filtering
+id: filtering
 title: Filtering
 original_id: filtering
 ---

@@ -1,5 +1,5 @@
 ---
-id: version-5.18-config
+id: config
 title: pnpm config
 original_id: config
 ---

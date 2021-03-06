@@ -1,5 +1,5 @@
 ---
-id: version-5.18-run
+id: run
 title: pnpm run
 original_id: run
 ---
@@ -113,6 +113,6 @@ Added in: v5.1.0
 Stream output from child processes immediately, prefixed with the originating
 package directory. This allows output from different packages to be interleaved.
 
-### --filter \<package_selector>
+### --filter \<package_selector\>
 
 [Read more about filtering.](../filtering)

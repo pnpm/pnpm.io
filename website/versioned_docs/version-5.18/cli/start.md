@@ -1,5 +1,5 @@
 ---
-id: version-5.18-start
+id: start
 title: pnpm start
 original_id: start
 ---
