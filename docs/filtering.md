@@ -16,7 +16,9 @@ Selectors may be specified via the `--filter` flag:
 pnpm <command> --filter <package_selector>
 ```
 
-> [An article that compares Lerna's filtering to pnpm's](https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a)
+:::tip
+[An article that compares Lerna's filtering to pnpm's](https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a)
+:::
 
 ## --filter \<package_name\>
 

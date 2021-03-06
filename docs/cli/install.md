@@ -54,7 +54,9 @@ will be requested from the server. To force full offline mode, use `--offline`.
 Do not execute any scripts defined in the project `package.json` and its
 dependencies.
 
-> Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
+:::note
+This flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
+:::
 
 ### --prod, -P
 

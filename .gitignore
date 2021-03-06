@@ -4,7 +4,7 @@
 /node_modules
 
 # production
-/build
+website/build
 
 # generated files
 .docusaurus

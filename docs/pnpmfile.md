@@ -76,7 +76,7 @@ affected by the hook. In order to ignore a package's build, use the
 
 ### `hooks.afterAllResolved(lockfile, context): lockfile`
 
-Added in v1.41.0.
+Added in: v1.41.0
 
 Allows you to mutate the lockfile output before it is serialized.
 
@@ -87,11 +87,9 @@ Allows you to mutate the lockfile output before it is serialized.
 * `context` - Context object for the step. Method `#log(msg)` allows you to use
 a debug log for the step.
 
-#### Usage
+#### Usage example
 
-Example pnpmfile.js:
-
-```js
+```js title="pnpmfile.js"
 function afterAllResolved(lockfile, context) {
   // ...
   return lockfile
@@ -142,5 +140,7 @@ Added in: v1.39.0
 The location of a global pnpmfile. A global pnpmfile is used by all projects
 during installation.
 
-**NOTE:** It is recommended to use local pnpmfiles. Only use a global pnpmfile
+:::note
+It is recommended to use local pnpmfiles. Only use a global pnpmfile
 if you use pnpm on projects that don't use pnpm as the primary package manager.
+:::
