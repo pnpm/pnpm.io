@@ -11,5 +11,5 @@ Runs a package's `"stop"` script, if one was provided.
 ##  Synopsis
 
 ```text
-pnpm stop [-- &lt;args>...]
+pnpm stop [-- <args>...]
 ```

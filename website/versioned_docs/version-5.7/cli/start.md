@@ -12,5 +12,5 @@ If no `"start"` property is specified on the `"scripts"` object, it will run `no
 ## Synopsis
 
 ```text
-pnpm start [-- &lt;args>...]
+pnpm start [-- <args>...]
 ```

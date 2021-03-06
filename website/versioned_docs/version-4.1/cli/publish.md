@@ -7,7 +7,7 @@ original_id: publish
 Publishes a package to the registry.
 
 ```text
-pnpm publish [&lt;tarball>|&lt;folder>] [--tag &lt;tag>] [--access &lt;public|restricted>]
+pnpm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
 ```
 
 When publishing a package inside a [workspace](../workspaces), the LICENSE file from the

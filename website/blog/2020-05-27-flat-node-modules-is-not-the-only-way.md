@@ -72,7 +72,7 @@ Here: [node_modules/.pnpm/express@4.17.1/node_modules/express](https://github.co
 OK, so now we know the purpose of the `.pnpm/` folder. `.pnpm/` stores all the packages in a flat folder structure, so every package can be found in a folder named by this pattern:
 
 ```text
-.pnpm/&lt;name>@&lt;version>/node_modules/&lt;name>
+.pnpm/<name>@<version>/node_modules/<name>
 ```
 
 We call it the virtual store directory.

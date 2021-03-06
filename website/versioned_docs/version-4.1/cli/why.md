@@ -9,11 +9,11 @@ Shows the packages that depend on &lt;pkg>
 ## Synopsis
 
 ```text
-pnpm why [-r] [--filter &lt;package selector>]
-         [&lt;package pattern> ...]
+pnpm why [-r] [--filter <package selector>]
+         [<package pattern> ...]
 
-pnpm recursive why [--filter &lt;package selector>]
-                   [&lt;package pattern> ...]
+pnpm recursive why [--filter <package selector>]
+                   [<package pattern> ...]
 ```
 
 ## Options

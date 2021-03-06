@@ -10,11 +10,11 @@ packages by providing arguments (patterns are supported).
 ## Synopsis
 
 ```text
-pnpm outdated [-r] [--filter &lt;package selector>]
-              [&lt;package pattern> ...]
+pnpm outdated [-r] [--filter <package selector>]
+              [<package pattern> ...]
 
-pnpm recursive outdated [--filter &lt;package selector>]
-                        [&lt;package pattern> ...]
+pnpm recursive outdated [--filter <package selector>]
+                        [<package pattern> ...]
 ```
 
 ## Examples

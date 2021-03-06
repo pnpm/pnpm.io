@@ -11,8 +11,8 @@ Rebuild a package.
 ## Synopsis
 
 ```text
-pnpm rebuild [-r [--workspace-concurrency=&lt;number>] [--no-sort]]
-     [&lt;pkg>...]
+pnpm rebuild [-r [--workspace-concurrency=<number>] [--no-sort]]
+     [<pkg>...]
 ```
 
 ## Options

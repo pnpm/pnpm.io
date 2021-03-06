@@ -11,12 +11,12 @@ Runs a defined package script.
 ## Synopsis
 
 ```text
-pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=&lt;number>]]
-     &lt;command> [-- &lt;args>...]
+pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=<number>]]
+     <command> [-- <args>...]
 
-pnpm multi run &lt;command> [-- &lt;args>...]
+pnpm multi run <command> [-- <args>...]
 
-pnpm recursive run &lt;command> [-- &lt;args>...]
+pnpm recursive run <command> [-- <args>...]
 ```
 
 In addition to the shell’s pre-existing `PATH`, `pnpm run` adds `node_modules/.bin`

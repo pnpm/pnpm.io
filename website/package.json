@@ -10,7 +10,7 @@
     "crowdin-upload": "crowdin --config ../crowdin.yaml upload sources --auto-update -b master",
     "crowdin-download": "crowdin --config ../crowdin.yaml download -b master",
     "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
+    "deploy": "NODE_OPTIONS=--max-old-space-size=10000 docusaurus deploy",
     "docusaurus": "docusaurus"
   },
   "devDependencies": {

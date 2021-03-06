@@ -14,11 +14,11 @@ For example, `pnpm list babel-* eslint-* semver@5`
 ## Synopsis
 
 ```text
-pnpm list [-r] [--filter &lt;package selector>] [--depth &lt;number>]
-          [&lt;package pattern> ...]
+pnpm list [-r] [--filter <package selector>] [--depth <number>]
+          [<package pattern> ...]
 
-pnpm recursive list [--filter &lt;package selector>] [--depth &lt;number>]
-                    [&lt;package pattern> ...]
+pnpm recursive list [--filter <package selector>] [--depth <number>]
+                    [<package pattern> ...]
 ```
 
 ## Options

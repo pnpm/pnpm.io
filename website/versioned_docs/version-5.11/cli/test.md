@@ -13,7 +13,7 @@ may read about [pnpm run](run).
 ## Synopsis
 
 ```text
-pnpm test [-r] [-- &lt;args>...]
+pnpm test [-r] [-- <args>...]
 ```
 
 ## Options

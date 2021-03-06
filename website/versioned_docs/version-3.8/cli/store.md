@@ -23,7 +23,7 @@ Returns exit code 0 if the content of the package is the same as it was at the t
 Added in: v2.12.0
 
 ```text
-pnpm store add &lt;pkg>...
+pnpm store add <pkg>...
 ```
 
 Adds new packages to the pnpm store directly.
@@ -40,7 +40,7 @@ pnpm store add express@4 typescript@2
 Added in: v2.21.0
 
 ```text
-pnpm store usages &lt;pkg>...
+pnpm store usages <pkg>...
 ```
 
 Lists all pnpm projects on the current filesystem that depend on the specified packages in the store.

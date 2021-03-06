@@ -23,7 +23,7 @@ Returns exit code 0 if the content of the package is the same as it was at the t
 Added in: v2.12.0
 
 ```text
-pnpm store add &lt;pkg>...
+pnpm store add <pkg>...
 ```
 
 Adds new packages to the pnpm store directly.

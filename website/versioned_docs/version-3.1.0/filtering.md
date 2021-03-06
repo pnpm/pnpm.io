@@ -162,14 +162,14 @@ leading "!". In zsh (and possibly other shells), "!" should be escaped: `\!`.
 For instance, this will run a command in all projects except for `foo`:
 
 ```sh
-pnpm &lt;cmd> --filter=!foo
+pnpm <cmd> --filter=!foo
 ```
 
 And this will run a command in all projects that are not under the `lib`
 directory:
 
 ```sh
-pnpm &lt;cmd> --filter=!./lib
+pnpm <cmd> --filter=!./lib
 ```
 
 ## --test-pattern &lt;glob\>

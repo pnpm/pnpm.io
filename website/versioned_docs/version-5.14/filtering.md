@@ -14,7 +14,7 @@ or by relation.
 Selectors may be specified via the `--filter` flag:
 
 ```text
-pnpm &lt;command> --filter &lt;package_selector>
+pnpm <command> --filter <package_selector>
 ```
 
 > An article that compares Lerna's filtering to pnpm's: https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a
@@ -102,27 +102,27 @@ Includes all projects that are under the specified directory.
 It may be used with "..." to select dependents/dependencies as well:
 
 ```text
-pnpm &lt;cmd> --filter ...{&lt;directory>}
-pnpm &lt;cmd> --filter {&lt;directory>}...
-pnpm &lt;cmd> --filter ...{&lt;directory>}...
+pnpm <cmd> --filter ...{<directory>}
+pnpm <cmd> --filter {<directory>}...
+pnpm <cmd> --filter ...{<directory>}...
 ```
 
 It may be combined with `[<since>]`. For instance, to select all changed projects
 inside a directory:
 
 ```text
-pnpm &lt;cmd> --filter {packages}[origin/master]
-pnpm &lt;cmd> --filter ...{packages}[origin/master]
-pnpm &lt;cmd> --filter {packages}[origin/master]...
-pnpm &lt;cmd> --filter ...{packages}[origin/master]...
+pnpm <cmd> --filter {packages}[origin/master]
+pnpm <cmd> --filter ...{packages}[origin/master]
+pnpm <cmd> --filter {packages}[origin/master]...
+pnpm <cmd> --filter ...{packages}[origin/master]...
 ```
 
 Or you may select all packages from a directory with names matching the given pattern:
 
 ```text
-pnpm &lt;cmd> --filter @babel/*{components}
-pnpm &lt;cmd> --filter @babel/*{components}[origin/master]
-pnpm &lt;cmd> --filter ...@babel/*{components}[origin/master]
+pnpm <cmd> --filter @babel/*{components}
+pnpm <cmd> --filter @babel/*{components}[origin/master]
+pnpm <cmd> --filter ...@babel/*{components}[origin/master]
 ```
 
 ## --filter [&lt;since>]
@@ -148,13 +148,13 @@ Any of the filter selectors may work as excluders, when they have a leading "!".
 For instance, this will run the command in all projects except `foo`:
 
 ```text
-pnpm &lt;cmd> --filter=!foo
+pnpm <cmd> --filter=!foo
 ```
 
 And this one will run tests in all projects that are not under the `lib` directory:
 
 ```text
-pnpm &lt;cmd> --filter=!./lib
+pnpm <cmd> --filter=!./lib
 ```
 
 ## --test-pattern [glob]

@@ -8,8 +8,8 @@ Connect the local project to another one.
 
 ```text
 pnpm link (in package dir)
-pnpm link &lt;pkg>
-pnpm link &lt;folder>
+pnpm link <pkg>
+pnpm link <folder>
 ```
 
 Alias: ln

@@ -50,7 +50,7 @@ Update global packages.
 Added in: v4.4.0
 
 ```text
-pnpm [-r] update --workspace [&lt;pkg>...]
+pnpm [-r] update --workspace [<pkg>...]
 ```
 
 Tries to link all packages from the workspace. Versions are updated to match the

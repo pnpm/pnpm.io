@@ -11,8 +11,8 @@ Runs a defined package script.
 ## Synopsis
 
 ```text
-pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=&lt;number>]]
-     &lt;command> [-- &lt;args>...]
+pnpm run [[-r] [--no-bail] [--no-sort] [--workspace-concurrency=<number>]]
+     <command> [-- <args>...]
 ```
 
 ## Examples

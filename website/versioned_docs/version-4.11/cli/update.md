@@ -14,11 +14,11 @@ You can use patterns to update all dependencies that match it.
 ## Synopsis
 
 ```text
-pnpm update [-r] [--filter &lt;package selector>]
-            [&lt;package pattern> ...]
+pnpm update [-r] [--filter <package selector>]
+            [<package pattern> ...]
 
-pnpm recursive update [--filter &lt;package selector>]
-                      [&lt;package pattern> ...]
+pnpm recursive update [--filter <package selector>]
+                      [<package pattern> ...]
 ```
 
 ## tl;dr
@@ -64,7 +64,7 @@ Update global packages.
 Added in: v4.4.0
 
 ```text
-pnpm [-r] update --workspace [&lt;pkg>...]
+pnpm [-r] update --workspace [<pkg>...]
 ```
 
 Tries to link all packages from the workspace. Versions are updated to match the

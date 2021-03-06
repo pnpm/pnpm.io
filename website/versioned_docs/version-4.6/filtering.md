@@ -14,7 +14,7 @@ or by relation.
 Selectors may be specified via the `--filter` flag:
 
 ```text
-pnpm &lt;command> --filter &lt;package_selector>
+pnpm <command> --filter <package_selector>
 ```
 
 > An article that compares Lerna's filtering to pnpm's: https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a
