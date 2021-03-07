@@ -3,7 +3,7 @@ preserve_hierarchy: true
 files:
   -
     source: '/docs/**/*'
-    translation: '/website/i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%'
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs/current/**/%original_file_name%'
     languages_mapping: &anchor
       locale:
         'hu': 'hu'
