@@ -4,7 +4,7 @@
     "start": "docusaurus start",
     "build": "docusaurus build",
     "publish-gh-pages": "docusaurus-publish --skip-image-compression",
-    "write-translations": "docusaurus write-translations",
+    "write-translations": "rm -rf i18n/en && docusaurus write-translations",
     "version": "docusaurus-version",
     "rename-version": "docusaurus-rename-version",
     "crowdin-upload": "pnpm write-translations && cd .. && crowdin upload sources --auto-update",

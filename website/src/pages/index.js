@@ -13,7 +13,7 @@ const features = [
     imageUrl: 'img/features/fast.svg',
     description: (
       <Translate>
-        pnpm is up to <b>2x faster</b> than the alternatives (see <a href="https://github.com/pnpm/node-package-manager-benchmark">benchmarks</a>)
+        pnpm is up to 2x faster than the alternatives
       </Translate>
     ),
   },
@@ -22,7 +22,7 @@ const features = [
     imageUrl: 'img/features/efficient.svg',
     description: (
       <Translate>
-        Files inside <strong>node_modules</strong> are linked from a single <strong>content-addressable storage</strong>
+        Files inside node_modules are linked from a single content-addressable storage
       </Translate>
     ),
   },
@@ -40,7 +40,7 @@ const features = [
     imageUrl: 'img/features/strict.svg',
     description: (
       <Translate>
-        pnpm creates a non-flat <strong>node_modules</strong>, so code has no access to arbitrary packages
+        pnpm creates a non-flat node_modules, so code has no access to arbitrary packages
       </Translate>
     ),
   },
