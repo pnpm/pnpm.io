@@ -4,8 +4,8 @@
 /node_modules
 
 # production
-website/build
-website/i18n/**/*
+build
+i18n/**/*
 
 # generated files
 .docusaurus

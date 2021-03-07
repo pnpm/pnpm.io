@@ -7,8 +7,8 @@
     "write-translations": "rm -rf i18n/en && docusaurus write-translations",
     "version": "docusaurus-version",
     "rename-version": "docusaurus-rename-version",
-    "crowdin-upload": "pnpm write-translations && cd .. && crowdin upload sources --auto-update",
-    "crowdin-download": "cd .. && crowdin download",
+    "crowdin-upload": "pnpm write-translations && crowdin upload sources --auto-update",
+    "crowdin-download": "crowdin download",
     "swizzle": "docusaurus swizzle",
     "deploy": "NODE_OPTIONS=--max-old-space-size=10000 docusaurus deploy",
     "docusaurus": "docusaurus"

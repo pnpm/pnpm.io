@@ -186,9 +186,9 @@ module.exports={
           "showLastUpdateAuthor": true,
           "showLastUpdateTime": true,
           "editUrl": "https://github.com/pnpm/pnpm.github.io/edit/source/docs/",
-          "path": "../docs",
+          "path": "./docs",
           "routeBasePath": "/",
-          "sidebarPath": "../website/sidebars.json"
+          "sidebarPath": "./sidebars.json"
         },
         "blog": {
           "path": "blog"

@@ -8,14 +8,14 @@ files:
       locale:
         'hu': 'hu'
   -
-    source: '/website/i18n/en/**/*'
-    translation: '/website/i18n/%two_letters_code%/**/%original_file_name%'
+    source: '/i18n/en/**/*'
+    translation: '/i18n/%two_letters_code%/**/%original_file_name%'
     languages_mapping: *anchor
   -
-    source: '/website/blog/**/*'
-    translation: '/website/i18n/%two_letters_code%/docusaurus-plugin-content-blog/**/%original_file_name%'
+    source: '/blog/**/*'
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-blog/**/%original_file_name%'
     languages_mapping: *anchor
   -
-    source: '/website/versioned_docs/**/*'
-    translation: '/website/i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%'
+    source: '/versioned_docs/**/*'
+    translation: '/i18n/%two_letters_code%/docusaurus-plugin-content-docs/**/%original_file_name%'
     languages_mapping: *anchor
