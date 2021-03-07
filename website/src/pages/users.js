@@ -1,6 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
+import Translate, {translate} from '@docusaurus/Translate'
 
 export default function Users() {
   const context = useDocusaurusContext();
@@ -23,8 +24,8 @@ export default function Users() {
         <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
           <div className="showcaseSection">
             <div className="prose">
-              <h1><translate>Who's Using This?</translate></h1>
-              <p><translate>This project is used by many folks</translate></p>
+              <h1><Translate>Who's Using This?</Translate></h1>
+              <p><Translate>This project is used by many folks</Translate></p>
             </div>
             <div className="logos" style={{
               alignItems: 'center',
@@ -32,11 +33,11 @@ export default function Users() {
               flexFlow: 'row wrap',
               justifyContent: 'center',
             }}>{showcase}</div>
-            <p><translate>Are you using this project?</translate></p>
+            <p><Translate>Are you using this project?</Translate></p>
             <a
               href="https://github.com/pnpm/pnpm.github.io/edit/source/website/siteConfig.js"
               className="button">
-              <translate>Add your company</translate>
+              <Translate>Add your company</Translate>
             </a>
           </div>
         </div>

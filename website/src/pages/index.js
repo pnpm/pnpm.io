@@ -4,6 +4,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import Translate, {translate} from '@docusaurus/Translate'
 import styles from './styles.module.css';
 
 const features = [
@@ -11,36 +12,36 @@ const features = [
     title: 'Fast',
     imageUrl: 'img/features/fast.svg',
     description: (
-      <>
+      <Translate>
         pnpm is up to <b>2x faster</b> than the alternatives (see <a href="https://github.com/pnpm/node-package-manager-benchmark">benchmarks</a>)
-      </>
+      </Translate>
     ),
   },
   {
     title: 'Efficient',
     imageUrl: 'img/features/efficient.svg',
     description: (
-      <>
+      <Translate>
         Files inside <strong>node_modules</strong> are linked from a single <strong>content-addressable storage</strong>
-      </>
+      </Translate>
     ),
   },
   {
     title: 'Supports monorepos',
     imageUrl: 'img/features/monorepo.svg',
     description: (
-      <>
+      <Translate>
         pnpm has built-in support for multiple packages in a repository
-      </>
+      </Translate>
     ),
   },
   {
     title: 'Strict',
     imageUrl: 'img/features/strict.svg',
     description: (
-      <>
+      <Translate>
         pnpm creates a non-flat <strong>node_modules</strong>, so code has no access to arbitrary packages
-      </>
+      </Translate>
     ),
   },
 ];
@@ -80,8 +81,8 @@ const Showcase = props => {
         <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
           <div className="showcaseSection">
             <div className="prose">
-              <h1><translate>Who's Using This?</translate></h1>
-              <p><translate>This project is used by many folks</translate></p>
+              <h1><Translate>Who's Using This?</Translate></h1>
+              <p><Translate>This project is used by many folks</Translate></p>
             </div>
             <div className="logos" style={{
               alignItems: 'center',
@@ -89,7 +90,7 @@ const Showcase = props => {
               flexFlow: 'row wrap',
               justifyContent: 'center',
             }}>{showcase}</div>
-            <p><translate>Are you using this project?</translate></p>
+            <p><Translate>Are you using this project?</Translate></p>
             <a
               href="https://github.com/pnpm/pnpm.github.io/edit/source/website/siteConfig.js"
               className={clsx(
@@ -103,7 +104,7 @@ const Showcase = props => {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('users')}>More pnpm users</Link>
+              to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
             </a>
           </div>
         </div>

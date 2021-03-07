@@ -5,6 +5,7 @@
 
 # production
 website/build
+website/i18n/**/*
 
 # generated files
 .docusaurus
