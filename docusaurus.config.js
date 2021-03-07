@@ -185,7 +185,7 @@ module.exports={
         "docs": {
           "showLastUpdateAuthor": true,
           "showLastUpdateTime": true,
-          "editUrl": "https://github.com/pnpm/pnpm.github.io/edit/source/docs/",
+          "editUrl": "https://github.com/pnpm/pnpm.github.io/edit/source/",
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": "./sidebars.json"
@@ -307,6 +307,9 @@ module.exports={
     localeConfigs: {
       en: {
         label: 'English',
+      },
+      zh: {
+        label: '中文',
       },
     },
   }
