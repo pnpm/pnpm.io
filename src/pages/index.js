@@ -55,7 +55,7 @@ function Feature({imageUrl, title, description}) {
           <img className={styles.featureImage} src={imgUrl} alt={title} style={{ width: '115px'}} />
         </div>
       )}
-      <h3>{title}</h3>
+      <h3 class="text--center">{title}</h3>
       <p>{description}</p>
     </div>
   );
