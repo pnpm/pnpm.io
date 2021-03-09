@@ -55,6 +55,10 @@ module.exports={
     ]
   ],
   "themeConfig": {
+    "prism": {
+      theme: require('prism-react-renderer/themes/github'),
+      darkTheme: require('prism-react-renderer/themes/dracula'),
+    },
     "navbar": {
       "title": "pnpm",
       "logo": {
