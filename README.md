@@ -10,10 +10,7 @@ pnpm start
 
 ## How to publish
 
-```
-cd website
-NODE_OPTIONS=--max-old-space-size=10000 USE_SSH=true GIT_USER=zkochan pnpm deploy
-```
+Push to the default branch, the website will be deployed automatically.
 
 ## Algolia Search
 
