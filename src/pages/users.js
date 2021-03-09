@@ -24,9 +24,9 @@ export default function Users() {
   return (
     <Layout>
       <div className="mainContainer">
-        <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
+        <div style={{margin: '0 auto', maxWidth: '1100px', padding: '2rem 0'}}>
           <div className="showcaseSection">
-            <div className="prose">
+            <div className="prose text--center">
               <h1><Translate>Who's Using This?</Translate></h1>
               <p><Translate>This project is used by many folks</Translate></p>
               <p><Translate>Are you using this project?</Translate></p>

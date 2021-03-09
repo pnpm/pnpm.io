@@ -123,7 +123,8 @@ module.exports={
       "copyright": "Copyright © 2015-2021 contributors of pnpm",
       "logo": {
         "src": "img/pnpm-light.svg"
-      }
+      },
+      "style": "dark",
     },
     "algolia": {
       "apiKey": "802b1d6ee5450a4296581a8e14aff417",

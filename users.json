@@ -1,18 +1,5 @@
 [
   {
-    "caption": "SheetJS",
-    "image": "/img/users/sheetjs.png",
-    "infoLink": "https://sheetjs.com",
-    "pinned": true
-  },
-  {
-    "caption": "JustAnswer",
-    "image": "/img/users/justanswer.svg",
-    "infoLink": "https://www.justanswer.com",
-    "pinned": true,
-    "width": 200
-  },
-  {
     "caption": "Compass",
     "image": "/img/users/compass.svg",
     "infoLink": "https://compass.com",
@@ -20,129 +7,9 @@
     "width": 150
   },
   {
-    "caption": "Cycle.js",
-    "image": "/img/users/cyclejs.svg",
-    "infoLink": "https://cycle.js.org/",
-    "pinned": true,
-    "width": 150
-  },
-  {
-    "caption": "Glitch",
-    "image": "/img/users/glitch.svg",
-    "infoLink": "https://glitch.com/",
-    "pinned": true
-  },
-  {
     "caption": "Microsoft",
     "image": "/img/users/microsoft.svg",
     "infoLink": "https://microsoft.com/",
-    "pinned": true,
-    "width": 250
-  },
-  {
-    "caption": "Pingy",
-    "image": "/img/users/pingy.svg",
-    "infoLink": "https://pin.gy/",
-    "pinned": true
-  },
-  {
-    "caption": "Rush",
-    "image": "/img/users/rush.svg",
-    "infoLink": "https://rushjs.io/",
-    "pinned": true
-  },
-  {
-    "caption": "Enuma Technologies",
-    "image": "/img/users/enuma.svg",
-    "infoLink": "https://enuma.io/",
-    "pinned": true,
-    "width": 250
-  },
-  {
-    "caption": "OAX Foundation",
-    "image": "/img/users/oax.svg",
-    "infoLink": "https://www.oax.org/",
-    "pinned": true
-  },
-  {
-    "caption": "Panascais",
-    "image": "/img/users/panascais.svg",
-    "infoLink": "https://panascais.net/",
-    "pinned": true,
-    "width": 250
-  },
-  {
-    "caption": "SwissDev Jobs",
-    "image": "/img/users/swissdev-javascript-jobs.svg",
-    "infoLink": "https://swissdevjobs.ch/jobs/JavaScript/All/",
-    "pinned": true,
-    "width": 200
-  },
-  {
-    "caption": "Tokopedia",
-    "image": "/img/users/tokopedia.svg",
-    "infoLink": "https://www.tokopedia.com/",
-    "pinned": true,
-    "width": 200
-  },
-  {
-    "caption": "Tradie Training",
-    "image": "/img/users/tradie-training.png",
-    "infoLink": "https://tt.edu.au/",
-    "pinned": true
-  },
-  {
-    "caption": "Telia Company",
-    "image": "/img/users/telia.png",
-    "infoLink": "https://www.telia.se/",
-    "pinned": true
-  },
-  {
-    "caption": "TakeShape",
-    "image": "/img/users/takeshape.svg",
-    "infoLink": "https://www.takeshape.io/",
-    "pinned": true,
-    "width": 290
-  },
-  {
-    "caption": "Kretes",
-    "image": "/img/users/kretes.svg",
-    "infoLink": "https://kretes.dev",
-    "pinned": true,
-    "width": 150
-  },
-  {
-    "caption": "tinyhttp",
-    "image": "/img/users/tinyhttp.svg",
-    "infoLink": "https://tinyhttp.v1rtl.site",
-    "pinned": true,
-    "width": 180
-  },
-  {
-    "caption": "Secure Code Warrior",
-    "image": "https://media.securecodewarrior.com/images/current_logo_v.png",
-    "infoLink": "https://securecodewarrior.com/",
-    "pinned": true,
-    "width": 200
-  },
-  {
-    "caption": "Jublia",
-    "image": "/img/users/jublia.png",
-    "infoLink": "https://jublia.com/",
-    "pinned": true,
-    "width": 200
-  },
-  {
-    "caption": "Wix",
-    "image": "/img/users/wix.svg",
-    "infoLink": "https://wix.com/",
-    "pinned": true,
-    "width": 200
-  },
-  {
-    "caption": "art solution",
-    "image": "https://artsolution.de/wp-content/uploads/2020/10/logo.jpg",
-    "infoLink": "https://artsolution.de/",
     "pinned": true,
     "width": 250
   },
@@ -159,5 +26,138 @@
     "infoLink": "https://bytedance.com/",
     "pinned": true,
     "width": 250
+  },
+  {
+    "caption": "JustAnswer",
+    "image": "/img/users/justanswer.svg",
+    "infoLink": "https://www.justanswer.com",
+    "pinned": true,
+    "width": 200
+  },
+  {
+    "caption": "Tokopedia",
+    "image": "/img/users/tokopedia.svg",
+    "infoLink": "https://www.tokopedia.com/",
+    "pinned": true,
+    "width": 200
+  },
+  {
+    "caption": "Telia Company",
+    "image": "/img/users/telia.png",
+    "infoLink": "https://www.telia.se/",
+    "pinned": true
+  },
+  {
+    "caption": "Wix",
+    "image": "/img/users/wix.svg",
+    "infoLink": "https://wix.com/",
+    "pinned": true,
+    "width": 200
+  },
+  {
+    "caption": "TakeShape",
+    "image": "/img/users/takeshape.svg",
+    "infoLink": "https://www.takeshape.io/",
+    "pinned": false,
+    "width": 290
+  },
+  {
+    "caption": "Cycle.js",
+    "image": "/img/users/cyclejs.svg",
+    "infoLink": "https://cycle.js.org/",
+    "pinned": false,
+    "width": 150
+  },
+  {
+    "caption": "Glitch",
+    "image": "/img/users/glitch.svg",
+    "infoLink": "https://glitch.com/",
+    "pinned": false
+  },
+  {
+    "caption": "Rush",
+    "image": "/img/users/rush.svg",
+    "infoLink": "https://rushjs.io/",
+    "pinned": false
+  },
+  {
+    "caption": "Enuma Technologies",
+    "image": "/img/users/enuma.svg",
+    "infoLink": "https://enuma.io/",
+    "pinned": false,
+    "width": 250
+  },
+  {
+    "caption": "OAX Foundation",
+    "image": "/img/users/oax.svg",
+    "infoLink": "https://www.oax.org/",
+    "pinned": false
+  },
+  {
+    "caption": "Panascais",
+    "image": "/img/users/panascais.svg",
+    "infoLink": "https://panascais.net/",
+    "pinned": false,
+    "width": 250
+  },
+  {
+    "caption": "SwissDev Jobs",
+    "image": "/img/users/swissdev-javascript-jobs.svg",
+    "infoLink": "https://swissdevjobs.ch/jobs/JavaScript/All/",
+    "pinned": false,
+    "width": 200
+  },
+  {
+    "caption": "Tradie Training",
+    "image": "/img/users/tradie-training.png",
+    "infoLink": "https://tt.edu.au/",
+    "pinned": false
+  },
+  {
+    "caption": "Kretes",
+    "image": "/img/users/kretes.svg",
+    "infoLink": "https://kretes.dev",
+    "pinned": false,
+    "width": 150
+  },
+  {
+    "caption": "Secure Code Warrior",
+    "image": "https://media.securecodewarrior.com/images/current_logo_v.png",
+    "infoLink": "https://securecodewarrior.com/",
+    "pinned": false,
+    "width": 200
+  },
+  {
+    "caption": "Jublia",
+    "image": "/img/users/jublia.png",
+    "infoLink": "https://jublia.com/",
+    "pinned": false,
+    "width": 200
+  },
+  {
+    "caption": "art solution",
+    "image": "https://artsolution.de/wp-content/uploads/2020/10/logo.jpg",
+    "infoLink": "https://artsolution.de/",
+    "pinned": false,
+    "width": 250
+  },
+  {
+    "caption": "SheetJS",
+    "image": "/img/users/sheetjs.png",
+    "infoLink": "https://sheetjs.com",
+    "pinned": false
+  },
+  {
+    "caption": "Pingy",
+    "image": "/img/users/pingy.svg",
+    "infoLink": "https://pin.gy/",
+    "pinned": false
+  },
+  {
+    "caption": "tinyhttp",
+    "image": "/img/users/tinyhttp.svg",
+    "infoLink": "https://tinyhttp.v1rtl.site",
+    "pinned": false,
+    "width": 180
   }
 ]

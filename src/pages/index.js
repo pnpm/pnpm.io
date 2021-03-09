@@ -65,7 +65,7 @@ const Showcase = props => {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
 
-  const showcase = siteConfig.customFields.users.map((user, i) => {
+  const showcase = siteConfig.customFields.users.filter(({ pinned }) => pinned).map((user, i) => {
     return (
       <a href={user.infoLink} target="_blank" key={i} rel="noopener">
         <img src={user.image} title={user.caption} style={{
@@ -77,9 +77,9 @@ const Showcase = props => {
   });
 
   return (
-      <div className="mainContainer">
+      <div className="mainContainer" style={{backgroundColor: 'var(--ifm-color-emphasis-100)', padding: '2rem 0'}}>
         <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
-          <div className="showcaseSection">
+          <div className="showcaseSection text--center">
             <div className="prose">
               <h1><Translate>Who's Using This?</Translate></h1>
               <p><Translate>This project is used by many folks</Translate></p>
@@ -90,14 +90,6 @@ const Showcase = props => {
               flexFlow: 'row wrap',
               justifyContent: 'center',
             }}>{showcase}</div>
-            <p><Translate>Are you using this project?</Translate></p>
-            <a
-              href="https://github.com/pnpm/pnpm.github.io/edit/source/website/siteConfig.js"
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              className="button">
             <Link
               style={{margin: '0 20px'}}
               className={clsx(
@@ -105,7 +97,6 @@ const Showcase = props => {
                 styles.getStarted,
               )}
               to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
-            </a>
           </div>
         </div>
       </div>
@@ -133,7 +124,7 @@ function Home() {
             <Link
               style={{margin: '0 20px'}}
               className={clsx(
-                'button button--outline button--secondary button--lg',
+                'button button--secondary button--lg',
                 styles.getStarted,
               )}
               to={useBaseUrl('installation')}>Getting Started</Link>
@@ -161,7 +152,7 @@ function Home() {
           </section>
         )}
         <Showcase></Showcase>
-        <div style={{textAlign: 'right'}}>The octopus icon made by <a href="https://www.flaticon.com/authors/flat-icons">Flat Icons</a> from <a href="https://www.flaticon.com">flaticon.com</a></div>
+        <div style={{textAlign: 'right', backgroundColor: 'var(--ifm-color-emphasis-100)'}}>The octopus icon made by <a href="https://www.flaticon.com/authors/flat-icons">Flat Icons</a> from <a href="https://www.flaticon.com">flaticon.com</a></div>
       </main>
     </Layout>
   );
