@@ -154,9 +154,6 @@ module.exports={
       zh: {
         label: '中文',
       },
-      ru: {
-        label: 'Русский',
-      },
     },
   }
 }
