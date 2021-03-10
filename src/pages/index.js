@@ -115,19 +115,13 @@ function Home() {
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
-            <Link 
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to="https://github.com/pnpm/pnpm">GitHub</Link>
             <Link
               style={{margin: '0 20px'}}
               className={clsx(
                 'button button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('installation')}>Getting Started</Link>
+              to={useBaseUrl('installation')}>Get Started</Link>
             <iframe
               src={"https://ghbtns.com/github-btn.html?user=pnpm&repo=pnpm&type=star&count=true&size=large"}
               frameBorder="0"

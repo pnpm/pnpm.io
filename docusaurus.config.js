@@ -89,6 +89,23 @@ module.exports={
         {
           type: 'localeDropdown',
           position: 'right',
+          dropdownItemsAfter: [
+            {
+              to: 'https://crowdin.com/project/pnpm',
+              label: 'Help Us Translate',
+            },
+          ],
+        },
+        {
+          href: 'https://opencollective.com/pnpm',
+          position: 'right',
+          label: 'Sponsor Us'
+        },
+        {
+          href: 'https://github.com/pnpm/pnpm',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
         },
       ],
     },
