@@ -1,5 +1,9 @@
 const path = require('path');
 
+const GITHUB_URL = 'https://github.com/pnpm/pnpm';
+const SPONSOR_URL = 'https://opencollective.com/pnpm';
+const TRANSLATE_URL = "https://crowdin.com/project/pnpm";
+
 module.exports={
   "title": "pnpm",
   "tagline": "Fast, disk space efficient package manager",
@@ -13,8 +17,8 @@ module.exports={
   "favicon": "img/favicon.png",
   "customFields": {
     "users": require('./users.json'),
-    "repoUrl": "https://github.com/pnpm/pnpm",
-    "translationRecruitingLink": "https://crowdin.com/project/pnpm"
+    "repoUrl": GITHUB_URL,
+    "translationRecruitingLink": TRANSLATE_URL,
   },
   "onBrokenLinks": "log",
   "onBrokenMarkdownLinks": "log",
@@ -97,7 +101,7 @@ module.exports={
           ],
         },
         {
-          href: 'https://opencollective.com/pnpm',
+          href: SPONSOR_URL,
           position: 'right',
           label: 'Sponsor Us'
         },
@@ -118,6 +122,18 @@ module.exports={
             {
               label: 'Getting Started',
               to: 'installation'
+            },
+            {
+              label: 'pnpm CLI',
+              to: 'pnpm-cli',
+            },
+            {
+              label: 'Workspace',
+              to: 'workspaces',
+            },
+            {
+              label: '.npmrc',
+              to: 'npmrc',
             },
           ]
         },
@@ -141,6 +157,23 @@ module.exports={
               href: 'https://twitter.com/pnpmjs'
             }
           ]
+        },
+        {
+          title: 'Contributing',
+          items: [
+            {
+              label: 'GitHub',
+              to: GITHUB_URL,
+            },
+            {
+              label: 'Sponsor Us',
+              to: SPONSOR_URL,
+            },
+            {
+              label: 'Help Us Translate',
+              to: TRANSLATE_URL,
+            },
+          ],
         },
       ],
       "copyright": "Copyright © 2015-2021 contributors of pnpm",
