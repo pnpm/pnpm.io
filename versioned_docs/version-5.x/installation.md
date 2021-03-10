@@ -48,9 +48,9 @@ Here is a list of past pnpm versions with respective Node.js version support.
 
 | Node.js    | pnpm 1 | pnpm 2 | pnpm 3 | pnpm 4 | pnpm 5 | pnpm 6 |
 |------------|--------|--------|--------|--------|--------|--------|
-| Node.js 4  | yes    | no     | no     | no     | no     | no     |
-| Node.js 6  | yes    | yes    | no     | no     | no     | no     |
-| Node.js 8  | yes    | yes    | yes    | no     | no     | no     |
-| Node.js 10 | yes    | yes    | yes    | yes    | yes    | no     |
-| Node.js 12 | no     | no     | yes    | yes    | yes    | yes    |
-| Node.js 14 | no     | no     | yes    | yes    | yes    | yes    |
+| Node.js 4  | ✔️     | ❌    | ❌    | ❌     | ❌     | ❌    |
+| Node.js 6  | ✔️     | ✔️    | ❌    | ❌     | ❌     | ❌    |
+| Node.js 8  | ✔️     | ✔️    | ✔️    | ❌     | ❌     | ❌    |
+| Node.js 10 | ✔️     | ✔️    | ✔️    | ✔️     | ✔️     | ❌    |
+| Node.js 12 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
+| Node.js 14 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
