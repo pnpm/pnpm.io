@@ -14,12 +14,11 @@
     "deploy": "NODE_OPTIONS=--max-old-space-size=10000 docusaurus deploy",
     "docusaurus": "docusaurus"
   },
-  "devDependencies": {},
   "dependencies": {
     "@crowdin/cli": "3",
-    "@docusaurus/core": "2.0.0-alpha.70",
-    "@docusaurus/plugin-client-redirects": "^2.0.0-alpha.70",
-    "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@docusaurus/core": "2.0.0-alpha.71",
+    "@docusaurus/plugin-client-redirects": "^2.0.0-alpha.71",
+    "@docusaurus/preset-classic": "2.0.0-alpha.71",
     "clsx": "^1.1.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2"
