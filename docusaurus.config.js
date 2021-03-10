@@ -155,7 +155,8 @@ module.exports={
       "contextualSearch": true,
     },
     "gtag": {
-      "trackingID": "UA-91385296-1"
+      trackingID: "UA-91385296-1",
+      anonymizeIP: true,
     }
   },
   i18n: {
