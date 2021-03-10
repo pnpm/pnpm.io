@@ -146,7 +146,7 @@ module.exports={
   },
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ru'],
+    locales: ['en'],
     localeConfigs: {
       en: {
         label: 'English',
