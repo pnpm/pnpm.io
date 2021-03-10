@@ -1,7 +1,6 @@
 ---
 id: aliases
 title: Aliases
-original_id: aliases
 ---
 
 Aliases let you install packages with custom names.

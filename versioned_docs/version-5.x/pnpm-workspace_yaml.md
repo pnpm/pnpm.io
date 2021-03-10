@@ -1,7 +1,6 @@
 ---
 id: pnpm-workspace_yaml
 title: pnpm-workspace.yaml
-original_id: pnpm-workspace_yaml
 ---
 
 `pnpm-workspace.yaml` defines the root of the [workspace] and enables you to
@@ -10,7 +9,7 @@ all subdirectories are included.
 
 For example:
 
-```yaml
+```yaml title="pnpm-workspace.yaml"
 packages:
   # all packages in subdirs of packages/ and components/
   - 'packages/**'

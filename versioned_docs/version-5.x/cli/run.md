@@ -1,7 +1,6 @@
 ---
 id: run
 title: pnpm run
-original_id: run
 ---
 
 Aliases: `run-script`

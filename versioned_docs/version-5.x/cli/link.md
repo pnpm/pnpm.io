@@ -1,7 +1,6 @@
 ---
 id: link
 title: pnpm link
-original_id: link
 ---
 
 Aliases: `ln`

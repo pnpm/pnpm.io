@@ -1,7 +1,6 @@
 ---
 id: config
 title: pnpm config
-original_id: config
 ---
 
 Aliases: `c`

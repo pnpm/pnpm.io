@@ -1,7 +1,6 @@
 ---
 id: package_json
 title: package.json
-original_id: package_json
 ---
 
 The manifest file of a package. It contains all the package's metadata,

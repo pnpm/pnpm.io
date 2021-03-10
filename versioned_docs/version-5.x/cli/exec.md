@@ -1,7 +1,6 @@
 ---
 id: exec
 title: pnpm exec
-original_id: exec
 ---
 
 Shorthand form of `pnpm -r exec`.

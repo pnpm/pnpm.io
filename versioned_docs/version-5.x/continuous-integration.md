@@ -1,7 +1,6 @@
 ---
 id: continuous-integration
 title: Continuous Integration
-original_id: continuous-integration
 ---
 
 pnpm can easily be used in various continuous integration systems.
@@ -115,4 +114,6 @@ jobs:
       run: pnpm install
 ```
 
-> Using `actions/setup-node@v2` you need to install with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo `
+:::note
+Using `actions/setup-node@v2` you need to install with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo `
+:::

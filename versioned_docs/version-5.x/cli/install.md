@@ -1,7 +1,6 @@
 ---
 id: install
 title: pnpm install
-original_id: install
 ---
 
 Aliases: `i`
@@ -55,7 +54,9 @@ will be requested from the server. To force full offline mode, use `--offline`.
 Do not execute any scripts defined in the project `package.json` and its
 dependencies.
 
-> Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
+:::note
+This flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
+:::
 
 ### --prod, -P
 
@@ -127,6 +128,6 @@ after installation is done. To stop the store server, run `pnpm server stop`
 Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 **WARNING**: This is highly discouraged.
 
-### --filter &lt;package_selector\>
+### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering)

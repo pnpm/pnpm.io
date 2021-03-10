@@ -1,7 +1,6 @@
 ---
 id: limitations
 title: Limitations
-original_id: limitations
 ---
 
 1. `npm-shrinkwrap.json` and `package-lock.json` are ignored. Unlike pnpm, npm

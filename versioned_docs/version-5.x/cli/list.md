@@ -1,7 +1,6 @@
 ---
 id: list
 title: pnpm list
-original_id: list
 ---
 
 Aliases: `ls`

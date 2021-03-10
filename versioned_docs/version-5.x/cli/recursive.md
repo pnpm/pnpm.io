@@ -1,7 +1,6 @@
 ---
 id: recursive
 title: pnpm recursive
-original_id: recursive
 ---
 
 Runs a pnpm command recursively on all subdirectories in the package or every

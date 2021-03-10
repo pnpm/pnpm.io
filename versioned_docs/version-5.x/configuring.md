@@ -1,7 +1,6 @@
 ---
 id: configuring
 title: Configuring
-original_id: configuring
 ---
 
 pnpm uses [npm's configuration] formats. Hence, you should set configuration

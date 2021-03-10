@@ -1,7 +1,6 @@
 ---
 id: outdated
 title: pnpm outdated
-original_id: outdated
 ---
 
 Checks for outdated packages. The check can be limited to a subset of the

@@ -1,7 +1,6 @@
 ---
 id: workspaces
 title: Workspace
-original_id: workspaces
 ---
 
 pnpm has built-in support for monorepositories (AKA multi-package repositories,
@@ -166,10 +165,12 @@ Advantages of this option:
 * faster installations in a monorepo
 * fewer changes in code reviews as they are all in one file
 
-**NOTE:** even though all the dependencies will be hard linked into the root
+:::note
+Even though all the dependencies will be hard linked into the root
 `node_modules`, packages will have access only to those dependencies
 that are declared in their `package.json`, so pnpm's strictness is preserved.
 This is a result of the aforementioned symbolic linking.
+:::
 
 ### save-workspace-protocol
 

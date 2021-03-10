@@ -1,7 +1,6 @@
 ---
 id: prune
 title: pnpm prune
-original_id: prune
 ---
 
 Removes unnecessary packages.

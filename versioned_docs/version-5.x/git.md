@@ -1,7 +1,6 @@
 ---
 id: git
 title: Working with Git
-original_id: git
 ---
 
 ## Lockfiles

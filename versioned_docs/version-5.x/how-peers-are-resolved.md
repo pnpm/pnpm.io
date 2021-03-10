@@ -1,7 +1,6 @@
 ---
 id: how-peers-are-resolved
 title: How peers are resolved
-original_id: how-peers-are-resolved
 ---
 
 One of the best features of pnpm is that in one project, a specific version of a

@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports={
   "title": "pnpm",
   "tagline": "Fast, disk space efficient package manager",
@@ -26,7 +28,7 @@ module.exports={
           "editUrl": "https://github.com/pnpm/pnpm.github.io/edit/source/",
           "path": "./docs",
           "routeBasePath": "/",
-          "sidebarPath": "./sidebars.json"
+          "sidebarPath": path.join(__dirname, "sidebars.json"),
         },
         "blog": {
           "path": "blog"

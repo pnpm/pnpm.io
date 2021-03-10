@@ -1,7 +1,6 @@
 ---
 id: remove
 title: pnpm remove
-original_id: remove
 ---
 
 Removes packages from `node_modules` and from the project's `package.json`.

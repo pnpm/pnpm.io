@@ -1,7 +1,6 @@
 ---
 id: pnpx-cli
 title: pnpx CLI
-original_id: pnpx-cli
 ---
 
 ## For new users
@@ -19,12 +18,12 @@ pnpx create-react-app my-project
 
 This will fetch `create-react-app` from the registry and run it with the given
 arguments. For more information, you may want to look at [npx] from npm, as it
-offers the same interface, except it uses pnpm instead of npm under the hood.
+offers the same interface, except it uses `npm` instead of `pnpm` under the hood.
 
 ## For npm users
 
 npm has a great package runner called [npx]. pnpm offers the same tool via the
-`pnpx` command. The only difference is that `pnpx` uses pnpm for installing
+`pnpx` command. The only difference is that `pnpx` uses `pnpm` for installing
 packages.
 
 [npx]: https://www.npmjs.com/package/npx

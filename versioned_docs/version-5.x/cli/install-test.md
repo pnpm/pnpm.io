@@ -1,7 +1,6 @@
 ---
 id: install-test
 title: pnpm install-test
-original_id: install-test
 ---
 
 Aliases: `it`

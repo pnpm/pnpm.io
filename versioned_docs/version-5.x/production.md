@@ -1,7 +1,6 @@
 ---
 id: production
 title: Production
-original_id: production
 ---
 
 There are two ways to bootstrap your package in a production environment with

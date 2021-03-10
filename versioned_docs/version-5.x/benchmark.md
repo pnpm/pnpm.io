@@ -1,7 +1,6 @@
 ---
 id: benchmark
 title: Benchmark
-original_id: benchmark
 ---
 
 pnpm is faster than npm and Yarn. See [this] benchmark which compares the three

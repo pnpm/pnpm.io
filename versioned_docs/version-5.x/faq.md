@@ -1,7 +1,6 @@
 ---
 id: faq
 title: Frequently Asked Questions
-original_id: faq
 ---
 
 ## Why does my `node_modules` folder use disk space if packages are stored in a global store?
@@ -123,7 +122,7 @@ briefly slowing down the installation process.
 `pnpm` stands for `performant npm`.
 [Rico Sta. Cruz](https://github.com/rstacruz/) came up with the name.
 
-## `pnpm` does not work with &lt;YOUR-PROJECT-HERE\>?
+## `pnpm` does not work with &lt;YOUR-PROJECT-HERE>?
 
 In most cases it means that one of the dependencies require packages not
 declared in `package.json`. It is a common mistake caused by flat

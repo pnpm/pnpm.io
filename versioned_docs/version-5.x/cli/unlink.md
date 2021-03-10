@@ -1,7 +1,6 @@
 ---
 id: unlink
 title: pnpm unlink
-original_id: unlink
 ---
 
 Unlinks a system-wide package (inverse of [`pnpm link`](link)).

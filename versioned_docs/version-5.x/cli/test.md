@@ -1,7 +1,6 @@
 ---
 id: test
 title: pnpm test
-original_id: test
 ---
 
 Aliases: `run test`, `t`, `tst`

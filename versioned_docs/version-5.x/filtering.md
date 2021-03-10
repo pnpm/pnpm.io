@@ -1,7 +1,6 @@
 ---
 id: filtering
 title: Filtering
-original_id: filtering
 ---
 
 Added in: v2.13.0
@@ -17,9 +16,11 @@ Selectors may be specified via the `--filter` flag:
 pnpm <command> --filter <package_selector>
 ```
 
-> [An article that compares Lerna's filtering to pnpm's](https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a)
+:::tip
+[An article that compares Lerna's filtering to pnpm's](https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a)
+:::
 
-## --filter &lt;package_name\>
+## --filter &lt;package_name>
 
 Added in: v2.13.0
 
@@ -34,7 +35,7 @@ pnpm test --filter "@babel/*"
 pnpm test --filter "*core"
 ```
 
-## --filter &lt;package_name\>...
+## --filter &lt;package_name>...
 
 Added in: v2.13.0
 
@@ -52,7 +53,7 @@ You may use a pattern to select a set of root packages:
 pnpm test --filter "@babel/preset-*..."
 ```
 
-## --filter &lt;package_name\>^...
+## --filter &lt;package_name>^...
 
 Added in: v4.4.0
 
@@ -65,7 +66,7 @@ dependencies:
 pnpm test --filter "foo^..."
 ```
 
-## --filter ...&lt;package_name\>
+## --filter ...&lt;package_name>
 
 Added in: v2.14.0
 
@@ -77,7 +78,7 @@ run the tests of `foo` and all packages dependent on it:
 pnpm test --filter ...foo
 ```
 
-## --filter "...^&lt;package_name\>"
+## --filter "...^&lt;package_name>"
 
 Added in: v4.4.0
 
@@ -89,14 +90,14 @@ run tests for all packages dependent on `foo`:
 pnpm test --filter "...^foo"
 ```
 
-## --filter ./&lt;directory\>
+## --filter ./&lt;directory>
 
 Added in: v2.15.0
 
 To only select packages under the specified directory, you may specify any
 absolute path, typically in POSIX format.
 
-## --filter {&lt;directory\>}
+## --filter {&lt;directory>}
 
 Added in: v4.7.0
 
@@ -130,7 +131,7 @@ pnpm <cmd> --filter "@babel/*{components}[origin/master]"
 pnpm <cmd> --filter "...@babel/*{components}[origin/master]"
 ```
 
-## --filter "[&lt;since\>]"
+## --filter "[&lt;since>]"
 
 Added in: v4.6.0
 
@@ -173,7 +174,7 @@ directory:
 pnpm <cmd> --filter=!./lib
 ```
 
-## --test-pattern &lt;glob\>
+## --test-pattern &lt;glob>
 
 Added in: v5.14.0
 

@@ -1,7 +1,6 @@
 ---
 id: pnpm-cli
 title: pnpm CLI
-original_id: pnpm-cli
 ---
 
 ## Differences vs npm

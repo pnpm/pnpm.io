@@ -1,7 +1,6 @@
 ---
 id: only-allow-pnpm
 title: Only allow pnpm
-original_id: only-allow-pnpm
 ---
 
 When you use pnpm on a project, you don't want others to accidentally run

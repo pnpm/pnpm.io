@@ -1,7 +1,6 @@
 ---
 id: update
 title: pnpm update
-original_id: update
 ---
 
 Aliases: `up`

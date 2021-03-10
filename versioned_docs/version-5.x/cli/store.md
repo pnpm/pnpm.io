@@ -1,7 +1,6 @@
 ---
 id: store
 title: pnpm store
-original_id: store
 ---
 
 Managing the [package store](../about-package-store).

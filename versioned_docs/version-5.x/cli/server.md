@@ -1,7 +1,6 @@
 ---
 id: server
 title: pnpm server
-original_id: server
 ---
 
 Added in: v1.30.0

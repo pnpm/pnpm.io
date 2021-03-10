@@ -1,7 +1,6 @@
 ---
 id: why
 title: pnpm why
-original_id: why
 ---
 
 Shows all packages that depend on the specified package.

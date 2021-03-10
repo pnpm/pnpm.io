@@ -1,7 +1,6 @@
 ---
 id: start
 title: pnpm start
-original_id: start
 ---
 
 Aliases: `run start`

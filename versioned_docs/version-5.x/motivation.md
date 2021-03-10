@@ -1,7 +1,6 @@
 ---
 id: motivation
 title: Motivation
-original_id: motivation
 ---
 
 When using npm or Yarn, if you have 100 projects using a dependency, you will

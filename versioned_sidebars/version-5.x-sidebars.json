@@ -1,6 +1,7 @@
 {
   "version-5.x/docs": [
     {
+      "collapsed": true,
       "type": "category",
       "label": "Introduction",
       "items": [
@@ -15,6 +16,7 @@
       ]
     },
     {
+      "collapsed": true,
       "type": "category",
       "label": "Usage",
       "items": [
@@ -37,10 +39,12 @@
       ]
     },
     {
+      "collapsed": true,
       "type": "category",
       "label": "CLI commands",
       "items": [
         {
+          "collapsed": true,
           "type": "category",
           "label": "Manage dependencies",
           "items": [
@@ -87,6 +91,7 @@
           ]
         },
         {
+          "collapsed": true,
           "type": "category",
           "label": "Review dependencies",
           "items": [
@@ -109,6 +114,7 @@
           ]
         },
         {
+          "collapsed": true,
           "type": "category",
           "label": "Run scripts",
           "items": [
@@ -123,14 +129,11 @@
             {
               "type": "doc",
               "id": "version-5.x/cli/start"
-            },
-            {
-              "type": "doc",
-              "id": "version-5.x/cli/stop"
             }
           ]
         },
         {
+          "collapsed": true,
           "type": "category",
           "label": "Misc.",
           "items": [
@@ -155,6 +158,7 @@
       ]
     },
     {
+      "collapsed": true,
       "type": "category",
       "label": "Configuration",
       "items": [
@@ -177,6 +181,7 @@
       ]
     },
     {
+      "collapsed": true,
       "type": "category",
       "label": "Features",
       "items": [
@@ -195,6 +200,7 @@
       ]
     },
     {
+      "collapsed": true,
       "type": "category",
       "label": "Recipes",
       "items": [
@@ -217,6 +223,7 @@
       ]
     },
     {
+      "collapsed": true,
       "type": "category",
       "label": "Advanced",
       "items": [
@@ -231,10 +238,6 @@
         {
           "type": "doc",
           "id": "version-5.x/limitations"
-        },
-        {
-          "type": "doc",
-          "id": "version-5.x/about-package-store"
         },
         {
           "type": "doc",

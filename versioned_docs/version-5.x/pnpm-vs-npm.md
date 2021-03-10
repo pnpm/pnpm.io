@@ -1,7 +1,6 @@
 ---
 id: pnpm-vs-npm
 title: pnpm vs npm
-original_id: pnpm-vs-npm
 ---
 
 ## npm's flat tree

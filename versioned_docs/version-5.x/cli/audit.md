@@ -1,7 +1,6 @@
 ---
 id: audit
 title: pnpm audit
-original_id: audit
 ---
 
 Added in: 4.3.0

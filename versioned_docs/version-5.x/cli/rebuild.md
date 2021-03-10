@@ -1,7 +1,6 @@
 ---
 id: rebuild
 title: pnpm rebuild
-original_id: rebuild
 ---
 
 Aliases: `rb`

@@ -1,7 +1,6 @@
 ---
 id: add
 title: "pnpm add <pkg>"
-original_id: add
 ---
 
 Installs a package and any packages that it depends on.

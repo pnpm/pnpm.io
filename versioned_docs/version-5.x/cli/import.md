@@ -1,7 +1,6 @@
 ---
 id: import
 title: pnpm import
-original_id: import
 ---
 
 Added in: v2.15.0

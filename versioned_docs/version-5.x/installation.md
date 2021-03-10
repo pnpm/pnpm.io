@@ -1,7 +1,6 @@
 ---
 id: installation
 title: Installation
-original_id: installation
 ---
 
 ## Using npm
@@ -39,7 +38,9 @@ update it. You can upgrade pnpm using itself, like so:
 pnpm add -g pnpm
 ```
 
-> Do you wanna use pnpm on CI servers? See: [Continuous Integration](continuous-integration).
+:::tip
+Do you wanna use pnpm on CI servers? See: [Continuous Integration](continuous-integration).
+:::
 
 ## Compatibility
 

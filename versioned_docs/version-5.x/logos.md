@@ -1,7 +1,6 @@
 ---
 id: logos
 title: Logos
-original_id: logos
 ---
 
 ## Standard logo
