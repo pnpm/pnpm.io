@@ -134,7 +134,8 @@ module.exports={
     },
     "algolia": {
       "apiKey": "802b1d6ee5450a4296581a8e14aff417",
-      "indexName": "pnpm"
+      "indexName": "pnpm",
+      "contextualSearch": true,
     },
     "gtag": {
       "trackingID": "UA-91385296-1"
