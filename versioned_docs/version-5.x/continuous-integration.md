@@ -116,6 +116,6 @@ jobs:
 
 :::note
 
-Using `actions/setup-node@v2` you need to install with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo `
+Using `actions/setup-node@v2` you need to install pnpm with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo ` if you do not specify a node version to use
 
 :::
