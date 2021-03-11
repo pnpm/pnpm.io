@@ -10,7 +10,7 @@ pnpm can easily be used in various continuous integration systems.
 On [Travis CI], you can use pnpm for installing your dependencies by adding this
 to your `.travis.yml` file:
 
-```yaml
+```yaml title=".travis.yml"
 cache:
   npm: false
   directories:
@@ -29,7 +29,7 @@ install:
 On [Semaphore], you can use pnpm for installing and caching your dependencies by
 adding this to your `.semaphore/semaphore.yml` file:
 
-```yaml
+```yaml title=".semaphore/semaphore.yml"
 version: v1.0
 name: Semaphore CI pnpm example
 agent:
@@ -56,7 +56,7 @@ blocks:
 On [AppVeyor], you can use pnpm for installing your dependencies by adding this
 to your `appveyor.yml`:
 
-```yaml
+```yaml title="appveyor.yml"
 install:
   - ps: Install-Product node $env:nodejs_version
   - curl -L https://unpkg.com/@pnpm/self-installer | node
@@ -69,7 +69,7 @@ install:
 
 On [Sail CI], you can use pnpm for installing your dependencies by adding this to your `.sail.yml` file:
 
-```yaml
+```yaml title=".sail.yml"
 install:
   image: znck/pnpm:latest
   command:
@@ -87,7 +87,7 @@ your own Docker image and push to [Docker Hub](https://hub.docker.com/).
 On GitHub Actions, you can use pnpm for installing and caching your dependencies
 like so (belongs in `.github/workflows/NAME.yml`):
 
-```yaml
+```yaml title=".github/workflows/NAME.yml"
 name: pnpm Example Workflow
 on:
   push:
