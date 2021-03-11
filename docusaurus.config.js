@@ -3,6 +3,19 @@ const path = require('path');
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
 const SPONSOR_URL = 'https://opencollective.com/pnpm';
 const TRANSLATE_URL = "https://crowdin.com/project/pnpm";
+const DEFAULT_LOCALE = 'en';
+const LOCALE_FULL_CODE = {
+  zh: 'zh-CN',
+}
+
+function makeEditUrl (locale, path1, path2) {
+  // Link to Crowdin for non-English docs
+  if (locale !== DEFAULT_LOCALE) {
+    return `https://crowdin.com/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
+  }
+  // Link to Github for English docs
+  return `https://github.com/pnpm/pnpm.github.io/edit/source/${path1}/${path2}`;
+}
 
 module.exports={
   "title": "pnpm",
@@ -29,13 +42,14 @@ module.exports={
         "docs": {
           "showLastUpdateAuthor": true,
           "showLastUpdateTime": true,
-          "editUrl": "https://github.com/pnpm/pnpm.github.io/edit/source/",
+          editUrl: ({locale, versionDocsDirPath, docPath}) => makeEditUrl(locale, versionDocsDirPath, docPath),
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
         },
         "blog": {
-          "path": "blog"
+          "path": "blog",
+          editUrl: ({locale, blogDirPath, blogPath}) => makeEditUrl(locale, blogDirPath, blogPath),
         },
         "theme": {
           "customCss": "../src/css/customTheme.css"
@@ -193,7 +207,7 @@ module.exports={
     }
   },
   i18n: {
-    defaultLocale: 'en',
+    defaultLocale: DEFAULT_LOCALE,
     locales: ['en', 'zh'],
     localeConfigs: {
       en: {
