@@ -4,8 +4,10 @@ title: Using Changesets with pnpm
 ---
 
 :::note
+
 At the time of writing this documentation, the latest pnpm version was 
 v5.17.3. The latest Changesets version was v2.14.1.
+
 :::
 
 ## Setup

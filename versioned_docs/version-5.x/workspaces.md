@@ -166,10 +166,12 @@ Advantages of this option:
 * fewer changes in code reviews as they are all in one file
 
 :::note
+
 Even though all the dependencies will be hard linked into the root
 `node_modules`, packages will have access only to those dependencies
 that are declared in their `package.json`, so pnpm's strictness is preserved.
 This is a result of the aforementioned symbolic linking.
+
 :::
 
 ### save-workspace-protocol

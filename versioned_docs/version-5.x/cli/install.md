@@ -55,7 +55,9 @@ Do not execute any scripts defined in the project `package.json` and its
 dependencies.
 
 :::note
+
 This flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
+
 :::
 
 ### --prod, -P
