@@ -116,6 +116,6 @@ jobs:
 
 :::note
 
-Using `actions/setup-node@v2` you need to install pnpm with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo ` if you do not specify a node version to use
+Using `actions/setup-node@v2` you need to install pnpm with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo npm install -g pnpm`. Alternatively, if you specify the Node.js version to use, pnpm may be installed with no priviledged user.
 
 :::
