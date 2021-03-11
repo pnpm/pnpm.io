@@ -1365,7 +1365,7 @@ packages:
       commander: 5.1.0
       copy-webpack-plugin: 6.4.1_webpack@4.46.0
       core-js: 3.9.1
-      css-loader: 5.1.1_webpack@4.46.0
+      css-loader: 5.1.2_webpack@4.46.0
       del: 6.0.0
       detect-port: 1.3.0
       eta: 1.12.1
@@ -1391,6 +1391,7 @@ packages:
       postcss: 8.2.8
       postcss-loader: 4.2.0_postcss@8.2.8+webpack@4.46.0
       postcss-preset-env: 6.7.0
+      prism-react-renderer: 1.2.0_react@16.14.0
       prompts: 2.4.0
       react: 16.14.0
       react-dev-utils: 11.0.4
@@ -2688,7 +2689,7 @@ packages:
     resolution: {integrity: sha512-7H4AJZXvSsn62SqZyJCP+1AWwOuoYpUfK6ot9vm0e87XD6mT8lDywc9D9OTJPMULyGcvmIxzTAMeG2Cc+YX+fA==}
     dependencies:
       browserslist: 4.16.3
-      caniuse-lite: 1.0.30001197
+      caniuse-lite: 1.0.30001198
       colorette: 1.2.2
       fraction.js: 4.0.13
       normalize-range: 0.1.2
@@ -2705,7 +2706,7 @@ packages:
     resolution: {integrity: sha512-XrvP4VVHdRBCdX1S3WXVD8+RyG9qeb1D5Sn1DeLiG2xfSpzellk5k54xbUERJ3M5DggQxes39UGOTP8CFrEGbg==}
     dependencies:
       browserslist: 4.16.3
-      caniuse-lite: 1.0.30001197
+      caniuse-lite: 1.0.30001198
       colorette: 1.2.2
       normalize-range: 0.1.2
       num2fraction: 1.2.2
@@ -3012,8 +3013,8 @@ packages:
   /browserslist/4.14.2:
     resolution: {integrity: sha512-HI4lPveGKUR0x2StIz+2FXfDk9SfVMrxn6PLh1JeGUwcuoDkdKZebWiyLRJ68iIPDpMI4JLVDf7S7XzslgWOhw==}
     dependencies:
-      caniuse-lite: 1.0.30001197
-      electron-to-chromium: 1.3.684
+      caniuse-lite: 1.0.30001198
+      electron-to-chromium: 1.3.686
       escalade: 3.1.1
       node-releases: 1.1.71
     dev: false
@@ -3024,9 +3025,9 @@ packages:
   /browserslist/4.16.3:
     resolution: {integrity: sha512-vIyhWmIkULaq04Gt93txdh+j02yX/JzlyhLYbV3YQCn/zvES3JnY7TifHHvvr1w5hTDluNKMkV05cs4vy8Q7sw==}
     dependencies:
-      caniuse-lite: 1.0.30001197
+      caniuse-lite: 1.0.30001198
       colorette: 1.2.2
-      electron-to-chromium: 1.3.684
+      electron-to-chromium: 1.3.686
       escalade: 3.1.1
       node-releases: 1.1.71
     dev: false
@@ -3228,13 +3229,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.16.3
-      caniuse-lite: 1.0.30001197
+      caniuse-lite: 1.0.30001198
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: false
 
-  /caniuse-lite/1.0.30001197:
-    resolution: {integrity: sha512-8aE+sqBqtXz4G8g35Eg/XEaFr2N7rd/VQ6eABGBmNtcB8cN6qNJhMi6oSFy4UWWZgqgL3filHT8Nha4meu3tsw==}
+  /caniuse-lite/1.0.30001198:
+    resolution: {integrity: sha512-r5GGgESqOPZzwvdLVER374FpQu2WluCF1Z2DSiFJ89KSmGjT0LVKjgv4NcAqHmGWF9ihNpqRI9KXO9Ex4sKsgA==}
     dev: false
 
   /ccount/1.1.0:
@@ -3415,8 +3416,8 @@ packages:
     engines:
       node: '>=6'
 
-  /clipboard/2.0.7:
-    resolution: {integrity: sha512-8M8WEZcIvs0hgOma+wAPkrUxpv0PMY1L6VsAJh/2DOKARIMpyWe6ZLcEoe1qktl6/ced5ceYHs+oGedSbgZ3sg==}
+  /clipboard/2.0.8:
+    resolution: {integrity: sha512-Y6WO0unAIQp5bLmk1zdThRhgJt/x3ks6f30s3oE3H1mgIEU33XyQjEf8gsf6DxC7NPX8Y1SsNWjUjL/ywLnnbQ==}
     dependencies:
       good-listener: 1.2.2
       select: 1.1.2
@@ -3843,8 +3844,8 @@ packages:
       node: '>=6.0.0'
     hasBin: true
 
-  /css-loader/5.1.1_webpack@4.46.0:
-    resolution: {integrity: sha512-5FfhpjwtuRgxqmusDidowqmLlcb+1HgnEDMsi2JhiUrZUcoc+cqw+mUtMIF/+OfeMYaaFCLYp1TaIt9H6I/fKA==}
+  /css-loader/5.1.2_webpack@4.46.0:
+    resolution: {integrity: sha512-T7vTXHSx0KrVEg/xjcl7G01RcVXpcw4OELwDPvkr7izQNny85A84dK3dqrczuEfBcu7Yg7mdTjJLSTibRUoRZg==}
     dependencies:
       camelcase: 6.2.0
       cssesc: 3.0.0
@@ -4367,8 +4368,8 @@ packages:
     resolution: {integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=}
     dev: false
 
-  /electron-to-chromium/1.3.684:
-    resolution: {integrity: sha512-GV/vz2EmmtRSvfGSQ5A0Lucic//IRSDijgL15IgzbBEEnp4rfbxeUSZSlBfmsj7BQvE4sBdgfsvPzLCnp6L21w==}
+  /electron-to-chromium/1.3.686:
+    resolution: {integrity: sha512-SOJT3m00NX/gT3sD6E3PcZX6u3+zUmQq4+yp8QCKLOwf2ECnmh9eAY+eonhC/AAu5Gg2WrtUU2m7/+e85O0l6A==}
     dev: false
 
   /elliptic/6.5.4:
@@ -8192,7 +8193,7 @@ packages:
     dependencies:
       autoprefixer: 9.8.6
       browserslist: 4.16.3
-      caniuse-lite: 1.0.30001197
+      caniuse-lite: 1.0.30001198
       css-blank-pseudo: 0.1.4
       css-has-pseudo: 0.10.0
       css-prefers-color-scheme: 3.1.1
@@ -8447,7 +8448,7 @@ packages:
     resolution: {integrity: sha512-c29LVsqOaLbBHuIbsTxaKENh1N2EQBOHaWv7gkHN4dgRbxSREqDnDbtFJYdpPauS4YCplMSNCABQ6Eeor69bAA==}
     dev: false
     optionalDependencies:
-      clipboard: 2.0.7
+      clipboard: 2.0.8
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
@@ -10981,10 +10982,10 @@ packages:
     dev: false
 
 specifiers:
-  '@crowdin/cli': '3'
+  '@crowdin/cli': ^3.5.4
   '@docusaurus/core': 2.0.0-alpha.71
   '@docusaurus/plugin-client-redirects': ^2.0.0-alpha.71
   '@docusaurus/preset-classic': 2.0.0-alpha.71
   clsx: ^1.1.1
-  react: ^16.10.2
-  react-dom: ^16.10.2
+  react: ^16.14.0
+  react-dom: ^16.14.0
