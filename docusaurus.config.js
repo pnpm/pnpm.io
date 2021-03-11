@@ -208,7 +208,7 @@ module.exports={
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: ['en', 'zh'],
+    locales: ['en', 'zh', 'ru'],
     localeConfigs: {
       en: {
         label: 'English',
@@ -216,6 +216,9 @@ module.exports={
       zh: {
         label: '中文',
       },
+      ru: {
+        label: 'Русский',
+      },
     },
-  }
+  },
 }
