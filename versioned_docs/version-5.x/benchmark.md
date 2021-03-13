@@ -10,4 +10,4 @@ Here are the benchmarks on a React app:
 
 ![](https://cdn.rawgit.com/pnpm/node-package-manager-benchmark/7f0c3e40/results/imgs/react-app.svg)
 
-[this]: https://github.com/zkochan/node-package-manager-benchmark
+[this]: https://github.com/pnpm/benchmarks-of-javascript-package-managers
