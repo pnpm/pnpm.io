@@ -201,9 +201,7 @@ then hardlink packages from the store. If neither cloning nor linking is
 possible, fall back to copying
 * **hardlink** - hard link packages from the store
 * **copy** - copy packages from the store
-* **clone** - clone (AKA copy-on-write or reference link) packages from the
-* store
-
+* **clone** - clone (AKA copy-on-write or reference link) packages from the store
 
 ## Lockfile Settings
 
