@@ -39,7 +39,7 @@ will be installed from the configured sources, depending on whether or not
 [`link-workspace-packages`] is set, and use of the
 [`workspace: range protocol`].
 
-[workspace]: ../workspaces
+[workspace]: ../workspaces.md
 [`link-workspace-packages`]: ../workspaces#link-workspace-packages
 [`workspace: range protocol`]: ../workspaces#workspace-ranges-workspace
 
