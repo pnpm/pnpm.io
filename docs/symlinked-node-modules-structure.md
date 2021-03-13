@@ -20,17 +20,17 @@ content-addressable store. Let's say you install `foo@1.0.0` that depends on
 
 ```text
 node_modules
-`-- .pnpm
-    |-- bar@1.0.0
-    |   `-- node_modules
-    |       `-- bar -> <store>/bar
-    |           |-- index.js
-    |           `-- package.json
-    `-- foo@1.0.0
-        `-- node_modules
-            `-- foo -> <store>/foo
-                |-- index.js
-                `-- package.json
+└── .pnpm
+    ├── bar@1.0.0
+    │   └── node_modules
+    │       └── bar -> <store>/bar
+    │           ├── index.js
+    │           └── package.json
+    └── foo@1.0.0
+        └── node_modules
+            └── foo -> <store>/foo
+                ├── index.js
+                └── package.json
 ```
 
 These are the only "real" files in `node_modules`. Once all the packages are
@@ -52,14 +52,14 @@ symlinked to the `foo@1.0.0/node_modules` folder:
 
 ```text
 node_modules
-`-- .pnpm
-    |-- bar@1.0.0
-    |   `-- node_modules
-    |       `-- bar -> <store>/bar
-    `-- foo@1.0.0
-        `-- node_modules
-            |-- foo -> <store>/foo
-            `-- bar -> ../../bar@1.0.0/node_modules/bar
+└── .pnpm
+    ├── bar@1.0.0
+    │   └── node_modules
+    │       └── bar -> <store>/bar
+    └── foo@1.0.0
+        └── node_modules
+            ├── foo -> <store>/foo
+            └── bar -> ../../bar@1.0.0/node_modules/bar
 ```
 
 Next, direct dependencies are handled. `foo` is going to be symlinked into the
@@ -67,15 +67,15 @@ root `node_modules` folder because `foo` is a dependency of the project:
 
 ```text
 node_modules
-|-- foo -> ./.pnpm/foo@1.0.0/node_modules/foo
-`-- .pnpm
-    |-- bar@1.0.0
-    |   `-- node_modules
-    |       `-- bar -> <store>/bar
-    `-- foo@1.0.0
-        `-- node_modules
-            |-- foo -> <store>/foo
-            `-- bar -> ../../bar@1.0.0/node_modules/bar
+├── foo -> ./.pnpm/foo@1.0.0/node_modules/foo
+└── .pnpm
+    ├── bar@1.0.0
+    │   └── node_modules
+    │       └── bar -> <store>/bar
+    └── foo@1.0.0
+        └── node_modules
+            ├── foo -> <store>/foo
+            └── bar -> ../../bar@1.0.0/node_modules/bar
 ```
 
 This is a very simple example. However, the layout will maintain this structure
@@ -86,20 +86,20 @@ structure will look:
 
 ```text
 node_modules
-|-- foo -> ./.pnpm/foo@1.0.0/node_modules/foo
-`-- .pnpm
-    |-- bar@1.0.0
-    |   `-- node_modules
-    |       |-- bar -> <store>/bar
-    |       `-- qar -> ../../qar@2.0.0/node_modules/qar
-    |-- foo@1.0.0
-    |   `-- node_modules
-    |       |-- foo -> <store>/foo
-    |       |-- bar -> ../../bar@1.0.0/node_modules/bar
-    |       `-- qar -> ../../qar@2.0.0/node_modules/qar
-    `-- qar@2.0.0
-        `-- node_modules
-            `-- qar -> <store>/qar
+├── foo -> ./.pnpm/foo@1.0.0/node_modules/foo
+└── .pnpm
+    ├── bar@1.0.0
+    │   └── node_modules
+    │       ├── bar -> <store>/bar
+    │       └── qar -> ../../qar@2.0.0/node_modules/qar
+    ├── foo@1.0.0
+    │   └── node_modules
+    │       ├── foo -> <store>/foo
+    │       ├── bar -> ../../bar@1.0.0/node_modules/bar
+    │       └── qar -> ../../qar@2.0.0/node_modules/qar
+    └── qar@2.0.0
+        └── node_modules
+            └── qar -> <store>/qar
 ```
 
 As you may see, even though the graph is deeper now (`foo > bar > qar`), the

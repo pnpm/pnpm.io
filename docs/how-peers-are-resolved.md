@@ -37,14 +37,14 @@ Normally, if a package does not have peer dependencies, it is hard linked to a
 
 ```text
 node_modules
-`-- .pnpm
-    |-- foo@1.0.0
-    |   `-- node_modules
-    |       |-- foo
-    |       |-- qux   -> ../../qux@1.0.0/node_modules/qux
-    |       `-- plugh -> ../../plugh@1.0.0/node_modules/plugh
-    |-- qux@1.0.0
-    `-- plugh@1.0.0
+└── .pnpm
+    ├── foo@1.0.0
+    │   └── node_modules
+    │       ├── foo
+    │       ├── qux   -> ../../qux@1.0.0/node_modules/qux
+    │       └── plugh -> ../../plugh@1.0.0/node_modules/plugh
+    ├── qux@1.0.0
+    ├── plugh@1.0.0
 ```
 
 However, if `foo` has peer dependencies, there may be multiple sets of
@@ -53,26 +53,26 @@ resolutions:
 
 ```text
 node_modules
-`-- .pnpm
-    |-- foo@1.0.0_bar@1.0.0+baz@1.0.0
-    |   `-- node_modules
-    |       |-- foo
-    |       |-- bar   -> ../../bar@1.0.0/node_modules/bar
-    |       |-- baz   -> ../../baz@1.0.0/node_modules/baz
-    |       |-- qux   -> ../../qux@1.0.0/node_modules/qux
-    |       `-- plugh -> ../../plugh@1.0.0/node_modules/plugh
-    |-- foo@1.0.0_bar@1.0.0+baz@1.1.0
-    |   `-- node_modules
-    |       |-- foo
-    |       |-- bar   -> ../../bar@1.0.0/node_modules/bar
-    |       |-- baz   -> ../../baz@1.1.0/node_modules/baz
-    |       |-- qux   -> ../../qux@1.0.0/node_modules/qux
-    |       `-- plugh -> ../../plugh@1.0.0/node_modules/plugh
-    |-- bar@1.0.0
-    |-- baz@1.0.0
-    |-- baz@1.1.0
-    |-- qux@1.0.0
-    `-- plugh@1.0.0
+└── .pnpm
+    ├── foo@1.0.0_bar@1.0.0+baz@1.0.0
+    │   └── node_modules
+    │       ├── foo
+    │       ├── bar   -> ../../bar@1.0.0/node_modules/bar
+    │       ├── baz   -> ../../baz@1.0.0/node_modules/baz
+    │       ├── qux   -> ../../qux@1.0.0/node_modules/qux
+    │       └── plugh -> ../../plugh@1.0.0/node_modules/plugh
+    ├── foo@1.0.0_bar@1.0.0+baz@1.1.0
+    │   └── node_modules
+    │       ├── foo
+    │       ├── bar   -> ../../bar@1.0.0/node_modules/bar
+    │       ├── baz   -> ../../baz@1.1.0/node_modules/baz
+    │       ├── qux   -> ../../qux@1.0.0/node_modules/qux
+    │       └── plugh -> ../../plugh@1.0.0/node_modules/plugh
+    ├── bar@1.0.0
+    ├── baz@1.0.0
+    ├── baz@1.1.0
+    ├── qux@1.0.0
+    ├── plugh@1.0.0
 ```
 
 We create symlinks either to the `foo` that is inside
@@ -93,23 +93,23 @@ once with `c@1.0.0` and again with `c@1.1.0`.
 
 ```text
 node_modules
-`-- .pnpm
-    |-- a@1.0.0_c@1.0.0
-    |   `-- node_modules
-    |       |-- a
-    |       `-- b -> ../../b@1.0.0_c@1.0.0/node_modules/b
-    |-- a@1.0.0_c@1.1.0
-    |   `-- node_modules
-    |       |-- a
-    |       `-- b -> ../../b@1.0.0_c@1.1.0/node_modules/b
-    |-- b@1.0.0_c@1.0.0
-    |   `-- node_modules
-    |       |-- b
-    |       `-- c -> ../../c@1.0.0/node_modules/c
-    |-- b@1.0.0_c@1.1.0
-    |   `-- node_modules
-    |       |-- b
-    |       `-- c -> ../../cn@1.1.0/node_modules/plugin
-    |-- c@1.0.0
-    `-- c@1.1.0
+└── .pnpm
+    ├── a@1.0.0_c@1.0.0
+    │   └── node_modules
+    │       ├── a
+    │       └── b -> ../../b@1.0.0_c@1.0.0/node_modules/b
+    ├── a@1.0.0_c@1.1.0
+    │   └── node_modules
+    │       ├── a
+    │       └── b -> ../../b@1.0.0_c@1.1.0/node_modules/b
+    ├── b@1.0.0_c@1.0.0
+    │   └── node_modules
+    │       ├── b
+    │       └── c -> ../../c@1.0.0/node_modules/c
+    ├── b@1.0.0_c@1.1.0
+    │   └── node_modules
+    │       ├── b
+    │       └── c -> ../../cn@1.1.0/node_modules/plugin
+    ├── c@1.0.0
+    ├── c@1.1.0
 ```
