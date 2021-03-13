@@ -164,7 +164,7 @@ module.exports={
             },
             {
               label: 'Project Chat',
-              href: 'https://bit.ly/pnpm-discord-invite',
+              href: 'https://pnpm.js.org/r/chat/',
             },
             {
               label: 'Twitter',
