@@ -8,7 +8,7 @@ original_id: limitations
 same `name@version` multiple times and with different sets of dependencies.
 npm's shrinkwrap file is designed to reflect the `node_modules` layout created
 by npm. pnpm cannot create a similar layout, so it cannot respect
-npm's lockfile format. However, see [pnpm import](pnpm-import).
+npm's lockfile format. However, see [pnpm import](pnpm-import.md).
 2. You can't publish npm modules with `bundleDependencies` managed by pnpm.
 3. Binstubs (files in `node_modules/.bin`) are always shell files not
 symlinks to JS files. The shell files are created to help pluggable CLI apps

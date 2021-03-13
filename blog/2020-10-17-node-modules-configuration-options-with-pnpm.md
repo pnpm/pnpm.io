@@ -49,7 +49,7 @@ hoist=false
 
 However, if some of your dependencies are trying to access packages that they don't have in dependencies, you have two options:
 
-1. Create a `pnpmfile.js` and use a [hook](/en/pnpmfile) to add the missing dependency to the package's manifest.
+1. Create a `pnpmfile.js` and use a [hook](/pnpmfile) to add the missing dependency to the package's manifest.
 
 2. Add a pattern to the `hoist-pattern` setting. For instance, if the not found module is `babel-core`, add the following setting to `.npmrc`:
 

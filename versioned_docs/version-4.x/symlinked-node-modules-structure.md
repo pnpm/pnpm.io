@@ -5,7 +5,7 @@ original_id: symlinked-node-modules-structure
 ---
 
 > This article only describes how pnpm's `node_modules` are structured when there are no packages with peer dependencies.
-> For the more complex scenario of dependencies with peers, see [How peers are resolved](how-peers-are-resolved).
+> For the more complex scenario of dependencies with peers, see [how peers are resolved](how-peers-are-resolved.md).
 
 pnpm's `node_modules` layout uses symbolic links to create a nested structure of dependencies.
 

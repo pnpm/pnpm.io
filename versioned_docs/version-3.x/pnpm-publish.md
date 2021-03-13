@@ -10,7 +10,7 @@ Publishes a package to the registry.
 pnpm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
 ```
 
-When publishing a package inside a [workspace](workspace), the LICENSE file from the
+When publishing a package inside a [workspace](workspace.md), the LICENSE file from the
 root of the workspace is packed with the package (unless the package has a license of its own).
 
 ## --tag &lt;tag>

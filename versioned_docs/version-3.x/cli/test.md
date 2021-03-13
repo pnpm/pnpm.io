@@ -8,7 +8,7 @@ Aliases: `run test`, `t`, `tst`
 
 Runs a package's `"test"` script, if one was provided.
 This is just a shortcut to `pnpm run test`, so for more details you
-may read about [pnpm run](run).
+may read about [pnpm run](run.md).
 
 ## Synopsis
 

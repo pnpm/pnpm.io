@@ -4,7 +4,7 @@ title: pnpm store
 original_id: pnpm-store
 ---
 
-Commands related to the [pnpm package store](about-the-package-store).
+Commands related to the [pnpm package store](about-the-package-store.md).
 
 ## pnpm store status
 
@@ -66,4 +66,4 @@ Pruning the store is not harmful, but might slow down future installations.
 
 Please read [the FAQ](faq.md#what-does-pnpm-store-prune-do-is-it-harmful) for more information on unreferenced packages and `pnpm store prune` best practices.
 
-> This command is prohibited when a [store server](pnpm-server) is running.
+> This command is prohibited when a [store server](pnpm-server.md) is running.

@@ -8,8 +8,8 @@ pnpm has built-in support for monorepos (a.k.a. multi-package repositories,
 multi-project repositories or monolithic repositories). You can create a
 workspace to unite multiple projects inside a single repository.
 
-A workspace must have a [pnpm-workspace.yaml](pnpm-workspace_yaml) file in
-its root. A workspace also may have a [.npmrc](npmrc) in its root.
+A workspace must have a [pnpm-workspace.yaml](pnpm-workspace_yaml.md) file in
+its root. A workspace also may have a [.npmrc](npmrc.md) in its root.
 
 ## Workspace ranges (workspace:)
 

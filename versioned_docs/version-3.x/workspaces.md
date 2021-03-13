@@ -4,8 +4,8 @@ title: Workspaces
 original_id: workspaces
 ---
 
-pnpm supports concurrent actions in multi-package repositories (workspaces). A workspace must have a [pnpm-workspace.yaml](pnpm-workspace_yaml) file in
-its root. A workspace also may have a [.npmrc](npmrc) in its root.
+pnpm supports concurrent actions in multi-package repositories (workspaces). A workspace must have a [pnpm-workspace.yaml](pnpm-workspace_yaml.md) file in
+its root. A workspace also may have a [.npmrc](npmrc.md) in its root.
 
 ## Workspace ranges (workspace:)
 

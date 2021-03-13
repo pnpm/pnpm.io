@@ -32,7 +32,7 @@ Create a `.npmrc` file in the root of your multi-package repository with the fol
 link-workspace-packages = true
 ```
 
-Create a [pnpm-workspace.yaml](workspace) file with the following content:
+Create a [pnpm-workspace.yaml](workspace.md) file with the following content:
 
 ```yaml
 packages:

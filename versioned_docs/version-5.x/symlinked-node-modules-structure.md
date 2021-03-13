@@ -7,7 +7,7 @@ title: Symlinked `node_modules` structure
 
 This article only describes how pnpm's `node_modules` are structured when
 there are no packages with peer dependencies. For the more complex scenario of
-dependencies with peers, see [how peers are resolved](how-peers-are-resolved).
+dependencies with peers, see [how peers are resolved](how-peers-are-resolved.md).
 
 :::
 

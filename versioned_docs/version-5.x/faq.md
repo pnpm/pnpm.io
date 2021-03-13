@@ -74,7 +74,7 @@ pnpm functions differently in the 2 cases below:
 
 ### Store path is specified
 
-If the store path is specified via [the store config](configuring), then copying
+If the store path is specified via [the store config](configuring.md), then copying
 occurs between the store and any projects that are on a different disk.
 
 If you run `pnpm install` on disk `A`, then the pnpm store must be on disk `A`.
@@ -151,7 +151,7 @@ automatically added to your project's `package.json`.
 
 ### Solution 2
 
-One of the solutions is to use [hooks](pnpmfile#hooks) for adding the missing
+One of the solutions is to use [hooks](pnpmfile.md#hooks) for adding the missing
 dependencies to the package's `package.json`.
 
 An example was [Webpack Dashboard] which wasn't working with `pnpm`. It has
