@@ -27,7 +27,7 @@ Be advised that it is encouraged instead to use [npmrc] for this setting, to
 enforce the same behaviour in all environments. This option exists solely so you
 may override that if necessary.
 
-[npmrc]: ../workspaces#link-workspace-packages
+[npmrc]: ../workspaces.md#link-workspace-packages
 
 ### --workspace-concurrency
 
@@ -108,4 +108,4 @@ pnpm -r exec -- pnpm view $PNPM_PACKAGE_NAME
 
 ### --filter &lt;package_selector\>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

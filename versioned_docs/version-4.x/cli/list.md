@@ -67,4 +67,4 @@ Don't display packages from `optionalDependencies`.
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

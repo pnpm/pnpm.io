@@ -18,7 +18,7 @@ Aliases: rm, r, uninstall, un
 
 ### --recursive, -r
 
-When used inside a [workspace](../workspaces), removes a dependency (or dependencies)
+When used inside a [workspace](../workspaces.md), removes a dependency (or dependencies)
 from every workspace package.
 
 When used not inside a workspace, removes a dependency (or dependencies)
@@ -26,7 +26,7 @@ from every package found in subdirectories.
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)
 
 ### --global
 

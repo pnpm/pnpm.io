@@ -3,7 +3,7 @@ id: store
 title: pnpm store
 ---
 
-Managing the [package store](../about-package-store).
+Managing the [package store](../about-package-store.md).
 
 ## Commands
 

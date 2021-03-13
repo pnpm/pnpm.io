@@ -21,7 +21,7 @@ every workspace package when executed inside a workspace.
 
 ### --filter &lt;package_selector\>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)
 
 ### --global
 

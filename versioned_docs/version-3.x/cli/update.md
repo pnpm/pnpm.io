@@ -39,7 +39,7 @@ Ignores the version range specified in `package.json`. Instead, the version spec
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)
 
 ### --global
 

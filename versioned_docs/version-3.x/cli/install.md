@@ -47,7 +47,7 @@ To force full offline mode, use `--offline`.
 
 Do not execute any scripts defined in the project `package.json` and its dependencies.
 
-> Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
+> Note: this flag does not prevent the execution of [pnpmfile.js](../pnpmfile.md)
 
 ### --production[=true|false]
 
@@ -103,4 +103,4 @@ To stop the store server, run `pnpm server stop`
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

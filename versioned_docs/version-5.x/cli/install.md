@@ -56,7 +56,7 @@ dependencies.
 
 :::note
 
-This flag does not prevent the execution of [pnpmfile.js](../pnpmfile)
+This flag does not prevent the execution of [pnpmfile.js](../pnpmfile.md)
 
 :::
 
@@ -132,4 +132,4 @@ Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

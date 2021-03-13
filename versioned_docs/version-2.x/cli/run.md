@@ -114,4 +114,4 @@ package directory. This allows output from different packages to be interleaved.
 
 ### --filter &lt;package_selector\>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

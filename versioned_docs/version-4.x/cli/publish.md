@@ -10,10 +10,10 @@ Publishes a package to the registry.
 pnpm [-r] publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
 ```
 
-When publishing a package inside a [workspace](../workspaces), the LICENSE file from the
+When publishing a package inside a [workspace](../workspaces.md), the LICENSE file from the
 root of the workspace is packed with the package (unless the package has a license of its own).
 
-You may override some fields before publish, using the [publishConfig](../package_json#publishconfig)
+You may override some fields before publish, using the [publishConfig](../package_json.md#publishconfig)
 field in `package.json`.
 
 When running this command recursively (`pnpm -r publish`), pnpm will publish all
@@ -42,4 +42,4 @@ Tells the registry whether the published package should be public or restricted.
 
 Added in: 4.6.0
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

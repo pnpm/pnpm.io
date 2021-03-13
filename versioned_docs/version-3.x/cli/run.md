@@ -34,4 +34,4 @@ If none of the packages have the command, the command fails.
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

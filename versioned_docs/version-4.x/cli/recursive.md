@@ -16,7 +16,7 @@ original_id: recursive
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)
 
 ### workspace-concurrency
 

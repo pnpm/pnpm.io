@@ -79,4 +79,4 @@ Show outdated dependencies and select which ones to update.
 
 ### --filter &lt;package_selector\>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

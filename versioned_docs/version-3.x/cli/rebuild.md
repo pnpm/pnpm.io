@@ -23,4 +23,4 @@ This command runs the **pnpm build** command in every package of the multi-packa
 
 ### --filter &lt;package_selector>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)

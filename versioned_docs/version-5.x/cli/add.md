@@ -40,8 +40,8 @@ will be installed from the configured sources, depending on whether or not
 [`workspace: range protocol`].
 
 [workspace]: ../workspaces.md
-[`link-workspace-packages`]: ../workspaces#link-workspace-packages
-[`workspace: range protocol`]: ../workspaces#workspace-ranges-workspace
+[`link-workspace-packages`]: ../workspaces.md#link-workspace-packages
+[`workspace: range protocol`]: ../workspaces.md#workspace-ranges-workspace
 
 ### Install from local file system
 
@@ -134,4 +134,4 @@ Only adds the new dependency if it is found in the workspace.
 
 ### --filter &lt;package_selector\>
 
-[Read more about filtering.](../filtering)
+[Read more about filtering.](../filtering.md)
