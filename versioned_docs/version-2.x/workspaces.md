@@ -10,8 +10,8 @@ workspace to unite multiple projects inside a single repository.
 A workspace must have a [`pnpm-workspace.yaml`] file in its
 root. A workspace also may have an [`.npmrc`] in its root.
 
-[`pnpm-workspace.yaml`]: pnpm-workspace_yaml
-[`.npmrc`]: npmrc
+[`pnpm-workspace.yaml`]: pnpm-workspace_yaml.md
+[`.npmrc`]: npmrc.md
 
 ## Workspace protocol (workspace:)
 
@@ -115,7 +115,7 @@ For how to set up a repository using Rush, read [this page][rush-setup].
 For using Changesets with pnpm, read [this guide][changesets-guide].
 
 [rush-setup]: https://rushjs.io/pages/maintainer/setup_new_repo
-[changesets-guide]: using-changesets
+[changesets-guide]: using-changesets.md
 
 ## Options
 

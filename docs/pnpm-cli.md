@@ -38,6 +38,6 @@ a list of handy npm equivalents to get you started:
 | `npm i <pkg>`   | [`pnpm add <pkg>`] |
 | `npm run <cmd>` | [`pnpm <cmd>`]     |
 
-[`pnpm install`]: cli/install
-[`pnpm add <pkg>`]: cli/add
-[`pnpm <cmd>`]: cli/exec 
+[`pnpm install`]: ./cli/install.md
+[`pnpm add <pkg>`]: ./cli/add.md
+[`pnpm <cmd>`]: ./cli/exec.md

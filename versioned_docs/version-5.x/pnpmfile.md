@@ -7,7 +7,7 @@ pnpm lets you hook directly into the installation process via special functions
 (hooks). Hooks can be declared in a file called `pnpmfile.js`.
 
 By default, `pnpmfile.js` should be located in the same directory as the
-lockfile. For instance, in a [workspace](workspaces) with a shared lockfile,
+lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
 `pnpmfile.js` should be in the root of the monorepo.
 
 ## Hooks
@@ -72,7 +72,7 @@ Removing the `scripts` field from a dependency's manifest via `readPackage` will
 not prevent pnpm from building the dependency. When building a dependency, pnpm
 reads the `package.json` of the package from the package's archive, which is not
 affected by the hook. In order to ignore a package's build, use the
-[pnpm.neverBuiltDependencies](package_json#pnpmneverbuiltdependencies) field.
+[pnpm.neverBuiltDependencies](package_json.md#pnpmneverbuiltdependencies) field.
 
 ### `hooks.afterAllResolved(lockfile, context): lockfile`
 

@@ -22,4 +22,4 @@ Once you first installed pnpm, you can upgrade it using pnpm:
 pnpm add -g pnpm
 ```
 
-> Do you wanna use pnpm on CI servers? See: [Continuous Integration](continuous-integration).
+> Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).

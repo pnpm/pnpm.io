@@ -3,7 +3,7 @@ id: store
 title: pnpm store
 ---
 
-Managing the [package store](../about-package-store.md).
+Managing the package store.
 
 ## Commands
 
@@ -21,7 +21,7 @@ Added in: v2.12.0
 Functionally equivalent to [`pnpm add`], except this adds new packages to the
 store directly without modifying any projects or files outside of the store.
 
-[`pnpm add`]: add
+[`pnpm add`]: ./add.md
 
 ### prune
 
@@ -38,4 +38,4 @@ practices.
 Please note that this is prohibited when a [store server] is running.
 
 [the FAQ]: faq.md#what-does-pnpm-store-prune-do-is-it-harmful
-[store server]: server
+[store server]: ./server.md

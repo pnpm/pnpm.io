@@ -21,4 +21,4 @@ packages:
 The root package is always included, even when custom location wildcards are
 used.
 
-[workspace]: workspaces
+[workspace]: workspaces.md

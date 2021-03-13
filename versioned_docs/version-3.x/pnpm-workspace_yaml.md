@@ -4,7 +4,7 @@ title: pnpm-workspace.yaml
 original_id: pnpm-workspace_yaml
 ---
 
-`pnpm-workspace.yaml` defines the root of the [workspace](workspaces) and it allows to
+`pnpm-workspace.yaml` defines the root of the [workspace](workspaces.md) and it allows to
 include/exclude directories from the workspace. By default, all packages
 of all subdirectories are included.
 

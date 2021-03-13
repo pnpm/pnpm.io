@@ -30,5 +30,5 @@ filter = @my-scope/*
 See the [`config` command] for more information.
 
 [npm's configuration]: https://docs.npmjs.com/misc/config
-[the FAQ]: faq#does-pnpm-work-across-multiple-hard-drives-or-filesystems
-[`config` command]: cli/config
+[the FAQ]: ./faq.md#does-pnpm-work-across-multiple-hard-drives-or-filesystems
+[`config` command]: ./cli/config.md

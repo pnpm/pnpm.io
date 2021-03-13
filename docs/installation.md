@@ -40,7 +40,7 @@ pnpm add -g pnpm
 
 :::tip
 
-Do you wanna use pnpm on CI servers? See: [Continuous Integration](continuous-integration).
+Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).
 
 :::
 

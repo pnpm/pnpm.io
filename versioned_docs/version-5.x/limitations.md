@@ -24,6 +24,6 @@ that uses pnpm.
 Got an idea for workarounds for these issues?
 [Share them.](https://github.com/pnpm/pnpm/issues/new)
 
-[pnpm import]: cli/import
+[pnpm import]: cli/import.md
 [#736]: https://github.com/pnpm/pnpm/issues/736
 [--preserve-symlinks]: https://nodejs.org/api/cli.html#cli_preserve_symlinks

@@ -8,7 +8,7 @@ pnpm allows to step directly into the installation process via special functions
 Hooks can be declared in a file called `pnpmfile.js`.
 
 By default, `pnpmfile.js` should be located in the same directory in which the lockfile is.
-So in a [workspace](workspaces) with a shared lockfile, the `pnpmfile.js` should be in the root
+So in a [workspace](workspaces.md) with a shared lockfile, the `pnpmfile.js` should be in the root
 of the monorepo.
 
 ## Hooks

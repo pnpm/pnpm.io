@@ -29,7 +29,7 @@ Unless the user has set the `engine-strict` config flag (see [.npmrc]), this
 field is advisory only and will only produce warnings when your package is
 installed as a dependency.
 
-[.npmrc]: https://pnpm.js.org/en/npmrc#engine-strict
+[.npmrc]: ./npmrc.md#engine-strict
 
 ### peerDependenciesMeta
 

@@ -3,7 +3,7 @@ id: unlink
 title: pnpm unlink
 ---
 
-Unlinks a system-wide package (inverse of [`pnpm link`](link)).
+Unlinks a system-wide package (inverse of [`pnpm link`](./link.md)).
 
 If called without arguments, all linked dependencies will be unlinked.
 
