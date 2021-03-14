@@ -10,4 +10,4 @@ Here are the benchmarks on a React app:
 
 ![](https://raw.githubusercontent.com/pnpm/benchmarks-of-javascript-package-managers/main/results/imgs/alotta-files.svg)
 
-[this]: https://github.com/pnpm/benchmarks-of-javascript-package-managers
+[this]: https://pnpm.js.org/r/benchmarks
