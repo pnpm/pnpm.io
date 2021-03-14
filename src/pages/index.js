@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Fast',
+    title: <Translate>Fast</Translate>,
     imageUrl: 'img/features/fast.svg',
     description: (
       <Translate>
@@ -18,7 +18,7 @@ const features = [
     ),
   },
   {
-    title: 'Efficient',
+    title: <Translate>Efficient</Translate>,
     imageUrl: 'img/features/efficient.svg',
     description: (
       <Translate>
@@ -27,7 +27,7 @@ const features = [
     ),
   },
   {
-    title: 'Supports monorepos',
+    title: <Translate>Supports monorepos</Translate>,
     imageUrl: 'img/features/monorepo.svg',
     description: (
       <Translate>
@@ -36,7 +36,7 @@ const features = [
     ),
   },
   {
-    title: 'Strict',
+    title: <Translate>Strict</Translate>,
     imageUrl: 'img/features/strict.svg',
     description: (
       <Translate>
