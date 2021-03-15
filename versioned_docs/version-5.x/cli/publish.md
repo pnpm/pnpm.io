@@ -42,12 +42,6 @@ pnpm add foo@next
 
 Tells the registry whether the published package should be public or restricted.
 
-### --force
-
-Added in: v5.18.0
-
-`pnpm publish -r --force` will try to publish packages even if their current version is already in the registry.
-
 ### git-checks
 
 Added in: v4.11.0
@@ -73,7 +67,7 @@ changes.
 Added in: v5.18.0
 
 Try to publish packages even if their current version is already found in the
-registry or any other checks fail.
+registry.
 
 ### --filter &lt;package_selector\>
 
