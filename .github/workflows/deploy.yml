@@ -21,6 +21,8 @@ jobs:
         version: 6.0.0-alpha.3
     - name: Installl dependencies
       run: pnpm install
+    - name: Update pnpm bundle
+      run: curl -L --fail https://unpkg.com/pnpm@latest-5/dist/pnpm.js > static/pnpm.js
     - name: Update translations
       env:
         CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
