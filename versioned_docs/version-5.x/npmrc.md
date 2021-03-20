@@ -365,6 +365,15 @@ A proxy to use for outgoing http requests. If the HTTP_PROXY or http_proxy
 environment variables are set, proxy settings will be honored by the underlying
 request library.
 
+### noproxy
+
+Added in: v5.18.8
+
+* Default: **null**
+* Type: **String**
+
+A comma-separated string of domain extensions that a proxy should not be used for.
+
 ### strict-ssl
 
 * Default: **true**
