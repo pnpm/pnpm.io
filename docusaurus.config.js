@@ -208,17 +208,12 @@ module.exports={
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: ['en', 'zh', 'ru'],
+    locales: ['en', 'zh', 'es', 'ru'],
     localeConfigs: {
-      en: {
-        label: 'English',
-      },
-      zh: {
-        label: '中文',
-      },
-      ru: {
-        label: 'Русский',
-      },
+      en: { label: 'English' },
+      es: { label: 'Español' },
+      ru: { label: 'Русский' },
+      zh: { label: '中文' },
     },
   },
 }
