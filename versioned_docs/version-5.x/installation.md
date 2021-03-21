@@ -14,7 +14,7 @@ npm install -g pnpm
 ## Using a standalone script
 
 ```sh
-curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm
+curl -f https://pnpm.js.org/pnpm.js | node - add --global pnpm
 ```
 
 On Windows (PowerShell):
