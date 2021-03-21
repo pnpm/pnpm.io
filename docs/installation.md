@@ -3,14 +3,6 @@ id: installation
 title: Installation
 ---
 
-## Using npm
-
-This is by far the fastest and easiest solution.
-
-```sh
-npm install -g pnpm
-```
-
 ## Using a standalone script
 
 ```sh
@@ -21,6 +13,12 @@ On Windows (PowerShell):
 
 ```powershell
 (Invoke-WebRequest 'https://pnpm.js.org/pnpm.js' -UseBasicParsing).Content | node - add --global pnpm
+```
+
+## Using npm
+
+```sh
+npm install -g pnpm
 ```
 
 ## Via npx resolution
