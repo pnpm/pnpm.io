@@ -1,6 +1,8 @@
 name: Benchmark runner
 
-on: push
+on:
+  schedule:
+    - cron: '30 2 * * *'
 
 jobs:
   build:
@@ -16,9 +18,9 @@ jobs:
       - run: sudo npm install -g pnpm
       - run: pnpm install
       - run: pnpm run benchmark
-      # - name: Commit & Push changes
-      #   uses: actions-js/push@master
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     message: "chore: update benchmarks"
-      #     branch: main
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: "chore: update benchmarks"
+          branch: main
