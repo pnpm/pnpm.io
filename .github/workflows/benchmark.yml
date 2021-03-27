@@ -1,0 +1,26 @@
+name: Benchmark runner
+
+on:
+  schedule:
+    - cron: '30 2 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: sudo npm install -g pnpm
+      - run: pnpm --dir=benchmarks install
+      - run: pnpm --dir=benchmarks run benchmark
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: "chore: update benchmarks"
+          branch: main
