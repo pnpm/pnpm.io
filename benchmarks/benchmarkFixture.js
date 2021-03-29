@@ -134,6 +134,13 @@ module.exports = async function benchmark (pm, fixture, opts) {
 
   // update all dependency versions to '*' and install again
   const originalPackageJson = await updateDependenciesInPackageJson(cwd)
+  if (pm.name === 'pnpm') {
+    // This is needed to fix pnpm execution on CI
+    pm = {
+      ...pm,
+      args: [...pm.args, '--no-frozen-lockfile'],
+    }
+  }
   const updatedDependencies = measureInstall(pm, cwd)
 
   // revert `package.json` back to its original state, just in case
