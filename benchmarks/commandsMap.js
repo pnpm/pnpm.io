@@ -7,6 +7,8 @@ module.exports = {
     name: 'npm',
     args: [
       'install',
+      '--no-fund',
+      '--no-audit',
       '--ignore-scripts',
       '--cache',
       'cache',
