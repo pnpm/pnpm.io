@@ -1,4 +1,5 @@
 'use strict'
+const path = require('path')
 
 const getHighestNumber = (array) => {
   // flatten array of arrays of numbers into an array of numbers
@@ -93,7 +94,7 @@ module.exports = (resultArrays, pms, tests) => {
     svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${pm.legend}</text>` + '\n'
 
     // add version under name
-    const pmVersion = require(`${pm.name}/package.json`).version
+    const pmVersion = require(path.join(__dirname, 'managers/node_modules', pm.name, 'package.json')).version
     const text = `v${pmVersion}`
     textY += 4
     svgStr += `  <text x="${x}" y="${textY}" class="font s3" text-anchor="${anchor}">${text}</text>` + '\n'

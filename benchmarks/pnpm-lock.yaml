@@ -7,15 +7,12 @@ specifiers:
   get-folder-size: ^1.0.0
   load-yaml-file: ^0.1.0
   mkdirp: ^0.5.1
-  npm: ^7.7.5
   path-key: ^2.0.1
-  pnpm: ^5.16.0
   pretty-bytes: ^4.0.2
   pretty-ms: ^2.1.0
   rimraf: ^2.5.4
   thenify: ^3.2.1
   write-yaml-file: ^1.0.0
-  yarn: ^1.22.10
 
 dependencies:
   common-tags: 1.8.0
@@ -24,15 +21,12 @@ dependencies:
   get-folder-size: 1.0.1
   load-yaml-file: 0.1.1
   mkdirp: 0.5.5
-  npm: 7.7.5
   path-key: 2.0.1
-  pnpm: 5.18.8
   pretty-bytes: 4.0.2
   pretty-ms: 2.1.0
   rimraf: 2.7.1
   thenify: 3.3.1
   write-yaml-file: 1.0.1
-  yarn: 1.22.10
 
 packages:
 
@@ -202,79 +196,6 @@ packages:
       minimist: 1.2.5
     dev: false
 
-  /npm/7.7.5:
-    resolution: {integrity: sha512-Og1lKsev2CLw8fYzGQ3190FEXzgIGys9Cpm+kgl3SEWx+EhQL4ecyOO1VHGPZo06fdVPp3/CtPjPHro1u2n2rQ==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dev: false
-    bundledDependencies:
-      - '@npmcli/arborist'
-      - '@npmcli/ci-detect'
-      - '@npmcli/config'
-      - '@npmcli/run-script'
-      - abbrev
-      - ansicolors
-      - ansistyles
-      - archy
-      - byte-size
-      - cacache
-      - chalk
-      - chownr
-      - cli-columns
-      - cli-table3
-      - columnify
-      - glob
-      - graceful-fs
-      - hosted-git-info
-      - ini
-      - init-package-json
-      - is-cidr
-      - json-parse-even-better-errors
-      - leven
-      - libnpmaccess
-      - libnpmdiff
-      - libnpmfund
-      - libnpmhook
-      - libnpmorg
-      - libnpmpack
-      - libnpmpublish
-      - libnpmsearch
-      - libnpmteam
-      - libnpmversion
-      - make-fetch-happen
-      - minipass
-      - minipass-pipeline
-      - mkdirp
-      - mkdirp-infer-owner
-      - ms
-      - node-gyp
-      - nopt
-      - npm-audit-report
-      - npm-package-arg
-      - npm-pick-manifest
-      - npm-profile
-      - npm-registry-fetch
-      - npm-user-validate
-      - npmlog
-      - opener
-      - pacote
-      - parse-conflict-json
-      - qrcode-terminal
-      - read
-      - read-package-json
-      - read-package-json-fast
-      - readdir-scoped-modules
-      - rimraf
-      - semver
-      - ssri
-      - tar
-      - text-table
-      - tiny-relative-date
-      - treeverse
-      - validate-npm-package-name
-      - which
-      - write-file-atomic
-
   /once/1.4.0:
     resolution: {integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E=}
     dependencies:
@@ -309,12 +230,6 @@ packages:
   /plur/1.0.0:
     resolution: {integrity: sha1-24XGgU9eXlo7Se/CjWBP7GKXUVY=}
     engines: {node: '>=0.10.0'}
-    dev: false
-
-  /pnpm/5.18.8:
-    resolution: {integrity: sha512-MO0XZoJfZFn6KjhcDpS03P9MeKx3xzgoXJcIcTjJ29/pKeS1O5x/SeLjzsCsAbkPLrv6JdY5uotIz7LRKEe88w==}
-    engines: {node: '>=10.16'}
-    hasBin: true
     dev: false
 
   /pretty-bytes/4.0.2:
@@ -405,11 +320,4 @@ packages:
 
   /yallist/2.1.2:
     resolution: {integrity: sha1-HBH5IY8HYImkfdUS+TxmmaaoHVI=}
-    dev: false
-
-  /yarn/1.22.10:
-    resolution: {integrity: sha512-IanQGI9RRPAN87VGTF7zs2uxkSyQSrSPsju0COgbsKQOOXr5LtcVPeyXWgwVa0ywG3d8dg6kSYKGBuYK021qeA==}
-    engines: {node: '>=4.0.0'}
-    hasBin: true
-    requiresBuild: true
     dev: false

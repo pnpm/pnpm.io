@@ -25,7 +25,7 @@ function createEnv () {
   const pathEnv = pathKey()
   const env = Object.create(process.env)
   env[pathEnv] = [
-    path.join(__dirname, 'node_modules', '.bin'),
+    path.join(__dirname, 'managers/node_modules/.bin'),
     path.dirname(process.execPath),
     process.env[pathEnv]
   ].join(path.delimiter)

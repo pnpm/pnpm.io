@@ -1,5 +1,6 @@
 'use strict'
 const { promisify } = require('util')
+const fs = require('fs')
 const writeFile = promisify(require('fs').writeFile)
 const { join } = require('path')
 const mkdirp = require('mkdirp')
@@ -8,6 +9,7 @@ const prettyMs = require('pretty-ms')
 const cmdsMap = require('./commandsMap')
 const benchmark = require('./recordBenchmark')
 const generateSvg = require('./generateSvg')
+const spawn = require("cross-spawn")
 
 const LIMIT_RUNS = 3
 
@@ -102,6 +104,10 @@ run()
   .catch(err => console.error(err))
 
 async function run () {
+  const managersDir = join(__dirname, 'managers')
+  await fs.promises.mkdir(managersDir, { recursive: true })
+  spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
+  spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir })
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
   const sections = []
   const svgs = []

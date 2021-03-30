@@ -10,7 +10,7 @@ module.exports = async function (pm, fixture, opts) {
   opts = opts || {}
   const limitRuns = opts.limitRuns || Infinity
 
-  const pmVersion = require(`${pm.name}/package.json`).version
+  const pmVersion = require(path.join(__dirname, 'managers/node_modules', pm.name, 'package.json')).version
   const resultsFile = path.join(RESULTS, pm.scenario, pmVersion, `${fixture}.yaml`)
   const prevResults = await safeLoadYamlFile(resultsFile) || []
 
