@@ -20,7 +20,7 @@ The app's `package.json` [here](./fixtures/alotta-files/package.json)
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
-| install |       |          |             | 54.3s | 15.5s | 39.1s | 29.1s |
+| install |       |          |             | 49.6s | 15.5s | 39.1s | 29.1s |
 | install | ✔     | ✔        | ✔           | 1.9s | 1.4s | 707ms | n/a |
 | install | ✔     | ✔        |             | 11.4s | 4.6s | 11s | 1.8s |
 | install | ✔     |          |             | 27.4s | 7.3s | 26.5s | 17.2s |
