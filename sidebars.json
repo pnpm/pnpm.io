@@ -24,6 +24,7 @@
           "cli/import",
           "cli/rebuild",
           "cli/prune",
+          "cli/fetch",
           "cli/install-test"
         ]
       },
@@ -79,7 +80,8 @@
       "benchmark",
       "limitations",
       "symlinked-node-modules-structure",
-      "how-peers-are-resolved"
+      "how-peers-are-resolved",
+      "boost-docker-build-with-pnpm-fetch"
     ]
   }
 }
