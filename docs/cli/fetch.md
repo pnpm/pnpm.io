@@ -5,7 +5,11 @@ title: pnpm fetch
 
 Fetch packages from a lockfile into virtual store, package manifest is ignored.
 
-WARNING! This is an experimental command. Breaking changes may be introduced in non-major versions of the CLI.
+:::warning
+
+This is an experimental command. Breaking changes may be introduced in non-major versions of the CLI.
+
+:::
 
 ## Options
 
@@ -16,7 +20,6 @@ Only development packages will be fetched
 ### --prod
 
 Development packages will not be fetched
-
 
 
 

@@ -9,7 +9,7 @@ You may have read the [official guide] to writing a Dockerfile for a Node.js
 app, if you didn't read it yet, you may want to read it first.
 
 From that guide, we learn to write an optimized Dockerfile for projects using
-pnpm, which shall looks like
+pnpm, which shall look like
 
 ```Dockerfile
 FROM node:14
@@ -19,7 +19,7 @@ RUN curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml pnpmfile.js ./
 
-RUN pnpm install --frozon-lockfile --prod
+RUN pnpm install --frozen-lockfile --prod
 
 # Bundle app source
 COPY . .
@@ -28,8 +28,8 @@ EXPOSE 8080
 CMD [ "node", "server.js" ]
 ```
 
-As long as there is no chang to `.npmrc`, `package.json`, `pnpm-lock.yaml`,
-`pnpmfile.js`, docker build cache is still valid up to the layer of
+As long as there is no change to `.npmrc`, `package.json`, `pnpm-lock.yaml`,
+`.pnpmfile.cjs`, docker build cache is still valid up to the layer of
 `RUN pnpm install --frozen-lockfile --prod`, which cost most of the time
 when building a docker image.
 
@@ -44,18 +44,18 @@ look like
 ```Dockerfile
 FROM node:14
 
-RUN curl -L https://unpkg.com/@pnpm/self-installer | node
+RUN curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
 
 # Files required by pnpm install
-COPY .npmrc package.json pnpm-lock.yaml pnpmfile.js ./
+COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
 
 # for each sub-package, we have to add one extra step to copy its manifest
-# to right place, as docker have no way to filter out only package.json with
+# to the right place, as docker have no way to filter out only package.json with
 # single instruction
 COPY packages/foo/backage.json packages/foo/
 COPY packages/bar/backage.json packages/bar/
 
-RUN pnpm install --frozon-lockfile --prod
+RUN pnpm install --frozen-lockfile --prod
 
 # Bundle app source
 COPY . .
@@ -73,7 +73,7 @@ to fetch package to virtual store with information only from a lockfile.
 ```Dockerfile
 FROM node:14
 
-RUN curl -L https://unpkg.com/@pnpm/self-installer | node
+RUN curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
 
 # pnpm fetch does require only lockfile
 COPY pnpm-lock.yaml ./
@@ -82,7 +82,7 @@ RUN pnpm fetch --prod
 
 
 ADD . ./
-RUN pnpm recursive install --offline --prod
+RUN pnpm install -r --offline --prod
 
 # Bundle app source
 COPY . .
@@ -96,7 +96,7 @@ pnpm not to communicate with package registry as all needed packages shall be
 already presented in the virtual store.
 
 As long as the lockfile is not changed, the build cache is valid up to the
-layer `RUN pnpm recursive install --offline --prod`, which will save you much
+layer `RUN pnpm install -r --offline --prod`, which will save you much
 time.
 
 
