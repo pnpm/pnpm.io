@@ -91,7 +91,7 @@ EXPOSE 8080
 CMD [ "node", "server.js" ]
 ```
 
-It works for both simple project and monospace project, `--offline` enforces
+It works for both simple project and monorepo project, `--offline` enforces
 pnpm not to communicate with package registry as all needed packages shall be
 already presented in the virtual store.
 
