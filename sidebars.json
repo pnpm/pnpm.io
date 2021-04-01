@@ -80,8 +80,7 @@
       "benchmark",
       "limitations",
       "symlinked-node-modules-structure",
-      "how-peers-are-resolved",
-      "boost-docker-build-with-pnpm-fetch"
+      "how-peers-are-resolved"
     ]
   }
 }
