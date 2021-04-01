@@ -14,7 +14,7 @@ pnpm, which shall looks like
 ```Dockerfile
 FROM node:14
 
-RUN curl -L https://unpkg.com/@pnpm/self-installer | node
+RUN curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
 
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml pnpmfile.js ./
