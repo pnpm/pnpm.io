@@ -164,7 +164,7 @@ module.exports={
             },
             {
               label: 'Project Chat',
-              href: 'https://pnpm.js.org/r/chat/',
+              href: 'https://r.pnpm.io/chat',
             },
             {
               label: 'Twitter',
