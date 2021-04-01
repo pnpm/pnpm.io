@@ -4,6 +4,8 @@ title: pnpm fetch
 ---
 
 Fetch packages from a lockfile into virtual store, package manifest is ignored.
+Useful for building a docker image, see
+[the correspinding guide](../boost-docker-build-with-pnpm-fetch).
 
 :::warning
 
