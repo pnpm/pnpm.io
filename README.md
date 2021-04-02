@@ -1,4 +1,4 @@
-# pnpm.js.org
+# pnpm.io
 
 ## Testing locally
 

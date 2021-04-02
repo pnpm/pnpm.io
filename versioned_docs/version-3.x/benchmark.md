@@ -4,7 +4,7 @@ title: Benchmark
 original_id: benchmark
 ---
 
-pnpm is faster than npm and Yarn. See [this](https://pnpm.js.org/r/benchmarks)
+pnpm is faster than npm and Yarn. See [this](https://r.pnpm.io/benchmarks)
 benchmark which compares the three package managers on different types of applications.
 
 Here are the benchmarks on a React app:
