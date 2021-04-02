@@ -20,14 +20,14 @@ The app's `package.json` [here](./fixtures/alotta-files/package.json)
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
-| install |       |          |             | 49.6s | 15.5s | 39.1s | 29.1s |
-| install | ✔     | ✔        | ✔           | 1.9s | 1.4s | 707ms | n/a |
-| install | ✔     | ✔        |             | 11.4s | 4.6s | 11s | 1.8s |
-| install | ✔     |          |             | 27.4s | 7.3s | 26.5s | 17.2s |
-| install |       | ✔        |             | 29.5s | 12.8s | 23.3s | 14.2s |
-| install | ✔     |          | ✔           | 2.5s | 1.8s | 22.1s | n/a |
-| install |       | ✔        | ✔           | 1.8s | 1.4s | 713ms | n/a |
-| install |       |          | ✔           | 2.5s | 5.9s | 41.1s | n/a |
-| update  | n/a   | n/a      | n/a         | 1.7s | 11.5s | 35.4s | 28.3s |
+| install |       |          |             | 53.7s | 15.5s | 39.1s | 29.1s |
+| install | ✔     | ✔        | ✔           | 2.3s | 1.4s | 707ms | n/a |
+| install | ✔     | ✔        |             | 14.1s | 4.6s | 11s | 1.8s |
+| install | ✔     |          |             | 31.9s | 7.3s | 26.5s | 17.2s |
+| install |       | ✔        |             | 34.5s | 12.8s | 23.3s | 14.2s |
+| install | ✔     |          | ✔           | 3.1s | 1.8s | 22.1s | n/a |
+| install |       | ✔        | ✔           | 2.2s | 1.4s | 713ms | n/a |
+| install |       |          | ✔           | 3.2s | 5.9s | 41.1s | n/a |
+| update  | n/a   | n/a      | n/a         | 2.2s | 11.5s | 35.4s | 28.3s |
 
 ![Graph of the alotta-files results](./results/imgs/alotta-files.svg)
