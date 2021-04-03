@@ -30,8 +30,6 @@ not added as dependencies to the project.
 
 pnpm uses symlinks to add only the direct dependencies of the project into the root of the modules directory.
 If you'd like more details about the unique `node_modules` structure that pnpm
-creates and why it works fine with the Node.js ecosystem, read this small
-article, and our corresponding documentation about the content-addressable
-store:
+creates and why it works fine with the Node.js ecosystem, read:
 - [Flat node_modules is not the only way](/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
 - [Symlinked node_modules structure](symlinked-node-modules-structure.md)
