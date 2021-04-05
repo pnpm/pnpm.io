@@ -138,17 +138,17 @@ async function run () {
       | install |       |          | ✔           | ${prettyMs(npmRes.withWarmModules)} | ${prettyMs(pnpmRes.withWarmModules)} | ${prettyMs(yarnRes.withWarmModules)} | n/a |
       | update  | n/a   | n/a      | n/a         | ${prettyMs(npmRes.updatedDependencies)} | ${prettyMs(pnpmRes.updatedDependencies)} | ${prettyMs(yarnRes.updatedDependencies)} | ${prettyMs(yarnPnPRes.updatedDependencies)} |
 
-      ![Graph of the ${fixture.name} results](./results/imgs/${fixture.name}.svg)
+      ![Graph of the ${fixture.name} results](../static/img/benchmarks/${fixture.name}.svg)
     `)
 
     svgs.push({
-      path: join(__dirname, 'results', 'imgs', `${fixture.name}.svg`),
+      path: join(__dirname, '../static/img/benchmarks', `${fixture.name}.svg`),
       file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions)
     })
   }
 
   // make sure folder exists
-  mkdirp.sync(join(__dirname, 'results', 'imgs'))
+  mkdirp.sync(join(__dirname, '../static/img/benchmarks'))
 
   const introduction = stripIndents`
   # Benchmarks of JavaScript Package Managers
