@@ -1,14 +1,14 @@
 ---
 id: pnpmfile
-title: pnpmfile.js
+title: .pnpmfile.cjs
 ---
 
 pnpm lets you hook directly into the installation process via special functions
-(hooks). Hooks can be declared in a file called `pnpmfile.js`.
+(hooks). Hooks can be declared in a file called `.pnpmfile.cjs`.
 
-By default, `pnpmfile.js` should be located in the same directory as the
+By default, `.pnpmfile.cjs` should be located in the same directory as the
 lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
-`pnpmfile.js` should be in the root of the monorepo.
+`.pnpmfile.cjs` should be in the root of the monorepo.
 
 ## Hooks
 
@@ -37,7 +37,7 @@ a debug log for the step.
 
 #### Usage
 
-Example `pnpmfile.js` (changes the dependencies of a dependency):
+Example `.pnpmfile.cjs` (changes the dependencies of a dependency):
 
 ```js
 function readPackage(pkg, context) {
@@ -89,7 +89,7 @@ a debug log for the step.
 
 #### Usage example
 
-```js title="pnpmfile.js"
+```js title=".pnpmfile.cjs"
 function afterAllResolved(lockfile, context) {
   // ...
   return lockfile
@@ -116,16 +116,16 @@ Added in: v1.25.0
 * Default: **false**
 * Type: **Boolean**
 
-`pnpmfile.js` will be ignored. Useful together with `--ignore-scripts` when you
+`.pnpmfile.cjs` will be ignored. Useful together with `--ignore-scripts` when you
 want to make sure that no script gets executed during install.
 
 ### pnpmfile
 
 Added in: v1.39.0
 
-* Default: **pnpmfile.js**
+* Default: **.pnpmfile.cjs**
 * Type: **path**
-* Example: **.pnpm/pnpmfile.js**
+* Example: **.pnpm/.pnpmfile.cjs**
 
 The location of the local pnpmfile.
 
@@ -135,7 +135,7 @@ Added in: v1.39.0
 
 * Default: **null**
 * Type: **path**
-* Example: **~/.pnpm/global_pnpmfile.js**
+* Example: **~/.pnpm/global_pnpmfile.cjs**
 
 The location of a global pnpmfile. A global pnpmfile is used by all projects
 during installation.

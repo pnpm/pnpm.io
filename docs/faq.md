@@ -169,7 +169,7 @@ was used by `webpack-dashboard`, but `babel-traverse` wasn't specified in
 `inspectpack`'s `package.json`. It still worked with `npm` and `yarn` because
 they create flat `node_modules`.
 
-The solution was to create a `pnpmfile.js` with the following contents:
+The solution was to create a `.pnpmfile.cjs` with the following contents:
 
 ```js
 module.exports = {
@@ -184,7 +184,7 @@ module.exports = {
 };
 ```
 
-After creating a `pnpmfile.js`, delete `pnpm-lock.yaml` only - there is no need
+After creating a `.pnpmfile.cjs`, delete `pnpm-lock.yaml` only - there is no need
 to delete `node_modules`, as pnpm hooks only effect module resolution. Then,
 rebuild the dependencies & it should be working.
 
