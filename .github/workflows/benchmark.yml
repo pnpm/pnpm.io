@@ -1,7 +1,6 @@
 name: Benchmark runner
 
 on:
-  push:
   schedule:
     - cron: '30 2 * * *'
   workflow_dispatch:
@@ -20,7 +19,6 @@ jobs:
       - run: sudo npm install -g pnpm
       - run: pnpm --dir=benchmarks install
       - run: pnpm --dir=benchmarks run benchmark
-      - run: ls -lsa static/benchmark 
       - name: Commit & Push changes
         uses: actions-js/push@master
         with:
