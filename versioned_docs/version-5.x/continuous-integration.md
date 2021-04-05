@@ -16,7 +16,7 @@ cache:
   directories:
     - "~/.pnpm-store"
 before_install:
-  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - curl -f https://get.pnpm.io/v5.js | node - add --global pnpm@5
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
@@ -42,7 +42,7 @@ blocks:
       jobs:
         - name: pnpm install
           commands:
-            - curl -L https://unpkg.com/@pnpm/self-installer | node
+            - curl -f https://get.pnpm.io/v5.js | node - add --global pnpm@5
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -59,7 +59,7 @@ to your `appveyor.yml`:
 ```yaml title="appveyor.yml"
 install:
   - ps: Install-Product node $env:nodejs_version
-  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - curl -f https://get.pnpm.io/v5.js | node - add --global pnpm@5
   - pnpm install
 ```
 
@@ -109,7 +109,7 @@ jobs:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
     - name: Install pnpm
-      run: npm i -g pnpm
+      run: curl -f https://get.pnpm.io/v5.js | node - add --global pnpm@5
     - name: pnpm Build
       run: pnpm install
 ```
