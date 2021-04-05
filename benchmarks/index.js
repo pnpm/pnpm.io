@@ -142,7 +142,7 @@ async function run () {
     `)
 
     svgs.push({
-      path: join(__dirname, 'results', 'imgs', `${fixture.name}.svg`),
+      path: join(__dirname, '../static/img/benchmarks', `${fixture.name}.svg`),
       file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions)
     })
   }
