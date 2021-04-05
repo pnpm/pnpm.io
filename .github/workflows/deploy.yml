@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - source
+      - test-action
 
 jobs:
   deploy:
@@ -16,8 +17,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '14'
-    - name: Install pnpm
-      run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@next
+    - uses: pnpm/action-setup@v1.2.1
+      with:
+        version: next
     - name: Install dependencies
       run: pnpm install
     - name: Update pnpm bundle
