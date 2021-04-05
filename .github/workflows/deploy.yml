@@ -20,8 +20,6 @@ jobs:
       run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@next
     - name: Install dependencies
       run: pnpm install
-    - name: Update pnpm bundle
-      run: curl -L --fail https://unpkg.com/pnpm@latest-5/dist/pnpm.js > static/pnpm.js
     - name: Update translations
       env:
         CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
