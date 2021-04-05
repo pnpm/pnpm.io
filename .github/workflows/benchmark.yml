@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: sudo npm install -g pnpm
+      - run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@next
       - run: pnpm --dir=benchmarks install
       - run: pnpm --dir=benchmarks run benchmark
       - name: Commit & Push changes

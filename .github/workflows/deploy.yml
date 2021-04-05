@@ -16,10 +16,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '14'
-    - uses: pnpm/action-setup@v1.2.1
-      with:
-        version: 6.0.0-alpha.3
-    - name: Installl dependencies
+    - name: Install pnpm
+      run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@next
+    - name: Install dependencies
       run: pnpm install
     - name: Update pnpm bundle
       run: curl -L --fail https://unpkg.com/pnpm@latest-5/dist/pnpm.js > static/pnpm.js

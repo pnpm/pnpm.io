@@ -16,5 +16,8 @@
         "rimraf": "^2.5.4",
         "thenify": "^3.2.1",
         "write-yaml-file": "^1.0.0"
+    },
+    "engines": {
+      "pnpm": "6"
     }
 }
