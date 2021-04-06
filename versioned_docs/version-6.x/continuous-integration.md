@@ -119,3 +119,26 @@ jobs:
 Using `actions/setup-node@v2` you need to install pnpm with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo npm install -g pnpm`. Alternatively, if you specify the Node.js version to use, pnpm may be installed with no priviledged user.
 
 :::
+
+## Gitlab CI
+
+On Gitlab, you can use pnpm for installing and caching your dependencies
+like so (belongs in `.gitlab-ci.yml`):
+
+```yaml title=".gitlab-ci.yml"
+stages:
+  - build
+
+build:
+  stage: build
+  image: node:14.16.0-buster
+  before_script:
+    - npm i -g pnpm
+    - pnpm config set store-dir .pnpm-store
+  script:
+    - pnpm install # install dependencies
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - .pnpm-store
+```
