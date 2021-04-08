@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-This benchmark compares the performance of [npm](https://github.com/npm/cli), [pnpm](https://github.com/pnpm/pnpm) and [Yarn](https://github.com/yarnpkg/yarn) (both regular and PnP variant).
+This benchmark compares the performance of npm, pnpm, and Yarn (both regular and PnP variant).
 
 Here's a quick explanation of how these tests could apply to the real world:
 
@@ -16,7 +16,7 @@ Here's a quick explanation of how these tests could apply to the real world:
 
 ## Lots of Files
 
-The app's `package.json` [here](./fixtures/alotta-files/package.json)
+The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main/benchmarks/fixtures/alotta-files/package.json)
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
@@ -30,4 +30,4 @@ The app's `package.json` [here](./fixtures/alotta-files/package.json)
 | install |       |          | ✔           | 3s | 5.7s | 41.1s | n/a |
 | update  | n/a   | n/a      | n/a         | 2s | 10.7s | 35.4s | 28.3s |
 
-![Graph of the alotta-files results](../static/img/benchmarks/alotta-files.svg)
+![Graph of the alotta-files results](../../static/img/benchmarks/alotta-files.svg)

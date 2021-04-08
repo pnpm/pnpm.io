@@ -32,7 +32,7 @@ const fixtures = [
   },*/
   {
     name: 'alotta-files',
-    mdDesc: '## Lots of Files\n\nThe app\'s `package.json` [here](./fixtures/alotta-files/package.json)'
+    mdDesc: '## Lots of Files\n\nThe app\'s `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main/benchmarks/fixtures/alotta-files/package.json)'
   }
 ]
 
@@ -138,7 +138,7 @@ async function run () {
       | install |       |          | ✔           | ${prettyMs(npmRes.withWarmModules)} | ${prettyMs(pnpmRes.withWarmModules)} | ${prettyMs(yarnRes.withWarmModules)} | n/a |
       | update  | n/a   | n/a      | n/a         | ${prettyMs(npmRes.updatedDependencies)} | ${prettyMs(pnpmRes.updatedDependencies)} | ${prettyMs(yarnRes.updatedDependencies)} | ${prettyMs(yarnPnPRes.updatedDependencies)} |
 
-      ![Graph of the ${fixture.name} results](../static/img/benchmarks/${fixture.name}.svg)
+      ![Graph of the ${fixture.name} results](../../static/img/benchmarks/${fixture.name}.svg)
     `)
 
     svgs.push({
@@ -153,7 +153,7 @@ async function run () {
   const introduction = stripIndents`
   # Benchmarks of JavaScript Package Managers
 
-  This benchmark compares the performance of [npm](https://github.com/npm/cli), [pnpm](https://github.com/pnpm/pnpm) and [Yarn](https://github.com/yarnpkg/yarn) (both regular and PnP variant).
+  This benchmark compares the performance of npm, pnpm, and Yarn (both regular and PnP variant).
   `
 
   const explanation = stripIndents`
@@ -173,7 +173,7 @@ async function run () {
   await Promise.all(
     [
       Promise.all(svgs.map((file) => writeFile(file.path, file.file, 'utf-8'))),
-      writeFile('README.md', stripIndents`
+      writeFile(path.join(__dirname, '../src/pages/benchmarks.md'), stripIndents`
         ${introduction}
 
         ${explanation}

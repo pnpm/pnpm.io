@@ -101,6 +101,11 @@ module.exports={
           "position": "left"
         },
         {
+          "to": "/benchmarks",
+          "label": "Benchmarks",
+          "position": "left"
+        },
+        {
           type: 'docsVersionDropdown',
           "position": "right",
         },
