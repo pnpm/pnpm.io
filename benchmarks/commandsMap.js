@@ -14,7 +14,6 @@ module.exports = {
       'cache',
       '--registry',
       'https://registry.npmjs.org/',
-      '--no-audit',
       '--legacy-peer-deps'
     ]
   },
