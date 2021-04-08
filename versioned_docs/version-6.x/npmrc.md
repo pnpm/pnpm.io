@@ -202,6 +202,17 @@ possible, fall back to copying
 * **copy** - copy packages from the store
 * **clone** - clone (AKA copy-on-write or reference link) packages from the store
 
+### modules-cache-max-age
+
+Added in: v6.0.0
+
+* Default: **10080** (7 days in minutes)
+* Type: **number**
+
+The time in minutes after which orphan packages from the modules directory should be removed.
+pnpm keeps a cache of packages in the modules directory. This boosts installation speed when
+switching branches or downgrading dependencies.
+
 ## Lockfile Settings
 
 ### lockfile
