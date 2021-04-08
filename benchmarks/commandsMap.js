@@ -13,7 +13,8 @@ module.exports = {
       '--cache',
       'cache',
       '--registry',
-      'https://registry.npmjs.org/'
+      'https://registry.npmjs.org/',
+      '--legacy-peer-deps'
     ]
   },
   pnpm: {
