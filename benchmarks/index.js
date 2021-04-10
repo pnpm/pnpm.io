@@ -10,6 +10,7 @@ const cmdsMap = require('./commandsMap')
 const benchmark = require('./recordBenchmark')
 const generateSvg = require('./generateSvg')
 const spawn = require("cross-spawn")
+const path = require('path')
 
 const LIMIT_RUNS = 3
 
