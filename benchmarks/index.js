@@ -1,17 +1,17 @@
 'use strict'
-const { promisify } = require('util')
-const fs = require('fs')
-const writeFile = promisify(require('fs').writeFile)
-const { join } = require('path')
-const mkdirp = require('mkdirp')
-const stripIndents = require('common-tags').stripIndents
-const prettyMs = require('pretty-ms')
-const cmdsMap = require('./commandsMap')
-const benchmark = require('./recordBenchmark')
-const generateSvg = require('./generateSvg')
-const spawn = require("cross-spawn")
-const path = require('path')
+import fs from 'fs'
+import mkdirp from 'mkdirp'
+import commonTags from 'common-tags'
+import prettyMs from 'pretty-ms'
+import cmdsMap from './commandsMap.js'
+import benchmark from './recordBenchmark.js'
+import generateSvg from './generateSvg.js'
+import spawn from "cross-spawn"
+import path from 'path'
+import { fileURLToPath } from 'url'
 
+const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
+const { stripIndents } = commonTags
 const LIMIT_RUNS = 3
 
 const fixtures = [
@@ -105,7 +105,7 @@ run()
   .catch(err => console.error(err))
 
 async function run () {
-  const managersDir = join(__dirname, 'managers')
+  const managersDir = path.join(DIRNAME, 'managers')
   await fs.promises.mkdir(managersDir, { recursive: true })
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
   spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@rc'], { cwd: managersDir, stdio: 'inherit' })
@@ -143,13 +143,13 @@ async function run () {
     `)
 
     svgs.push({
-      path: join(__dirname, '../static/img/benchmarks', `${fixture.name}.svg`),
+      path: path.join(DIRNAME, '../static/img/benchmarks', `${fixture.name}.svg`),
       file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions)
     })
   }
 
   // make sure folder exists
-  mkdirp.sync(join(__dirname, '../static/img/benchmarks'))
+  mkdirp.sync(path.join(DIRNAME, '../static/img/benchmarks'))
 
   const introduction = stripIndents`
   # Benchmarks of JavaScript Package Managers
@@ -173,8 +173,8 @@ async function run () {
 
   await Promise.all(
     [
-      Promise.all(svgs.map((file) => writeFile(file.path, file.file, 'utf-8'))),
-      writeFile(path.join(__dirname, '../src/pages/benchmarks.md'), stripIndents`
+      Promise.all(svgs.map((file) => fs.promises.writeFile(file.path, file.file, 'utf-8'))),
+      fs.promises.writeFile(path.join(DIRNAME, '../src/pages/benchmarks.md'), stripIndents`
         ${introduction}
 
         ${explanation}

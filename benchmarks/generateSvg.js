@@ -1,5 +1,4 @@
-'use strict'
-const path = require('path')
+import path from 'path'
 
 const getHighestNumber = (array) => {
   // flatten array of arrays of numbers into an array of numbers
@@ -12,7 +11,7 @@ const NPM_COLOR = '#cd3731'
 const YARN_COLOR = '#248ebd'
 const PNPM_COLOR = '#fbae00'
 
-module.exports = (resultArrays, pms, tests) => {
+export default (resultArrays, pms, tests) => {
   let svgStr = ''
   // colors taken from logos (where possible)
   const colors = [ NPM_COLOR, PNPM_COLOR, YARN_COLOR, YARN_COLOR ]

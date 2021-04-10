@@ -1,17 +1,19 @@
 'use strict'
-const path = require('path')
-const child = require('child_process')
-const pathKey = require('path-key')
-const thenify = require('thenify')
-const spawn = require("cross-spawn");
-const copy = thenify(require('fs-extra').copy)
-const readFile = thenify(require('fs').readFile)
-const writeFile = thenify(require('fs').writeFile)
-const getFolderSize = thenify(require('get-folder-size'))
-const rimraf = require('rimraf').sync
+import path from 'path'
+import pathKey from 'path-key'
+import spawn from "cross-spawn"
+import fsx from 'fs-extra'
+import { promises as fs } from 'fs'
+import getFolderSizeCB from 'get-folder-size'
+import rimraf from 'rimraf'
+import { promisify } from 'util'
+import { fileURLToPath } from 'url'
 
-const FIXTURES_DIR = path.join(__dirname, 'fixtures')
-const TMP = path.join(__dirname, '.tmp')
+const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
+const getFolderSize = promisify(getFolderSizeCB)
+
+const FIXTURES_DIR = path.join(DIRNAME, 'fixtures')
+const TMP = path.join(DIRNAME, '.tmp')
 
 const lockfileNameByPM = {
   npm: 'package-lock.json',
@@ -25,7 +27,7 @@ function createEnv () {
   const pathEnv = pathKey()
   const env = Object.create(process.env)
   env[pathEnv] = [
-    path.join(__dirname, 'managers/node_modules/.bin'),
+    path.join(DIRNAME, 'managers/node_modules/.bin'),
     path.dirname(process.execPath),
     process.env[pathEnv]
   ].join(path.delimiter)
@@ -34,7 +36,7 @@ function createEnv () {
 
 async function updateDependenciesInPackageJson (cwd) {
   const packageJsonPath = path.join(cwd, 'package.json')
-  const buf = await readFile(packageJsonPath)
+  const buf = await fs.readFile(packageJsonPath)
   const originalAsString = buf.toString()
   const parsed = JSON.parse(originalAsString)
 
@@ -48,15 +50,15 @@ async function updateDependenciesInPackageJson (cwd) {
   })
 
   const modifiedAsString = JSON.stringify(parsed)
-  await writeFile(packageJsonPath, modifiedAsString)
+  await fs.writeFile(packageJsonPath, modifiedAsString)
 
   // return the original file so that we can replace it when done
   return originalAsString
 }
 
-module.exports = async function benchmark (pm, fixture, opts) {
+export default async function benchmark (pm, fixture, opts) {
   const cwd = path.join(TMP, pm.scenario, fixture)
-  await copy(path.join(FIXTURES_DIR, fixture), cwd)
+  await fsx.copy(path.join(FIXTURES_DIR, fixture), cwd)
   const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
 
   console.log(`# first install`)
@@ -69,7 +71,7 @@ module.exports = async function benchmark (pm, fixture, opts) {
 
     repeatInstall = measureInstall(pm, cwd)
 
-    rimraf(modules)
+    rimraf.sync(modules)
   } else {
     repeatInstall = 0
   }
@@ -79,26 +81,26 @@ module.exports = async function benchmark (pm, fixture, opts) {
   const withWarmCacheAndLockfile = measureInstall(pm, cwd)
 
   if (modules) {
-    rimraf(modules)
+    rimraf.sync(modules)
   }
 
   const lockfileName = lockfileNameByPM[pm.name]
-  rimraf(path.join(cwd, lockfileName))
+  rimraf.sync(path.join(cwd, lockfileName))
 
   console.log('# with warm cache')
 
   const withWarmCache = measureInstall(pm, cwd)
 
   if (modules) {
-    rimraf(modules)
+    rimraf.sync(modules)
   }
-  rimraf(path.join(cwd, 'cache'))
+  rimraf.sync(path.join(cwd, 'cache'))
 
   console.log('# with lockfile')
 
   const withLockfile = measureInstall(pm, cwd)
 
-  rimraf(path.join(cwd, lockfileName))
+  rimraf.sync(path.join(cwd, lockfileName))
 
   let withWarmCacheAndModules
   let withWarmModulesAndLockfile
@@ -109,14 +111,14 @@ module.exports = async function benchmark (pm, fixture, opts) {
 
     withWarmCacheAndModules = measureInstall(pm, cwd)
 
-    rimraf(path.join(cwd, 'cache'))
+    rimraf.sync(path.join(cwd, 'cache'))
 
     console.log('# with warm modules and lockfile')
 
     withWarmModulesAndLockfile = measureInstall(pm, cwd)
 
-    rimraf(path.join(cwd, 'cache'))
-    rimraf(path.join(cwd, lockfileName))
+    rimraf.sync(path.join(cwd, 'cache'))
+    rimraf.sync(path.join(cwd, lockfileName))
 
     console.log('# with warm modules')
 
@@ -144,9 +146,9 @@ module.exports = async function benchmark (pm, fixture, opts) {
   const updatedDependencies = measureInstall(pm, cwd)
 
   // revert `package.json` back to its original state, just in case
-  await writeFile(path.join(cwd, 'package.json'), originalPackageJson)
+  await fs.writeFile(path.join(cwd, 'package.json'), originalPackageJson)
 
-  rimraf(cwd)
+  rimraf.sync(cwd)
   return {
     firstInstall,
     repeatInstall,

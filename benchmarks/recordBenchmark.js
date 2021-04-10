@@ -1,16 +1,19 @@
 'use strict'
-const benchmark = require('./benchmarkFixture')
-const path = require('path')
-const writeYamlFile = require('write-yaml-file')
-const loadYamlFile = require('load-yaml-file')
+import benchmark from './benchmarkFixture.js'
+import path from 'path'
+import writeYamlFile from 'write-yaml-file'
+import loadYamlFile from 'load-yaml-file'
+import { fileURLToPath } from 'url'
+import loadJsonFile from 'load-json-file'
 
-const RESULTS = path.join(__dirname, 'results')
+const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
+const RESULTS = path.join(DIRNAME, 'results')
 
-module.exports = async function (pm, fixture, opts) {
+export default async function (pm, fixture, opts) {
   opts = opts || {}
   const limitRuns = opts.limitRuns || Infinity
 
-  const pmVersion = require(path.join(__dirname, 'managers/node_modules', pm.name, 'package.json')).version
+  const { version: pmVersion } = await loadJsonFile(path.join(DIRNAME, 'managers/node_modules', pm.name, 'package.json'))
   const resultsFile = path.join(RESULTS, pm.scenario, pmVersion, `${fixture}.yaml`)
   const prevResults = await safeLoadYamlFile(resultsFile) || []
 
