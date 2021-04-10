@@ -9,7 +9,7 @@
     "rename-version": "docusaurus-rename-version",
     "crowdin-upload": "pnpm write-translations && crowdin upload sources --auto-update",
     "crowdin-download": "crowdin download",
-    "crowdin:sync": "pnpm crowdin-upload && pnpm crowdin-download",
+    "crowdin:sync": "pnpm crowdin-upload && pnpm crowdin-download --verbose",
     "swizzle": "docusaurus swizzle",
     "deploy": "NODE_OPTIONS=--max-old-space-size=10000 docusaurus deploy",
     "docusaurus": "docusaurus"
