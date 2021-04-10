@@ -213,7 +213,7 @@ module.exports={
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: ['en', 'zh', 'es', 'ru', 'tr', 'hu', 'pt-BR'],
+    locales: ['en', 'zh', 'es', 'pt', 'ru', 'tr', 'hu'],
     localeConfigs: {
       en: { label: 'English' },
       es: { label: 'Español' },
@@ -221,7 +221,7 @@ module.exports={
       zh: { label: '中文' },
       tr: { label: 'Türkçe' },
       hu: { label: 'Magyar' },
-      'pt-BR': { label: 'Português Brasileiro' },
+      pt: { label: 'Português Brasileiro' },
     },
   },
 }
