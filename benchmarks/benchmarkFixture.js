@@ -58,7 +58,7 @@ async function updateDependenciesInPackageJson (cwd) {
 
 export default async function benchmark (pm, fixture, opts) {
   const cwd = path.join(TMP, pm.scenario, fixture)
-  await fsx.copy(path.join(FIXTURES_DIR, fixture), cwd)
+  fsx.copySync(path.join(FIXTURES_DIR, fixture), cwd)
   const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
 
   console.log(`# first install`)
