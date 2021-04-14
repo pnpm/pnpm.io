@@ -108,7 +108,7 @@ async function run () {
   const managersDir = path.join(DIRNAME, 'managers')
   await fs.promises.mkdir(managersDir, { recursive: true })
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
-  spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@rc'], { cwd: managersDir, stdio: 'inherit' })
+  spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
   const sections = []
   const svgs = []

@@ -1,4 +1,8 @@
 import path from 'path'
+import loadJsonFile from 'load-json-file'
+import { fileURLToPath } from 'url'
+
+const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
 
 const getHighestNumber = (array) => {
   // flatten array of arrays of numbers into an array of numbers
@@ -93,7 +97,7 @@ export default (resultArrays, pms, tests) => {
     svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${pm.legend}</text>` + '\n'
 
     // add version under name
-    const pmVersion = require(path.join(__dirname, 'managers/node_modules', pm.name, 'package.json')).version
+    const pmVersion = loadJsonFile.sync(path.join(DIRNAME, 'managers/node_modules', pm.name, 'package.json')).version
     const text = `v${pmVersion}`
     textY += 4
     svgStr += `  <text x="${x}" y="${textY}" class="font s3" text-anchor="${anchor}">${text}</text>` + '\n'
