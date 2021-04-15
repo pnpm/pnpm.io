@@ -41,6 +41,16 @@ For workspaces, as of v3.5, `<workspace root>/node_modules/.bin` is also added
 to the `PATH`, so if a tool is installed in the workspace root, it may be called
 in any workspace package's `scripts`.
 
+## Differences with `npm run`
+
+By default, pnpm doesn't run arbitrary `pre` and `post` hooks for user-defined
+scripts (such as `prestart`). This behavior, inherited from npm, caused scripts
+to be implicit rather than explicit, obfuscating the execution flow. It also led
+to surprising executions with `pnpm serve` also running `pnpm preserve`.
+
+If for some reason you need the pre/post scripts behavior of npm, use the
+`enable-pre-post-scripts` option.
+
 ## Options
 
 ### script-shell
@@ -111,6 +121,16 @@ Added in: v5.1.0
 
 Stream output from child processes immediately, prefixed with the originating
 package directory. This allows output from different packages to be interleaved.
+
+### enable-pre-post-scripts
+
+Added in: v6.1.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, pnpm will run any pre/post scripts automatically. So running `pnpm foo`
+will be like running `pnpm prefoo && pnpm foo && pnpm postfoo`.
 
 ### --filter &lt;package_selector\>
 
