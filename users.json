@@ -165,5 +165,12 @@
     "image": "/img/users/telescoope.png",
     "infoLink": "https://telescoope.org/",
     "pinned": false
+  },
+  {
+    "caption": "NetLicensing",
+    "image": "/img/users/netlicensing.png",
+    "infoLink": "https://netlicensing.io",
+    "pinned": false,
+    "width": 250
   }
 ]
