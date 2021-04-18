@@ -15,6 +15,8 @@ On Windows (PowerShell):
 (Invoke-WebRequest 'https://get.pnpm.io/v6.js' -UseBasicParsing).Content | node - add --global pnpm
 ```
 
+The standalone script is signed. [Here's how to verify it](https://github.com/pnpm/get#verifying-files).
+
 ## Using npm
 
 ```sh
