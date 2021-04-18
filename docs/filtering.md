@@ -22,7 +22,7 @@ pnpm <command> --filter <package_selector>
 
 :::
 
-## --filter &lt;package_name>
+## `--filter <package_name>`
 
 Added in: v2.13.0
 
@@ -37,9 +37,9 @@ pnpm test --filter "@babel/*"
 pnpm test --filter "*core"
 ```
 
-## --filter &lt;package_name>...
+## `--filter <package_name>...`
 
-Added in: v2.13.0
+Added in: `v2.13.0`
 
 To select a package and its dependencies (direct and non-direct), suffix the
 package name with an ellipsis: `<package_name>...`. For instance, the next
@@ -55,9 +55,9 @@ You may use a pattern to select a set of root packages:
 pnpm test --filter "@babel/preset-*..."
 ```
 
-## --filter &lt;package_name>^...
+## `--filter <package_name>^...`
 
-Added in: v4.4.0
+Added in: `v4.4.0`
 
 To ONLY select the dependencies of a package (both direct and non-direct),
 suffix the name with the aforementioned ellipsis preceded by a chevron. For
@@ -68,9 +68,9 @@ dependencies:
 pnpm test --filter "foo^..."
 ```
 
-## --filter ...&lt;package_name>
+## `--filter ...<package_name>`
 
-Added in: v2.14.0
+Added in: `v2.14.0`
 
 To select a package and its dependent packages (direct and non-direct), prefix
 the package name with an ellipsis: `...<package_name>`. For instance, this will
@@ -80,9 +80,9 @@ run the tests of `foo` and all packages dependent on it:
 pnpm test --filter ...foo
 ```
 
-## --filter "...^&lt;package_name>"
+## `--filter "...^<package_name>"`
 
-Added in: v4.4.0
+Added in: `v4.4.0`
 
 To ONLY select a package's dependents (both direct and non-direct), prefix the
 package name with an ellipsis followed by a chevron. For instance, this will
@@ -92,16 +92,16 @@ run tests for all packages dependent on `foo`:
 pnpm test --filter "...^foo"
 ```
 
-## --filter ./&lt;directory>
+## `--filter ./<directory>`
 
-Added in: v2.15.0
+Added in: `v2.15.0`
 
 To only select packages under the specified directory, you may specify any
 absolute path, typically in POSIX format.
 
-## --filter {&lt;directory>}
+## `--filter {<directory>}`
 
-Added in: v4.7.0
+Added in: `v4.7.0`
 
 Includes all projects that are under the specified directory.
 
@@ -133,9 +133,9 @@ pnpm <cmd> --filter "@babel/*{components}[origin/master]"
 pnpm <cmd> --filter "...@babel/*{components}[origin/master]"
 ```
 
-## --filter "[&lt;since>]"
+## `--filter "[<since>]"`
 
-Added in: v4.6.0
+Added in: `v4.6.0`
 
 Selects all the packages changed since the specified commit/branch. May be
 suffixed or prefixed with `...` to include dependencies/dependents.
@@ -158,7 +158,7 @@ pnpm test --filter ...foo --filter bar --filter baz...
 
 ## Excluding
 
-Added in: v5.8.0
+Added in: `v5.8.0`
 
 Any of the filter selectors may work as exclusion operators when they have a
 leading "!". In zsh (and possibly other shells), "!" should be escaped: `\!`.
@@ -176,9 +176,9 @@ directory:
 pnpm <cmd> --filter=!./lib
 ```
 
-## --test-pattern &lt;glob>
+## `--test-pattern <glob>`
 
-Added in: v5.14.0
+Added in: `v5.14.0`
 
 `test-pattern` allows detecting whether the modified files are related to tests.
 If they are, the dependent packages of such modified packages are not included.
