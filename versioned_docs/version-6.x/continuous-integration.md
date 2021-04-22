@@ -133,7 +133,7 @@ build:
   stage: build
   image: node:14.16.0-buster
   before_script:
-    - npm i -g pnpm
+    - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
