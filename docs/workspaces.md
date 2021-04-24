@@ -15,7 +15,7 @@ root. A workspace also may have an [`.npmrc`] in its root.
 
 ## Workspace protocol (workspace:)
 
-Supported since v3.7.0.
+Added in: v3.7.0.
 
 By default, pnpm will link packages from the workspace if the available packages
 match the declared ranges. For instance, `foo@1.0.0` is linked into `bar` if
@@ -24,7 +24,7 @@ match the declared ranges. For instance, `foo@1.0.0` is linked into `bar` if
 `foo@2.0.0` will be installed from the registry. This behavior introduces some
 uncertainty.
 
-Luckily, pnpm supports the `workspace:` protocol (the same as in Yarn v2). When
+Luckily, pnpm supports the `workspace:` protocol. When
 this protocol is used, pnpm will refuse to resolve to anything other than a
 local workspace package. So, if you set `"foo": "workspace:2.0.0"`, this time
 installation will fail because `"foo@2.0.0"` isn't present in the workspace.
@@ -37,7 +37,7 @@ the `workspace:` protocol is used.
 
 ### Referencing workspace packages through aliases
 
-Added in 5.12.0
+Added in: v5.12.0
 
 Let's say you have a package in the workspace named `foo`. Usually, you would
 reference it as `"foo": "workspace:*"`.
@@ -51,7 +51,7 @@ example will become: `"bar": "npm:foo@1.0.0"`.
 
 ### Referencing workspace packages through their relative path
 
-Added in 5.12.0
+Added in: v5.12.0
 
 In a workspace with 2 packages:
 
@@ -71,16 +71,18 @@ When a workspace package is packed into an archive (whether it's through
 `pnpm pack` or one of the publish commands like `pnpm publish`), we dynamically
 replace any `workspace:` dependency by:
 
-* The corresponding version in the target workspace (if you use `*`)
+* The corresponding version in the target workspace (if you use `workspace:*`, `workspace:~`, or `workspace:^`)
 * The associated semver range (for any other range type)
 
-So for example, if we have a workspace package at version `1.5.0`, the following:
+So for example, if we have `foo`, `bar`, `qar`, `zoo `in the workspace and they all are at version `1.5.0`, the following:
 
 ```json
 {
 	"dependencies": {
 		"foo": "workspace:*",
-		"bar": "workspace:^1.2.3"
+		"bar": "workspace:~",
+		"qar": "workspace:^",
+		"zoo": "workspace:^1.5.0"
 	}
 }
 ```
@@ -91,7 +93,9 @@ Will be transformed into:
 {
 	"dependencies": {
 		"foo": "1.5.0",
-		"bar": "^1.2.3"
+		"bar": "~1.5.0",
+		"qar": "^1.5.0",
+		"zoo": "^1.5.0"
 	}
 }
 ```

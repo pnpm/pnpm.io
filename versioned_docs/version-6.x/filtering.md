@@ -176,6 +176,13 @@ directory:
 pnpm <cmd> --filter=!./lib
 ```
 
+## --filter-prod &lt;filtering_pattern>
+
+Added in: v6.2.0
+
+Acts the same a `--filter` but omits `devDependencies` when selecting dependency projects
+from the workspace.
+
 ## --test-pattern &lt;glob>
 
 Added in: v5.14.0

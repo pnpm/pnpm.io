@@ -431,6 +431,15 @@ The minimum (base) timeout for retrying requests.
 The maximum fallback timeout to ensure the retry factor does not make requests
 too long.
 
+### fetch-timeout
+
+Added in: v6.2.0
+
+* Default: **60000 (1 minute)**
+* Type: **Number**
+
+The maximum amount of time to wait for HTTP requests to complete.
+
 ## CLI Settings
 
 ### [no-]color
