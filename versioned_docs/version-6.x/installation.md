@@ -56,3 +56,4 @@ Here is a list of past pnpm versions with respective Node.js version support.
 | Node.js 10 | ✔️     | ✔️    | ✔️    | ✔️     | ✔️     | ❌    |
 | Node.js 12 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
 | Node.js 14 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
+| Node.js 16 | ?     | ?    | ?️    | ?️     | ?️     | ✔️    |
