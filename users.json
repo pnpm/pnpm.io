@@ -172,5 +172,11 @@
     "infoLink": "https://netlicensing.io",
     "pinned": false,
     "width": 250
+  },
+  {
+    "caption": "Fonkel",
+    "image": "/img/users/fonkel.svg",
+    "infoLink": "https://fonkel.io",
+    "pinned": false
   }
 ]
