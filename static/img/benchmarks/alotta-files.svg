@@ -39,7 +39,7 @@
   <text x="290" y="28" class="font s5 text" text-anchor="middle">50</text>
   <text x="290" y="310" class="font s5 text" text-anchor="middle">50</text>
   <text x="290" y="20" class="font s4 text" font-style="italic" text-anchor="end">Installation time in seconds (lower is better)</text>
-  <rect x="40" y="35" width="249" height="6" fill="#cd3731" rx="1" ry="1"></rect>
+  <rect x="40" y="35" width="231" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="41.5" width="72" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="48" width="196" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="54.5" width="146" height="6" fill="#248ebd" rx="1" ry="1"></rect>
