@@ -22,12 +22,12 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
 | install |       |          |             | 43.8s | 15.9s | 39.1s | 29.1s |
 | install | ✔     | ✔        | ✔           | 1.5s | 1.4s | 707ms | n/a |
-| install | ✔     | ✔        |             | 9.1s | 4.7s | 11s | 1.8s |
-| install | ✔     |          |             | 27.2s | 7.7s | 26.5s | 17.2s |
-| install |       | ✔        |             | 25.1s | 14s | 23.3s | 14.2s |
-| install | ✔     |          | ✔           | 2.1s | 2.1s | 22.1s | n/a |
+| install | ✔     | ✔        |             | 9.1s | 4.2s | 11s | 1.8s |
+| install | ✔     |          |             | 27.2s | 7.6s | 26.5s | 17.2s |
+| install |       | ✔        |             | 25.1s | 13.5s | 23.3s | 14.2s |
+| install | ✔     |          | ✔           | 2.1s | 2s | 22.1s | n/a |
 | install |       | ✔        | ✔           | 1.5s | 1.6s | 713ms | n/a |
-| install |       |          | ✔           | 2.1s | 6.7s | 41.1s | n/a |
-| update  | n/a   | n/a      | n/a         | 1.5s | 12.5s | 35.4s | 28.3s |
+| install |       |          | ✔           | 2.1s | 6.2s | 41.1s | n/a |
+| update  | n/a   | n/a      | n/a         | 1.5s | 11.2s | 35.4s | 28.3s |
 
 ![Graph of the alotta-files results](../../static/img/benchmarks/alotta-files.svg)
