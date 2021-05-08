@@ -20,10 +20,10 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
-| install |       |          |             | 52.8s | 13.6s | 39.1s | 29.1s |
+| install |       |          |             | 44.6s | 13.6s | 39.1s | 29.1s |
 | install | ✔     | ✔        | ✔           | 2s | 1.2s | 707ms | n/a |
 | install | ✔     | ✔        |             | 11.7s | 3.8s | 11s | 1.8s |
-| install | ✔     |          |             | 28s | 6.1s | 26.5s | 17.2s |
+| install | ✔     |          |             | 25.8s | 6.1s | 26.5s | 17.2s |
 | install |       | ✔        |             | 28.9s | 10.9s | 23.3s | 14.2s |
 | install | ✔     |          | ✔           | 2.7s | 1.7s | 22.1s | n/a |
 | install |       | ✔        | ✔           | 1.9s | 1.2s | 713ms | n/a |
