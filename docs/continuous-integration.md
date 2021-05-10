@@ -159,7 +159,7 @@ pipelines:
           name: Build and test
           image: node:14.16.0
           script:
-            - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
+            - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
