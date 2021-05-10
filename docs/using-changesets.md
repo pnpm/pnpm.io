@@ -47,7 +47,7 @@ To automate the process, you can use `changeset version` with GitHub actions.
 
 ### Bumb up packages
 
-The action will detect when changesets files arrives in the `main` branch, the action will open a new PR listing all the packages will be bump up. Once is merged the packages will be updated and you can decide whether publising or not by adding the `publish` property.
+The action will detect when changeset files arrive in the `main` branch, the action will open a new PR listing all the packages with bumped versions. Once merged, the packages will be updated and you can decide whether to publish or not by adding the `publish` property.
 
 ### Publishing
 
