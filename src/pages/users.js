@@ -35,7 +35,7 @@ export default function Users() {
                   'button button--outline button--secondary button--lg',
                   styles.getStarted,
                 )}
-                href="https://github.com/pnpm/pnpm.github.io/edit/source/users.json">
+                href="https://github.com/pnpm/pnpm.github.io/edit/main/users.json">
                 <Translate>Add your company</Translate>
               </Link>
             </div>
