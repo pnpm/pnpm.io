@@ -178,5 +178,11 @@
     "image": "/img/users/fonkel.svg",
     "infoLink": "https://fonkel.io",
     "pinned": false
-  }
+  },
+  {
+    "caption": "Verdaccio",
+    "image": "/img/users/verdaccio.svg",
+    "infoLink": "https://verdaccio.org",
+    "pinned": false
+  },
 ]
