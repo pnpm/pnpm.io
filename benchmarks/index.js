@@ -104,6 +104,23 @@ const toArray = (pms, resultsObj) => {
     )
 }
 
+async function installYarnBerryLikeModule (managersDir) {
+  spawn.sync('pnpx', ['yarn', 'set', 'version', 'berry'], { cwd: managersDir, stdio: 'inherit' })
+  const result = spawn.sync('pnpx', ['yarn', '--version'], { cwd: managersDir })
+  const yarnBerryVersion = result.stdout.toString().trim()
+
+  const yarnPkgJsonPath = path.join(managersDir, 'node_modules/yarn/package.json')
+  const yarnPkgJson = JSON.parse(fs.readFileSync(yarnPkgJsonPath, 'utf-8'))
+  yarnPkgJson.version = yarnBerryVersion
+
+  // Replace yarn binary with the yarn berry script
+  await Promise.allSettled([
+    fs.promises.writeFile(yarnPkgJsonPath, JSON.stringify(yarnPkgJson)),
+    fs.promises.rename(path.join(DIRNAME, 'managers/.yarn/releases/yarn-berry.cjs'), path.join(DIRNAME, 'managers/node_modules/.bin/yarn')),
+    fs.promises.rm(path.join(DIRNAME, 'managers/.yarnrc.yml')),
+  ]);
+}
+
 run()
   .then(() => console.log('done'))
   .catch(err => console.error(err))
@@ -118,6 +135,7 @@ async function run () {
   ])
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
   spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
+  await installYarnBerryLikeModule(managersDir)
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
   const sections = []
