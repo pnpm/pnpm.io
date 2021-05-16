@@ -22,9 +22,9 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
 | install |       |          |             | 51.5s | 14.7s | 39.1s | 29.1s |
 | install | ✔     | ✔        | ✔           | 1.8s | 1.4s | 707ms | n/a |
-| install | ✔     | ✔        |             | 10.7s | 4.2s | 11s | 1.8s |
-| install | ✔     |          |             | 29.5s | 6.9s | 26.5s | 17.2s |
-| install |       | ✔        |             | 28.5s | 12s | 23.3s | 14.2s |
+| install | ✔     | ✔        |             | 10.6s | 4.2s | 11s | 1.8s |
+| install | ✔     |          |             | 28.6s | 6.9s | 26.5s | 17.2s |
+| install |       | ✔        |             | 28.1s | 12s | 23.3s | 14.2s |
 | install | ✔     |          | ✔           | 2.5s | 1.9s | 22.1s | n/a |
 | install |       | ✔        | ✔           | 1.7s | 1.4s | 713ms | n/a |
 | install |       |          | ✔           | 2.4s | 6s | 41.1s | n/a |
