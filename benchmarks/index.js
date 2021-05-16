@@ -109,6 +109,7 @@ async function run () {
   await fs.promises.mkdir(managersDir, { recursive: true })
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
   spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
+  const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
   const sections = []
   const svgs = []
@@ -144,7 +145,7 @@ async function run () {
 
     svgs.push({
       path: path.join(DIRNAME, '../static/img/benchmarks', `${fixture.name}.svg`),
-      file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions)
+      file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions, formattedNow)
     })
   }
 
@@ -153,6 +154,8 @@ async function run () {
 
   const introduction = stripIndents`
   # Benchmarks of JavaScript Package Managers
+
+  **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
   This benchmark compares the performance of npm, pnpm, and Yarn (both regular and PnP variant).
   `
