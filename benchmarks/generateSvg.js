@@ -15,7 +15,7 @@ const NPM_COLOR = '#cd3731'
 const YARN_COLOR = '#248ebd'
 const PNPM_COLOR = '#fbae00'
 
-export default (resultArrays, pms, tests) => {
+export default (resultArrays, pms, tests, formattedNow) => {
   let svgStr = ''
   // colors taken from logos (where possible)
   const colors = [ NPM_COLOR, PNPM_COLOR, YARN_COLOR, YARN_COLOR ]
@@ -188,7 +188,7 @@ export default (resultArrays, pms, tests) => {
 
   // add node version
   ;(() => {
-    const text = `Tests were run using Node.js ${process.version}`
+    const text = `Tests were run using Node.js ${process.version} at: ${formattedNow}`
     const anchor = 'end'
     const x = graph.x + graph.w
     const y = vb.h - 2
