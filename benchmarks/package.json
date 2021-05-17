@@ -1,8 +1,7 @@
 {
     "type": "module",
     "scripts": {
-        "prebench:clean": "./node_modules/.bin/rimraf .tmp",
-        "benchmark": "pnpm run prebench:clean && node ./index.js"
+        "benchmark": "node ./index.js"
     },
     "dependencies": {
         "common-tags": "^1.3.1",
@@ -11,7 +10,6 @@
         "get-folder-size": "^1.0.0",
         "load-json-file": "^6.2.0",
         "load-yaml-file": "^0.1.0",
-        "mkdirp": "^0.5.1",
         "path-key": "^2.0.1",
         "pretty-bytes": "^4.0.2",
         "pretty-ms": "^2.1.0",

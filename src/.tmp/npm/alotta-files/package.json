@@ -2,7 +2,6 @@
   "name": "alotta-modules",
   "version": "0.0.1",
   "dependencies": {
-    "animate.less": "^2.2.0",
     "autoprefixer": "^6.0.3",
     "babel-core": "^6.4.0",
     "babel-eslint": "^6.1.2",

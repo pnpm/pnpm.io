@@ -30,23 +30,18 @@ export default {
   },
   yarn: {
     scenario: 'yarn',
-    legend: 'Yarn',
+    legend: 'Yarn Berry',
     name: 'yarn',
     args: [
-      '--ignore-scripts',
-      '--cache-folder',
-      'cache'
+      'install'
     ]
   },
   yarn_pnp: {
     scenario: 'yarn_pnp',
-    legend: "Yarn PnP",
+    legend: 'Yarn Berry PnP',
     name: 'yarn',
     args: [
-      '--pnp',
-      '--ignore-scripts',
-      '--cache-folder',
-      'cache'
+      'install'
     ]
   }
 }

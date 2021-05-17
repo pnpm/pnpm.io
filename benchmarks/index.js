@@ -1,6 +1,7 @@
 'use strict'
 import fs from 'fs'
-import mkdirp from 'mkdirp'
+import { promisify } from 'util'
+import rimraf from 'rimraf'
 import commonTags from 'common-tags'
 import prettyMs from 'pretty-ms'
 import cmdsMap from './commandsMap.js'
@@ -11,6 +12,9 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
+const TMP = path.join(DIRNAME, '.tmp')
+const BENCH_IMGS = path.join(DIRNAME, '../static/img/benchmarks')
+
 const { stripIndents } = commonTags
 const LIMIT_RUNS = 3
 
@@ -100,15 +104,38 @@ const toArray = (pms, resultsObj) => {
     )
 }
 
+async function installYarnBerryLikeModule (managersDir) {
+  spawn.sync('pnpx', ['yarn', 'set', 'version', 'berry'], { cwd: managersDir, stdio: 'inherit' })
+  const result = spawn.sync('pnpx', ['yarn', '--version'], { cwd: managersDir })
+  const yarnBerryVersion = result.stdout.toString().trim()
+
+  const yarnPkgJsonPath = path.join(managersDir, 'node_modules/yarn/package.json')
+  const yarnPkgJson = JSON.parse(fs.readFileSync(yarnPkgJsonPath, 'utf-8'))
+  yarnPkgJson.version = yarnBerryVersion
+
+  // Replace yarn binary with the yarn berry script
+  await Promise.allSettled([
+    fs.promises.writeFile(yarnPkgJsonPath, JSON.stringify(yarnPkgJson)),
+    fs.promises.rename(path.join(DIRNAME, 'managers/.yarn/releases/yarn-berry.cjs'), path.join(DIRNAME, 'managers/node_modules/.bin/yarn')),
+    fs.promises.rm(path.join(DIRNAME, 'managers/.yarnrc.yml')),
+  ]);
+}
+
 run()
   .then(() => console.log('done'))
   .catch(err => console.error(err))
 
 async function run () {
   const managersDir = path.join(DIRNAME, 'managers')
-  await fs.promises.mkdir(managersDir, { recursive: true })
+  await Promise.allSettled([
+    promisify(rimraf)(TMP),
+    // make sure folder exists
+    fs.promises.mkdir(managersDir, { recursive: true }),
+    fs.promises.mkdir(BENCH_IMGS, { recursive: true }),
+  ])
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
   spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
+  await installYarnBerryLikeModule(managersDir)
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
   const sections = []
@@ -128,8 +155,8 @@ async function run () {
     sections.push(stripIndents`
       ${fixture.mdDesc}
 
-      | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
-      | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
+      | action  | cache | lockfile | node_modules| npm | pnpm | Yarn Berry | Yarn Berry PnP |
+      | ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
       | install |       |          |             | ${prettyMs(npmRes.firstInstall)} | ${prettyMs(pnpmRes.firstInstall)} | ${prettyMs(yarnRes.firstInstall)} | ${prettyMs(yarnPnPRes.firstInstall)} |
       | install | ✔     | ✔        | ✔           | ${prettyMs(npmRes.repeatInstall)} | ${prettyMs(pnpmRes.repeatInstall)} | ${prettyMs(yarnRes.repeatInstall)} | n/a |
       | install | ✔     | ✔        |             | ${prettyMs(npmRes.withWarmCacheAndLockfile)} | ${prettyMs(pnpmRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnPnPRes.withWarmCacheAndLockfile)} |
@@ -144,13 +171,10 @@ async function run () {
     `)
 
     svgs.push({
-      path: path.join(DIRNAME, '../static/img/benchmarks', `${fixture.name}.svg`),
+      path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
       file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions, formattedNow)
     })
   }
-
-  // make sure folder exists
-  mkdirp.sync(path.join(DIRNAME, '../static/img/benchmarks'))
 
   const introduction = stripIndents`
   # Benchmarks of JavaScript Package Managers
@@ -176,7 +200,7 @@ async function run () {
 
   await Promise.all(
     [
-      Promise.all(svgs.map((file) => fs.promises.writeFile(file.path, file.file, 'utf-8'))),
+      ...svgs.map((file) => fs.promises.writeFile(file.path, file.file, 'utf-8')),
       fs.promises.writeFile(path.join(DIRNAME, '../src/pages/benchmarks.md'), stripIndents`
         ${introduction}
 
@@ -184,7 +208,7 @@ async function run () {
 
         ${sections.join('\n\n')}`, 'utf8')
     ]
-  ).catch((err) => { throw err })
+  )
 }
 
 function average (benchmarkResults) {
