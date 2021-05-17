@@ -1,5 +1,7 @@
 'use strict'
 import fs from 'fs'
+import { promisify } from 'util'
+import rimraf from 'rimraf'
 import mkdirp from 'mkdirp'
 import commonTags from 'common-tags'
 import prettyMs from 'pretty-ms'
@@ -11,6 +13,8 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
+const TMP = path.join(DIRNAME, '.tmp')
+
 const { stripIndents } = commonTags
 const LIMIT_RUNS = 3
 
@@ -106,7 +110,10 @@ run()
 
 async function run () {
   const managersDir = path.join(DIRNAME, 'managers')
-  await fs.promises.mkdir(managersDir, { recursive: true })
+  await Promise.allSettled([
+    promisify(rimraf)(TMP),
+    fs.promises.mkdir(managersDir, { recursive: true }),
+  ])
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
   spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
