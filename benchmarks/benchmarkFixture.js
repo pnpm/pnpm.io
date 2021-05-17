@@ -34,6 +34,15 @@ function createEnv () {
   return env
 }
 
+function cleanLockfile (pm, cwd) {
+  const lockfileName = lockfileNameByPM[pm.name]
+  rimraf.sync(path.join(cwd, lockfileName))
+  if (pm.name === 'yarn') {
+    // This ensures yarn berry to install under a nested folder
+    spawnSyncOrThrow({ name: 'touch', args: [lockfileName] }, { env, cwd, stdio: "inherit" })
+  }
+}
+
 async function updateDependenciesInPackageJson (cwd) {
   const packageJsonPath = path.join(cwd, 'package.json')
   const buf = await fs.readFile(packageJsonPath)
@@ -61,8 +70,44 @@ export default async function benchmark (pm, fixture, opts) {
   fsx.copySync(path.join(FIXTURES_DIR, fixture), cwd)
   const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
 
+  cleanLockfile(pm, cwd)
+
   console.log(`# first install`)
 
+  if (pm.name === 'yarn') {
+    // Disable global mirror that speeds up yarn berry install
+    spawnSyncOrThrow({
+      name: 'yarn',
+      args: [
+        'config',
+        'set',
+        'enableMirror',
+        'false'
+      ]
+    }, { env, cwd, stdio: "inherit" })
+    spawnSyncOrThrow({
+      name: 'yarn',
+      args: [
+        'config',
+        'set',
+        'cacheFolder',
+        path.join(cwd, 'cache')
+      ]
+    }, { env, cwd, stdio: "inherit" })
+    /**
+     * @see https://yarnpkg.com/configuration/yarnrc#nodeLinker
+     */
+    const nodeLinker = pm.scenario === 'yarn_pnp' ? 'pnp' : 'node-modules'
+    spawnSyncOrThrow({
+      name: 'yarn',
+      args: [
+        'config',
+        'set',
+        'nodeLinker',
+        nodeLinker
+      ]
+    }, { env, cwd, stdio: "inherit" })
+  }
   const firstInstall = measureInstall(pm, cwd)
 
   let repeatInstall
@@ -84,8 +129,7 @@ export default async function benchmark (pm, fixture, opts) {
     rimraf.sync(modules)
   }
 
-  const lockfileName = lockfileNameByPM[pm.name]
-  rimraf.sync(path.join(cwd, lockfileName))
+  cleanLockfile(pm, cwd)
 
   console.log('# with warm cache')
 
@@ -100,7 +144,7 @@ export default async function benchmark (pm, fixture, opts) {
 
   const withLockfile = measureInstall(pm, cwd)
 
-  rimraf.sync(path.join(cwd, lockfileName))
+  cleanLockfile(pm, cwd)
 
   let withWarmCacheAndModules
   let withWarmModulesAndLockfile
@@ -118,7 +162,7 @@ export default async function benchmark (pm, fixture, opts) {
     withWarmModulesAndLockfile = measureInstall(pm, cwd)
 
     rimraf.sync(path.join(cwd, 'cache'))
-    rimraf.sync(path.join(cwd, lockfileName))
+    cleanLockfile(pm, cwd)
 
     console.log('# with warm modules')
 
@@ -167,12 +211,17 @@ function measureInstall (cmd, cwd) {
   const startTime = Date.now()
 
   console.log(`> ${cmd.name} ${cmd.args.join(' ')}`)
-  const result = spawn.sync(cmd.name, cmd.args, { env, cwd, stdio: "inherit" });
-  if (result.status !== 0) {
-    throw new Error(`${cmd.name} failed with status code ${result.status}`)
-  }
+  spawnSyncOrThrow(cmd, { env, cwd, stdio: "inherit" });
 
   const endTime = Date.now()
 
   return endTime - startTime
+}
+
+function spawnSyncOrThrow (cmd, opts) {
+  const result = spawn.sync(cmd.name, cmd.args, opts);
+  if (result.status !== 0) {
+    throw new Error(`${cmd.name} failed with status code ${result.status}`)
+  }
+  return result;
 }
