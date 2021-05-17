@@ -2,7 +2,6 @@
 import fs from 'fs'
 import { promisify } from 'util'
 import rimraf from 'rimraf'
-import mkdirp from 'mkdirp'
 import commonTags from 'common-tags'
 import prettyMs from 'pretty-ms'
 import cmdsMap from './commandsMap.js'
@@ -14,6 +13,7 @@ import { fileURLToPath } from 'url'
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
 const TMP = path.join(DIRNAME, '.tmp')
+const BENCH_IMGS = path.join(DIRNAME, '../static/img/benchmarks')
 
 const { stripIndents } = commonTags
 const LIMIT_RUNS = 3
@@ -112,7 +112,9 @@ async function run () {
   const managersDir = path.join(DIRNAME, 'managers')
   await Promise.allSettled([
     promisify(rimraf)(TMP),
+    // make sure folder exists
     fs.promises.mkdir(managersDir, { recursive: true }),
+    fs.promises.mkdir(BENCH_IMGS, { recursive: true }),
   ])
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
   spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
@@ -151,13 +153,10 @@ async function run () {
     `)
 
     svgs.push({
-      path: path.join(DIRNAME, '../static/img/benchmarks', `${fixture.name}.svg`),
+      path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
       file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions, formattedNow)
     })
   }
-
-  // make sure folder exists
-  mkdirp.sync(path.join(DIRNAME, '../static/img/benchmarks'))
 
   const introduction = stripIndents`
   # Benchmarks of JavaScript Package Managers
@@ -183,7 +182,7 @@ async function run () {
 
   await Promise.all(
     [
-      Promise.all(svgs.map((file) => fs.promises.writeFile(file.path, file.file, 'utf-8'))),
+      ...svgs.map((file) => fs.promises.writeFile(file.path, file.file, 'utf-8')),
       fs.promises.writeFile(path.join(DIRNAME, '../src/pages/benchmarks.md'), stripIndents`
         ${introduction}
 
@@ -191,7 +190,7 @@ async function run () {
 
         ${sections.join('\n\n')}`, 'utf8')
     ]
-  ).catch((err) => { throw err })
+  )
 }
 
 function average (benchmarkResults) {
