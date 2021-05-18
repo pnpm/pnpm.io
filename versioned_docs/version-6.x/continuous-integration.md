@@ -142,3 +142,26 @@ build:
     paths:
       - .pnpm-store
 ```
+
+## Bitbucket Pipelines
+
+You can use pnpm for installing and caching your dependencies:
+
+```yaml title=".bitbucket-pipelines.yml"
+definitions:
+  caches:
+    pnpm: $BITBUCKET_CLONE_DIR/.pnpm-store
+
+pipelines:
+  pull-requests:
+    "**":
+      - step:
+          name: Build and test
+          image: node:14.16.0
+          script:
+            - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
+            - pnpm install
+            - pnpm run build # Replace with your build/test…etc. commands
+          caches:
+            - pnpm
+```
