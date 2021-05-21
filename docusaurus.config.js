@@ -14,7 +14,7 @@ function makeEditUrl (locale, path1, path2) {
     return `https://crowdin.com/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
   }
   // Link to Github for English docs
-  return `https://github.com/pnpm/pnpm.github.io/edit/source/${path1}/${path2}`;
+  return `https://github.com/pnpm/pnpm.github.io/edit/main/${path1}/${path2}`;
 }
 
 module.exports={
