@@ -13,9 +13,9 @@ jobs:
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: 12
+          node-version: 16
       - run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@next
       - run: pnpm --dir=benchmarks install
       - run: pnpm --dir=benchmarks run benchmark
