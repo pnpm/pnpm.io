@@ -30,7 +30,7 @@ export default {
   },
   yarn: {
     scenario: 'yarn',
-    legend: 'Yarn Berry',
+    legend: 'Yarn',
     name: 'yarn',
     args: [
       'install'
@@ -38,7 +38,7 @@ export default {
   },
   yarn_pnp: {
     scenario: 'yarn_pnp',
-    legend: 'Yarn Berry PnP',
+    legend: 'Yarn PnP',
     name: 'yarn',
     args: [
       'install'
