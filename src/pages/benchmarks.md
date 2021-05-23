@@ -20,8 +20,8 @@ Here's a quick explanation of how these tests could apply to the real world:
 
 The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main/benchmarks/fixtures/alotta-files/package.json)
 
-| action  | cache | lockfile | node_modules| npm | pnpm | Yarn Berry | Yarn Berry PnP |
-| ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
+| action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
+| ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
 | install |       |          |             | 46.8s | 14s | 53.9s | 44.3s |
 | install | ✔     | ✔        | ✔           | 1.7s | 1.3s | 2.2s | n/a |
 | install | ✔     | ✔        |             | 10.4s | 3.9s | 12.7s | 1.8s |
