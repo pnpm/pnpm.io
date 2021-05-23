@@ -609,3 +609,23 @@ Added in: v4.2.0
 * Type: **path**
 
 Specify a custom directory to store global packages.
+
+## use-node-version
+
+Added in: v6.5.0
+
+* Default: **undefined**
+* Type: **semver**
+
+Specifies which exact Node.js version should be used for the project's runtime.
+pnpm will automatically install the specified version of Node.js and use it for
+running `pnpm run` commands or the `pnpm node` command.
+
+### use-stderr
+
+Added in: v6.5.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When true, all the output is written to stderr.

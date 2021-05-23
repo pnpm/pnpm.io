@@ -69,6 +69,12 @@ Added in: v5.18.0
 Try to publish packages even if their current version is already found in the
 registry.
 
+### --report-summary
+
+Added in: v6.5.0
+
+Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.
+
 ### --filter &lt;package_selector\>
 
 Added in: 4.6.0
