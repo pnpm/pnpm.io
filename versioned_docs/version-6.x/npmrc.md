@@ -610,7 +610,7 @@ Added in: v4.2.0
 
 Specify a custom directory to store global packages.
 
-## use-node-version
+### use-node-version
 
 Added in: v6.5.0
 
