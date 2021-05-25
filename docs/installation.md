@@ -57,3 +57,38 @@ Here is a list of past pnpm versions with respective Node.js version support.
 | Node.js 12 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
 | Node.js 14 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
 | Node.js 16 | ?     | ?    | ?️    | ?️     | ?️     | ✔️    |
+
+## Troubleshooting
+
+If pnpm is broken and you cannot fix it by reinstalling, you might need to remove it manually from the PATH.
+
+Let's assume you have the following error when running `pnpm install`:
+
+```
+C:\src>pnpm install
+internal/modules/cjs/loader.js:883
+  throw err;
+  ^
+
+ 
+
+Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node_modules\pnpm\bin\pnpm.js'
+←[90m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:880:15)←[39m
+←[90m    at Function.Module._load (internal/modules/cjs/loader.js:725:27)←[39m
+←[90m    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)←[39m
+←[90m    at internal/main/run_main_module.js:17:47←[39m {
+  code: ←[32m'MODULE_NOT_FOUND'←[39m,
+  requireStack: []
+}
+```
+
+First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run this command in Git Bash.
+You'll get the location of the pnpm command, for instance:
+
+```
+$ which pnpm
+/c/Program Files/nodejs/pnpm
+```
+
+Now that you know where the pnpm CLI is, open that directory and remove any pnpm-related files (`pnpm.cmd`, `pnpx.cmd`, `pnpm`, etc).
+Once done, install pnpm again and it should work as expected.
