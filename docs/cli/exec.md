@@ -3,20 +3,53 @@ id: exec
 title: pnpm exec
 ---
 
-Shorthand form of `pnpm -r exec`.
+Execute a shell command in scope of a project.
 
-See the [`-r exec`] documentation for more information.
+`node_modules/.bin` is added to the `PATH`, so `pnpm exec` allows executing commands of dependencies.
 
-[`r exec`]: recursive#pnpm--r-exec
+## Examples
+
+If you have Jest as a dependency of your project, there is no need to install Jest globally, just run it with `pnpm exec`:
+
+```
+pnpm exec jest
+```
+
+The `exec` part is actually optional when the command is not in conflict with a builtin pnpm command, so you may also just run:
+
+```
+pnpm jest
+```
 
 ## Options
 
+### --recursive, -r
+
+Added in: v2.9.0
+
+Execute the shell command in every project of the workspace.
+
+The name of the current package is available through the environment variable
+`PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0 onwards).
+
+Examples:
+
+```
+# prune node_modules installations for all packages
+pnpm -r exec -- rm -rf node_modules
+# view package information for all packages
+pnpm -r exec -- pnpm view $PNPM_PACKAGE_NAME
+```
+
 ### --parallel
 
-Disregards concurrency and topological sorting configuration entirely and runs
-the command immediately in all matching packages, with prefixed streaming
-output.
+Added in: v5.1.0
 
-This is the preferred option for processes that take a long time to run, exempli
-gratia, running a build process with the watch flag over a large number of
-packages.
+Completely disregard concurrency and topological sorting, running a given script
+immediately in all matching packages with prefixed streaming output. This is the
+preferred flag for long-running processes over many packages, for instance, a
+lengthy build process.
+
+### --filter &lt;package_selector\>
+
+[Read more about filtering.](../filtering.md)

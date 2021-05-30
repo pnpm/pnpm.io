@@ -85,27 +85,6 @@ When `true`, the order of packages is reversed.
 pnpm -r --reverse run clean
 ```
 
-## pnpm -r exec
-
-Added in: v2.9.0
-
-```sh
-pnpm -r exec -- <command> [args...]
-```
-
-This command runs a command in each package of the monorepo.
-
-The name of the current package is available through the environment variable
-`PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0 onwards).
-
-Examples:
-```sh
-# prune node_modules installations for all packages
-pnpm -r exec -- rm -rf node_modules
-# view package information for all packages
-pnpm -r exec -- pnpm view $PNPM_PACKAGE_NAME
-```
-
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)

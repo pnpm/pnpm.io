@@ -43,6 +43,7 @@
         "label": "Run scripts",
         "items": [
           "cli/run",
+          "cli/exec",
           "cli/test",
           "cli/start"
         ]
