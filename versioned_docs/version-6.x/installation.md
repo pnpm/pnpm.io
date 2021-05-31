@@ -6,13 +6,13 @@ title: Installation
 ## Using a standalone script
 
 ```sh
-curl -f https://get.pnpm.io/v6.js | node - add --global pnpm
+curl -f https://get.pnpm.io/v6.6.js | node - add --global pnpm
 ```
 
 On Windows (PowerShell):
 
 ```powershell
-(Invoke-WebRequest 'https://get.pnpm.io/v6.js' -UseBasicParsing).Content | node - add --global pnpm
+(Invoke-WebRequest 'https://get.pnpm.io/v6.6.js' -UseBasicParsing).Content | node - add --global pnpm
 ```
 
 The standalone script is signed. [Here's how to verify it](https://github.com/pnpm/get#verifying-files).
