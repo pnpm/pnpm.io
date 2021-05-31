@@ -108,6 +108,25 @@ Will be published as:
 }
 ```
 
+#### publishConfig.directory
+
+Added in v6.7.0
+
+You also can use the field `publishConfig.directory` to customize the published subdirectory relative to the current `package.json`.
+
+It is expected to have a modified version of the current package in the specified directory (usually using third party build tools).
+
+> In this example the `"dist"` folder must contain a `package.json`
+
+```json
+{
+  "name": "foo",
+  "version": "1.0.0",
+  "publishConfig": {
+    "directory": "dist"
+  }
+}
+```
 ### pnpm.overrides
 
 Added in: v5.10.1

@@ -16,6 +16,7 @@ has a license of its own).
 
 You may override some fields before publish, using the
 [publishConfig] field in `package.json`.
+You also can use the [`publishConfig.directory`](../package_json.md#publishconfigdirectory) to customize the published subdirectory (usually using third party build tools). 
 
 When running this command recursively (`pnpm -r publish`), pnpm will publish all
 the packages that have versions not yet published to the registry.
