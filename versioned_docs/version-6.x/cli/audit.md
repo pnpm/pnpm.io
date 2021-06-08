@@ -48,3 +48,10 @@ Only audit production dependencies.
 ### --no-optional
 
 Don't audit `optionalDependencies`.
+
+### --ignore-registry-errors
+
+Added in: v6.7.1
+
+If the registry responds with a non-200 status code, the process should exit with 0.
+So the process will fail only if the registry actually successfully responds with found vulnerabilities.
