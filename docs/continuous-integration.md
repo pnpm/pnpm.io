@@ -16,7 +16,7 @@ cache:
   directories:
     - "~/.pnpm-store"
 before_install:
-  - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
+  - curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
@@ -42,7 +42,7 @@ blocks:
       jobs:
         - name: pnpm install
           commands:
-            - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
+            - curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -59,7 +59,7 @@ to your `appveyor.yml`:
 ```yaml title="appveyor.yml"
 install:
   - ps: Install-Product node $env:nodejs_version
-  - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
+  - curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6
   - pnpm install
 ```
 
@@ -109,7 +109,7 @@ jobs:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
     - name: Install pnpm
-      run: curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
+      run: curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6
     - name: pnpm Build
       run: pnpm install
 ```
@@ -133,7 +133,7 @@ build:
   stage: build
   image: node:14.16.0-buster
   before_script:
-    - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
+    - curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -159,7 +159,7 @@ pipelines:
           name: Build and test
           image: node:14.16.0
           script:
-            - curl -f https://get.pnpm.io/v6.js | node - add --global pnpm@6
+            - curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
