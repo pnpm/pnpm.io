@@ -92,3 +92,9 @@ $ which pnpm
 
 Now that you know where the pnpm CLI is, open that directory and remove any pnpm-related files (`pnpm.cmd`, `pnpx.cmd`, `pnpm`, etc).
 Once done, install pnpm again and it should work as expected.
+
+## Uninstalling pnpm
+
+If you need to remove the pnpm CLI from your system and any files it have written to your disk, see [Uninstalling pnpm].
+
+[Uninstalling pnpm]: ./uninstall.md

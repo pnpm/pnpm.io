@@ -254,6 +254,10 @@
         {
           "type": "doc",
           "id": "version-6.x/how-peers-are-resolved"
+        },
+        {
+          "type": "doc",
+          "id": "version-6.x/uninstall"
         }
       ]
     }
