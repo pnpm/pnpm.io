@@ -77,7 +77,7 @@ pnpm add <git remote url>
 ```
 
 Installs the package from the hosted Git provider, cloning it with Git.
-You can use a protocol for certain Git providers. Exempli gratia,
+You can use a protocol for certain Git providers. For example,
 `pnpm add github:user/repo`
 
 You may install from Git by:
