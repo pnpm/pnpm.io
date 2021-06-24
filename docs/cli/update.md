@@ -57,6 +57,7 @@ versions of packages inside the workspace.
 If specific packages are updated, the command will fail if any of the updated
 dependencies are not found inside the workspace. For instance, the following
 command fails if `express` is not a workspace package:
+
 `pnpm up -r --workspace express`.
 
 ### --prod, -P
