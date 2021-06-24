@@ -157,6 +157,73 @@ separating the package selector from the dependency selector with a ">", for
 example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
 any other dependencies.
 
+### pnpm.packageExtensions
+
+Added in: v6.9.0
+
+The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
+
+```json
+{
+  "pnpm": {
+    "packageExtensions": {
+      "react-redux": {
+        "peerDependencies": {
+          "react-dom": "*"
+        }
+      }
+    }
+  }
+}
+```
+
+The keys in `packageExtensions` are package names or package names and semver ranges, so it is possible to patch only some versions of a package:
+
+```json
+{
+  "pnpm": {
+    "packageExtensions": {
+      "react-redux@1": {
+        "peerDependencies": {
+          "react-dom": "*"
+        }
+      }
+    }
+  }
+}
+```
+
+The following fields may be extended using `packageExtensions`: `dependencies`, `optionalDependencies`, `peerDependencies`, and `peerDependenciesMeta`.
+
+A bigger example:
+
+```json
+{
+  "pnpm": {
+    "packageExtensions": {
+      "express@1": {
+        "optionalDependencies": {
+          "typescript": "2"
+        }
+      },
+      "fork-ts-checker-webpack-plugin": {
+        "dependencies": {
+          "@babel/core": "1"
+        },
+        "peerDependencies": {
+          "eslint": ">= 6"
+        },
+        "peerDependenciesMeta": {
+          "eslint": {
+            "optional": true
+          }
+        }
+      }
+    }
+  }
+}
+```
+
 ### pnpm.neverBuiltDependencies
 
 Added in: v5.16.0
