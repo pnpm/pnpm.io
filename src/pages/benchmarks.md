@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Jun 26, 2021, 2:47 AM_ (_daily_ updated).
+**Last benchmarked at**: _Jun 27, 2021, 2:50 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, and Yarn (both regular and PnP variant).
 
@@ -22,12 +22,12 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 50.5s | 15.5s | 1m 1.4s | 49.1s |
+| install |       |          |             | 47s | 15.5s | 1m 1.4s | 49.1s |
 | install | ✔     | ✔        | ✔           | 1.8s | 1.3s | 2.6s | n/a |
 | install | ✔     | ✔        |             | 10.9s | 4.1s | 15s | 2.1s |
 | install | ✔     |          |             | 16.3s | 6.7s | 22.3s | 8.1s |
 | install |       | ✔        |             | 27.5s | 12.3s | 53.7s | 40.4s |
-| install | ✔     |          | ✔           | 21.9s | 1.8s | 8.8s | n/a |
+| install | ✔     |          | ✔           | 20.3s | 1.8s | 8.8s | n/a |
 | install |       | ✔        | ✔           | 1.8s | 1.3s | 41.1s | n/a |
 | install |       |          | ✔           | 20s | 5.9s | 46.8s | n/a |
 
