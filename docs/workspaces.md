@@ -189,3 +189,9 @@ IF (and only if) they are present in the workspace.
 You might want to change this setting to `false` if the tooling in your
 repository does not understand the workspace protocol (and ideally submit a PR
 to your tooling to get it added in the future).
+
+## Troubleshooting
+
+pnpm cannot guarantee that scripts will be run in topological order if there are cycles between workspace dependencies. If pnpm detects cyclic dependencies during installation, it will produce a warning. If pnpm is able to find out wich dependencies are causing the cycles, it will display them too.
+
+If you see the message `There are cyclic workspace dependencies`, please inspect workspace dependencies declared in `dependencies`, `optionalDependencies` and `devDependencies`.
