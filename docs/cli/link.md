@@ -21,3 +21,15 @@ pnpm link --global <pkg>
 * **Type**: Path string
 
 Changes the link location to `<dir>`.
+
+### `pnpm link <dir>`
+
+Links package from `<dir>` folder to node_modules of package from where you executing this command or specified via `--dir` option.
+
+### `pnpm link --global`
+
+Links package from where this command was executed or specified via `--dir` option to global `node_modules`, so it can be referred from another package with `pnpm link --global <pkg>`.
+
+### `pnpm link --global <pkg>`
+
+Links package from global `node_modules` to the `node_nodules` of package from where this command was executed or specified via `--dir` option.
