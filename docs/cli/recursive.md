@@ -39,6 +39,8 @@ Added in: v2.13.0
 Set the maximum number of tasks to run simultaneously. For unlimited concurrency
 use `Infinity`.
 
+> Since v6.10.0 you can set the `workpace-concurrency` as `<= 0` and it will use amount of cores of the host as: `max(1, (number of cores) - abs(workspace-concurrency))`
+
 ### --[no-]bail
 
 Added in: v2.13.0
