@@ -28,8 +28,8 @@ Links package from `<dir>` folder to node_modules of package from where you exec
 
 ### `pnpm link --global`
 
-Links package from where this command was executed or specified via `--dir` option to global `node_modules`, so it can be referred from another package with `pnpm link --global <pkg>`.
+Links package from location where this command was executed or specified via `--dir` option to global `node_modules`, so it can be referred from another package with `pnpm link --global <pkg>`.
 
 ### `pnpm link --global <pkg>`
 
-Links package from global `node_modules` to the `node_nodules` of package from where this command was executed or specified via `--dir` option.
+Links the specified package (`<pkg>`) from global `node_modules` to the `node_nodules` of package from where this command was executed or specified via `--dir` option.
