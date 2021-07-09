@@ -120,7 +120,7 @@ briefly slowing down the installation process.
 ## What does `pnpm` stand for?
 
 `pnpm` stands for `performant npm`.
-[Rico Sta. Cruz](https://github.com/rstacruz/) came up with the name.
+[@rstacruz](https://github.com/rstacruz/) came up with the name.
 
 ## `pnpm` does not work with &lt;YOUR-PROJECT-HERE>?
 

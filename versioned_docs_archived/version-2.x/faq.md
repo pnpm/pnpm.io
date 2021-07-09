@@ -88,7 +88,7 @@ Then pnpm would need to re-download all removed packages, briefly slowing down t
 
 ## What does `pnpm` stand for?
 
-`pnpm` stands for `performant npm`. [Rico Sta. Cruz](https://github.com/rstacruz/) came up with the name.
+`pnpm` stands for `performant npm`. [@rstacruz](https://github.com/rstacruz/) came up with the name.
 
 ## `pnpm` does not work with &lt;YOUR-PROJECT-HERE\>?
 
