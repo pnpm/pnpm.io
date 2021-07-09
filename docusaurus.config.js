@@ -120,9 +120,18 @@ module.exports={
           ],
         },
         {
-          href: SPONSOR_URL,
+          label: 'Sponsor Us',
           position: 'right',
-          label: 'Sponsor Us'
+          items: [
+            {
+              label: 'Open Collective',
+              href: SPONSOR_URL,
+            },
+            {
+              label: 'Crypto Donations',
+              href: '/crypto-donations',
+            }
+          ]
         },
         {
           href: 'https://github.com/pnpm/pnpm',
