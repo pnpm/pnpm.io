@@ -121,7 +121,7 @@ module.exports={
           ],
         },
         {
-          label: 'Sponsor Us',
+          label: '🧡 Sponsor Us',
           position: 'right',
           items: [
             {
