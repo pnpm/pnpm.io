@@ -39,3 +39,9 @@ Please note that this is prohibited when a [store server] is running.
 
 [the FAQ]: faq.md#what-does-pnpm-store-prune-do-is-it-harmful
 [store server]: ./server.md
+
+### path
+
+Added in: v6.10.0
+
+Returns the path to the active store directory.

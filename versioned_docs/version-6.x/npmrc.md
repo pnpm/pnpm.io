@@ -610,6 +610,24 @@ Added in: v4.2.0
 
 Specify a custom directory to store global packages.
 
+### state-dir
+
+Added in: v6.10.0
+
+* Default: **$XDG_STATE_HOME/pnpm**
+* Type: **path**
+
+The directory where pnpm creates the `pnpm-state.json` file that is currently used only by the update checker.
+
+### cache-dir
+
+Added in: v6.10.0
+
+* Default: **$XDG_CACHE_HOME/pnpm**
+* Type: **path**
+
+The location of the package metadata cache.
+
 ### use-node-version
 
 Added in: v6.5.0
