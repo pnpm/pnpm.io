@@ -3,6 +3,7 @@ const path = require('path');
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
 const SPONSOR_URL = 'https://opencollective.com/pnpm';
 const TRANSLATE_URL = "https://crowdin.com/project/pnpm";
+const CRYPTO_DONATIONS_HREF = '/crypto-donations';
 const DEFAULT_LOCALE = 'en';
 const LOCALE_FULL_CODE = {
   zh: 'zh-CN',
@@ -129,7 +130,7 @@ module.exports={
             },
             {
               label: 'Crypto Donations',
-              href: '/crypto-donations',
+              href: CRYPTO_DONATIONS_HREF,
             }
           ]
         },
@@ -191,15 +192,19 @@ module.exports={
           items: [
             {
               label: 'GitHub',
-              to: GITHUB_URL,
+              href: GITHUB_URL,
             },
             {
-              label: 'Sponsor Us',
-              to: SPONSOR_URL,
+              label: 'Sponsor Us on Open Collective',
+              href: SPONSOR_URL,
+            },
+            {
+              label: 'Crypto Donations',
+              href: CRYPTO_DONATIONS_HREF,
             },
             {
               label: 'Help Us Translate',
-              to: TRANSLATE_URL,
+              href: TRANSLATE_URL,
             },
           ],
         },
