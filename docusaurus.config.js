@@ -102,6 +102,11 @@ module.exports={
           "position": "left"
         },
         {
+          "to": "/community",
+          "label": "Community",
+          "position": "left"
+        },
+        {
           "to": "/benchmarks",
           "label": "Benchmarks",
           "position": "left"
