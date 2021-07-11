@@ -1,0 +1,10 @@
+- firstInstall: 18092
+  repeatInstall: 1543
+  withWarmCacheAndLockfile: 5078
+  withWarmCache: 8085
+  withLockfile: 16321
+  withWarmCacheAndModules: 2913
+  withWarmModulesAndLockfile: 1529
+  withWarmModules: 7144
+  updatedDependencies: 12990
+  size: 213891286
