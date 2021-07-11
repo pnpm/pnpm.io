@@ -1,5 +1,7 @@
 # Crypto Donations
 
+If your crypto of choice is not in the list below, feel free to contact us, and we will set up a wallet for it.
+
 ## Bitcoin (BTC)
 
 ```
