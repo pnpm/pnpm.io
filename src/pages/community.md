@@ -21,6 +21,7 @@
 - 09-06-2020: [Using pnpm with private registries in Bytesafe](https://bytesafe.dev/posts/pnpm-package-manager/)
 - 12-07-2020: [Mono repository done right!](https://blog.ghaiklor.com/2020/07/12/mono-repository-done-right/comment-page-1/)
 - 27-09-2020: [pnpm: A Space-Efficient JavaScript Package Manager](https://medium.com/javascript-in-plain-english/what-is-pnpm-a-space-efficient-javascript-package-manager-2876b623b81d)
+- 23-11-2020: [Cleaner ESLint Config and Pnpm Support and more with Nx 10.4](https://blog.nrwl.io/cleaner-eslint-config-and-pnpm-compatibility-with-nx-10-4-3f6faa3cdd19)
 - 22-03-2021: [How to Use PNPM in Netlify Build](https://www.seancdavis.com/blog/use-pnpm-with-netlify/)
 
 In German :de::
@@ -64,6 +65,7 @@ In Ukrainian 🇺🇦:
 
 * [rush](https://rushjs.io/)
 * [changesets](https://github.com/atlassian/changesets) - A way to manage your versioning and changelogs with a focus on monorepos.
+* [Nx](https://nx.dev/)
 * [Renovate](https://renovateapp.com/) - Automated dependency updates, for humans
 * [syncpack](https://github.com/JamieMason/syncpack)
 * [handpick](https://github.com/redaxmedia/handpick) - Handpick conditional dependencies like a boss
