@@ -58,23 +58,6 @@ module.exports={
       }
     ]
   ],
-  "plugins": [
-    [
-      '@docusaurus/plugin-client-redirects',
-      {
-        createRedirects: (existingPath) => {
-          const alternatives = []
-          if (!existingPath.match(/^\/[a-z]{2}\//)) {
-            alternatives.push(`/en${existingPath}`);
-          }
-          if (!existingPath.startsWith('/5.x/')) {
-            alternatives.push(`/5.x${existingPath}`);
-          }
-          return alternatives;
-        }
-      }
-    ]
-  ],
   "themeConfig": {
     "prism": {
       theme: require('prism-react-renderer/themes/github'),
