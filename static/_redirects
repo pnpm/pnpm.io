@@ -1,2 +1,3 @@
 https://pnpm.js.org/pnpm.js   https://get.pnpm.io/v5.js    200
 https://pnpm.js.org/*         https://pnpm.io/:splat       301!
+/6.x/*                        /:splat                      302

@@ -1,4 +1,0 @@
-[[redirects]]
-  from = "/6.x/*"
-  to = "/:splat"
-  status = 302
