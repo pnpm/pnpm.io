@@ -184,5 +184,12 @@
     "image": "/img/users/verdaccio.svg",
     "infoLink": "https://verdaccio.org",
     "pinned": false
+  },
+  {
+    "caption": "SvelteKit",
+    "image": "/img/users/sveltekit.svg",
+    "infoLink": "https://kit.svelte.dev",
+    "pinned": false,
+    "width": 300
   }
 ]
