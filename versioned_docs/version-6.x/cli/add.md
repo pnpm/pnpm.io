@@ -21,8 +21,11 @@ By default, any new package is installed as a production dependency.
 ### Install from npm registry
 
 `pnpm add package-name` will install the latest version of `package-name` from
-the [npm registry](https://www.npmjs.com/) by default. To install a package from
-another registry, you can use the tarball link (see [the corresponding guide]).
+the [npm registry](https://www.npmjs.com/) by default.
+
+If executed in a workspace, the command will first try to check whether other
+projects in the workspace use the specified package. If so, the already used version range
+will be installed.
 
 You may also install packages by:
 

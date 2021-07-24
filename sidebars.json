@@ -53,6 +53,7 @@
         "label": "Misc.",
         "items": [
           "cli/publish",
+          "cli/pack",
           "cli/recursive",
           "cli/server",
           "cli/store"

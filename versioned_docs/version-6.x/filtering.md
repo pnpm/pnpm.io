@@ -97,7 +97,7 @@ pnpm test --filter "...^foo"
 Added in: v2.15.0
 
 To only select packages under the specified directory, you may specify any
-absolute path, typically in POSIX format.
+relative path, typically in POSIX format.
 
 ## --filter {&lt;directory>}
 

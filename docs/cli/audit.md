@@ -3,7 +3,7 @@ id: audit
 title: pnpm audit
 ---
 
-Added in: 4.3.0
+Added in: v4.3.0
 
 Checks for known security issues with the installed packages.
 
@@ -22,6 +22,8 @@ use this overrides to force `lodash@^2.1.0`:
 }
 ```
 
+Or alternatively, run `pnpm audit --fix`.
+
 [overrides]: ../package_json.md#pnpmoverrides
 
 ## Options
@@ -32,6 +34,12 @@ use this overrides to force `lodash@^2.1.0`:
 * Default: **low**
 
 Only print advisories with severity greater than or equal to `<severity>`.
+
+### --fix
+
+Added in: v6.11.0
+
+Add overrides to the `package.json` file in order to force non-vulnerable versions of the dependencies.
 
 ### --json
 
