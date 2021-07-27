@@ -1,6 +1,7 @@
 const path = require('path');
 
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
+const GITHUB_SPONSOR_URL = 'https://github.com/sponsors/pnpm';
 const SPONSOR_URL = 'https://opencollective.com/pnpm';
 const TRANSLATE_URL = "https://crowdin.com/project/pnpm";
 const CRYPTO_DONATIONS_HREF = '/crypto-donations';
@@ -117,6 +118,10 @@ module.exports={
               href: SPONSOR_URL,
             },
             {
+              label: 'GitHub Sponsors',
+              href: GITHUB_SPONSOR_URL,
+            },
+            {
               label: 'Crypto Donations',
               href: CRYPTO_DONATIONS_HREF,
             }
@@ -181,14 +186,6 @@ module.exports={
             {
               label: 'GitHub',
               href: GITHUB_URL,
-            },
-            {
-              label: 'Sponsor Us on Open Collective',
-              href: SPONSOR_URL,
-            },
-            {
-              label: 'Crypto Donations',
-              href: CRYPTO_DONATIONS_HREF,
             },
             {
               label: 'Help Us Translate',
