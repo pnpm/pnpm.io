@@ -185,7 +185,7 @@ module.exports = {
 ```
 
 After creating a `.pnpmfile.cjs`, delete `pnpm-lock.yaml` only - there is no need
-to delete `node_modules`, as pnpm hooks only effect module resolution. Then,
+to delete `node_modules`, as pnpm hooks only affect module resolution. Then,
 rebuild the dependencies & it should be working.
 
 [Webpack Dashboard]: https://github.com/pnpm/pnpm/issues/1043
