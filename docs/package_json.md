@@ -108,9 +108,25 @@ Will be published as:
 }
 ```
 
+#### publishConfig.executableFiles
+
+Added in: v6.11.5
+
+By default, for portability reasons, no files except those listed in the bin field will be marked as executable in the resulting package archive. The `executableFiles` field lets you declare additional fields that must have the executable flag (+x) set even if they aren't directly accessible through the bin field.
+
+```json
+{
+  "publishConfig": {
+    "executableFiles": [
+      "./dist/shim.js",
+    ]
+  }
+}
+```
+
 #### publishConfig.directory
 
-Added in v6.7.0
+Added in: v6.7.0
 
 You also can use the field `publishConfig.directory` to customize the published subdirectory relative to the current `package.json`.
 
