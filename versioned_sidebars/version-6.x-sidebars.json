@@ -141,6 +141,13 @@
           ]
         },
         {
+          "type": "category",
+          "label": "Manage environments",
+          "items": [
+            "version-6.x/cli/env"
+          ]
+        },
+        {
           "collapsed": true,
           "type": "category",
           "label": "Misc.",

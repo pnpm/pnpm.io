@@ -50,6 +50,13 @@
       },
       {
         "type": "category",
+        "label": "Manage environments",
+        "items": [
+          "cli/env"
+        ]
+      },
+      {
+        "type": "category",
         "label": "Misc.",
         "items": [
           "cli/publish",
