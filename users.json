@@ -191,5 +191,12 @@
     "infoLink": "https://kit.svelte.dev",
     "pinned": false,
     "width": 300
+  },
+  {
+    "caption": "SyntaxPhoenix IT-Solutions",
+    "image": "/img/users/syntaxphoenix.svg",
+    "infoLink": "https://syntaxphoenix.com",
+    "pinned": false,
+    "width": 300
   }
 ]
