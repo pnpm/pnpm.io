@@ -80,23 +80,41 @@ const Showcase = props => {
       <div className="mainContainer" style={{backgroundColor: 'var(--ifm-color-emphasis-100)', padding: '2rem 0'}}>
         <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
           <div className="showcaseSection text--center">
-            <div className="prose">
-              <h1><Translate>Who's Using This?</Translate></h1>
-              <p><Translate>This project is used by many folks</Translate></p>
+            <div className="prose" style={{marginBottom: '20px'}}>
+              <h1><Translate>Sponsored By</Translate></h1>
+              <div className="logos" style={{
+                alignItems: 'center',
+                display: 'flex',
+                flexFlow: 'row wrap',
+                justifyContent: 'center',
+              }}>
+                <a href="https://www.justanswer.com/" target="_blank">
+                  <img style={{marginTop: '-22px', padding: '20px'}} src="/img/users/justanswer.svg" />
+                </a>
+                <a href="https://bit.dev/" target="_blank">
+                  <img style={{padding: '20px'}} width="120" src="/img/users/bit.svg" />
+                </a>
+              </div>
             </div>
-            <div className="logos" style={{
-              alignItems: 'center',
-              display: 'flex',
-              flexFlow: 'row wrap',
-              justifyContent: 'center',
-            }}>{showcase}</div>
-            <Link
-              style={{margin: '0 20px'}}
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
+            <div>
+              <div className="prose">
+                <h1><Translate>Who's Using This?</Translate></h1>
+                <p><Translate>This project is used by many folks</Translate></p>
+              </div>
+              <div className="logos" style={{
+                alignItems: 'center',
+                display: 'flex',
+                flexFlow: 'row wrap',
+                justifyContent: 'center',
+              }}>{showcase}</div>
+              <Link
+                style={{margin: '0 20px'}}
+                className={clsx(
+                  'button button--outline button--secondary button--lg',
+                  styles.getStarted,
+                )}
+                to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
+            </div>
           </div>
         </div>
       </div>
