@@ -128,11 +128,15 @@
             },
             {
               "type": "doc",
+              "id": "version-6.x/cli/test"
+            },
+            {
+              "type": "doc",
               "id": "version-6.x/cli/exec"
             },
             {
               "type": "doc",
-              "id": "version-6.x/cli/test"
+              "id": "version-6.x/cli/dlx"
             },
             {
               "type": "doc",

@@ -3,6 +3,10 @@ id: pnpx-cli
 title: pnpx CLI
 ---
 
+:::warning
+This command is deprecated! Use [`pnpm exec`] and [`pnpm dlx`] instead.
+:::
+
 ## For new users
 
 `pnpx` (PNPm eXecute) is a command line tool that fetches a package from the
@@ -20,7 +24,7 @@ This will fetch `create-react-app` from the registry and run it with the given
 arguments. For more information, you may want to look at [npx] from npm, as it
 offers the same interface, except it uses `npm` instead of `pnpm` under the hood.
 
-If you just want to run a binary of a project's dependency, see [pnpm exec].
+If you just want to run a binary of a project's dependency, see [`pnpm exec`].
 
 ## For npm users
 
@@ -29,4 +33,5 @@ npm has a great package runner called [npx]. pnpm offers the same tool via the
 packages.
 
 [npx]: https://www.npmjs.com/package/npx
-[pnpm exec]: ./cli/exec.md
+[`pnpm exec`]: ./cli/exec.md
+[`pnpm dlx`]: ./cli/dlx.md

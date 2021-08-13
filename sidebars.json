@@ -43,8 +43,9 @@
         "label": "Run scripts",
         "items": [
           "cli/run",
-          "cli/exec",
           "cli/test",
+          "cli/exec",
+          "cli/dlx",
           "cli/start"
         ]
       },
