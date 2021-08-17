@@ -109,7 +109,7 @@ node_modules
     ├── b@1.0.0_c@1.1.0
     │   └── node_modules
     │       ├── b
-    │       └── c -> ../../cn@1.1.0/node_modules/plugin
+    │       └── c -> ../../c@1.1.0/node_modules/c
     ├── c@1.0.0
     ├── c@1.1.0
 ```
