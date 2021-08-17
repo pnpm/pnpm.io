@@ -94,6 +94,9 @@ const Showcase = props => {
                 <a href="https://bit.dev/" target="_blank">
                   <img style={{padding: '20px'}} width="120" src="/img/users/bit.svg" />
                 </a>
+                <a href="https://prisma.io/" target="_blank">
+                  <img style={{padding: '20px'}} width="240" src="/img/users/prisma.svg" />
+                </a>
               </div>
             </div>
             <div>
