@@ -23,7 +23,8 @@ For more on this subject:
 
 ## Does it work on Windows?
 
-Short answer: Yes
+Short answer: Yes.
+
 Long answer: Using symbolic linking on Windows is problematic to say the least,
 however, pnpm has a workaround. For Windows, we use [junctions] instead.
 
