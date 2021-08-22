@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: curl -f https://get.pnpm.io/v6.7.js | node - add --global pnpm@6.7
+      - run: curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm@6.14
       - run: pnpm --dir=benchmarks install
       - run: pnpm --dir=benchmarks run benchmark
       - name: Commit & Push changes
