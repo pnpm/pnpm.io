@@ -8,7 +8,13 @@ title: Installation
 On POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
 
 ```sh
-curl https://get.pnpm.io/install.sh | bash
+curl -fsSL https://get.pnpm.io/install.sh | bash
+```
+
+If you don't have curl installed, you would like to use wget:
+
+```sh
+wget -qO- https://get.pnpm.io/install.sh | bash
 ```
 
 You may use the [pnpm env] command then to install Node.js.
