@@ -7,6 +7,13 @@
     "width": 150
   },
   {
+    "caption": "Prisma",
+    "image": "/img/users/prisma.svg",
+    "infoLink": "https://prisma.io",
+    "pinned": true,
+    "width": 150
+  },
+  {
     "caption": "Microsoft",
     "image": "/img/users/microsoft.svg",
     "infoLink": "https://microsoft.com/",
