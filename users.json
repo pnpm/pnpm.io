@@ -10,7 +10,7 @@
     "caption": "Prisma",
     "image": "/img/users/prisma.svg",
     "infoLink": "https://prisma.io",
-    "pinned": true,
+    "pinned": false,
     "width": 150
   },
   {
