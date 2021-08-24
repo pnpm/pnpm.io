@@ -5,7 +5,9 @@ title: Installation
 
 ## Using a standalone script
 
-On POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
+### Node.js is not preinstalled
+
+On x64 POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
 
 ```sh
 curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -18,6 +20,14 @@ wget -qO- https://get.pnpm.io/install.sh | sh -
 ```
 
 You may use the [pnpm env] command then to install Node.js.
+
+### Node.js is preinstalled
+
+On Linux or macOS:
+
+```
+curl -f https://get.pnpm.io/v6.14.js | node - add --global pnpm
+```
 
 On Windows (PowerShell):
 
