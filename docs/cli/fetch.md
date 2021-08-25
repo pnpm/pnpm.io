@@ -94,8 +94,6 @@ RUN pnpm fetch --prod
 ADD . ./
 RUN pnpm install -r --offline --prod
 
-# Bundle app source
-COPY . .
 
 EXPOSE 8080
 CMD [ "node", "server.js" ]
