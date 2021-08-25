@@ -7,7 +7,7 @@ title: Installation
 
 ### Node.js is not preinstalled
 
-On x64 POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
+On POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
 
 ```sh
 curl -fsSL https://get.pnpm.io/install.sh | sh -
