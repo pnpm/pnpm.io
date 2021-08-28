@@ -5,7 +5,8 @@ title: pnpm import
 
 Added in: v2.15.0
 
-`pnpm import` generates a `pnpm-lock.yaml` from an npm `package-lock.json` (or
-`npm-shrinkwrap.json`) file.
+`pnpm import` generates a `pnpm-lock.yaml` from another package manager's lockfile. Supported source files:
+* `package-lock.json`
+* `npm-shrinkwrap.json`
+* `yarn.lock` (since v6.14.0)
 
-After v6.14.0, `pnpm import` now support generates from yarn.lock file.
