@@ -6,7 +6,7 @@ title: Using Changesets with pnpm
 :::note
 
 At the time of writing this documentation, the latest pnpm version was
-v6.3.0. The latest [Changesets](https://github.com/atlassian/changesets) version was v2.16.0.
+v6.14. The latest [Changesets](https://github.com/atlassian/changesets) version was v2.16.0.
 
 :::
 
@@ -22,19 +22,19 @@ pnpm add -DW @changesets/cli
 Then changesets' init command:
 
 ```sh
-pnpx changeset init
+pnpm changeset init
 ```
 
 ## Adding new changesets
 
-To generate a new changeset, run `pnpx changeset` in the root of the repository.
+To generate a new changeset, run `pnpm changeset` in the root of the repository.
 The generated markdown files in the `.changeset` directory should be committed
 to the repository.
 
 ## Releasing changes
 
-1. Run `pnpx changeset version`. This will bump the versions of the packages
-   previously specified with `pnpx changeset` (and any dependents of those) and
+1. Run `pnpm changeset version`. This will bump the versions of the packages
+   previously specified with `pnpm changeset` (and any dependents of those) and
    update the changelog files.
 2. Run `pnpm install`. This will update the lockfile and rebuild packages.
 3. Commit the changes.
