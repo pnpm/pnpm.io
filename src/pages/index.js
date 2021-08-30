@@ -52,7 +52,7 @@ function Feature({imageUrl, title, description}) {
     <div className={clsx('col col--3', styles.feature)}>
       {imgUrl && (
         <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} style={{ width: '115px'}} />
+          <img className={styles.featureImage} src={imgUrl} alt="" style={{ width: '115px'}} />
         </div>
       )}
       <h3 className="text--center">{title}</h3>
@@ -68,7 +68,7 @@ const Showcase = props => {
   const showcase = siteConfig.customFields.users.filter(({ pinned }) => pinned).map((user, i) => {
     return (
       <a href={user.infoLink} target="_blank" key={i} rel="noopener">
-        <img src={user.image} title={user.caption} style={{
+        <img src={user.image} alt={user.caption} style={{
           width: user.width ? `${user.width}px` : '128px',
           padding: '20px'
         }} />
@@ -89,13 +89,13 @@ const Showcase = props => {
                 justifyContent: 'center',
               }}>
                 <a href="https://www.justanswer.com/" target="_blank">
-                  <img style={{marginTop: '-22px', padding: '20px'}} src="/img/users/justanswer.svg" />
+                  <img style={{marginTop: '-22px', padding: '20px'}} alt="JustAnswer" src="/img/users/justanswer.svg" />
                 </a>
                 <a href="https://bit.dev/" target="_blank">
-                  <img style={{padding: '20px'}} width="120" src="/img/users/bit.svg" />
+                  <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
                 </a>
                 <a href="https://prisma.io/" target="_blank">
-                  <img style={{padding: '20px'}} width="240" src="/img/users/prisma.svg" />
+                  <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
                 </a>
               </div>
             </div>
