@@ -1,11 +1,11 @@
 {
   "scripts": {
     "examples": "docusaurus-examples",
-    "copy-docs": "rm -rf versioned_docs/version-6.x && cp -r docs versioned_docs/version-6.x",
+    "copy-docs": "shx rm -rf versioned_docs/version-6.x && shx cp -r docs versioned_docs/version-6.x",
     "start": "pnpm copy-docs && docusaurus start",
     "build": "pnpm copy-docs && docusaurus build",
     "publish-gh-pages": "docusaurus-publish --skip-image-compression",
-    "write-translations": "rm -rf i18n/en && docusaurus write-translations",
+    "write-translations": "shx rm -rf i18n/en && docusaurus write-translations",
     "version": "docusaurus docs:version",
     "rename-version": "docusaurus-rename-version",
     "crowdin-upload": "pnpm write-translations && crowdin upload sources --auto-update",
@@ -16,15 +16,18 @@
     "docusaurus": "docusaurus"
   },
   "dependencies": {
-    "@crowdin/cli": "^3.6.4",
-    "@docusaurus/core": "2.0.0-beta.4",
-    "@docusaurus/plugin-client-redirects": "^2.0.0-beta.4",
-    "@docusaurus/preset-classic": "2.0.0-beta.4",
+    "@crowdin/cli": "^3.6.5",
+    "@docusaurus/core": "2.0.0-beta.6",
+    "@docusaurus/plugin-client-redirects": "^2.0.0-beta.6",
+    "@docusaurus/preset-classic": "2.0.0-beta.6",
     "clsx": "^1.1.1",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "engines": {
     "pnpm": "6"
+  },
+  "devDependencies": {
+    "shx": "^0.3.3"
   }
 }
