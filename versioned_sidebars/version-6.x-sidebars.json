@@ -252,6 +252,10 @@
       "items": [
         {
           "type": "doc",
+          "id": "version-6.x/errors"
+        },
+        {
+          "type": "doc",
           "id": "version-6.x/logos"
         },
         {

@@ -86,6 +86,7 @@
       "git"
     ],
     "Advanced": [
+      "errors",
       "logos",
       "benchmark",
       "limitations",
