@@ -84,6 +84,12 @@ Added in: v1.26.0 (initially named `shrinkwrap-only`)
 When used, only updates `pnpm-lock.yaml` and `package.json` instead of checking
 `node_modules` and downloading dependencies.
 
+### --fix-lockfile
+
+Added in: v6.15.0
+
+Fix broken lockfile entries automatically.
+
 ### --frozen-lockfile
 
 Added in: v1.37.1 (initially named `frozen-shrinkwrap`)

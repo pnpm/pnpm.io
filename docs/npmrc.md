@@ -610,6 +610,12 @@ Added in: v4.2.0
 
 Specify a custom directory to store global packages.
 
+### global-bin-dir
+
+Added in: v6.15.0
+
+Allows to set the target directory for the bin files of globally installed packages.
+
 ### state-dir
 
 Added in: v6.10.0
