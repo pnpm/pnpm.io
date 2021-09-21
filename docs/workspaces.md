@@ -195,3 +195,12 @@ to your tooling to get it added in the future).
 pnpm cannot guarantee that scripts will be run in topological order if there are cycles between workspace dependencies. If pnpm detects cyclic dependencies during installation, it will produce a warning. If pnpm is able to find out which dependencies are causing the cycles, it will display them too.
 
 If you see the message `There are cyclic workspace dependencies`, please inspect workspace dependencies declared in `dependencies`, `optionalDependencies` and `devDependencies`.
+
+## Usage examples
+
+Here are a few open source projects that use the workspace feature of pnpm:
+
+* [Cycle.js](https://github.com/cyclejs/cyclejs) (as of 9/21/2021, commit `f2187ab6688368edb904b649bd371a658f6a8637`)
+* [Prisma](https://github.com/prisma/prisma) (as of 9/21/2021, commit `c4c83e788aa16d61bae7a6d00adc8a58b3789a06`)
+* [Verdaccio](https://github.com/verdaccio/verdaccio) (as of 9/21/2021, commit `9dbf73e955fcb70b0a623c5ab89649b95146c744`)
+* [Rollup plugins](https://github.com/rollup/plugins) (as of 9/21/2021, commit `53fb18c0c2852598200c547a0b1d745d15b5b487`)
