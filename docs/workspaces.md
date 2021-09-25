@@ -200,7 +200,9 @@ If you see the message `There are cyclic workspace dependencies`, please inspect
 
 Here are a few open source projects that use the workspace feature of pnpm:
 
+* [Vite](https://github.com/vitejs/vite) (as of 9/26/2021, commit `3e1cce01d01493d33e50966d0d0fd39a86d229f9`)
 * [Cycle.js](https://github.com/cyclejs/cyclejs) (as of 9/21/2021, commit `f2187ab6688368edb904b649bd371a658f6a8637`)
 * [Prisma](https://github.com/prisma/prisma) (as of 9/21/2021, commit `c4c83e788aa16d61bae7a6d00adc8a58b3789a06`)
 * [Verdaccio](https://github.com/verdaccio/verdaccio) (as of 9/21/2021, commit `9dbf73e955fcb70b0a623c5ab89649b95146c744`)
 * [Rollup plugins](https://github.com/rollup/plugins) (as of 9/21/2021, commit `53fb18c0c2852598200c547a0b1d745d15b5b487`)
+* [Milkdown](https://github.com/Saul-Mirone/milkdown) (as of 9/26/2021, commit `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913`)
