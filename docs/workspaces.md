@@ -207,6 +207,7 @@ Here are a few open source projects that use the workspace feature of pnpm:
 * [Rollup plugins](https://github.com/rollup/plugins) (as of 9/21/2021, commit `53fb18c0c2852598200c547a0b1d745d15b5b487`)
 * [Milkdown](https://github.com/Saul-Mirone/milkdown) (as of 9/26/2021, commit `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913`)
 * [ByteMD](https://github.com/bytedance/bytemd) (as of 2/18/2021, commit `36ef25f1ea1cd0b08752df5f8c832302017bb7fb`)
-* [Telecraft](https://github.com/telecraft/telecraft) (as of 9/26/2021, commit `73a9c48c9d4f160d758b8881f404cc52c20a7454`)
 * [VueUse](https://github.com/vueuse/vueuse) (as of 9/25/2021, commit `826351ba1d9c514e34426c85f3d69fb9875c7dd9`)
 * [Slidev](https://github.com/slidevjs/slidev) (as of 4/12/2021, commit `d6783323eb1ab1fc612577eb63579c8f7bc99c3a`)
+* [SvelteKit](https://github.com/sveltejs/kit) (as of 9/26/2021, commit `b164420ab26fa04fd0fbe0ac05431f36a89ef193`)
+* [Telecraft](https://github.com/telecraft/telecraft) (as of 9/26/2021, commit `73a9c48c9d4f160d758b8881f404cc52c20a7454`)
