@@ -206,3 +206,4 @@ Here are a few open source projects that use the workspace feature of pnpm:
 * [Verdaccio](https://github.com/verdaccio/verdaccio) (as of 9/21/2021, commit `9dbf73e955fcb70b0a623c5ab89649b95146c744`)
 * [Rollup plugins](https://github.com/rollup/plugins) (as of 9/21/2021, commit `53fb18c0c2852598200c547a0b1d745d15b5b487`)
 * [Milkdown](https://github.com/Saul-Mirone/milkdown) (as of 9/26/2021, commit `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913`)
+* [ByteMD](https://github.com/bytedance/bytemd) (as of 2/18/2021, commit `36ef25f1ea1cd0b08752df5f8c832302017bb7fb`)
