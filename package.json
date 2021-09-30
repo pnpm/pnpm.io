@@ -29,6 +29,5 @@
   },
   "devDependencies": {
     "shx": "^0.3.3"
-  },
-  "packageManager": "yarn@3.0.2"
+  }
 }
