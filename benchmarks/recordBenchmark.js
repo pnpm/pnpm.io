@@ -20,7 +20,8 @@ export default async function (pm, fixture, opts) {
   if (prevResults.length >= limitRuns) return prevResults
 
   const newResults = await benchmark(pm, fixture, {
-    hasNodeModules: opts.hasNodeModules
+    hasNodeModules: opts.hasNodeModules,
+    managersDir: opts.managersDir,
   })
   const results = [...prevResults, newResults]
   await writeYamlFile(resultsFile, results)

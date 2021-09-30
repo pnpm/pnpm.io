@@ -21,20 +21,18 @@ const lockfileNameByPM = {
   yarn: 'yarn.lock'
 }
 
-const env = createEnv()
-
-function createEnv () {
+function createEnv (managersDir) {
   const pathEnv = pathKey()
   const env = Object.create(process.env)
   env[pathEnv] = [
-    path.join(DIRNAME, 'managers/node_modules/.bin'),
+    path.join(managersDir, 'node_modules/.bin'),
     path.dirname(process.execPath),
     process.env[pathEnv]
   ].join(path.delimiter)
   return env
 }
 
-function cleanLockfile (pm, cwd) {
+function cleanLockfile (pm, cwd, env) {
   const lockfileName = lockfileNameByPM[pm.name]
   rimraf.sync(path.join(cwd, lockfileName))
   if (pm.name === 'yarn') {
@@ -66,11 +64,12 @@ async function updateDependenciesInPackageJson (cwd) {
 }
 
 export default async function benchmark (pm, fixture, opts) {
+  const env = createEnv(opts.managersDir)
   const cwd = path.join(TMP, pm.scenario, fixture)
   fsx.copySync(path.join(FIXTURES_DIR, fixture), cwd)
   const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
 
-  cleanLockfile(pm, cwd)
+  cleanLockfile(pm, cwd, env)
 
   console.log(`# first install`)
 
@@ -108,13 +107,13 @@ export default async function benchmark (pm, fixture, opts) {
       ]
     }, { env, cwd, stdio: "inherit" })
   }
-  const firstInstall = measureInstall(pm, cwd)
+  const firstInstall = measureInstall(pm, cwd, env)
 
   let repeatInstall
   if (modules) {
     console.log(`# repeat install`)
 
-    repeatInstall = measureInstall(pm, cwd)
+    repeatInstall = measureInstall(pm, cwd, env)
 
     rimraf.sync(modules)
   } else {
@@ -123,7 +122,7 @@ export default async function benchmark (pm, fixture, opts) {
 
   console.log(`# with warm cache and lockfile`)
 
-  const withWarmCacheAndLockfile = measureInstall(pm, cwd)
+  const withWarmCacheAndLockfile = measureInstall(pm, cwd, env)
 
   if (modules) {
     rimraf.sync(modules)
@@ -133,7 +132,7 @@ export default async function benchmark (pm, fixture, opts) {
 
   console.log('# with warm cache')
 
-  const withWarmCache = measureInstall(pm, cwd)
+  const withWarmCache = measureInstall(pm, cwd, env)
 
   if (modules) {
     rimraf.sync(modules)
@@ -142,7 +141,7 @@ export default async function benchmark (pm, fixture, opts) {
 
   console.log('# with lockfile')
 
-  const withLockfile = measureInstall(pm, cwd)
+  const withLockfile = measureInstall(pm, cwd, env)
 
   cleanLockfile(pm, cwd)
 
@@ -153,20 +152,20 @@ export default async function benchmark (pm, fixture, opts) {
   if (modules) {
     console.log('# with warm cache and modules')
 
-    withWarmCacheAndModules = measureInstall(pm, cwd)
+    withWarmCacheAndModules = measureInstall(pm, cwd, env)
 
     rimraf.sync(path.join(cwd, 'cache'))
 
     console.log('# with warm modules and lockfile')
 
-    withWarmModulesAndLockfile = measureInstall(pm, cwd)
+    withWarmModulesAndLockfile = measureInstall(pm, cwd, env)
 
     rimraf.sync(path.join(cwd, 'cache'))
     cleanLockfile(pm, cwd)
 
     console.log('# with warm modules')
 
-    withWarmModules = measureInstall(pm, cwd)
+    withWarmModules = measureInstall(pm, cwd, env)
 
     size = await getFolderSize(modules)
   } else {
@@ -187,7 +186,7 @@ export default async function benchmark (pm, fixture, opts) {
       args: [...pm.args, '--no-frozen-lockfile'],
     }
   }
-  const updatedDependencies = measureInstall(pm, cwd)
+  const updatedDependencies = measureInstall(pm, cwd, env)
 
   // revert `package.json` back to its original state, just in case
   await fs.writeFile(path.join(cwd, 'package.json'), originalPackageJson)
@@ -207,7 +206,7 @@ export default async function benchmark (pm, fixture, opts) {
   }
 }
 
-function measureInstall (cmd, cwd) {
+function measureInstall (cmd, cwd, env) {
   const startTime = Date.now()
 
   console.log(`> ${cmd.name} ${cmd.args.join(' ')}`)

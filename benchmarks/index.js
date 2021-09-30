@@ -4,6 +4,7 @@ import { promisify } from 'util'
 import rimraf from 'rimraf'
 import commonTags from 'common-tags'
 import prettyMs from 'pretty-ms'
+import tempy from 'tempy'
 import cmdsMap from './commandsMap.js'
 import benchmark from './recordBenchmark.js'
 import generateSvg from './generateSvg.js'
@@ -126,7 +127,7 @@ run()
   .catch(err => console.error(err))
 
 async function run () {
-  const managersDir = path.join(DIRNAME, 'managers')
+  const managersDir = path.join(tempy.directory(), 'managers')
   await Promise.allSettled([
     promisify(rimraf)(TMP),
     // make sure folder exists
@@ -140,11 +141,16 @@ async function run () {
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
   const sections = []
   const svgs = []
+  const opts = {
+    limitRuns: LIMIT_RUNS,
+    hasNodeModules: true,
+    managersDir,
+  }
   for (const fixture of fixtures) {
-    const npmRes = min(await benchmark(cmdsMap.npm, fixture.name, {limitRuns: LIMIT_RUNS, hasNodeModules: true}))
-    const yarnRes = min(await benchmark(cmdsMap.yarn, fixture.name, {limitRuns: LIMIT_RUNS, hasNodeModules: true}))
-    const yarnPnPRes = min(await benchmark(cmdsMap.yarn_pnp, fixture.name, {limitRuns: LIMIT_RUNS, hasNodeModules: false}))
-    const pnpmRes = min(await benchmark(cmdsMap.pnpm, fixture.name, {limitRuns: LIMIT_RUNS, hasNodeModules: true}))
+    const npmRes = min(await benchmark(cmdsMap.npm, fixture.name, opts))
+    const yarnRes = min(await benchmark(cmdsMap.yarn, fixture.name, opts))
+    const yarnPnPRes = min(await benchmark(cmdsMap.yarn_pnp, fixture.name, opts))
+    const pnpmRes = min(await benchmark(cmdsMap.pnpm, fixture.name, opts))
     const resArray = toArray(pms, {
       'npm': npmRes,
       'pnpm': pnpmRes,
