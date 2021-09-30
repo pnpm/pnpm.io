@@ -48,11 +48,11 @@
   <rect x="40" y="78" width="10" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="84.5" width="0" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="95" width="47" height="6" fill="#cd3731" rx="1" ry="1"></rect>
-  <rect x="40" y="101.5" width="20" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="101.5" width="19" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="108" width="58" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="114.5" width="8" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="125" width="66" height="6" fill="#cd3731" rx="1" ry="1"></rect>
-  <rect x="40" y="131.5" width="34" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="131.5" width="33" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="138" width="86" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="144.5" width="31" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="155" width="115" height="6" fill="#cd3731" rx="1" ry="1"></rect>
@@ -85,5 +85,5 @@
   <text x="38" y="222.5" class="font s4" dominant-baseline="middle" text-anchor="end">with node_modules</text>
   <text x="38" y="226.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
   <text x="38" y="254.5" class="font s4" dominant-baseline="middle" text-anchor="end">with node_modules</text>
-  <text x="290" y="287" class="font s4 text" text-anchor="end">Tests were run using Node.js v16.10.0 at: Sep 29, 2021, 2:44 AM</text>
+  <text x="290" y="287" class="font s4 text" text-anchor="end">Tests were run using Node.js v16.10.0 at: Sep 30, 2021, 2:48 AM</text>
 </svg>
