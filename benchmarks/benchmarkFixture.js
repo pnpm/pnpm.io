@@ -107,6 +107,29 @@ export default async function benchmark (pm, fixture, opts) {
       ]
     }, { env, cwd, stdio: "inherit" })
   }
+
+  if (pm.name.startsWith('yarn')) {
+    spawnSyncOrThrow({
+      name: 'yarn',
+      args: [
+        'config',
+        'set',
+        'enableScripts',
+        'false',
+      ]
+    }, { env, cwd, stdio: "inherit" })
+    spawnSyncOrThrow({
+      name: 'yarn',
+      args: [
+        'config',
+        'set',
+        'enableImmutableInstalls',
+        'false',
+      ]
+    }, { env, cwd, stdio: "inherit" })
+    
+  }
+
   const firstInstall = measureInstall(pm, cwd, env)
 
   let repeatInstall

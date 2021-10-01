@@ -149,7 +149,10 @@ async function run () {
   for (const fixture of fixtures) {
     const npmRes = min(await benchmark(cmdsMap.npm, fixture.name, opts))
     const yarnRes = min(await benchmark(cmdsMap.yarn, fixture.name, opts))
-    const yarnPnPRes = min(await benchmark(cmdsMap.yarn_pnp, fixture.name, opts))
+    const yarnPnPRes = min(await benchmark(cmdsMap.yarn_pnp, fixture.name, {
+      ...opts,
+      hasNodeModules: false,
+    }))
     const pnpmRes = min(await benchmark(cmdsMap.pnpm, fixture.name, opts))
     const resArray = toArray(pms, {
       'npm': npmRes,
