@@ -5,6 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
+  workflow_run:
+    workflows: ["Benchmark runner"]
+    branches: [main]
+    types: 
+      - completed
 
 jobs:
   deploy:
