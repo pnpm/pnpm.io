@@ -117,8 +117,8 @@ async function installYarnBerryLikeModule (managersDir) {
   // Replace yarn binary with the yarn berry script
   await Promise.allSettled([
     fs.promises.writeFile(yarnPkgJsonPath, JSON.stringify(yarnPkgJson)),
-    fs.promises.rename(path.join(DIRNAME, 'managers/.yarn/releases/yarn-berry.cjs'), path.join(DIRNAME, 'managers/node_modules/.bin/yarn')),
-    fs.promises.rm(path.join(DIRNAME, 'managers/.yarnrc.yml')),
+    fs.promises.rename(path.join(managersDir, `.yarn/releases/yarn-${yarnBerryVersion}.cjs`), path.join(managersDir, 'node_modules/.bin/yarn')),
+    fs.promises.rm(path.join(managersDir, '.yarnrc.yml')),
   ]);
 }
 
