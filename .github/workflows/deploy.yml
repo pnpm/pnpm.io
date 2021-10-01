@@ -18,6 +18,8 @@ jobs:
     steps:
     - name: Checkout Commit
       uses: actions/checkout@v1
+      with:
+          fetch-depth: 0
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
