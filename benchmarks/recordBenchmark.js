@@ -14,6 +14,7 @@ export default async function (pm, fixture, opts) {
   const limitRuns = opts.limitRuns || Infinity
 
   const { version: pmVersion } = await loadJsonFile(path.join(opts.managersDir, 'node_modules', pm.name, 'package.json'))
+  pm.version = pmVersion
   const resultsFile = path.join(RESULTS, pm.scenario, pmVersion, `${fixture}.yaml`)
   const prevResults = await safeLoadYamlFile(resultsFile) || []
 

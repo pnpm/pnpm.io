@@ -51,7 +51,7 @@ const tests = [
   'withWarmCacheAndModules',
   'withWarmModulesAndLockfile',
   'withWarmModules',
-  // 'updatedDependencies' // This is temporarily removed because it is broken with Yarn v2
+  'updatedDependencies'
 ]
 
 const testDescriptions = [
@@ -84,9 +84,9 @@ const testDescriptions = [
   [ // withWarmModules
     'with node_modules'
   ],
-  // [ // updatedDependencies
-    // 'update'
-  // ]
+  [ // updatedDependencies
+    'update'
+  ]
 ]
 
 const toArray = (pms, resultsObj) => {
@@ -174,6 +174,7 @@ async function run () {
       | install | ✔     |          | ✔           | ${prettyMs(npmRes.withWarmCacheAndModules)} | ${prettyMs(pnpmRes.withWarmCacheAndModules)} | ${prettyMs(yarnRes.withWarmCacheAndModules)} | n/a |
       | install |       | ✔        | ✔           | ${prettyMs(npmRes.withWarmModulesAndLockfile)} | ${prettyMs(pnpmRes.withWarmModulesAndLockfile)} | ${prettyMs(yarnRes.withWarmModulesAndLockfile)} | n/a |
       | install |       |          | ✔           | ${prettyMs(npmRes.withWarmModules)} | ${prettyMs(pnpmRes.withWarmModules)} | ${prettyMs(yarnRes.withWarmModules)} | n/a |
+      | update  | n/a | n/a | n/a | ${prettyMs(npmRes.updatedDependencies)} | ${prettyMs(pnpmRes.updatedDependencies)} | ${prettyMs(yarnRes.updatedDependencies)} | ${prettyMs(yarnPnPRes.updatedDependencies)} |
 
       ![Graph of the ${fixture.name} results](../../static/img/benchmarks/${fixture.name}.svg)
     `)
