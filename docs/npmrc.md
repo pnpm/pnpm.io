@@ -653,3 +653,15 @@ Added in: v6.5.0
 * Type: **Boolean**
 
 When true, all the output is written to stderr.
+
+### extend-node-path
+
+Added in: v6.16.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When `false`, the `NODE_PATH` environment variable is not set in the command shims.
+It is recommended to set this setting to `false` if you are getting the next error, when running commands:
+
+> The input line is too long. The syntax of the command is incorrect.

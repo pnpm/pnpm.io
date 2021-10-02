@@ -197,3 +197,15 @@ source code of the package, tests will run in the dependent packages as well:
 ```sh
 pnpm --filter="...[origin/master]" --test-pattern="test/*" test
 ```
+
+## --changed-files-ignore-pattern &ltglob>
+
+Added in: v6.16.0
+
+Allows to ignore changed files by glob patterns when filtering for changed projects since the specified commit/branch.
+
+Usage example:
+
+```sh
+pnpm --filter="...[origin/master]" --changed-files-ignore-pattern="**/README.md" run build
+```
