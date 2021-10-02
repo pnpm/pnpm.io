@@ -71,64 +71,30 @@ export default async function benchmark (pm, fixture, opts) {
 
   cleanLockfile(pm, cwd, env)
 
-  console.log(`# first install`)
-
   if (pm.name === 'yarn') {
     // Disable global mirror that speeds up yarn berry install
-    spawnSyncOrThrow({
-      name: 'yarn',
-      args: [
-        'config',
-        'set',
-        'enableMirror',
-        'false'
-      ]
-    }, { env, cwd, stdio: "inherit" })
-    spawnSyncOrThrow({
-      name: 'yarn',
-      args: [
-        'config',
-        'set',
-        'cacheFolder',
-        path.join(cwd, 'cache')
-      ]
-    }, { env, cwd, stdio: "inherit" })
+    let yarnRc =
+      'enableImmutableInstalls: false\n'
+    + 'enableMirror: false\n'
+    + `cacheFolder: ${path.join(cwd, 'cache')}\n`
+    + 'enableScripts: false\n'
     /**
      * @see https://yarnpkg.com/configuration/yarnrc#nodeLinker
      */
-    const nodeLinker = pm.scenario === 'yarn_pnp' ? 'pnp' : 'node-modules'
-    spawnSyncOrThrow({
-      name: 'yarn',
-      args: [
-        'config',
-        'set',
-        'nodeLinker',
-        nodeLinker
-      ]
-    }, { env, cwd, stdio: "inherit" })
+    switch (pm.scenario) {
+      case 'yarn':
+        yarnRc += 'nodeLinker: node-modules\n'
+                + 'nmMode: hardlinks-local\n'
+                + 'compressionLevel: 0\n'
+        break
+      case 'yarn_pnp':
+        yarnRc += 'nodeLinker: pnp\n'
+        break
+    }
+    await fs.writeFile(path.join(cwd, '.yarnrc.yml'), yarnRc)
   }
 
-  if (pm.name.startsWith('yarn')) {
-    spawnSyncOrThrow({
-      name: 'yarn',
-      args: [
-        'config',
-        'set',
-        'enableScripts',
-        'false',
-      ]
-    }, { env, cwd, stdio: "inherit" })
-    spawnSyncOrThrow({
-      name: 'yarn',
-      args: [
-        'config',
-        'set',
-        'enableImmutableInstalls',
-        'false',
-      ]
-    }, { env, cwd, stdio: "inherit" })
-    
-  }
+  console.log(`# first install`)
 
   const firstInstall = measureInstall(pm, cwd, env)
 
