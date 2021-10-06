@@ -57,6 +57,22 @@ module.exports={
           "customCss": "../src/css/customTheme.css"
         }
       }
+    ],
+  ],
+  "plugins": [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: 'community',
+        path: 'community',
+        routeBasePath: 'community',
+        "showLastUpdateAuthor": true,
+        "showLastUpdateTime": true,
+        editUrl: ({locale, versionDocsDirPath, docPath}) => makeEditUrl(locale, versionDocsDirPath, docPath),
+        "path": "./docs",
+        "routeBasePath": "/",
+        "sidebarPath": path.join(__dirname, "sidebars.json"),
+      }
     ]
   ],
   "themeConfig": {
