@@ -161,6 +161,7 @@ An example of the `"pnpm"."overrides"` field:
   "pnpm": {
     "overrides": {
       "foo": "^1.0.0",
+      "quux": "npm:@myorg/quux@^1.0.0",
       "bar@^2.1.0": "3.0.0",
       "qar@1>zoo": "2"
     }
