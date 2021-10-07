@@ -175,6 +175,14 @@
             {
               "type": "doc",
               "id": "version-6.x/cli/store"
+            },
+            {
+              "type": "doc",
+              "id": "version-6.x/cli/root"
+            },
+            {
+              "type": "doc",
+              "id": "version-6.x/cli/bin"
             }
           ]
         }

@@ -64,7 +64,9 @@
           "cli/pack",
           "cli/recursive",
           "cli/server",
-          "cli/store"
+          "cli/store",
+          "cli/root",
+          "cli/bin"
         ]
       }
     ],
