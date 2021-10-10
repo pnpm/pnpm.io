@@ -198,5 +198,12 @@
     "infoLink": "https://syntaxphoenix.com",
     "pinned": false,
     "width": 200
+  },
+  {
+    "caption": "CodeCarrot",
+    "image": "/img/users/codecarrot.svg",
+    "infoLink": "https://codecarrot.net",
+    "pinned": false,
+    "width": 300
   }
 ]
