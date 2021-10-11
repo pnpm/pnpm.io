@@ -46,6 +46,7 @@
           "cli/test",
           "cli/exec",
           "cli/dlx",
+          "cli/create",
           "cli/start"
         ]
       },

@@ -140,6 +140,10 @@
             },
             {
               "type": "doc",
+              "id": "version-6.x/cli/create"
+            },
+            {
+              "type": "doc",
               "id": "version-6.x/cli/start"
             }
           ]

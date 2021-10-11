@@ -35,3 +35,8 @@ As of v6.14.5, multiple packages can be provided for installation:
 pnpm --package=yo --package=generator-webapp dlx yo webapp --skip-install
 ```
 
+### --silent, -s
+
+Added in: v6.17.0
+
+Only the output of the executed command is printed.
