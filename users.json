@@ -208,9 +208,9 @@
   },
   {
     "caption": "Vue",
-    "image": "/img/users/vue.png",
+    "image": "/img/users/vue.svg",
     "infoLink": "https://v3.vuejs.org/",
     "pinned": true,
-    "width": 200
+    "width": 150
   }
 ]
