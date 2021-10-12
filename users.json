@@ -205,5 +205,12 @@
     "infoLink": "https://codecarrot.net",
     "pinned": false,
     "width": 300
+  },
+  {
+    "caption": "Vue",
+    "image": "/img/users/vue.svg",
+    "infoLink": "https://v3.vuejs.org/",
+    "pinned": true,
+    "width": 150
   }
 ]
