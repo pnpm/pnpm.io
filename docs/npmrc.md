@@ -365,7 +365,7 @@ It is not the path to a key file (and there is no `keyfile` option).
 * Type: **IP Address**
 
 The IP address of the local interface to use when making connections to the npm
-registry. Must be IPv4 in versions of Node prior to 12.x.
+registry.
 
 ### proxy
 
