@@ -4,7 +4,9 @@ title: pnpx CLI
 ---
 
 :::warning
+
 This command is deprecated! Use [`pnpm exec`] and [`pnpm dlx`] instead.
+
 :::
 
 ## For new users
