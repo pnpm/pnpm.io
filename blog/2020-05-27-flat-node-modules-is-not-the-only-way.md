@@ -2,7 +2,7 @@
 title: Flat node_modules is not the only way
 author: Zoltan Kochan
 authorURL: "http://twitter.com/zoltankochan"
-authorImageURL: "https://pbs.twimg.com/profile_images/1143606083262586880/EW2GCFKK_400x400.jpg"
+authorImageURL: "https://gravatar.com/avatar/1f59f040fb37d5799e3879fa678c2373?s=48"
 ---
 
 New users of pnpm frequently ask me about the weird structure of `node_modules` that pnpm creates. Why is it not flat? Where are all the sub-dependencies?
