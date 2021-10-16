@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Oct 16, 2021, 9:42 AM_ (_daily_ updated).
+**Last benchmarked at**: _Oct 16, 2021, 5:04 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, and Yarn (both regular and PnP variant).
 
