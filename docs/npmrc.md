@@ -376,6 +376,15 @@ A proxy to use for outgoing http requests. If the HTTP_PROXY or http_proxy
 environment variables are set, proxy settings will be honored by the underlying
 request library.
 
+### maxsockets
+
+Added in: v6.18.0
+
+* Default: **network-concurrency x 3**
+* Type: **Number**
+
+The maximum number of connections to use per origin (protocol/host/port combination).
+
 ### noproxy
 
 Added in: v5.18.8
