@@ -37,6 +37,12 @@ pnpm test --filter "@babel/*"
 pnpm test --filter "*core"
 ```
 
+Since v6.19.0:
+
+Specifying the scope of the package is optional, so `--filter=core` will pick `@babel/core` if `core` is not found.
+However, if the workspace has multiple packages with the same name (for instance, `@babel/core` and `@types/core`),
+then filtering without scope will pick nothing.
+
 ## --filter &lt;package_name>...
 
 Added in: v2.13.0
