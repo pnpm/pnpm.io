@@ -31,6 +31,65 @@ installed as a dependency.
 
 [.npmrc]: ./npmrc.md#engine-strict
 
+### dependenciesMeta
+
+#### dependenciesMeta.*.injected
+
+Added in: v6.20.0
+
+If this is set to true for a local dependency, the package will be hard linked to the modules directory, not symlinked.
+
+For instance, the following `package.json` in a workspace will create a symlink to `button` in the `node_modules` directory of `card`:
+
+```json
+{
+  "name": "card",
+  "dependencies": {
+    "button": "workspace:1.0.0"
+  }
+}
+```
+
+But what if `button` has `react` in its peer dependencies? If all projects in the monorepo use the same version of `react`, then no problem. But what if `button` is required by `card` that uses `react@16` and `form` with `react@17`? Without using `inject`, you'd have to choose a single version of `react` and install it as dev dependency of `button`. But using the `injected` field you can inject `button` to a package, and `button` will be installed with the `react` version of that package.
+
+So this will be the `package.json` of `card`:
+
+```json
+{
+  "name": "card",
+  "dependencies": {
+    "button": "workspace:1.0.0",
+    "react": "16"
+  },
+  "dependenciesMeta": {
+    "button": {
+      "injected": true
+    }
+  }
+}
+```
+
+`button` will be hard linked into the dependencies of `card`, and `react@16` will be symlinked to the dependencies of `card/node_modules/button`.
+
+And this will be the `package.json` of `form`:
+
+```json
+{
+  "name": "form",
+  "dependencies": {
+    "button": "workspace:1.0.0",
+    "react": "17"
+  },
+  "dependenciesMeta": {
+    "button": {
+      "injected": true
+    }
+  }
+}
+```
+
+`button` will be hard linked into the dependencies of `form`, and `react@17` will be symlinked to the dependencies of `form/node_modules/button`.
+
 ### peerDependenciesMeta
 
 This field lists some extra information related to the dependencies listed in
