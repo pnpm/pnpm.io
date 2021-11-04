@@ -2,9 +2,9 @@
 import benchmark from './benchmarkFixture.js'
 import path from 'path'
 import writeYamlFile from 'write-yaml-file'
-import loadYamlFile from 'load-yaml-file'
+import { loadYamlFile } from 'load-yaml-file'
 import { fileURLToPath } from 'url'
-import loadJsonFile from 'load-json-file'
+import { loadJsonFile } from 'load-json-file'
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
 const RESULTS = path.join(DIRNAME, 'results')

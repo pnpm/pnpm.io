@@ -4,13 +4,11 @@ import pathKey from 'path-key'
 import spawn from "cross-spawn"
 import fsx from 'fs-extra'
 import { promises as fs } from 'fs'
-import getFolderSizeCB from 'get-folder-size'
+import getFolderSize from 'get-folder-size'
 import rimraf from 'rimraf'
-import { promisify } from 'util'
 import { fileURLToPath } from 'url'
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
-const getFolderSize = promisify(getFolderSizeCB)
 
 const FIXTURES_DIR = path.join(DIRNAME, 'fixtures')
 const TMP = path.join(DIRNAME, '.tmp')
@@ -156,12 +154,12 @@ export default async function benchmark (pm, fixture, opts) {
 
     withWarmModules = measureInstall(pm, cwd, env)
 
-    size = await getFolderSize(modules)
+    size = await getFolderSize(modules).size
   } else {
     withWarmCacheAndModules =
       withWarmModulesAndLockfile =
       withWarmModules = 0
-    size = await getFolderSize(path.join(cwd, 'cache'))
+    size = await getFolderSize(path.join(cwd, 'cache')).size
   }
 
   console.log('# with updated dependencies')
