@@ -4,7 +4,6 @@ on: [pull_request]
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: deploy
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v2
