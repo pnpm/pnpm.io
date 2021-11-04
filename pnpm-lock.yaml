@@ -1,14 +1,14 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@crowdin/cli': ^3.7.1
+  '@crowdin/cli': 3.7.1
   '@docusaurus/core': 2.0.0-beta.9
-  '@docusaurus/plugin-client-redirects': ^2.0.0-beta.9
+  '@docusaurus/plugin-client-redirects': 2.0.0-beta.9
   '@docusaurus/preset-classic': 2.0.0-beta.9
-  clsx: ^1.1.1
-  react: ^17.0.2
-  react-dom: ^17.0.2
-  shx: ^0.3.3
+  clsx: 1.1.1
+  react: 17.0.2
+  react-dom: 17.0.2
+  shx: 0.3.3
 
 dependencies:
   '@crowdin/cli': 3.7.1
