@@ -5,6 +5,7 @@ const GITHUB_SPONSOR_URL = 'https://github.com/sponsors/pnpm';
 const SPONSOR_URL = 'https://opencollective.com/pnpm';
 const TRANSLATE_URL = "https://crowdin.com/project/pnpm";
 const CRYPTO_DONATIONS_HREF = '/crypto-donations';
+const LOCALE_CI = process.env.LOCALE_CI;
 const DEFAULT_LOCALE = 'en';
 const LOCALE_FULL_CODE = {
   zh: 'zh-CN',
@@ -221,7 +222,7 @@ module.exports={
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: ['en', 'it', 'zh', 'ja', 'ru', 'tr', 'pt', 'fr', 'pl', 'es', 'hu'],
+    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ru', 'tr', 'pt', 'fr', 'pl', 'es', 'hu'],
     localeConfigs: {
       en: { label: 'English' },
       it: { label: 'Italiano (100%)' },
