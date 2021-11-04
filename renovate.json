@@ -2,5 +2,6 @@
   "extends": [
     "config:base"
   ],
-  "ignorePaths": ["**/fixtures/**", "src/.tmp/**"]
+  "ignorePaths": ["**/fixtures/**", "src/.tmp/**"],
+  "pinVersions": false
 }
