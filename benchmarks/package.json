@@ -9,7 +9,7 @@
         "fs-extra": "^1.0.0",
         "get-folder-size": "^1.0.0",
         "load-json-file": "^6.2.0",
-        "load-yaml-file": "^0.1.0",
+        "load-yaml-file": "^0.2.0",
         "path-key": "^2.0.1",
         "pretty-bytes": "^4.0.2",
         "pretty-ms": "^2.1.0",

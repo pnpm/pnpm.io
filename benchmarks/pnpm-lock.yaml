@@ -6,7 +6,7 @@ specifiers:
   fs-extra: ^1.0.0
   get-folder-size: ^1.0.0
   load-json-file: ^6.2.0
-  load-yaml-file: ^0.1.0
+  load-yaml-file: ^0.2.0
   path-key: ^2.0.1
   pretty-bytes: ^4.0.2
   pretty-ms: ^2.1.0
@@ -21,7 +21,7 @@ dependencies:
   fs-extra: 1.0.0
   get-folder-size: 1.0.1
   load-json-file: 6.2.0
-  load-yaml-file: 0.1.1
+  load-yaml-file: 0.2.0
   path-key: 2.0.1
   pretty-bytes: 4.0.2
   pretty-ms: 2.1.0
@@ -409,13 +409,13 @@ packages:
       type-fest: 0.6.0
     dev: false
 
-  /load-yaml-file/0.1.1:
-    resolution: {integrity: sha512-G910TofXH7u0NfslAzqv6c9pHpvBzObNOo2hMG0/KUDpdHeFY0wE/fTBMExt0Gb12gg5bXS7Hj6pb0e+xbBXLA==}
-    engines: {node: '>=4'}
+  /load-yaml-file/0.2.0:
+    resolution: {integrity: sha512-OfCBkGEw4nN6JLtgRidPX6QxjBQGQf72q3si2uvqyFEMbycSFFHwAZeXx6cJgFM9wmLrf9zBwCP3Ivqa+LLZPw==}
+    engines: {node: '>=6'}
     dependencies:
       graceful-fs: 4.2.6
       js-yaml: 3.14.1
-      pify: 2.3.0
+      pify: 4.0.1
       strip-bom: 3.0.0
     dev: false
 
@@ -504,14 +504,14 @@ packages:
     engines: {node: '>=8.6'}
     dev: false
 
-  /pify/2.3.0:
-    resolution: {integrity: sha1-7RQaasBDqEnqWISY59yosVMw6Qw=}
-    engines: {node: '>=0.10.0'}
-    dev: false
-
   /pify/3.0.0:
     resolution: {integrity: sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=}
     engines: {node: '>=4'}
+    dev: false
+
+  /pify/4.0.1:
+    resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
+    engines: {node: '>=6'}
     dev: false
 
   /plur/1.0.0:
