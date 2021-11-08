@@ -28,7 +28,8 @@ module.exports={
   "organizationName": "pnpm",
   "projectName": "pnpm.github.io",
   "scripts": [
-    "https://buttons.github.io/buttons.js"
+    "https://buttons.github.io/buttons.js",
+    "/homepage.js",
   ],
   "favicon": "img/favicon.png",
   "customFields": {
