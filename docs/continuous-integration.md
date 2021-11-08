@@ -99,24 +99,21 @@ jobs:
         node-version: [15]
     steps:
     - uses: actions/checkout@v2
+    - uses: pnpm/action-setup@v2.0.1
+      with:
+        version: 6.20.3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Cache .pnpm-store
-      uses: actions/cache@v1
-      with:
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-    - name: Install pnpm
-      run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
-    - name: pnpm Build
+        cache: 'pnpm'
+    - name: Install dependencies
       run: pnpm install
 ```
 
 :::note
 
-Using `actions/setup-node@v2` you need to install pnpm with [root permissions](https://github.com/actions/setup-node/issues/177), eg:`sudo npm install -g pnpm`. Alternatively, if you specify the Node.js version to use, pnpm may be installed with no priviledged user.
+Caching packages dependencies with `actions/setup-node@v2` requires you to install pnpm with version **6.10+**.
 
 :::
 
