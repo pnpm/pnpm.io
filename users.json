@@ -35,6 +35,13 @@
     "width": 250
   },
   {
+    "caption": "JustAnswer",
+    "image": "/img/users/justanswer.svg",
+    "infoLink": "https://www.justanswer.com",
+    "pinned": true,
+    "width": 200
+  },
+  {
     "caption": "Tokopedia",
     "image": "/img/users/tokopedia.svg",
     "infoLink": "https://www.tokopedia.com/",

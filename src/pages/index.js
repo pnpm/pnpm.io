@@ -88,9 +88,6 @@ const Showcase = props => {
                 flexFlow: 'row wrap',
                 justifyContent: 'center',
               }}>
-                <a href="https://www.justanswer.com/" target="_blank">
-                  <img style={{marginTop: '-22px', padding: '20px'}} alt="JustAnswer" src="/img/users/justanswer.svg" />
-                </a>
                 <a href="https://bit.dev/" target="_blank">
                   <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
                 </a>
