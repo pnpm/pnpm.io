@@ -20,11 +20,6 @@ jobs:
         run: pnpm install
       - name: Update pnpm bundle
         run: curl -L --fail https://get.pnpm.io/v5.js > static/pnpm.js
-      - name: Download translations
-        env:
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-        run: pnpm crowdin-download
       - name: Build
         run: pnpm build
         env:
