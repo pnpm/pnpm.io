@@ -19,7 +19,7 @@ lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
 | `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json` |
 | `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                 |
 
-### `hooks.readPackage(pkg, context): pkg`
+### `hooks.readPackage(pkg, context): pkg | Promise<pkg>`
 
 Allows you to mutate a dependency's `package.json` after parsing and prior to
 resolution. These mutations are not saved to the filesystem, however, they will
@@ -74,7 +74,7 @@ reads the `package.json` of the package from the package's archive, which is not
 affected by the hook. In order to ignore a package's build, use the
 [pnpm.neverBuiltDependencies](package_json.md#pnpmneverbuiltdependencies) field.
 
-### `hooks.afterAllResolved(lockfile, context): lockfile`
+### `hooks.afterAllResolved(lockfile, context): lockfile | Promise<lockfile>`
 
 Added in: v1.41.0
 

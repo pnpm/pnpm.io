@@ -8,7 +8,8 @@
       "pnpm-cli",
       "pnpx-cli",
       "configuring",
-      "filtering"
+      "filtering",
+      "scripts"
     ],
     "CLI commands": [
       {

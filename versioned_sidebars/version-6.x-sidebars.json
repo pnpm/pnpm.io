@@ -35,6 +35,10 @@
         {
           "type": "doc",
           "id": "version-6.x/filtering"
+        },
+        {
+          "type": "doc",
+          "id": "version-6.x/scripts"
         }
       ]
     },
