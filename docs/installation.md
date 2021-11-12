@@ -37,6 +37,20 @@ Invoke-WebRequest 'https://get.pnpm.io/v6.16.js' -UseBasicParsing -o pnpm.js; no
 
 The standalone script is signed. [Here's how to verify it](https://github.com/pnpm/get#verifying-files).
 
+## Using Corepack
+
+Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
+
+```
+corepack enable
+```
+
+This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the latest pnpm version and run:
+
+```
+corepack prepare pnpm@6.21.1 --activate
+```
+
 ## Using npm
 
 ```sh
