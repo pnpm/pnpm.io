@@ -92,7 +92,6 @@
     "Advanced": [
       "errors",
       "logos",
-      "benchmark",
       "limitations",
       "symlinked-node-modules-structure",
       "how-peers-are-resolved",
