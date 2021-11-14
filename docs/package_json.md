@@ -129,16 +129,19 @@ Added in: v3.4.0
 It is possible to override some fields in the manifest before the package is
 packed.
 The following fields may be overridden:
-[`bin`](https://github.com/stereobooster/package.json#bin),
-[`main`](https://github.com/stereobooster/package.json#main),
-[`exports`](https://nodejs.org/api/esm.html#esm_package_exports),
-[`types` or `typings`](https://github.com/stereobooster/package.json#types),
-[`module`](https://github.com/stereobooster/package.json#module),
-[`browser`](https://github.com/stereobooster/package.json#browser),
-[`esnext`](https://github.com/stereobooster/package.json#esnext),
-[`es2015`](https://github.com/stereobooster/package.json#es2015),
-[`unpkg`](https://github.com/stereobooster/package.json#unpkg-1) and
-[`umd:main`](https://github.com/stereobooster/package.json#microbundle).
+
+* [`bin`](https://github.com/stereobooster/package.json#bin)
+* [`main`](https://github.com/stereobooster/package.json#main)
+* [`exports`](https://nodejs.org/api/esm.html#esm_package_exports)
+* [`types` or `typings`](https://github.com/stereobooster/package.json#types)
+* [`module`](https://github.com/stereobooster/package.json#module)
+* [`browser`](https://github.com/stereobooster/package.json#browser)
+* [`esnext`](https://github.com/stereobooster/package.json#esnext)
+* [`es2015`](https://github.com/stereobooster/package.json#es2015)
+* [`unpkg`](https://github.com/stereobooster/package.json#unpkg-1)
+* [`umd:main`](https://github.com/stereobooster/package.json#microbundle)
+* cpu
+* os
 
 To override a field, add the publish version of the field to `publishConfig`.
 
