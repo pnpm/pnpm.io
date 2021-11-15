@@ -219,5 +219,12 @@
     "infoLink": "https://v3.vuejs.org/",
     "pinned": true,
     "width": 150
+  },
+  {
+    "caption": "Bytesafe",
+    "image": "/img/users/bytesafe.svg",
+    "infoLink": "https://bytesafe.dev",
+    "pinned": false,
+    "width": 300
   }
 ]
