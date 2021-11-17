@@ -2,6 +2,7 @@
 
 ## Articles
 
+- 2021-11-17: [Replacing Lerna + Yarn with PNPM Workspaces](https://www.raulmelo.dev/blog/replacing-lerna-and-yarn-with-pnpm-workspaces)
 - 2021-03-22: [How to Use PNPM in Netlify Build](https://www.seancdavis.com/blog/use-pnpm-with-netlify/)
 - 2020-11-23: [Cleaner ESLint Config and Pnpm Support and more with Nx 10.4](https://blog.nrwl.io/cleaner-eslint-config-and-pnpm-compatibility-with-nx-10-4-3f6faa3cdd19)
 - 2020-09-27: [pnpm: A Space-Efficient JavaScript Package Manager](https://medium.com/javascript-in-plain-english/what-is-pnpm-a-space-efficient-javascript-package-manager-2876b623b81d)
