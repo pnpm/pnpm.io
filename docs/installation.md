@@ -48,7 +48,7 @@ corepack enable
 This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the latest pnpm version and run:
 
 ```
-corepack prepare pnpm@6.21.1 --activate
+corepack prepare pnpm@6.22.2 --activate
 ```
 
 ## Using npm
