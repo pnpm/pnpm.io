@@ -308,6 +308,7 @@ A bigger example:
 Added in: v5.16.0
 
 This field allows to ignore the builds of specific dependencies.
+The "preinstall", "install", and "postinstall" scripts of the listed packages will not be executed during installation.
 
 An example of the `"pnpm"."neverBuiltDependencies"` field:
 
