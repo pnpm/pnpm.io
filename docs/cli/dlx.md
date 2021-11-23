@@ -16,6 +16,12 @@ pnpm dlx create-react-app ./my-app
 
 This will fetch `create-react-app` from the registry and run it with the given arguments.
 
+Since v6.23.1 you may also specify which exact version of the package you'd like to use:
+
+```
+pnpm dlx create-react-app@next ./my-app
+```
+
 ## Options
 
 ### --package &lt;name\>
