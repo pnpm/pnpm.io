@@ -62,7 +62,7 @@ In Ukrainian 🇺🇦:
 In Spanish 🇪🇸::
 
 - [Introdución a pnpm 
-](https://youtu.be/rE0_hlG0ifw?t=854) ([Slides](https://docs.google.com/presentation/d/1x2X6EE4yf9V-5xExe1_RMXlCWcurzL1rGi9kc8COEDQ/edit?usp=sharing)) by [@jotadeveloper](https://github.com/juanpicado)
+](https://youtu.be/rE0_hlG0ifw?t=854) ([Slides](https://docs.google.com/presentation/d/1x2X6EE4yf9V-5xExe1_RMXlCWcurzL1rGi9kc8COEDQ/edit?usp=sharing)) ([Demo](https://github.com/juanpicado/pnpm-workspace-example)) by [@jotadeveloper](https://github.com/juanpicado)
 
 ## Packages
 
