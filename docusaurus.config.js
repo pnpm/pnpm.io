@@ -228,7 +228,7 @@ module.exports={
       en: { label: 'English' },
       it: { label: 'Italiano (100%)' },
       zh: { label: '中文 (89%)' },
-      ja: { label: '日本語 (48%)' },
+      ja: { label: '日本語 (66%)' },
       ru: { label: 'Русский (30%)' },
       tr: { label: 'Türkçe (18%)' },
       pt: { label: 'Português Brasileiro (16%)' },
