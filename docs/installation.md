@@ -19,6 +19,12 @@ If you don't have curl installed, you would like to use wget:
 wget -qO- https://get.pnpm.io/install.sh | sh -
 ```
 
+On Windows (PowerShell):
+
+```powershell
+iwr https://get.pnpm.io/install.ps1 -useb | iex
+```
+
 You may use the [pnpm env] command then to install Node.js.
 
 ### Node.js is preinstalled
