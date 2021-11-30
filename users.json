@@ -226,5 +226,12 @@
     "infoLink": "https://bytesafe.dev",
     "pinned": false,
     "width": 300
+  },
+  {
+    "caption": "Jike",
+    "image": "/img/users/jike.svg",
+    "infoLink": "https://okjike.com/",
+    "pinned": false,
+    "width": 200
   }
 ]
