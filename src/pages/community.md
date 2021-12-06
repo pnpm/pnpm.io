@@ -42,9 +42,10 @@ In French :fr::
 
 In English :uk::us::
 
-- [What is pnpm](https://t.co/eYzVYjyPSl?amp=1)
-- [Why I stopped using npm for pnpm And You should too!](https://youtu.be/7L7nBtaGAlM)
-- [Reduce SPFX Node Modules from 50,000 files to 1,000](https://www.spjeff.com/2019/08/20/video-reduce-spfx-node-modules-from-50000-files-to-1000/)
+- `2021-12-02`: [Use pnpm instead of npm or yarn for JavaScript & TypeScript](https://youtu.be/uJqqddyzN3s)
+- `2021-10-13`: [What is pnpm](https://youtu.be/hiTmX2dW84E)
+- `2019-08-20`: [Reduce SPFX Node Modules from 50,000 files to 1,000](https://vimeo.com/355016928)
+- `2017-12-20`: [Why I stopped using npm for pnpm And You should too!](https://youtu.be/7L7nBtaGAlM)
 
 In Russian :ru::
 
