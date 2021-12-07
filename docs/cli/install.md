@@ -81,8 +81,7 @@ Added in: v1.26.0 (initially named `shrinkwrap-only`)
 * Default: **false**
 * Type: **Boolean**
 
-When used, only updates `pnpm-lock.yaml` and `package.json` instead of checking
-`node_modules` and downloading dependencies.
+When used, only updates `pnpm-lock.yaml` and `package.json`. Nothing gets written to the `node_modules` directory.
 
 ### --fix-lockfile
 
