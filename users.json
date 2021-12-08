@@ -233,5 +233,12 @@
     "infoLink": "https://okjike.com/",
     "pinned": false,
     "width": 200
+  },
+  {
+    "caption": "Pabio",
+    "image": "/img/users/pabio.svg",
+    "infoLink": "https://pabio.io",
+    "pinned": false,
+    "width": 100
   }
 ]
