@@ -33,6 +33,12 @@ In French :fr::
 - `2021-06-01`: [On a changé notre gestionnaire de dépendances front](https://blog.yousign.io/posts/on-a-change-notre-gestionnaire-de-dependances-front?utm_source=twitter&utm_medium=social&utm_campaign=blogep)
 - `2021-03-19`: [Migration pnpm chez Malt](https://medium.com/nerds-malt/migration-pnpm-chez-malt-4464e5e8069c)
 
+In Chinese :cn::
+- `2021-12-11`: [npm/yarn的设计缺陷，以及pnpm是如何改进的](https://xingyahao.com/c/pnpm-npm-yarn.html)
+
+In Japanese :jp::
+- `2021-12-11`: [npm/yarnの不足点とpnpmの解決法](https://engineering.meetsmore.com/entry/2021/12/06/112931)
+
 ## Podcasts
 
 * [Hasty Treat - How to Setup a pnpm Monorepo](https://syntax.fm/show/401/hasty-treat-how-to-setup-a-pnpm-monorepo)
@@ -60,9 +66,9 @@ In Ukrainian 🇺🇦:
 
 - [pnpm - пакетний менеджер для Node.js](http://bit.ly/pnpm-pr-ukr-1) - by [@zkochan](https://github.com/zkochan)
 
-In Spanish 🇪🇸::
+In Spanish 🇪🇸:
 
-- [Introdución a pnpm 
+- [Introdución a pnpm
 ](https://youtu.be/rE0_hlG0ifw?t=854) ([Slides](https://docs.google.com/presentation/d/1x2X6EE4yf9V-5xExe1_RMXlCWcurzL1rGi9kc8COEDQ/edit?usp=sharing)) ([Demo](https://github.com/juanpicado/pnpm-workspace-example)) by [@jotadeveloper](https://github.com/juanpicado)
 
 ## Packages
