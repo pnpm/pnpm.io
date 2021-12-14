@@ -122,6 +122,12 @@ Added in: v5.1.0
 Stream output from child processes immediately, prefixed with the originating
 package directory. This allows output from different packages to be interleaved.
 
+### --aggregate-output
+
+Added in: v6.24.0
+
+Aggregate output from child processes that are run in parallel, and only print output when the child process is finished. It makes reading large logs after running `pnpm -r <command>` with `--parallel` or with `--workspace-concurrency=<number>` much easier (especially on CI). Only `--reporter=append-only` is supported.
+
 ### enable-pre-post-scripts
 
 Added in: v6.1.0
