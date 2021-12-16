@@ -35,7 +35,7 @@ function cleanLockfile (pm, cwd, env) {
   rimraf.sync(path.join(cwd, lockfileName))
   if (pm.name === 'yarn') {
     // This ensures yarn berry to install under a nested folder
-    spawnSyncOrThrow({ name: 'touch', args: [lockfileName] }, { env, cwd, stdio: "inherit" })
+    spawnSyncOrThrow({ name: 'nodetouch', args: [lockfileName] }, { env, cwd, stdio: "inherit" })
   }
 }
 

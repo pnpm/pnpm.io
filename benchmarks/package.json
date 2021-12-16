@@ -16,6 +16,7 @@
         "rimraf": "^3.0.2",
         "tempy": "^2.0.0",
         "thenify": "^3.3.1",
+        "touch": "^3.1.0",
         "write-yaml-file": "^4.2.0"
     },
     "engines": {
