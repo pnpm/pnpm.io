@@ -200,6 +200,7 @@ If you see the message `There are cyclic workspace dependencies`, please inspect
 
 Here are a few open source projects that use the workspace feature of pnpm:
 
+* [icestark](https://github.com/ice-lab/icestark) (as of 12/16/2021, commit `4862326a8de53d02f617e7b1986774fd7540fccd`)
 * [Vue 3.0](https://github.com/vuejs/vue-next) (as of 10/9/2021, commit `61c5fbd3e35152f5f32e95bf04d3ee083414cecb`)
 * [Vite](https://github.com/vitejs/vite) (as of 9/26/2021, commit `3e1cce01d01493d33e50966d0d0fd39a86d229f9`)
 * [Cycle.js](https://github.com/cyclejs/cyclejs) (as of 9/21/2021, commit `f2187ab6688368edb904b649bd371a658f6a8637`)
