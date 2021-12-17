@@ -95,7 +95,8 @@
       "limitations",
       "symlinked-node-modules-structure",
       "how-peers-are-resolved",
-      "uninstall"
+      "uninstall",
+      "pnpm-vs-npm"
     ]
   }
 }

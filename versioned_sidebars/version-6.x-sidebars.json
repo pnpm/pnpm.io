@@ -289,6 +289,10 @@
         {
           "type": "doc",
           "id": "version-6.x/uninstall"
+        },
+        {
+          "type": "doc",
+          "id": "version-6.x/pnpm-vs-npm"
         }
       ]
     }
