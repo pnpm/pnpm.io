@@ -16,6 +16,9 @@ function makeEditUrl (locale, path1, path2) {
   if (locale !== DEFAULT_LOCALE) {
     return `https://crowdin.com/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
   }
+  if (path1 === 'versioned_docs/version-6.x') {
+    return `https://github.com/pnpm/pnpm.github.io/edit/main/docs/${path2}`;
+  }
   // Link to Github for English docs
   return `https://github.com/pnpm/pnpm.github.io/edit/main/${path1}/${path2}`;
 }
