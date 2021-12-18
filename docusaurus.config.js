@@ -51,6 +51,10 @@ module.exports={
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
         },
+        "gtag": {
+          trackingID: "UA-91385296-1",
+          anonymizeIP: true,
+        },
         "blog": {
           "path": "blog",
           editUrl: ({locale, blogDirPath, blogPath}) => makeEditUrl(locale, blogDirPath, blogPath),
@@ -216,10 +220,6 @@ module.exports={
       "indexName": "pnpm",
       "contextualSearch": true,
     },
-    "gtag": {
-      trackingID: "UA-91385296-1",
-      anonymizeIP: true,
-    }
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
