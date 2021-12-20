@@ -5,6 +5,8 @@ title: Motivation
 
 ## Saving disk space and boosting installation speed
 
+[![](/img/cafs-illustration.jpg)](https://twitter.com/HemSays/status/1434921646083563525/photo/1)
+
 When using npm or Yarn, if you have 100 projects using a dependency, you will
 have 100 copies of that dependency saved on disk. With pnpm, the dependency will be
 stored in a content-addressable store, so:
@@ -23,6 +25,8 @@ As a result, you save a lot of space on your disk proportional to the number of
 projects and dependencies, and you have a lot faster installations!
 
 ## Creating a non-flat node_modules directory
+
+[![](/img/node-modules-structure.jpg)](https://twitter.com/xiaokedada/status/1471691763102679041/photo/1)
 
 When installing dependencies with npm, all packages are hoisted to the root of the
 modules directory. As a result, source code has access to dependencies that are
