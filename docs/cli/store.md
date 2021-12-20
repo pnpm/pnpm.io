@@ -25,19 +25,30 @@ store directly without modifying any projects or files outside of the store.
 
 ### prune
 
-Removes orphan packages from the store.
+Removes _unreferenced packages_ from the store.
 
-Pruning the store will save disk space, however may slow down future
-installations involving pruned packages. Ultimately, it is a safe operation,
-however not recommended if you have orphaned packages from a package you intend
-to reinstall.
+Unreferenced packages are packages that are not used by any projects on the
+system. Packages can become unreferenced after most installation operations, for
+instance when dependencies are made redundant.
 
-Please read [the FAQ] for more information on unreferenced packages and best
-practices.
+For example, during `pnpm install`, package `foo@1.0.0` is updated to
+`foo@1.0.1`. pnpm will keep `foo@1.0.0` in the store, as it does not
+automatically remove packages. If package `foo@1.0.0` is not used by any other
+project on the system, it becomes unreferenced. Running `pnpm store prune` would
+remove `foo@1.0.0` from the store.
 
-Please note that this is prohibited when a [store server] is running.
+Running `pnpm store prune` is not harmful and has no side effects on your
+projects. If future installations require removed packages, pnpm will download
+them again.
 
-[the FAQ]: faq.md#what-does-pnpm-store-prune-do-is-it-harmful
+It is best practice to run `pnpm store prune` occasionally to clean up the
+store, but not too frequently. Sometimes, unreferenced packages become required
+again. This could occur when switching branches and installing older
+dependencies, in which case pnpm would need to re-download all removed packages,
+briefly slowing down the installation process.
+
+Please note that this command is prohibited when a [store server] is running.
+
 [store server]: ./server.md
 
 ### path
