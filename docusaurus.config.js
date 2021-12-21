@@ -219,7 +219,8 @@ module.exports={
       "style": "dark",
     },
     "algolia": {
-      "apiKey": "802b1d6ee5450a4296581a8e14aff417",
+      "appId": "RAHRBBK2WL",
+      "apiKey": "a337998a623aa8f80d2a97a79d565086",
       "indexName": "pnpm",
       "contextualSearch": true,
     },
