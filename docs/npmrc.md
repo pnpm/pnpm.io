@@ -569,6 +569,36 @@ Only use the side effects cache if present, do not create it for new packages.
 Set to true to enable UID/GID switching when running package scripts.
 If set explicitly to false, then installing as a non-root user will fail.
 
+## Node.js Settings
+
+### use-node-version
+
+Added in: v6.5.0
+
+* Default: **undefined**
+* Type: **semver**
+
+Specifies which exact Node.js version should be used for the project's runtime.
+pnpm will automatically install the specified version of Node.js and use it for
+running `pnpm run` commands or the `pnpm node` command.
+
+### node-mirror:&lt;releaseDir>
+
+Added in: v6.24.0
+
+* Default: **`https://nodejs.org/download/<releaseDir>/`**
+* Type: **URL**
+
+Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this setting can be any directory from <https://nodejs.org/download>: `release`, `rc`, `nightly`, `v8-canary`, etc.
+
+Here is how pnpm may be configured to download Node.js from Node.js mirror in China:
+
+```
+node-mirror:release=https://npmmirror.com/mirrors/node/
+node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
+node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
+```
+
 ## Other Settings
 
 ### use-running-store-server
@@ -642,17 +672,6 @@ Added in: v6.10.0
 * Type: **path**
 
 The location of the package metadata cache.
-
-### use-node-version
-
-Added in: v6.5.0
-
-* Default: **undefined**
-* Type: **semver**
-
-Specifies which exact Node.js version should be used for the project's runtime.
-pnpm will automatically install the specified version of Node.js and use it for
-running `pnpm run` commands or the `pnpm node` command.
 
 ### use-stderr
 
