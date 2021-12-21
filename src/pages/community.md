@@ -55,6 +55,7 @@ In English :uk::us::
 
 In Russian :ru::
 
+- `2021-12-06`: [Доклад: Пакетные менеджеры: есть ли жизнь за пределами npm? / Валентин Семирульник (Авиасейлс)](https://youtu.be/RAFFHpjrwAs)
 - [About pnpm v1](https://www.youtube.com/watch?v=rMb4OHL9tWI&feature=youtu.be&t=2m52s)
 - [npm v5, Yarn или pnpm, что круче?](https://youtu.be/TIeMLwH9SEU) - [slides](http://piterjs.org/events/16/Mike_Bashurov.pdf?utm_source=twitter.com&utm_medium=social&utm_campaign=vystupaet-maykl-bashurov--npm-v5--yarn)
 
