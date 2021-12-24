@@ -240,5 +240,12 @@
     "infoLink": "https://pabio.io",
     "pinned": false,
     "width": 180
+  },
+  {
+    "caption": "Yonghui",
+    "image": "/img/users/yonghui.png",
+    "infoLink": "https://www.yonghui.com.cn/?frompage=pnpm",
+    "pinned": false,
+    "width": 195
   }
 ]
