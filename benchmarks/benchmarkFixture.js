@@ -85,6 +85,10 @@ export default async function benchmark (pm, fixture, opts) {
                 + 'nmMode: hardlinks-local\n'
                 + 'compressionLevel: 0\n'
         break
+      case 'yarn_pnpm':
+        yarnRc += 'nodeLinker: pnpm\n'
+                + 'compressionLevel: 0\n'
+        break
       case 'yarn_pnp':
         yarnRc += 'nodeLinker: pnp\n'
         break

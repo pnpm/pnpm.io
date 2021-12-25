@@ -9,12 +9,13 @@ const getHighestNumber = (array) => {
 const NPM_COLOR = '#cd3731'
 const YARN_COLOR = '#248ebd'
 const YARN_PNP_COLOR = '#40a9ff'
+const YARN_PNPM_COLOR = '#4B949B'
 const PNPM_COLOR = '#fbae00'
 
 export default (resultArrays, pms, tests, formattedNow) => {
   let svgStr = ''
   // colors taken from logos (where possible)
-  const colors = [ NPM_COLOR, PNPM_COLOR, YARN_COLOR, YARN_PNP_COLOR ]
+  const colors = [ NPM_COLOR, PNPM_COLOR, YARN_COLOR, YARN_PNPM_COLOR, YARN_PNP_COLOR ]
   // empty areas next to the graph
   const offset = {
     left: 40,
@@ -83,7 +84,7 @@ export default (resultArrays, pms, tests, formattedNow) => {
   pms.forEach((pm, index) => {
     // draw colored circle
     const radius = 4
-    const x = graph.x + radius + (radius * 4) * index
+    const x = graph.x + radius + (radius * 5) * index
     const y = vb.y + radius + 2
     svgStr += `  <circle cx="${x}" cy="${y}" r="${radius}" fill="${colors[index]}"></circle>` + '\n'
 

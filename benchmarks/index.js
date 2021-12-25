@@ -138,7 +138,7 @@ async function run () {
   spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
   await installYarnBerryLikeModule(managersDir)
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
-  const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
+  const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnpm', 'yarn_pnp'  ]
   const sections = []
   const svgs = []
   const opts = {
@@ -149,6 +149,7 @@ async function run () {
   for (const fixture of fixtures) {
     const npmRes = min(await benchmark(cmdsMap.npm, fixture.name, opts))
     const yarnRes = min(await benchmark(cmdsMap.yarn, fixture.name, opts))
+    const yarnPnpmRes = min(await benchmark(cmdsMap.yarn_pnpm, fixture.name, opts))
     const yarnPnPRes = min(await benchmark(cmdsMap.yarn_pnp, fixture.name, {
       ...opts,
       hasNodeModules: false,
@@ -158,23 +159,24 @@ async function run () {
       'npm': npmRes,
       'pnpm': pnpmRes,
       'yarn': yarnRes,
+      'yarn_pnpm': yarnPnpmRes,
       'yarn_pnp': yarnPnPRes,
     })
 
     sections.push(stripIndents`
       ${fixture.mdDesc}
 
-      | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
-      | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-      | install |       |          |             | ${prettyMs(npmRes.firstInstall)} | ${prettyMs(pnpmRes.firstInstall)} | ${prettyMs(yarnRes.firstInstall)} | ${prettyMs(yarnPnPRes.firstInstall)} |
-      | install | ✔     | ✔        | ✔           | ${prettyMs(npmRes.repeatInstall)} | ${prettyMs(pnpmRes.repeatInstall)} | ${prettyMs(yarnRes.repeatInstall)} | n/a |
-      | install | ✔     | ✔        |             | ${prettyMs(npmRes.withWarmCacheAndLockfile)} | ${prettyMs(pnpmRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnPnPRes.withWarmCacheAndLockfile)} |
-      | install | ✔     |          |             | ${prettyMs(npmRes.withWarmCache)} | ${prettyMs(pnpmRes.withWarmCache)} | ${prettyMs(yarnRes.withWarmCache)} | ${prettyMs(yarnPnPRes.withWarmCache)} |
-      | install |       | ✔        |             | ${prettyMs(npmRes.withLockfile)} | ${prettyMs(pnpmRes.withLockfile)} | ${prettyMs(yarnRes.withLockfile)} | ${prettyMs(yarnPnPRes.withLockfile)} |
-      | install | ✔     |          | ✔           | ${prettyMs(npmRes.withWarmCacheAndModules)} | ${prettyMs(pnpmRes.withWarmCacheAndModules)} | ${prettyMs(yarnRes.withWarmCacheAndModules)} | n/a |
-      | install |       | ✔        | ✔           | ${prettyMs(npmRes.withWarmModulesAndLockfile)} | ${prettyMs(pnpmRes.withWarmModulesAndLockfile)} | ${prettyMs(yarnRes.withWarmModulesAndLockfile)} | n/a |
-      | install |       |          | ✔           | ${prettyMs(npmRes.withWarmModules)} | ${prettyMs(pnpmRes.withWarmModules)} | ${prettyMs(yarnRes.withWarmModules)} | n/a |
-      | update  | n/a | n/a | n/a | ${prettyMs(npmRes.updatedDependencies)} | ${prettyMs(pnpmRes.updatedDependencies)} | ${prettyMs(yarnRes.updatedDependencies)} | ${prettyMs(yarnPnPRes.updatedDependencies)} |
+      | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn pnpm | Yarn PnP |
+      | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---       | ---      |
+      | install |       |          |             | ${prettyMs(npmRes.firstInstall)} | ${prettyMs(pnpmRes.firstInstall)} | ${prettyMs(yarnRes.firstInstall)} | ${prettyMs(yarnPnpmRes.firstInstall)} | ${prettyMs(yarnPnPRes.firstInstall)} |
+      | install | ✔     | ✔        | ✔           | ${prettyMs(npmRes.repeatInstall)} | ${prettyMs(pnpmRes.repeatInstall)} | ${prettyMs(yarnRes.repeatInstall)} | ${prettyMs(yarnPnpmRes.repeatInstall)} | n/a |
+      | install | ✔     | ✔        |             | ${prettyMs(npmRes.withWarmCacheAndLockfile)} | ${prettyMs(pnpmRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnPnpmRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnPnPRes.withWarmCacheAndLockfile)} |
+      | install | ✔     |          |             | ${prettyMs(npmRes.withWarmCache)} | ${prettyMs(pnpmRes.withWarmCache)} | ${prettyMs(yarnRes.withWarmCache)} | ${prettyMs(yarnPnpmRes.withWarmCache)} | ${prettyMs(yarnPnPRes.withWarmCache)} |
+      | install |       | ✔        |             | ${prettyMs(npmRes.withLockfile)} | ${prettyMs(pnpmRes.withLockfile)} | ${prettyMs(yarnRes.withLockfile)} | ${prettyMs(yarnPnpmRes.withLockfile)} | ${prettyMs(yarnPnPRes.withLockfile)} |
+      | install | ✔     |          | ✔           | ${prettyMs(npmRes.withWarmCacheAndModules)} | ${prettyMs(pnpmRes.withWarmCacheAndModules)} | ${prettyMs(yarnRes.withWarmCacheAndModules)} | ${prettyMs(yarnPnpmRes.withWarmCacheAndModules)} | n/a |
+      | install |       | ✔        | ✔           | ${prettyMs(npmRes.withWarmModulesAndLockfile)} | ${prettyMs(pnpmRes.withWarmModulesAndLockfile)} | ${prettyMs(yarnRes.withWarmModulesAndLockfile)} | ${prettyMs(yarnPnpmRes.withWarmModulesAndLockfile)} | n/a |
+      | install |       |          | ✔           | ${prettyMs(npmRes.withWarmModules)} | ${prettyMs(pnpmRes.withWarmModules)} | ${prettyMs(yarnRes.withWarmModules)} | ${prettyMs(yarnPnpmRes.withWarmModules)} | n/a |
+      | update  | n/a | n/a | n/a | ${prettyMs(npmRes.updatedDependencies)} | ${prettyMs(pnpmRes.updatedDependencies)} | ${prettyMs(yarnRes.updatedDependencies)} | ${prettyMs(yarnPnpmRes.updatedDependencies)} | ${prettyMs(yarnPnPRes.updatedDependencies)} |
 
       ![Graph of the ${fixture.name} results](../../static/img/benchmarks/${fixture.name}.svg)
     `)
@@ -192,7 +194,7 @@ pnpm doesn't have blocking stages of installation. Each dependency has its own s
 
     svgs.push({
       path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
-      file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions, formattedNow)
+      file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnpm, cmdsMap.yarn_pnp], testDescriptions, formattedNow)
     })
   }
 
@@ -201,7 +203,7 @@ pnpm doesn't have blocking stages of installation. Each dependency has its own s
 
   **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
-  This benchmark compares the performance of npm, pnpm, and Yarn (both regular and PnP variant).
+  This benchmark compares the performance of npm, pnpm, and Yarn (regular, pnpm and PnP variants).
   `
 
   const explanation = stripIndents`

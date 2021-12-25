@@ -36,6 +36,14 @@ export default {
       'install'
     ]
   },
+  yarn_pnpm: {
+    scenario: 'yarn_pnpm',
+    legend: 'Yarn pnpm',
+    name: 'yarn',
+    args: [
+      'install'
+    ]
+  },
   yarn_pnp: {
     scenario: 'yarn_pnp',
     legend: 'Yarn PnP',
