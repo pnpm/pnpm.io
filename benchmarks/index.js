@@ -201,7 +201,7 @@ pnpm doesn't have blocking stages of installation. Each dependency has its own s
 
   **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
-  This benchmark compares the performance of npm, pnpm, and Yarn (both regular and PnP variant).
+  This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
   `
 
   const explanation = stripIndents`
