@@ -214,3 +214,4 @@ Here are a few open source projects that use the workspace feature of pnpm:
 * [SvelteKit](https://github.com/sveltejs/kit) (as of 9/26/2021, commit `b164420ab26fa04fd0fbe0ac05431f36a89ef193`)
 * [Telecraft](https://github.com/telecraft/telecraft) (as of 9/26/2021, commit `73a9c48c9d4f160d758b8881f404cc52c20a7454`)
 * [GiraphQL](https://github.com/hayes/giraphql) (as of 8/4/2021, commit `3dd3ff148da382d6f406f20626a9a5c25707c0c8`)
+* [Tailchat](https://github.com/msgbyte/tailchat) (as of 12/27/2021, commit `298af71aa0619e0a8fa8717777afe2fb32739db4`)
