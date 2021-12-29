@@ -9,9 +9,9 @@ It is the end of the year and it was a good year for pnpm, so let's see how it w
 
 ## Usage
 
-### Download stats
+### Download Stats
 
-My goal this year was to beat Bower by the number of downloads. We were able to achieve this goal [in November](https://npm-stat.com/charts.html?package=pnpm&package=bower&from=2021-01-01&to=2021-12-29)!
+My goal this year was to beat Bower by the number of downloads. We were able to achieve this goal [in November](https://npm-stat.com/charts.html?package=pnpm&package=bower&from=2021-01-01&to=2021-12-29):
 
 ![](/img/blog/pnpm-vs-bower-stats.png)
 
@@ -22,14 +22,14 @@ pnpm was downloaded about [3 times more](https://npm-stat.com/charts.html?packag
 :::note
 
 These stats don't even measure all the different ways that pnpm may be installed!
-They only measure the downloads of the [pnpm npm package](https://www.npmjs.com/package/pnpm). However, this year we also added compiled binary versions of pnpm, which are shipped differently.
+They only measure the downloads of the [pnpm npm package](https://www.npmjs.com/package/pnpm). This year we also added compiled binary versions of pnpm, which are shipped differently.
 
 :::
 
 ### Docs visits
 
 We collect some unpersonalized stats from our docs using Google Analytics.
-In 2021, sometimes we had more than 2000 unique visitors a week.
+In 2021, sometimes we had more than 2,000 unique visitors a week.
 
 ![](/img/blog/ga-unique-visits-2021.png)
 
@@ -83,7 +83,7 @@ Peer dependency issues used to be printed as plain text and it was hard to under
 
 ### Yarn
 
-Yarn added a pnpm linker in [v3.1](https://dev.to/arcanis/yarn-31-corepack-esm-pnpm-optional-packages--3hak#new-install-mode-raw-pnpm-endraw-). So Yarn can create a similar node-modules directory structure to the one that pnpm create.
+Yarn added a pnpm linker in [v3.1](https://dev.to/arcanis/yarn-31-corepack-esm-pnpm-optional-packages--3hak#new-install-mode-raw-pnpm-endraw-). So Yarn can create a similar node-modules directory structure to the one that pnpm creates.
 
 Also, the Yarn team plans to implement a content-addressable storage to be more disk space efficient.
 
@@ -93,7 +93,7 @@ The npm team decided to also adopt the symlinked node-modules directory structur
 
 ### Others
 
-[Bun](https://twitter.com/jarredsumner/status/1473416431291174912/photo/1) written in Zig and [Volt](https://github.com/voltpkg/volt) written in Rust both claim to be faster than npm/Yarn/pnpm. I did not benchmark this new package managers yet.
+[Bun](https://twitter.com/jarredsumner/status/1473416431291174912/photo/1) written in Zig and [Volt](https://github.com/voltpkg/volt) written in Rust both claim to be faster than npm/Yarn/pnpm. I did not benchmark these new package managers yet.
 
 ## Future Plans
 
