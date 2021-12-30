@@ -74,7 +74,7 @@ replace any `workspace:` dependency by:
 * The corresponding version in the target workspace (if you use `workspace:*`, `workspace:~`, or `workspace:^`)
 * The associated semver range (for any other range type)
 
-So for example, if we have `foo`, `bar`, `qar`, `zoo `in the workspace and they all are at version `1.5.0`, the following:
+So for example, if we have `foo`, `bar`, `qar`, `zoo` in the workspace and they all are at version `1.5.0`, the following:
 
 ```json
 {
