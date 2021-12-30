@@ -51,7 +51,7 @@ Also, many great open-source projects started to use pnpm. Some switched to pnpm
 
 * [Vue](https://github.com/vuejs/vue-next)
 * [Vite](https://github.com/vitejs/vite)
-* and [others](https://github.com/vitejs/vite).
+* and [others](https://pnpm.io/workspaces#usage-examples)
 
 Some switched because they like how efficient, fast, and beautiful pnpm is:
 
