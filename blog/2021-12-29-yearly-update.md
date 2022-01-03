@@ -7,6 +7,8 @@ authorImageURL: "https://gravatar.com/avatar/1f59f040fb37d5799e3879fa678c2373?s=
 
 It is the end of the year and it was a good year for pnpm, so let's see how it went.
 
+<!--truncate-->
+
 ## Usage
 
 ### Download Stats
