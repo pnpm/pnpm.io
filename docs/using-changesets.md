@@ -6,7 +6,7 @@ title: Using Changesets with pnpm
 :::note
 
 At the time of writing this documentation, the latest pnpm version was
-v6.14. The latest [Changesets](https://github.com/atlassian/changesets) version was v2.16.0.
+v6.14. The latest [Changesets](https://github.com/changesets/changesets) version was v2.16.0.
 
 :::
 

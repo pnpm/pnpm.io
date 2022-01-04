@@ -80,7 +80,7 @@ In Spanish 🇪🇸:
 ## Toolings with pnpm support
 
 * [rush](https://rushjs.io/)
-* [changesets](https://github.com/atlassian/changesets) - A way to manage your versioning and changelogs with a focus on monorepos.
+* [changesets](https://github.com/changesets/changesets) - A way to manage your versioning and changelogs with a focus on monorepos.
 * [Nx](https://nx.dev/)
 * [Renovate](https://renovateapp.com/) - Automated dependency updates, for humans
 * [syncpack](https://github.com/JamieMason/syncpack)
