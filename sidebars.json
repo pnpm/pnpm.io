@@ -90,6 +90,7 @@
       "git"
     ],
     "Advanced": [
+      "feature-comparison",
       "errors",
       "logos",
       "limitations",
