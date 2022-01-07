@@ -22,8 +22,8 @@ pnpm <command> --filter <package_selector>
 
 :::
 
-## Matching
 
+## Matching
 ### --filter &lt;package_name>
 
 Added in: v2.13.0
