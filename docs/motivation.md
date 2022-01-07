@@ -28,12 +28,18 @@ projects and dependencies, and you have a lot faster installations!
 
 [![](/img/node-modules-structure.jpg)](https://twitter.com/xiaokedada/status/1471691763102679041/photo/1)
 
-When installing dependencies with npm, all packages are hoisted to the root of the
+When installing dependencies with npm or Yarn Classic, all packages are hoisted to the root of the
 modules directory. As a result, source code has access to dependencies that are
 not added as dependencies to the project.
 
-pnpm uses symlinks to add only the direct dependencies of the project into the root of the modules directory.
+By default, pnpm uses symlinks to add only the direct dependencies of the project into the root of the modules directory.
 If you'd like more details about the unique `node_modules` structure that pnpm
 creates and why it works fine with the Node.js ecosystem, read:
 - [Flat node_modules is not the only way](/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
 - [Symlinked node_modules structure](symlinked-node-modules-structure.md)
+
+:::tip
+
+If your tooling doesn't work well with symlinks, you may still use pnpm and set the [node-linker](npmrc#node-linker) setting to `hoisted`. This will instruct pnpm to create a node_modules directory that is similar to those created by npm and Yarn Classic.
+
+:::

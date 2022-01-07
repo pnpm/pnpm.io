@@ -40,7 +40,7 @@ const features = [
     imageUrl: 'img/features/strict.svg',
     description: (
       <Translate>
-        pnpm creates a non-flat node_modules, so code has no access to arbitrary packages
+        pnpm creates a non-flat node_modules by default, so code has no access to arbitrary packages
       </Translate>
     ),
   },

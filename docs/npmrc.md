@@ -133,11 +133,17 @@ Added in: v5.9.0
 Defines what linker should be used for installing Node packages.
 
 * **isolated** - dependencies are symlinked from a virtual store at `node_modules/.pnpm`.
-* **hoisted** - a flat `node_modules` without symlinks is created. Same as the `node_modules` created by npm or Yarn Classic. Choose this linker if you have issues with symlinks (for instance, for a React Native project).
+* **hoisted** - a flat `node_modules` without symlinks is created. Same as the `node_modules` created by npm or Yarn Classic. Legitimate reasons to use this setting:
+  1. Your tooling doesn't work well with symlinks. A React Native project will most probably only work if you use a hoisted `node_modules`.
+  1. Your project is deployed to a serverless hosting provider. Some serverless providers (for instance, AWS Lambda) don't support symlinks. An alternative solution for this problem is to bundle your application before deployment.
+  1. If you want to publish your package with [`"bundledDependencies"`].
+  1. If you are running Node.js with the [--preserve-symlinks] flag.
 * **pnp** - no `node_modules`. Plug'n'Play is an innovative strategy for Node that is [used by Yarn Berry][pnp]. It is recommended to also set `symlink` setting to `false` when using `pnp` as
 your linker.
 
 [pnp]: https://yarnpkg.com/features/pnp
+[--preserve-symlinks]: https://nodejs.org/api/cli.html#cli_preserve_symlinks
+[`"bundledDependencies"`]: https://docs.npmjs.com/cli/v8/configuring-npm/package-json#bundleddependencies
 
 ### symlink
 
