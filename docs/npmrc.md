@@ -127,15 +127,14 @@ The directory in which dependencies will be installed (instead of
 
 Added in: v5.9.0
 
-* Default: **undefined**
-* Type: **undefined**, **pnp**
+* Default: **isolated**
+* Type: **isolated**, **hoisted**, **pnp**
 
 Defines what linker should be used for installing Node packages.
-By default, pnpm creates a linked modules directory, but the Plug'n'Play
-build and resolution strategy is supported as well. Plug'n'Play is an innovative
-strategy for Node that is [used by Yarn][pnp].
 
-It is recommended to also set `symlink` setting to `false` when using `pnp` as
+* **isolated** - dependencies are symlinked from a virtual store at `node_modules/.pnpm`.
+* **hoisted** - a flat `node_modules` without symlinks is created. Same as the `node_modules` created by npm or Yarn Classic. Choose this linker if you have issues with symlinks (for instance, for a React Native project).
+* **pnp** - no `node_modules`. Plug'n'Play is an innovative strategy for Node that is [used by Yarn Berry][pnp]. It is recommended to also set `symlink` setting to `false` when using `pnp` as
 your linker.
 
 [pnp]: https://yarnpkg.com/features/pnp
@@ -267,6 +266,26 @@ You may also use an environment variable. For example:
 
 ```
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
+```
+
+### &lt;URL\>:tokenHelper
+
+Added in: v6.25.0
+
+A token helper is an executable which outputs an auth token. This can be used in situations where the authToken is not a constant value but is something that refreshes regularly, where a script or other tool can use an existing refresh token to obtain a new access token.
+
+The configuration for the path to the helper must be an absolute path, with no arguments. In order to be secure, it is only permitted to set this value in the user `.npmrc`. Otherwise a project could place a value in a project's local `.npmrc` and run arbitrary executables.
+
+Setting a token helper for the default registry:
+
+```
+tokenHelper=/home/ivan/token-generator
+```
+
+Setting a token helper for the specified registry:
+
+```
+//registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 
 ### &lt;URL\>:always-auth
