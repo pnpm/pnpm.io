@@ -22,7 +22,10 @@ pnpm <command> --filter <package_selector>
 
 :::
 
-## --filter &lt;package_name>
+
+## Matching
+
+### --filter &lt;package_name>
 
 Added in: v2.13.0
 
@@ -43,7 +46,7 @@ Specifying the scope of the package is optional, so `--filter=core` will pick `@
 However, if the workspace has multiple packages with the same name (for instance, `@babel/core` and `@types/core`),
 then filtering without scope will pick nothing.
 
-## --filter &lt;package_name>...
+### --filter &lt;package_name>...
 
 Added in: v2.13.0
 
@@ -61,7 +64,7 @@ You may use a pattern to select a set of root packages:
 pnpm test --filter "@babel/preset-*..."
 ```
 
-## --filter &lt;package_name>^...
+### --filter &lt;package_name>^...
 
 Added in: v4.4.0
 
@@ -74,7 +77,7 @@ dependencies:
 pnpm test --filter "foo^..."
 ```
 
-## --filter ...&lt;package_name>
+### --filter ...&lt;package_name>
 
 Added in: v2.14.0
 
@@ -86,7 +89,7 @@ run the tests of `foo` and all packages dependent on it:
 pnpm test --filter ...foo
 ```
 
-## --filter "...^&lt;package_name>"
+### --filter "...^&lt;package_name>"
 
 Added in: v4.4.0
 
@@ -98,14 +101,14 @@ run tests for all packages dependent on `foo`:
 pnpm test --filter "...^foo"
 ```
 
-## --filter ./&lt;directory>
+### --filter ./&lt;directory>
 
 Added in: v2.15.0
 
 To only select packages under the specified directory, you may specify any
 relative path, typically in POSIX format.
 
-## --filter {&lt;directory>}
+### --filter {&lt;directory>}
 
 Added in: v4.7.0
 
@@ -139,7 +142,7 @@ pnpm <cmd> --filter "@babel/*{components}[origin/master]"
 pnpm <cmd> --filter "...@babel/*{components}[origin/master]"
 ```
 
-## --filter "[&lt;since>]"
+### --filter "[&lt;since>]"
 
 Added in: v4.6.0
 
@@ -151,15 +154,6 @@ For example, the next command will run tests in all changed packages since
 
 ```sh
 pnpm test --filter "...[origin/master]"
-```
-
-## Multiplicity
-
-When packages are filtered, every package is taken that matches at least one of
-the selectors. You can use as many filters as you want:
-
-```sh
-pnpm test --filter ...foo --filter bar --filter baz...
 ```
 
 ## Excluding
@@ -180,6 +174,15 @@ directory:
 
 ```sh
 pnpm <cmd> --filter=!./lib
+```
+
+## Multiplicity
+
+When packages are filtered, every package is taken that matches at least one of
+the selectors. You can use as many filters as you want:
+
+```sh
+pnpm test --filter ...foo --filter bar --filter baz...
 ```
 
 ## --filter-prod &lt;filtering_pattern>
