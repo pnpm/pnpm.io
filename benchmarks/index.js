@@ -17,7 +17,7 @@ const TMP = path.join(DIRNAME, '.tmp')
 const BENCH_IMGS = path.join(DIRNAME, '../static/img/benchmarks')
 
 const { stripIndents } = commonTags
-const LIMIT_RUNS = 3
+const LIMIT_RUNS = 30
 
 const fixtures = [
   /*{
