@@ -4,7 +4,7 @@
         "benchmark": "node ./index.js"
     },
     "dependencies": {
-        "common-tags": "^1.8.0",
+        "common-tags": "^1.8.2",
         "cross-spawn": "^7.0.3",
         "fs-extra": "^10.0.0",
         "get-folder-size": "^3.1.0",
