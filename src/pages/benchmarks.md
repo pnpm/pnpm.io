@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Jan 9, 2022, 11:49 AM_ (_daily_ updated).
+**Last benchmarked at**: _Jan 10, 2022, 2:57 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 48.6s | 18.8s | 20.5s | 27.2s |
-| install | ✔     | ✔        | ✔           | 2.1s | 1.5s | 2.6s | n/a |
-| install | ✔     | ✔        |             | 13.2s | 4.8s | 8.6s | 1.8s |
-| install | ✔     |          |             | 19.5s | 8.3s | 14.2s | 7.2s |
-| install |       | ✔        |             | 31.8s | 16.2s | 15s | 20.4s |
-| install | ✔     |          | ✔           | 2.7s | 2s | 8s | n/a |
-| install |       | ✔        | ✔           | 2.1s | 1.6s | 9s | n/a |
-| install |       |          | ✔           | 2.7s | 7.1s | 14.1s | n/a |
-| update  | n/a | n/a | n/a | 2.1s | 13.3s | 18.7s | 32.4s |
+| install |       |          |             | 48.6s | 15.8s | 19.1s | 25.6s |
+| install | ✔     | ✔        | ✔           | 1.8s | 1.3s | 2.4s | n/a |
+| install | ✔     | ✔        |             | 10.7s | 3.8s | 7.3s | 1.7s |
+| install | ✔     |          |             | 16.3s | 8.2s | 12.9s | 7.2s |
+| install |       | ✔        |             | 29.6s | 13.6s | 12.9s | 19.4s |
+| install | ✔     |          | ✔           | 2.4s | 1.8s | 7.6s | n/a |
+| install |       | ✔        | ✔           | 1.8s | 1.6s | 8.2s | n/a |
+| install |       |          | ✔           | 2.4s | 6s | 13.9s | n/a |
+| update  | n/a | n/a | n/a | 1.8s | 12s | 16.8s | 30.8s |
 
 ![Graph of the alotta-files results](../../static/img/benchmarks/alotta-files.svg)
 
