@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@algolia/client-search': ^4.11.0
-  '@crowdin/cli': 3.7.4
+  '@crowdin/cli': 3.7.5
   '@docusaurus/core': 2.0.0-beta.14
   '@docusaurus/plugin-client-redirects': ^2.0.0-beta.14
   '@docusaurus/preset-classic': 2.0.0-beta.14
@@ -17,7 +17,7 @@ specifiers:
 
 dependencies:
   '@algolia/client-search': 4.11.0
-  '@crowdin/cli': 3.7.4
+  '@crowdin/cli': 3.7.5
   '@docusaurus/core': 2.0.0-beta.14_3e110919350e0ee2e64d1a654bd03c09
   '@docusaurus/plugin-client-redirects': 2.0.0-beta.14_2e199c06c41c98ee02ba5a7328abde4d
   '@docusaurus/preset-classic': 2.0.0-beta.14_c05ac0158f66440204c34856c0d5a9d2
@@ -1483,8 +1483,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@crowdin/cli/3.7.4:
-    resolution: {integrity: sha512-gxoJvxq282PWdCQvNRH03wWqBwEXJYlM2aBng5ZbffHLQXVQw7idIeghYJ/7TTwzyXkibq06YPkgAaaJJaoLiw==}
+  /@crowdin/cli/3.7.5:
+    resolution: {integrity: sha512-/RSWUUm5ubpWX1v5O+jcCGI3GhdrOzXgeU9O9Bgnb5lDD1NqZpf9gsiu1JiSE1ywYb5opKalIw4cCCSo8DxQIQ==}
     hasBin: true
     dependencies:
       shelljs: 0.8.4
