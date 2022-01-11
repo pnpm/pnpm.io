@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Jan 10, 2022, 2:57 AM_ (_daily_ updated).
+**Last benchmarked at**: _Jan 11, 2022, 2:57 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -25,10 +25,10 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 | install |       |          |             | 48.6s | 15.8s | 19.1s | 25.6s |
 | install | ✔     | ✔        | ✔           | 1.8s | 1.3s | 2.4s | n/a |
 | install | ✔     | ✔        |             | 10.7s | 3.8s | 7.3s | 1.7s |
-| install | ✔     |          |             | 16.3s | 8.2s | 12.9s | 7.2s |
+| install | ✔     |          |             | 16.3s | 7.7s | 12.9s | 7.2s |
 | install |       | ✔        |             | 29.6s | 13.6s | 12.9s | 19.4s |
 | install | ✔     |          | ✔           | 2.4s | 1.8s | 7.6s | n/a |
-| install |       | ✔        | ✔           | 1.8s | 1.6s | 8.2s | n/a |
+| install |       | ✔        | ✔           | 1.8s | 1.4s | 8.2s | n/a |
 | install |       |          | ✔           | 2.4s | 6s | 13.9s | n/a |
 | update  | n/a | n/a | n/a | 1.8s | 12s | 16.8s | 30.8s |
 
