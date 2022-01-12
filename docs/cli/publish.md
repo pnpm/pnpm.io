@@ -53,7 +53,7 @@ Added in: v4.11.0
 When true, `pnpm publish` checks if the current branch is your publish branch
 (master by default), clean, and up-to-date.
 
-### publish-branch
+### --publish-branch
 
 Added in: v4.11.0
 
