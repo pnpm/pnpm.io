@@ -474,6 +474,27 @@ Added in: v6.2.0
 
 The maximum amount of time to wait for HTTP requests to complete.
 
+## Peer Dependency Settings
+
+### auto-install-peers
+
+Added in: v6.26.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, `pnpm add <pkg>` automatically installs any missing peer dependencies as dev dependencies.
+
+### strict-peer-dependencies
+
+Added in: v2.15.0
+
+* Default: **false**
+* Type: **Boolean**
+
+If this is enabled, commands will fail if there is a missing or invalid peer
+dependency in the tree.
+
 ## CLI Settings
 
 ### [no-]color
@@ -501,16 +522,6 @@ Added in: v4.13.0
 
 Any logs at or higher than the given level will be shown.
 You can instead pass `--silent` to turn off all output logs.
-
-### strict-peer-dependencies
-
-Added in: v2.15.0
-
-* Default: **false**
-* Type: **Boolean**
-
-If this is enabled, commands will fail if there is a missing or invalid peer
-dependency in the tree.
 
 ### use-beta-cli
 

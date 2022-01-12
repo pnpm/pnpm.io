@@ -303,6 +303,44 @@ A bigger example:
 }
 ```
 
+### pnpm.peerDependencyRules.ignoreMissing
+
+Added in: v6.26.0
+
+pnpm will not print warnings about missing peer dependencies from this list.
+
+For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
+
+```json
+{
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["react"]
+    }
+  }
+}
+```
+
+### pnpm.peerDependencyRules.allowedVersions
+
+Added in: v6.26.0
+
+Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
+
+For instance, if you have some dependencies that need `react@16` but you know that they work fine with `react@17`, then you may use the following configuration:
+
+```json
+{
+  "pnpm": {
+    "allowedVersions": {
+      "react": "17"
+    }
+  }
+}
+```
+
+This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
+
 ### pnpm.neverBuiltDependencies
 
 Added in: v5.16.0
