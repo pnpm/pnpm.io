@@ -43,6 +43,14 @@ Invoke-WebRequest 'https://get.pnpm.io/v6.16.js' -UseBasicParsing -o pnpm.js; no
 
 The standalone script is signed. [Here's how to verify it](https://github.com/pnpm/get#verifying-files).
 
+## Using Homebrew
+
+If you have the package manager installed, you can install pnpm using the following command:
+
+```
+brew install pnpm
+```
+
 ## Using Corepack
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
