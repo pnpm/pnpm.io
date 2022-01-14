@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@algolia/client-search': ^4.12.0
-  '@crowdin/cli': 3.7.6
+  '@crowdin/cli': 3.7.7
   '@docusaurus/core': 2.0.0-beta.14
   '@docusaurus/plugin-client-redirects': ^2.0.0-beta.14
   '@docusaurus/preset-classic': 2.0.0-beta.14
@@ -17,7 +17,7 @@ specifiers:
 
 dependencies:
   '@algolia/client-search': 4.12.0
-  '@crowdin/cli': 3.7.6
+  '@crowdin/cli': 3.7.7
   '@docusaurus/core': 2.0.0-beta.14_3e110919350e0ee2e64d1a654bd03c09
   '@docusaurus/plugin-client-redirects': 2.0.0-beta.14_551f66505a0ff3148b09a4146b45f5f2
   '@docusaurus/preset-classic': 2.0.0-beta.14_ba1db2493d4388d4a58865dfe1faf806
@@ -1518,8 +1518,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@crowdin/cli/3.7.6:
-    resolution: {integrity: sha512-iXKPexzaave7mNadVA0nAhhdi3DsSmU/hbrt1LhpYNW6Lngp74PXQ1hShxCgflPeqpExF/ZJaptWW8qAgNpwQg==}
+  /@crowdin/cli/3.7.7:
+    resolution: {integrity: sha512-wN0NXLDymC9PgT3I6jMx/YLjcEtegAnFg7VaavzLfc1vFegD4lKlrvRmc0qV2IIiRMZLShEsS0QtYtAyhi/qew==}
     hasBin: true
     dependencies:
       shelljs: 0.8.5
@@ -3825,7 +3825,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       globby: 11.0.4
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       is-glob: 4.0.3
       is-path-cwd: 2.2.0
       is-path-inside: 3.0.3
@@ -5271,7 +5271,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
     dev: false
 
   /keyv/3.1.0:
@@ -8141,7 +8141,7 @@ packages:
       default-gateway: 6.0.3
       del: 6.0.0
       express: 4.17.2
-      graceful-fs: 4.2.8
+      graceful-fs: 4.2.9
       html-entities: 2.3.2
       http-proxy-middleware: 2.0.1
       ipaddr.js: 2.0.1
