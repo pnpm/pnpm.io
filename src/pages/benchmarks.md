@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Jan 13, 2022, 2:57 AM_ (_daily_ updated).
+**Last benchmarked at**: _Jan 14, 2022, 2:56 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 48.6s | 20.7s | 19.1s | 25.6s |
-| install | ✔     | ✔        | ✔           | 1.8s | 1.7s | 2.4s | n/a |
-| install | ✔     | ✔        |             | 10.7s | 5.3s | 7.3s | 1.7s |
-| install | ✔     |          |             | 16.3s | 9.1s | 12.9s | 7.2s |
-| install |       | ✔        |             | 29.6s | 18.1s | 12.9s | 19.4s |
-| install | ✔     |          | ✔           | 2.4s | 2.2s | 7.6s | n/a |
-| install |       | ✔        | ✔           | 1.8s | 1.7s | 8.2s | n/a |
-| install |       |          | ✔           | 2.4s | 7.6s | 13.9s | n/a |
-| update  | n/a | n/a | n/a | 1.8s | 15.3s | 16.8s | 30.8s |
+| install |       |          |             | 1m 9.3s | 14.8s | 17.9s | 25.2s |
+| install | ✔     | ✔        | ✔           | 1.8s | 1.2s | 2.3s | n/a |
+| install | ✔     | ✔        |             | 10.5s | 3.7s | 7s | 1.6s |
+| install | ✔     |          |             | 15.5s | 7.8s | 12.5s | 7s |
+| install |       | ✔        |             | 28.8s | 12.4s | 12.7s | 19.1s |
+| install | ✔     |          | ✔           | 2.3s | 1.7s | 7.6s | n/a |
+| install |       | ✔        | ✔           | 1.8s | 1.3s | 7.8s | n/a |
+| install |       |          | ✔           | 2.3s | 5.8s | 12.8s | n/a |
+| update  | n/a | n/a | n/a | 1.7s | 10.4s | 16.4s | 30.2s |
 
 ![Graph of the alotta-files results](../../static/img/benchmarks/alotta-files.svg)
 
