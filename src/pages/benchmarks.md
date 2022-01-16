@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Jan 15, 2022, 2:58 AM_ (_daily_ updated).
+**Last benchmarked at**: _Jan 16, 2022, 2:57 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 1m 9.3s | 14.8s | 17.9s | 25.2s |
-| install | ✔     | ✔        | ✔           | 1.8s | 1.2s | 2.3s | n/a |
-| install | ✔     | ✔        |             | 10.5s | 3.7s | 7s | 1.6s |
-| install | ✔     |          |             | 15.5s | 7.8s | 12.5s | 7s |
-| install |       | ✔        |             | 28.8s | 12.4s | 12.7s | 19.1s |
-| install | ✔     |          | ✔           | 2.3s | 1.7s | 7.6s | n/a |
-| install |       | ✔        | ✔           | 1.8s | 1.3s | 7.8s | n/a |
-| install |       |          | ✔           | 2.3s | 5.8s | 12.8s | n/a |
-| update  | n/a | n/a | n/a | 1.7s | 10.4s | 16.4s | 30.2s |
+| install |       |          |             | 1m 9.3s | 14s | 16.6s | 23.6s |
+| install | ✔     | ✔        | ✔           | 1.7s | 1.2s | 2.3s | n/a |
+| install | ✔     | ✔        |             | 10s | 3.5s | 6.8s | 1.5s |
+| install | ✔     |          |             | 14.3s | 6.9s | 11.2s | 6.2s |
+| install |       | ✔        |             | 25.7s | 11.6s | 12s | 17.9s |
+| install | ✔     |          | ✔           | 2.2s | 1.7s | 7s | n/a |
+| install |       | ✔        | ✔           | 1.7s | 1.3s | 7.6s | n/a |
+| install |       |          | ✔           | 2.2s | 4.9s | 11.8s | n/a |
+| update  | n/a | n/a | n/a | 1.6s | 10s | 15.5s | 28.3s |
 
 ![Graph of the alotta-files results](../../static/img/benchmarks/alotta-files.svg)
 
