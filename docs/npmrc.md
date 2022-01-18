@@ -583,7 +583,6 @@ Added in: v1.31.0
 
 * Default: **false**
 * Type: **Boolean**
-* Stability: **Experimental**
 
 Use and cache the results of (pre/post)install hooks.
 
@@ -593,7 +592,6 @@ Added in: v1.31.0
 
 * Default: **false**
 * Type: **Boolean**
-* Stability: **Experimental**
 
 Only use the side effects cache if present, do not create it for new packages.
 
