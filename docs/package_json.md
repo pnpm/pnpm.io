@@ -332,8 +332,10 @@ For instance, if you have some dependencies that need `react@16` but you know th
 ```json
 {
   "pnpm": {
-    "allowedVersions": {
-      "react": "17"
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "react": "17"
+      }
     }
   }
 }
