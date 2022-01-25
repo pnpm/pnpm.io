@@ -86,7 +86,6 @@
     "Recipes": [
       "using-changesets",
       "continuous-integration",
-      "only-allow-pnpm",
       "git"
     ],
     "Advanced": [

@@ -253,10 +253,6 @@
         },
         {
           "type": "doc",
-          "id": "version-6.x/only-allow-pnpm"
-        },
-        {
-          "type": "doc",
           "id": "version-6.x/git"
         }
       ]
