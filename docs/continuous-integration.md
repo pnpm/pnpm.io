@@ -65,23 +65,6 @@ install:
 
 [AppVeyor]: https://www.appveyor.com
 
-## Sail CI
-
-On [Sail CI], you can use pnpm for installing your dependencies by adding this to your `.sail.yml` file:
-
-```yaml title=".sail.yml"
-install:
-  image: znck/pnpm:latest
-  command:
-    - pnpm
-  args:
-    - install
-```
-To get the exact Node version and pnpm version you require you can always make
-your own Docker image and push to [Docker Hub](https://hub.docker.com/).
-
-[Sali CI]: https://sail.ci
-
 ## GitHub Actions
 
 On GitHub Actions, you can use pnpm for installing and caching your dependencies
