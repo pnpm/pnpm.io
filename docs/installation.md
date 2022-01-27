@@ -51,6 +51,14 @@ If you have the package manager installed, you can install pnpm using the follow
 brew install pnpm
 ```
 
+## Using Scoop
+
+If you have Scoop installed, you can install pnpm using the following command:
+
+```
+scoop install node-lts pnpm
+```
+
 ## Using Corepack
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
@@ -118,7 +126,7 @@ internal/modules/cjs/loader.js:883
   throw err;
   ^
 
- 
+
 
 Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node_modules\pnpm\bin\pnpm.js'
 ←[90m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:880:15)←[39m
