@@ -53,7 +53,7 @@ brew install pnpm
 
 ## Using Scoop
 
-If you have [Scoop](https://scoop.sh/) installed, you can install pnpm using the following command:
+If you have Scoop installed, you can install pnpm using the following command:
 
 ```
 scoop install node-lts pnpm
