@@ -51,6 +51,14 @@ If you have the package manager installed, you can install pnpm using the follow
 brew install pnpm
 ```
 
+## Using Scoop
+
+If you have [Scoop](https://scoop.sh/) installed, you can install pnpm using the following command:
+
+```
+scoop install node-lts pnpm
+```
+
 ## Using Corepack
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
@@ -97,14 +105,14 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 Here is a list of past pnpm versions with respective Node.js version support.
 
 | Node.js    | pnpm 1 | pnpm 2 | pnpm 3 | pnpm 4 | pnpm 5 | pnpm 6 |
-|------------|--------|--------|--------|--------|--------|--------|
-| Node.js 4  | ✔️     | ❌    | ❌    | ❌     | ❌     | ❌    |
-| Node.js 6  | ✔️     | ✔️    | ❌    | ❌     | ❌     | ❌    |
-| Node.js 8  | ✔️     | ✔️    | ✔️    | ❌     | ❌     | ❌    |
-| Node.js 10 | ✔️     | ✔️    | ✔️    | ✔️     | ✔️     | ❌    |
-| Node.js 12 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
-| Node.js 14 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
-| Node.js 16 | ?     | ?    | ?️    | ?️     | ?️     | ✔️    |
+| ---------- | ------ | ------ | ------ | ------ | ------ | ------ |
+| Node.js 4  | ✔️     | ❌     | ❌     | ❌     | ❌     | ❌     |
+| Node.js 6  | ✔️     | ✔️     | ❌     | ❌     | ❌     | ❌     |
+| Node.js 8  | ✔️     | ✔️     | ✔️     | ❌     | ❌     | ❌     |
+| Node.js 10 | ✔️     | ✔️     | ✔️     | ✔️     | ✔️     | ❌     |
+| Node.js 12 | ❌     | ❌     | ✔️     | ✔️     | ✔️     | ✔️     |
+| Node.js 14 | ❌     | ❌     | ✔️     | ✔️     | ✔️     | ✔️     |
+| Node.js 16 | ?      | ?      | ?️     | ?️     | ?️     | ✔️     |
 
 ## Troubleshooting
 
@@ -118,7 +126,7 @@ internal/modules/cjs/loader.js:883
   throw err;
   ^
 
- 
+
 
 Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node_modules\pnpm\bin\pnpm.js'
 ←[90m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:880:15)←[39m
@@ -145,5 +153,5 @@ Once done, install pnpm again and it should work as expected.
 
 If you need to remove the pnpm CLI from your system and any files it have written to your disk, see [Uninstalling pnpm].
 
-[Uninstalling pnpm]: ./uninstall.md
+[uninstalling pnpm]: ./uninstall.md
 [pnpm env]: ./cli/env.md
