@@ -105,14 +105,14 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 Here is a list of past pnpm versions with respective Node.js version support.
 
 | Node.js    | pnpm 1 | pnpm 2 | pnpm 3 | pnpm 4 | pnpm 5 | pnpm 6 |
-| ---------- | ------ | ------ | ------ | ------ | ------ | ------ |
-| Node.js 4  | ✔️     | ❌     | ❌     | ❌     | ❌     | ❌     |
-| Node.js 6  | ✔️     | ✔️     | ❌     | ❌     | ❌     | ❌     |
-| Node.js 8  | ✔️     | ✔️     | ✔️     | ❌     | ❌     | ❌     |
-| Node.js 10 | ✔️     | ✔️     | ✔️     | ✔️     | ✔️     | ❌     |
-| Node.js 12 | ❌     | ❌     | ✔️     | ✔️     | ✔️     | ✔️     |
-| Node.js 14 | ❌     | ❌     | ✔️     | ✔️     | ✔️     | ✔️     |
-| Node.js 16 | ?      | ?      | ?️     | ?️     | ?️     | ✔️     |
+|------------|--------|--------|--------|--------|--------|--------|
+| Node.js 4  | ✔️     | ❌    | ❌    | ❌     | ❌     | ❌    |
+| Node.js 6  | ✔️     | ✔️    | ❌    | ❌     | ❌     | ❌    |
+| Node.js 8  | ✔️     | ✔️    | ✔️    | ❌     | ❌     | ❌    |
+| Node.js 10 | ✔️     | ✔️    | ✔️    | ✔️     | ✔️     | ❌    |
+| Node.js 12 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
+| Node.js 14 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
+| Node.js 16 | ?     | ?    | ?️    | ?️     | ?️     | ✔️    |
 
 ## Troubleshooting
 
@@ -153,5 +153,5 @@ Once done, install pnpm again and it should work as expected.
 
 If you need to remove the pnpm CLI from your system and any files it have written to your disk, see [Uninstalling pnpm].
 
-[uninstalling pnpm]: ./uninstall.md
+[Uninstalling pnpm]: ./uninstall.md
 [pnpm env]: ./cli/env.md
