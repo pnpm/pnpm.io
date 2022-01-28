@@ -37,6 +37,8 @@ In French :fr::
 
 In Chinese :cn::
 - `2021-12-11`: [npm/yarn的设计缺陷，以及pnpm是如何改进的](https://xingyahao.com/c/pnpm-npm-yarn.html)
+- `2021-12-07`: [为什么 Vue 源码及生态仓库要迁移 pnpm?](https://mp.weixin.qq.com/s/0PfyRfv23aTF2sV_RY11Fw)
+- `2021-08-28`: [pnpm: 最先进的包管理工具](https://mp.weixin.qq.com/s/5Zo576QFpdAfwXmhfTwWZQ)
 
 In Japanese :jp::
 - `2021-12-11`: [npm/yarnの不足点とpnpmの解決法](https://engineering.meetsmore.com/entry/2021/12/06/112931)
