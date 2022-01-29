@@ -10,7 +10,7 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 
-import {useVersions, useLatestVersion} from '@docusaurus/theme-common';
+import {useVersions, useLatestVersion} from '@theme/hooks/useDocs';
 
 function Version() {
   const {siteConfig} = useDocusaurusContext();
