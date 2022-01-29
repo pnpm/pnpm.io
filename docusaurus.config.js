@@ -68,6 +68,17 @@ module.exports={
       }
     ]
   ],
+  "plugins": [
+    [
+      "content-docs",
+      ({
+        "id": "community",
+        "path": "community",
+        "routeBasePath": "community",
+        "sidebarPath": path.join(__dirname, "sidebarsCommunity.json"),
+      }),
+    ],
+  ],
   "themeConfig": {
     "prism": {
       theme: require('prism-react-renderer/themes/github'),
@@ -95,7 +106,7 @@ module.exports={
           "position": "left"
         },
         {
-          "to": "/community",
+          "to": "/community/articles",
           "label": "Community",
           "position": "left"
         },
