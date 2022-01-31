@@ -727,3 +727,12 @@ When `false`, the `NODE_PATH` environment variable is not set in the command shi
 It is recommended to set this setting to `false` if you are getting the next error, when running commands:
 
 > The input line is too long. The syntax of the command is incorrect.
+
+### update-notifier
+
+Added in: v6.29.0
+
+* Default: **true**
+* Type: **Boolean**
+
+Set to `false` to suppress the update notification when using an older version of pnpm than the latest.
