@@ -49,7 +49,7 @@ to be implicit rather than explicit, obfuscating the execution flow. It also led
 to surprising executions with `pnpm serve` also running `pnpm preserve`.
 
 If for some reason you need the pre/post scripts behavior of npm, use the
-`enable-pre-post-scripts` option.
+`--enable-pre-post-scripts` option.
 
 ## Options
 
@@ -68,7 +68,7 @@ For instance, to force usage of Git Bash on Windows:
 pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
-### shell-emulator
+### --shell-emulator
 
 Added in: v5.8.0
 
@@ -87,7 +87,7 @@ next script will fail on non-POSIX-compliant systems:
 }
 ```
 
-But if the `shell-emulator` setting is set to `true`, it will work on all
+But if the `--shell-emulator` setting is set to `true`, it will work on all
 platforms.
 
 [bash-like shell]: https://www.npmjs.com/package/@yarnpkg/shell
@@ -128,7 +128,7 @@ Added in: v6.24.0
 
 Aggregate output from child processes that are run in parallel, and only print output when the child process is finished. It makes reading large logs after running `pnpm -r <command>` with `--parallel` or with `--workspace-concurrency=<number>` much easier (especially on CI). Only `--reporter=append-only` is supported.
 
-### enable-pre-post-scripts
+### --enable-pre-post-scripts
 
 Added in: v6.1.0
 
