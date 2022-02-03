@@ -159,7 +159,7 @@ any symlinks. It is a useful setting together with `node-linker=pnp`.
 
 Added in: v5.15.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When `false`, pnpm will not write any files to the modules directory
