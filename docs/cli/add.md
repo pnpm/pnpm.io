@@ -13,9 +13,10 @@ By default, any new package is installed as a production dependency.
 | `pnpm add sax`                         | Save to `dependencies`             |
 | `pnpm add -D sax`                      | Save to `devDependencies`          |
 | `pnpm add -O sax`                      | Save to `optionalDependencies`     |
+| `pnpm add -g sax `                     | Install package globally           |
 | `pnpm add sax@next`                    | Install from the `next` tag        |
 | `pnpm add sax@3.0.0`                   | Specify version `3.0.0`            |
-
+  
 ## Supported package locations
 
 ### Install from npm registry
@@ -125,7 +126,7 @@ Adding a new dependency to the root workspace package fails, unless the
 
 For instance, `pnpm add debug -W`.
 
-### --global
+### --global, -g
 
 Install a package globally.
 
