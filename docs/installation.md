@@ -56,7 +56,7 @@ brew install pnpm
 If you have Scoop installed, you can install pnpm using the following command:
 
 ```
-scoop install node-lts pnpm
+scoop install nodejs-lts pnpm
 ```
 
 ## Using Corepack
