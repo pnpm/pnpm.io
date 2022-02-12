@@ -16,7 +16,7 @@ By default, any new package is installed as a production dependency.
 | `pnpm add -g sax `                     | Install package globally           |
 | `pnpm add sax@next`                    | Install from the `next` tag        |
 | `pnpm add sax@3.0.0`                   | Specify version `3.0.0`            |
-  
+
 ## Supported package locations
 
 ### Install from npm registry
