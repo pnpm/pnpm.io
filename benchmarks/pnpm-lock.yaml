@@ -8,7 +8,7 @@ specifiers:
   load-json-file: ^7.0.1
   load-yaml-file: ^1.0.0
   path-key: ^4.0.0
-  pretty-bytes: ^5.6.0
+  pretty-bytes: ^6.0.0
   pretty-ms: ^7.0.1
   rimraf: ^3.0.2
   tempy: ^2.0.0
@@ -24,7 +24,7 @@ dependencies:
   load-json-file: 7.0.1
   load-yaml-file: 1.0.0
   path-key: 4.0.0
-  pretty-bytes: 5.6.0
+  pretty-bytes: 6.0.0
   pretty-ms: 7.0.1
   rimraf: 3.0.2
   tempy: 2.0.0
@@ -396,9 +396,9 @@ packages:
     engines: {node: '>=8.6'}
     dev: false
 
-  /pretty-bytes/5.6.0:
-    resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
-    engines: {node: '>=6'}
+  /pretty-bytes/6.0.0:
+    resolution: {integrity: sha512-6UqkYefdogmzqAZWzJ7laYeJnaXDy2/J+ZqiiMtS7t7OfpXWTlaeGMwX8U6EFvPV/YWWEKRkS8hKS4k60WHTOg==}
+    engines: {node: ^14.13.1 || >=16.0.0}
     dev: false
 
   /pretty-ms/7.0.1:
