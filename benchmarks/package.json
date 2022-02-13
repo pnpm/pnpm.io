@@ -11,7 +11,7 @@
         "load-json-file": "^7.0.1",
         "load-yaml-file": "^1.0.0",
         "path-key": "^4.0.0",
-        "pretty-bytes": "^5.6.0",
+        "pretty-bytes": "^6.0.0",
         "pretty-ms": "^7.0.1",
         "rimraf": "^3.0.2",
         "tempy": "^2.0.0",
