@@ -215,3 +215,4 @@ Here are a few open source projects that use the workspace feature of pnpm:
 * [Telecraft](https://github.com/telecraft/telecraft) (as of 9/26/2021, commit `73a9c48c9d4f160d758b8881f404cc52c20a7454`)
 * [GiraphQL](https://github.com/hayes/giraphql) (as of 8/4/2021, commit `3dd3ff148da382d6f406f20626a9a5c25707c0c8`)
 * [Tailchat](https://github.com/msgbyte/tailchat) (as of 12/27/2021, commit `298af71aa0619e0a8fa8717777afe2fb32739db4`)
+* [Vitest](https://github.com/vitest-dev/vitest) (as of 12/13/2021, commit `d6ff0ccb819716713f5eab5c046861f4d8e4f988`)
