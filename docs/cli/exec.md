@@ -32,13 +32,18 @@ Execute the shell command in every project of the workspace.
 The name of the current package is available through the environment variable
 `PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0 onwards).
 
-Examples:
+#### Examples
+
+Prune `node_modules` installations for all packages:
 
 ```
-# prune node_modules installations for all packages
-pnpm -r exec -- rm -rf node_modules
-# view package information for all packages
-pnpm -r exec -- pnpm view $PNPM_PACKAGE_NAME
+pnpm -r exec rm -rf node_modules
+```
+
+View package information for all packages. This should be used with the `--shell-mode` (or `-c`) option for the environment variable to work.
+
+```
+pnpm -rc exec pnpm view $PNPM_PACKAGE_NAME
 ```
 
 ### --parallel
@@ -49,6 +54,12 @@ Completely disregard concurrency and topological sorting, running a given script
 immediately in all matching packages with prefixed streaming output. This is the
 preferred flag for long-running processes over many packages, for instance, a
 lengthy build process.
+
+### --shell-mode, -c
+
+Added in: v6.31.0
+
+Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
 
 ### --filter &lt;package_selector\>
 
