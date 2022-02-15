@@ -23,6 +23,21 @@ pnpm jest
 
 ## Options
 
+Any options for the `exec` command should be listed before the `exec` keyword.
+Options listed after the `exec` keyword are passed to the executed command.
+
+Good. pnpm will run recursively:
+
+```
+pnpm -r exec jest
+```
+
+Bad, pnpm will not run recursively but `jest` will be executed with the `-r` option:
+
+```
+pnpm exec jest -r
+```
+
 ### --recursive, -r
 
 Added in: v2.9.0
