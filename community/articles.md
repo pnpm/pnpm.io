@@ -3,6 +3,7 @@ id: articles
 title: Articles
 ---
 
+- `2022-02-16`: [JavaScript package managers compared: npm, Yarn, or pnpm?](https://blog.logrocket.com/javascript-package-managers-compared/)
 - `2022-01-18`: [A story of how we migrated to pnpm](https://divriots.com/blog/switching-to-pnpm)
 - `2022-01-17`: [Yarn, npm, or pnpm?](https://www.pixelmatters.com/blog/yarn-npm-or-pnpm)
 - `2021-11-17`: [Replacing Lerna + Yarn with pnpm workspaces](https://www.raulmelo.dev/blog/replacing-lerna-and-yarn-with-pnpm-workspaces)

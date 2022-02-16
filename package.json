@@ -30,7 +30,7 @@
     "webpack": "^5.67.0"
   },
   "engines": {
-    "pnpm": "6"
+    "pnpm": ">=6"
   },
   "devDependencies": {
     "shx": "^0.3.4"
