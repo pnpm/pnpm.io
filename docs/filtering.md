@@ -13,7 +13,7 @@ relation.
 Selectors may be specified via the `--filter` flag:
 
 ```sh
-pnpm <command> --filter <package_selector>
+pnpm --filter <package_selector> <command>
 ```
 
 :::tip
@@ -35,9 +35,9 @@ pattern to select a set of packages (`@scope/*`).
 Examples:
 
 ```sh
-pnpm test --filter "@babel/core"
-pnpm test --filter "@babel/*"
-pnpm test --filter "*core"
+pnpm --filter "@babel/core" test
+pnpm --filter "@babel/*" test
+pnpm --filter "*core" test
 ```
 
 Since v6.19.0:
@@ -55,13 +55,13 @@ package name with an ellipsis: `<package_name>...`. For instance, the next
 command will run tests of `foo` and all of its dependencies:
 
 ```sh
-pnpm test --filter foo...
+pnpm --filter foo... test
 ```
 
 You may use a pattern to select a set of root packages:
 
 ```sh
-pnpm test --filter "@babel/preset-*..."
+pnpm --filter "@babel/preset-*..." test
 ```
 
 ### --filter &lt;package_name>^...
@@ -74,7 +74,7 @@ instance, the next command will run tests for all of `foo`'s
 dependencies:
 
 ```sh
-pnpm test --filter "foo^..."
+pnpm --filter "foo^..." test
 ```
 
 ### --filter ...&lt;package_name>
@@ -86,7 +86,7 @@ the package name with an ellipsis: `...<package_name>`. For instance, this will
 run the tests of `foo` and all packages dependent on it:
 
 ```sh
-pnpm test --filter ...foo
+pnpm --filter ...foo test
 ```
 
 ### --filter "...^&lt;package_name>"
@@ -98,7 +98,7 @@ package name with an ellipsis followed by a chevron. For instance, this will
 run tests for all packages dependent on `foo`:
 
 ```text
-pnpm test --filter "...^foo"
+pnpm --filter "...^foo" test
 ```
 
 ### --filter ./&lt;directory>
@@ -118,28 +118,28 @@ It may be used with the ellipsis and chevron operators to select
 dependents/dependencies as well:
 
 ```sh
-pnpm <cmd> --filter ...{<directory>}
-pnpm <cmd> --filter {<directory>}...
-pnpm <cmd> --filter ...{<directory>}...
+pnpm --filter ...{<directory>} <cmd>
+pnpm --filter {<directory>}... <cmd>
+pnpm --filter ...{<directory>}... <cmd>
 ```
 
 It may also be combined with `[<since>]`. For instance, to select all changed
 projects inside a directory:
 
 ```sh
-pnpm <cmd> --filter "{packages}[origin/master]"
-pnpm <cmd> --filter "...{packages}[origin/master]"
-pnpm <cmd> --filter "{packages}[origin/master]..."
-pnpm <cmd> --filter "...{packages}[origin/master]..."
+pnpm --filter "{packages}[origin/master]" <cmd>
+pnpm --filter "...{packages}[origin/master]" <cmd>
+pnpm --filter "{packages}[origin/master]..." <cmd>
+pnpm --filter "...{packages}[origin/master]..." <cmd>
 ```
 
 Or you may select all packages from a directory with names matching the given
 pattern:
 
 ```text
-pnpm <cmd> --filter "@babel/*{components}"
-pnpm <cmd> --filter "@babel/*{components}[origin/master]"
-pnpm <cmd> --filter "...@babel/*{components}[origin/master]"
+pnpm --filter "@babel/*{components}" <cmd>
+pnpm --filter "@babel/*{components}[origin/master]" <cmd>
+pnpm --filter "...@babel/*{components}[origin/master]" <cmd>
 ```
 
 ### --filter "[&lt;since>]"
@@ -153,7 +153,7 @@ For example, the next command will run tests in all changed packages since
 `master` and on any dependent packages:
 
 ```sh
-pnpm test --filter "...[origin/master]"
+pnpm --filter "...[origin/master]" test
 ```
 
 ## Excluding
@@ -166,14 +166,14 @@ leading "!". In zsh (and possibly other shells), "!" should be escaped: `\!`.
 For instance, this will run a command in all projects except for `foo`:
 
 ```sh
-pnpm <cmd> --filter=!foo
+pnpm --filter=!foo <cmd>
 ```
 
 And this will run a command in all projects that are not under the `lib`
 directory:
 
 ```sh
-pnpm <cmd> --filter=!./lib
+pnpm --filter=!./lib <cmd>
 ```
 
 ## Multiplicity
@@ -182,7 +182,7 @@ When packages are filtered, every package is taken that matches at least one of
 the selectors. You can use as many filters as you want:
 
 ```sh
-pnpm test --filter ...foo --filter bar --filter baz...
+pnpm --filter ...foo --filter bar --filter baz... test
 ```
 
 ## --filter-prod &lt;filtering_pattern>
