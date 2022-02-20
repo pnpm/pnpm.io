@@ -68,7 +68,8 @@
           "cli/server",
           "cli/store",
           "cli/root",
-          "cli/bin"
+          "cli/bin",
+          "cli/setup"
         ]
       }
     ],

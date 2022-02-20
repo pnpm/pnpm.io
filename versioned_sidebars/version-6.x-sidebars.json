@@ -191,6 +191,10 @@
             {
               "type": "doc",
               "id": "version-6.x/cli/bin"
+            },
+            {
+              "type": "doc",
+              "id": "version-6.x/cli/setup"
             }
           ]
         }
