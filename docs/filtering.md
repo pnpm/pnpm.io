@@ -10,7 +10,7 @@ Filtering allows you to restrict commands to specific subsets of packages.
 pnpm supports a rich selector syntax for picking packages by name or by
 relation.
 
-Selectors may be specified via the `--filter` flag:
+Selectors may be specified via the `--filter` (or `-F`) flag:
 
 ```sh
 pnpm --filter <package_selector> <command>

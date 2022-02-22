@@ -359,3 +359,19 @@ An example of the `"pnpm"."neverBuiltDependencies"` field:
   }
 }
 ```
+
+### pnpm.onlyBuiltDependencies
+
+Added in: v6.32.0
+
+A list of package names that are allowed to be executed during installation. If this field exists, only the listed packages will be able to run install scripts.
+
+Example:
+
+```json
+{
+  "pnpm": {
+    "onlyBuiltDependencies": ["fsevents"]
+  }
+}
+```
