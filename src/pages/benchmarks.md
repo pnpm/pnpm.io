@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Feb 25, 2022, 2:51 AM_ (_daily_ updated).
+**Last benchmarked at**: _Feb 26, 2022, 2:50 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 50s | 15.9s | 18.5s | 25.9s |
-| install | ✔     | ✔        | ✔           | 2.3s | 1.3s | 2.4s | n/a |
-| install | ✔     | ✔        |             | 14.2s | 3.6s | 6.9s | 1.6s |
-| install | ✔     |          |             | 20.3s | 6.8s | 12s | 6.8s |
-| install |       | ✔        |             | 34.7s | 13.2s | 12.5s | 19.5s |
-| install | ✔     |          | ✔           | 3.1s | 1.7s | 7.5s | n/a |
-| install |       | ✔        | ✔           | 2.4s | 1.3s | 7.9s | n/a |
-| install |       |          | ✔           | 3.1s | 6.1s | 12.8s | n/a |
-| update  | n/a | n/a | n/a | 2.4s | 10.8s | 16.4s | 30.9s |
+| install |       |          |             | 43.5s | 15.9s | 18.5s | 24.3s |
+| install | ✔     | ✔        | ✔           | 1.9s | 1.3s | 2.3s | n/a |
+| install | ✔     | ✔        |             | 11.7s | 3.6s | 6.9s | 1.6s |
+| install | ✔     |          |             | 16.4s | 6.8s | 12s | 6.7s |
+| install |       | ✔        |             | 27.8s | 13.2s | 12.5s | 18.4s |
+| install | ✔     |          | ✔           | 2.5s | 1.7s | 7.5s | n/a |
+| install |       | ✔        | ✔           | 2s | 1.3s | 7.9s | n/a |
+| install |       |          | ✔           | 2.8s | 6.1s | 12.8s | n/a |
+| update  | n/a | n/a | n/a | 2.2s | 10.8s | 16.4s | 29.6s |
 
 ![Graph of the alotta-files results](../../static/img/benchmarks/alotta-files.svg)
 
