@@ -62,8 +62,8 @@ COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
 # for each sub-package, we have to add one extra step to copy its manifest
 # to the right place, as docker have no way to filter out only package.json with
 # single instruction
-COPY packages/foo/backage.json packages/foo/
-COPY packages/bar/backage.json packages/bar/
+COPY packages/foo/package.json packages/foo/
+COPY packages/bar/package.json packages/bar/
 
 RUN pnpm install --frozen-lockfile --prod
 
