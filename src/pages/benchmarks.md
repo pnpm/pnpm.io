@@ -32,7 +32,7 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 | install |       |          | ✔           | 2.8s | 6.1s | 12.8s | n/a |
 | update  | n/a | n/a | n/a | 2.2s | 10.8s | 16.4s | 29.6s |
 
-![Graph of the alotta-files results](../../static/img/benchmarks/alotta-files.svg)
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
 ## The reason pnpm is fast
 
