@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Mar 1, 2022, 3:00 AM_ (_daily_ updated).
+**Last benchmarked at**: _Mar 2, 2022, 2:55 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 43.5s | 15.3s | 17.7s | 24.3s |
-| install | ✔     | ✔        | ✔           | 1.8s | 1.2s | 2.3s | n/a |
-| install | ✔     | ✔        |             | 10.1s | 3.8s | 6.9s | 1.5s |
-| install | ✔     |          |             | 15.5s | 6.6s | 11.9s | 6.7s |
-| install |       | ✔        |             | 27.8s | 12.7s | 12.2s | 18.4s |
-| install | ✔     |          | ✔           | 2.3s | 1.7s | 7.2s | n/a |
-| install |       | ✔        | ✔           | 1.8s | 1.2s | 7.8s | n/a |
-| install |       |          | ✔           | 2.3s | 6.9s | 12.8s | n/a |
-| update  | n/a | n/a | n/a | 1.8s | 10.3s | 16.4s | 29.6s |
+| install |       |          |             | 43.5s | 13.2s | 16.7s | 24.3s |
+| install | ✔     | ✔        | ✔           | 1.6s | 1.2s | 2.3s | n/a |
+| install | ✔     | ✔        |             | 9.1s | 3.6s | 6.6s | 1.5s |
+| install | ✔     |          |             | 13.7s | 6.6s | 11.5s | 5.9s |
+| install |       | ✔        |             | 23.6s | 11.6s | 11.6s | 18.4s |
+| install | ✔     |          | ✔           | 2.1s | 1.7s | 6.9s | n/a |
+| install |       | ✔        | ✔           | 1.7s | 1.2s | 7.4s | n/a |
+| install |       |          | ✔           | 2.1s | 5.8s | 11.8s | n/a |
+| update  | n/a | n/a | n/a | 1.6s | 9.7s | 15.1s | 29.6s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
