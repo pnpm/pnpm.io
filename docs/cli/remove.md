@@ -3,7 +3,7 @@ id: remove
 title: pnpm remove
 ---
 
-Aliases: rm, uninstall, un
+Aliases: `rm`, `uninstall`, `un`
 
 Removes packages from `node_modules` and from the project's `package.json`.
 
