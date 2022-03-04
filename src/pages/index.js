@@ -97,6 +97,9 @@ const Showcase = props => {
                 <a href="https://www.leniolabs.com/" target="_blank">
                   <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
                 </a>
+                <a href="https://vercel.com/" target="_blank">
+                  <img style={{padding: '20px'}} width="240" alt="Vercel" src="/img/users/vercel.svg" />
+                </a>
               </div>
             </div>
             <div>
