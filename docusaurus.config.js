@@ -91,6 +91,10 @@ module.exports={
       },
       "items": [
         {
+          href: 'https://war.ukraine.ua/support-ukraine/',
+          image: 'https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg',
+        },
+        {
           "to": "motivation",
           "label": "Docs",
           "position": "left"
