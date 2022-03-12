@@ -62,6 +62,13 @@
     "width": 200
   },
   {
+    "caption": "Files",
+    "image": "/img/users/takeshape.svg",
+    "infoLink": "https://files.community/",
+    "pinned": true,
+    "width": 290
+  },
+  {
     "caption": "TakeShape",
     "image": "/img/users/takeshape.svg",
     "infoLink": "https://www.takeshape.io/",
