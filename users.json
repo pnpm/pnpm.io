@@ -63,10 +63,10 @@
   },
   {
     "caption": "Files",
-    "image": "/img/users/takeshape.svg",
+    "image": "/img/users/files.svg",
     "infoLink": "https://files.community/",
     "pinned": true,
-    "width": 290
+    "width": 257
   },
   {
     "caption": "TakeShape",
