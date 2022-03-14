@@ -242,11 +242,11 @@ module.exports={
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ru', 'fr', 'tr', 'es', 'pt', 'id', 'ko'],
+    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh-CN', 'ja', 'ru', 'fr', 'tr', 'es', 'pt', 'id', 'ko'],
     localeConfigs: {
       en: { label: 'English' },
       it: { label: 'Italiano (100%)' },
-      zh: { label: '中文 (95%)' },
+      'zh-CN': { label: '中文 (95%)' },
       ja: { label: '日本語 (74%)' },
       ru: { label: 'Русский (30%)' },
       fr: { label: 'Français (24%)' },
