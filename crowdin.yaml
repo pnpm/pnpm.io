@@ -4,7 +4,7 @@ preserve_hierarchy: true
 
 languages_mapping: &languages_mapping
   locale:
-    'es': 'es'
+    'es-ES': 'es'
     'fr': 'fr'
     'id': 'id'
     'it': 'it'
