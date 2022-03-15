@@ -146,13 +146,6 @@ function Home() {
                 styles.getStarted,
               )}
               to={useBaseUrl('installation')}><Translate>Get Started</Translate></Link>
-            <Link
-              style={{margin: '0 20px'}}
-              className={clsx(
-                'button button--primary button--lg',
-                styles.getStarted,
-              )}
-              to={'https://war.ukraine.ua/support-ukraine/'}><Translate>Support Ukraine 🇺🇦</Translate></Link>
             <iframe
               src={"https://ghbtns.com/github-btn.html?user=pnpm&repo=pnpm&type=star&count=true&size=large"}
               frameBorder="0"
