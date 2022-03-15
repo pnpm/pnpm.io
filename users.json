@@ -65,8 +65,7 @@
     "caption": "Files",
     "image": "/img/users/files.svg",
     "infoLink": "https://files.community/",
-    "pinned": true,
-    "width": 257
+    "pinned": true
   },
   {
     "caption": "TakeShape",
