@@ -18,7 +18,7 @@ function makeEditUrl (locale, path1, path2) {
   if (locale !== DEFAULT_LOCALE) {
     return `https://crowdin.com/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
   }
-  if (path1 === 'versioned_docs/version-6.x') {
+  if (path1 === 'versioned_docs/version-7.x') {
     return `https://github.com/pnpm/pnpm.github.io/edit/main/docs/${path2}`;
   }
   // Link to Github for English docs
@@ -55,6 +55,7 @@ module.exports={
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
+          lastVersion: '6.x',
         },
         "gtag": {
           trackingID: "UA-91385296-1",
