@@ -9,6 +9,8 @@ const LOCALE_CI = process.env.LOCALE_CI;
 const DEFAULT_LOCALE = 'en';
 const LOCALE_FULL_CODE = {
   zh: 'zh-CN',
+  pt: 'pt-BR',
+  es: 'es-ES',
 }
 
 function makeEditUrl (locale, path1, path2) {
