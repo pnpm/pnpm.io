@@ -251,7 +251,7 @@
     "caption": "PeakActivity",
     "image": "/img/users/peakactivity.png",
     "infoLink": "https://peakactivity.com",
-    "pinned": true,
+    "pinned": false,
     "width": 300
   },
   {
