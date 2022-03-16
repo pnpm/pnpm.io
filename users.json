@@ -248,6 +248,13 @@
     "width": 180
   },
   {
+    "caption": "PeakActivity",
+    "image": "/img/users/peakactivity.png",
+    "infoLink": "https://peakactivity.com",
+    "pinned": false,
+    "width": 300
+  },
+  {
     "caption": "Yonghui",
     "image": "/img/users/yonghui.png",
     "infoLink": "https://www.yonghui.com.cn/?frompage=pnpm",
