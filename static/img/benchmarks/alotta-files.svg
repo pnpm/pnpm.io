@@ -42,7 +42,7 @@
   <rect x="40" y="35" width="232" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="41.5" width="54" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="48" width="69" height="6" fill="#248ebd" rx="1" ry="1"></rect>
-  <rect x="40" y="54.5" width="102" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
+  <rect x="40" y="54.5" width="97" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="65" width="7" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="71.5" width="5" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="78" width="10" height="6" fill="#248ebd" rx="1" ry="1"></rect>
@@ -58,7 +58,7 @@
   <rect x="40" y="155" width="98" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="161.5" width="46" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="168" width="48" height="6" fill="#248ebd" rx="1" ry="1"></rect>
-  <rect x="40" y="174.5" width="77" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
+  <rect x="40" y="174.5" width="72" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="185" width="9" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="191.5" width="7" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="198" width="28" height="6" fill="#248ebd" rx="1" ry="1"></rect>
@@ -74,7 +74,7 @@
   <rect x="40" y="275" width="7" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="281.5" width="38" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="288" width="63" height="6" fill="#248ebd" rx="1" ry="1"></rect>
-  <rect x="40" y="294.5" width="123" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
+  <rect x="40" y="294.5" width="120" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <line x1="40" y1="31" x2="40" y2="305" class="line"></line>
   <text x="38" y="44.5" class="font s4" dominant-baseline="middle" text-anchor="end">clean install</text>
   <text x="38" y="70.5" class="font s4" dominant-baseline="middle" text-anchor="end">with cache</text>
@@ -90,5 +90,5 @@
   <text x="38" y="226.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
   <text x="38" y="254.5" class="font s4" dominant-baseline="middle" text-anchor="end">with node_modules</text>
   <text x="38" y="284.5" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v16.14.0 at: Mar 16, 2022, 3:01 AM</text>
+  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v16.14.0 at: Mar 17, 2022, 2:56 AM</text>
 </svg>
