@@ -489,7 +489,7 @@ When `true`, `pnpm add <pkg>` automatically installs any missing peer dependenci
 
 Added in: v2.15.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 If this is enabled, commands will fail if there is a missing or invalid peer
@@ -581,7 +581,7 @@ node_modules.
 
 Added in: v1.31.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 Use and cache the results of (pre/post)install hooks.
@@ -715,18 +715,6 @@ Added in: v6.5.0
 * Type: **Boolean**
 
 When true, all the output is written to stderr.
-
-### extend-node-path
-
-Added in: v6.16.0
-
-* Default: **true**
-* Type: **Boolean**
-
-When `false`, the `NODE_PATH` environment variable is not set in the command shims.
-It is recommended to set this setting to `false` if you are getting the next error, when running commands:
-
-> The input line is too long. The syntax of the command is incorrect.
 
 ### update-notifier
 

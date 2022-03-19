@@ -104,15 +104,13 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 Here is a list of past pnpm versions with respective Node.js version support.
 
-| Node.js    | pnpm 1 | pnpm 2 | pnpm 3 | pnpm 4 | pnpm 5 | pnpm 6 |
-|------------|--------|--------|--------|--------|--------|--------|
-| Node.js 4  | ✔️     | ❌    | ❌    | ❌     | ❌     | ❌    |
-| Node.js 6  | ✔️     | ✔️    | ❌    | ❌     | ❌     | ❌    |
-| Node.js 8  | ✔️     | ✔️    | ✔️    | ❌     | ❌     | ❌    |
-| Node.js 10 | ✔️     | ✔️    | ✔️    | ✔️     | ✔️     | ❌    |
-| Node.js 12 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
-| Node.js 14 | ❌     | ❌    | ✔️    | ✔️     | ✔️     | ✔️    |
-| Node.js 16 | ?     | ?    | ?️    | ?️     | ?️     | ✔️    |
+| Node.js    | pnpm 4 | pnpm 5 | pnpm 6 | pnpm 7 |
+|------------|--------|--------|--------|--------|
+| Node.js 10 | ✔️      | ✔️      | ❌     | ❌     |
+| Node.js 12 | ✔️      | ✔️      | ✔️      | ❌     |
+| Node.js 14 | ✔️      | ✔️      | ✔️      | ✔️      |
+| Node.js 16 | ?️      | ?️      | ✔️      | ✔️      |
+| Node.js 18 | ?️      | ?️      | ✔️      | ✔️      |
 
 ## Troubleshooting
 

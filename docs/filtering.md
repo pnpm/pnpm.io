@@ -16,13 +16,6 @@ Selectors may be specified via the `--filter` (or `-F`) flag:
 pnpm --filter <package_selector> <command>
 ```
 
-:::tip
-
-[An article that compares Lerna's filtering to pnpm's](https://medium.com/pnpm/pnpm-vs-lerna-filtering-in-a-multi-package-repository-1f68bc644d6a)
-
-:::
-
-
 ## Matching
 
 ### --filter &lt;package_name>
@@ -101,16 +94,15 @@ run tests for all packages dependent on `foo`:
 pnpm --filter "...^foo" test
 ```
 
-### --filter ./&lt;directory>
+### --filter ./&lt;glob>, --filter {&lt;glob>}
 
 Added in: v2.15.0
 
-To only select packages under the specified directory, you may specify any
-relative path, typically in POSIX format.
+A glob pattern relative to the current working directory matching projects.
 
-### --filter {&lt;directory>}
-
-Added in: v4.7.0
+```sh
+pnpm --filter "./packages/**" <cmd>
+```
 
 Includes all projects that are under the specified directory.
 
@@ -127,19 +119,19 @@ It may also be combined with `[<since>]`. For instance, to select all changed
 projects inside a directory:
 
 ```sh
-pnpm --filter "{packages}[origin/master]" <cmd>
-pnpm --filter "...{packages}[origin/master]" <cmd>
-pnpm --filter "{packages}[origin/master]..." <cmd>
-pnpm --filter "...{packages}[origin/master]..." <cmd>
+pnpm --filter "{packages/**}[origin/master]" <cmd>
+pnpm --filter "...{packages/**}[origin/master]" <cmd>
+pnpm --filter "{packages/**}[origin/master]..." <cmd>
+pnpm --filter "...{packages/**}[origin/master]..." <cmd>
 ```
 
 Or you may select all packages from a directory with names matching the given
 pattern:
 
 ```text
-pnpm --filter "@babel/*{components}" <cmd>
-pnpm --filter "@babel/*{components}[origin/master]" <cmd>
-pnpm --filter "...@babel/*{components}[origin/master]" <cmd>
+pnpm --filter "@babel/*{components/**}" <cmd>
+pnpm --filter "@babel/*{components/**}[origin/master]" <cmd>
+pnpm --filter "...@babel/*{components/**}[origin/master]" <cmd>
 ```
 
 ### --filter "[&lt;since>]"

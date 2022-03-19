@@ -3,12 +3,27 @@ id: recursive
 title: pnpm -r, --recursive
 ---
 
-Runs a pnpm command recursively on all subdirectories in the package or every
-available workspace. Currently, only the following commands can be used
-recursively: `add`, `exec`, `install`, `list`, `outdated`, `publish`, `rebuild`,
-`remove`, `run`, `test`, `unlink`, `update`, `why`
-
 Aliases: `m`, `multi`, `recursive`, `<command> -r`
+
+Runs a command in every project of a workspace, when used with the following commands:
+
+* `install`
+* `list`
+* `outdated`
+* `publish`
+* `rebuild`
+* `remove`
+* `unlink`
+* `update`
+* `why`
+
+Runs a command in every project of a workspace, excluding the root project,
+when used with the following commands:
+
+* `exec`
+* `run`
+* `test`
+* `add`
 
 Usage example:
 
