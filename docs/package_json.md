@@ -35,8 +35,6 @@ installed as a dependency.
 
 #### dependenciesMeta.*.injected
 
-Added in: v6.20.0
-
 If this is set to true for a local dependency, the package will be hard linked to the modules directory, not symlinked.
 
 For instance, the following `package.json` in a workspace will create a symlink to `button` in the `node_modules` directory of `card`:
@@ -124,8 +122,6 @@ However, `foo` is optional, but only to the required version specification.
 
 ### publishConfig
 
-Added in: v3.4.0
-
 It is possible to override some fields in the manifest before the package is
 packed.
 The following fields may be overridden:
@@ -172,8 +168,6 @@ Will be published as:
 
 #### publishConfig.executableFiles
 
-Added in: v6.11.5
-
 By default, for portability reasons, no files except those listed in the bin field will be marked as executable in the resulting package archive. The `executableFiles` field lets you declare additional fields that must have the executable flag (+x) set even if they aren't directly accessible through the bin field.
 
 ```json
@@ -187,8 +181,6 @@ By default, for portability reasons, no files except those listed in the bin fie
 ```
 
 #### publishConfig.directory
-
-Added in: v6.7.0
 
 You also can use the field `publishConfig.directory` to customize the published subdirectory relative to the current `package.json`.
 
@@ -207,8 +199,6 @@ It is expected to have a modified version of the current package in the specifie
 ```
 
 ### pnpm.overrides
-
-Added in: v5.10.1
 
 This field allows you to instruct pnpm to override any dependency in the
 dependency graph. This is useful to enforce all your packages to use a single
@@ -237,8 +227,6 @@ example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
 any other dependencies.
 
 ### pnpm.packageExtensions
-
-Added in: v6.9.0
 
 The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
 
@@ -305,8 +293,6 @@ A bigger example:
 
 ### pnpm.peerDependencyRules.ignoreMissing
 
-Added in: v6.26.0
-
 pnpm will not print warnings about missing peer dependencies from this list.
 
 For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
@@ -322,8 +308,6 @@ For instance, with the following configuration, pnpm will not print warnings if 
 ```
 
 ### pnpm.peerDependencyRules.allowedVersions
-
-Added in: v6.26.0
 
 Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
 
@@ -345,8 +329,6 @@ This will tell pnpm that any dependency that has react in its peer dependencies 
 
 ### pnpm.neverBuiltDependencies
 
-Added in: v5.16.0
-
 This field allows to ignore the builds of specific dependencies.
 The "preinstall", "install", and "postinstall" scripts of the listed packages will not be executed during installation.
 
@@ -361,8 +343,6 @@ An example of the `"pnpm"."neverBuiltDependencies"` field:
 ```
 
 ### pnpm.onlyBuiltDependencies
-
-Added in: v6.32.0
 
 A list of package names that are allowed to be executed during installation. If this field exists, only the listed packages will be able to run install scripts.
 

@@ -40,8 +40,6 @@ pnpm exec jest -r
 
 ### --recursive, -r
 
-Added in: v2.9.0
-
 Execute the shell command in every project of the workspace.
 
 The name of the current package is available through the environment variable
@@ -63,16 +61,12 @@ pnpm -rc exec pnpm view $PNPM_PACKAGE_NAME
 
 ### --parallel
 
-Added in: v5.1.0
-
 Completely disregard concurrency and topological sorting, running a given script
 immediately in all matching packages with prefixed streaming output. This is the
 preferred flag for long-running processes over many packages, for instance, a
 lengthy build process.
 
 ### --shell-mode, -c
-
-Added in: v6.31.0
 
 Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
 

@@ -3,8 +3,6 @@ id: dlx
 title: "pnpm dlx"
 ---
 
-Added in: v6.13.0
-
 Fetches a package from the registry without installing it as a dependency, hotloads it, and runs whatever default command binary it exposes.
 
 For example, to use `create-react-app` anywhere to bootstrap a react app without
@@ -16,7 +14,7 @@ pnpm dlx create-react-app ./my-app
 
 This will fetch `create-react-app` from the registry and run it with the given arguments.
 
-Since v6.23.1 you may also specify which exact version of the package you'd like to use:
+You may also specify which exact version of the package you'd like to use:
 
 ```
 pnpm dlx create-react-app@next ./my-app
@@ -42,7 +40,5 @@ pnpm --package=yo --package=generator-webapp dlx yo webapp --skip-install
 ```
 
 ### --silent, -s
-
-Added in: v6.17.0
 
 Only the output of the executed command is printed.

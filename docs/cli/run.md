@@ -55,8 +55,6 @@ If for some reason you need the pre/post scripts behavior of npm, use the
 
 ### script-shell
 
-Added in: v5.10.0
-
 * Default: **null**
 * Type: **path**
 
@@ -69,8 +67,6 @@ pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
 ### shell-emulator
-
-Added in: v5.8.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -100,15 +96,11 @@ If none of the packages have the command, the command fails.
 
 ### --if-present
 
-Added in: v4.5.0
-
 You can use the `--if-present` flag to avoid exiting with a non-zero exit code
 when the script is undefined. This lets you run potentially undefined scripts
 without breaking the execution chain.
 
 ### --parallel
-
-Added in: v5.1.0
 
 Completely disregard concurrency and topological sorting, running a given script
 immediately in all matching packages with prefixed streaming output. This is the
@@ -117,20 +109,14 @@ lengthy build process.
 
 ### --stream
 
-Added in: v5.1.0
-
 Stream output from child processes immediately, prefixed with the originating
 package directory. This allows output from different packages to be interleaved.
 
 ### --aggregate-output
 
-Added in: v6.24.0
-
 Aggregate output from child processes that are run in parallel, and only print output when the child process is finished. It makes reading large logs after running `pnpm -r <command>` with `--parallel` or with `--workspace-concurrency=<number>` much easier (especially on CI). Only `--reporter=append-only` is supported.
 
 ### enable-pre-post-scripts
-
-Added in: v6.1.0
 
 * Default: **false**
 * Type: **Boolean**

@@ -9,8 +9,6 @@ How pnpm handles the `scripts` field of `package.json`.
 
 ### `pnpm:devPreinstall`
 
-Added in: v6.21.0
-
 Runs only on local `pnpm install`.
 
 Runs before any dependency is installed.

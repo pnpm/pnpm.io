@@ -52,19 +52,15 @@ may override that if necessary.
 
 ### --workspace-concurrency
 
-Added in: v2.13.0
-
 * Default: **4**
 * Type: **Number**
 
 Set the maximum number of tasks to run simultaneously. For unlimited concurrency
 use `Infinity`.
 
-> Since v6.10.0 you can set the `workpace-concurrency` as `<= 0` and it will use amount of cores of the host as: `max(1, (number of cores) - abs(workspace-concurrency))`
+You can set the `workpace-concurrency` as `<= 0` and it will use amount of cores of the host as: `max(1, (number of cores) - abs(workspace-concurrency))`
 
 ### --[no-]bail
-
-Added in: v2.13.0
 
 * Default: **true**
 * Type: **Boolean**
@@ -82,8 +78,6 @@ pnpm -r --no-bail test
 
 ### --[no-]sort
 
-Added in: v2.14.0
-
 * Default: **true**
 * Type: **Boolean**
 
@@ -96,8 +90,6 @@ pnpm -r --no-sort test
 ```
 
 ### --reverse
-
-Added in: v5.17.1
 
 * Default: **false**
 * Type: **boolean**

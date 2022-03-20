@@ -3,8 +3,6 @@ id: audit
 title: pnpm audit
 ---
 
-Added in: v4.3.0
-
 Checks for known security issues with the installed packages.
 
 If security issues are found, try to update your dependencies via `pnpm update`.
@@ -37,8 +35,6 @@ Only print advisories with severity greater than or equal to `<severity>`.
 
 ### --fix
 
-Added in: v6.11.0
-
 Add overrides to the `package.json` file in order to force non-vulnerable versions of the dependencies.
 
 ### --json
@@ -58,8 +54,6 @@ Only audit production dependencies.
 Don't audit `optionalDependencies`.
 
 ### --ignore-registry-errors
-
-Added in: v6.7.1
 
 If the registry responds with a non-200 status code, the process should exit with 0.
 So the process will fail only if the registry actually successfully responds with found vulnerabilities.

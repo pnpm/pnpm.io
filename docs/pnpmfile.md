@@ -76,8 +76,6 @@ affected by the hook. In order to ignore a package's build, use the
 
 ### `hooks.afterAllResolved(lockfile, context): lockfile | Promise<lockfile>`
 
-Added in: v1.41.0
-
 Allows you to mutate the lockfile output before it is serialized.
 
 #### Arguments
@@ -111,8 +109,6 @@ this function, and you can even extend the lockfile's functionality.
 
 ### ignore-pnpmfile
 
-Added in: v1.25.0
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -121,8 +117,6 @@ want to make sure that no script gets executed during install.
 
 ### pnpmfile
 
-Added in: v1.39.0
-
 * Default: **.pnpmfile.cjs**
 * Type: **path**
 * Example: **.pnpm/.pnpmfile.cjs**
@@ -130,8 +124,6 @@ Added in: v1.39.0
 The location of the local pnpmfile.
 
 ### global-pnpmfile
-
-Added in: v1.39.0
 
 * Default: **null**
 * Type: **path**

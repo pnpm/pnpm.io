@@ -3,8 +3,6 @@ id: env
 title: "pnpm env <cmd>"
 ---
 
-Added in: v6.12.0
-
 Manages the Node.js environment.
 
 ## Commands

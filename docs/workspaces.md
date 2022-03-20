@@ -15,8 +15,6 @@ root. A workspace also may have an [`.npmrc`] in its root.
 
 ## Workspace protocol (workspace:)
 
-Added in: v3.7.0.
-
 By default, pnpm will link packages from the workspace if the available packages
 match the declared ranges. For instance, `foo@1.0.0` is linked into `bar` if
 `bar` has `"foo": "^1.0.0"` in its dependencies. However, if `bar` has
@@ -37,8 +35,6 @@ the `workspace:` protocol is used.
 
 ### Referencing workspace packages through aliases
 
-Added in: v5.12.0
-
 Let's say you have a package in the workspace named `foo`. Usually, you would
 reference it as `"foo": "workspace:*"`.
 
@@ -50,8 +46,6 @@ example will become: `"bar": "npm:foo@1.0.0"`.
 
 
 ### Referencing workspace packages through their relative path
-
-Added in: v5.12.0
 
 In a workspace with 2 packages:
 
@@ -125,8 +119,6 @@ For using Changesets with pnpm, read [this guide][changesets-guide].
 
 ### link-workspace-packages
 
-Added in: v2.14.0
-
 * Default: **true**
 * Type: **true**, **false**, **deep**
 
@@ -140,8 +132,6 @@ workspace packages can still be linked by using the `workspace:` range protocol.
 
 ### prefer-workspace-packages
 
-Added in: v5.13.0
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -153,8 +143,6 @@ This setting is only useful if the workspace doesn't use
 `save-workspace-protocol`.
 
 ### shared-workspace-lockfile
-
-Added in: v2.17.0 as `shared-workspace-shrinkwrap`
 
 * Default: **true**
 * Type: **Boolean**

@@ -3,8 +3,6 @@ id: completion
 title: Command line tab-completion
 ---
 
-Added in: v4.9.0
-
 Unlike other popular package managers, which usually require plugins, pnpm
 supports command line tab-completion for Bash, Zsh, Fish, and similar shells.
 

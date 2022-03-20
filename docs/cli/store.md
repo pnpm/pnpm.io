@@ -16,8 +16,6 @@ time of unpacking.
 
 ### add
 
-Added in: v2.12.0
-
 Functionally equivalent to [`pnpm add`], except this adds new packages to the
 store directly without modifying any projects or files outside of the store.
 
@@ -52,7 +50,5 @@ Please note that this command is prohibited when a [store server] is running.
 [store server]: ./server.md
 
 ### path
-
-Added in: v6.10.0
 
 Returns the path to the active store directory.

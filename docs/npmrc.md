@@ -25,8 +25,6 @@ All `.npmrc` files are an [INI-formatted] list of `key = value` parameters.
 
 ### hoist
 
-Added in: v4.0.0
-
 * Default: **true**
 * Type: **boolean**
 
@@ -34,8 +32,6 @@ When `true`, all dependencies are hoisted to `node_modules/.pnpm`. This makes
 unlisted dependencies accessible to all packages inside `node_modules`.
 
 ### hoist-pattern
-
-Added in: v4.0.0
 
 * Default: **['\*']**
 * Type: **string[]**
@@ -53,8 +49,6 @@ hoist-pattern[]=*babel*
 ```
 
 ### public-hoist-pattern
-
-Added in: v5.2.0
 
 * Default: **['\*types\*', '\*eslint\*', '@prettier/plugin-\*', '\*prettier-plugin-\*']**
 * Type: **string[]**
@@ -79,8 +73,6 @@ Note: Setting `shamefully-hoist` to `true` is the same as setting
 
 ### shamefully-hoist
 
-Added in: v1.34.0 as `shamefully-flatten`, renamed in v4.0.0
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -93,8 +85,6 @@ root of `node_modules`, you can set this to `true` to hoist them for you.
 ## Node-Modules Settings
 
 ### store-dir
-
-Added in: v4.2.0 as `store`
 
 * Default: **~/.pnpm-store**
 * Type: **path**
@@ -115,8 +105,6 @@ only possible on the same filesystem.
 
 ### modules-dir
 
-Added in: v4.14.0
-
 * Default: **node_modules**
 * Type: **path**
 
@@ -124,8 +112,6 @@ The directory in which dependencies will be installed (instead of
 `node_modules`).
 
 ### node-linker
-
-Added in: v5.9.0
 
 * Default: **isolated**
 * Type: **isolated**, **hoisted**, **pnp**
@@ -147,8 +133,6 @@ your linker.
 
 ### symlink
 
-Added in: v5.9.0
-
 * Default: **true**
 * Type: **Boolean**
 
@@ -156,8 +140,6 @@ When `symlink` is set to `false`, pnpm creates a virtual store directory without
 any symlinks. It is a useful setting together with `node-linker=pnp`.
 
 ### enable-modules-dir
-
-Added in: v5.15.0
 
 * Default: **true**
 * Type: **Boolean**
@@ -170,8 +152,6 @@ mount a modules directory with FUSE: [@pnpm/mount-modules].
 [@pnpm/mount-modules]: https://www.npmjs.com/package/@pnpm/mount-modules
 
 ### virtual-store-dir
-
-Added in: v4.1.0
 
 * Default: **node_modules/.pnpm**
 * Types: **path**
@@ -193,8 +173,6 @@ root is shared).
 
 ### package-import-method
 
-Added in: v1.25.0
-
 * Default: **auto**
 * Type: **auto**, **hardlink**, **copy**, **clone**
 
@@ -209,8 +187,6 @@ possible, fall back to copying
 
 ### modules-cache-max-age
 
-Added in: v6.0.0
-
 * Default: **10080** (7 days in minutes)
 * Type: **number**
 
@@ -222,16 +198,12 @@ switching branches or downgrading dependencies.
 
 ### lockfile
 
-Added in: v1.32.0 as `shrinkwrap`
-
 * Default: **true**
 * Type: **Boolean**
 
 When set to `false`, pnpm won't read or generate a `pnpm-lock.yaml` file.
 
 ### prefer-frozen-lockfile
-
-Added in: v1.37.1 as `prefer-frozen-shrinkwrap`
 
 * Default: **true** (from v1.38.0)
 * Type: **Boolean**
@@ -275,8 +247,6 @@ You may also use an environment variable. For example:
 ```
 
 ### &lt;URL\>:tokenHelper
-
-Added in: v6.25.0
 
 A token helper is an executable which outputs an auth token. This can be used in situations where the authToken is not a constant value but is something that refreshes regularly, where a script or other tool can use an existing refresh token to obtain a new access token.
 
@@ -403,16 +373,12 @@ request library.
 
 ### maxsockets
 
-Added in: v6.18.0
-
 * Default: **network-concurrency x 3**
 * Type: **Number**
 
 The maximum number of connections to use per origin (protocol/host/port combination).
 
 ### noproxy
-
-Added in: v5.18.8
 
 * Default: **null**
 * Type: **String**
@@ -467,8 +433,6 @@ too long.
 
 ### fetch-timeout
 
-Added in: v6.2.0
-
 * Default: **60000 (1 minute)**
 * Type: **Number**
 
@@ -478,16 +442,12 @@ The maximum amount of time to wait for HTTP requests to complete.
 
 ### auto-install-peers
 
-Added in: v6.26.0
-
 * Default: **false**
 * Type: **Boolean**
 
 When `true`, `pnpm add <pkg>` automatically installs any missing peer dependencies as dev dependencies.
 
 ### strict-peer-dependencies
-
-Added in: v2.15.0
 
 * Default: **true**
 * Type: **Boolean**
@@ -498,8 +458,6 @@ dependency in the tree.
 ## CLI Settings
 
 ### [no-]color
-
-Added in: v4.1.0
 
 * Default: **auto**
 * Type: **auto**, **always**, **never**
@@ -515,8 +473,6 @@ Controls colors in the output.
 
 ### loglevel
 
-Added in: v4.13.0
-
 * Default: **info**
 * Type: **debug**, **info**, **warn**, **error**
 
@@ -524,8 +480,6 @@ Any logs at or higher than the given level will be shown.
 You can instead pass `--silent` to turn off all output logs.
 
 ### use-beta-cli
-
-Added in: v3.6.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -535,8 +489,6 @@ may get some changes to the CLI functionality that are breaking changes, or
 potentially bugs.
 
 ### recursive-install
-
-Added in: v5.4.0
 
 * Default: **true**
 * Type: **Boolean**
@@ -561,8 +513,6 @@ Regardless of this configuration, installation will always fail if a project
 
 ### npm-path
 
-Added in: v4.8.0
-
 * Type: **path**
 
 The location of the npm binary that pnpm uses for some actions, like publishing.
@@ -579,16 +529,12 @@ node_modules.
 
 ### side-effects-cache
 
-Added in: v1.31.0
-
 * Default: **true**
 * Type: **Boolean**
 
 Use and cache the results of (pre/post)install hooks.
 
 ### side-effects-cache-readonly
-
-Added in: v1.31.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -607,8 +553,6 @@ If set explicitly to false, then installing as a non-root user will fail.
 
 ### use-node-version
 
-Added in: v6.5.0
-
 * Default: **undefined**
 * Type: **semver**
 
@@ -617,8 +561,6 @@ pnpm will automatically install the specified version of Node.js and use it for
 running `pnpm run` commands or the `pnpm node` command.
 
 ### node-mirror:&lt;releaseDir>
-
-Added in: v6.24.0
 
 * Default: **`https://nodejs.org/download/<releaseDir>/`**
 * Type: **URL**
@@ -636,8 +578,6 @@ node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 ## Other Settings
 
 ### use-running-store-server
-
-Added in: v2.5.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -676,8 +616,6 @@ This also sets the tag that is added to the `package@version` specified by the
 
 ### global-dir
 
-Added in: v4.2.0
-
 * Default: **&lt;path to node\>/pnpm-global**
 * Type: **path**
 
@@ -685,13 +623,9 @@ Specify a custom directory to store global packages.
 
 ### global-bin-dir
 
-Added in: v6.15.0
-
 Allows to set the target directory for the bin files of globally installed packages.
 
 ### state-dir
-
-Added in: v6.10.0
 
 * Default: **$XDG_STATE_HOME/pnpm**
 * Type: **path**
@@ -700,8 +634,6 @@ The directory where pnpm creates the `pnpm-state.json` file that is currently us
 
 ### cache-dir
 
-Added in: v6.10.0
-
 * Default: **$XDG_CACHE_HOME/pnpm**
 * Type: **path**
 
@@ -709,16 +641,12 @@ The location of the package metadata cache.
 
 ### use-stderr
 
-Added in: v6.5.0
-
 * Default: **false**
 * Type: **Boolean**
 
 When true, all the output is written to stderr.
 
 ### update-notifier
-
-Added in: v6.29.0
 
 * Default: **true**
 * Type: **Boolean**

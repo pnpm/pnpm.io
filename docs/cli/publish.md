@@ -45,8 +45,6 @@ Tells the registry whether the published package should be public or restricted.
 
 ### git-checks
 
-Added in: v4.11.0
-
 * Default : **true** (since v5)
 * Type: **Boolean**
 
@@ -54,8 +52,6 @@ When true, `pnpm publish` checks if the current branch is your publish branch
 (master by default), clean, and up-to-date.
 
 ### publish-branch
-
-Added in: v4.11.0
 
 * Default: **master**
 * Types: **String**
@@ -65,14 +61,10 @@ changes.
 
 ### --force
 
-Added in: v5.18.0
-
 Try to publish packages even if their current version is already found in the
 registry.
 
 ### --report-summary
-
-Added in: v6.5.0
 
 Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.
 

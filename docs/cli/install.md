@@ -38,8 +38,6 @@ If a package won't be found locally, the installation will fail.
 
 ### --prefer-offline
 
-Added in: v1.28.0
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -76,8 +74,6 @@ Only `devDependencies` are installed regardless of the `NODE_ENV`.
 
 ### --lockfile-only
 
-Added in: v1.26.0 (initially named `shrinkwrap-only`)
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -85,13 +81,9 @@ When used, only updates `pnpm-lock.yaml` and `package.json`. Nothing gets writte
 
 ### --fix-lockfile
 
-Added in: v6.15.0
-
 Fix broken lockfile entries automatically.
 
 ### --frozen-lockfile
-
-Added in: v1.37.1 (initially named `frozen-shrinkwrap`)
 
 * Default:
   * For non-CI: **false**
@@ -118,8 +110,6 @@ the installation progress.
 * **ndjson** - the most verbose reporter. Prints all logs in [ndjson](http://ndjson.org/) format
 
 ### --use-store-server
-
-Added in: v1.30.0
 
 * Default: **false**
 * Type: **Boolean**

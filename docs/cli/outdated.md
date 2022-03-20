@@ -29,37 +29,25 @@ List outdated global packages.
 
 ### --long
 
-Added in: v4.0.0
-
 Print details.
 
 ### --no-table
-
-Added in: v4.0.0
 
 Prints the outdated dependencies in a list format instead of the default table.
 Good for small consoles.
 
 ### --compatible
 
-Added in: v4.7.0
-
 Prints only versions that satisfy specifications in `package.json`.
 
 ### --dev, -D
-
-Added in: v4.7.0
 
 Checks only `devDependencies`.
 
 ### --prod, -P
 
-Added in: v4.7.0
-
 Checks only `dependencies` and `optionalDependencies`.
 
 ### --no-optional
-
-Added in: v4.7.0
 
 Doesn't check `optionalDependencies`.

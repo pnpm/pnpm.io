@@ -22,8 +22,6 @@ Run as if pnpm was started in `<path>` instead of the current working directory.
 
 ### -w, --workspace-root
 
-Added in: v5.6.0
-
 Run as if pnpm was started in the root of the [workspace](https://pnpm.io/workspaces)
 instead of the current working directory.
 

@@ -3,8 +3,6 @@ id: server
 title: pnpm server
 ---
 
-Added in: v1.30.0
-
 Manage a store server.
 
 ## Commands
@@ -60,8 +58,6 @@ type, the protocol is automatically set to use TCP.
 
 * Default: **&lt;home\>/.pnpm-store**
 * Type: **Path**
-
-Added in: v1 as `store`
 
 The directory to use for the content addressable store.
 

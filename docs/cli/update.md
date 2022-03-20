@@ -39,8 +39,6 @@ pnpm --recursive update typescript@latest
 
 ### --latest, -L
 
-Added in: v3.2.0
-
 Ignores the version range specified in `package.json`. Instead, the version specified by the `latest` tag will be used (potentially upgrading the packages across major versions).
 
 ### --global
@@ -48,8 +46,6 @@ Ignores the version range specified in `package.json`. Instead, the version spec
 Update global packages.
 
 ### --workspace
-
-Added in: v4.4.0
 
 Tries to link all packages from the workspace. Versions are updated to match the
 versions of packages inside the workspace.
@@ -73,8 +69,6 @@ Only update packages in `devDependencies`.
 Don't update packages in `optionalDependencies`.
 
 ### --interactive, -i
-
-Added in: v4.8.0
 
 Show outdated dependencies and select which ones to update.
 
