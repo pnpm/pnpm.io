@@ -5,8 +5,6 @@ title: Installation
 
 ## Using a standalone script
 
-### Node.js is not preinstalled
-
 On POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
 
 ```sh
@@ -26,38 +24,6 @@ $env:PNPM_VERSION='7.0.0-beta.1' ; iwr https://get.pnpm.io/install.ps1 -useb | i
 ```
 
 You may use the [pnpm env] command then to install Node.js.
-
-### Node.js is preinstalled
-
-On Linux or macOS:
-
-```
-curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@next-7
-```
-
-On Windows (PowerShell):
-
-```powershell
-Invoke-WebRequest 'https://get.pnpm.io/v6.16.js' -UseBasicParsing -o pnpm.js; node pnpm.js add --global pnpm@next-7; Remove-Item pnpm.js
-```
-
-The standalone script is signed. [Here's how to verify it](https://github.com/pnpm/get#verifying-files).
-
-## Using Homebrew
-
-If you have the package manager installed, you can install pnpm using the following command:
-
-```
-brew install pnpm
-```
-
-## Using Scoop
-
-If you have Scoop installed, you can install pnpm using the following command:
-
-```
-scoop install nodejs-lts pnpm
-```
 
 ## Using Corepack
 
@@ -79,10 +45,20 @@ corepack prepare pnpm@7.0.0-beta.1 --activate
 npm install -g pnpm@next-7
 ```
 
-## Via npx resolution
+## Using Homebrew
 
-```sh
-npx pnpm add -g pnpm@next-7
+If you have the package manager installed, you can install pnpm using the following command:
+
+```
+brew install pnpm
+```
+
+## Using Scoop
+
+If you have Scoop installed, you can install pnpm using the following command:
+
+```
+scoop install nodejs-lts pnpm
 ```
 
 ## Upgrading
