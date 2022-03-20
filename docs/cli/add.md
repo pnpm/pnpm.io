@@ -117,14 +117,14 @@ Added in: v3.2.0
 Using `--save-peer` will add one or more packages to `peerDependencies` and
 install them as dev dependencies.
 
-### --ignore-workspace-root-check, -W
+### --ignore-workspace-root-check
 
 Added in: v3.6.0
 
 Adding a new dependency to the root workspace package fails, unless the
-`--ignore-workspace-root-check` or `-W` flag is used.
+`--ignore-workspace-root-check` or `-w` flag is used.
 
-For instance, `pnpm add debug -W`.
+For instance, `pnpm add debug -w`.
 
 ### --global, -g
 
