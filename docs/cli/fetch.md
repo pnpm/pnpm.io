@@ -5,12 +5,6 @@ title: pnpm fetch
 
 Fetch packages from a lockfile into virtual store, package manifest is ignored.
 
-:::warning
-
-This is an experimental command. Breaking changes may be introduced in non-major versions of the CLI.
-
-:::
-
 ## Usage scenario
 
 This command is specifically designed to boost building a docker image.
