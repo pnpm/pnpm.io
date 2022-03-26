@@ -45,7 +45,7 @@ Tells the registry whether the published package should be public or restricted.
 
 ### git-checks
 
-* Default : **true** (since v5)
+* Default : **true**
 * Type: **Boolean**
 
 When true, `pnpm publish` checks if the current branch is your publish branch

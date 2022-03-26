@@ -24,8 +24,6 @@ Install Node.js v16:
 pnpm env use --global 16
 ```
 
-Also since v6.18.0:
-
 Install a prerelease version of Node.js:
 
 ```

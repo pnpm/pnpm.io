@@ -125,7 +125,7 @@ For using Changesets with pnpm, read [this guide][changesets-guide].
 If this is enabled, locally available packages are linked to `node_modules`
 instead of being downloaded from the registry. This is very convenient in a
 monorepo. If you need local packages to also be linked to subdependencies, you
-can use the `deep` setting (since v5).
+can use the `deep` setting.
 
 Else, packages are downloaded and installed from the registry. However,
 workspace packages can still be linked by using the `workspace:` range protocol.

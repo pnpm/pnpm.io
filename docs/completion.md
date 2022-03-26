@@ -13,8 +13,7 @@ pnpm install-completion
 ```
 
 The CLI will ask for which shell to generate the autocompletion script.
-Alternatively, the target shell may be specified in the command line (since
-v5.15.0):
+Alternatively, the target shell may be specified in the command line:
 
 ```text
 pnpm install-completion zsh
