@@ -33,7 +33,7 @@ pnpm --package=@pnpm/meta-updater dlx meta-updater --help
 pnpm --package=@pnpm/meta-updater@0 dlx meta-updater --help
 ```
 
-As of v6.14.5, multiple packages can be provided for installation:
+Multiple packages can be provided for installation:
 
 ```
 pnpm --package=yo --package=generator-webapp dlx yo webapp --skip-install

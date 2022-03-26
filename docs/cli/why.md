@@ -14,8 +14,6 @@ subdirectories or on every workspace package when executed inside a workspace.
 
 ### --json
 
-Added in: 3.7.0
-
 Show information in JSON format.
 
 ### --long

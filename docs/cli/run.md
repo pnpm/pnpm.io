@@ -37,7 +37,7 @@ like so:
 
 And even though `eslint` is not installed globally in your shell, it will run.
 
-For workspaces, as of v3.5, `<workspace root>/node_modules/.bin` is also added
+For workspaces, `<workspace root>/node_modules/.bin` is also added
 to the `PATH`, so if a tool is installed in the workspace root, it may be called
 in any workspace package's `scripts`.
 

@@ -43,7 +43,7 @@ pnpm exec jest -r
 Execute the shell command in every project of the workspace.
 
 The name of the current package is available through the environment variable
-`PNPM_PACKAGE_NAME` (supported from pnpm v2.22.0 onwards).
+`PNPM_PACKAGE_NAME`.
 
 #### Examples
 

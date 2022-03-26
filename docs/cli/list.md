@@ -21,8 +21,6 @@ package, when executed inside a workspace.
 
 ### --json
 
-Added in: 3.7.0
-
 Log output in JSON format.
 
 ### --long

@@ -70,6 +70,4 @@ Save the list of published packages to `pnpm-publish-summary.json`. Useful when 
 
 ### --filter &lt;package_selector\>
 
-Added in: 4.6.0
-
 [Read more about filtering.](../filtering.md)
