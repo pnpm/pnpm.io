@@ -66,7 +66,7 @@ module.exports={
           editUrl: ({locale, blogDirPath, blogPath}) => makeEditUrl(locale, blogDirPath, blogPath),
         },
         "theme": {
-          "customCss": "../src/css/customTheme.css"
+          customCss: require.resolve('./src/css/customTheme.css'),
         }
       }
     ]
