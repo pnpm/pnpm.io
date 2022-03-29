@@ -267,5 +267,12 @@
     "infoLink": "https://www.shopee.com/",
     "pinned": false,
     "width": 145
+  },
+  {
+    "caption": "NetEase Avg",
+    "image": "/img/users/netease-avg.png",
+    "infoLink": "https://avg.163.com",
+    "pinned": false,
+    "width": 250
   }
 ]
