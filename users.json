@@ -260,5 +260,12 @@
     "infoLink": "https://www.yonghui.com.cn/?frompage=pnpm",
     "pinned": false,
     "width": 195
+  },
+  {
+    "caption": "Shopee",
+    "image": "/img/users/shopee.svg",
+    "infoLink": "https://www.shopee.com/",
+    "pinned": false,
+    "width": 145
   }
 ]
