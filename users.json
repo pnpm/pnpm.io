@@ -281,5 +281,12 @@
     "infoLink": "https://element-plus.org/",
     "pinned": false,
     "width": 250
+  },
+  {
+    "caption": "Agora Flat",
+    "image": "/img/users/agora-flat.svg",
+    "infoLink": "https://flat.whiteboard.agora.io/en/",
+    "pinned": true,
+    "width": 120
   }
 ]
