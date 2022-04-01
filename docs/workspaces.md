@@ -204,3 +204,4 @@ Here are a few open source projects that use the workspace feature of pnpm:
 * [GiraphQL](https://github.com/hayes/giraphql) (as of 8/4/2021, commit `3dd3ff148da382d6f406f20626a9a5c25707c0c8`)
 * [Tailchat](https://github.com/msgbyte/tailchat) (as of 12/27/2021, commit `298af71aa0619e0a8fa8717777afe2fb32739db4`)
 * [Vitest](https://github.com/vitest-dev/vitest) (as of 12/13/2021, commit `d6ff0ccb819716713f5eab5c046861f4d8e4f988`)
+* [Element Plus](https://github.com/element-plus/element-plus) (as of 9/23/2021, commit `f9e192535ff74d1443f1d9e0c5394fad10428629`)

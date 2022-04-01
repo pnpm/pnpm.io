@@ -274,5 +274,12 @@
     "infoLink": "https://avg.163.com",
     "pinned": false,
     "width": 250
+  },
+  {
+    "caption": "Element Plus",
+    "image": "/img/users/element-plus.svg",
+    "infoLink": "https://element-plus.org/",
+    "pinned": false,
+    "width": 250
   }
 ]
