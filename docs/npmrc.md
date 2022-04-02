@@ -86,15 +86,18 @@ root of `node_modules`, you can set this to `true` to hoist them for you.
 
 ### store-dir
 
-* Default: **~/.pnpm-store**
+* Default:
+  * On Windows: **~/AppData/Local/pnpm/store**
+  * On macOS: **~/Library/pnpm/store**
+  * On Linux: **~/.local/share/pnpm/store**
 * Type: **path**
 
 The location where all the packages are saved on the disk.
 
 The store should be always on the same disk on which installation is happening,
 so there will be one store per disk. If there is a home directory on the current
-disk, then the store is created in `<home dir>/.pnpm-store`. If there is no
-home on the disk, then the store is created at the root of the filesystem. For
+disk, then the store is created inside it. If there is no home on the disk,
+then the store is created at the root of the filesystem. For
 example, if installation is happening on a filesystem mounted at `/mnt`,
 then the store will be created at `/mnt/.pnpm-store`. The same goes for Windows
 systems.
