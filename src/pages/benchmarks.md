@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Mar 27, 2022, 3:03 AM_ (_daily_ updated).
+**Last benchmarked at**: _Apr 3, 2022, 3:10 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 1m 0.2s | 12.9s | 16.6s | 23.1s |
-| install | ✔     | ✔        | ✔           | 1.8s | 1.2s | 2.3s | n/a |
-| install | ✔     | ✔        |             | 10.1s | 3.6s | 6.5s | 1.5s |
-| install | ✔     |          |             | 15.2s | 6.2s | 11.1s | 5.9s |
-| install |       | ✔        |             | 26.7s | 10.9s | 11.6s | 17.1s |
-| install | ✔     |          | ✔           | 2.3s | 1.7s | 6.8s | n/a |
-| install |       | ✔        | ✔           | 1.8s | 1.2s | 7.3s | n/a |
-| install |       |          | ✔           | 2.3s | 5.3s | 11.8s | n/a |
-| update  | n/a | n/a | n/a | 1.8s | 9.2s | 15.1s | 28.9s |
+| install |       |          |             | 52.9s | 16.2s | 16.6s | 23.1s |
+| install | ✔     | ✔        | ✔           | 2.1s | 1.4s | 2.3s | n/a |
+| install | ✔     | ✔        |             | 11.5s | 4.1s | 6.5s | 1.5s |
+| install | ✔     |          |             | 17.5s | 7.7s | 11.1s | 5.9s |
+| install |       | ✔        |             | 30.1s | 14s | 11.6s | 17.1s |
+| install | ✔     |          | ✔           | 2.8s | 1.8s | 6.8s | n/a |
+| install |       | ✔        | ✔           | 2.1s | 1.4s | 7.3s | n/a |
+| install |       |          | ✔           | 2.8s | 6.4s | 11.8s | n/a |
+| update  | n/a | n/a | n/a | 2.2s | 11.2s | 15.1s | 28.9s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
