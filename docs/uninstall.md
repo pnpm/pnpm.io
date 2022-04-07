@@ -20,6 +20,8 @@ If you used the standalone script to install pnpm (or npx), then you should be a
 pnpm rm -g pnpm
 ```
 
+You might also want to clean the `PNPM_HOME` env variable in your shell configuration file (`$HOME/.bashrc`, `$HOME/.zshrc` or `$HOME/.config/fish/config.fish`).
+
 If you used npm to install pnpm, then you should use npm to uninstall pnpm:
 
 ```
