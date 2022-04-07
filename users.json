@@ -34,6 +34,7 @@
     "pinned": true,
     "width": 250
   },
+  
   {
     "caption": "JustAnswer",
     "image": "/img/users/justanswer.svg",
@@ -287,6 +288,14 @@
     "image": "/img/users/agora-flat.svg",
     "infoLink": "https://flat.whiteboard.agora.io/en/",
     "pinned": true,
+    "width": 120
+  },
+  
+   {
+    "caption": "Treeprofile",
+    "image": "https://www.treeprofile.com/assets/img/icon-green.png",
+    "infoLink": "https://www.treeprofile.com",
+    "pinned": false,
     "width": 120
   }
 ]
