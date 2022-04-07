@@ -295,7 +295,7 @@
     "caption": "Treeprofile",
     "image": "https://www.treeprofile.com/assets/img/icon-green.png",
     "infoLink": "https://www.treeprofile.com",
-    "pinned": true,
+    "pinned": false,
     "width": 120
   }
 ]
