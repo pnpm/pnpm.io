@@ -5,7 +5,7 @@ title: Uninstalling pnpm
 
 ## Removing the globally installed packages
 
-Before removing the pnpm CLI, it might make sense to remove all globall packages that were installed by pnpm.
+Before removing the pnpm CLI, it might make sense to remove all global packages that were installed by pnpm.
 
 To list all the global packages, run `pnpm ls -g`. There are two ways to remove the global packages:
 
