@@ -7,7 +7,7 @@ Publishes a package to the registry.
 
 ```sh
 pnpm [-r] publish [<tarball|folder>] [--tag <tag>]
-     [--access <public|restricted>]
+     [--access <public|restricted>] [options]
 ```
 
 When publishing a package inside a [workspace](../workspaces.md), the LICENSE file
@@ -16,7 +16,7 @@ has a license of its own).
 
 You may override some fields before publish, using the
 [publishConfig] field in `package.json`.
-You also can use the [`publishConfig.directory`](../package_json.md#publishconfigdirectory) to customize the published subdirectory (usually using third party build tools). 
+You also can use the [`publishConfig.directory`](../package_json.md#publishconfigdirectory) to customize the published subdirectory (usually using third party build tools).
 
 When running this command recursively (`pnpm -r publish`), pnpm will publish all
 the packages that have versions not yet published to the registry.
@@ -43,17 +43,14 @@ pnpm add foo@next
 
 Tells the registry whether the published package should be public or restricted.
 
-### git-checks
+### --no-git-checks
 
-* Default : **true**
-* Type: **Boolean**
+Don't check if current branch is your publish branch, clean, and up-to-date
+, clean, and up-to-date.
 
-When true, `pnpm publish` checks if the current branch is your publish branch
-(master by default), clean, and up-to-date.
+### --publish-branch
 
-### publish-branch
-
-* Default: **master**
+* Default: **master** and **main**
 * Types: **String**
 
 The primary branch of the repository which is used for publishing the latest
@@ -68,6 +65,25 @@ registry.
 
 Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.
 
+### --dry-run
+
+Does everything a publish would do except actually publishing to the registry.
+
+### --otp
+
+When publishing packages that require two-factor authentication, this option can specify a one-time password.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
+
+## Configuration
+
+You can also set `git-checks`, `publish-branch` options in the `.npmrc` file.
+
+For example:
+
+```ini title=".npmrc"
+git-checks=false
+publish-branch=production
+```
