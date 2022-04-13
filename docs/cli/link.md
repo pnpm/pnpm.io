@@ -32,4 +32,4 @@ Links package from location where this command was executed or specified via `--
 
 ### `pnpm link --global <pkg>`
 
-Links the specified package (`<pkg>`) from global `node_modules` to the `node_nodules` of package from where this command was executed or specified via `--dir` option.
+Links the specified package (`<pkg>`) from global `node_modules` to the `node_modules` of package from where this command was executed or specified via `--dir` option.
