@@ -51,7 +51,7 @@ Tells the registry whether the published package should be public or restricted.
 When true, `pnpm publish` checks if the current branch is your publish branch
 (master by default), clean, and up-to-date.
 
-### publish-branch
+### --publish-branch
 
 * Default: **master**
 * Types: **String**
