@@ -331,6 +331,13 @@ cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 
 It is not the path to a certificate file (and there is no `certfile` option).
 
+### git-shallow-hosts
+
+* Default: **['github.com', 'gist.github.com', 'gitlab.com', 'bitbucket.com', 'bitbucket.org']**
+* Type: **string[]**
+
+When fetching dependencies that are Git repositories, if the host is listed in this setting, pnpm will use shallow cloning to fetch only the needed commit, not all the history.
+
 ### https-proxy
 
 * Default: **null**
