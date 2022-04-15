@@ -8,19 +8,19 @@ title: Installation
 On POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-rc.3 sh -
+curl -fsSL https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-rc.5 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-rc.3 sh -
+wget -qO- https://get.pnpm.io/install.sh | PNPM_VERSION=7.0.0-rc.5 sh -
 ```
 
 On Windows (PowerShell):
 
 ```powershell
-$env:PNPM_VERSION='7.0.0-rc.3' ; iwr https://get.pnpm.io/install.ps1 -useb | iex
+$env:PNPM_VERSION='7.0.0-rc.5' ; iwr https://get.pnpm.io/install.ps1 -useb | iex
 ```
 
 You may use the [pnpm env] command then to install Node.js.
@@ -36,7 +36,7 @@ corepack enable
 This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the latest pnpm version and run:
 
 ```
-corepack prepare pnpm@7.0.0-rc.3 --activate
+corepack prepare pnpm@7.0.0-rc.5 --activate
 ```
 
 ## Using npm
