@@ -21,7 +21,7 @@ function makeEditUrl (locale, path1, path2) {
   if (path1 === 'versioned_docs/version-7.x') {
     return `https://github.com/pnpm/pnpm.github.io/edit/main/docs/${path2}`;
   }
-  // Link to Github for English docs
+  // Link to GitHub for English docs
   return `https://github.com/pnpm/pnpm.github.io/edit/main/${path1}/${path2}`;
 }
 

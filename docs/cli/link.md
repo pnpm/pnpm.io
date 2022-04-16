@@ -24,7 +24,7 @@ Changes the link location to `<dir>`.
 
 ### `pnpm link <dir>`
 
-Links package from `<dir>` folder to node_modules of package from where you executing this command or specified via `--dir` option.
+Links package from `<dir>` folder to node_modules of package from where you're executing this command or specified via `--dir` option.
 
 ### `pnpm link --global`
 

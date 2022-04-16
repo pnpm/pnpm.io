@@ -30,7 +30,7 @@ public-hoist-pattern[]=*eslint*
 
 ## Plug'n'Play. The strictest configuration
 
-pnpm supports [Yarn's Plug'n'Play](https://yarnpkg.com/features/pnp) since v5.9. With PnP, both your application and the dependencies of your application will have access only to their declared dependencies. This is even stricter then setting `hoist=false` because inside a monorepo, you're application will not be able to access even the dependencies of the root project.
+pnpm supports [Yarn's Plug'n'Play](https://yarnpkg.com/features/pnp) since v5.9. With PnP, both your application and the dependencies of your application will have access only to their declared dependencies. This is even stricter then setting `hoist=false` because inside a monorepo, your application will not be able to access even the dependencies of the root project.
 
 To use Plug'n'Play, set these settings:
 
@@ -61,7 +61,7 @@ However, if some of your dependencies are trying to access packages that they do
 
 Some tools might not work even with the default configuration of pnpm, which hoists everything to the root of the virtual store and some packages to the root. In this case, you can hoist either everything or a subset of dependencies to the root of the modules directory.
 
-Hoisting everything to the the root of node_modules:
+Hoisting everything to the root of node_modules:
 
 ```ini
 shamefully-hoist=true

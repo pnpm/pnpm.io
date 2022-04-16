@@ -174,7 +174,7 @@ export default (resultArrays, pms, tests, formattedNow) => {
         ((thickness + spacing) * pms.length + separation) * indexT +
         // go to center of middle bar
         thickness + spacing + thickness / 2 -
-        // get y position for property based on how much properties there are
+        // get y position for property based on how many properties there are
         ((properties.length - (indexP + 1)) / 2) * ySpacing +
         ySpacing * indexP / 2
       svgStr += `  <text x="${x}" y="${y}" class="font s4" dominant-baseline="${baseline}" text-anchor="${anchor}">${property}</text>` + '\n'

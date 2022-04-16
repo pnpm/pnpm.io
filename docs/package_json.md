@@ -174,7 +174,7 @@ By default, for portability reasons, no files except those listed in the bin fie
 {
   "publishConfig": {
     "executableFiles": [
-      "./dist/shim.js",
+      "./dist/shim.js"
     ]
   }
 }

@@ -125,7 +125,7 @@ Once done, install pnpm again and it should work as expected.
 
 ## Uninstalling pnpm
 
-If you need to remove the pnpm CLI from your system and any files it have written to your disk, see [Uninstalling pnpm].
+If you need to remove the pnpm CLI from your system and any files it has written to your disk, see [Uninstalling pnpm].
 
 [Uninstalling pnpm]: ./uninstall.md
 [pnpm env]: ./cli/env.md
