@@ -16,7 +16,7 @@ cache:
   directories:
     - "~/.pnpm-store"
 before_install:
-  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.3
+  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.6
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
@@ -42,7 +42,7 @@ blocks:
       jobs:
         - name: pnpm install
           commands:
-            - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.3
+            - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.6
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -59,7 +59,7 @@ to your `appveyor.yml`:
 ```yaml title="appveyor.yml"
 install:
   - ps: Install-Product node $env:nodejs_version
-  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.3
+  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.6
   - pnpm install
 ```
 
@@ -84,7 +84,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: pnpm/action-setup@v2.0.1
       with:
-        version: 7.0.0-rc.3
+        version: 7.0.0-rc.6
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
@@ -113,7 +113,7 @@ build:
   stage: build
   image: node:14.16.0-buster
   before_script:
-    - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.3
+    - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.6
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -139,7 +139,7 @@ pipelines:
           name: Build and test
           image: node:14.16.0
           script:
-            - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.3
+            - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7.0.0-rc.6
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
