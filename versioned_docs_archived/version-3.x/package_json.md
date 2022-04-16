@@ -38,7 +38,7 @@ If true, the selected peer dependency will be marked as optional by the package 
 {
     "peerDependenciesMeta": {
         "react-dom": {
-            "optional": true,
+            "optional": true
         }
     }
 }
