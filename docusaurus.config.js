@@ -257,9 +257,9 @@ module.exports={
     localeConfigs: {
       en: { label: 'English' },
       it: { label: 'Italiano (100%)' },
-      zh: { label: '中文 (95%)' },
+      zh: { label: '中文 (97%)' },
       ja: { label: '日本語 (73%)' },
-      ko: { label: '한국어 (32%)' },
+      ko: { label: '한국어 (37%)' },
       ru: { label: 'Русский (29%)' },
       fr: { label: 'Français (23%)' },
       pt: { label: 'Português Brasileiro (22%)' },
