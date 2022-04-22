@@ -46,6 +46,14 @@ const features = [
   },
 ];
 
+function addUTM(urlAddress) {
+  const url = new URL(urlAddress);
+  url.searchParams.append("utm_source", "pnpm");
+  url.searchParams.append("utm_medium", "home_page");
+
+  return url.toString();
+}
+
 function Feature({imageUrl, title, description}) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
@@ -67,7 +75,7 @@ const Showcase = props => {
 
   const showcase = siteConfig.customFields.users.filter(({ pinned }) => pinned).map((user, i) => {
     return (
-      <a href={user.infoLink} target="_blank" key={i} rel="noopener">
+      <a href={addUTM(user.infoLink)} target="_blank" key={i} rel="noopener">
         <img src={user.image} alt={user.caption} style={{
           width: user.width ? `${user.width}px` : '128px',
           padding: '20px'
@@ -88,16 +96,16 @@ const Showcase = props => {
                 flexFlow: 'row wrap',
                 justifyContent: 'center',
               }}>
-                <a href="https://bit.dev/" target="_blank">
+                <a href={addUTM("https://bit.dev/")} target="_blank">
                   <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
                 </a>
-                <a href="https://prisma.io/" target="_blank">
+                <a href={addUTM("https://prisma.io/")} target="_blank">
                   <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
                 </a>
-                <a href="https://www.leniolabs.com/" target="_blank">
+                <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
                   <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
                 </a>
-                <a href="https://vercel.com/" target="_blank">
+                <a href={addUTM("https://vercel.com/")} target="_blank">
                   <img style={{padding: '20px'}} width="240" alt="Vercel" src="/img/users/vercel.svg" />
                 </a>
               </div>
