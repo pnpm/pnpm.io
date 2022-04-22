@@ -11,8 +11,12 @@ export default function Users() {
   const {siteConfig = {}} = context;
 
   const showcase = siteConfig.customFields.users.map((user, i) => {
+    const url = new URL(user.infoLink);
+    url.searchParams.append("utm_source", "pnpm");
+    url.searchParams.append("utm_medium", "users_page");
+
     return (
-      <a href={user.infoLink} target="_blank" key={i} rel="noopener">
+      <a href={url.toString()} target="_blank" key={i} rel="noopener">
         <img src={user.image} title={user.caption} style={{
           width: user.width ? `${user.width}px` : '128px',
           padding: '20px'
