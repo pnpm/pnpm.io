@@ -191,6 +191,10 @@
             {
               "type": "doc",
               "id": "version-7.x/cli/setup"
+            },
+            {
+              "type": "doc",
+              "id": "version-7.x/cli/init"
             }
           ]
         }
