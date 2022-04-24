@@ -30,3 +30,9 @@ However, there is only `bar@2.0.0` in the workspace, so `pnpm install` will fail
 To fix this error, all dependencies that use the [workspace protocol] should be updated to use versions of packages that are present in the workspace. This can be done either manually or using the `pnpm -r update` command.
 
 [workspace protocol]: ./workspaces.md#workspace-protocol-workspace
+
+## ERR_PNPM_PEER_DEP_ISSUES
+
+`pnpm install` will fail if the project has unresolved peer dependencies or the peer dependencies are not matching the wanted ranges. To fix this, install the missing peer dependencies.
+
+You may also selectively ignore these errors using the [pnpm.peerDependencyRules.ignoreMissing](package_json#pnpmpeerdependencyrulesignoremissing) and [pnpm.peerDependencyRules.allowedVersions](package_json#pnpmpeerdependencyrulesallowedversions) fields in `package.json`.
