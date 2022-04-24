@@ -61,15 +61,6 @@ If you have Scoop installed, you can install pnpm using the following command:
 scoop install nodejs-lts pnpm
 ```
 
-## Upgrading
-
-Once you have installed pnpm, there is no need to use other package managers to
-update it. You can upgrade pnpm using itself, like so:
-
-```sh
-pnpm add -g pnpm
-```
-
 :::tip
 
 Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).
