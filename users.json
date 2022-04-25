@@ -5,7 +5,14 @@
     "infoLink": "https://compass.com",
     "pinned": true,
     "width": 150
-  },
+  }, 
+{
+"caption": "Harshit",
+"image": "https://robbreport-com.cdn.ampproject.org/i/s/robbreport.com/wp-content/uploads/2021/05/Bitcoin1.jpg",
+    "infoLink": "https://harshitcoin.vercel.app",
+    "pinned": true,
+    "width": 150
+},
   {
     "caption": "Prisma",
     "image": "/img/users/prisma.svg",
