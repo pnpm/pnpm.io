@@ -169,6 +169,9 @@ function Home() {
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
+              <div style={{ textAlign: 'center' }}>
+                <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d1E31WPR70g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
               <div className="row">
                 {features.map((props, idx) => (
                   <Feature key={idx} {...props} />

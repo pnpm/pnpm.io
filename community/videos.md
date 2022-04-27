@@ -5,6 +5,7 @@ title: Videos
 
 In English :uk::us::
 
+- `2022-04-25`: [Why I Switched From NPM/Yarn to PNPM And Why You Should Too!](https://youtu.be/d1E31WPR70g)
 - `2021-12-02`: [Use pnpm instead of npm or yarn for JavaScript & TypeScript](https://youtu.be/uJqqddyzN3s)
 - `2021-10-13`: [What is pnpm](https://youtu.be/hiTmX2dW84E)
 - `2019-08-20`: [Reduce SPFX Node Modules from 50,000 files to 1,000](https://vimeo.com/355016928)
