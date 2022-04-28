@@ -32,7 +32,7 @@ however, pnpm has a workaround. For Windows, we use [junctions] instead.
 ## But the nested `node_modules` approach is incompatible with Windows?
 
 Early versions of npm had issues because of nesting all `node_modules` (see
-[this issue]. However, pnpm does not create deep folders, it stores all packages
+[this issue]). However, pnpm does not create deep folders, it stores all packages
 flatly and uses symbolic links to create the dependency tree structure.
 
 [this issue]: https://github.com/nodejs/node-v0.x-archive/issues/6960
