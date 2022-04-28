@@ -55,16 +55,10 @@ function addUTM(urlAddress) {
 }
 
 function Feature({imageUrl, title, description}) {
-  const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--3', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt="" style={{ width: '115px'}} />
-        </div>
-      )}
-      <h3 className="text--center">{title}</h3>
-      <p className="text--center">{description}</p>
+      <h3>{title}</h3>
+      <p>{description}</p>
     </div>
   );
 }
@@ -169,7 +163,7 @@ function Home() {
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
-              <div style={{ textAlign: 'center' }}>
+              <div style={{ marginBottom: '24px', textAlign: 'center' }}>
                 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d1E31WPR70g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>
               <div className="row">
