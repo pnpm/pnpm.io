@@ -136,6 +136,7 @@ The following fields may be overridden:
 * [`es2015`](https://github.com/stereobooster/package.json#es2015)
 * [`unpkg`](https://github.com/stereobooster/package.json#unpkg-1)
 * [`umd:main`](https://github.com/stereobooster/package.json#microbundle)
+* [`typesVersions`](https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html#version-selection-with-typesversions)
 * cpu
 * os
 
