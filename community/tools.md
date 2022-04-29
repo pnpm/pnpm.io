@@ -10,9 +10,11 @@ title: Tools
 
 ## Toolings with pnpm support
 
-- [rush](https://rushjs.io/)
+- [Bit](https://bit.dev/) - A toolchain for component-driven development.
+- [Turborepo](https://turborepo.org/) - A high-performance build system for JavaScript and TypeScript codebases.
+- [Rush](https://rushjs.io/) - A scalable monorepo manager for the web.
 - [changesets](https://github.com/changesets/changesets) - A way to manage your versioning and changelogs with a focus on monorepos.
-- [Nx](https://nx.dev/)
+- [Nx](https://nx.dev/) - Next generation build system with first class monorepo support and powerful integrations.
 - [Renovate](https://renovateapp.com/) - Automated dependency updates, for humans
 - [syncpack](https://github.com/JamieMason/syncpack)
 - [handpick](https://github.com/redaxmedia/handpick) - Handpick conditional dependencies like a boss
