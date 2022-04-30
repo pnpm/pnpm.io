@@ -33,10 +33,10 @@ Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.htm
 corepack enable
 ```
 
-This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the latest pnpm version and run:
+This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the [latest pnpm version](https://github.com/pnpm/pnpm/releases/latest) and run:
 
 ```
-corepack prepare pnpm@7.0.0-rc.9 --activate
+corepack prepare pnpm@<version> --activate
 ```
 
 ## Using npm
