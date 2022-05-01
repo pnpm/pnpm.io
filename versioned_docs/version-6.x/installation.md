@@ -38,7 +38,7 @@ curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@latest-6
 On Windows (PowerShell):
 
 ```powershell
-Invoke-WebRequest 'https://get.pnpm.io/v6.16.js' -UseBasicParsing -o pnpm.js; node pnpm.js add --global pnpm; Remove-Item pnpm.js
+Invoke-WebRequest 'https://get.pnpm.io/v6.16.js' -UseBasicParsing -o pnpm.js; node pnpm.js add --global pnpm@6.32.11; Remove-Item pnpm.js
 ```
 
 The standalone script is signed. [Here's how to verify it](https://github.com/pnpm/get#verifying-files).
@@ -76,7 +76,7 @@ corepack prepare pnpm@6.32.11 --activate
 ## Using npm
 
 ```sh
-npm install -g pnpm
+npm install -g pnpm@latest-6
 ```
 
 ## Via npx resolution
