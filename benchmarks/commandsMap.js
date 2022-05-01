@@ -8,10 +8,8 @@ export default {
       '--no-fund',
       '--no-audit',
       '--ignore-scripts',
-      '--cache',
-      'cache',
-      '--registry',
-      'https://registry.npmjs.org/',
+      '--cache=cache',
+      '--registry=https://registry.npmjs.org/',
       '--legacy-peer-deps'
     ]
   },
@@ -22,10 +20,10 @@ export default {
     args: [
       'install',
       '--ignore-scripts',
-      '--store-dir',
-      `cache`,
-      '--registry',
-      'https://registry.npmjs.org/'
+      '--store-dir=cache/store',
+      '--cache-dir=cache/cache',
+      '--registry=https://registry.npmjs.org/',
+      '--no-strict-peer-dependencies',
     ]
   },
   yarn: {
