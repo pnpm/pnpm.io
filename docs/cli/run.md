@@ -13,7 +13,7 @@ Let's say you have a `watch` script configured in your `package.json`, like so:
 
 ```json
 "scripts": {
-    "watch": "build-command --watch"
+    "watch": "webpack --watch"
 }
 ```
 
@@ -52,6 +52,30 @@ If for some reason you need the pre/post scripts behavior of npm, use the
 `enable-pre-post-scripts` option.
 
 ## Options
+
+Any options for the `run` command should be listed before the script's name.
+Options listed after the script's name are passed to the executed script.
+
+All these will run pnpm CLI with the `--silent` option:
+
+```sh
+pnpm run --silent watch
+pnpm --silent run watch
+pnpm --silent watch
+```
+
+Any arguments after the command's name are added to the executed script.
+So if `watch` runs `webpack --watch`, then this command:
+
+```sh
+pnpm run webpack --no-color
+```
+
+will run:
+
+```sh
+webpack --watch --no-color
+```
 
 ### script-shell
 
