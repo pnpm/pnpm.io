@@ -207,3 +207,4 @@ Here are a few open source projects that use the workspace feature of pnpm:
 * [Element Plus](https://github.com/element-plus/element-plus) (as of 9/23/2021, commit `f9e192535ff74d1443f1d9e0c5394fad10428629`)
 * [Astro](https://github.com/withastro/astro) (as of 3/08/2022, commit `240d88aefe66c7d73b9c713c5da42ae789c011ce`)
 * [VuePress 2.0](https://github.com/vuepress/vuepress-next) (as of 4/23/2022, commit `b85b1c3b39e80a8de92a7469381061f75ef33623`)
+* [NextAuth.js](https://github.com/nextauthjs/next-auth) (as of 5/3/2022, commit `4f29d39521451e859dbdb83179756b372e3dd7aa`)
