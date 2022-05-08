@@ -13,13 +13,11 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '18'
       - name: Install pnpm
-        run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@next-7
+        run: npm i -g pnpm
       - name: Install dependencies
         run: pnpm install
-      - name: Update pnpm bundle
-        run: curl -L --fail https://get.pnpm.io/v5.js > static/pnpm.js
       - name: Build
         run: pnpm build
         env:
