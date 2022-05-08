@@ -45,8 +45,7 @@ Tells the registry whether the published package should be public or restricted.
 
 ### --no-git-checks
 
-Don't check if current branch is your publish branch, clean, and up-to-date
-, clean, and up-to-date.
+Don't check if current branch is your publish branch, clean, and up-to-date with remote.
 
 ### --publish-branch
 
