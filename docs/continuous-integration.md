@@ -118,7 +118,9 @@ build:
   script:
     - pnpm install # install dependencies
   cache:
-    key: "$CI_COMMIT_REF_SLUG"
+    key:
+      files:
+        - pnpm-lock.yaml
     paths:
       - .pnpm-store
 ```
