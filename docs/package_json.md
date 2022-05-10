@@ -292,6 +292,13 @@ A bigger example:
 }
 ```
 
+:::tip
+Together with Yarn, we maintain a database of `packageExtensions` to patch broken packages in the ecosystem.
+If you use `packageExtensions`, consider sending a PR upstream and contributing your extension to the [`@yarnpkg/extensions`] database. 
+:::
+
+[`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
+
 ### pnpm.peerDependencyRules.ignoreMissing
 
 pnpm will not print warnings about missing peer dependencies from this list.
