@@ -290,12 +290,18 @@
     "pinned": true,
     "width": 120
   },
-  
-   {
+  {
     "caption": "Treeprofile",
     "image": "https://www.treeprofile.com/assets/img/icon-green.png",
     "infoLink": "https://www.treeprofile.com",
     "pinned": false,
     "width": 120
+  },
+  {
+    "caption": "Maze",
+    "image": "/img/users/maze.png",
+    "infoLink": "https://www.maze.co/",
+    "pinned": false,
+    "width": 240
   }
 ]
