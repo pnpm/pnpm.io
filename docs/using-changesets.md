@@ -16,7 +16,7 @@ To setup changesets on a pnpm workspace, install changesets as a dev dependency
 in the root of the workspace:
 
 ```sh
-pnpm add -DW @changesets/cli
+pnpm add -Dw @changesets/cli
 ```
 
 Then changesets' init command:
