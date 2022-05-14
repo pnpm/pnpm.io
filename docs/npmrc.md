@@ -208,7 +208,7 @@ When set to `false`, pnpm won't read or generate a `pnpm-lock.yaml` file.
 
 ### prefer-frozen-lockfile
 
-* Default: **true** (from v1.38.0)
+* Default: **true**
 * Type: **Boolean**
 
 When set to `true` and the available `pnpm-lock.yaml` satisfies the
