@@ -178,7 +178,6 @@ function Home() {
           </section>
         )}
         <Showcase></Showcase>
-        <div style={{textAlign: 'right', backgroundColor: 'var(--ifm-color-emphasis-100)'}}>The octopus icon made by <a href="https://www.flaticon.com/authors/flat-icons">Flat Icons</a> from <a href="https://www.flaticon.com">flaticon.com</a></div>
       </main>
     </Layout>
   );
