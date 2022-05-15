@@ -34,7 +34,7 @@
     "pinned": true,
     "width": 250
   },
-  
+
   {
     "caption": "JustAnswer",
     "image": "/img/users/justanswer.svg",
@@ -303,5 +303,12 @@
     "infoLink": "https://www.maze.co/",
     "pinned": false,
     "width": 240
+  },
+  {
+    "caption": "MuPhile Labs",
+    "image": "/img/users/MuPhileLabs.jpeg",
+    "infoLink": "https://muphile.com",
+    "pinned": false,
+    "width": 200
   }
 ]
