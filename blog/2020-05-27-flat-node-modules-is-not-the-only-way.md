@@ -60,7 +60,7 @@ Let's see what is inside `express`:
       LICENSE
       package.json
       Readme.md
-    .modules.yaml
+  .modules.yaml
 ```
 
 `express` has no `node_modules`? Where are all the dependencies of `express`?
