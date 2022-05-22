@@ -455,7 +455,7 @@ The maximum amount of time to wait for HTTP requests to complete.
 * Default: **false**
 * Type: **Boolean**
 
-When `true`, `pnpm add <pkg>` automatically installs any missing peer dependencies as dev dependencies.
+When `true`, any missing non-optional peer dependencies are automatically installed.
 
 ### strict-peer-dependencies
 

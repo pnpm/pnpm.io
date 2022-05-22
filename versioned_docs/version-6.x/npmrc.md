@@ -483,7 +483,7 @@ Added in: v6.26.0
 * Default: **false**
 * Type: **Boolean**
 
-When `true`, `pnpm add <pkg>` automatically installs any missing peer dependencies as dev dependencies.
+When `true`, any missing non-optional peer dependencies are automatically installed.
 
 ### strict-peer-dependencies
 
