@@ -8,6 +8,7 @@ title: Feature Comparison
 | Workspace support | ✔️ | ✔️ | ✔️ |
 | Isolated `node_modules` | ✔️ - The default | ✔️ | ❌ |
 | Hoisted `node_modules` | ✔️ | ✔️ | ✔️ - The default |
+| Autoinstalling peers | ✔️ - Via [auto-install-peers=true] | ❌ | ✔️  |
 | Plug'n'Play | ✔️ | ✔️ - The default | ❌ |
 | Zero-Installs | ❌ | ✔️ | ❌ |
 | Patching dependencies | ❌ | ✔️ | ❌ |
@@ -16,3 +17,5 @@ title: Feature Comparison
 | Overrides support | ✔️ | ✔️ - Via resolutions | ✔️ |
 | Content-addressable storage | ✔️ | ❌ | ❌ |
 | Dynamic package execution | ✔️ - Via `pnpm dlx` | ✔️ - Via `yarn dlx` | ✔️ - Via `npx` |
+
+[auto-install-peers=true]: npmrc.md#auto-install-peers

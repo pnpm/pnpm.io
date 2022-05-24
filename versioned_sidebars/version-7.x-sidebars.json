@@ -12,6 +12,10 @@
         {
           "type": "doc",
           "id": "version-7.x/installation"
+        },
+        {
+          "type": "doc",
+          "id": "feature-comparison"
         }
       ]
     },
@@ -266,10 +270,6 @@
       "type": "category",
       "label": "Advanced",
       "items": [
-        {
-          "type": "doc",
-          "id": "feature-comparison"
-        },
         {
           "type": "doc",
           "id": "version-7.x/errors"
