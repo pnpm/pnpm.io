@@ -570,6 +570,22 @@ Specifies which exact Node.js version should be used for the project's runtime.
 pnpm will automatically install the specified version of Node.js and use it for
 running `pnpm run` commands or the `pnpm node` command.
 
+### node-version
+
+* Default: the value returned by **node -v**, without the v prefix
+* Type: **semver**
+
+The Node.js version to use when checking a package's `engines` setting.
+
+If you want to prevent contributors of your project from adding new incompatible dependencies, use `node-version` and `engine-strict` in a `.npmrc` file at the root of the project:
+
+```ini
+node-version=12.22.0
+engine-strict=true
+```
+
+This way, even if someone is using Node.js v16, they will not be able to install a new dependency that doesn't support Node.js v12.22.0.
+
 ### node-mirror:&lt;releaseDir>
 
 * Default: **`https://nodejs.org/download/<releaseDir>/`**
