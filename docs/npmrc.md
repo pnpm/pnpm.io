@@ -87,6 +87,7 @@ root of `node_modules`, you can set this to `true` to hoist them for you.
 ### store-dir
 
 * Default:
+  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/store**
   * On Windows: **~/AppData/Local/pnpm/store**
   * On macOS: **~/Library/pnpm/store**
   * On Linux: **~/.local/share/pnpm/store**
@@ -642,7 +643,11 @@ This also sets the tag that is added to the `package@version` specified by the
 
 ### global-dir
 
-* Default: **&lt;path to node\>/pnpm-global**
+* Default:
+  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/global**
+  * On Windows: **~/AppData/Local/pnpm/global**
+  * On macOS: **~/Library/pnpm/global**
+  * On Linux: **~/.local/share/pnpm/global**
 * Type: **path**
 
 Specify a custom directory to store global packages.
@@ -653,14 +658,22 @@ Allows to set the target directory for the bin files of globally installed packa
 
 ### state-dir
 
-* Default: **$XDG_STATE_HOME/pnpm**
+* Default:
+  * If the **$XDG_STATE_HOME** env variable is set, then **$XDG_STATE_HOME/pnpm**
+  * On Windows: **~/AppData/Local/pnpm-state**
+  * On macOS: **~/.pnpm-state**
+  * On Linux: **~/.local/state/pnpm**
 * Type: **path**
 
 The directory where pnpm creates the `pnpm-state.json` file that is currently used only by the update checker.
 
 ### cache-dir
 
-* Default: **$XDG_CACHE_HOME/pnpm**
+* Default:
+  * If the **$XDG_CACHE_HOME** env variable is set, then **$XDG_CACHE_HOME/pnpm**
+  * On Windows: **~/AppData/Local/pnpm-cache**
+  * On macOS: **~/Library/Caches/pnpm**
+  * On Linux: **~/.local/share/pnpm/store**
 * Type: **path**
 
 The location of the package metadata cache.
