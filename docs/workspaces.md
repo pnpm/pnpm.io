@@ -186,26 +186,25 @@ If you see the message `There are cyclic workspace dependencies`, please inspect
 
 ## Usage examples
 
-Here are a few open source projects that use the workspace feature of pnpm:
+Here are a few of the most popular open source projects that use the workspace feature of pnpm:
 
-* [icestark](https://github.com/ice-lab/icestark) (as of 12/16/2021, commit `4862326a8de53d02f617e7b1986774fd7540fccd`)
-* [Vue 3.0](https://github.com/vuejs/vue-next) (as of 10/9/2021, commit `61c5fbd3e35152f5f32e95bf04d3ee083414cecb`)
-* [Vite](https://github.com/vitejs/vite) (as of 9/26/2021, commit `3e1cce01d01493d33e50966d0d0fd39a86d229f9`)
-* [Cycle.js](https://github.com/cyclejs/cyclejs) (as of 9/21/2021, commit `f2187ab6688368edb904b649bd371a658f6a8637`)
-* [Prisma](https://github.com/prisma/prisma) (as of 9/21/2021, commit `c4c83e788aa16d61bae7a6d00adc8a58b3789a06`)
-* [Verdaccio](https://github.com/verdaccio/verdaccio) (as of 9/21/2021, commit `9dbf73e955fcb70b0a623c5ab89649b95146c744`)
-* [Rollup plugins](https://github.com/rollup/plugins) (as of 9/21/2021, commit `53fb18c0c2852598200c547a0b1d745d15b5b487`)
-* [Milkdown](https://github.com/Saul-Mirone/milkdown) (as of 9/26/2021, commit `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913`)
-* [ByteMD](https://github.com/bytedance/bytemd) (as of 2/18/2021, commit `36ef25f1ea1cd0b08752df5f8c832302017bb7fb`)
-* [VueUse](https://github.com/vueuse/vueuse) (as of 9/25/2021, commit `826351ba1d9c514e34426c85f3d69fb9875c7dd9`)
-* [Slidev](https://github.com/slidevjs/slidev) (as of 4/12/2021, commit `d6783323eb1ab1fc612577eb63579c8f7bc99c3a`)
-* [SvelteKit](https://github.com/sveltejs/kit) (as of 9/26/2021, commit `b164420ab26fa04fd0fbe0ac05431f36a89ef193`)
-* [Telecraft](https://github.com/telecraft/telecraft) (as of 9/26/2021, commit `73a9c48c9d4f160d758b8881f404cc52c20a7454`)
-* [GiraphQL](https://github.com/hayes/giraphql) (as of 8/4/2021, commit `3dd3ff148da382d6f406f20626a9a5c25707c0c8`)
-* [Tailchat](https://github.com/msgbyte/tailchat) (as of 12/27/2021, commit `298af71aa0619e0a8fa8717777afe2fb32739db4`)
-* [Vitest](https://github.com/vitest-dev/vitest) (as of 12/13/2021, commit `d6ff0ccb819716713f5eab5c046861f4d8e4f988`)
-* [Element Plus](https://github.com/element-plus/element-plus) (as of 9/23/2021, commit `f9e192535ff74d1443f1d9e0c5394fad10428629`)
-* [Astro](https://github.com/withastro/astro) (as of 3/08/2022, commit `240d88aefe66c7d73b9c713c5da42ae789c011ce`)
-* [VuePress 2.0](https://github.com/vuepress/vuepress-next) (as of 4/23/2022, commit `b85b1c3b39e80a8de92a7469381061f75ef33623`)
-* [NextAuth.js](https://github.com/nextauthjs/next-auth) (as of 5/3/2022, commit `4f29d39521451e859dbdb83179756b372e3dd7aa`)
-* [cz-git](https://github.com/Zhengqbbb/cz-git) (as of 4/25/2022, commit `e59a5236a868549e027ff0b5e73b4db1212b7130`)
+| Project | Stars | Migration date | Migration commit |
+| --      | --    | --             | --               |
+| [Next.js](https://github.com/vercel/next.js) | ![](https://img.shields.io/github/stars/vercel/next.js) | 2022-05-29 | `f7b81316aea4fc9962e5e54981a6d559004231aa` |
+| [Vite](https://github.com/vitejs/vite) | ![](https://img.shields.io/github/stars/vitejs/vite) | 2021-09-26 | `3e1cce01d01493d33e50966d0d0fd39a86d229f9` |
+| [Vue 3.0](https://github.com/vuejs/vue-next) | ![](https://img.shields.io/github/stars/vuejs/vue-next) | 2021-10-09 | `61c5fbd3e35152f5f32e95bf04d3ee083414cecb` |
+| [Prisma](https://github.com/prisma/prisma) | ![](https://img.shields.io/github/stars/prisma/prisma) | 2021-09-21 | `c4c83e788aa16d61bae7a6d00adc8a58b3789a06` |
+| [Slidev](https://github.com/slidevjs/slidev) | ![](https://img.shields.io/github/stars/slidevjs/slidev) | 2021-04-12 | `d6783323eb1ab1fc612577eb63579c8f7bc99c3a` |
+| [Element Plus](https://github.com/element-plus/element-plus) | ![](https://img.shields.io/github/stars/element-plus/element-plus) | 2021-09-23 | `f9e192535ff74d1443f1d9e0c5394fad10428629` |
+| [Verdaccio](https://github.com/verdaccio/verdaccio) | ![](https://img.shields.io/github/stars/verdaccio/verdaccio) | 2021-09-21 | `9dbf73e955fcb70b0a623c5ab89649b95146c744` |
+| [Astro](https://github.com/withastro/astro) | ![](https://img.shields.io/github/stars/withastro/astro) | 2022-03-08 | `240d88aefe66c7d73b9c713c5da42ae789c011ce` |
+| [Cycle.js](https://github.com/cyclejs/cyclejs) | ![](https://img.shields.io/github/stars/cyclejs/cyclejs) | 2021-09-21 | `f2187ab6688368edb904b649bd371a658f6a8637` |
+| [VueUse](https://github.com/vueuse/vueuse) | ![](https://img.shields.io/github/stars/vueuse/vueuse) | 2021-09-25 | `826351ba1d9c514e34426c85f3d69fb9875c7dd9` |
+| [NextAuth.js](https://github.com/nextauthjs/next-auth) | ![](https://img.shields.io/github/stars/nextauthjs/next-auth) | 2022-05-03 | `4f29d39521451e859dbdb83179756b372e3dd7aa` |
+| [SvelteKit](https://github.com/sveltejs/kit) | ![](https://img.shields.io/github/stars/sveltejs/kit) | 2021-09-26 | `b164420ab26fa04fd0fbe0ac05431f36a89ef193` |
+| [Milkdown](https://github.com/Saul-Mirone/milkdown) | ![](https://img.shields.io/github/stars/Saul-Mirone/milkdown) | 2021-09-26 | `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913` |
+| [Vitest](https://github.com/vitest-dev/vitest) | ![](https://img.shields.io/github/stars/vitest-dev/vitest) | 2021-12-13 | `d6ff0ccb819716713f5eab5c046861f4d8e4f988` |
+| [Rollup plugins](https://github.com/rollup/plugins) | ![](https://img.shields.io/github/stars/rollup/plugins) | 2021-09-21 | `53fb18c0c2852598200c547a0b1d745d15b5b487` |
+| [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
+| [icestark](https://github.com/ice-lab/icestark) | ![](https://img.shields.io/github/stars/ice-lab/icestark) | 2021-12-16 | `4862326a8de53d02f617e7b1986774fd7540fccd` |
+| [VuePress 2.0](https://github.com/vuepress/vuepress-next) | ![](https://img.shields.io/github/stars/vuepress/vuepress-next) | 2022-04-23 | `b85b1c3b39e80a8de92a7469381061f75ef33623` |
