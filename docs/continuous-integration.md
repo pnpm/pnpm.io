@@ -82,9 +82,9 @@ jobs:
         node-version: [15]
     steps:
     - uses: actions/checkout@v2
-    - uses: pnpm/action-setup@v2.0.1
+    - uses: pnpm/action-setup@v2.2.2
       with:
-        version: 7.0.0
+        version: 7
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
