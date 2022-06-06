@@ -736,7 +736,7 @@ The directory where pnpm creates the `pnpm-state.json` file that is currently us
   * If the **$XDG_CACHE_HOME** env variable is set, then **$XDG_CACHE_HOME/pnpm**
   * On Windows: **~/AppData/Local/pnpm-cache**
   * On macOS: **~/Library/Caches/pnpm**
-  * On Linux: **~/.local/share/pnpm/store**
+  * On Linux: **~/.cache/pnpm**
 * Type: **path**
 
 The location of the package metadata cache.
