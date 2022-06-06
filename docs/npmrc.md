@@ -602,6 +602,69 @@ node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
 node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 ```
 
+## Workspace Settings
+
+### link-workspace-packages
+
+* Default: **true**
+* Type: **true**, **false**, **deep**
+
+If this is enabled, locally available packages are linked to `node_modules`
+instead of being downloaded from the registry. This is very convenient in a
+monorepo. If you need local packages to also be linked to subdependencies, you
+can use the `deep` setting.
+
+Else, packages are downloaded and installed from the registry. However,
+workspace packages can still be linked by using the `workspace:` range protocol.
+
+### prefer-workspace-packages
+
+* Default: **false**
+* Type: **Boolean**
+
+If this is enabled, local packages from the workspace are preferred over
+packages from the registry, even if there is a newer version of the package in
+the registry.
+
+This setting is only useful if the workspace doesn't use
+`save-workspace-protocol`.
+
+### shared-workspace-lockfile
+
+* Default: **true**
+* Type: **Boolean**
+
+If this is enabled, pnpm creates a single `pnpm-lock.yaml` file in the root of
+the workspace. This also means that all dependencies of workspace packages will
+be in a single `node_modules` (and get symlinked to their package `node_modules`
+folder for Node's module resolution).
+
+Advantages of this option:
+* every dependency is a singleton
+* faster installations in a monorepo
+* fewer changes in code reviews as they are all in one file
+
+:::note
+
+Even though all the dependencies will be hard linked into the root
+`node_modules`, packages will have access only to those dependencies
+that are declared in their `package.json`, so pnpm's strictness is preserved.
+This is a result of the aforementioned symbolic linking.
+
+:::
+
+### save-workspace-protocol
+
+* Default: **true**
+* Type: **Boolean**
+
+If this is enabled, new dependencies will be added with the workspace protocol
+IF (and only if) they are present in the workspace.
+
+You might want to change this setting to `false` if the tooling in your
+repository does not understand the workspace protocol (and ideally submit a PR
+to your tooling to get it added in the future).
+
 ## Other Settings
 
 ### use-running-store-server
