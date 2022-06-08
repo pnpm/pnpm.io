@@ -68,7 +68,7 @@ Any arguments after the command's name are added to the executed script.
 So if `watch` runs `webpack --watch`, then this command:
 
 ```sh
-pnpm run webpack --no-color
+pnpm run watch --no-color
 ```
 
 will run:
