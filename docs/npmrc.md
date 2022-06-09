@@ -349,6 +349,8 @@ key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
 
 It is not the path to a key file (and there is no `keyfile` option).
 
+This setting contains sensitive information. Don't write it to a local `.npmrc` file committed to the repository.
+
 ### git-shallow-hosts
 
 * Default: **['github.com', 'gist.github.com', 'gitlab.com', 'bitbucket.com', 'bitbucket.org']**
