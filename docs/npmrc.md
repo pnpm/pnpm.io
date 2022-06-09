@@ -335,6 +335,20 @@ cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 
 It is not the path to a certificate file (and there is no `certfile` option).
 
+### key
+
+* Default: **null**
+* Type: **String**
+
+A client key to pass when accessing the registry. Values should be in PEM format
+(AKA "Base-64 encoded X.509 (.CER)"). For example:
+
+```sh
+key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
+```
+
+It is not the path to a key file (and there is no `keyfile` option).
+
 ### git-shallow-hosts
 
 * Default: **['github.com', 'gist.github.com', 'gitlab.com', 'bitbucket.com', 'bitbucket.org']**
@@ -350,20 +364,6 @@ When fetching dependencies that are Git repositories, if the host is listed in t
 A proxy to use for outgoing HTTPS requests. If the `HTTPS_PROXY`, `https_proxy`,
 `HTTP_PROXY` or `http_proxy` environment variables are set, their values will be
 used instead.
-
-### key
-
-* Default: **null**
-* Type: **String**
-
-A client key to pass when accessing the registry. Values should be in PEM format
-(AKA "Base-64 encoded X.509 (.CER)"). For example:
-
-```sh
-key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
-```
-
-It is not the path to a key file (and there is no `keyfile` option).
 
 ### local-address
 
