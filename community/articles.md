@@ -3,6 +3,7 @@ id: articles
 title: Articles
 ---
 
+- `2022-06-09`: [pnpm: Because to work more flexible we start from the bottom](https://medium.com/jobtome-engineering/pnpm-because-to-work-more-flexible-we-start-from-the-bottom-5a9c3a9c2af4)
 - `2022-02-16`: [JavaScript package managers compared: npm, Yarn, or pnpm?](https://blog.logrocket.com/javascript-package-managers-compared/)
 - `2022-01-18`: [A story of how we migrated to pnpm](https://divriots.com/blog/switching-to-pnpm)
 - `2022-01-17`: [Yarn, npm, or pnpm?](https://www.pixelmatters.com/blog/yarn-npm-or-pnpm)
