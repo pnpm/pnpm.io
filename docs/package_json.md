@@ -365,3 +365,24 @@ Example:
   }
 }
 ```
+
+### pnpm.allowedDeprecatedVersions
+
+Added in: v7.2.0
+
+This setting allows muting deprecation warnings of specific packages.
+
+Example:
+
+```json
+{
+  "pnpm": {
+    "allowedDeprecatedVersions": {
+      "express": "1",
+      "request": "*"
+    }
+  }
+}
+```
+
+With the above configuration pnpm will not print deprecation warnings about any version of `request` and about v1 of `express`.
