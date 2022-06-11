@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Jun 6, 2022, 1:17 AM_ (_daily_ updated).
+**Last benchmarked at**: _Jun 11, 2022, 10:06 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 33s | 14.7s | 16.7s | 22.9s |
-| install | ✔     | ✔        | ✔           | 1.9s | 1.1s | 2.1s | n/a |
-| install | ✔     | ✔        |             | 9.9s | 3.7s | 6.5s | 1.4s |
-| install | ✔     |          |             | 14.8s | 6.6s | 11.1s | 6.1s |
-| install |       | ✔        |             | 16.2s | 12.2s | 11.5s | 17.2s |
-| install | ✔     |          | ✔           | 2.5s | 2.8s | 6.9s | n/a |
-| install |       | ✔        | ✔           | 1.9s | 1.2s | 7.1s | n/a |
-| install |       |          | ✔           | 2.3s | 7.2s | 11.7s | n/a |
-| update  | n/a | n/a | n/a | 1.8s | 9s | 15.4s | 28.3s |
+| install |       |          |             | 33s | 22s | 16.7s | 22.9s |
+| install | ✔     | ✔        | ✔           | 1.9s | 1.7s | 2.1s | n/a |
+| install | ✔     | ✔        |             | 9.9s | 5.4s | 6.5s | 1.4s |
+| install | ✔     |          |             | 14.8s | 9.4s | 11.1s | 6.1s |
+| install |       | ✔        |             | 16.2s | 19.4s | 11.5s | 17.2s |
+| install | ✔     |          | ✔           | 2.5s | 3s | 6.9s | n/a |
+| install |       | ✔        | ✔           | 1.9s | 1.8s | 7.1s | n/a |
+| install |       |          | ✔           | 2.3s | 11.2s | 11.7s | n/a |
+| update  | n/a | n/a | n/a | 1.8s | 13.8s | 15.4s | 28.3s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
