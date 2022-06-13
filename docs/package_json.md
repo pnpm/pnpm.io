@@ -7,9 +7,7 @@ The manifest file of a package. It contains all the package's metadata,
 including dependencies, title, author, et cetera. This is a standard preserved
 across all major Node.JS package managers, including pnpm.
 
-## Fields
-
-### engines
+## engines
 
 You can specify the version of Node and pnpm that your software works on:
 
@@ -31,9 +29,9 @@ installed as a dependency.
 
 [.npmrc]: ./npmrc.md#engine-strict
 
-### dependenciesMeta
+## dependenciesMeta
 
-#### dependenciesMeta.*.injected
+### dependenciesMeta.*.injected
 
 If this is set to true for a local dependency, the package will be hard linked to the modules directory, not symlinked.
 
@@ -88,12 +86,12 @@ And this will be the `package.json` of `form`:
 
 `button` will be hard linked into the dependencies of `form`, and `react@17` will be symlinked to the dependencies of `form/node_modules/button`.
 
-### peerDependenciesMeta
+## peerDependenciesMeta
 
 This field lists some extra information related to the dependencies listed in
 the `peerDependencies` field.
 
-#### peerDependenciesMeta.*.optional
+### peerDependenciesMeta.*.optional
 
 If this is set to true, the selected peer dependency will be marked as optional
 by the package manager. Therefore, the consumer omitting it will no longer be
@@ -120,7 +118,7 @@ Note that even though `bar` was not specified in `peerDependencies`, it is
 marked as optional. pnpm will therefore assume that any version of bar is fine.
 However, `foo` is optional, but only to the required version specification.
 
-### publishConfig
+## publishConfig
 
 It is possible to override some fields in the manifest before the package is
 packed.
@@ -167,7 +165,7 @@ Will be published as:
 }
 ```
 
-#### publishConfig.executableFiles
+### publishConfig.executableFiles
 
 By default, for portability reasons, no files except those listed in the bin field will be marked as executable in the resulting package archive. The `executableFiles` field lets you declare additional fields that must have the executable flag (+x) set even if they aren't directly accessible through the bin field.
 
@@ -181,7 +179,7 @@ By default, for portability reasons, no files except those listed in the bin fie
 }
 ```
 
-#### publishConfig.directory
+### publishConfig.directory
 
 You also can use the field `publishConfig.directory` to customize the published subdirectory relative to the current `package.json`.
 
@@ -199,7 +197,7 @@ It is expected to have a modified version of the current package in the specifie
 }
 ```
 
-### pnpm.overrides
+## pnpm.overrides
 
 This field allows you to instruct pnpm to override any dependency in the
 dependency graph. This is useful to enforce all your packages to use a single
@@ -227,7 +225,7 @@ separating the package selector from the dependency selector with a ">", for
 example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
 any other dependencies.
 
-### pnpm.packageExtensions
+## pnpm.packageExtensions
 
 The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
 
@@ -301,6 +299,8 @@ If you use `packageExtensions`, consider sending a PR upstream and contributing 
 
 [`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
 
+## pnpm.peerDependencyRules
+
 ### pnpm.peerDependencyRules.ignoreMissing
 
 pnpm will not print warnings about missing peer dependencies from this list.
@@ -337,7 +337,7 @@ For instance, if you have some dependencies that need `react@16` but you know th
 
 This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
 
-### pnpm.neverBuiltDependencies
+## pnpm.neverBuiltDependencies
 
 This field allows to ignore the builds of specific dependencies.
 The "preinstall", "install", and "postinstall" scripts of the listed packages will not be executed during installation.
@@ -352,7 +352,7 @@ An example of the `"pnpm"."neverBuiltDependencies"` field:
 }
 ```
 
-### pnpm.onlyBuiltDependencies
+## pnpm.onlyBuiltDependencies
 
 A list of package names that are allowed to be executed during installation. If this field exists, only the listed packages will be able to run install scripts.
 
@@ -366,7 +366,7 @@ Example:
 }
 ```
 
-### pnpm.allowedDeprecatedVersions
+## pnpm.allowedDeprecatedVersions
 
 Added in: v7.2.0
 
