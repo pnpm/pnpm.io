@@ -12,8 +12,8 @@ For example:
 ```yaml title="pnpm-workspace.yaml"
 packages:
   # all packages in subdirs of packages/ and components/
-  - 'packages/**'
-  - 'components/**'
+  - 'packages/*'
+  - 'components/*'
   # exclude packages that are inside test directories
   - '!**/test/**'
 ```
