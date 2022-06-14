@@ -39,6 +39,14 @@ This will automatically install pnpm on your system. However, it probably won't 
 corepack prepare pnpm@<version> --activate
 ```
 
+## Using Volta
+
+If you have [Volta](https://volta.sh/) installed, you can install pnpm using the following command:
+
+```
+volta install pnpm
+```
+
 ## Using npm
 
 ```sh
