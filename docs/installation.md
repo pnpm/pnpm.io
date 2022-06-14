@@ -29,13 +29,13 @@ You may use the [pnpm env] command then to install Node.js.
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
 
-```
+```sh
 corepack enable
 ```
 
 This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the [latest pnpm version](https://github.com/pnpm/pnpm/releases/latest) and run:
 
-```
+```sh
 corepack prepare pnpm@<version> --activate
 ```
 
@@ -43,7 +43,7 @@ corepack prepare pnpm@<version> --activate
 
 If you have [Volta](https://volta.sh/) installed, you can install pnpm using the following command:
 
-```
+```sh
 volta install pnpm
 ```
 
@@ -57,7 +57,7 @@ npm install -g pnpm
 
 If you have the package manager installed, you can install pnpm using the following command:
 
-```
+```sh
 brew install pnpm
 ```
 
@@ -65,7 +65,7 @@ brew install pnpm
 
 If you have Scoop installed, you can install pnpm using the following command:
 
-```
+```sh
 scoop install nodejs-lts pnpm
 ```
 
