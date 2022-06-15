@@ -13,6 +13,16 @@ root. A workspace also may have an [`.npmrc`] in its root.
 [`pnpm-workspace.yaml`]: pnpm-workspace_yaml.md
 [`.npmrc`]: npmrc.md
 
+:::tip
+
+If you are looking into monorepo management, you might also want to look into [Bit].
+Bit uses pnpm under the hood but automates a lot of the things that are currently done manually in a traditional workspace managed by pnpm/npm/Yarn. There's an article about `bit install` that talks about it: [Painless Monorepo Dependency Management with Bit].
+
+:::
+
+[Bit]: https://bit.dev/?utm_source=pnpm&utm_medium=workspace_page
+[Painless Monorepo Dependency Management with Bit]: https://bit.cloud/blog/painless-monorepo-dependency-management-with-bit-l4f9fzyw?utm_source=pnpm&utm_medium=workspace_page
+
 ## Workspace protocol (workspace:)
 
 By default, pnpm will link packages from the workspace if the available packages
@@ -145,3 +155,4 @@ Here are a few of the most popular open source projects that use the workspace f
 | [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
 | [icestark](https://github.com/ice-lab/icestark) | ![](https://img.shields.io/github/stars/ice-lab/icestark) | 2021-12-16 | `4862326a8de53d02f617e7b1986774fd7540fccd` |
 | [VuePress 2.0](https://github.com/vuepress/vuepress-next) | ![](https://img.shields.io/github/stars/vuepress/vuepress-next) | 2022-04-23 | `b85b1c3b39e80a8de92a7469381061f75ef33623` |
+
