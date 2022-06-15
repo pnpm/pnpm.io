@@ -151,6 +151,7 @@ Here are a few of the most popular open source projects that use the workspace f
 | [SvelteKit](https://github.com/sveltejs/kit) | ![](https://img.shields.io/github/stars/sveltejs/kit) | 2021-09-26 | `b164420ab26fa04fd0fbe0ac05431f36a89ef193` |
 | [Milkdown](https://github.com/Saul-Mirone/milkdown) | ![](https://img.shields.io/github/stars/Saul-Mirone/milkdown) | 2021-09-26 | `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913` |
 | [Vitest](https://github.com/vitest-dev/vitest) | ![](https://img.shields.io/github/stars/vitest-dev/vitest) | 2021-12-13 | `d6ff0ccb819716713f5eab5c046861f4d8e4f988` |
+| [Nhost](https://github.com/nhost/nhost) | ![](https://img.shields.io/github/stars/nhost/nhost) | 2022-02-07 | `10a1799a1fef2f558f737de3bb6cadda2b50e58f` |
 | [Rollup plugins](https://github.com/rollup/plugins) | ![](https://img.shields.io/github/stars/rollup/plugins) | 2021-09-21 | `53fb18c0c2852598200c547a0b1d745d15b5b487` |
 | [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
 | [icestark](https://github.com/ice-lab/icestark) | ![](https://img.shields.io/github/stars/ice-lab/icestark) | 2021-12-16 | `4862326a8de53d02f617e7b1986774fd7540fccd` |
