@@ -317,5 +317,12 @@
     "infoLink": "https://hypestyle.netlify.app",
     "pinned": false,
     "width": 200
+  },
+  {
+    "caption": "Nhost",
+    "image": "/img/users/nhost.svg",
+    "infoLink": "https://nhost.io",
+    "pinned": false,
+    "width": 300
   }
 ]
