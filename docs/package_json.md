@@ -317,6 +317,18 @@ For instance, with the following configuration, pnpm will not print warnings if 
 }
 ```
 
+Package name patterns may also be used:
+
+```json
+{
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": ["@babel/*", "@eslint/*"]
+    }
+  }
+}
+```
+
 ### pnpm.peerDependencyRules.allowedVersions
 
 Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
@@ -336,6 +348,24 @@ For instance, if you have some dependencies that need `react@16` but you know th
 ```
 
 This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
+
+### pnpm.peerDependencyRules.allowAny
+
+Added in: v7.3.0
+
+`allowAny` is an array of package name patterns, any peer dependency matching the pattern will be resolved from any version, regardless of the range specified in `peerDependencies`. For instance:
+
+```json
+{
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowAny": ["@babel/*", "eslint"]
+    }
+  }
+}
+```
+
+The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
 
 ## pnpm.neverBuiltDependencies
 
