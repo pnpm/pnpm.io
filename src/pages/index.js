@@ -93,6 +93,9 @@ const Showcase = props => {
                 <a href={addUTM("https://bit.dev/")} target="_blank">
                   <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
                 </a>
+                <a href={addUTM("https://nhost.io/")} target="_blank">
+                  <img style={{padding: '20px'}} width="240" alt="bit" src="/img/users/nhost.svg" />
+                </a>
                 <a href={addUTM("https://prisma.io/")} target="_blank">
                   <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
                 </a>
