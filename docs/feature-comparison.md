@@ -11,7 +11,7 @@ title: Feature Comparison
 | Autoinstalling peers | ✔️ - Via [auto-install-peers=true] | ❌ | ✔️  |
 | Plug'n'Play | ✔️ | ✔️ - The default | ❌ |
 | Zero-Installs | ❌ | ✔️ | ❌ |
-| Patching dependencies | ❌ | ✔️ | ❌ |
+| Patching dependencies | ✔️ | ✔️ | ❌ |
 | Managing Node.js versions | ✔️ | ❌ | ❌ |
 | Has a lockfile | ✔️ - `pnpm-lock.yaml` | ✔️ - `yarn.lock` | ✔️ - `package-lock.json` |
 | Overrides support | ✔️ | ✔️ - Via resolutions | ✔️ |

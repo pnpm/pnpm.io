@@ -178,7 +178,7 @@ root is shared).
 ### package-import-method
 
 * Default: **auto**
-* Type: **auto**, **hardlink**, **copy**, **clone**
+* Type: **auto**, **hardlink**, **copy**, **clone**, **clone-or-copy**
 
 Controls the way packages are imported from the store.
 
@@ -186,6 +186,7 @@ Controls the way packages are imported from the store.
 then hardlink packages from the store. If neither cloning nor linking is
 possible, fall back to copying
 * **hardlink** - hard link packages from the store
+* **clone-or-copy** - try to clone packages from the store. If cloning is not supported then fall back to copying
 * **copy** - copy packages from the store
 * **clone** - clone (AKA copy-on-write or reference link) packages from the store
 
@@ -666,6 +667,15 @@ IF (and only if) they are present in the workspace.
 You might want to change this setting to `false` if the tooling in your
 repository does not understand the workspace protocol (and ideally submit a PR
 to your tooling to get it added in the future).
+
+### include-workspace-root
+
+Added in: v7.4.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When executing commands recursively in a workspace, execute them on the root workspace project as well.
 
 ## Other Settings
 

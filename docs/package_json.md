@@ -416,3 +416,21 @@ Example:
 ```
 
 With the above configuration pnpm will not print deprecation warnings about any version of `request` and about v1 of `express`.
+
+## pnpm.patchedDependencies
+
+Added in: v7.4.0
+
+This field is added/updated automatically when you run [pnpm patch-commit]. It is a dictionary where the key should be the package name and exact version. The value should be a relative path to a patch file.
+
+Example:
+
+```json
+{
+  "pnpm": {
+    "express@4.18.1": "patches/express@4.18.1.patch"
+  }
+}
+```
+
+[pnpm patch-commit]: ./cli/patch-commit.md

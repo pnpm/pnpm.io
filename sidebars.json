@@ -25,7 +25,9 @@
           "cli/rebuild",
           "cli/prune",
           "cli/fetch",
-          "cli/install-test"
+          "cli/install-test",
+          "cli/patch",
+          "cli/patch-commit"
         ]
       },
       {
@@ -69,7 +71,8 @@
           "cli/root",
           "cli/bin",
           "cli/setup",
-          "cli/init"
+          "cli/init",
+          "cli/deploy"
         ]
       }
     ],

@@ -95,6 +95,14 @@
             {
               "type": "doc",
               "id": "version-7.x/cli/install-test"
+            },
+            {
+              "type": "doc",
+              "id": "version-7.x/cli/patch"
+            },
+            {
+              "type": "doc",
+              "id": "version-7.x/cli/patch-commit"
             }
           ]
         },
@@ -199,6 +207,10 @@
             {
               "type": "doc",
               "id": "version-7.x/cli/init"
+            },
+            {
+              "type": "doc",
+              "id": "version-7.x/cli/deploy"
             }
           ]
         }

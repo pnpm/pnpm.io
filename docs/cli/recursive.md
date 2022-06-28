@@ -25,6 +25,8 @@ when used with the following commands:
 * `test`
 * `add`
 
+If you want the root project be included even when running scripts, set the [include-workspace-root] setting to `true`.
+
 Usage example:
 
 ```
@@ -103,3 +105,5 @@ pnpm -r --reverse run clean
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
+
+[include-workspace-root]: ../npmrc.md#include-workspace-root
