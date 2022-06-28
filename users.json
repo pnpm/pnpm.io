@@ -324,5 +324,12 @@
     "infoLink": "https://nhost.io",
     "pinned": false,
     "width": 300
+  },
+  {
+    "caption": "Anxinzo",
+    "image": "https://axzo-public.oss-cn-chengdu.aliyuncs.com/axzo/copyRight_logo.png",
+    "infoLink": "https://www.axzo.cn",
+    "pinned": false,
+    "width": 111
   }
 ]
