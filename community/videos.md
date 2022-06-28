@@ -6,6 +6,7 @@ title: Videos
 In English :uk::us::
 
 - `2022-04-25`: [Why I Switched From NPM/Yarn to PNPM And Why You Should Too!](https://youtu.be/d1E31WPR70g)
+- `2022-04-07`: [pnpm – a Fast, Disk Space Efficient Package Manager for JavaScript - Zoltan Kochan, DevOps.js Conf](https://youtu.be/pLI41kHi3AM)
 - `2021-12-02`: [Use pnpm instead of npm or yarn for JavaScript & TypeScript](https://youtu.be/uJqqddyzN3s)
 - `2021-10-13`: [What is pnpm](https://youtu.be/hiTmX2dW84E)
 - `2019-08-20`: [Reduce SPFX Node Modules from 50,000 files to 1,000](https://vimeo.com/355016928)
