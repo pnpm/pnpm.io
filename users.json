@@ -327,14 +327,14 @@
   },
   {
     "caption": "Shipber",
-    "image": "/img/users/Shipber.png",
+    "image": "/img/users/shipber.png",
     "infoLink": "https://www.shipber.com",
     "pinned": false,
     "width": 300
   },
   {
     "caption": "Adber",
-    "image": "/img/users/Adber.svg",
+    "image": "/img/users/adber.svg",
     "infoLink": "https://www.adber.com",
     "pinned": false,
     "width": 300
@@ -344,6 +344,6 @@
     "image": "https://axzo-public.oss-cn-chengdu.aliyuncs.com/axzo/copyRight_logo.png",
     "infoLink": "https://www.axzo.cn",
     "pinned": false,
-    "width": 111
+    "width": 300
   }
 ]
