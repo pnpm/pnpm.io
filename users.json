@@ -326,6 +326,20 @@
     "width": 300
   },
   {
+    "caption": "Shipber",
+    "image": "/img/users/Shipber.png",
+    "infoLink": "https://www.shipber.com",
+    "pinned": false,
+    "width": 300
+  },
+  {
+    "caption": "Adber",
+    "image": "/img/users/Adber.svg",
+    "infoLink": "https://www.adber.com",
+    "pinned": false,
+    "width": 300
+  },
+  {
     "caption": "Anxinzo",
     "image": "https://axzo-public.oss-cn-chengdu.aliyuncs.com/axzo/copyRight_logo.png",
     "infoLink": "https://www.axzo.cn",
