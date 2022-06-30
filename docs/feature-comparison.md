@@ -17,5 +17,6 @@ title: Feature Comparison
 | Overrides support | ✔️ | ✔️ - Via resolutions | ✔️ |
 | Content-addressable storage | ✔️ | ❌ | ❌ |
 | Dynamic package execution | ✔️ - Via `pnpm dlx` | ✔️ - Via `yarn dlx` | ✔️ - Via `npx` |
+| Side-effects cache | ✔️ | ❌ | ❌ |
 
 [auto-install-peers=true]: npmrc.md#auto-install-peers
