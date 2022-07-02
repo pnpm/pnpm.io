@@ -13,4 +13,4 @@ Once you're done with your changes, run `pnpm patch-commit <path>` (with `<path>
 
 [`patchedDependencies`]: ../package_json.md#pnpmpatcheddependencies
 
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/gtwp38epD6o" title="The pnpm patch command demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0GjLqRGRbcY" title="The pnpm patch command demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
