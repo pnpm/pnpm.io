@@ -659,14 +659,23 @@ This is a result of the aforementioned symbolic linking.
 ### save-workspace-protocol
 
 * Default: **true**
-* Type: **Boolean**
+* Type: **true**, **false**, **rolling**
 
-If this is enabled, new dependencies will be added with the workspace protocol
-IF (and only if) they are present in the workspace.
+This setting controls how dependencies that are linked from the workspace are added to `package.json`.
 
-You might want to change this setting to `false` if the tooling in your
-repository does not understand the workspace protocol (and ideally submit a PR
-to your tooling to get it added in the future).
+If `foo@1.0.0` is in the workspace and you run `pnpm add foo` in another project of the workspace, below is how `foo` will be added to the dependencies field. The `save-prefix` setting also influences how the spec is created.
+
+| save-workspace-protocol | save-prefix | spec |
+|--|--|--|
+| false | `''` | `1.0.0` |
+| false | `'~'` | `~1.0.0` |
+| false | `'^'` | `^1.0.0` |
+| true | `''` | `workspace:1.0.0` |
+| true | `'~'` | `workspace:~1.0.0` |
+| true | `'^'` | `workspace:^1.0.0` |
+| rolling | `''` | `workspace:*` |
+| rolling | `'~'` | `workspace:~` |
+| rolling | `'^'` | `workspace:^` |
 
 ### include-workspace-root
 
