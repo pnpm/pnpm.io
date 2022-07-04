@@ -28,6 +28,13 @@ affect what gets resolved in the lockfile and therefore what gets installed.
 Note that you will need to delete the `pnpm-lock.yaml` if you have already
 resolved the dependency you want to modify.
 
+:::tip
+
+If you need changes to `package.json` saved to the filesystem, you need to use the [`pnpm patch`] command and patch the `package.json` file.
+This might be useful if you want to remove the `bin` field of a dependency for instance.
+
+:::
+
 #### Arguments
 
 * `pkg` - The manifest of the package. Either the response from the registry or
@@ -138,3 +145,5 @@ It is recommended to use local pnpmfiles. Only use a global pnpmfile
 if you use pnpm on projects that don't use pnpm as the primary package manager.
 
 :::
+
+[`pnpm patch`]: ./cli/patch.md
