@@ -3,23 +3,19 @@ id: npmrc
 title: ".npmrc"
 ---
 
-pnpm gets its configuration from the command line, environment variables, and
-`.npmrc` files.
+pnpm uses \*`.npmrc` files to make pnpm even more configurable!
 
-The `pnpm config` command can be used to update and edit the contents of the
-user and global `.npmrc` files.
+`.npmrc` can be added adjecent to `package.json` or `pnpm-workspace.yaml` files anywhere more configuration is required.
 
-The four relevant files are:
+In example, if installing peerDependencies is required in a project, you can create a `.npmrc` file adjacent to `package.json` file containing peerDependencies. By adding the necessary key value pair to the `.npmrc` exactly as labeled below.
 
-* per-project configuration file (`/path/to/my/project/.npmrc`)
-* per-workspace configuration file (the directory that contains the
-`pnpm-workspace.yaml` file)
-* per-user configuration file (`~/.npmrc`)
-* global configuration file (`/etc/npmrc`)
+```txt
+auto-install-peers=true
+```
 
-All `.npmrc` files are an [INI-formatted] list of `key = value` parameters.
+Once, `pnpm install` is run, pnpm will automatically install the peerDependencies!
 
-[INI-formatted]: https://en.wikipedia.org/wiki/INI_file
+Listed below are all of the `pnpm` configuration options supported via `.npmrc` configuration files.
 
 ## Dependency Hoisting Settings
 
@@ -242,7 +238,7 @@ Define the authentication bearer token to use when accessing the specified
 registry. For example:
 
 ```sh
-//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
+//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 You may also use an environment variable. For example:
