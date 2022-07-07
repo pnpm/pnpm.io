@@ -20,3 +20,4 @@ title: Tools
 - [handpick](https://github.com/redaxmedia/handpick) - Handpick conditional dependencies like a boss
 - [Kretes](https://kretes.dev/) - A programming environment for building full-stack apps in TypeScript.
 - [yarnhook](https://github.com/frontsideair/yarnhook) - yarnhook keeps your node_modules up-to-date when your yarn.lock, package-lock.json or shrinkwrap.yaml changes due to git operations like checkout, merge, rebase, pull etc.
+- [Meterian](https://meterian.io) - Ensure your dependencies are not vulnerable, out of date, or with a license you do not want to use.
