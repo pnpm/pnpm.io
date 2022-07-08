@@ -433,4 +433,9 @@ Example:
 }
 ```
 
+## resolutions
+
+Same as [`pnpm.overrides`]. We read it for easier migration from Yarn.
+
 [pnpm patch-commit]: ./cli/patch-commit.md
+[`pnpm.overrides`]: #pnpmoverrides
