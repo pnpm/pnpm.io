@@ -346,12 +346,11 @@
     "pinned": false,
     "width": 300
   },
-  
-   {
+  {
     "caption": "Facile CSS",
     "image": "https://facilecss.com/img/icon.png",
     "infoLink": "https://facilecss.com",
     "pinned": false,
     "width": 200
-  },
+  }
 ]
