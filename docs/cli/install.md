@@ -94,7 +94,7 @@ If `true`, pnpm doesn't generate a lockfile and fails to install if the lockfile
 is out of sync with the manifest / an update is needed or no lockfile is
 present.
 
-This setting is `true` by default in CI environments. The following code is used to detect CI environments:
+This setting is `true` by default in [CI environments]. The following code is used to detect CI environments:
 
 ```js title="https://github.com/watson/ci-info/blob/44e98cebcdf4403f162195fbcf90b1f69fc6e047/index.js#L54-L61"
 exports.isCI = !!(
@@ -106,6 +106,8 @@ exports.isCI = !!(
   false
 )
 ```
+
+[CI environments]: https://github.com/watson/ci-info#supported-ci-tools
 
 ### --reporter=&lt;name\>
 
