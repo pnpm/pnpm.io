@@ -1,5 +1,12 @@
 [
   {
+    "caption": "UpMeet",
+    "image": "https://upmeet.netlify.app/icon.png",
+    "infoLink": "https://upmeet.netlify.app/",
+    "pinned": false,
+    "width": 98
+  },
+  {
     "caption": "Compass",
     "image": "/img/users/compass.svg",
     "infoLink": "https://compass.com",
