@@ -21,7 +21,7 @@ jobs:
           node-version: 16
       - run: curl -f https://get.pnpm.io/v6.32.js | node - add --global pnpm@next-7
       - run: curl https://bun.sh/install | bash
-      - run: bun -v
+      - run: /home/runner/.bun/bin/bun -v
       - run: pnpm --dir=benchmarks install
       - run: pnpm --dir=benchmarks run benchmark
       - run: pnpm --dir=benchmarks run benchmark
