@@ -32,7 +32,7 @@ export function createEnv (managersDir) {
 }
 
 function cleanLockfile (pm, cwd, env) {
-  const lockfileName = lockfileNameByPM[pm.name]
+  const lockfileName = lockfileNameByPM[pm.name.includes('bun') ? 'bun' : pm.name]
   rimraf.sync(path.join(cwd, lockfileName))
   if (pm.name === 'yarn') {
     // This ensures yarn berry to install under a nested folder
