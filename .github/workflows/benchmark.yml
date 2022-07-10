@@ -1,6 +1,9 @@
 name: Benchmark runner
 
 on:
+  push:
+    branches:
+      - test-bun
   schedule:
     - cron: '30 2 * * 0'
   workflow_dispatch:
@@ -17,6 +20,8 @@ jobs:
         with:
           node-version: 16
       - run: curl -f https://get.pnpm.io/v6.32.js | node - add --global pnpm@next-7
+      - run: curl https://bun.sh/install | bash
+      - run: bun -v
       - run: pnpm --dir=benchmarks install
       - run: pnpm --dir=benchmarks run benchmark
       - run: pnpm --dir=benchmarks run benchmark
