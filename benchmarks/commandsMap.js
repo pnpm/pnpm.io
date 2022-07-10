@@ -41,5 +41,13 @@ export default {
     args: [
       'install'
     ]
-  }
+  },
+  bun: {
+    scenario: 'bun',
+    legend: 'Bun',
+    name: 'bun',
+    args: [
+      'install'
+    ]
+  },
 }
