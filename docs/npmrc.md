@@ -587,6 +587,18 @@ Specifies which exact Node.js version should be used for the project's runtime.
 pnpm will automatically install the specified version of Node.js and use it for
 running `pnpm run` commands or the `pnpm node` command.
 
+This may be used instead of `.nvmrc` and `nvm`. Instead of the following `.nvmrc` file:
+
+```
+16.16.0
+```
+
+Use this `.npmrc` file:
+
+```
+use-node-version=16.16.0
+```
+
 ### node-version
 
 * Default: the value returned by **node -v**, without the v prefix
