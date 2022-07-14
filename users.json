@@ -348,9 +348,16 @@
   },
   {
     "caption": "Facile CSS",
-    "image": "https://facilecss.com/img/icon.png",
+    "image": "https://facilecss.com/icon.png",
     "infoLink": "https://facilecss.com",
     "pinned": false,
     "width": 200
+  },
+  {
+    "caption": "UpMeet",
+    "image": "https://upmeet.netlify.app/icon.png",
+    "infoLink": "https://upmeet.netlify.app/",
+    "pinned": false,
+    "width": 98
   }
 ]
