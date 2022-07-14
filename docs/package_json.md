@@ -428,9 +428,16 @@ Example:
 ```json
 {
   "pnpm": {
-    "express@4.18.1": "patches/express@4.18.1.patch"
+    "patchedDependencies": {
+      "express@4.18.1": "patches/express@4.18.1.patch"
+    }
   }
 }
 ```
 
+## resolutions
+
+Same as [`pnpm.overrides`]. We read it for easier migration from Yarn.
+
 [pnpm patch-commit]: ./cli/patch-commit.md
+[`pnpm.overrides`]: #pnpmoverrides

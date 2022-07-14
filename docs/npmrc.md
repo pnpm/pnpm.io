@@ -190,6 +190,19 @@ possible, fall back to copying
 * **copy** - copy packages from the store
 * **clone** - clone (AKA copy-on-write or reference link) packages from the store
 
+Cloning is the best way to write packages to node_modules. It is the fastest way and safest way. When cloning is used, you may edit files in your node_modules and they will not be modified in the central content-addressable store.
+
+Unfortunately, not all file systems support cloning. We recommend using a copy-on-write (CoW) file system (for instance, Btrfs instead of Ext4 on Linux) for the best experience with pnpm.
+
+:::info
+
+Even though macOS supports cloning, there is currently [a bug in Node.js] that prevents us from using it in pnpm. If you have ideas how to fix it, [help us].
+
+:::
+
+[a bug in Node.js]: https://github.com/libuv/libuv/pull/2578
+[help us]: https://github.com/pnpm/pnpm/issues/5001
+
 ### modules-cache-max-age
 
 * Default: **10080** (7 days in minutes)

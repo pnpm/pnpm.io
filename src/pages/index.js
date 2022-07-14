@@ -22,7 +22,7 @@ const features = [
     imageUrl: 'img/features/efficient.svg',
     description: (
       <Translate>
-        Files inside node_modules are linked from a single content-addressable storage
+        Files inside node_modules are cloned or hard linked from a single content-addressable storage
       </Translate>
     ),
   },
