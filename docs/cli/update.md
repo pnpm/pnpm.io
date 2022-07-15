@@ -3,7 +3,7 @@ id: update
 title: pnpm update
 ---
 
-Aliases: `up`
+Aliases: `up`, `upgrade`
 
 `pnpm update` updates packages to their latest version based on the specified
 range.
