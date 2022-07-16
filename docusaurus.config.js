@@ -202,17 +202,21 @@ module.exports={
               to: 'users'
             },
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/pnpm'
-            },
-            {
               label: 'Project Chat',
               href: 'https://r.pnpm.io/chat',
             },
             {
               label: 'Twitter',
               href: 'https://twitter.com/pnpmjs'
-            }
+            },
+            {
+              label: 'YouTube',
+              href: 'https://www.youtube.com/channel/UCbxCCNH8jFiGuLA2uM_ZdJQ',
+            },
+            {
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/pnpm'
+            },
           ]
         },
         {
