@@ -79,6 +79,7 @@ const Showcase = props => {
   });
 
   return (
+    <>
       <div className="mainContainer" style={{backgroundColor: 'var(--ifm-color-emphasis-100)', padding: '2rem 0'}}>
         <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
           <div className="showcaseSection text--center">
@@ -135,6 +136,8 @@ const Showcase = props => {
           </div>
         </div>
       </div>
+      <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CEAIPK3U&placement=pnpmio" id="_carbonads_js"></script>
+    </>
   );
 };
 
