@@ -79,65 +79,62 @@ const Showcase = props => {
   });
 
   return (
-    <>
-      <div className="mainContainer" style={{backgroundColor: 'var(--ifm-color-emphasis-100)', padding: '2rem 0'}}>
-        <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
-          <div className="showcaseSection text--center">
-            <div className="prose" style={{marginBottom: '20px'}}>
-              <h1><Translate>Sponsored By</Translate></h1>
-              <div className="logos" style={{
-                alignItems: 'center',
-                display: 'flex',
-                flexFlow: 'row wrap',
-                justifyContent: 'center',
-              }}>
-                <a href={addUTM("https://bit.dev/")} target="_blank">
-                  <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
-                </a>
-                <a href={addUTM("https://nhost.io/")} target="_blank">
-                  <img style={{padding: '20px'}} width="240" alt="bit" src="/img/users/nhost.svg" />
-                </a>
-                <a href={addUTM("https://novu.co/")} target="_blank">
-                  <img style={{padding: '20px'}} width="240" alt="bit" src="/img/users/novu.svg" />
-                </a>
-                <a href={addUTM("https://prisma.io/")} target="_blank">
-                  <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
-                </a>
-                <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
-                  <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
-                </a>
-                <a href={addUTM("https://vercel.com/")} target="_blank">
-                  <img style={{padding: '20px'}} width="240" alt="Vercel" src="/img/users/vercel.svg" />
-                </a>
-                <a href={addUTM("https://www.takeshape.io/")} target="_blank">
-                  <img style={{padding: '20px'}} width="320" alt="TakeShape" src="/img/users/takeshape.svg" />
-                </a>
-              </div>
+    <div className="mainContainer" style={{backgroundColor: 'var(--ifm-color-emphasis-100)', padding: '2rem 0'}}>
+      <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
+        <div className="showcaseSection text--center">
+          <div className="prose" style={{marginBottom: '20px'}}>
+            <h1><Translate>Sponsored By</Translate></h1>
+            <div className="logos" style={{
+              alignItems: 'center',
+              display: 'flex',
+              flexFlow: 'row wrap',
+              justifyContent: 'center',
+            }}>
+              <a href={addUTM("https://bit.dev/")} target="_blank">
+                <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
+              </a>
+              <a href={addUTM("https://nhost.io/")} target="_blank">
+                <img style={{padding: '20px'}} width="240" alt="bit" src="/img/users/nhost.svg" />
+              </a>
+              <a href={addUTM("https://novu.co/")} target="_blank">
+                <img style={{padding: '20px'}} width="240" alt="bit" src="/img/users/novu.svg" />
+              </a>
+              <a href={addUTM("https://prisma.io/")} target="_blank">
+                <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
+              </a>
+              <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
+              </a>
+              <a href={addUTM("https://vercel.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="240" alt="Vercel" src="/img/users/vercel.svg" />
+              </a>
+              <a href={addUTM("https://www.takeshape.io/")} target="_blank">
+                <img style={{padding: '20px'}} width="320" alt="TakeShape" src="/img/users/takeshape.svg" />
+              </a>
             </div>
-            <div>
-              <div className="prose">
-                <h1><Translate>Who's Using This?</Translate></h1>
-                <p><Translate>This project is used by many folks</Translate></p>
-              </div>
-              <div className="logos" style={{
-                alignItems: 'center',
-                display: 'flex',
-                flexFlow: 'row wrap',
-                justifyContent: 'center',
-              }}>{showcase}</div>
-              <Link
-                style={{margin: '0 20px'}}
-                className={clsx(
-                  'button button--outline button--secondary button--lg',
-                  styles.getStarted,
-                )}
-                to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
+          </div>
+          <div>
+            <div className="prose">
+              <h1><Translate>Who's Using This?</Translate></h1>
+              <p><Translate>This project is used by many folks</Translate></p>
             </div>
+            <div className="logos" style={{
+              alignItems: 'center',
+              display: 'flex',
+              flexFlow: 'row wrap',
+              justifyContent: 'center',
+            }}>{showcase}</div>
+            <Link
+              style={{margin: '0 20px'}}
+              className={clsx(
+                'button button--outline button--secondary button--lg',
+                styles.getStarted,
+              )}
+              to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
           </div>
         </div>
       </div>
-      <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CEAIPK3U&placement=pnpmio" id="_carbonads_js"></script>
-    </>
+    </div>
   );
 };
 
@@ -175,6 +172,7 @@ function Home() {
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
+              <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CEAIPK3U&placement=pnpmio" id="_carbonads_js"></script>
               <div style={{ marginBottom: '24px', textAlign: 'center' }}>
                 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/d1E31WPR70g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
               </div>

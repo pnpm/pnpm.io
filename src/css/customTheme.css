@@ -109,7 +109,7 @@ html[data-theme="dark"] .header-github-link::before {
     position: relative;
     right: initial;
     bottom: initial;
-    margin: 0 auto;
+    margin: 0 auto 25px;
 
     max-width: 330px;
   }
