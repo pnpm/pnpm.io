@@ -231,6 +231,14 @@ When set to `true` and the available `pnpm-lock.yaml` satisfies the
 headless installation skips all dependency resolution as it does not need to
 modify the lockfile.
 
+### lockfile-include-tarball-url
+
+Added in: v7.6.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Add the full URL to the package's tarball to every entry in `pnpm-lock.yaml`.
 
 ## Registry & Authentication Settings
 
@@ -800,3 +808,13 @@ When true, all the output is written to stderr.
 * Type: **Boolean**
 
 Set to `false` to suppress the update notification when using an older version of pnpm than the latest.
+
+### prefer-symlinked-executables
+
+Added in: v7.6.0
+
+* Default: **true**, when **node-linker** is set to **hoisted** and the system is POSIX
+* Type: **Boolean**
+
+Create symlinks to executables in `node_modules/.bin` instead of command shims. This setting is ignored on Windows, where only command shims work.
+
