@@ -31,6 +31,8 @@ installed as a dependency.
 
 ## dependenciesMeta
 
+Additional meta information used for dependencies declared inside `dependencies`, `optionalDependencies`, and `devDependencies`.
+
 ### dependenciesMeta.*.injected
 
 If this is set to true for a local dependency, the package will be hard linked to the modules directory, not symlinked.
