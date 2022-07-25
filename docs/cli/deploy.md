@@ -32,9 +32,8 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-COPY --from=pruned /app/pruned/dist dist
-COPY --from=pruned /app/pruned/node_modules node_modules
+COPY --from=pruned /app/pruned .
 
-ENTRYPOINT ["node", "dist"]
+ENTRYPOINT ["node", "index.js"]
 ```
 
