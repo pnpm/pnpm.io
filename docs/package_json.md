@@ -205,8 +205,6 @@ This field allows you to instruct pnpm to override any dependency in the
 dependency graph. This is useful to enforce all your packages to use a single
 version of a dependency, backport a fix, or replace a dependency with a fork.
 
-Note that the overrides field can only be set at the root of the project.
-
 An example of the `"pnpm"."overrides"` field:
 
 ```json
