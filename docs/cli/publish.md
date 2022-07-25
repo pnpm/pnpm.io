@@ -67,14 +67,16 @@ Save the list of published packages to `pnpm-publish-summary.json`. Useful when 
 An example of a `pnpm-publish-summary.json` file:
 
 ```json
-[
-  {
-    "name": "foo",
-    "version": "1.0.0"
-  },
-  {
-    "name": "bar",
-    "version": "2.0.0"
+{
+  "publishedPackages": [
+    {
+      "name": "foo",
+      "version": "1.0.0"
+    },
+    {
+      "name": "bar",
+      "version": "2.0.0"
+    }
   }
 ]
 ```
