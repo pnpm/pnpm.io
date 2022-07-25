@@ -64,6 +64,21 @@ registry.
 
 Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.
 
+An example of a `pnpm-publish-summary.json` file:
+
+```json
+[
+  {
+    "name": "foo",
+    "version": "1.0.0"
+  },
+  {
+    "name": "bar",
+    "version": "2.0.0"
+  }
+]
+```
+
 ### --dry-run
 
 Does everything a publish would do except actually publishing to the registry.
