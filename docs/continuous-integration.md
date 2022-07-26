@@ -147,3 +147,30 @@ pipelines:
           caches:
             - pnpm
 ```
+
+## Azure Pipelines
+
+On Azure Pipelines, you can use pnpm for installing and caching your dependencies by adding this
+to your `azure-pipelines.yml`:
+
+```yaml title="azure-pipelines.yml"
+variables:
+  pnpm_config_cache: $(Pipeline.Workspace)/.pnpm-store
+
+steps:
+  - task: Cache@2
+    inputs:
+      key: 'pnpm | "$(Agent.OS)" | pnpm-lock.yaml'
+      path: $(pnpm_config_cache)
+    displayName: Cache pnpm
+
+  - script: |
+      curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+      pnpm config set store-dir $(pnpm_config_cache)
+    displayName: "Setup pnpm"
+
+  - script: |
+      pnpm install
+      pnpm run build
+    displayName: "pnpm install and build"
+```
