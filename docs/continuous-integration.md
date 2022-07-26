@@ -150,8 +150,7 @@ pipelines:
 
 ## Azure Pipelines
 
-On Azure Pipelines, you can use pnpm for installing and caching your dependencies by adding this
-to your `azure-pipelines.yml`:
+On Azure Pipelines, you can use pnpm for installing and caching your dependencies by adding this to your `azure-pipelines.yml`:
 
 ```yaml title="azure-pipelines.yml"
 variables:
