@@ -16,7 +16,7 @@ export default function Users() {
     url.searchParams.append("utm_medium", "users_page");
 
     return (
-      <a href={url.toString()} target="_blank" key={i} rel="noopener">
+      <a href={url.toString()} target="_blank" key={i} rel="noopener nofollow">
         <img src={user.image} title={user.caption} style={{
           width: user.width ? `${user.width}px` : '128px',
           padding: '20px'
