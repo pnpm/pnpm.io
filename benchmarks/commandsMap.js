@@ -24,6 +24,7 @@ export default {
       '--cache-dir=cache/cache',
       '--registry=https://registry.npmjs.org/',
       '--no-strict-peer-dependencies',
+      '--network-concurrency=Infinity',
     ]
   },
   yarn: {
