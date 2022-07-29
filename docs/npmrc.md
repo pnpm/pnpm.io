@@ -818,3 +818,11 @@ Added in: v7.6.0
 
 Create symlinks to executables in `node_modules/.bin` instead of command shims. This setting is ignored on Windows, where only command shims work.
 
+### verify-store-integrity
+
+Added in: v7.7.0
+
+* Default: **true**
+* Type: **Boolean**
+
+By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's `node_modules`. If `verify-store-integrity` is set to `false`, files in the content-addressable store will not be checked during installation.
