@@ -19,7 +19,7 @@ const lockfileNameByPM = {
   yarn: 'yarn.lock'
 }
 
-function createEnv (managersDir) {
+export function createEnv (managersDir) {
   const pathEnv = pathKey()
   const env = Object.create(process.env)
   env[pathEnv] = [

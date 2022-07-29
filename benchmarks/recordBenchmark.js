@@ -1,5 +1,6 @@
 'use strict'
-import benchmark from './benchmarkFixture.js'
+import spawn from 'cross-spawn'
+import benchmark, { createEnv } from './benchmarkFixture.js'
 import path from 'path'
 import writeYamlFile from 'write-yaml-file'
 import { loadYamlFile } from 'load-yaml-file'
@@ -35,7 +36,7 @@ function getPMVersion (pmName, opts) {
   if (status !== 0) {
     throw new Error(`Couldn't detect version of ${pmName}. ${stderr?.toString()}`)
   }
-  return stdout.toString()
+  return stdout.toString().trim()
 }
 
 async function safeLoadYamlFile (filename) {
