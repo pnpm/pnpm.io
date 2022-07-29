@@ -16,11 +16,10 @@ const TMP = path.join(DIRNAME, '.tmp')
 const lockfileNameByPM = {
   npm: 'package-lock.json',
   pnpm: 'pnpm-lock.yaml',
-  yarn: 'yarn.lock',
-  bun: 'bun.lockb',
+  yarn: 'yarn.lock'
 }
 
-export function createEnv (managersDir) {
+function createEnv (managersDir) {
   const pathEnv = pathKey()
   const env = Object.create(process.env)
   env[pathEnv] = [

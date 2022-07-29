@@ -1,6 +1,5 @@
 'use strict'
-import spawn from "cross-spawn"
-import benchmark, { createEnv } from './benchmarkFixture.js'
+import benchmark from './benchmarkFixture.js'
 import path from 'path'
 import writeYamlFile from 'write-yaml-file'
 import { loadYamlFile } from 'load-yaml-file'
