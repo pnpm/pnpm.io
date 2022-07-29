@@ -114,6 +114,14 @@ $ which pnpm
 Now that you know where the pnpm CLI is, open that directory and remove any pnpm-related files (`pnpm.cmd`, `pnpx.cmd`, `pnpm`, etc).
 Once done, install pnpm again and it should work as expected.
 
+## Using a shorter alias
+
+`pnpm` might be hard to type, so you may use a shorter alias like `pn` instead. Just put the following line to your `.bashrc`, `.zshrc`, or `config.fish`:
+
+```
+alias pn=pnpm
+```
+
 ## Uninstalling pnpm
 
 If you need to remove the pnpm CLI from your system and any files it has written to your disk, see [Uninstalling pnpm].
