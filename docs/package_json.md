@@ -199,6 +199,25 @@ It is expected to have a modified version of the current package in the specifie
 }
 ```
 
+### publishConfig.linkDirectory
+
+Added in: v7.8.0
+
+When set to `true`, the project will be symlinked from the `publishConfig.directory` location during local development.
+
+For example:
+
+```json
+{
+  "name": "foo",
+  "version": "1.0.0",
+  "publishConfig": {
+    "directory": "dist"
+    "linkDirectory": true
+  }
+}
+```
+
 ## pnpm.overrides
 
 This field allows you to instruct pnpm to override any dependency in the
