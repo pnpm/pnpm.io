@@ -44,20 +44,6 @@ If a package won't be found locally, the installation will fail.
 If `true`, staleness checks for cached data will be bypassed, but missing data
 will be requested from the server. To force full offline mode, use `--offline`.
 
-### --ignore-scripts
-
-* Default: **false**
-* Type: **Boolean**
-
-Do not execute any scripts defined in the project `package.json` and its
-dependencies.
-
-:::note
-
-This flag does not prevent the execution of [.pnpmfile.cjs](../pnpmfile.md)
-
-:::
-
 ### --prod, -P
 
 pnpm will not install any package listed in `devDependencies` if the `NODE_ENV`

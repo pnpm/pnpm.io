@@ -314,7 +314,7 @@ A bigger example:
 :::tip
 
 Together with Yarn, we maintain a database of `packageExtensions` to patch broken packages in the ecosystem.
-If you use `packageExtensions`, consider sending a PR upstream and contributing your extension to the [`@yarnpkg/extensions`] database. 
+If you use `packageExtensions`, consider sending a PR upstream and contributing your extension to the [`@yarnpkg/extensions`] database.
 
 :::
 

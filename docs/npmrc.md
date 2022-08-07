@@ -554,6 +554,29 @@ The location of the npm binary that pnpm uses for some actions, like publishing.
 
 ## Build Settings
 
+### ignore-scripts
+
+* Default: **false**
+* Type: **Boolean**
+
+Do not execute any scripts defined in the project `package.json` and its
+dependencies.
+
+:::note
+
+This flag does not prevent the execution of [.pnpmfile.cjs](../pnpmfile.md)
+
+:::
+
+### ignore-dep-scripts
+
+Added in: v7.9.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Do not execute any scripts of the installed packages. Scripts of the projects are executed.
+
 ### child-concurrency
 
 * Default: **5**
@@ -826,3 +849,16 @@ Added in: v7.7.0
 * Type: **Boolean**
 
 By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's `node_modules`. If `verify-store-integrity` is set to `false`, files in the content-addressable store will not be checked during installation.
+
+### ignore-compatibility-db
+
+Added in: v7.9.0
+
+* Default: **false**
+* Type: **Boolean**
+
+During installation the dependencies of some packages are automatically patched. If you want to disable this, set this config to `false`.
+
+The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
+
+[`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
