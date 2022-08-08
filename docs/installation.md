@@ -86,14 +86,14 @@ If pnpm is broken and you cannot fix it by reinstalling, you might need to remov
 Let's assume you have the following error when running `pnpm install`:
 
 ```
-C:\src>pnpm install
+C:\src> pnpm install
 internal/modules/cjs/loader.js:883
   throw err;
   ^
 
 
 
-Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node_modules\pnpm\bin\pnpm.js'
+Error: Cannot find module 'C:\Users\User\AppData\Roaming\npm\pnpm-global\4\node_modules\pnpm\bin\pnpm.js'
 ←[90m    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:880:15)←[39m
 ←[90m    at Function.Module._load (internal/modules/cjs/loader.js:725:27)←[39m
 ←[90m    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:72:12)←[39m
