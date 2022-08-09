@@ -86,7 +86,7 @@ If pnpm is broken and you cannot fix it by reinstalling, you might need to remov
 Let's assume you have the following error when running `pnpm install`:
 
 ```
-C:\src> pnpm install
+C:\src>pnpm install
 internal/modules/cjs/loader.js:883
   throw err;
   ^
