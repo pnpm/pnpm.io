@@ -126,6 +126,15 @@ after installation is done. To stop the store server, run `pnpm server stop`
 Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 **WARNING**: This is highly discouraged.
 
+### --ignore-scripts
+
+* Default: **false**
+* Type: **Boolean**
+
+If true, pnpm does not run scripts specified in package.json files.
+
+Note that commands explicitly intended to run a particular script, such as pnpm run start, pnpm run stop, pnpm run restart, pnpm run test, and pnpm run-script will still run their intended script if ignore-scripts is set, but they will not run any pre- or post-scripts.
+
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering.md)
