@@ -22,3 +22,15 @@ pnpm install-completion zsh
 To see examples of completion, read [this article].
 
 [this article]: https://medium.com/pnpm/pnpm-v4-9-comes-with-command-completion-a411715260b4
+
+## Fig (on macOS only)
+
+You can get IDE-style autocompletions for pnpm with [Fig]. It works in Bash, Zsh, and Fish.
+
+To install, run:
+
+```text
+brew install fig
+```
+
+[Fig]: https://fig.io/
