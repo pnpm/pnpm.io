@@ -23,12 +23,12 @@ To see examples of completion, read [this article].
 
 [this article]: https://medium.com/pnpm/pnpm-v4-9-comes-with-command-completion-a411715260b4
 
-### Fig
+## Fig (on macOS only)
 
-You can get IDE-style autocompletions for pnpm with <a href="https://fig.io/" target="_blank"><img src="https://fig.io/badges/Logo.svg" width="15" height="15"/></a> [Fig](https://fig.io/). It works in bash, zsh, and fish.
+You can get IDE-style autocompletions for pnpm with [Fig](https://fig.io/). It works in Bash, Zsh, and Fish.
 
 To install, run:
 
-```shell
+```text
 brew install fig
 ```
