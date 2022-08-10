@@ -126,6 +126,14 @@ after installation is done. To stop the store server, run `pnpm server stop`
 Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 **WARNING**: This is highly discouraged.
 
+### --ignore-scripts
+
+* Default: **false**
+* Type: **Boolean**
+
+Do not execute any scripts defined in the project `package.json` and its
+dependencies.
+
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering.md)
