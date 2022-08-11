@@ -261,8 +261,8 @@ module.exports={
     localeConfigs: {
       en: { label: 'English' },
       it: { label: 'Italiano (100%)' },
-      zh: { label: '中文（中国） (100%)' },
-      'zh-TW': { label: '中文（台灣） (7%)' },
+      zh: { label: '简体中文 (100%)' },
+      'zh-TW': { label: '正體中文 (7%)' },
       ja: { label: '日本語 (100%)' },
       ko: { label: '한국어 (56%)' },
       pt: { label: 'Português Brasileiro (44%)' },
