@@ -12,7 +12,7 @@ In English :uk::us::
 - `2019-08-20`: [Reduce SPFX Node Modules from 50,000 files to 1,000](https://vimeo.com/355016928)
 - `2017-12-20`: [Why I stopped using npm for pnpm And You should too!](https://youtu.be/7L7nBtaGAlM)
 
-In Russian :ru::
+In Russian:
 
 - `2021-12-06`: [Доклад: Пакетные менеджеры: есть ли жизнь за пределами npm? / Валентин Семирульник (Авиасейлс)](https://youtu.be/RAFFHpjrwAs)
 - [About pnpm v1](https://www.youtube.com/watch?v=rMb4OHL9tWI&feature=youtu.be&t=2m52s)
