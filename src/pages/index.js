@@ -111,6 +111,9 @@ const Showcase = props => {
               <a href={addUTM("https://www.takeshape.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="320" alt="TakeShape" src="/img/users/takeshape.svg" />
               </a>
+              <a href={addUTM("https://doppler.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="320" alt="Doppler" src="/img/users/doppler.svg" />
+              </a>
             </div>
           </div>
           <div>
