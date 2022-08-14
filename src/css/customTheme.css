@@ -48,11 +48,11 @@ html[data-theme="dark"] .header-github-link::before {
 
 #carbonads a {
   text-decoration: none;
-  color: inherit;
+  color: #000000;
 }
 
 #carbonads a:hover {
-  color: inherit;
+  color: #475569;
 }
 
 #carbonads span {
@@ -84,6 +84,7 @@ html[data-theme="dark"] .header-github-link::before {
   font-size: 13px;
   line-height: 1.5;
   text-align: left;
+  color: #000000;
 }
 
 #carbonads .carbon-poweredby {
