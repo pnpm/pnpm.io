@@ -230,6 +230,14 @@ module.exports={
               label: 'Help Us Translate',
               href: TRANSLATE_URL,
             },
+            {
+              label: 'Vote for us on stackshare',
+              href: 'https://stackshare.io/pnpm',
+            },
+            {
+              label: 'Like us on AlternativeTo',
+              href: 'https://alternativeto.net/software/pnpm/about/',
+            },
           ],
         },
         {
