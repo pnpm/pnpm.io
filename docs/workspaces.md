@@ -157,4 +157,5 @@ Here are a few of the most popular open source projects that use the workspace f
 | [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
 | [icestark](https://github.com/ice-lab/icestark) | ![](https://img.shields.io/github/stars/ice-lab/icestark) | 2021-12-16 | `4862326a8de53d02f617e7b1986774fd7540fccd` |
 | [VuePress 2.0](https://github.com/vuepress/vuepress-next) | ![](https://img.shields.io/github/stars/vuepress/vuepress-next) | 2022-04-23 | `b85b1c3b39e80a8de92a7469381061f75ef33623` |
+| [Turborepo](https://github.com/vercel/turborepo) | ![](https://img.shields.io/github/stars/vercel/turborepo) | 2022-03-02 | `b85b1c3b39e80a8de92a7469381061f75ef33623` |
 
