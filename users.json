@@ -359,5 +359,12 @@
     "infoLink": "https://upmeet.netlify.app/",
     "pinned": false,
     "width": 98
+  },
+  {
+    "caption": "Jonte",
+    "image": "https://jontes.page/images/avatar@2x.webp",
+    "infoLink": "https://jontes.page/",
+    "pinned": false,
+    "width": 200
   }
 ]
