@@ -3,7 +3,7 @@
 ## Testing locally
 
 ```
-cd website
+cd docs
 pnpm install
 pnpm start
 ```
