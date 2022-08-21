@@ -68,6 +68,7 @@ node_modules
     │       ├── baz   -> ../../baz@1.1.0/node_modules/baz
     │       ├── qux   -> ../../qux@1.0.0/node_modules/qux
     │       └── plugh -> ../../plugh@1.0.0/node_modules/plugh
+    ├── foo@1.0.0
     ├── bar@1.0.0
     ├── baz@1.0.0
     ├── baz@1.1.0
@@ -110,6 +111,8 @@ node_modules
     │   └── node_modules
     │       ├── b
     │       └── c -> ../../c@1.1.0/node_modules/c
+    ├── a@1.0.0
+    ├── b@1.0.0
     ├── c@1.0.0
     ├── c@1.1.0
 ```
