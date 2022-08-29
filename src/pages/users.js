@@ -33,15 +33,6 @@ export default function Users() {
             <div className="prose text--center">
               <h1><Translate>Who's Using This?</Translate></h1>
               <p><Translate>This project is used by many folks</Translate></p>
-              <p><Translate>Are you using this project?</Translate></p>
-              <Link
-                className={clsx(
-                  'button button--outline button--secondary button--lg',
-                  styles.getStarted,
-                )}
-                href="https://github.com/pnpm/pnpm.github.io/edit/main/users.json">
-                <Translate>Add your company</Translate>
-              </Link>
             </div>
             <div className="logos" style={{
               alignItems: 'center',

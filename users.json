@@ -46,21 +46,28 @@
     "caption": "Tokopedia",
     "image": "/img/users/tokopedia.svg",
     "infoLink": "https://www.tokopedia.com/",
-    "pinned": true,
+    "pinned": false,
     "width": 200
   },
   {
     "caption": "Telia Company",
     "image": "/img/users/telia.png",
     "infoLink": "https://www.telia.se/",
-    "pinned": true
+    "pinned": false
   },
   {
     "caption": "Wix",
     "image": "/img/users/wix.svg",
     "infoLink": "https://wix.com/",
-    "pinned": true,
+    "pinned": false,
     "width": 200
+  },
+  {
+    "caption": "Shopee",
+    "image": "/img/users/shopee.svg",
+    "infoLink": "https://www.shopee.com/",
+    "pinned": false,
+    "width": 245
   },
   {
     "caption": "Files",
@@ -162,19 +169,6 @@
     "pinned": false
   },
   {
-    "caption": "Pingy",
-    "image": "/img/users/pingy.svg",
-    "infoLink": "https://pin.gy/",
-    "pinned": false
-  },
-  {
-    "caption": "tinyhttp",
-    "image": "/img/users/tinyhttp.svg",
-    "infoLink": "https://tinyhttp.v1rtl.site",
-    "pinned": false,
-    "width": 180
-  },
-  {
     "caption": "Telescoope",
     "image": "/img/users/telescoope.png",
     "infoLink": "https://telescoope.org/",
@@ -224,7 +218,7 @@
     "caption": "Vue",
     "image": "/img/users/vue.svg",
     "infoLink": "https://v3.vuejs.org/",
-    "pinned": true,
+    "pinned": false,
     "width": 150
   },
   {
@@ -263,13 +257,6 @@
     "width": 195
   },
   {
-    "caption": "Shopee",
-    "image": "/img/users/shopee.svg",
-    "infoLink": "https://www.shopee.com/",
-    "pinned": false,
-    "width": 145
-  },
-  {
     "caption": "NetEase Avg",
     "image": "/img/users/netease-avg.png",
     "infoLink": "https://avg.163.com",
@@ -287,13 +274,6 @@
     "caption": "Agora Flat",
     "image": "/img/users/agora-flat.svg",
     "infoLink": "https://flat.whiteboard.agora.io/en/",
-    "pinned": true,
-    "width": 120
-  },
-  {
-    "caption": "Treeprofile",
-    "image": "https://www.treeprofile.com/assets/img/icon-green.png",
-    "infoLink": "https://www.treeprofile.com",
     "pinned": false,
     "width": 120
   },
@@ -303,20 +283,6 @@
     "infoLink": "https://www.maze.co/",
     "pinned": false,
     "width": 240
-  },
-  {
-    "caption": "MuPhile Labs",
-    "image": "/img/users/MuPhileLabs.jpeg",
-    "infoLink": "https://muphile.com",
-    "pinned": false,
-    "width": 200
-  },
-  {
-    "caption": "Hypestyle CSS",
-    "image": "https://hypestyle.netlify.app/img/icon.png",
-    "infoLink": "https://hypestyle.netlify.app",
-    "pinned": false,
-    "width": 200
   },
   {
     "caption": "Nhost",
@@ -338,26 +304,5 @@
     "infoLink": "https://www.adber.com",
     "pinned": false,
     "width": 300
-  },
-  {
-    "caption": "Anxinzo",
-    "image": "https://axzo-public.oss-cn-chengdu.aliyuncs.com/axzo/copyRight_logo.png",
-    "infoLink": "https://www.axzo.cn",
-    "pinned": false,
-    "width": 300
-  },
-  {
-    "caption": "Facile CSS",
-    "image": "https://facilecss.com/icon.png",
-    "infoLink": "https://facilecss.com",
-    "pinned": false,
-    "width": 200
-  },
-  {
-    "caption": "UpMeet",
-    "image": "https://upmeet.netlify.app/icon.png",
-    "infoLink": "https://upmeet.netlify.app/",
-    "pinned": false,
-    "width": 98
   }
 ]
