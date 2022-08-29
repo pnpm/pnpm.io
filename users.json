@@ -1,5 +1,12 @@
 [
   {
+    "caption": "Kalpa Services",
+    "image": "/img/users/kalpa.svg",
+    "infoLink": "https://kalpa.dev",
+    "pinned": true,
+    "width": 150
+  },
+  {
     "caption": "Compass",
     "image": "/img/users/compass.svg",
     "infoLink": "https://compass.com",
