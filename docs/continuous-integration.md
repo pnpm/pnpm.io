@@ -173,3 +173,39 @@ steps:
       pnpm run build
     displayName: "pnpm install and build"
 ```
+
+
+## CircleCI
+
+On CircleCI, you can use pnpm for installing and caching your dependencies by adding this to your `.circleci/config.yml`:
+
+```yaml title=".circleci/config.yml"
+version: 2.1
+
+jobs:
+  build: # this can be any name you choose
+    docker:
+      - image: node:18
+    resource_class: large
+    parallelism: 10
+
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore pnpm Package Cache
+          keys:
+            - pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Install pnpm package manager
+          command: |
+            curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm@7
+      - run:
+          name: Install Dependencies
+          command: |
+            pnpm install
+      - save_cache:
+          name: Save pnpm Package Cache
+          key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - node_modules
+```
