@@ -3,6 +3,7 @@ id: articles
 title: Articles
 ---
 
+- `2022-09-01`: [What is pnpm & why you should try it as a frontend developer](https://javascript.plainenglish.io/what-is-pnpm-why-you-should-try-it-as-a-frontend-developer-69a3a7b34f5b)
 - `2022-07-22`: [Managing a full-stack, multi-package monorepo using pnpm](https://blog.logrocket.com/managing-full-stack-monorepo-pnpm/)
 - `2022-06-09`: [pnpm: Because to work more flexible we start from the bottom](https://medium.com/jobtome-engineering/pnpm-because-to-work-more-flexible-we-start-from-the-bottom-5a9c3a9c2af4)
 - `2022-02-16`: [JavaScript package managers compared: npm, Yarn, or pnpm?](https://blog.logrocket.com/javascript-package-managers-compared/)
@@ -31,19 +32,19 @@ title: Articles
 - `2017-05-01`: [Overview of differences between npm, yarn and pnpm](https://hackernoon.com/understanding-differences-between-npm-yarn-and-pnpm-31bb6b0c87b3)
 - `2017-03-19`: [Why should we use pnpm?](https://www.kochan.io/nodejs/why-should-we-use-pnpm.html)
 
-In German :de::
+In German:
 - `2019-10-10`: [JavaScript-Paketmanager pnpm 4 überarbeitet die Verzeichnisstruktur](https://www.heise.de/developer/meldung/JavaScript-Paketmanager-pnpm-4-ueberarbeitet-die-Verzeichnisstruktur-4550827.html)
 - `2019-10-09`: [pnpm 4.0 veröffentlicht: Eine Alternative zu npm mit überarbeitetem Konzept](https://entwickler.de/online/javascript/pnpm-4-0-package-manager-579910357.html)
 
-In French :fr::
+In French:
 - `2021-06-01`: [On a changé notre gestionnaire de dépendances front](https://blog.yousign.io/posts/on-a-change-notre-gestionnaire-de-dependances-front?utm_source=twitter&utm_medium=social&utm_campaign=blogep)
 - `2021-03-19`: [Migration pnpm chez Malt](https://medium.com/nerds-malt/migration-pnpm-chez-malt-4464e5e8069c)
 
-In Chinese :cn::
+In Chinese:
 - `2022-01-28`: [新一代包管理工具 pnpm](https://www.qjidea.com/pnpm/)
 - `2021-12-11`: [npm/yarn的设计缺陷，以及pnpm是如何改进的](https://xingyahao.com/c/pnpm-npm-yarn.html)
 - `2021-12-07`: [为什么 Vue 源码及生态仓库要迁移 pnpm?](https://mp.weixin.qq.com/s/0PfyRfv23aTF2sV_RY11Fw)
 - `2021-08-28`: [pnpm: 最先进的包管理工具](https://mp.weixin.qq.com/s/5Zo576QFpdAfwXmhfTwWZQ)
 
-In Japanese :jp::
+In Japanese:
 - `2021-12-11`: [npm/yarnの不足点とpnpmの解決法](https://engineering.meetsmore.com/entry/2021/12/06/112931)
