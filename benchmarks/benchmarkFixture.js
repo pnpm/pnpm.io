@@ -45,14 +45,52 @@ async function updateDependenciesInPackageJson (cwd) {
   const originalAsString = buf.toString()
   const parsed = JSON.parse(originalAsString)
 
-  // set all dependency versions to '*'
-  Object.keys(parsed).forEach((key) => {
-    if (key.toLowerCase().includes('dependencies')) {
-      Object.keys(parsed[key]).forEach((dependency) => {
-        parsed[key][dependency] = '*'
-      })
-    }
-  })
+  parsed.dependencies = {
+    ...parsed.dependencies,
+    "babel-core": "^6.4.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-lodash": "^3.2.11",
+    "babel-plugin-module-resolver": "^2.2.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-runtime": "^6.4.3",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-react-hmre": "^1.0.1",
+    "babel-preset-stage-1": "^6.3.13",
+    "babel-runtime": "^6.3.19",
+    "clean-webpack-plugin": "^0.1.16",
+    "core-decorators": "^0.12.3",
+    "css-loader": "^0.23.1",
+    "css-mqpacker": "^4.0.0",
+    "react": "^15.4.1",
+    "react-addons-css-transition-group": "^15.3.0",
+    "react-addons-shallow-compare": "^15.3.0",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2",
+    "react-dom": "^15.4.1",
+    "react-draft-wysiwyg": "^1.6.5",
+    "react-dropzone": "^3.5.3",
+    "react-grid-layout": "^0.12.6",
+    "react-highcharts": "^11.5.0",
+    "react-hot-loader": "v3.0.0-beta.6",
+    "react-input-calendar": "^0.3.14",
+    "react-lazyload": "^2.2.5",
+    "react-measure": "^1.4.6",
+    "react-mixin": "^3.0.3",
+    "react-responsive": "^1.2.5",
+    "react-responsive-tabs": "^0.5.3",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
+    "react-select-plus": "^1.0.0-rc",
+    "react-skylight": "^0.3.0",
+    "react-sortablejs": "^1.2.1",
+    "react-tappable": "^0.8.4",
+    "react-tooltip": "3.11.2",
+    "react-virtualized": "^7.19.4",
+    "react-waypoint": "^5.2.0",
+  }
 
   const modifiedAsString = JSON.stringify(parsed)
   await fs.writeFile(packageJsonPath, modifiedAsString)
