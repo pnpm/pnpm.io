@@ -41,6 +41,18 @@ Install the latest version of Node.js:
 pnpm env use --global latest
 ```
 
+### remove, rm
+
+Added in v7.10.0
+
+Removes the specified version of Node.JS.
+
+Usage example:
+
+```
+pnpm env remove --global 14.0.0
+```
+
 ## Options
 
 ### --global, -g

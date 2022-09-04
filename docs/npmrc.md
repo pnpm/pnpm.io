@@ -861,4 +861,31 @@ During installation the dependencies of some packages are automatically patched.
 
 The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
 
+### resolution-mode
+
+Added in: v7.10.0
+
+* Default: **highest**
+* Type: **highest**, **time-based**
+
+When `resolution-mode` is set to `time-based`, dependencies will be resolved the following way:
+
+1. Direct dependencies will be resolved to their lowest versions. So if there is `foo@^1.1.0` in the dependencies, then `1.1.0` will be installed.
+1. Subdependencies will be resolved from versions that were published before the last direct dependency was published.
+
+With this resolution mode installations with warm cache are faster. It also reduces the chance of subdependency hijacking as subdependencies will be updated only if direct dependencies are updated.
+
+This resolution mode works only with npm's [full metadata]. So it is slower in some scenarios. However, if you use [Verdaccio] v5.15.1 or newer, you may set the `registry-supports-time-field` setting to `true`, and it will be really fast.
+
+### registry-supports-time-field
+
+Added in v7.10.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Set this to `true` if the registry that you are using returns the "time" field in the abbreviated metadata. As of now, only [Verdaccio] from v5.15.1 supports this.
+
 [`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
+[full metadata]: https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md#full-metadata-format
+[Verdaccio]: https://verdaccio.org/
