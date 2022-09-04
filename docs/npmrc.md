@@ -794,6 +794,13 @@ Specify a custom directory to store global packages.
 
 ### global-bin-dir
 
+* Default:
+  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm**
+  * On Windows: **~/AppData/Local/pnpm**
+  * On macOS: **~/Library/pnpm**
+  * On Linux: **~/.local/share/pnpm**
+* Type: **path**
+
 Allows to set the target directory for the bin files of globally installed packages.
 
 ### state-dir
