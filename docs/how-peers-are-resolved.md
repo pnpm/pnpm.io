@@ -26,7 +26,7 @@ multiple different sets of dependencies in the same project.
 ```
 
 In the example above, `foo@1.0.0` is installed for `foo-parent-1` and
-`foo-parent-2`. Both packages have `bar` and `baz`as well, but they depend on
+`foo-parent-2`. Both packages have `bar` and `baz` as well, but they depend on
 different versions of `baz`. As a result, `foo@1.0.0` has two different sets of
 dependencies: one with `baz@1.0.0` and the other one with `baz@1.1.0`. To
 support these use cases, pnpm has to hard link `foo@1.0.0` as many times as
