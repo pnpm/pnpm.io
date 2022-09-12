@@ -7,9 +7,9 @@ Added in: v7.4.0
 
 Prepare a package for patching (inspired by a similar command in Yarn).
 
-This command will cause a package to be extracted in a temporary directory intended to be editable at will.
+This command will cause a package to be extracted in a temporary directory. Within here you have a `\source` and a `\user` directory. The `\user` directory is intended to be editable at will.
 
-Once you're done with your changes, run `pnpm patch-commit <path>` (with `<path>` being the temporary directory you received) to generate a patchfile and register it into your top-level manifest via the [`patchedDependencies`] field.
+Once you're done with your changes, run `pnpm patch-commit <path>` (with `<path>` being the path to the `\user` directory within the temporary location you received) to generate a patchfile and register it into your top-level manifest via the [`patchedDependencies`] field.
 
 Usage:
 
