@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@algolia/client-search": "^4.14.2",
-    "@crowdin/cli": "3.7.10",
+    "@crowdin/cli": "3.8.0",
     "@docusaurus/core": "2.1.0",
     "@docusaurus/plugin-client-redirects": "2.1.0",
     "@docusaurus/plugin-content-docs": "2.1.0",
