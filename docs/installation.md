@@ -39,6 +39,12 @@ This will automatically install pnpm on your system. However, it probably won't 
 corepack prepare pnpm@<version> --activate
 ```
 
+With Node.js v16.17 or newer, you may install the `latest` version of pnpm by just specifying the tag:
+
+```
+corepack prepare pnpm@latest --activate
+```
+
 ## Using npm
 
 ```sh
