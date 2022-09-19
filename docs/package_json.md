@@ -456,6 +456,22 @@ Example:
 }
 ```
 
+## pnpm.allowNonAppliedPatches
+
+Added in: v7.12.0
+
+When `true`, installation won't fail if some of the patches from the `patchedDependencies` field were not applied.
+
+```json
+{
+  "pnpm": {
+    "patchedDependencies": {
+      "express@4.18.1": "patches/express@4.18.1.patch"
+    }
+    "allowNonAppliedPatches": true
+}
+```
+
 ## resolutions
 
 Same as [`pnpm.overrides`]. We read it for easier migration from Yarn.
