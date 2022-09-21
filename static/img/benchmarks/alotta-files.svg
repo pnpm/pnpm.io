@@ -74,7 +74,7 @@
   <rect x="40" y="275" width="48" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="281.5" width="68" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="288" width="41" height="6" fill="#248ebd" rx="1" ry="1"></rect>
-  <rect x="40" y="294.5" width="94" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
+  <rect x="40" y="294.5" width="92" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <line x1="40" y1="31" x2="40" y2="305" class="line"></line>
   <text x="38" y="44.5" class="font s4" dominant-baseline="middle" text-anchor="end">clean install</text>
   <text x="38" y="70.5" class="font s4" dominant-baseline="middle" text-anchor="end">with cache</text>
@@ -90,5 +90,5 @@
   <text x="38" y="226.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
   <text x="38" y="254.5" class="font s4" dominant-baseline="middle" text-anchor="end">with node_modules</text>
   <text x="38" y="284.5" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v16.17.0 at: Sep 21, 2022, 1:09 PM</text>
+  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v16.17.0 at: Sep 21, 2022, 2:14 PM</text>
 </svg>
