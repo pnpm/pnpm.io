@@ -51,8 +51,18 @@ The action will detect when changeset files arrive in the `main` branch, and the
 
 ### Publishing
 
-By adding `publish: pnpm ci:publish` which is a script that executes `changeset publish`
-will publish to the registry once the PR is opened by `changeset version`.
+Add a new script `ci:publish` which executes `pnpm publish -r`. 
+It will publish to the registry once the PR is opened by `changeset version`.
+
+**package.json**
+```json
+{
+   "scripts": {
+      "ci:publish": "pnpm publish -r"
+   },
+   ...
+}
+```
 
 ```yaml
 name: Changesets
