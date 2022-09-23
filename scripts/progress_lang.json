@@ -1,0 +1,110 @@
+{
+    "ar": {
+        "translationProgress": 1,
+        "approvalProgress": 0
+    },
+    "de": {
+        "translationProgress": 8,
+        "approvalProgress": 0
+    },
+    "es-ES": {
+        "translationProgress": 30,
+        "approvalProgress": 30
+    },
+    "fa": {
+        "translationProgress": 7,
+        "approvalProgress": 2
+    },
+    "fil": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "fr": {
+        "translationProgress": 33,
+        "approvalProgress": 33
+    },
+    "gl": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "hi": {
+        "translationProgress": 1,
+        "approvalProgress": 0
+    },
+    "hu": {
+        "translationProgress": 10,
+        "approvalProgress": 0
+    },
+    "id": {
+        "translationProgress": 27,
+        "approvalProgress": 27
+    },
+    "it": {
+        "translationProgress": 99,
+        "approvalProgress": 98
+    },
+    "ja": {
+        "translationProgress": 92,
+        "approvalProgress": 92
+    },
+    "kn": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "ko": {
+        "translationProgress": 63,
+        "approvalProgress": 63
+    },
+    "lo": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "pa-IN": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "pl": {
+        "translationProgress": 7,
+        "approvalProgress": 0
+    },
+    "pt-BR": {
+        "translationProgress": 59,
+        "approvalProgress": 59
+    },
+    "ru": {
+        "translationProgress": 42,
+        "approvalProgress": 41
+    },
+    "si-LK": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "sv-SE": {
+        "translationProgress": 2,
+        "approvalProgress": 0
+    },
+    "te": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "tl": {
+        "translationProgress": 0,
+        "approvalProgress": 0
+    },
+    "tr": {
+        "translationProgress": 33,
+        "approvalProgress": 22
+    },
+    "uk": {
+        "translationProgress": 8,
+        "approvalProgress": 0
+    },
+    "zh-CN": {
+        "translationProgress": 94,
+        "approvalProgress": 94
+    },
+    "zh-TW": {
+        "translationProgress": 29,
+        "approvalProgress": 29
+    }
+}
