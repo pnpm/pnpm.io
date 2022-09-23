@@ -131,6 +131,14 @@ pnpm cannot guarantee that scripts will be run in topological order if there are
 
 If you see the message `There are cyclic workspace dependencies`, please inspect workspace dependencies declared in `dependencies`, `optionalDependencies` and `devDependencies`.
 
+The default peer dependency resolution can in some cases cause duplicates of peer dependencies between workspace packages. This may lead to unexpected behavior e.g. where local caches within a module are not shared by a package and its library.
+
+One such case is there are transitive peer dependencies that are fulfilled differently (e.g. one installes an optional dependency while the other does not) in two workspace packages.
+
+To avoid having package `a`:s dev dependencies available `a` when used as an dependency in `b`, set `"dependencyMeta": { "a": { "injected": true } }` in the `package.json` file for package `b`. See [dependenciesMeta.*.injected]
+
+[dependenciesMeta.*.injected]: package_json.md#dependenciesmetainjected
+
 ## Usage examples
 
 Here are a few of the most popular open source projects that use the workspace feature of pnpm:
