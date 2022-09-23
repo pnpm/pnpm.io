@@ -1,4 +1,5 @@
 const path = require('path');
+const progress = require("./scripts/progress_lang.json");
 
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
 const GITHUB_SPONSOR_URL = 'https://github.com/sponsors/pnpm';
@@ -267,21 +268,27 @@ module.exports={
     defaultLocale: DEFAULT_LOCALE,
     locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'ru', 'fr', 'tr', 'es', 'zh-TW', 'id'],
     localeConfigs: {
-      en: { label: 'English' },
-      it: { label: 'Italiano (100%)' },
-      zh: { label: '简体中文 (94%)' },
-      'zh-TW': { label: '正體中文 (29%)' },
-      ja: { label: '日本語 (94%)' },
-      ko: { label: '한국어 (64%)' },
-      pt: { label: 'Português Brasileiro (60%)' },
-      ru: { label: 'Русский (42%)' },
-      fr: { label: 'Français (33%)' },
-      tr: { label: 'Türkçe (28%)' },
-      es: { label: 'Español (30%)' },
-      id: { label: 'Bahasa Indonesia (27%)' },
-      hu: { label: 'Magyar (11%)' },
-      pl: { label: 'Polski (9%)' },
-      de: { label: 'Deutsch (6%)' },
+      en: { label: "English" },
+      it: { label: `Italiano (${progress["it"].translationProgress}%)` },
+      zh: { label: `简体中文 (${progress["zh-CN"].translationProgress}%)` },
+      "zh-TW": {
+        label: `正體中文 (${progress["zh-TW"].translationProgress}%)`,
+      },
+      ja: { label: `日本語 (${progress["ja"].translationProgress}%)` },
+      ko: { label: `한국어 (${progress["ko"].translationProgress}%)` },
+      pt: {
+        label: `Português Brasileiro (${progress["pt-BR"].translationProgress}%)`,
+      },
+      ru: { label: `Русский (${progress["ru"].translationProgress}%)` },
+      fr: { label: `Français (${progress["fr"].translationProgress}%)` },
+      tr: { label: `Türkçe (${progress["tr"].translationProgress}%)` },
+      es: { label: `Español (${progress["es-ES"].translationProgress}%)` },
+      id: {
+        label: `Bahasa Indonesia (${progress["id"].translationProgress}%)`,
+      },
+      hu: { label: `Magyar (${progress["hu"].translationProgress}%)` },
+      pl: { label: `Polski (${progress["pl"].translationProgress}%)` },
+      de: { label: `Deutsch (${progress["de"].translationProgress}%)` },
     },
   },
 }

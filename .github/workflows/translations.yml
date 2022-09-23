@@ -1,0 +1,38 @@
+name: translations progress
+
+on:
+  schedule:
+    # weekly on sunday
+    - cron: '5 8 * * 7'
+  # or manual triggered
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: deploy
+    steps:
+      - name: Checkout Commit
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install pnpm
+        run: npm i --location=global pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: update translations
+        run: pnpm run update-progress
+        env:
+          TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - name: Commit & Push changes
+        uses: actions-js/push@a52398fac807b0c1e5f1492c969b477c8560a0ba # tag=v1.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: "chore: updated translation progress"
+          branch: master
+          author_email: z@kochan.io
+          author_name: zkochan
