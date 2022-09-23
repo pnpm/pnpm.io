@@ -15,7 +15,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - name: Install pnpm
-        run: npm i -g pnpm
+        run: npm i --location=global pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build
