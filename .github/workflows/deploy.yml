@@ -23,7 +23,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version-file: '.nvmrc'
     - name: Install pnpm
       run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@next-7
     - name: Install dependencies
