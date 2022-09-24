@@ -1,12 +1,11 @@
 name: translations progress
 
 on:
+  # or manual triggered
+  workflow_dispatch:
   schedule:
     # weekly on sunday
     - cron: '5 8 * * 7'
-  # or manual triggered
-  workflow_dispatch:
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
