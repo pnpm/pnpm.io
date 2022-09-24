@@ -32,6 +32,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           message: "chore: updated translation progress"
-          branch: master
+          branch: main
           author_email: z@kochan.io
           author_name: zkochan
