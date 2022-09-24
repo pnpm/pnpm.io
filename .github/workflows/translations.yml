@@ -4,8 +4,8 @@ on:
   # or manual triggered
   workflow_dispatch:
   schedule:
-    # weekly on sunday
-    - cron: '5 8 * * 7'
+    # twice a week
+    - cron: '0 0 * * 1,4'
 jobs:
   deploy:
     runs-on: ubuntu-latest
