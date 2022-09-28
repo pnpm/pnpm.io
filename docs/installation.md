@@ -25,6 +25,12 @@ iwr https://get.pnpm.io/install.ps1 -useb | iex
 
 You may use the [pnpm env] command then to install Node.js.
 
+Prior to running the install script, you may optionally set a shell variable `PNPM_VERSION` to install a specific version of pnpm:
+
+```sh
+export PNPM_VERSION=<version>
+```
+
 ## Using Corepack
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
