@@ -27,7 +27,7 @@ Bit uses pnpm under the hood but automates a lot of the things that are currentl
 
 By default, pnpm will link packages from the workspace if the available packages
 match the declared ranges. For instance, `foo@1.0.0` is linked into `bar` if
-`bar` has `"foo": "^1.0.0"` in its dependencies and `foo@1.0.0` is not in the workspace. However, if `bar` has
+`bar` has `"foo": "^1.0.0"` in its dependencies and `foo@1.0.0` is in the workspace. However, if `bar` has
 `"foo": "2.0.0"` in dependencies and `foo@2.0.0` is not in the workspace,
 `foo@2.0.0` will be installed from the registry. This behavior introduces some
 uncertainty.
