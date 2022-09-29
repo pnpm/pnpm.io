@@ -124,23 +124,29 @@ Once done, install pnpm again and it should work as expected.
 
 `pnpm` might be hard to type, so you may use a shorter alias like `pn` instead. 
 
-#### Adding a permanent alias in Bash (Linux, Mac)
+#### Adding a permanent alias on POSIX systems
+
 Just put the following line to your `.bashrc`, `.zshrc`, or `config.fish`:
+
 ```
 alias pn=pnpm
 ```
+
 #### Adding a permanent alias in Powershell (Windows):
-1. In a Powershell window with admin rights, execute:
+
+In a Powershell window with admin rights, execute:
 
 ```
 notepad $profile.AllUsersAllHosts
 ```
 
-2. In the "profile.ps1" Notepad file that opens, put:
+In the `profile.ps1` file that opens, put:
+
 ```
 set-alias -name pn -value pnpm
 ```
-3. Save the file and close the window. You may need to close any open Powershell window in order for the alias to take effect.
+
+Save the file and close the window. You may need to close any open Powershell window in order for the alias to take effect.
 
 
 ## Uninstalling pnpm
