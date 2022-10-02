@@ -28,7 +28,7 @@ You may use the [pnpm env] command then to install Node.js.
 Prior to running the install script, you may optionally set a shell variable `PNPM_VERSION` to install a specific version of pnpm:
 
 ```sh
-export PNPM_VERSION=<version>
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 ```
 
 ## Using Corepack
