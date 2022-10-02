@@ -100,9 +100,9 @@ Caching packages dependencies with `actions/setup-node@v2` requires you to insta
 
 :::
 
-## Gitlab CI
+## GitLab CI
 
-On Gitlab, you can use pnpm for installing and caching your dependencies
+On GitLab, you can use pnpm for installing and caching your dependencies
 like so (belongs in `.gitlab-ci.yml`):
 
 ```yaml title=".gitlab-ci.yml"

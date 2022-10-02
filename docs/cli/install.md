@@ -84,7 +84,7 @@ This setting is `true` by default in [CI environments]. The following code is us
 
 ```js title="https://github.com/watson/ci-info/blob/44e98cebcdf4403f162195fbcf90b1f69fc6e047/index.js#L54-L61"
 exports.isCI = !!(
-  env.CI || // Travis CI, CircleCI, Cirrus CI, Gitlab CI, Appveyor, CodeShip, dsari
+  env.CI || // Travis CI, CircleCI, Cirrus CI, GitLab CI, Appveyor, CodeShip, dsari
   env.CONTINUOUS_INTEGRATION || // Travis CI, Cirrus CI
   env.BUILD_NUMBER || // Jenkins, TeamCity
   env.RUN_ID || // TaskCluster, dsari
