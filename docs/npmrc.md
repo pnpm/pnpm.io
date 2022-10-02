@@ -43,9 +43,18 @@ the phantom dependencies (recommended).
 
 For instance:
 
-```sh
+```ini
 hoist-pattern[]=*eslint*
 hoist-pattern[]=*babel*
+```
+
+Since v7.12.0, you may also exclude patterns from hoisting using `!`.
+
+For instance:
+
+```ini
+hoist-pattern[]=*types*
+hoist-pattern[]=!@types/react
 ```
 
 ### public-hoist-pattern
@@ -64,12 +73,21 @@ resolve dependencies properly.
 
 For instance:
 
-```sh
+```
 public-hoist-pattern[]=*plugin*
 ```
 
 Note: Setting `shamefully-hoist` to `true` is the same as setting
 `public-hoist-pattern` to `*`.
+
+Since v7.12.0, you may also exclude patterns from hoisting using `!`.
+
+For instance:
+
+```ini
+public-hoist-pattern[]=*types*
+public-hoist-pattern[]=!@types/react
+```
 
 ### shamefully-hoist
 
