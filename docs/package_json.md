@@ -472,6 +472,26 @@ When `true`, installation won't fail if some of the patches from the `patchedDep
 }
 ```
 
+## pnpm.updateConfig
+
+### pnpm.updateConfig.ignoreDependencies
+
+Added in: v7.13.0
+
+Sometimes you can't update a dependency. For instance, the latest version of the dependency started to use ESM but your project is not yet in ESM. Annoyingly, such a package will be always printed out by the `pnpm outdated` command and updated, when running `pnpm update --latest`. However, you may list packages that you don't want to upgrade in the `ignoreDependencies` field:
+
+```json
+{
+  "pnpm": {
+    "updateConfig": {
+      "ignoreDependencies": ["load-json-file"]
+    }
+  }
+}
+```
+
+Patterns are also supported, so you may ignore any packages from a scope: `@babel/*`.
+
 ## resolutions
 
 Same as [`pnpm.overrides`]. We read it for easier migration from Yarn.

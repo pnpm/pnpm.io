@@ -8,8 +8,7 @@ Aliases: `up`, `upgrade`
 `pnpm update` updates packages to their latest version based on the specified
 range.
 
-When used without arguments, updates all dependencies. You can use patterns to
-update specific dependencies.
+When used without arguments, updates all dependencies.
 
 ## TL;DR
 
@@ -19,6 +18,29 @@ update specific dependencies.
 |`pnpm up --latest`    | Updates all dependencies, ignoring ranges specified in `package.json`    |
 |`pnpm up foo@2`       | Updates `foo` to the latest version on v2                                |
 |`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
+|`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
+
+## Selecting dependencies with patterns
+
+You can use patterns to update specific dependencies.
+
+Update all `babel` packages:
+
+```sh
+pnpm update @babel/*
+```
+
+Update all dependencies, except `webpack`:
+
+```sh
+pnpm update !webpack
+```
+
+Patterns may also be compined, so the next command will update all `babel` packages, except `core`:
+
+```sh
+pnpm update @babel/* !@babel/core
+```
 
 ## Options
 
