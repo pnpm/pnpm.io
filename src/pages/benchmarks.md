@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Oct 2, 2022, 12:35 PM_ (_daily_ updated).
+**Last benchmarked at**: _Oct 5, 2022, 11:11 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 36s | 19s | 17.9s | 25.4s |
-| install | ✔     | ✔        | ✔           | 2.1s | 1.2s | 2.3s | n/a |
-| install | ✔     | ✔        |             | 8.8s | 5.1s | 6.9s | 1.5s |
-| install | ✔     |          |             | 13.2s | 8.7s | 6.4s | 6.9s |
-| install |       | ✔        |             | 15.3s | 16.6s | 12.3s | 19.2s |
-| install | ✔     |          | ✔           | 2.5s | 2.9s | 7.7s | n/a |
-| install |       | ✔        | ✔           | 2s | 1.3s | 7.7s | n/a |
-| install |       |          | ✔           | 2.5s | 10.3s | 12.9s | n/a |
-| update  | n/a | n/a | n/a | 7.6s | 11.4s | 6.6s | 14.7s |
+| install |       |          |             | 36s | 16.8s | 20.1s | 43.8s |
+| install | ✔     | ✔        | ✔           | 2s | 1.2s | 2.5s | n/a |
+| install | ✔     | ✔        |             | 8.8s | 4.6s | 7.5s | 1.6s |
+| install | ✔     |          |             | 13.2s | 7.7s | 13.6s | 7.4s |
+| install |       | ✔        |             | 15.3s | 14.6s | 13.7s | 37.3s |
+| install | ✔     |          | ✔           | 2.5s | 2.7s | 8.4s | n/a |
+| install |       | ✔        | ✔           | 2s | 1.2s | 8.5s | n/a |
+| install |       |          | ✔           | 2.5s | 9.5s | 14.7s | n/a |
+| update  | n/a | n/a | n/a | 7.6s | 10.3s | 6.6s | 15.5s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
