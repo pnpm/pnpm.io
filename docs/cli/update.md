@@ -36,7 +36,7 @@ Update all dependencies, except `webpack`:
 pnpm update !webpack
 ```
 
-Patterns may also be compined, so the next command will update all `babel` packages, except `core`:
+Patterns may also be combined, so the next command will update all `babel` packages, except `core`:
 
 ```sh
 pnpm update @babel/* !@babel/core
