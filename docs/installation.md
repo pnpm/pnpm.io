@@ -5,7 +5,17 @@ title: Installation
 
 ## Using a standalone script
 
-On POSIX systems, you may install pnpm even if you don't have Node.js installed, using the following script:
+You may install pnpm even if you don't have Node.js installed, using the following scripts.
+
+### On Windows
+
+Using PowerShell:
+
+```powershell
+iwr https://get.pnpm.io/install.ps1 -useb | iex
+```
+
+### On POSIX systems
 
 ```sh
 curl -fsSL https://get.pnpm.io/install.sh | sh -
@@ -17,19 +27,25 @@ If you don't have curl installed, you would like to use wget:
 wget -qO- https://get.pnpm.io/install.sh | sh -
 ```
 
-On Windows (PowerShell):
+### On Alpine Linux
 
-```powershell
-iwr https://get.pnpm.io/install.ps1 -useb | iex
+```sh
+curl -fsSL "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" -o /bin/pnpm; chmod +x /bin/pnpm;
 ```
 
-You may use the [pnpm env] command then to install Node.js.
+### Installing a specific version
 
-Prior to running the install script, you may optionally set a shell variable `PNPM_VERSION` to install a specific version of pnpm:
+Prior to running the install script, you may optionally set an env variable `PNPM_VERSION` to install a specific version of pnpm:
 
 ```sh
 curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 ```
+
+:::tip
+
+You may use the [pnpm env] command then to install Node.js.
+
+:::
 
 ## Using Corepack
 
