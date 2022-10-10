@@ -92,7 +92,7 @@
         "approvalProgress": 0
     },
     "tr": {
-        "translationProgress": 33,
+        "translationProgress": 32,
         "approvalProgress": 22
     },
     "uk": {
@@ -100,11 +100,11 @@
         "approvalProgress": 0
     },
     "zh-CN": {
-        "translationProgress": 94,
+        "translationProgress": 93,
         "approvalProgress": 93
     },
     "zh-TW": {
-        "translationProgress": 31,
-        "approvalProgress": 31
+        "translationProgress": 30,
+        "approvalProgress": 30
     }
 }
