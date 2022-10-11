@@ -76,6 +76,18 @@
     "pinned": false
   },
   {
+    "caption": "Depth",
+    "image": "/img/users/depth.svg",
+    "infoLink": "https://codrex.dev",
+    "pinned": false
+  },
+  {
+    "caption": "FluentHub",
+    "image": "/img/users/fluenthub.svg",
+    "infoLink": "https://hub.codrex.dev",
+    "pinned": false
+  },
+  {
     "caption": "TakeShape",
     "image": "/img/users/takeshape.svg",
     "infoLink": "https://www.takeshape.io/",
