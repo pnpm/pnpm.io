@@ -32,7 +32,7 @@ export default function Users() {
           <div className="showcaseSection">
             <div className="prose text--center">
               <h1><Translate>Who's Using This?</Translate></h1>
-              <p><Translate>This project is used by many folks</Translate></p>
+              <p><Translate>We have lots of users! On this page we will only list well known companies. If you want to showcase your stack, use StackShare. If you want the logo of your company to be on our homepage, become a silver, gold, or platinum sponsor.</Translate></p>
             </div>
             <div className="logos" style={{
               alignItems: 'center',
