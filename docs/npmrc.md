@@ -290,6 +290,12 @@ You may also use an environment variable. For example:
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 
+Or you may just use an environment variable directly, without changing `.npmrc` at all:
+
+```
+npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
+```
+
 ### &lt;URL\>:tokenHelper
 
 A token helper is an executable which outputs an auth token. This can be used in situations where the authToken is not a constant value but is something that refreshes regularly, where a script or other tool can use an existing refresh token to obtain a new access token.
