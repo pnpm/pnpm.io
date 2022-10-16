@@ -508,7 +508,7 @@ When `true`, any missing non-optional peer dependencies are automatically instal
 
 ### strict-peer-dependencies
 
-* Default: **true**
+* Default: **false** (was **true** from v7.0.0 until v7.13.5)
 * Type: **Boolean**
 
 If this is enabled, commands will fail if there is a missing or invalid peer
