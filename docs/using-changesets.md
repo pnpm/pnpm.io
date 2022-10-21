@@ -73,7 +73,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: setup node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 14
       - name: install pnpm
