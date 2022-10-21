@@ -81,7 +81,7 @@ jobs:
       matrix:
         node-version: [15]
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: pnpm/action-setup@v2.2.2
       with:
         version: 7
