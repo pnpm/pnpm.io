@@ -33,7 +33,8 @@
     "webpack": "^5.74.0"
   },
   "engines": {
-    "pnpm": ">=7.12.0"
+    "pnpm": ">=7.12.0",
+    "node": ">=16.14.0"
   },
   "devDependencies": {
     "@types/node": "^18.7.19",
