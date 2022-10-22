@@ -211,6 +211,10 @@
             {
               "type": "doc",
               "id": "version-7.x/cli/deploy"
+            },
+            {
+              "type": "doc",
+              "id": "version-7.x/cli/doctor"
             }
           ]
         }
