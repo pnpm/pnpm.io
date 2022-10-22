@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Oct 16, 2022, 4:36 AM_ (_daily_ updated).
+**Last benchmarked at**: _Oct 22, 2022, 5:44 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 36s | 16.8s | 19.9s | 40.1s |
-| install | ✔     | ✔        | ✔           | 2s | 1.2s | 2.5s | n/a |
-| install | ✔     | ✔        |             | 8.8s | 4.7s | 7.5s | 1.6s |
-| install | ✔     |          |             | 13.2s | 7.7s | 13.3s | 7.4s |
-| install |       | ✔        |             | 15.3s | 14.7s | 13.6s | 32.8s |
-| install | ✔     |          | ✔           | 2.5s | 2.7s | 8.4s | n/a |
-| install |       | ✔        | ✔           | 2s | 1.2s | 8.4s | n/a |
-| install |       |          | ✔           | 2.5s | 9.4s | 14s | n/a |
-| update  | n/a | n/a | n/a | 7.6s | 10.2s | 6.6s | 14.6s |
+| install |       |          |             | 36s | 19.3s | 19.9s | 40s |
+| install | ✔     | ✔        | ✔           | 2s | 1.3s | 2.5s | n/a |
+| install | ✔     | ✔        |             | 8.8s | 5.2s | 7.5s | 1.6s |
+| install | ✔     |          |             | 13.2s | 8.7s | 13.3s | 7.4s |
+| install |       | ✔        |             | 15.3s | 17.1s | 13.6s | 32.8s |
+| install | ✔     |          | ✔           | 2.5s | 2.9s | 8.4s | n/a |
+| install |       | ✔        | ✔           | 2s | 1.3s | 8.4s | n/a |
+| install |       |          | ✔           | 2.5s | 10.8s | 14s | n/a |
+| update  | n/a | n/a | n/a | 7.6s | 11.9s | 6.6s | 14.6s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
