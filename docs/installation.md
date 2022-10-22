@@ -33,6 +33,10 @@ wget -qO- https://get.pnpm.io/install.sh | sh -
 curl -fsSL "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" -o /bin/pnpm; chmod +x /bin/pnpm;
 ```
 
+### Prerequisites
+
+If you don't use the standalone script to install pnpm, then you need to have Node.js (at least v14) to be installed on your system.
+
 ### Installing a specific version
 
 Prior to running the install script, you may optionally set an env variable `PNPM_VERSION` to install a specific version of pnpm:
