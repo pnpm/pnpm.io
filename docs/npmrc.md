@@ -314,22 +314,6 @@ Setting a token helper for the specified registry:
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 
-### &lt;URL\>:always-auth
-
-* Default: **false**
-* Type: **Boolean**
-
-Force pnpm to always require authentication (even for GET requests) when
-accessing the specified registry. For example:
-
-```sh
-@babel:registry=https://gitlab.com/api/v4/packages/npm/
-//gitlab.com/api/v4/packages/npm/:always-auth=true
-
-registry=https://registry.npmjs.org/
-//registry.npmjs.org/:always-auth=true
-```
-
 ## Request Settings
 
 ### ca
