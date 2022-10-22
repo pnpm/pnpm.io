@@ -72,7 +72,8 @@
           "cli/bin",
           "cli/setup",
           "cli/init",
-          "cli/deploy"
+          "cli/deploy",
+          "cli/doctor"
         ]
       }
     ],
