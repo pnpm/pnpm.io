@@ -105,10 +105,14 @@ exports.isCI = !!(
 Allows you to choose the reporter that will log debug info to the terminal about
 the installation progress.
 
-* **silent** - no output is logged to the console, except fatal errors
+* **silent** - no output is logged to the console, not even fatal errors
 * **default** - the default reporter when the stdout is TTY
-* **append-only** (Added in v1.29.1) - the output is always appended to the end. No cursor manipulations are performed
+* **append-only** - the output is always appended to the end. No cursor manipulations are performed
 * **ndjson** - the most verbose reporter. Prints all logs in [ndjson](http://ndjson.org/) format
+
+If you want to change what type of information is printed, use the [loglevel] setting.
+
+[loglevel]: ../npmrc.md#loglevel
 
 ### --use-store-server
 
