@@ -266,7 +266,7 @@ module.exports={
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'ru', 'fr', 'tr', 'es', 'zh-TW', 'id'],
+    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'zh-TW', 'ru', 'fr', 'tr', 'es', 'id'],
     localeConfigs: {
       en: { label: "English" },
       it: { label: `Italiano (${progress["it"].translationProgress}%)` },
