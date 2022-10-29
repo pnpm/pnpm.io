@@ -212,7 +212,7 @@ module.exports={
             },
             {
               label: 'YouTube',
-              href: 'https://www.youtube.com/channel/UCbxCCNH8jFiGuLA2uM_ZdJQ',
+              href: 'https://www.youtube.com/@pnpmjs',
             },
             {
               label: 'Stack Overflow',
