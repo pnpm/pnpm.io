@@ -22,6 +22,20 @@ use this overrides to force `lodash@^2.1.0`:
 
 Or alternatively, run `pnpm audit --fix`.
 
+
+If an `allowList` is provided in the `package.json`, overrides for those CVEs will not be installed.
+This is useful if a vulnerable package has been designated as tolerable to a project or an upstream dependency is blocking an upgrade.
+
+```json title="package.json"
+{
+    "pnpm": {
+        "allowList": [
+            "CVE-2022-36313"
+        ]
+    }
+}
+```
+
 [overrides]: ../package_json.md#pnpmoverrides
 
 ## Options
