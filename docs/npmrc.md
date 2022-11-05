@@ -198,7 +198,7 @@ root is shared).
 * Default: **auto**
 * Type: **auto**, **hardlink**, **copy**, **clone**, **clone-or-copy**
 
-Controls the way packages are imported from the store.
+Controls the way packages are imported from the store (if you want to disable symlinks inside `node_modules`, then you need to change the [node-linker] setting, not this one).
 
 * **auto** - try to clone packages from the store. If cloning is not supported
 then hardlink packages from the store. If neither cloning nor linking is
@@ -220,6 +220,7 @@ Even though macOS supports cloning, there is currently [a bug in Node.js] that p
 
 [a bug in Node.js]: https://github.com/libuv/libuv/pull/2578
 [help us]: https://github.com/pnpm/pnpm/issues/5001
+[node-linker]: #node-linker
 
 ### modules-cache-max-age
 
