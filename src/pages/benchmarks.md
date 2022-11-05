@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Nov 5, 2022, 9:41 PM_ (_daily_ updated).
+**Last benchmarked at**: _Nov 5, 2022, 10:14 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 42.2s | 26.3s | 15.6s | 32.6s |
-| install | ✔     | ✔        | ✔           | 2.9s | 1.6s | 1.9s | n/a |
-| install | ✔     | ✔        |             | 14.1s | 6.8s | 5.9s | 1.2s |
-| install | ✔     |          |             | 20.7s | 11.4s | 10.6s | 5.9s |
-| install |       | ✔        |             | 23.4s | 22.9s | 10.7s | 27s |
-| install | ✔     |          | ✔           | 3.6s | 3.9s | 6.6s | n/a |
-| install |       | ✔        | ✔           | 2.9s | 1.6s | 6.9s | n/a |
-| install |       |          | ✔           | 3.6s | 14.8s | 11.3s | n/a |
-| update  | n/a | n/a | n/a | 10.1s | 15.3s | 5.7s | 11.6s |
+| install |       |          |             | 42.2s | 19.9s | 15.6s | 32.6s |
+| install | ✔     | ✔        | ✔           | 2.3s | 1.3s | 1.9s | n/a |
+| install | ✔     | ✔        |             | 10s | 5.1s | 5.9s | 1.2s |
+| install | ✔     |          |             | 15s | 9.3s | 10.6s | 5.9s |
+| install |       | ✔        |             | 17.1s | 16.8s | 10.7s | 27s |
+| install | ✔     |          | ✔           | 2.7s | 2.9s | 6.6s | n/a |
+| install |       | ✔        | ✔           | 2.2s | 1.3s | 6.9s | n/a |
+| install |       |          | ✔           | 2.8s | 10.7s | 11.3s | n/a |
+| update  | n/a | n/a | n/a | 10.1s | 11.3s | 5.7s | 11.6s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
