@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Oct 31, 2022, 11:47 PM_ (_daily_ updated).
+**Last benchmarked at**: _Nov 5, 2022, 12:50 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 36s | 19s | 15.6s | 32.6s |
-| install | ✔     | ✔        | ✔           | 2s | 1.2s | 1.9s | n/a |
-| install | ✔     | ✔        |             | 8.8s | 5s | 5.9s | 1.2s |
-| install | ✔     |          |             | 13.2s | 9s | 10.6s | 5.9s |
-| install |       | ✔        |             | 15.3s | 16.4s | 10.7s | 27s |
-| install | ✔     |          | ✔           | 2.5s | 2.8s | 6.6s | n/a |
-| install |       | ✔        | ✔           | 2s | 1.3s | 6.9s | n/a |
-| install |       |          | ✔           | 2.5s | 10.4s | 11.3s | n/a |
-| update  | n/a | n/a | n/a | 7.6s | 11.3s | 5.7s | 11.6s |
+| install |       |          |             | 44.9s | 26.7s | 15.6s | 32.6s |
+| install | ✔     | ✔        | ✔           | 3.1s | 1.6s | 1.9s | n/a |
+| install | ✔     | ✔        |             | 14.6s | 7.2s | 5.9s | 1.2s |
+| install | ✔     |          |             | 21.5s | 11.4s | 10.6s | 5.9s |
+| install |       | ✔        |             | 24.3s | 23.7s | 10.7s | 27s |
+| install | ✔     |          | ✔           | 3.8s | 4s | 6.6s | n/a |
+| install |       | ✔        | ✔           | 3s | 1.7s | 6.9s | n/a |
+| install |       |          | ✔           | 3.7s | 15.2s | 11.3s | n/a |
+| update  | n/a | n/a | n/a | 10.1s | 15.4s | 5.7s | 11.6s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
