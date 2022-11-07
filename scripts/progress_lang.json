@@ -8,7 +8,7 @@
         "approvalProgress": 8
     },
     "es-ES": {
-        "translationProgress": 32,
+        "translationProgress": 33,
         "approvalProgress": 31
     },
     "fa": {
@@ -72,8 +72,8 @@
         "approvalProgress": 55
     },
     "ru": {
-        "translationProgress": 41,
-        "approvalProgress": 40
+        "translationProgress": 44,
+        "approvalProgress": 41
     },
     "si-LK": {
         "translationProgress": 0,
@@ -100,7 +100,7 @@
         "approvalProgress": 0
     },
     "zh-CN": {
-        "translationProgress": 93,
+        "translationProgress": 95,
         "approvalProgress": 93
     },
     "zh-TW": {
