@@ -22,7 +22,10 @@ use this overrides to force `lodash@^2.1.0`:
 
 Or alternatively, run `pnpm audit --fix`.
 
+If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`pnpm.auditConfig.ignoreCves`] setting.
+
 [overrides]: ../package_json.md#pnpmoverrides
+[`pnpm.auditConfig.ignoreCves`]: ../package_json.md#pnpmauditconfigignorecves
 
 ## Options
 

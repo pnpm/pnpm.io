@@ -492,6 +492,28 @@ Sometimes you can't update a dependency. For instance, the latest version of the
 
 Patterns are also supported, so you may ignore any packages from a scope: `@babel/*`.
 
+## pnpm.auditConfig
+
+### pnpm.auditConfig.ignoreCves
+
+Added in: v7.15.0
+
+A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
+
+```json
+{
+  "pnpm": {
+    "auditConfig": {
+      "ignoreCves": [
+        "CVE-2022-36313"
+      ]
+    }
+  }
+}
+```
+
+[`pnpm audit`]: ./cli/audit.md
+
 ## resolutions
 
 Same as [`pnpm.overrides`]. We read it for easier migration from Yarn.
