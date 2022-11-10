@@ -31,10 +31,14 @@ List outdated global packages.
 
 Print details.
 
-### --no-table
+### --format &lt;format\>
 
-Prints the outdated dependencies in a list format instead of the default table.
-Good for small consoles.
+Added in: v7.15.0
+
+* Default: **table**
+* Type: **table**, **list**, **json**
+
+Prints the outdtaed dependencies in the given format.
 
 ### --compatible
 
