@@ -7,7 +7,7 @@ title: Motivation
 
 [![](/img/cafs-illustration.jpg)](https://twitter.com/HemSays/status/1434921646083563525/photo/1)
 
-When using npm or Yarn, if you have 100 projects using a dependency, you will
+When using npm, if you have 100 projects using a dependency, you will
 have 100 copies of that dependency saved on disk. With pnpm, the dependency will be
 stored in a content-addressable store, so:
 
