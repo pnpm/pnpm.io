@@ -31,7 +31,7 @@ Show extended information.
 
 Outputs package directories in a parseable format instead of their tree view.
 
-### --global
+### --global, -g
 
 List packages in the global install directory instead of in the current project.
 
