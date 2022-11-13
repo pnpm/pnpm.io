@@ -43,7 +43,7 @@ Added in: v3.2.0
 
 Ignores the version range specified in `package.json`. Instead, the version specified by the `latest` tag will be used (potentially upgrading the packages across major versions).
 
-### --global
+### --global, -g
 
 Update global packages.
 

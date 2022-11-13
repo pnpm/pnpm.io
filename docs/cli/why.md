@@ -24,7 +24,7 @@ Show verbose output.
 
 Show parseable output instead of tree view.
 
-### --global
+### --global, -g
 
 List packages in the global install directory instead of in the current project.
 

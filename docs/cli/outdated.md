@@ -23,7 +23,7 @@ every workspace package when executed inside a workspace.
 
 [Read more about filtering.](../filtering.md)
 
-### --global
+### --global, -g
 
 List outdated global packages.
 

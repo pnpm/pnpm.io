@@ -17,7 +17,7 @@ dependencies) from every workspace package.
 When used not inside a workspace, removes a dependency (or dependencies) from
 every package found in subdirectories.
 
-### --global
+### --global, -g
 
 Remove a global package.
 
