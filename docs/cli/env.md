@@ -43,7 +43,7 @@ pnpm env use --global latest
 
 ### remove, rm
 
-Added in v7.10.0
+Added in: v7.10.0
 
 Removes the specified version of Node.JS.
 
@@ -51,6 +51,30 @@ Usage example:
 
 ```
 pnpm env remove --global 14.0.0
+```
+
+### list, ls
+
+Added in: v7.16.0
+
+List Node.js versions available locally or remotely.
+
+Print locally installed versions:
+
+```
+pnpm env list
+```
+
+Print remotely available Node.js versions:
+
+```
+pnpm env list --remote
+```
+
+Print remotely available Node.js v16 versions:
+
+```
+pnpm env list --remote 16
 ```
 
 ## Options

@@ -25,7 +25,7 @@ pnpm patch <pkg name>@<version>
 
 ### --edit-dir &lt;dir>
 
-Added in v7.11.0
+Added in: v7.11.0
 
 The package that needs to be patched will be extracted to this directory.
 

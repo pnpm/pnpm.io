@@ -895,7 +895,7 @@ This resolution mode works only with npm's [full metadata]. So it is slower in s
 
 ### registry-supports-time-field
 
-Added in v7.10.0
+Added in: v7.10.0
 
 * Default: **false**
 * Type: **Boolean**
