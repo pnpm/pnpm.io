@@ -18,5 +18,6 @@ title: Feature Comparison
 | Content-addressable storage | ✔️ | ❌ | ❌ |
 | Dynamic package execution | ✔️ - Via `pnpm dlx` | ✔️ - Via `yarn dlx` | ✔️ - Via `npx` |
 | Side-effects cache | ✔️ | ❌ | ❌ |
+| Listing licenses | ✔️  - Via `pnpm licenses list` | ✔️  - Via a plugin | ❌ |
 
 [auto-install-peers=true]: npmrc.md#auto-install-peers
