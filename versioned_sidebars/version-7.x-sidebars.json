@@ -126,6 +126,10 @@
             {
               "type": "doc",
               "id": "version-7.x/cli/why"
+            },
+            {
+              "type": "doc",
+              "id": "version-7.x/cli/licenses"
             }
           ]
         },

@@ -37,7 +37,8 @@
           "cli/audit",
           "cli/list",
           "cli/outdated",
-          "cli/why"
+          "cli/why",
+          "cli/licenses"
         ]
       },
       {
