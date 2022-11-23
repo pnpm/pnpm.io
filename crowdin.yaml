@@ -1,5 +1,5 @@
-project_id_env: CROWDIN_PROJECT_ID
-api_token_env: CROWDIN_PERSONAL_TOKEN
+project_id: 302994
+api_token: 90c94c6aa5fb02574320b67fbff124ab87a33b1d959ea4afd627a75c4799d8a4f351fe14df1020df
 preserve_hierarchy: true
 
 languages_mapping: &languages_mapping

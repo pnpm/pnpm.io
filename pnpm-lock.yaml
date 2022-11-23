@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@algolia/client-search': ^4.14.2
-  '@crowdin/cli': 3.9.0
+  '@crowdin/cli': 3.9.1
   '@crowdin/crowdin-api-client': 1.19.2
   '@docusaurus/core': 2.2.0
   '@docusaurus/plugin-client-redirects': 2.2.0
@@ -21,7 +21,7 @@ specifiers:
 
 dependencies:
   '@algolia/client-search': 4.14.2
-  '@crowdin/cli': 3.9.0
+  '@crowdin/cli': 3.9.1
   '@docusaurus/core': 2.2.0_56jbash75ng5psbctf36wqywr4
   '@docusaurus/plugin-client-redirects': 2.2.0_56jbash75ng5psbctf36wqywr4
   '@docusaurus/plugin-content-docs': 2.2.0_56jbash75ng5psbctf36wqywr4
@@ -1519,8 +1519,8 @@ packages:
     dev: false
     optional: true
 
-  /@crowdin/cli/3.9.0:
-    resolution: {integrity: sha512-4wQjqJZmU/mg3VYfRL6IYXw/pPAL9vdfW3QVSBovYA+bYaEt43ZuGsSrqeBGOhLehasWwRqklXWsl96gxQlLdw==}
+  /@crowdin/cli/3.9.1:
+    resolution: {integrity: sha512-Ca+mzVvLE9lYmTA4peTHOQdH42+eThwQ0DK6URT7crInQKJRjVJdsA2kkfEwi2mQPruAIG/KIKaPieRWPanlIQ==}
     hasBin: true
     dependencies:
       njre: 0.2.0
@@ -8879,7 +8879,7 @@ packages:
 
 time:
   /@algolia/client-search/4.14.2: '2022-07-27T09:44:12.767Z'
-  /@crowdin/cli/3.9.0: '2022-10-17T11:58:08.156Z'
+  /@crowdin/cli/3.9.1: '2022-11-16T09:59:29.800Z'
   /@crowdin/crowdin-api-client/1.19.2: '2022-10-15T07:01:24.785Z'
   /@docusaurus/core/2.2.0: '2022-10-29T10:54:32.589Z'
   /@docusaurus/plugin-client-redirects/2.2.0: '2022-10-29T10:54:39.013Z'
