@@ -102,6 +102,9 @@ const Showcase = props => {
               <a href={addUTM("https://prisma.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
               </a>
+              <a href="https://www.flightcontrol.dev/?ref=pnpm" target="_blank">
+                <img style={{padding: '20px'}} width="320" alt="Flightcontrol" src="/img/users/flightcontrol.png" />
+              </a>
               <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
               </a>
