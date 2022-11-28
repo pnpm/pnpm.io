@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   common-tags: ^1.8.2
   cross-spawn: ^7.0.3
-  fs-extra: ^10.0.0
+  fs-extra: ^11.0.0
   get-folder-size: ^3.1.0
   load-json-file: ^7.0.1
   load-yaml-file: ^1.0.0
@@ -19,7 +19,7 @@ specifiers:
 dependencies:
   common-tags: 1.8.2
   cross-spawn: 7.0.3
-  fs-extra: 10.0.0
+  fs-extra: 11.0.0
   get-folder-size: 3.1.0
   load-json-file: 7.0.1
   load-yaml-file: 1.0.0
@@ -173,9 +173,9 @@ packages:
       to-regex-range: 5.0.1
     dev: false
 
-  /fs-extra/10.0.0:
-    resolution: {integrity: sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==}
-    engines: {node: '>=12'}
+  /fs-extra/11.0.0:
+    resolution: {integrity: sha512-4YxRvMi4P5C3WQTvdRfrv5UVqbISpqjORFQAW5QPiKAauaxNCwrEdIi6pG3tDFhKKpMen+enEhHIzB/tvIO+/w==}
+    engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.9
       jsonfile: 6.1.0
