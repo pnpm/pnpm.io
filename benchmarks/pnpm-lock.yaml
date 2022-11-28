@@ -4,7 +4,7 @@ specifiers:
   common-tags: ^1.8.2
   cross-spawn: ^7.0.3
   fs-extra: ^11.0.0
-  get-folder-size: ^3.1.0
+  get-folder-size: ^4.0.0
   load-json-file: ^7.0.1
   load-yaml-file: ^1.0.0
   path-key: ^4.0.0
@@ -20,7 +20,7 @@ dependencies:
   common-tags: 1.8.2
   cross-spawn: 7.0.3
   fs-extra: 11.0.0
-  get-folder-size: 3.1.0
+  get-folder-size: 4.0.0
   load-json-file: 7.0.1
   load-yaml-file: 1.0.0
   path-key: 4.0.0
@@ -190,8 +190,8 @@ packages:
     resolution: {integrity: sha512-w4n9cPWyP7aHxKxYHFQMegj7WIAsL/YX/C4Bs5Rr8s1H9M1rNtRWRsw+ovYMkXDQ5S4ZbYHsHAPmevPjPgw44w==}
     dev: false
 
-  /get-folder-size/3.1.0:
-    resolution: {integrity: sha512-/I7q+x1HCd22IXP4+kp2Wkz8+au7VfNwNyMfM4Z0gwaTMs+dJ1ShXUWDGSWXi+rDU59MI/j7NBP7+kd7zejnPw==}
+  /get-folder-size/4.0.0:
+    resolution: {integrity: sha512-Z6sv92povPRhGTNv1j8pMOzkXCcJOYWFTSrulKzoF9qbIRHXtR2Vfjw964jsWVMrIKnwHzm/0jl8IFONbBbEKw==}
     engines: {node: '>=14.13.0'}
     hasBin: true
     dependencies:

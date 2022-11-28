@@ -7,7 +7,7 @@
         "common-tags": "^1.8.2",
         "cross-spawn": "^7.0.3",
         "fs-extra": "^11.0.0",
-        "get-folder-size": "^3.1.0",
+        "get-folder-size": "^4.0.0",
         "load-json-file": "^7.0.1",
         "load-yaml-file": "^1.0.0",
         "path-key": "^4.0.0",
