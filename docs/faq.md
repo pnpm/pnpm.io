@@ -108,6 +108,13 @@ workarounds to make the buggy packages work.
 
 ### Solution 1
 
+In case there are issues, you can use the [`node-linker=hoisted`] setting.
+This creates a flat `node_modules` structure similar to the one created by `npm`.
+
+[`node-linker=hoisted`]: npmrc#node-linker
+
+### Solution 2
+
 In the following example, a dependency does **not** have the `iterall` module in
 its own list of deps.
 
@@ -125,7 +132,7 @@ automatically added to your project's `package.json`.
   }
 ```
 
-### Solution 2
+### Solution 3
 
 One of the solutions is to use [hooks](pnpmfile.md#hooks) for adding the missing
 dependencies to the package's `package.json`.
@@ -165,12 +172,3 @@ to delete `node_modules`, as pnpm hooks only affect module resolution. Then,
 rebuild the dependencies & it should be working.
 
 [Webpack Dashboard]: https://github.com/pnpm/pnpm/issues/1043
-
-### Solution 3
-
-In case there are too many issues, you can use the `shamefully-hoist` option.
-This creates a flat `node_modules` structure similar to the one created by `npm`
-or `yarn`, which is not recommended as avoiding this structure is the primary
-purpose of pnpm's `node_modules` approach.
-
-To use it, try `pnpm install --shamefully-hoist`.
