@@ -246,6 +246,33 @@ separating the package selector from the dependency selector with a ">", for
 example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
 any other dependencies.
 
+An override may be defined as a reference to a direct dependency's spec.
+This is achieved by prefixing the name of the dependency with a `$`:
+
+```json
+{
+  "dependencies": {
+    "foo": "^1.0.0"
+  },
+  "overrides": {
+    "foo": "$foo"
+  }
+}
+```
+
+The referenced package does not need to match the overridden one:
+
+```json
+{
+  "dependencies": {
+    "foo": "^1.0.0"
+  },
+  "overrides": {
+    "bar": "$foo"
+  }
+}
+```
+
 ## pnpm.packageExtensions
 
 The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
