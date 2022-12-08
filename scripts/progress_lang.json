@@ -4,8 +4,8 @@
         "approvalProgress": 0
     },
     "de": {
-        "translationProgress": 8,
-        "approvalProgress": 8
+        "translationProgress": 7,
+        "approvalProgress": 7
     },
     "es-ES": {
         "translationProgress": 32,
@@ -37,15 +37,15 @@
     },
     "id": {
         "translationProgress": 25,
-        "approvalProgress": 25
+        "approvalProgress": 24
     },
     "it": {
-        "translationProgress": 97,
-        "approvalProgress": 93
+        "translationProgress": 96,
+        "approvalProgress": 92
     },
     "ja": {
-        "translationProgress": 90,
-        "approvalProgress": 89
+        "translationProgress": 89,
+        "approvalProgress": 88
     },
     "kn": {
         "translationProgress": 0,
@@ -53,7 +53,7 @@
     },
     "ko": {
         "translationProgress": 61,
-        "approvalProgress": 58
+        "approvalProgress": 57
     },
     "lo": {
         "translationProgress": 0,
@@ -73,7 +73,7 @@
     },
     "ru": {
         "translationProgress": 44,
-        "approvalProgress": 44
+        "approvalProgress": 43
     },
     "si-LK": {
         "translationProgress": 0,
@@ -100,8 +100,8 @@
         "approvalProgress": 0
     },
     "zh-CN": {
-        "translationProgress": 93,
-        "approvalProgress": 93
+        "translationProgress": 92,
+        "approvalProgress": 92
     },
     "zh-TW": {
         "translationProgress": 47,
