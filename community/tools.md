@@ -10,6 +10,7 @@ title: Tools
 
 ## Toolings with pnpm support
 
+- [Bazel](https://bazel.build) (via [rules_js](https://github.com/aspect-build/rules_js)) - Google's massively scalable multi-language build tool.
 - [Bit](https://bit.dev/) - A toolchain for component-driven development.
 - [Turborepo](https://turborepo.org/) - A high-performance build system for JavaScript and TypeScript codebases.
 - [Rush](https://rushjs.io/) - A scalable monorepo manager for the web.
