@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Dec 11, 2022, 3:24 AM_ (_daily_ updated).
+**Last benchmarked at**: _Dec 18, 2022, 3:06 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,15 +22,15 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 40.7s | 25.5s | 21.2s | 40s |
-| install | ✔     | ✔        | ✔           | 2.8s | 1.6s | 2.5s | n/a |
-| install | ✔     | ✔        |             | 12.6s | 6.3s | 7.9s | 1.7s |
-| install | ✔     |          |             | 18.7s | 10.4s | 14.2s | 7.9s |
-| install |       | ✔        |             | 20.9s | 22.8s | 14.3s | 32.9s |
-| install | ✔     |          | ✔           | 3.4s | 3.8s | 8.7s | n/a |
-| install |       | ✔        | ✔           | 2.7s | 1.6s | 8.7s | n/a |
-| install |       |          | ✔           | 3.3s | 14.4s | 15.4s | n/a |
-| update  | n/a | n/a | n/a | 10.7s | 14.8s | 6.9s | 14.5s |
+| install |       |          |             | 40.7s | 20s | 21.2s | 40s |
+| install | ✔     | ✔        | ✔           | 2.3s | 1.4s | 2.5s | n/a |
+| install | ✔     | ✔        |             | 10.2s | 5.6s | 7.9s | 1.7s |
+| install | ✔     |          |             | 15.3s | 9.6s | 14.2s | 7.9s |
+| install |       | ✔        |             | 17.1s | 17.3s | 14.3s | 32.9s |
+| install | ✔     |          | ✔           | 2.8s | 3s | 8.7s | n/a |
+| install |       | ✔        | ✔           | 2.2s | 1.4s | 8.7s | n/a |
+| install |       |          | ✔           | 2.8s | 11s | 15.4s | n/a |
+| update  | n/a | n/a | n/a | 10.7s | 11.9s | 6.9s | 14.5s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
 
