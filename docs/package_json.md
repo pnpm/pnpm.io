@@ -541,9 +541,24 @@ A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
 
 [`pnpm audit`]: ./cli/audit.md
 
+## pnpm.requiredScripts
+
+Added in: v7.19.0
+
+Scripts listed in this array will be required in each project of the worksapce. Otherwise, `pnpm -r run <script name>` will fail.
+
+```
+{
+  "pnpm": {
+    "requiredScripts": ["build"]
+  }
+}
+```
+
 ## resolutions
 
 Same as [`pnpm.overrides`]. We read it for easier migration from Yarn.
 
 [pnpm patch-commit]: ./cli/patch-commit.md
 [`pnpm.overrides`]: #pnpmoverrides
+
