@@ -209,3 +209,27 @@ jobs:
           paths:
             - node_modules
 ```
+
+## Jenkins
+
+You can use pnpm for installing and caching your dependencies:
+
+```title="Jenkinsfile"
+pipeline {
+    agent {
+        docker {
+            image 'node:lts-bullseye-slim' 
+            args '-p 3000:3000' 
+        }
+    }
+    stages {
+        stage('Build') { 
+            steps {
+                sh 'corepack enabled'
+                sh 'corepack prepare pnpm@latest --activate'
+                sh 'pnpm install'
+            }
+        }
+    }
+}
+```
