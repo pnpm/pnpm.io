@@ -39,6 +39,16 @@ Multiple packages can be provided for installation:
 pnpm --package=yo --package=generator-webapp dlx yo webapp --skip-install
 ```
 
+### --shell-mode, -c
+
+Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
+
+Example: 
+
+```
+pnpm --package cowsay --package lolcatjs -c dlx 'echo "hi pnpm" | cowsay | lolcatjs'
+```
+
 ### --silent, -s
 
 Only the output of the executed command is printed.
