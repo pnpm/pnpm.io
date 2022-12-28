@@ -59,6 +59,12 @@ Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.htm
 corepack enable
 ```
 
+If you installed Node.js using Homebrew, you'll need to install corepack separately:
+
+```
+brew install corepack
+```
+
 This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the [latest pnpm version](https://github.com/pnpm/pnpm/releases/latest) and run:
 
 ```
