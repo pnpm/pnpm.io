@@ -25,6 +25,14 @@ the packages that have versions not yet published to the registry.
 
 ## Options
 
+### --recursive, -r
+
+Publish all packages from the workspace.
+
+### --json
+
+Show information in JSON format.
+
 ### --tag &lt;tag\>
 
 Publishes the package with the given tag. By default, `pnpm publish` updates
