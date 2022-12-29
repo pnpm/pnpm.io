@@ -5,14 +5,14 @@
     },
     "de": {
         "translationProgress": 8,
-        "approvalProgress": 8
+        "approvalProgress": 7
     },
     "es-ES": {
-        "translationProgress": 32,
+        "translationProgress": 31,
         "approvalProgress": 30
     },
     "fa": {
-        "translationProgress": 7,
+        "translationProgress": 6,
         "approvalProgress": 1
     },
     "fil": {
@@ -20,8 +20,8 @@
         "approvalProgress": 0
     },
     "fr": {
-        "translationProgress": 34,
-        "approvalProgress": 32
+        "translationProgress": 35,
+        "approvalProgress": 31
     },
     "gl": {
         "translationProgress": 0,
@@ -40,20 +40,20 @@
         "approvalProgress": 24
     },
     "it": {
-        "translationProgress": 96,
-        "approvalProgress": 92
+        "translationProgress": 98,
+        "approvalProgress": 91
     },
     "ja": {
-        "translationProgress": 89,
-        "approvalProgress": 89
+        "translationProgress": 88,
+        "approvalProgress": 87
     },
     "kn": {
         "translationProgress": 0,
         "approvalProgress": 0
     },
     "ko": {
-        "translationProgress": 62,
-        "approvalProgress": 57
+        "translationProgress": 60,
+        "approvalProgress": 56
     },
     "lo": {
         "translationProgress": 0,
@@ -68,12 +68,12 @@
         "approvalProgress": 0
     },
     "pt-BR": {
-        "translationProgress": 56,
-        "approvalProgress": 53
+        "translationProgress": 55,
+        "approvalProgress": 52
     },
     "ru": {
-        "translationProgress": 44,
-        "approvalProgress": 44
+        "translationProgress": 43,
+        "approvalProgress": 42
     },
     "si-LK": {
         "translationProgress": 0,
@@ -92,7 +92,7 @@
         "approvalProgress": 0
     },
     "tr": {
-        "translationProgress": 34,
+        "translationProgress": 33,
         "approvalProgress": 21
     },
     "uk": {
@@ -101,10 +101,10 @@
     },
     "zh-CN": {
         "translationProgress": 92,
-        "approvalProgress": 92
+        "approvalProgress": 90
     },
     "zh-TW": {
-        "translationProgress": 47,
-        "approvalProgress": 47
+        "translationProgress": 46,
+        "approvalProgress": 45
     }
 }
