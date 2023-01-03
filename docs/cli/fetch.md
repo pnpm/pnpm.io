@@ -72,7 +72,7 @@ As you can see, the Dockerfile has to be updated when you add or remove
 sub-packages.
 
 `pnpm fetch` solves the above problem perfectly by providing the ability
-to fetch packages from the virtual store with information only from a lockfile.
+to load packages into the virtual store using only information from a lockfile.
 
 ```Dockerfile
 FROM node:14
