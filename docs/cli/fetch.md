@@ -7,13 +7,13 @@ Fetch packages from a lockfile into virtual store, package manifest is ignored.
 
 ## Usage scenario
 
-This command is specifically designed to boost building a docker image.
+This command is specifically designed to improve building a docker image.
 
 You may have read the [official guide] to writing a Dockerfile for a Node.js
-app, if you didn't read it yet, you may want to read it first.
+app, if you haven't read it yet, you may want to read it first.
 
 From that guide, we learn to write an optimized Dockerfile for projects using
-pnpm, which shall look like
+pnpm, which looks like
 
 ```Dockerfile
 FROM node:14
@@ -32,17 +32,17 @@ EXPOSE 8080
 CMD [ "node", "server.js" ]
 ```
 
-As long as there is no change to `.npmrc`, `package.json`, `pnpm-lock.yaml`,
+As long as there are no changes to `.npmrc`, `package.json`, `pnpm-lock.yaml`,
 `.pnpmfile.cjs`, docker build cache is still valid up to the layer of
 `RUN pnpm install --frozen-lockfile --prod`, which cost most of the time
 when building a docker image.
 
 However, modification to `package.json` may happen much more frequently than
-we expected, because it does not only contain dependencies, but may also
+we expect, because it does not only contain dependencies, but may also
 contain the version number, scripts, and arbitrary configuration for any other
 tool.
 
-It's also hard to maintain a Dockerfile that build a monorepo project, it may
+It's also hard to maintain a Dockerfile that builds a monorepo project, it may
 look like
 
 ```Dockerfile
@@ -71,8 +71,8 @@ CMD [ "node", "server.js" ]
 As you can see, the Dockerfile has to be updated when you add or remove
 sub-packages.
 
-`pnpm fetch` will solve the above problem perfectly by providing the ability
-to fetch package to virtual store with information only from a lockfile.
+`pnpm fetch` solves the above problem perfectly by providing the ability
+to fetch packages from the virtual store with information only from a lockfile.
 
 ```Dockerfile
 FROM node:14
@@ -93,12 +93,12 @@ EXPOSE 8080
 CMD [ "node", "server.js" ]
 ```
 
-It works for both simple project and monorepo project, `--offline` enforces
-pnpm not to communicate with package registry as all needed packages shall be
-already presented in the virtual store.
+It works for both simple and monorepo projects, `--offline` enforces
+pnpm not to communicate with the package registry as all needed packages are
+already present in the virtual store.
 
 As long as the lockfile is not changed, the build cache is valid up to the
-layer `RUN pnpm install -r --offline --prod`, which will save you much
+layer, so `RUN pnpm install -r --offline --prod`, will save you much
 time.
 
 
