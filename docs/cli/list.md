@@ -56,6 +56,12 @@ Display only the dependency graph for packages in `devDependencies`.
 
 Don't display packages from `optionalDependencies`.
 
+### --only-projects
+
+Added in: v7.22.0
+
+Display only dependencies that are also projects within the workspace.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)

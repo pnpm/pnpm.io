@@ -51,6 +51,15 @@ to surprising executions with `pnpm serve` also running `pnpm preserve`.
 If for some reason you need the pre/post scripts behavior of npm, use the
 `enable-pre-post-scripts` option.
 
+## Environment
+
+There are some environment variables that pnpm automatically creates for the executed scripts.
+These environment variables may be used to get contextual information about the running process.
+
+These are the environment variables created by pnpm:
+
+* **npm_command** - contains the name of the executed command. If the executed command is `pnpm run`, then the value of this variable will be "run-script".
+
 ## Options
 
 Any options for the `run` command should be listed before the script's name.
@@ -147,6 +156,12 @@ Aggregate output from child processes that are run in parallel, and only print o
 
 When `true`, pnpm will run any pre/post scripts automatically. So running `pnpm foo`
 will be like running `pnpm prefoo && pnpm foo && pnpm postfoo`.
+
+### --resume-from &lt;package_name\>
+
+Added in: v7.22.0
+
+Resume execution from a particular project. This can be useful if you are working with a large workspace and you want to restart a build at a particular project without running through all of the projects that precede it in the build order.
 
 ### --filter &lt;package_selector\>
 

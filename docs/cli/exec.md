@@ -45,6 +45,12 @@ Execute the shell command in every project of the workspace.
 The name of the current package is available through the environment variable
 `PNPM_PACKAGE_NAME`.
 
+### --resume-from &lt;package_name\>
+
+Added in: v7.22.0
+
+Resume execution from a particular project. This can be useful if you are working with a large workspace and you want to restart a build at a particular project without running through all of the projects that precede it in the build order.
+
 #### Examples
 
 Prune `node_modules` installations for all packages:
