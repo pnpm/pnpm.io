@@ -499,6 +499,16 @@ When `true`, any missing non-optional peer dependencies are automatically instal
 If this is enabled, commands will fail if there is a missing or invalid peer
 dependency in the tree.
 
+### resolve-peers-from-workspace-root
+
+Added in: v7.23.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When enabled, dependencies of the root workspace project are used to resolve peer dependencies of any projects in the workspace.
+It is a useful feature as you can install your peer dependencies only in the root of the workspace, and you can be sure that all projects in the workspace use the same versions of the peer dependencies.
+
 ## CLI Settings
 
 ### [no-]color
