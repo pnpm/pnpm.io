@@ -8,8 +8,8 @@
         "approvalProgress": 7
     },
     "es-ES": {
-        "translationProgress": 31,
-        "approvalProgress": 30
+        "translationProgress": 30,
+        "approvalProgress": 29
     },
     "fa": {
         "translationProgress": 6,
@@ -20,8 +20,8 @@
         "approvalProgress": 0
     },
     "fr": {
-        "translationProgress": 34,
-        "approvalProgress": 31
+        "translationProgress": 33,
+        "approvalProgress": 30
     },
     "gl": {
         "translationProgress": 0,
@@ -36,24 +36,24 @@
         "approvalProgress": 0
     },
     "id": {
-        "translationProgress": 25,
-        "approvalProgress": 24
+        "translationProgress": 24,
+        "approvalProgress": 23
     },
     "it": {
         "translationProgress": 98,
-        "approvalProgress": 90
+        "approvalProgress": 88
     },
     "ja": {
-        "translationProgress": 88,
-        "approvalProgress": 86
+        "translationProgress": 87,
+        "approvalProgress": 85
     },
     "kn": {
         "translationProgress": 0,
         "approvalProgress": 0
     },
     "ko": {
-        "translationProgress": 60,
-        "approvalProgress": 56
+        "translationProgress": 58,
+        "approvalProgress": 54
     },
     "lo": {
         "translationProgress": 0,
@@ -68,12 +68,12 @@
         "approvalProgress": 0
     },
     "pt-BR": {
-        "translationProgress": 54,
-        "approvalProgress": 52
+        "translationProgress": 52,
+        "approvalProgress": 50
     },
     "ru": {
-        "translationProgress": 43,
-        "approvalProgress": 42
+        "translationProgress": 42,
+        "approvalProgress": 41
     },
     "si-LK": {
         "translationProgress": 0,
@@ -100,11 +100,11 @@
         "approvalProgress": 0
     },
     "zh-CN": {
-        "translationProgress": 91,
-        "approvalProgress": 90
+        "translationProgress": 90,
+        "approvalProgress": 88
     },
     "zh-TW": {
-        "translationProgress": 47,
-        "approvalProgress": 46
+        "translationProgress": 46,
+        "approvalProgress": 45
     }
 }
