@@ -251,7 +251,7 @@ module.exports={
           ],
         },
       ],
-      "copyright": "Copyright © 2015-2022 contributors of pnpm",
+      "copyright": `Copyright © 2015-${new Date().getFullYear()} contributors of pnpm`,
       "logo": {
         "src": "img/pnpm-light.svg"
       },
