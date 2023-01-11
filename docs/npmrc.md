@@ -259,6 +259,15 @@ Added in: v7.6.0
 
 Add the full URL to the package's tarball to every entry in `pnpm-lock.yaml`.
 
+### use-lockfile-v6
+
+Added in: v7.24.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Use the new v6 lockfile format, which will be the default one in pnpm v8. This new format is more readable as it doesn't use hashes to shorten long dependency paths.
+
 ## Registry & Authentication Settings
 
 ### registry
