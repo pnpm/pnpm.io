@@ -18,7 +18,6 @@ When used without arguments, updates all dependencies.
 |`pnpm up --latest`    | Updates all dependencies, ignoring ranges specified in `package.json`    |
 |`pnpm up foo@2`       | Updates `foo` to the latest version on v2                                |
 |`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
-|`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
 
 ## Selecting dependencies with patterns
 
