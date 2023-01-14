@@ -10,7 +10,7 @@ specifiers:
   path-key: ^4.0.0
   pretty-bytes: ^6.0.0
   pretty-ms: ^7.0.1
-  rimraf: ^3.0.2
+  rimraf: ^4.0.0
   tempy: ^2.0.0
   thenify: ^3.3.1
   touch: ^3.1.0
@@ -26,7 +26,7 @@ dependencies:
   path-key: 4.0.0
   pretty-bytes: 6.0.0
   pretty-ms: 7.0.1
-  rimraf: 3.0.2
+  rimraf: 4.0.4
   tempy: 2.0.0
   thenify: 3.3.1
   touch: 3.1.0
@@ -422,6 +422,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.0
+    dev: false
+
+  /rimraf/4.0.4:
+    resolution: {integrity: sha512-R0hoVr9xTwemarQjoWlNt/nb5dEGVTBhVdkRmEX2zEkT8T6onH0XKiGjuaC7rNNj/gYzY2p4NVRJ3sjO1ascHQ==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: false
 
   /run-parallel/1.2.0:

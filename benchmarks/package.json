@@ -13,7 +13,7 @@
         "path-key": "^4.0.0",
         "pretty-bytes": "^6.0.0",
         "pretty-ms": "^7.0.1",
-        "rimraf": "^3.0.2",
+        "rimraf": "^4.0.0",
         "tempy": "^2.0.0",
         "thenify": "^3.3.1",
         "touch": "^3.1.0",
