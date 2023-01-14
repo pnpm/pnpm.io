@@ -921,6 +921,15 @@ Added in: v7.10.0
 
 Set this to `true` if the registry that you are using returns the "time" field in the abbreviated metadata. As of now, only [Verdaccio] from v5.15.1 supports this.
 
+### extend-node-path
+
+Added in: v7.25.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When `false`, the `NODE_PATH` environment variable is not set in the command shims.
+
 [`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
 [full metadata]: https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md#full-metadata-format
 [Verdaccio]: https://verdaccio.org/

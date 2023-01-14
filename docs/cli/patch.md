@@ -29,3 +29,8 @@ Added in: v7.11.0
 
 The package that needs to be patched will be extracted to this directory.
 
+### --ignore-existing
+
+Added in: v7.25.0
+
+Ignore existing patch files when patching.
