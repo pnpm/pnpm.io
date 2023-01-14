@@ -12,7 +12,7 @@
         "load-yaml-file": "^1.0.0",
         "path-key": "^4.0.0",
         "pretty-bytes": "^6.0.0",
-        "pretty-ms": "^7.0.1",
+        "pretty-ms": "^8.0.0",
         "rimraf": "^4.0.0",
         "tempy": "^2.0.0",
         "thenify": "^3.3.1",

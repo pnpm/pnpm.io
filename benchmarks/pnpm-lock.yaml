@@ -9,7 +9,7 @@ specifiers:
   load-yaml-file: ^1.0.0
   path-key: ^4.0.0
   pretty-bytes: ^6.0.0
-  pretty-ms: ^7.0.1
+  pretty-ms: ^8.0.0
   rimraf: ^4.0.0
   tempy: ^2.0.0
   thenify: ^3.3.1
@@ -25,7 +25,7 @@ dependencies:
   load-yaml-file: 1.0.0
   path-key: 4.0.0
   pretty-bytes: 6.0.0
-  pretty-ms: 7.0.1
+  pretty-ms: 8.0.0
   rimraf: 4.0.4
   tempy: 2.0.0
   thenify: 3.3.1
@@ -366,9 +366,9 @@ packages:
       aggregate-error: 3.1.0
     dev: false
 
-  /parse-ms/2.1.0:
-    resolution: {integrity: sha512-kHt7kzLoS9VBZfUsiKjv43mr91ea+U05EyKkEtqp7vNbHxmaVuEqN7XxeEVnGrMtYOAxGrDElSi96K7EgO1zCA==}
-    engines: {node: '>=6'}
+  /parse-ms/3.0.0:
+    resolution: {integrity: sha512-Tpb8Z7r7XbbtBTrM9UhpkzzaMrqA2VXMT3YChzYltwV3P3pM6t8wl7TvpMnSTosz1aQAdVib7kdoys7vYOPerw==}
+    engines: {node: '>=12'}
     dev: false
 
   /path-is-absolute/1.0.1:
@@ -401,11 +401,11 @@ packages:
     engines: {node: ^14.13.1 || >=16.0.0}
     dev: false
 
-  /pretty-ms/7.0.1:
-    resolution: {integrity: sha512-973driJZvxiGOQ5ONsFhOF/DtzPMOMtgC11kCpUrPGMTgqp2q/1gwzCquocrN33is0VZ5GFHXZYMM9l6h67v2Q==}
-    engines: {node: '>=10'}
+  /pretty-ms/8.0.0:
+    resolution: {integrity: sha512-ASJqOugUF1bbzI35STMBUpZqdfYKlJugy6JBziGi2EE+AL5JPJGSzvpeVXojxrr0ViUYoToUjb5kjSEGf7Y83Q==}
+    engines: {node: '>=14.16'}
     dependencies:
-      parse-ms: 2.1.0
+      parse-ms: 3.0.0
     dev: false
 
   /queue-microtask/1.2.3:
