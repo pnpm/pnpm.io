@@ -180,6 +180,12 @@ set-alias -name pn -value pnpm
 
 Save the file and close the window. You may need to close any open Powershell window in order for the alias to take effect.
 
+## Update pnpm
+Update your old version of pnpm to the latest version of ppm with the following command.
+```bash
+pnpm add -g pnpm@latest
+```
+
 ## Uninstalling pnpm
 
 If you need to remove the pnpm CLI from your system and any files it has written to your disk, see [Uninstalling pnpm].
