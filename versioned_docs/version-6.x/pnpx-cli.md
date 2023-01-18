@@ -31,8 +31,9 @@ If you just want to run a binary of a project's dependency, see [`pnpm exec`].
 ## For npm users
 
 npm has a great package runner called [npx]. pnpm offers the same tool via the
-`pnpx` command. The only difference is that `pnpx` uses `pnpm` for installing
-packages.
+`pnpx` command. The only difference is that `pnpx` uses `pnpm` for installing packages. 
+However, it's important to note that unlike `npx`, `pnpx` does not run binaries of project 
+dependencies, you should use the [`pnpm exec`] command instead.
 
 [npx]: https://www.npmjs.com/package/npx
 [`pnpm exec`]: ./cli/exec.md
