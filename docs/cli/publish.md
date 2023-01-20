@@ -111,3 +111,14 @@ For example:
 git-checks=false
 publish-branch=production
 ```
+
+## Life Cycle Scripts
+
+* `prepublishOnly`
+* `prepublish`
+* `prepack`
+* `prepare`
+* `postpack`
+* `publish`
+* `postpublish`
+
