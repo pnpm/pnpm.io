@@ -110,16 +110,24 @@ module.exports={
           "to": "motivation",
           "label": "Docs",
           "position": "left"
-        },
+        },                    
         {
           "to": "blog",
           "label": "Blog",
-          "position": "left"
+          "position": "left",
+          className: 'header-long-screen',
         },
         {
           "to": "/faq",
           "label": "FAQ",
-          "position": "left"
+          "position": "left",
+          className: 'header-long-screen',
+        },
+        {
+          "to": "/benchmarks",
+          "label": "Benchmarks",
+          "position": "left",
+          className: 'header-long-screen',
         },
         {
           "to": "/community/articles",
@@ -127,9 +135,28 @@ module.exports={
           "position": "left"
         },
         {
-          "to": "/benchmarks",
-          "label": "Benchmarks",
-          "position": "left"
+          type: 'dropdown',
+          label: 'More',
+          "position": "left",
+          className: 'header-short-screen',
+          items: [
+            {
+              "to": "blog",
+              "label": "Blog",
+            },
+            {
+              "to": "/faq",
+              "label": "FAQ",
+            },
+            {
+              "to": "/community/articles",
+              "label": "Community",              
+            },
+            {
+              "to": "/benchmarks",
+              "label": "Benchmarks",
+            },
+          ],
         },
         {
           type: 'docsVersionDropdown',
