@@ -27,7 +27,8 @@
           "cli/fetch",
           "cli/install-test",
           "cli/patch",
-          "cli/patch-commit"
+          "cli/patch-commit",
+          "cli/dedupe"
         ]
       },
       {

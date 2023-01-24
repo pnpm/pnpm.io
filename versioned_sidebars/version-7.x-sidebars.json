@@ -103,6 +103,10 @@
             {
               "type": "doc",
               "id": "version-7.x/cli/patch-commit"
+            },
+            {
+              "type": "doc",
+              "id": "version-7.x/cli/dedupe"
             }
           ]
         },
