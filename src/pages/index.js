@@ -93,9 +93,6 @@ const Showcase = props => {
               <a href={addUTM("https://bit.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
               </a>
-              <a href={addUTM("https://nhost.io/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Nhost" src="/img/users/nhost.svg" />
-              </a>
               <a href={addUTM("https://novu.co/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Novu" src="/img/users/novu.svg" />
               </a>
@@ -110,9 +107,6 @@ const Showcase = props => {
               </a>
               <a href={addUTM("https://vercel.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Vercel" src="/img/users/vercel.svg" />
-              </a>
-              <a href={addUTM("https://www.takeshape.io/")} target="_blank">
-                <img style={{padding: '20px'}} width="320" alt="TakeShape" src="/img/users/takeshape.svg" />
               </a>
               <a href={addUTM("https://doppler.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="320" alt="Doppler" src="/img/users/doppler.svg" />
