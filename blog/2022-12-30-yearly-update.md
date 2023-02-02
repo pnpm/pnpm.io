@@ -100,7 +100,7 @@ A new resolution mode was added to pnpm, which should make updating dependencies
 
 ### Listing licenses of dependencies (since [v7.17.0](https://github.com/pnpm/pnpm/releases/tag/v7.17.0))
 
-You may now you the [`pnpm licenses list`] command to check the licenses of the installed packages.
+You may now use the [`pnpm licenses list`] command to check the licenses of the installed packages.
 
 [`pnpm licenses list`]: /cli/licenses
 
