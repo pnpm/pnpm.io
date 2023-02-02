@@ -6,7 +6,7 @@ title: Feature Comparison
 | Feature | pnpm | Yarn | npm |
 | ---     | ---  | ---  | --- |
 | Workspace support | ✔️ | ✔️ | ✔️ |
-| Isolated `node_modules` | ✔️ - The default | ✔️ | ❌ |
+| Isolated `node_modules` | ✔️ - The default | ✔️ | ✔️ |
 | Hoisted `node_modules` | ✔️ | ✔️ | ✔️ - The default |
 | Autoinstalling peers | ✔️ - Via [auto-install-peers=true] | ❌ | ✔️  |
 | Plug'n'Play | ✔️ | ✔️ - The default | ❌ |
