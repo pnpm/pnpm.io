@@ -26,7 +26,7 @@ You can use patterns to update specific dependencies.
 Update all `babel` packages:
 
 ```sh
-pnpm update @babel/*
+pnpm update "@babel/*"
 ```
 
 Update all dependencies, except `webpack`:
@@ -38,7 +38,7 @@ pnpm update !webpack
 Patterns may also be combined, so the next command will update all `babel` packages, except `core`:
 
 ```sh
-pnpm update @babel/* !@babel/core
+pnpm update "@babel/*" !@babel/core
 ```
 
 ## Options
