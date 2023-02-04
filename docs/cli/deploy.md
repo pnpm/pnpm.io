@@ -37,6 +37,24 @@ COPY --from=pruned /app/pruned .
 ENTRYPOINT ["node", "index.js"]
 ```
 
+## Options
+
+### --dev, -D
+
+Only `devDependencies` are installed regardless of the `NODE_ENV`.
+
+### --no-optional
+
+`optionalDependencies` are not installed.
+
+### --prod, -P
+
+Packages in `devDependencies` won't be installed.
+
+### --filter &lt;package_selector\>
+
+[Read more about filtering.](../filtering.md)
+
 ## Files included in the deployed project
 
 By default, all the files of the project are copied during deployment. The project's `package.json` may contain a "files" field to list the files and directories that should be copied.
