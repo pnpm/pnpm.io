@@ -30,7 +30,12 @@ wget -qO- https://get.pnpm.io/install.sh | sh -
 ### On Alpine Linux
 
 ```sh
-wget -qO /bin/pnpm "https://github.com/pnpm/pnpm/releases/latest/download/pnpm-linuxstatic-x64" && chmod +x /bin/pnpm
+# bash
+wget -qO- https://get.pnpm.io/install.sh | ENV="~/.bashrc" SHELL="$(which bash)" bash -
+# sh
+wget -qO- https://get.pnpm.io/install.sh | ENV="~/.shrc" SHELL="$(which sh)" sh -
+# dash
+wget -qO- https://get.pnpm.io/install.sh | ENV="~/.dashrc" SHELL="$(which dash)" dash -
 ```
 
 ### Prerequisites
