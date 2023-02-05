@@ -545,7 +545,7 @@ A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
 
 Added in: v7.19.0
 
-Scripts listed in this array will be required in each project of the worksapce. Otherwise, `pnpm -r run <script name>` will fail.
+Scripts listed in this array will be required in each project of the workspace. Otherwise, `pnpm -r run <script name>` will fail.
 
 ```
 {
