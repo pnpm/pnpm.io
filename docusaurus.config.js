@@ -248,6 +248,18 @@ module.exports={
               label: 'Stack Overflow',
               href: 'https://stackoverflow.com/questions/tagged/pnpm'
             },
+            {
+              label: 'Reddit',
+              href: 'https://reddit.com/r/pnpm/'
+            },
+            {
+              label: 'DEV',
+              href: 'https://dev.to/t/pnpm/'
+            },
+            {
+              label: 'Hashnode',
+              href: 'https://hashnode.com/n/pnpm'
+            },
           ]
         },
         {
