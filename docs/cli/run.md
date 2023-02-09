@@ -23,6 +23,22 @@ all scripts get aliased in as pnpm commands, so ultimately `pnpm watch` is just
 shorthand for `pnpm run watch` (ONLY for scripts that do not share the same name
 as already existing pnpm commands).
 
+## Running multiple scripts
+
+Added in: v7.27.0
+
+You may run multiple scripts at the same time by using a regex instead of the script name.
+
+```sh
+pnpm run "/<regex>/"
+```
+
+Run all scripts that start with `watch:`:
+
+```sh
+pnpm run "/^watch:.*/"
+```
+
 ## Details
 
 In addition to the shell’s pre-existing `PATH`, `pnpm run` includes

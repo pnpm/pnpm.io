@@ -901,7 +901,7 @@ The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
 Added in: v7.10.0
 
 * Default: **highest**
-* Type: **highest**, **time-based**
+* Type: **highest**, **time-based**, **lowest-direct** (added in: v7.27.0)
 
 When `resolution-mode` is set to `time-based`, dependencies will be resolved the following way:
 
@@ -911,6 +911,8 @@ When `resolution-mode` is set to `time-based`, dependencies will be resolved the
 With this resolution mode installations with warm cache are faster. It also reduces the chance of subdependency hijacking as subdependencies will be updated only if direct dependencies are updated.
 
 This resolution mode works only with npm's [full metadata]. So it is slower in some scenarios. However, if you use [Verdaccio] v5.15.1 or newer, you may set the `registry-supports-time-field` setting to `true`, and it will be really fast.
+
+When `resolution-mode` is set to `lowest-direct`, direct dependencies will be resolved to their lowest versions.
 
 ### registry-supports-time-field
 
