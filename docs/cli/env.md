@@ -17,7 +17,6 @@ Install the LTS version of Node.js:
 
 ```
 pnpm env use --global lts
-pnpm env use --global argon
 ```
 
 Install Node.js v16:
@@ -40,6 +39,14 @@ Install the latest version of Node.js:
 ```
 pnpm env use --global latest
 ```
+
+Install an LTS version of Node.js using its [codename]:
+
+```
+pnpm env use --global argon
+```
+
+[codename]: https://github.com/nodejs/Release/blob/main/CODENAMES.md
 
 ### remove, rm
 
