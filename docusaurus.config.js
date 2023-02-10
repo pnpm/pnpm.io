@@ -241,6 +241,11 @@ module.exports={
               href: 'https://twitter.com/pnpmjs'
             },
             {
+              label: 'Mastodon',
+              href: 'https://fosstodon.org/@pnpm',
+              rel: 'me',
+            },
+            {
               label: 'YouTube',
               href: 'https://www.youtube.com/@pnpmjs',
             },
@@ -259,6 +264,10 @@ module.exports={
             {
               label: 'Hashnode',
               href: 'https://hashnode.com/n/pnpm'
+            },
+            {
+              label: 'Keybase',
+              href: 'https://keybase.io/pnpm'
             },
           ]
         },
