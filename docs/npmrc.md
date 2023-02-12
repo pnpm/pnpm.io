@@ -407,14 +407,16 @@ A proxy to use for outgoing HTTPS requests. If the `HTTPS_PROXY`, `https_proxy`,
 `HTTP_PROXY` or `http_proxy` environment variables are set, their values will be
 used instead.
 
-### local-address
+If your proxy URL contains a username and password, make sure to URL-encode them.
+For instance:
 
-* Default: **undefined**
-* Type: **IP Address**
+```
+https-proxy=https://use%21r:pas%2As@my.proxy:1234/foo
+```
 
-The IP address of the local interface to use when making connections to the npm
-registry.
+Do not encode the colon (`:`) between the username and password.
 
+### http-proxy
 ### proxy
 
 * Default: **null**
@@ -423,6 +425,14 @@ registry.
 A proxy to use for outgoing http requests. If the HTTP_PROXY or http_proxy
 environment variables are set, proxy settings will be honored by the underlying
 request library.
+
+### local-address
+
+* Default: **undefined**
+* Type: **IP Address**
+
+The IP address of the local interface to use when making connections to the npm
+registry.
 
 ### maxsockets
 
