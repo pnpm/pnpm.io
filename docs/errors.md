@@ -42,3 +42,14 @@ You may also selectively ignore these errors using the [pnpm.peerDependencyRules
 This error happens when installation cannot be performed without changes to the lockfile. This might happen in a CI environment if someone has changed a `package.json` file in the repository without running `pnpm install` afterwards. Or someone forgot to commit the changes to the lockfile.
 
 To fix this error, just run `pnpm install` and commit the changes to the lockfile.
+
+## ERR\_PNPM\_TARBALL\_INTEGRITY
+
+This error indicates that the downloaded package's tarball did not match the expected integrity checksum.
+
+If you use the npm registry (`registry.npmjs.org`), then this probably means that the integrity in your lockfile is incorrect.
+This might happen if a lockfile had badly resolved merge conflicts.
+
+If you use a registry that allows to override existing versions of a package, then it might mean that in your local metadata cache you have the integrity checksum of an older version of the package. In this case, you should run `pnpm store prune`. This command will remove your local metadata cache. Then you can retry the command that failed.
+
+But also be careful and verify that the package is downloaded from the right URL. The URL should be printed in the error message.
