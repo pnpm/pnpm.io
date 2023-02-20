@@ -65,6 +65,12 @@ Added in: v7.22.0
 
 Resume execution from a particular project. This can be useful if you are working with a large workspace and you want to restart a build at a particular project without running through all of the projects that precede it in the build order.
 
+### --report-summary
+
+Added in: v7.28.0
+
+Save the execution results of every package to "pnpm-exec-summary.json". Useful to inspect the execution time and status of each package.
+
 ### --parallel
 
 Completely disregard concurrency and topological sorting, running a given script
