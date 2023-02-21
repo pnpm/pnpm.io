@@ -16,7 +16,8 @@ cache:
   directories:
     - "~/.pnpm-store"
 before_install:
-  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+  - corepack enable
+  - corepack prepare pnpm@latest-7 --activate
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
@@ -42,7 +43,8 @@ blocks:
       jobs:
         - name: pnpm install
           commands:
-            - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+            - corepack enable
+            - corepack prepare pnpm@latest-7 --activate
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -59,7 +61,8 @@ to your `appveyor.yml`:
 ```yaml title="appveyor.yml"
 install:
   - ps: Install-Product node $env:nodejs_version
-  - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+  - corepack enable
+  - corepack prepare pnpm@latest-7 --activate
   - pnpm install
 ```
 
@@ -113,7 +116,8 @@ build:
   stage: build
   image: node:14.16.0-buster
   before_script:
-    - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+    - corepack enable
+    - corepack prepare pnpm@latest-7 --activate
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -141,7 +145,8 @@ pipelines:
           name: Build and test
           image: node:14.16.0
           script:
-            - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+            - corepack enable
+            - corepack prepare pnpm@latest-7 --activate
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
@@ -164,7 +169,8 @@ steps:
     displayName: Cache pnpm
 
   - script: |
-      curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+      corepack enable
+      corepack prepare pnpm@latest-7 --activate
       pnpm config set store-dir $(pnpm_config_cache)
     displayName: "Setup pnpm"
 
@@ -198,7 +204,8 @@ jobs:
       - run:
           name: Install pnpm package manager
           command: |
-            curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm@7
+            corepack enable
+            corepack prepare pnpm@latest-7 --activate
       - run:
           name: Install Dependencies
           command: |
@@ -226,7 +233,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh 'corepack enable'
-                sh 'corepack prepare pnpm@latest --activate'
+                sh 'corepack prepare pnpm@latest-7 --activate'
                 sh 'pnpm install'
             }
         }
