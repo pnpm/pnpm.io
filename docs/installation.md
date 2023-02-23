@@ -31,11 +31,11 @@ wget -qO- https://get.pnpm.io/install.sh | sh -
 
 ```sh
 # bash
-wget -qO- https://get.pnpm.io/install.sh | ENV="~/.bashrc" SHELL="$(which bash)" bash -
+wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 # sh
-wget -qO- https://get.pnpm.io/install.sh | ENV="~/.shrc" SHELL="$(which sh)" sh -
+wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 # dash
-wget -qO- https://get.pnpm.io/install.sh | ENV="~/.dashrc" SHELL="$(which dash)" dash -
+wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
 ```
 
 ### Prerequisites
