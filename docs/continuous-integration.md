@@ -5,6 +5,12 @@ title: Continuous Integration
 
 pnpm can easily be used in various continuous integration systems.
 
+:::note
+
+In all the provided configuration files the store is cached. However, this is not required, and it is not guaranteed that caching the store will make installation faster. So feel free to not cache the pnpm store in your job.
+
+:::
+
 ## Travis
 
 On [Travis CI], you can use pnpm for installing your dependencies by adding this
