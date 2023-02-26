@@ -397,6 +397,21 @@ For instance, if you have some dependencies that need `react@16` but you know th
 
 This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
 
+It is also possible to suppress the warnings only for peer dependencies of specific packages. For instance, with the following configuration `react` v17 will be only allowed when it is in the peer dependencies of the `button` v2 package or in the dependencies of any `card` package:
+
+```json
+{
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "button@2>react": "17",
+        "card>react": "17"
+      }
+    }
+  }
+}
+```
+
 ### pnpm.peerDependencyRules.allowAny
 
 Added in: v7.3.0

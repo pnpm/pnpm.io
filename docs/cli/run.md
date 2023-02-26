@@ -179,6 +179,30 @@ Added in: v7.22.0
 
 Resume execution from a particular project. This can be useful if you are working with a large workspace and you want to restart a build at a particular project without running through all of the projects that precede it in the build order.
 
+### --report-summary
+
+Added in: v7.28.0
+
+Record the result of the scripts executions into a `pnpm-exec-summary.json` file.
+
+An example of a `pnpm-exec-summary.json` file:
+
+```json
+{
+  "executionStatus": {
+    "/Users/zoltan/src/pnpm/pnpm/cli/command": {
+      "status": "passed",
+      "duration": 1861.143042
+    },
+    "/Users/zoltan/src/pnpm/pnpm/cli/common-cli-options-help": {
+      "status": "passed",
+      "duration": 1865.914958
+    }
+  }
+```
+
+Possible values of `status` are: 'passed', 'queued', 'running'.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)

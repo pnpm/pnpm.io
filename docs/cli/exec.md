@@ -76,6 +76,10 @@ lengthy build process.
 
 Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
 
+### --report-summary
+
+[Read about this option in the run command docs](./run.md#--report-summary)
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
