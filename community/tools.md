@@ -17,6 +17,7 @@ title: Tools
 - [changesets](https://github.com/changesets/changesets) - A way to manage your versioning and changelogs with a focus on monorepos.
 - [handpick](https://github.com/redaxmedia/handpick) - Handpick conditional dependencies like a boss.
 - [Kretes](https://kretes.dev/) - A programming environment for building full-stack apps in TypeScript.
+- [Lockfile Explorer](https://lfx.rushstack.io) - A desktop app for visualizing pnpm lockfiles and troubleshooting version conflicts.
 - [Meterian](https://meterian.io) - Ensure your dependencies are not vulnerable, out of date, or with a license you do not want to use.
 - [Nx](https://nx.dev/) - Next generation build system with first class monorepo support and powerful integrations.
 - [Renovate](https://renovateapp.com/) - Automated dependency updates, for humans.
