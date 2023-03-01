@@ -12,12 +12,12 @@
         "approvalProgress": 23
     },
     "it": {
-        "translationProgress": 84,
+        "translationProgress": 85,
         "approvalProgress": 82
     },
     "ja": {
-        "translationProgress": 85,
-        "approvalProgress": 84
+        "translationProgress": 93,
+        "approvalProgress": 92
     },
     "ko": {
         "translationProgress": 54,
@@ -32,12 +32,12 @@
         "approvalProgress": 38
     },
     "tr": {
-        "translationProgress": 33,
+        "translationProgress": 34,
         "approvalProgress": 20
     },
     "zh-CN": {
-        "translationProgress": 83,
-        "approvalProgress": 83
+        "translationProgress": 84,
+        "approvalProgress": 84
     },
     "zh-TW": {
         "translationProgress": 44,
