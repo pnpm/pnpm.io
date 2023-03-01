@@ -337,9 +337,9 @@ module.exports={
       id: {
         label: `Bahasa Indonesia (${progress["id"].translationProgress}%)`,
       },
-      hu: { label: `Magyar (${progress["hu"].translationProgress}%)` },
-      pl: { label: `Polski (${progress["pl"].translationProgress}%)` },
-      de: { label: `Deutsch (${progress["de"].translationProgress}%)` },
+      // hu: { label: `Magyar (${progress["hu"].translationProgress}%)` },
+      // pl: { label: `Polski (${progress["pl"].translationProgress}%)` },
+      // de: { label: `Deutsch (${progress["de"].translationProgress}%)` },
     },
   },
 }
