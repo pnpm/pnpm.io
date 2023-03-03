@@ -23,6 +23,9 @@ RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
 
+# If you patched any package, include patches before install too
+COPY patches patches
+
 RUN pnpm install --frozen-lockfile --prod
 
 # Bundle app source
@@ -53,6 +56,9 @@ RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
 
+# If you patched any package, include patches before install too
+COPY patches patches
+
 # for each sub-package, we have to add one extra step to copy its manifest
 # to the right place, as docker have no way to filter out only package.json with
 # single instruction
@@ -81,6 +87,9 @@ RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
 
 # pnpm fetch does require only lockfile
 COPY pnpm-lock.yaml ./
+
+# If you patched any package, include patches before running pnpm fetch 
+COPY patches patches
 
 RUN pnpm fetch --prod
 
