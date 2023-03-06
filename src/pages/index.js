@@ -108,9 +108,6 @@ const Showcase = props => {
               <a href={addUTM("https://vercel.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Vercel" src="/img/users/vercel.svg" />
               </a>
-              <a href={addUTM("https://doppler.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="320" alt="Doppler" src="/img/users/doppler.svg" />
-              </a>
               <a href={addUTM("https://depot.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Depot" src="/img/users/depot.svg" />
               </a>
