@@ -510,6 +510,66 @@ The maximum amount of time to wait for HTTP requests to complete.
 
 When `true`, any missing non-optional peer dependencies are automatically installed.
 
+### dedupe-peer-dependents
+
+Added in: v7.29.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When this setting is set to `true`, packages with peer dependencies will be deduplicated after peers resolution.
+
+For instance, let's say we have a workspace with two projects and both of them have `webpack` in their dependencies. `webpack` has `esbuild` in its optional peer dependencies, and one of the projects has `esbuild` in its dependencies. In this case, pnpm will link two instances of `webpack` to the `node_modules/.pnpm` directory: one with `esbuild` and another one without it:
+
+```
+node_modules
+  .pnpm
+    webpack@1.0.0_esbuild@1.0.0
+    webpack@1.0.0
+project1
+  node_modules
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0/node_modules/webpack
+project2
+  node_modules
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
+    esbuild
+```
+
+This makes sense because `webpack` is used in two projects, and one of the projects doesn't have `esbuild`, so the two projects cannot share the same instance of `webpack`. However, this is not what most developers expect, especially since in a hoisted `node_modules`, there would only be one instance of `webpack`. Therefore, you may now use the `dedupe-peer-dependents` setting to deduplicate `webpack` when it has no conflicting peer dependencies (explanation at the end). In this case, if we set `dedupe-peer-dependents` to `true`, both projects will use the same `webpack` instance, which is the one that has `esbuild` resolved:
+
+```
+node_modules
+  .pnpm
+    webpack@1.0.0_esbuild@1.0.0
+project1
+  node_modules
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
+project2
+  node_modules
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
+    esbuild
+```
+
+**What are conflicting peer dependencies?** By conflicting peer dependencies we mean a scenario like the following one:
+
+```
+node_modules
+  .pnpm
+    webpack@1.0.0_react@16.0.0_esbuild@1.0.0
+    webpack@1.0.0_react@17.0.0
+project1
+  node_modules
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0/node_modules/webpack
+    react (v17)
+project2
+  node_modules
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
+    esbuild
+    react (v16)
+```
+
+In this case, we cannot dedupe `webpack` as `webpack` has `react` in its peer dependencies and `react` is resolved from two different versions in the context of the two projects.
+
 ### strict-peer-dependencies
 
 * Default: **false** (was **true** from v7.0.0 until v7.13.5)
