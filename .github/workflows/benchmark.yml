@@ -19,7 +19,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: curl -f https://get.pnpm.io/v6.32.js | node - add --global pnpm@next-7
+      - run: |
+          corepack enable
+          corepack prepare pnpm@next-7 --activate
       - run: curl https://bun.sh/install | bash
       - run: /home/runner/.bun/bin/bun -v
       - run: pnpm --dir=benchmarks install
