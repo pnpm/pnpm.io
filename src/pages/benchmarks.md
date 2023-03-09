@@ -40,6 +40,4 @@ Why is pnpm so crazy fast compared to other "traditional" package managers?
 
 pnpm doesn't have blocking stages of installation. Each dependency has its own stages and the next stage starts as soon as possible.
 
-![](/img/installation-stages-of-other-pms.png)
-
-![](/img/installation-stages-of-pnpm.jpg)
+![](/img/installation-stages-of-pnpm-2.png)
