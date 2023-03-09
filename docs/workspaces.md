@@ -156,6 +156,7 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Milkdown](https://github.com/Saul-Mirone/milkdown) | ![](https://img.shields.io/github/stars/Saul-Mirone/milkdown) | 2021-09-26 | `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913` |
 | [Nhost](https://github.com/nhost/nhost) | ![](https://img.shields.io/github/stars/nhost/nhost) | 2022-02-07 | `10a1799a1fef2f558f737de3bb6cadda2b50e58f` |
 | [Logto](https://github.com/logto-io/logto) | ![](https://img.shields.io/github/stars/logto-io/logto) | 2021-07-29 | `0b002e07850c8e6d09b35d22fab56d3e99d77043` |
+| [Rushstack](https://github.com/microsoft/rushstack) | ![](https://img.shields.io/github/stars/microsoft/rushstack) | 2020-07-06 | `73ad06ae6a3ee09ef8e37ee05923e4643f86ce83` |
 | [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
 | [Rollup plugins](https://github.com/rollup/plugins) | ![](https://img.shields.io/github/stars/rollup/plugins) | 2021-09-21 | `53fb18c0c2852598200c547a0b1d745d15b5b487` |
 | [icestark](https://github.com/ice-lab/icestark) | ![](https://img.shields.io/github/stars/ice-lab/icestark) | 2021-12-16 | `4862326a8de53d02f617e7b1986774fd7540fccd` |
