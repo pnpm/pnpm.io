@@ -5,7 +5,7 @@ title: Motivation
 
 ## Saving disk space
 
-![](/img/pnpm-store.svg)
+![An illustration of the pnpm content-addressable store. On the illustration there are two projects with node_modules. The files in the node_modules directories are hard links to the same files in the content-addressable store.](/img/pnpm-store.svg)
 
 When using npm, if you have 100 projects using a dependency, you will
 have 100 copies of that dependency saved on disk. With pnpm, the dependency will be
@@ -32,11 +32,11 @@ pnpm perfoms installation in three stages:
 1. Directory structure calculation. The `node_modules` directory structure is calculated based on the dependencies.
 1. Linking dependencies. All remaining dependencies are fetched and hard linked from the store to `node_modules`.
 
-![](/img/installation-stages-of-pnpm.svg)
+![An illustration of the pnpm install process. Packages are resolved, fetched, and hard linked as soon as possible.](/img/installation-stages-of-pnpm.svg)
 
 This approach is significantly faster than the traditional three-stage installation process of resolving, fetching, and writing all dependencies to `node_modules`.
 
-![](/img/installation-stages-of-other-pms.svg)
+![An illustration of how package managers like Yarn Classic or npm install dependencies.](/img/installation-stages-of-other-pms.svg)
 
 ## Creating a non-flat node_modules directory
 
@@ -46,7 +46,7 @@ not added as dependencies to the project.
 
 By default, pnpm uses symlinks to add only the direct dependencies of the project into the root of the modules directory.
 
-![](/img/isolated-node-modules.svg)
+![An illustration of a node_modules directory created by pnpm. Packages in the root node_modules are symlinks to directories inside the node_modules/.pnpm directory](/img/isolated-node-modules.svg)
 
 If you'd like more details about the unique `node_modules` structure that pnpm
 creates and why it works fine with the Node.js ecosystem, read:
