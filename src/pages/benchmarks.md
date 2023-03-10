@@ -33,11 +33,3 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.github.io/blob/main
 | update  | n/a | n/a | n/a | 8.9s | 12s | 6.9s | 14.9s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
-
-## The reason pnpm is fast
-
-Why is pnpm so crazy fast compared to other "traditional" package managers?
-
-pnpm doesn't have blocking stages of installation. Each dependency has its own stages and the next stage starts as soon as possible.
-
-![](/img/installation-stages-of-pnpm-2.png)

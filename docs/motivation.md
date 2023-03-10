@@ -3,9 +3,9 @@ id: motivation
 title: Motivation
 ---
 
-## Saving disk space and boosting installation speed
+## Saving disk space
 
-[![](/img/cafs-illustration.jpg)](https://twitter.com/HemSays/status/1434921646083563525/photo/1)
+![An illustration of the pnpm content-addressable store. On the illustration there are two projects with node_modules. The files in the node_modules directories are hard links to the same files in the content-addressable store.](/img/pnpm-store.svg)
 
 When using npm, if you have 100 projects using a dependency, you will
 have 100 copies of that dependency saved on disk. With pnpm, the dependency will be
@@ -24,15 +24,30 @@ across projects.
 As a result, you save a lot of space on your disk proportional to the number of
 projects and dependencies, and you have a lot faster installations!
 
-## Creating a non-flat node_modules directory
+## Boosting installation speed
 
-[![](/img/node-modules-structure.jpg)](https://twitter.com/xiaokedada/status/1471691763102679041/photo/1)
+pnpm perfoms installation in three stages:
+
+1. Dependency resolution. All required dependencies are identified and fetched to the store.
+1. Directory structure calculation. The `node_modules` directory structure is calculated based on the dependencies.
+1. Linking dependencies. All remaining dependencies are fetched and hard linked from the store to `node_modules`.
+
+![An illustration of the pnpm install process. Packages are resolved, fetched, and hard linked as soon as possible.](/img/installation-stages-of-pnpm.svg)
+
+This approach is significantly faster than the traditional three-stage installation process of resolving, fetching, and writing all dependencies to `node_modules`.
+
+![An illustration of how package managers like Yarn Classic or npm install dependencies.](/img/installation-stages-of-other-pms.svg)
+
+## Creating a non-flat node_modules directory
 
 When installing dependencies with npm or Yarn Classic, all packages are hoisted to the root of the
 modules directory. As a result, source code has access to dependencies that are
 not added as dependencies to the project.
 
 By default, pnpm uses symlinks to add only the direct dependencies of the project into the root of the modules directory.
+
+![An illustration of a node_modules directory created by pnpm. Packages in the root node_modules are symlinks to directories inside the node_modules/.pnpm directory](/img/isolated-node-modules.svg)
+
 If you'd like more details about the unique `node_modules` structure that pnpm
 creates and why it works fine with the Node.js ecosystem, read:
 - [Flat node_modules is not the only way](/blog/2020/05/27/flat-node-modules-is-not-the-only-way)

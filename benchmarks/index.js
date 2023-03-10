@@ -179,15 +179,6 @@ async function run () {
       <img alt="Graph of the ${fixture.name} results" src="/img/benchmarks/${fixture.name}.svg" />
     `)
 
-    sections.push(`## The reason pnpm is fast
-
-Why is pnpm so crazy fast compared to other "traditional" package managers?
-
-pnpm doesn't have blocking stages of installation. Each dependency has its own stages and the next stage starts as soon as possible.
-
-![](/img/installation-stages-of-pnpm-2.png)
-`)
-
     svgs.push({
       path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
       file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions, formattedNow)
