@@ -40,13 +40,14 @@ This approach is significantly faster than the traditional three-stage installat
 
 ## Creating a non-flat node_modules directory
 
-[![](/img/node-modules-structure.jpg)](https://twitter.com/xiaokedada/status/1471691763102679041/photo/1)
-
 When installing dependencies with npm or Yarn Classic, all packages are hoisted to the root of the
 modules directory. As a result, source code has access to dependencies that are
 not added as dependencies to the project.
 
 By default, pnpm uses symlinks to add only the direct dependencies of the project into the root of the modules directory.
+
+![](/img/isolated-node-modules.svg)
+
 If you'd like more details about the unique `node_modules` structure that pnpm
 creates and why it works fine with the Node.js ecosystem, read:
 - [Flat node_modules is not the only way](/blog/2020/05/27/flat-node-modules-is-not-the-only-way)
