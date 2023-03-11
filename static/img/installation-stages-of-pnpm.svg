@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="135.09505 1407 825.5235 314.396" width="825.5235" height="314.396">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="135.09505 1407 574.3487 314.396" width="574.3487" height="314.396">
   <defs>
     <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="black">
       <g>
@@ -8,9 +8,9 @@
       </g>
     </marker>
   </defs>
-  <g id="Canvas_1" stroke-dasharray="none" fill="none" stroke-opacity="1" fill-opacity="1" stroke="none">
+  <g id="Canvas_1" stroke-opacity="1" fill="none" fill-opacity="1" stroke-dasharray="none" stroke="none">
     <title>Canvas 1</title>
-    <rect fill="white" x="135.09505" y="1407" width="825.5235" height="314.396"/>
+    <rect fill="white" x="135.09505" y="1407" width="574.3487" height="314.396"/>
     <g id="Canvas_1_Layer_1">
       <title>Layer 1</title>
       <g id="Graphic_148">
