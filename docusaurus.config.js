@@ -4,7 +4,7 @@ const progress = require("./scripts/progress_lang.json");
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
 const GITHUB_SPONSOR_URL = 'https://github.com/sponsors/pnpm';
 const SPONSOR_URL = 'https://opencollective.com/pnpm';
-const TRANSLATE_URL = "https://crowdin.com/project/pnpm";
+const TRANSLATE_URL = "https://translate.pnpm.io";
 const CRYPTO_DONATIONS_HREF = '/crypto-donations';
 const LOCALE_CI = process.env.LOCALE_CI;
 const DEFAULT_LOCALE = 'en';
@@ -17,7 +17,7 @@ const LOCALE_FULL_CODE = {
 function makeEditUrl (locale, path1, path2) {
   // Link to Crowdin for non-English docs
   if (locale !== DEFAULT_LOCALE) {
-    return `https://crowdin.com/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
+    return `https://translate.pnpm.io/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
   }
   if (path1 === 'versioned_docs/version-7.x') {
     return `https://github.com/pnpm/pnpm.github.io/edit/main/docs/${path2}`;
@@ -170,7 +170,7 @@ module.exports={
           position: 'right',
           dropdownItemsAfter: [
             {
-              to: 'https://crowdin.com/project/pnpm',
+              to: 'https://translate.pnpm.io',
               label: 'Help Us Translate',
             },
           ],
