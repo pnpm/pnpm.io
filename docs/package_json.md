@@ -88,6 +88,10 @@ And this will be the `package.json` of `form`:
 
 `button` will be hard linked into the dependencies of `form`, and `react@17` will be symlinked to the dependencies of `form/node_modules/button`.
 
+In contrast to normal dependencies, injected ones are not symlinked to the destination folder, so they are not updated automatically, e.g. after running the build script. To update the hard linked folder contents to the latest state of the dependency package folder, call `pnpm i` again.
+
+Note that the `button` package must have any lifecycle script that runs on install in order for `pnpm` to detect the changes and update it. For example, the package can be rebuilt on install: `"prepare": "pnpm run build"`. Any script would work, even a simple unrelated command without side effects, like this: `"prepare": "pnpm root"`.
+
 ## peerDependenciesMeta
 
 This field lists some extra information related to the dependencies listed in
