@@ -997,7 +997,7 @@ Set this to `true` if the registry that you are using returns the "time" field i
 
 Added in: v7.25.0
 
-* Default: **true** (**false** since v7.29.2)
+* Default: **true**
 * Type: **Boolean**
 
 When `false`, the `NODE_PATH` environment variable is not set in the command shims.
