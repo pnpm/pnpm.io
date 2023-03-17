@@ -105,6 +105,7 @@ root of `node_modules`, you can set this to `true` to hoist them for you.
 ### store-dir
 
 * Default:
+  * If the **$PNPM_HOME** env variable is set, then **$PNPM_HOME/store**
   * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/store**
   * On Windows: **~/AppData/Local/pnpm/store**
   * On macOS: **~/Library/pnpm/store**
