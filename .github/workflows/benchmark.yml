@@ -21,7 +21,7 @@ jobs:
           node-version: 16
       - run: |
           corepack enable
-          corepack prepare pnpm@next-7 --activate
+          corepack prepare pnpm@next-8 --activate
       - run: curl https://bun.sh/install | bash
       - run: /home/runner/.bun/bin/bun -v
       - run: pnpm --dir=benchmarks install

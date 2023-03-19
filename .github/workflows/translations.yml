@@ -20,7 +20,9 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - name: Install pnpm
-        run: npm i --location=global pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@next-8 --activate
       - name: Install dependencies
         run: pnpm install
       - name: update translations
