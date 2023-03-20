@@ -3,8 +3,6 @@ id: patch
 title: "pnpm patch <pkg>"
 ---
 
-Added in: v7.4.0
-
 Prepare a package for patching (inspired by a similar command in Yarn).
 
 This command will cause a package to be extracted in a temporary directory intended to be editable at will.
@@ -25,12 +23,8 @@ pnpm patch <pkg name>@<version>
 
 ### --edit-dir &lt;dir>
 
-Added in: v7.11.0
-
 The package that needs to be patched will be extracted to this directory.
 
 ### --ignore-existing
-
-Added in: v7.25.0
 
 Ignore existing patch files when patching.

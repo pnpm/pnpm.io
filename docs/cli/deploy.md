@@ -3,8 +3,6 @@ id: deploy
 title: "pnpm deploy"
 ---
 
-Added in: v7.4.0
-
 Deploy a package from a workspace.
 
 Usage:

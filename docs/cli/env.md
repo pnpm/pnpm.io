@@ -50,8 +50,6 @@ pnpm env use --global argon
 
 ### remove, rm
 
-Added in: v7.10.0
-
 Removes the specified version of Node.JS.
 
 Usage example:
@@ -61,8 +59,6 @@ pnpm env remove --global 14.0.0
 ```
 
 ### list, ls
-
-Added in: v7.16.0
 
 List Node.js versions available locally or remotely.
 

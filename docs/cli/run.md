@@ -25,8 +25,6 @@ as already existing pnpm commands).
 
 ## Running multiple scripts
 
-Added in: v7.27.0
-
 You may run multiple scripts at the same time by using a regex instead of the script name.
 
 ```sh
@@ -175,13 +173,9 @@ will be like running `pnpm prefoo && pnpm foo && pnpm postfoo`.
 
 ### --resume-from &lt;package_name\>
 
-Added in: v7.22.0
-
 Resume execution from a particular project. This can be useful if you are working with a large workspace and you want to restart a build at a particular project without running through all of the projects that precede it in the build order.
 
 ### --report-summary
-
-Added in: v7.28.0
 
 Record the result of the scripts executions into a `pnpm-exec-summary.json` file.
 

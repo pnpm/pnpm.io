@@ -415,8 +415,6 @@ It is also possible to suppress the warnings only for peer dependencies of speci
 
 ### pnpm.peerDependencyRules.allowAny
 
-Added in: v7.3.0
-
 `allowAny` is an array of package name patterns, any peer dependency matching the pattern will be resolved from any version, regardless of the range specified in `peerDependencies`. For instance:
 
 ```json
@@ -462,8 +460,6 @@ Example:
 
 ## pnpm.allowedDeprecatedVersions
 
-Added in: v7.2.0
-
 This setting allows muting deprecation warnings of specific packages.
 
 Example:
@@ -483,8 +479,6 @@ With the above configuration pnpm will not print deprecation warnings about any 
 
 ## pnpm.patchedDependencies
 
-Added in: v7.4.0
-
 This field is added/updated automatically when you run [pnpm patch-commit]. It is a dictionary where the key should be the package name and exact version. The value should be a relative path to a patch file.
 
 Example:
@@ -501,8 +495,6 @@ Example:
 
 ## pnpm.allowNonAppliedPatches
 
-Added in: v7.12.0
-
 When `true`, installation won't fail if some of the patches from the `patchedDependencies` field were not applied.
 
 ```json
@@ -518,8 +510,6 @@ When `true`, installation won't fail if some of the patches from the `patchedDep
 ## pnpm.updateConfig
 
 ### pnpm.updateConfig.ignoreDependencies
-
-Added in: v7.13.0
 
 Sometimes you can't update a dependency. For instance, the latest version of the dependency started to use ESM but your project is not yet in ESM. Annoyingly, such a package will be always printed out by the `pnpm outdated` command and updated, when running `pnpm update --latest`. However, you may list packages that you don't want to upgrade in the `ignoreDependencies` field:
 
@@ -539,8 +529,6 @@ Patterns are also supported, so you may ignore any packages from a scope: `@babe
 
 ### pnpm.auditConfig.ignoreCves
 
-Added in: v7.15.0
-
 A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
 
 ```json
@@ -558,8 +546,6 @@ A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
 [`pnpm audit`]: ./cli/audit.md
 
 ## pnpm.requiredScripts
-
-Added in: v7.19.0
 
 Scripts listed in this array will be required in each project of the workspace. Otherwise, `pnpm -r run <script name>` will fail.
 

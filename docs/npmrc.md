@@ -48,7 +48,7 @@ hoist-pattern[]=*eslint*
 hoist-pattern[]=*babel*
 ```
 
-Since v7.12.0, you may also exclude patterns from hoisting using `!`.
+You may also exclude patterns from hoisting using `!`.
 
 For instance:
 
@@ -80,7 +80,7 @@ public-hoist-pattern[]=*plugin*
 Note: Setting `shamefully-hoist` to `true` is the same as setting
 `public-hoist-pattern` to `*`.
 
-Since v7.12.0, you may also exclude patterns from hoisting using `!`.
+You may also exclude patterns from hoisting using `!`.
 
 For instance:
 
@@ -253,16 +253,12 @@ modify the lockfile.
 
 ### lockfile-include-tarball-url
 
-Added in: v7.6.0
-
 * Default: **false**
 * Type: **Boolean**
 
 Add the full URL to the package's tarball to every entry in `pnpm-lock.yaml`.
 
 ### use-lockfile-v6
-
-Added in: v7.24.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -571,7 +567,7 @@ In this case, we cannot dedupe `webpack` as `webpack` has `react` in its peer de
 
 ### strict-peer-dependencies
 
-* Default: **false** (was **true** from v7.0.0 until v7.13.5)
+* Default: **false**
 * Type: **Boolean**
 
 If this is enabled, commands will fail if there is a missing or invalid peer
@@ -664,8 +660,6 @@ This flag does not prevent the execution of [.pnpmfile.cjs](../pnpmfile.md)
 :::
 
 ### ignore-dep-scripts
-
-Added in: v7.9.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -830,8 +824,6 @@ If `foo@1.0.0` is in the workspace and you run `pnpm add foo` in another project
 
 ### include-workspace-root
 
-Added in: v7.4.0
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -936,8 +928,6 @@ Set to `false` to suppress the update notification when using an older version o
 
 ### prefer-symlinked-executables
 
-Added in: v7.6.0
-
 * Default: **true**, when **node-linker** is set to **hoisted** and the system is POSIX
 * Type: **Boolean**
 
@@ -945,16 +935,12 @@ Create symlinks to executables in `node_modules/.bin` instead of command shims. 
 
 ### verify-store-integrity
 
-Added in: v7.7.0
-
 * Default: **true**
 * Type: **Boolean**
 
 By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's `node_modules`. If `verify-store-integrity` is set to `false`, files in the content-addressable store will not be checked during installation.
 
 ### ignore-compatibility-db
-
-Added in: v7.9.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -981,16 +967,12 @@ When `resolution-mode` is set to `lowest-direct`, direct dependencies will be re
 
 ### registry-supports-time-field
 
-Added in: v7.10.0
-
 * Default: **false**
 * Type: **Boolean**
 
 Set this to `true` if the registry that you are using returns the "time" field in the abbreviated metadata. As of now, only [Verdaccio] from v5.15.1 supports this.
 
 ### extend-node-path
-
-Added in: v7.25.0
 
 * Default: **true**
 * Type: **Boolean**

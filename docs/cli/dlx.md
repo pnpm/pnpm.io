@@ -41,8 +41,6 @@ pnpm --package=yo --package=generator-webapp dlx yo webapp --skip-install
 
 ### --shell-mode, -c
 
-Added in: v7.21.0
-
 Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
 
 Example: 

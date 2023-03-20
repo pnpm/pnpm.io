@@ -33,8 +33,6 @@ Print details.
 
 ### --format &lt;format\>
 
-Added in: v7.15.0
-
 * Default: **table**
 * Type: **table**, **list**, **json**
 
