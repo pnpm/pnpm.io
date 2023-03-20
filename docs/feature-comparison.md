@@ -8,7 +8,7 @@ title: Feature Comparison
 | Workspace support | ✔️ | ✔️ | ✔️ |
 | Isolated `node_modules` | ✔️ - The default | ✔️ | ✔️ |
 | Hoisted `node_modules` | ✔️ | ✔️ | ✔️ - The default |
-| Autoinstalling peers | ✔️ - Via [auto-install-peers=true] | ❌ | ✔️  |
+| Autoinstalling peers | ✔️ | ❌ | ✔️  |
 | Plug'n'Play | ✔️ | ✔️ - The default | ❌ |
 | Zero-Installs | ❌ | ✔️ | ❌ |
 | Patching dependencies | ✔️ | ✔️ | ❌ |
@@ -20,4 +20,3 @@ title: Feature Comparison
 | Side-effects cache | ✔️ | ❌ | ❌ |
 | Listing licenses | ✔️  - Via `pnpm licenses list` | ✔️  - Via a plugin | ❌ |
 
-[auto-install-peers=true]: npmrc.md#auto-install-peers

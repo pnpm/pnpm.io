@@ -515,7 +515,7 @@ When `true`, any missing non-optional peer dependencies are automatically instal
 
 Added in: v7.29.0
 
-* Default: **true**
+* Default: **false**
 * Type: **Boolean**
 
 When this setting is set to `true`, packages with peer dependencies will be deduplicated after peers resolution.

@@ -201,7 +201,8 @@ It is expected to have a modified version of the current package in the specifie
 
 ### publishConfig.linkDirectory
 
-Added in: v7.8.0
+* Default: **true**
+* Type: **Boolean**
 
 When set to `true`, the project will be symlinked from the `publishConfig.directory` location during local development.
 

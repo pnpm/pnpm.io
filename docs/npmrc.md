@@ -506,14 +506,12 @@ The maximum amount of time to wait for HTTP requests to complete.
 
 ### auto-install-peers
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When `true`, any missing non-optional peer dependencies are automatically installed.
 
 ### dedupe-peer-dependents
-
-Added in: v7.29.0
 
 * Default: **true**
 * Type: **Boolean**
@@ -581,9 +579,7 @@ dependency in the tree.
 
 ### resolve-peers-from-workspace-root
 
-Added in: v7.23.0
-
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When enabled, dependencies of the root workspace project are used to resolve peer dependencies of any projects in the workspace.
@@ -813,7 +809,7 @@ This is a result of the aforementioned symbolic linking.
 
 ### save-workspace-protocol
 
-* Default: **true**
+* Default: **rolling**
 * Type: **true**, **false**, **rolling**
 
 This setting controls how dependencies that are linked from the workspace are added to `package.json`.
@@ -969,10 +965,8 @@ The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
 
 ### resolution-mode
 
-Added in: v7.10.0
-
-* Default: **highest**
-* Type: **highest**, **time-based**, **lowest-direct** (added in: v7.27.0)
+* Default: **lowest-direct**
+* Type: **highest**, **time-based**, **lowest-direct**
 
 When `resolution-mode` is set to `time-based`, dependencies will be resolved the following way:
 
@@ -1006,3 +1000,10 @@ When `false`, the `NODE_PATH` environment variable is not set in the command shi
 [`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
 [full metadata]: https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md#full-metadata-format
 [Verdaccio]: https://verdaccio.org/
+
+### deploy-all-files
+
+* Default: **false**
+* Type: **Boolean**
+
+When deploying a package or installing a local package, all files of the package are copied. By default, if the package has a `"files"` field in the `package.json`, then only the listed files and directories are copied.
