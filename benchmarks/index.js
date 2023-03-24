@@ -1,6 +1,5 @@
 'use strict'
 import fs from 'fs'
-import { promisify } from 'util'
 import rimraf from 'rimraf'
 import commonTags from 'common-tags'
 import prettyMs from 'pretty-ms'
@@ -129,7 +128,7 @@ run()
 async function run () {
   const managersDir = path.join(tempy.directory(), 'managers')
   await Promise.allSettled([
-    promisify(rimraf)(TMP),
+    rimraf(TMP),
     // make sure folder exists
     fs.promises.mkdir(managersDir, { recursive: true }),
     fs.promises.mkdir(BENCH_IMGS, { recursive: true }),
