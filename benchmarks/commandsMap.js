@@ -13,6 +13,21 @@ export default {
       '--legacy-peer-deps'
     ]
   },
+  npm_linked: {
+    scenario: 'npm_linked',
+    legend: 'npm linked',
+    name: 'npm',
+    args: [
+      'install',
+      '--install-strategy=linked',
+      '--no-fund',
+      '--no-audit',
+      '--ignore-scripts',
+      '--cache=cache',
+      '--registry=https://registry.npmjs.org/',
+      '--legacy-peer-deps'
+    ]
+  },
   pnpm: {
     scenario: 'pnpm',
     legend: 'pnpm',
