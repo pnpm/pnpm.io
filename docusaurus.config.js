@@ -19,7 +19,7 @@ function makeEditUrl (locale, path1, path2) {
   if (locale !== DEFAULT_LOCALE) {
     return `https://translate.pnpm.io/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
   }
-  if (path1 === 'versioned_docs/version-7.x') {
+  if (path1 === 'versioned_docs/version-8.x') {
     return `https://github.com/pnpm/pnpm.github.io/edit/main/docs/${path2}`;
   }
   // Link to GitHub for English docs
@@ -56,7 +56,7 @@ module.exports={
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
-          lastVersion: '7.x',
+          lastVersion: '8.x',
         },
         "gtag": {
           trackingID: "UA-91385296-1",
