@@ -40,7 +40,7 @@ wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which da
 
 ### Prerequisites
 
-If you don't use the standalone script to install pnpm, then you need to have Node.js (at least v14) to be installed on your system.
+If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v14) to be installed on your system.
 
 ### Installing a specific version
 
@@ -84,8 +84,20 @@ corepack prepare pnpm@latest --activate
 
 ## Using npm
 
+We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
+
+- [`pnpm`](https://www.npmjs.com/package/pnpm) is a ordinary version of pnpm, which needs Node.js to run.
+- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed.
+
+
 ```sh
 npm install -g pnpm
+```
+
+or
+
+```sh
+npm install -g @pnpm/exe
 ```
 
 ## Using Homebrew
