@@ -5,7 +5,7 @@ title: Installation
 
 ## Prerequisites
 
-If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v16) to be installed on your system.
+If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v16.14) to be installed on your system.
 
 ## Using a standalone script
 
