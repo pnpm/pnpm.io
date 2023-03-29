@@ -3,6 +3,10 @@ id: installation
 title: Installation
 ---
 
+## Prerequisites
+
+If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v16) to be installed on your system.
+
 ## Using a standalone script
 
 You may install pnpm even if you don't have Node.js installed, using the following scripts.
@@ -37,10 +41,6 @@ wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)"
 # dash
 wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
 ```
-
-### Prerequisites
-
-If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v14) to be installed on your system.
 
 ### Installing a specific version
 
