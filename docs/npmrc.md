@@ -822,6 +822,15 @@ If `foo@1.0.0` is in the workspace and you run `pnpm add foo` in another project
 
 When executing commands recursively in a workspace, execute them on the root workspace project as well.
 
+### ignore-worksapce-cycles
+
+Added in: v8.1.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, no workspace cycle warnings will be printed.
+
 ## Other Settings
 
 ### use-running-store-server
@@ -982,3 +991,12 @@ When `false`, the `NODE_PATH` environment variable is not set in the command shi
 * Type: **Boolean**
 
 When deploying a package or installing a local package, all files of the package are copied. By default, if the package has a `"files"` field in the `package.json`, then only the listed files and directories are copied.
+
+### dedupe-direct-dependents
+
+Added in: v8.1.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, dependencies that are already symlinked to the root `node_modules` directory of the workspace will not be symlinked to subproject `node_modules` directories.
