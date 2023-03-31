@@ -142,6 +142,7 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Nuxt](https://github.com/nuxt/nuxt) | ![](https://img.shields.io/github/stars/nuxt/nuxt) | 2022-10-17 | `74a90c566c936164018c086030c7de65b26a5cb6` |
 | [Vue 3.0](https://github.com/vuejs/vue-next) | ![](https://img.shields.io/github/stars/vuejs/vue-next) | 2021-10-09 | `61c5fbd3e35152f5f32e95bf04d3ee083414cecb` |
 | [Prisma](https://github.com/prisma/prisma) | ![](https://img.shields.io/github/stars/prisma/prisma) | 2021-09-21 | `c4c83e788aa16d61bae7a6d00adc8a58b3789a06` |
+| [n8n](https://github.com/n8n-io/n8n) | ![](https://img.shields.io/github/stars/n8n-io/n8n) | 2022-11-09 | `736777385c54d5b20174c9c1fda38bb31fbf14b4` |
 | [Slidev](https://github.com/slidevjs/slidev) | ![](https://img.shields.io/github/stars/slidevjs/slidev) | 2021-04-12 | `d6783323eb1ab1fc612577eb63579c8f7bc99c3a` |
 | [Astro](https://github.com/withastro/astro) | ![](https://img.shields.io/github/stars/withastro/astro) | 2022-03-08 | `240d88aefe66c7d73b9c713c5da42ae789c011ce` |
 | [Turborepo](https://github.com/vercel/turborepo) | ![](https://img.shields.io/github/stars/vercel/turborepo) | 2022-03-02 | `fd171519ec02a69c9afafc1bc5d9d1b481fba721` |
