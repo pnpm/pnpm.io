@@ -992,7 +992,7 @@ When `false`, the `NODE_PATH` environment variable is not set in the command shi
 
 When deploying a package or installing a local package, all files of the package are copied. By default, if the package has a `"files"` field in the `package.json`, then only the listed files and directories are copied.
 
-### dedupe-direct-dependents
+### dedupe-direct-deps
 
 Added in: v8.1.0
 
