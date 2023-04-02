@@ -822,7 +822,7 @@ If `foo@1.0.0` is in the workspace and you run `pnpm add foo` in another project
 
 When executing commands recursively in a workspace, execute them on the root workspace project as well.
 
-### ignore-worksapce-cycles
+### ignore-workspace-cycles
 
 Added in: v8.1.0
 
