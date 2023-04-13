@@ -8,8 +8,8 @@
         "approvalProgress": 30
     },
     "id": {
-        "translationProgress": 22,
-        "approvalProgress": 21
+        "translationProgress": 28,
+        "approvalProgress": 28
     },
     "it": {
         "translationProgress": 69,
@@ -36,11 +36,11 @@
         "approvalProgress": 16
     },
     "zh-CN": {
-        "translationProgress": 74,
-        "approvalProgress": 74
+        "translationProgress": 76,
+        "approvalProgress": 76
     },
     "zh-TW": {
         "translationProgress": 47,
-        "approvalProgress": 46
+        "approvalProgress": 47
     }
 }
