@@ -255,8 +255,10 @@ This is achieved by prefixing the name of the dependency with a `$`:
   "dependencies": {
     "foo": "^1.0.0"
   },
-  "overrides": {
-    "foo": "$foo"
+  "pnpm": {
+    "overrides": {
+      "foo": "$foo"
+    }
   }
 }
 ```
@@ -268,9 +270,11 @@ The referenced package does not need to match the overridden one:
   "dependencies": {
     "foo": "^1.0.0"
   },
-  "overrides": {
-    "bar": "$foo"
-  }
+  "pnpm": {
+    "overrides": {
+      "bar": "$foo"
+    }
+  }  
 }
 ```
 
