@@ -19,6 +19,8 @@ The four relevant files are:
 
 All `.npmrc` files are an [INI-formatted] list of `key = value` parameters.
 
+Values in the `.npmrc` files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string.
+
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
 ## Dependency Hoisting Settings
