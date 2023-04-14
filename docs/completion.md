@@ -35,13 +35,14 @@ brew install fig
 
 [Fig]: https://fig.io/
 
-## More advanced completion
+## g-plane/pnpm-shell-completion
 
-### features
+[pnpm-shell-completion] is a shell plugin maintained by Pig Fang on Github.
+
+Features:
+
 - Provide completion for `pnpm --filter <package>`.
 - Provide completion for `pnpm remove` command, even in workspace's packages (by specifying `--filter` option).
-- Provide completion for npm scripts in `package.json`.
+- Provide completion for scripts in `package.json`.
 
-### installation
-
-please refer to [pnpm-shell-completion](https://github.com/g-plane/pnpm-shell-completion)
+[pnpm-shell-completion]: https://github.com/g-plane/pnpm-shell-completion
