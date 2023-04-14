@@ -39,9 +39,10 @@ List packages in the global install directory instead of in the current project.
 
 Max display depth of the dependency tree.
 
-`pnpm ls --depth 0` will list direct dependencies only.
+`pnpm ls --depth 0` (default) will list direct dependencies only.
 `pnpm ls --depth -1` will list projects only. Useful inside a workspace when
 used with the `-r` option.
+`pnpm ls --depth Infinity` will list all dependencies regardless of depth.
 
 ### --prod, -P
 
