@@ -8,39 +8,39 @@
         "approvalProgress": 30
     },
     "id": {
-        "translationProgress": 28,
-        "approvalProgress": 28
+        "translationProgress": 29,
+        "approvalProgress": 27
     },
     "it": {
-        "translationProgress": 69,
-        "approvalProgress": 68
+        "translationProgress": 65,
+        "approvalProgress": 64
     },
     "ja": {
-        "translationProgress": 72,
-        "approvalProgress": 72
+        "translationProgress": 79,
+        "approvalProgress": 68
     },
     "ko": {
-        "translationProgress": 60,
-        "approvalProgress": 60
+        "translationProgress": 57,
+        "approvalProgress": 56
     },
     "pt-BR": {
-        "translationProgress": 47,
-        "approvalProgress": 46
+        "translationProgress": 45,
+        "approvalProgress": 44
     },
     "ru": {
         "translationProgress": 37,
-        "approvalProgress": 37
+        "approvalProgress": 36
     },
     "tr": {
         "translationProgress": 30,
         "approvalProgress": 16
     },
     "zh-CN": {
-        "translationProgress": 76,
-        "approvalProgress": 76
+        "translationProgress": 72,
+        "approvalProgress": 72
     },
     "zh-TW": {
-        "translationProgress": 47,
-        "approvalProgress": 47
+        "translationProgress": 44,
+        "approvalProgress": 44
     }
 }
