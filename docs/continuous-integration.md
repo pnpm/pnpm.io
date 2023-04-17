@@ -120,7 +120,7 @@ stages:
 
 build:
   stage: build
-  image: node:14.16.0-buster
+  image: node:16.9.0
   before_script:
     - corepack enable
     - corepack prepare pnpm@latest-8 --activate
@@ -149,7 +149,7 @@ pipelines:
     "**":
       - step:
           name: Build and test
-          image: node:14.16.0
+          image: node:16.9.0
           script:
             - corepack enable
             - corepack prepare pnpm@latest-8 --activate
