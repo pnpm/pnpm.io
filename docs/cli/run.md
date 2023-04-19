@@ -63,7 +63,12 @@ to be implicit rather than explicit, obfuscating the execution flow. It also led
 to surprising executions with `pnpm serve` also running `pnpm preserve`.
 
 If for some reason you need the pre/post scripts behavior of npm, use the
-`enable-pre-post-scripts` option.
+`enable-pre-post-scripts` option. Make sure it comes before any arguments, like so
+```sh
+pnpm --enable-pre-post-scripts start
+
+pnpm start --enable-pre-post-scripts # incorrect
+```
 
 ## Environment
 
