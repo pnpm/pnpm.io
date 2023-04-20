@@ -116,6 +116,14 @@ If you have Scoop installed, you can install pnpm using the following command:
 scoop install nodejs-lts pnpm
 ```
 
+## Using Choco
+
+If you have Chocolatey installed, you can install pnpm using the following command:
+
+```
+choco install pnpm
+```
+
 :::tip
 
 Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).
