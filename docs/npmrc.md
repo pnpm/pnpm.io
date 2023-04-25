@@ -30,7 +30,7 @@ Values in the `.npmrc` files may contain env variables using the `${NAME}` synta
 * Default: **true**
 * Type: **boolean**
 
-When `true`, all dependencies are hoisted to `node_modules/.pnpm`. This makes
+When `true`, all dependencies are hoisted to `node_modules/.pnpm/node_modules`. This makes
 unlisted dependencies accessible to all packages inside `node_modules`.
 
 ### hoist-pattern
@@ -38,7 +38,7 @@ unlisted dependencies accessible to all packages inside `node_modules`.
 * Default: **['\*']**
 * Type: **string[]**
 
-Tells pnpm which packages should be hoisted to `node_modules/.pnpm`. By
+Tells pnpm which packages should be hoisted to `node_modules/.pnpm/node_modules`. By
 default, all packages are hoisted - however, if you know that only some flawed
 packages have phantom dependencies, you can use this option to exclusively hoist
 the phantom dependencies (recommended).
