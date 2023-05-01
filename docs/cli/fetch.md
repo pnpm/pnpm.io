@@ -114,11 +114,11 @@ time.
 
 ## Options
 
-### --dev
+### --dev, -D
 
 Only development packages will be fetched
 
-### --prod
+### --prod, -P
 
 Development packages will not be fetched
 
