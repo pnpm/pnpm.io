@@ -11,6 +11,12 @@ Create a tarball from a package.
 
 Directory in which `pnpm pack` will save tarballs. The default is the current working directory.
 
+### --pack-gzip-level &lt;level\>
+
+Added in: v8.3.0
+
+Specifying custom compression level.
+
 ## Life Cycle Scripts
 
 * `prepack`

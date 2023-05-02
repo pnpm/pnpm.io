@@ -147,3 +147,9 @@ dependencies.
 ### --filter &lt;package_selector>
 
 [Read more about filtering.](../filtering.md)
+
+### --resolution-only
+
+Added in: v8.3.0
+
+Re-runs resolution: useful for printing out peer dependency issues.
