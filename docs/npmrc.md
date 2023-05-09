@@ -650,7 +650,7 @@ dependencies.
 
 :::note
 
-This flag does not prevent the execution of [.pnpmfile.cjs](../pnpmfile.md)
+This flag does not prevent the execution of [.pnpmfile.cjs](./pnpmfile.md)
 
 :::
 

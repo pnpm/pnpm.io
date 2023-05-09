@@ -26,9 +26,15 @@
           "cli/prune",
           "cli/fetch",
           "cli/install-test",
-          "cli/patch",
-          "cli/patch-commit",
           "cli/dedupe"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Patch dependencies",
+        "items": [
+          "cli/patch",
+          "cli/patch-commit"
         ]
       },
       {
