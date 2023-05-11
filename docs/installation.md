@@ -140,6 +140,7 @@ Here is a list of past pnpm versions with respective Node.js version support.
 | Node.js 14 | ✔️      | ✔️      | ✔️      | ❌     |
 | Node.js 16 | ?️      | ✔️      | ✔️      | ✔️      |
 | Node.js 18 | ?️      | ✔️      | ✔️      | ✔️      |
+| Node.js 20 | ?️      | ?      | ✔️      | ✔️      |
 
 ## Troubleshooting
 
