@@ -120,10 +120,10 @@ stages:
 
 build:
   stage: build
-  image: node:16.9.0
+  image: node:16.20.0
   before_script:
     - corepack enable
-    - corepack prepare pnpm@latest-8 --activate
+    - corepack prepare pnpm@8.5.1 --activate
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -149,10 +149,10 @@ pipelines:
     "**":
       - step:
           name: Build and test
-          image: node:16.9.0
+          image: node:16.20.0
           script:
             - corepack enable
-            - corepack prepare pnpm@latest-8 --activate
+            - corepack prepare pnpm@8.5.1 --activate
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
