@@ -123,7 +123,7 @@ build:
   image: node:16.20.0
   before_script:
     - corepack enable
-    - corepack prepare pnpm@8.5.1 --activate
+    - corepack prepare pnpm@latest-8 --activate
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -152,7 +152,7 @@ pipelines:
           image: node:16.20.0
           script:
             - corepack enable
-            - corepack prepare pnpm@8.5.1 --activate
+            - corepack prepare pnpm@latest-8 --activate
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
