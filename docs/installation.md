@@ -108,6 +108,14 @@ If you have the package manager installed, you can install pnpm using the follow
 brew install pnpm
 ```
 
+## Using winget
+
+If you have winget installed, you can install pnpm using the following command:
+
+```
+winget install pnpm
+```
+
 ## Using Scoop
 
 If you have Scoop installed, you can install pnpm using the following command:
