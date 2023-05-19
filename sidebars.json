@@ -34,7 +34,8 @@
         "label": "Patch dependencies",
         "items": [
           "cli/patch",
-          "cli/patch-commit"
+          "cli/patch-commit",
+          "cli/patch-remove"
         ]
       },
       {

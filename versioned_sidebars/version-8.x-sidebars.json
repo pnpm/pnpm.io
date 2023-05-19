@@ -98,6 +98,17 @@
             },
             {
               "type": "doc",
+              "id": "version-8.x/cli/dedupe"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Patch dependencies",
+          "items": [
+            {
+              "type": "doc",
               "id": "version-8.x/cli/patch"
             },
             {
@@ -106,7 +117,7 @@
             },
             {
               "type": "doc",
-              "id": "version-8.x/cli/dedupe"
+              "id": "version-8.x/cli/patch-remove"
             }
           ]
         },
