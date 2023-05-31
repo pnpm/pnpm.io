@@ -38,7 +38,7 @@ Added in: v7.15.0
 * Default: **table**
 * Type: **table**, **list**, **json**
 
-Prints the outdtaed dependencies in the given format.
+Prints the outdated dependencies in the given format.
 
 ### --compatible
 
