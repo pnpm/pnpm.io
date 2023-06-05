@@ -90,9 +90,6 @@ const Showcase = props => {
               flexFlow: 'row wrap',
               justifyContent: 'center',
             }}>
-              <a href={addUTM("https://bit.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
-              </a>
               <a href={addUTM("https://novu.co/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Novu" src="/img/users/novu.svg" />
               </a>
