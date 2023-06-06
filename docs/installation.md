@@ -82,6 +82,12 @@ With Node.js v16.17 or newer, you may install the `latest` version of pnpm by ju
 corepack prepare pnpm@latest --activate
 ```
 
+After installation, you will need to enable `pnpm` in order to use it:
+
+```
+corepack enable pnpm
+```
+
 ## Using npm
 
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
