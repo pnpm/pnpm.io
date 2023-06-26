@@ -304,5 +304,12 @@
     "infoLink": "https://www.adber.com",
     "pinned": false,
     "width": 300
+  },
+  {
+    "caption": "Qwik",
+    "image": "/img/users/qwik.svg",
+    "infoLink": "https://qwik.builder.io/",
+    "pinned": false,
+    "width": 300
   }
 ]
