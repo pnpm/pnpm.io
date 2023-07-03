@@ -40,4 +40,14 @@ Show all the config settings.
 
 ### --global, -g
 
-See the configuration in the global config file.
+Set the configuration in the global config file.
+
+### --location
+
+When set to `project`, the `.npmrc` file at the nearest `package.json` will be used.
+
+When set to `global`, the performance is the same as setting the `--global` option.
+
+### --json
+
+Show all the config settings in JSON format.

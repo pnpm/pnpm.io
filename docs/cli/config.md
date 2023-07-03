@@ -48,7 +48,7 @@ When set to `project`, the `.npmrc` file at the nearest `package.json` will be u
 
 When set to `global`, the performance is the same as setting the `--global` option.
 
-## --json
+### --json
 
 Show all the config settings in JSON format.
 
