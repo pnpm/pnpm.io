@@ -3,7 +3,7 @@
     "examples": "docusaurus-examples",
     "copy-docs": "shx rm -rf versioned_docs/version-8.x && shx cp -r docs versioned_docs/version-8.x",
     "start": "pnpm copy-docs && docusaurus start",
-    "build": "pnpm copy-docs && docusaurus build",
+    "build": "curl -L --fail https://get.pnpm.io/v5.js > static/pnpm.js && pnpm copy-docs && docusaurus build",
     "publish-gh-pages": "docusaurus-publish --skip-image-compression",
     "write-translations": "shx rm -rf i18n/en && docusaurus write-translations",
     "version": "docusaurus docs:version",
