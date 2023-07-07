@@ -61,6 +61,12 @@ this decision was made, see [this issue][eps-issue].
 
 [eps-issue]: https://github.com/nodejs/node-eps/issues/46
 
+## Does pnpm work across different subvolumes in one btrfs partition?
+
+Whilst btrfs does not allow cross-device hardlink between different subvolumes
+in one partition, it still allow reflinks. Therefore, pnpm will use reflink to
+share data between subvolumes.
+
 ## Does pnpm work across multiple drives or filesystems?
 
 The package store should be on the same drive and filesystem as installations,
@@ -70,7 +76,7 @@ location in another. See [Issue #712] for more details.
 
 pnpm functions differently in the 2 cases below:
 
-[Issue #712]: https://github.com/pnpm/pnpm/issues/712 
+[Issue #712]: https://github.com/pnpm/pnpm/issues/712
 
 ### Store path is specified
 
@@ -172,3 +178,21 @@ to delete `node_modules`, as pnpm hooks only affect module resolution. Then,
 rebuild the dependencies & it should be working.
 
 [Webpack Dashboard]: https://github.com/pnpm/pnpm/issues/1043
+
+## How to share files between my container and the host btrfs filesystem?
+
+:::note
+
+This would only work on copy-on-write filesystems that is supported by the container
+runtime (such as btrfs). On other filesystems (such as ext4), pnpm will copy the files.
+
+:::
+
+Most popular container runtimes (such as Docker or Podman) have support for copy-on-write
+filesystems (such as btrfs). In btrfs, the container runtime would create actual btrfs
+subvolumes for their mounted volumes. Therefore, pnpm can rely on this behavior to reflink the
+files between different mounted volumes.
+
+In order to share the files between the host and the container, you should mount the store
+directory from the host to the container. Then pnpm inside the container would naturally
+reuse the files from the host as reflinks.
