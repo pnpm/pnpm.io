@@ -31,7 +31,7 @@ install:
 
 [Travis CI]: https://travis-ci.org
 
-## Semaphore
+## Semaphore 
 
 On [Semaphore], you can use pnpm for installing and caching your dependencies by
 adding this to your `.semaphore/semaphore.yml` file:
