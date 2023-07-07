@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/pnpm.js",
+      "destination": "https://get.pnpm.io/v5.js"
+    },
+    {
+      "source": "/pnpm.js.org/:path*",
+      "destination": "https://pnpm.io/js-org-placeholder.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/8.x/:splat*",
+      "destination": "/:splat*",
+      "permanent": false
+    },
+    {
+      "source": "/en/:splat*",
+      "destination": "/:splat*",
+      "permanent": true
+    }
+  ]
+}
