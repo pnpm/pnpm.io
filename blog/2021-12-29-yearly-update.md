@@ -47,7 +47,7 @@ Our [main GitHub repository](https://github.com/pnpm/pnpm) received +5,000 stars
 
 ### New users
 
-Our biggest new user this year is [Bytedance](https://github.com/pnpm/pnpm.github.io/pull/89) (the company behind TikTok).
+Our biggest new user this year is [Bytedance](https://github.com/pnpm/pnpm.io/pull/89) (the company behind TikTok).
 
 Also, many great open-source projects started to use pnpm. Some switched to pnpm because of its great support of monorepos:
 

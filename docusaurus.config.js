@@ -14,16 +14,18 @@ const LOCALE_FULL_CODE = {
   es: 'es-ES',
 }
 
+const PROJECT_NAME = 'pnpm.io'
+
 function makeEditUrl (locale, path1, path2) {
   // Link to Crowdin for non-English docs
   if (locale !== DEFAULT_LOCALE) {
     return `https://translate.pnpm.io/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
   }
   if (path1 === 'versioned_docs/version-8.x') {
-    return `https://github.com/pnpm/pnpm.github.io/edit/main/docs/${path2}`;
+    return `https://github.com/pnpm/${PROJECT_NAME}/edit/main/docs/${path2}`;
   }
   // Link to GitHub for English docs
-  return `https://github.com/pnpm/pnpm.github.io/edit/main/${path1}/${path2}`;
+  return `https://github.com/pnpm/${PROJECT_NAME}/edit/main/${path1}/${path2}`;
 }
 
 module.exports={
@@ -32,7 +34,7 @@ module.exports={
   "url": "https://pnpm.io",
   "baseUrl": "/",
   "organizationName": "pnpm",
-  "projectName": "pnpm.github.io",
+  "projectName": PROJECT_NAME,
   "scripts": [
     "https://buttons.github.io/buttons.js",
     "/homepage.js",
