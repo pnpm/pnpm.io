@@ -301,6 +301,10 @@
         {
           "type": "doc",
           "id": "version-8.x/git"
+        },
+        {
+          "type": "doc",
+          "id": "version-8.x/docker"
         }
       ]
     },

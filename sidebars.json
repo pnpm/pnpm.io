@@ -101,7 +101,8 @@
     "Recipes": [
       "using-changesets",
       "continuous-integration",
-      "git"
+      "git",
+      "docker"
     ],
     "Advanced": [
       "feature-comparison",
