@@ -61,6 +61,10 @@ this decision was made, see [this issue][eps-issue].
 
 [eps-issue]: https://github.com/nodejs/node-eps/issues/46
 
+## Does pnpm work across different subvolumes in one Btrfs partition?
+
+While Btrfs does not allow cross-device hardlinks between different subvolumes in a single partition, it does permit reflinks. As a result, pnpm utilizes reflinks to share data between these subvolumes.
+
 ## Does pnpm work across multiple drives or filesystems?
 
 The package store should be on the same drive and filesystem as installations,
@@ -70,7 +74,7 @@ location in another. See [Issue #712] for more details.
 
 pnpm functions differently in the 2 cases below:
 
-[Issue #712]: https://github.com/pnpm/pnpm/issues/712 
+[Issue #712]: https://github.com/pnpm/pnpm/issues/712
 
 ### Store path is specified
 
