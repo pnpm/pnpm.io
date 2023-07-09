@@ -13,4 +13,4 @@ This method only works on copy-on-write filesystems supported by the container r
 
 Most popular container runtimes, including Docker and Podman, support copy-on-write filesystems like Btrfs. With Btrfs, container runtimes create actual Btrfs subvolumes for their mounted volumes. pnpm can leverage this behavior to reflink the files between different mounted volumes.
 
-To share files between the host and the container, mount the store directory from the host to the container. This allows pnpm inside the container to naturally reuse the files from the host as reflinks.
+To share files between the host and the container, mount the store directory and the `node_modules` directory from the host to the container. This allows pnpm inside the container to naturally reuse the files from the host as reflinks.
