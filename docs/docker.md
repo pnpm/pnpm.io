@@ -35,7 +35,7 @@ RUN pnpm install
 RUN pnpm run build
 ```
 
-Run the following command to build the container:
+Run the following command to build the docker image:
 
 ```sh
 docker build . --tag my-docker-image:latest -v "$HOME/.local/share/pnpm/store:/pnpm-store" -v "$(pwd)/node_modules:/app/node_modules"
