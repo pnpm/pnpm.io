@@ -44,3 +44,18 @@ then pnpm will execute the command as a shell script, so you can do things like 
 [`pnpm add <pkg>`]: ./cli/add.md
 [`pnpm <cmd>`]: ./cli/run.md
 [pnpm exec]: ./cli/exec.md
+
+## Environment variables
+
+* `PNPM_HOME`: If specified, it overrides the default "home" of pnpm related files.
+  * `$PNPM_HOME/` would be the default directory containing the `pnpm` executable when running the self-installer.
+  * `$PNPM_HOME/store/` would be the default store directory when running `pnpm install` (see [store-dir]).
+* `XDG_DATA_HOME`: If specified without `PNPM_HOME`, it determines the default "home" of pnpm related files.
+  * `$XDG_DATA_HOME/pnpm/` would be the default directory containing the `pnpm` executable when running the self-installer.
+  * `$XDG_DATA_HOME/pnpm/store/` would be the default store directory when running `pnpm install` (see [store-dir]).
+* `PNPM_PACKAGE_NAME`: Name of the package for shell commands running in recursive mode (See [--recursive, -r][recursive]).
+* `PNPM_VERSION`: If specified, the self-installer would install the requested version in `$PNPM_VERSION` (see [installing a specific version][specific-version]).
+
+[store-dir]: ./npmrc.md#store-dir
+[recursive]: ./cli/exec.md#recursive--r
+[specific-version]: ./installation.md#installing-a-specific-version
