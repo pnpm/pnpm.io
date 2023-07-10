@@ -44,3 +44,18 @@ then pnpm will execute the command as a shell script, so you can do things like 
 [`pnpm add <pkg>`]: ./cli/add.md
 [`pnpm <cmd>`]: ./cli/run.md
 [pnpm exec]: ./cli/exec.md
+
+## Environment variables
+
+Some environment variables that are not pnpm related might change the behaviour of pnpm:
+
+* [`CI`](./cli/install.md#frozen-lockfile)
+
+These environment variables may influence what directories pnpm will use for storing global information:
+
+* `XDG_CACHE_HOME`
+* `XDG_CONFIG_HOME`
+* `XDG_DATA_HOME`
+* `XDG_STATE_HOME`
+
+You can search the docs to find the settings that leverage these environment variables.
