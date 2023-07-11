@@ -64,6 +64,13 @@ were already installed, regardless of the `NODE_ENV`.
 
 `optionalDependencies` are not installed.
 
+### --no-lockfile
+
+* Default: **false**
+* Type: **Boolean**
+
+If `true`, pnpm doesn't read or generate a `pnpm-lock.yaml` file.
+
 ### --lockfile-only
 
 * Default: **false**
