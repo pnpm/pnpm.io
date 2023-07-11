@@ -163,7 +163,7 @@ package directory. This allows output from different packages to be interleaved.
 
 Aggregate output from child processes that are run in parallel, and only print output when the child process is finished. It makes reading large logs after running `pnpm -r <command>` with `--parallel` or with `--workspace-concurrency=<number>` much easier (especially on CI). Only `--reporter=append-only` is supported.
 
-### enable-pre-post-scripts
+### --enable-pre-post-scripts
 
 * Default: **false**
 * Type: **Boolean**
