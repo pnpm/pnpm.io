@@ -3,40 +3,51 @@ id: docker
 title: Working with Docker
 ---
 
-## Sharing Files Between a Container and the Host Btrfs Filesystem
-
 :::note
 
-This method only works on copy-on-write filesystems supported by the container runtime, such as Btrfs. For other filesystems, like Ext4, pnpm will copy the files instead.
+It is impossible to create reflinks or hardlinks between a Docker container and the host filesystem during build time.
+The next best thing you can do is using BuildKit cache mount to share cache between builds.
 
 :::
 
-Most popular container runtimes, including Docker and Podman, support copy-on-write filesystems like Btrfs. With Btrfs, container runtimes create actual Btrfs subvolumes for their mounted volumes. pnpm can leverage this behavior to reflink the files between different mounted volumes.
+## Minimizing Docker image size and build time
 
-To share files between the host and the container, mount the store directory and the `node_modules` directory from the host to the container. This allows pnpm inside the container to naturally reuse the files from the host as reflinks.
+* Use a small image, e.g. `node:XX-slim`.
+* Leverage multi-stage if possible and makes sense.
+* Leverage BuildKit cache mounts.
 
-Below is an example container setup for demonstration:
+### Example 1: Build a bundle in a Docker container
 
-```dockerfile title="Dockerfile"
-FROM node:20-slim
+Since `devDependencies` is only necessary for building the bundle, `pnpm install --prod` will be a separate stage
+from `pnpm install` and `pnpm run build`, allowing the final stage to copy only necessary files from the earlier
+stages, minimizing the size of the final image.
 
-# corepack is an experimental feature in Node.js v20 which allows
-# installing and managing versions of pnpm, npm, yarn
-RUN corepack enable
-
-VOLUME [ "/pnpm-store", "/app/node_modules" ]
-RUN pnpm config --global set store-dir /pnpm-store
-
-# You may need to copy more files than just package.json in your code
-COPY package.json /app/package.json
-
-WORKDIR /app
-RUN pnpm install
-RUN pnpm run build
+```text title=".dockerignore"
+node_modules
+.git
+.gitignore
+*.md
+dist
 ```
 
-Run the following command to build the docker image:
+```dockerfile title="Dockerfile"
+FROM node:20-slim AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+COPY . /app
+WORKDIR /app
 
-```sh
-docker build . --tag my-docker-image:latest -v "$HOME/.local/share/pnpm/store:/pnpm-store" -v "$(pwd)/node_modules:/app/node_modules"
+FROM base AS prod-deps
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+
+FROM base AS build
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm run build
+
+FROM base
+COPY --from=prod-deps /app/node_modules /app/node_modules
+COPY --from=build /app/dist /app/dist
+EXPOSE 8000
+CMD [ "pnpm", "start" ]
 ```
