@@ -305,6 +305,10 @@
         {
           "type": "doc",
           "id": "version-8.x/docker"
+        },
+        {
+          "type": "doc",
+          "id": "version-8.x/podman"
         }
       ]
     },

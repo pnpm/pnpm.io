@@ -102,7 +102,8 @@
       "using-changesets",
       "continuous-integration",
       "git",
-      "docker"
+      "docker",
+      "podman"
     ],
     "Advanced": [
       "feature-comparison",
