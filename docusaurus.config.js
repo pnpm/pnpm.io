@@ -294,7 +294,7 @@ module.exports={
             },
           ],
         },
-        {
+        /*{
           items: [
             {
               html: `<a href="https://www.netlify.com">
@@ -302,7 +302,7 @@ module.exports={
 </a>`,
             }
           ],
-        },
+        },*/
       ],
       "copyright": `Copyright © 2015-${new Date().getFullYear()} contributors of pnpm`,
       "logo": {
