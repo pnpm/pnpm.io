@@ -251,10 +251,10 @@ module.exports={
               label: 'YouTube',
               href: 'https://www.youtube.com/@pnpmjs',
             },
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/pnpm'
-            },
+            // {
+              // label: 'Stack Overflow',
+              // href: 'https://stackoverflow.com/questions/tagged/pnpm'
+            // },
             {
               label: 'Reddit',
               href: 'https://reddit.com/r/pnpm/'
@@ -284,14 +284,14 @@ module.exports={
               label: 'Help Us Translate',
               href: TRANSLATE_URL,
             },
-            {
-              label: 'Vote for us on stackshare',
-              href: 'https://stackshare.io/pnpm',
-            },
-            {
-              label: 'Like us on AlternativeTo',
-              href: 'https://alternativeto.net/software/pnpm/about/',
-            },
+            // {
+              // label: 'Vote for us on stackshare',
+              // href: 'https://stackshare.io/pnpm',
+            // },
+            // {
+              // label: 'Like us on AlternativeTo',
+              // href: 'https://alternativeto.net/software/pnpm/about/',
+            // },
           ],
         },
         /*{
