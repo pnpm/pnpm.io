@@ -183,4 +183,5 @@ Usage example:
 
 ```sh
 pnpm --filter="...[origin/master]" --changed-files-ignore-pattern="**/README.md" run build
-``` 
+```
+use required pattern 
