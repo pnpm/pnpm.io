@@ -5,10 +5,16 @@ title: pnpm unlink
 
 Unlinks a system-wide package (inverse of [`pnpm link`](./link.md)).
 
-If called without arguments, all linked dependencies will be unlinked.
+If called without arguments, all linked dependencies will be unlinked inside the
+current project.
 
 This is similar to `yarn unlink`, except pnpm re-installs the dependency after
 removing the external link.
+
+:::info
+If you want to remove a link made with `pnpm link --global <package>`, you should use `pnpm uninstall --global <package>`. 
+`pnpm unlink` only removes the links in your current directory.
+:::
 
 ## Options
 
