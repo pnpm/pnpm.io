@@ -40,7 +40,7 @@ Links the specified package (`<pkg>`) from global `node_modules` to the `node_mo
 
 ### Replace an installed package with a local version of it
 
-Let's say you have a project that uses `foo` package. You want to make changes to `foo` and test them in your project. In this scenario, you can use `pnpm link` to link the local version of `foo` to your project, while the package.json won't be modified.
+Let's say you have a project that uses `foo` package. You want to make changes to `foo` and test them in your project. In this scenario, you can use `pnpm link` to link the local version of `foo` to your project, while the `package.json` won't be modified.
 
 ```bash
 cd ~/projects/foo
@@ -62,7 +62,7 @@ pnpm link ~/projects/foo # link foo to my-project
 ### Add a binary globally
 
 If you are developing a package that has a binary, for example, a CLI tool, you can use `pnpm link --global` to make the binary available system-wide.
-This is the same as using `pnpm install -g`.
+This is the same as using `pnpm install -g foo`, but it will use the local version of `foo` instead of downloading it from the registry.
 
 Remember that the binary will be available only if the package has a `bin` field in its `package.json`.
 
@@ -74,15 +74,18 @@ pnpm link --global # link foo globally
 
 ## What's the difference between `pnpm link` and using the `file:` protocol?
 
-When you use `pnpm link`, the linked package is symlinked from the source code. You can modify the source code of the linked package, and the changes will be reflected in your project. With this method PNPM will not install the dependencies of the linked package, you will have to install them manually in the source code. This may be usefull when you have to use a specific package manager for the linked package, for example, if you want to use `npm` for the linked package, but `pnpm` for your project.
+When you use `pnpm link`, the linked package is symlinked from the source code. You can modify the source code of the linked package, and the changes will be reflected in your project. With this method pnpm will not install the dependencies of the linked package, you will have to install them manually in the source code. This may be usefull when you have to use a specific package manager for the linked package, for example, if you want to use `npm` for the linked package, but pnpm for your project.
 
-When you use the `file:` protocol in `dependencies`, the linked package is hard-linked to your project `node_modules`, you can modify the source code of the linked package, and the changes will be reflected in your project. With this method PNPM will also install the dependencies of the linked package, overriding the `node_modules` of the linked package.
+When you use the `file:` protocol in `dependencies`, the linked package is hard-linked to your project `node_modules`, you can modify the source code of the linked package, and the changes will be reflected in your project. With this method pnpm will also install the dependencies of the linked package, overriding the `node_modules` of the linked package.
 
-| Feature                                      | `pnpm link`                                | `file:` Protocol                                    |
-|----------------------------------------------|--------------------------------------------|-----------------------------------------------------|
-| Symlink/Hard-link                            | Symlink                                    | Hard-link                                           |
-| Reflects source code modifications           | Yes                                        | Yes                                                 |
-| Installs dependencies of the linked package  | No (manual installation required)          | Yes (overrides `node_modules` of the linked package)|
-| Use different package manager for dependency | Possible (e.g., use `npm` for linked pkg)  | No, it will use PNPM                                |
+:::info
+When dealing with **peer dependencies** it is recommended to use the `file:` protocol. It better resolves the peer dependencies from the project dependencies, ensuring that the linked dependency correctly uses the versions of the dependencies specified in your main project, leading to more consistent and expected behaviors.
+:::
 
+| Feature                                      | `pnpm link`                                        | `file:` Protocol                                    |
+|----------------------------------------------|----------------------------------------------------|-----------------------------------------------------|
+| Symlink/Hard-link                            | Symlink                                            | Hard-link                                           |
+| Reflects source code modifications           | Yes                                                | Yes                                                 |
+| Installs dependencies of the linked package  | No (manual installation required)                  | Yes (overrides `node_modules` of the linked package)|
+| Use different package manager for dependency | Possible (e.g., use `npm` for linked pkg)          | No, it will use pnpm                                |
 
