@@ -53,3 +53,25 @@ This might happen if a lockfile had badly resolved merge conflicts.
 If you use a registry that allows to override existing versions of a package, then it might mean that in your local metadata cache you have the integrity checksum of an older version of the package. In this case, you should run `pnpm store prune`. This command will remove your local metadata cache. Then you can retry the command that failed.
 
 But also be careful and verify that the package is downloaded from the right URL. The URL should be printed in the error message.
+
+## ERR_PNPM_MISMATCHED_RELEASE_CHANNEL
+
+The config field `use-node-version` defines a release channel different from version suffix.
+
+For example:
+* `rc/20.0.0` defines an `rc` channel but the version is that of a stable release.
+* `release/20.0.0-rc.0` defines a `release` channel but the version is that of an RC release.
+
+To fix this error, either remove the release channel prefix or correct the version suffix.
+
+## ERR_PNPM_INVALID_NODE_VERSION
+
+The value of config field `use-node-version` has an invalid syntax.
+
+Below are the valid forms of `use-node-version`:
+* Stable release:
+  * `X.Y.Z` (`X`, `Y`, `Z` are integers)
+  * `release/X.Y.Z` (`X`, `Y`, `Z` are integers)
+* RC release:
+  * `X.Y.Z-rc.W` (`X`, `Y`, `Z`, `W` are integers)
+  * `rc/X.Y.Z-rc.W` (`X`, `Y`, `Z`, `W` are integers)
