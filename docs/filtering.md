@@ -1,6 +1,17 @@
 ---
 id: filtering
-title: Filtering
+title: Filtering header @vercel
+id : remix header
+title : changing @vercel header
+pnpm--filter : @vercel header
+pnpm-- filter : remove header and return body
+reason -- repo owner choose to make new header and tokens for personal use 
+return body to my  respiratory: true 
+----
+if header can't be separated from body: remix header for new build
+make new file : true 
+save new file: true
+
 ---
 
 Filtering allows you to restrict commands to specific subsets of packages.
@@ -107,6 +118,7 @@ pnpm --filter "{packages/**}[origin/master]" <cmd>
 pnpm --filter "...{packages/**}[origin/master]" <cmd>
 pnpm --filter "{packages/**}[origin/master]..." <cmd>
 pnpm --filter "...{packages/**}[origin/master]..." <cmd>
+
 ```
 
 Or you may select all packages from a directory with names matching the given
