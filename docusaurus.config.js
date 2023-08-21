@@ -319,7 +319,7 @@ module.exports={
   },
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'zh-TW', 'ru', 'fr', 'tr', 'es', 'id'],
+    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'zh-TW', 'uk', 'fr', 'tr', 'es', 'id'],
     localeConfigs: {
       en: { label: "English" },
       it: { label: `Italiano (${progress["it"].translationProgress}%)` },
@@ -332,7 +332,7 @@ module.exports={
       pt: {
         label: `Português Brasileiro (${progress["pt-BR"].translationProgress}%)`,
       },
-      ru: { label: `Русский (${progress["ru"].translationProgress}%)` },
+      uk: { label: `Українська (${progress["uk"].translationProgress}%)` },
       fr: { label: `Français (${progress["fr"].translationProgress}%)` },
       tr: { label: `Türkçe (${progress["tr"].translationProgress}%)` },
       es: { label: `Español (${progress["es-ES"].translationProgress}%)` },

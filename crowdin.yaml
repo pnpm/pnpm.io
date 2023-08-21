@@ -11,7 +11,7 @@ languages_mapping: &languages_mapping
     'ja': 'ja'
     'ko': 'ko'
     'pt-BR': 'pt'
-    'ru': 'ru'
+    'uk': 'uk'
     'tr': 'tr'
     'zh-CN': 'zh'
     'zh-TW': 'zh-TW'

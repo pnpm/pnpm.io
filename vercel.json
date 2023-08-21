@@ -30,6 +30,11 @@
       "source": "/en/:splat*",
       "destination": "/:splat*",
       "permanent": true
+    },
+    {
+      "source": "/ru/:splat*",
+      "destination": "/uk/:splat*",
+      "permanent": true
     }
   ]
 }
