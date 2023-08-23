@@ -60,6 +60,10 @@ You may use the [pnpm env] command then to install Node.js.
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
 
+:::info
+If you have installed Node.js with `pnpm env` Corepack won't be installed on your system, you will need to install it separately. See [#4029](https://github.com/pnpm/pnpm/issues/4029).
+:::
+
 ```
 corepack enable
 ```
