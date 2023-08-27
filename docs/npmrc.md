@@ -955,7 +955,7 @@ The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
 
 ### resolution-mode
 
-* Default: **lowest-direct**
+* Default: **highest** (was **lowest-direct** from v8.0.0 to v8.6.12)
 * Type: **highest**, **time-based**, **lowest-direct**
 
 When `resolution-mode` is set to `time-based`, dependencies will be resolved the following way:
