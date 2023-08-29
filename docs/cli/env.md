@@ -6,7 +6,7 @@ title: "pnpm env <cmd>"
 Manages the Node.js environment.
 
 :::danger
-`pnpm env` does not include the binaries for Corepack. If you want to use Corepack to install other package managers, you need to install it separately. See [#4029](https://github.com/pnpm/pnpm/issues/4029)
+`pnpm env` does not include the binaries for Corepack. If you want to use Corepack to install other package managers, you need to install it separately (e.g. `pnpm add -g corepack`).
 :::
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/84-MzN_0Cng" title="The pnpm patch command demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
