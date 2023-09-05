@@ -134,7 +134,7 @@ async function run () {
     fs.promises.mkdir(BENCH_IMGS, { recursive: true }),
   ])
   spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
-  spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@latest'], { cwd: managersDir, stdio: 'inherit' })
+  spawn.sync('pnpm', ['add', 'yarn@latest', 'npm@latest', 'pnpm@next-8'], { cwd: managersDir, stdio: 'inherit' })
   await installYarnBerryLikeModule(managersDir)
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
