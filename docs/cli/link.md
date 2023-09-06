@@ -36,6 +36,28 @@ Links package from location where this command was executed or specified via `--
 
 Links the specified package (`<pkg>`) from global `node_modules` to the `node_modules` of package from where this command was executed or specified via `--dir` option.
 
+## Difference between `pnpm link <dir>` and `pnpm link --dir <dir>`
+
+`pnpm link <dir>` links the package from `<dir>` to the `node_modules` of the package where the command was executed. `pnpm link --dir <dir>` links the package from the current working directory to `<dir>`.
+
+```bash
+# The current directory is foo
+pnpm link ../bar
+
+- foo
+  - node_modules
+    - bar -> ../../bar
+- bar
+
+# The current directory is bar
+pnpm link --dir ../foo
+
+- foo
+  - node_modules
+    - bar -> ../../bar
+- bar
+```
+
 ## Use Cases
 
 ### Replace an installed package with a local version of it
