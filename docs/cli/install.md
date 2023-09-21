@@ -101,6 +101,8 @@ exports.isCI = !!(
 
 [CI environments]: https://github.com/watson/ci-info#supported-ci-tools
 
+You can also use the `--no-frozen-lockfile` parameter to turn off this feature，means set `false` to `--frozen-lockfile`
+
 ### --reporter=&lt;name\>
 
 * Default:
