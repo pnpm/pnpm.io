@@ -56,7 +56,7 @@ pnpm -r exec rm -rf node_modules
 View package information for all packages. This should be used with the `--shell-mode` (or `-c`) option for the environment variable to work.
 
 ```
-pnpm -rc exec pnpm view $PNPM_PACKAGE_NAME
+pnpm -rc exec pnpm view \$PNPM_PACKAGE_NAME
 ```
 
 ### --resume-from &lt;package_name\>

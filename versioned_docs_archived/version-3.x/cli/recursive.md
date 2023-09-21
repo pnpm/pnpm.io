@@ -77,5 +77,5 @@ Usage examples:
 
 ```sh
 pnpm recursive exec -- rm -rf node_modules
-pnpm recursive exec -- pnpm view $PNPM_PACKAGE_NAME
+pnpm recursive exec -- pnpm view \$PNPM_PACKAGE_NAME
 ```
