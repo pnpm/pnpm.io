@@ -25,8 +25,12 @@ be `pnpm-lock.feature-1.yaml`. You can commit it to the Git, and merge all git b
 |- pnpm-lock.<branch_name>.yaml
 ```
 
-NOTE: `feature/1` is special in that the `/` is automatically converted to `!`, so the corresponding
+:::note
+
+`feature/1` is special in that the `/` is automatically converted to `!`, so the corresponding
 lockfile name would be `pnpm-lock.feature!1.yaml`.
+
+:::
 
 ## Merge git branch lockfiles
 
@@ -39,11 +43,9 @@ After that, all git branch lockfiles will be merged into one `pnpm-lock.yaml`
 
 ### Branch Matching
 
-Pnpm allows you to specify `--merge-git-branch-lockfiles` by matching the current branch name.
+pnpm allows you to specify `--merge-git-branch-lockfiles` by matching the current branch name.
 
-For instance,
-
-By the following setting in `.npmrc` file, `pnpm install` will merge all git branch lockfiles when 
+For instance, by the following setting in `.npmrc` file, `pnpm install` will merge all git branch lockfiles when 
 running in the `main` branch and the branch name starts with `release`.
 
 ```ini
