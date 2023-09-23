@@ -1,7 +1,10 @@
 import React from 'react';
+import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
+import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate'
+import styles from './styles.module.css';
 
 export default function Users() {
   const context = useDocusaurusContext();
@@ -27,7 +30,16 @@ export default function Users() {
           <div className="showcaseSection">
             <div className="prose text--center">
               <h1><Translate>Who's Using This?</Translate></h1>
-              <p><Translate>We have lots of users! On this page we will only list well known companies. If you want to showcase your stack, use StackShare. If you want the logo of your company to be on our homepage, become a silver, gold, or platinum sponsor.</Translate></p>
+              <p><Translate>This project is used by many folks</Translate></p>
+              <p><Translate>Are you using this project?</Translate></p>
+              <Link
+                className={clsx(
+                  'button button--outline button--secondary button--lg',
+                  styles.getStarted,
+                )}
+                href="https://github.com/pnpm/pnpm.io/edit/main/users.json">
+                <Translate>Add your company</Translate>
+              </Link>
             </div>
             <div className="logos" style={{
               alignItems: 'center',
