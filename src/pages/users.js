@@ -1,10 +1,7 @@
 import React from 'react';
-import styles from './styles.module.css';
-import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import Translate, {translate} from '@docusaurus/Translate'
-import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate'
 
 export default function Users() {
   const context = useDocusaurusContext();
@@ -16,12 +13,10 @@ export default function Users() {
     url.searchParams.append("utm_medium", "users_page");
 
     return (
-      <a href={url.toString()} target="_blank" key={i} rel="noopener nofollow">
-        <img src={user.image} title={user.caption} style={{
-          width: user.width ? `${user.width}px` : '128px',
-          padding: '20px'
-        }} />
-      </a>
+      <img src={user.image} title={user.caption} style={{
+        width: user.width ? `${user.width}px` : '128px',
+        padding: '20px'
+      }} />
     );
   });
 

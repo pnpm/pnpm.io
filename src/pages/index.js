@@ -69,12 +69,10 @@ const Showcase = props => {
 
   const showcase = siteConfig.customFields.users.filter(({ pinned }) => pinned).map((user, i) => {
     return (
-      <a href={addUTM(user.infoLink)} target="_blank" key={i} rel="noopener nofollow">
-        <img src={user.image} alt={user.caption} style={{
-          width: user.width ? `${user.width}px` : '128px',
-          padding: '20px'
-        }} />
-      </a>
+      <img src={user.image} alt={user.caption} style={{
+        width: user.width ? `${user.width}px` : '128px',
+        padding: '20px'
+      }} />
     );
   });
 
