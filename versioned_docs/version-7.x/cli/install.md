@@ -101,6 +101,13 @@ exports.isCI = !!(
 
 [CI environments]: https://github.com/watson/ci-info#supported-ci-tools
 
+### --merge-git-branch-lockfiles
+
+Added in: v7.3.0
+
+Merge all git branch lockfiles.
+[Read more about git branch lockfiles.](../git_branch_lockfiles)
+
 ### --reporter=&lt;name\>
 
 * Default:

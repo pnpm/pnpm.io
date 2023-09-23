@@ -96,7 +96,8 @@
     "Features": [
       "workspaces",
       "aliases",
-      "completion"
+      "completion",
+      "git_branch_lockfiles"
     ],
     "Recipes": [
       "using-changesets",

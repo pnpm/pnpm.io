@@ -282,6 +282,10 @@
         {
           "type": "doc",
           "id": "version-8.x/completion"
+        },
+        {
+          "type": "doc",
+          "id": "version-8.x/git_branch_lockfiles"
         }
       ]
     },
