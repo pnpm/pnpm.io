@@ -42,6 +42,12 @@ wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)"
 wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
 ```
 
+### On Arch Linux
+
+```sh
+yay -S yarn-pnpm-corepack
+```
+
 ### Installing a specific version
 
 Prior to running the install script, you may optionally set an env variable `PNPM_VERSION` to install a specific version of pnpm:
