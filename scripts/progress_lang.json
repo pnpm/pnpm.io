@@ -35,6 +35,10 @@
         "translationProgress": 60,
         "approvalProgress": 52
     },
+    "ru": {
+        "translationProgress": 41,
+        "approvalProgress": 40
+    },
     "tr": {
         "translationProgress": 26,
         "approvalProgress": 15
