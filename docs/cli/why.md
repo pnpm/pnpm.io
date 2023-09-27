@@ -5,6 +5,11 @@ title: pnpm why
 
 Shows all packages that depend on the specified package.
 
+:::caution
+If the Dependencies Tree has more than 10 results (end leaves), the output will be truncated to 10 end leaves.
+
+This makes the output more readable and avoids memory issues.
+:::
 ## Options
 
 ### --recursive, -r
@@ -35,6 +40,10 @@ Only display the dependency tree for packages in `dependencies`.
 ### --dev, -D
 
 Only display the dependency tree for packages in `devDependencies`.
+
+### --depth &lt;number\>
+
+Display only dependencies within a specific depth.
 
 ### --only-projects
 
