@@ -12,6 +12,7 @@ If the Dependencies Tree has more than 10 results (end leaves), the output will 
 This makes the output more readable and avoids memory issues.
 
 :::
+
 ## Options
 
 ### --recursive, -r
