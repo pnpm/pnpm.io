@@ -86,14 +86,6 @@ module.exports={
     ],
   ],
   "themeConfig": {
-    announcementBar: {
-      id: 'support_ukraine',
-      content:
-        '<a target="_blank" rel="noopener noreferrer" href="https://war.ukraine.ua/support-ukraine/">Support Ukraine 🇺🇦</a>',
-      backgroundColor: '#20232a',
-      textColor: '#fff',
-      isCloseable: false,
-    },
     "colorMode": {
       respectPrefersColorScheme: true,
     },
