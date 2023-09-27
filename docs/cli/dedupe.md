@@ -12,3 +12,10 @@ Perform an install removing older dependencies in the lockfile if a newer versio
 Added in: v8.3.0
 
 Check if running dedupe would result in changes without installing packages or editing the lockfile. Exits with a non-zero status code if changes are possible.
+
+### `--ignore-scripts`
+
+Added in: v8.8.0
+
+Do not execute any scripts defined in the project `package.json` and its
+dependencies.
