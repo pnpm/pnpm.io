@@ -198,6 +198,7 @@ An example of a `pnpm-exec-summary.json` file:
 Possible values of `status` are: 'passed', 'queued', 'running'.
 
 ### --reporter-hide-prefix
+
 Hide workspace prefix from output from child processes that are run in parallel, and only print the raw output. This can be useful if you are running on CI and the output must be in a specific format without any prefixes (e.g. [GitHub Actions annotations](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-error-message)). Only `--reporter=append-only` is supported.
 
 ### --filter &lt;package_selector\>
