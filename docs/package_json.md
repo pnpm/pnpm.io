@@ -567,8 +567,9 @@ Scripts listed in this array will be required in each project of the workspace. 
 
 ## resolutions
 
-Same as [`pnpm.overrides`]. We read it for easier migration from Yarn.
+Functionally identical to [`pnpm.overrides`], this field is intended to make it easier to migrate from Yarn.
+
+`resolutions` and `pnpm.overrides` get merged before package resolution (with `pnpm.overrides` taking precedence), which can be useful when you're migrating from Yarn and need to tweak a few packages just for pnpm.
 
 [pnpm patch-commit]: ./cli/patch-commit.md
 [`pnpm.overrides`]: #pnpmoverrides
-
