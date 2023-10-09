@@ -856,6 +856,15 @@ Added in: v8.1.0
 
 When set to `true`, no workspace cycle warnings will be printed.
 
+### disallow-workspace-cycles
+
+Added in: v8.9.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, installation will fail if the workspace has cycles.
+
 ## Other Settings
 
 ### use-running-store-server
@@ -1025,3 +1034,4 @@ Added in: v8.1.0
 * Type: **Boolean**
 
 When set to `true`, dependencies that are already symlinked to the root `node_modules` directory of the workspace will not be symlinked to subproject `node_modules` directories.
+
