@@ -103,7 +103,7 @@ Examples:
 # prune node_modules installations for all packages
 pnpm -r exec -- rm -rf node_modules
 # view package information for all packages
-pnpm -r exec -- pnpm view $PNPM_PACKAGE_NAME
+pnpm -r exec -- pnpm view \$PNPM_PACKAGE_NAME
 ```
 
 ### --filter &lt;package_selector\>
