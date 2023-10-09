@@ -466,6 +466,33 @@ Example:
 }
 ```
 
+## pnpm.onlyBuiltDependenciesFile
+
+Added in: v8.9.0
+
+This configuration option allows users to specify a JSON file that lists the only packages permitted to run installation scripts during the pnpm install process. By using this, you can enhance security or ensure that only specific dependencies execute scripts during installation.
+
+Example:
+
+```json
+{
+  "dependencies": {
+    "@my-org/policy": "1.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependenciesFile": "node_modules/@my-org/policy/onlyBuiltDependencies.json"
+  }
+}
+```
+
+The JSON file itself should contain an array of package names:
+
+```json title="node_modules/@my-org/policy/onlyBuiltDependencies.json"
+[
+  "fsevents"
+]
+```
+
 ## pnpm.allowedDeprecatedVersions
 
 This setting allows muting deprecation warnings of specific packages.
