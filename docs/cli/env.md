@@ -55,14 +55,27 @@ pnpm env use --global argon
 
 [codename]: https://github.com/nodejs/Release/blob/main/CODENAMES.md
 
+### add
+
+Added in: v8.9.0
+
+Installs the specified version(s) of Node.js without activating them as the current version.
+
+Example:
+
+```
+pnpm env add --global lts 18 20.0.1
+```
+
 ### remove, rm
 
-Removes the specified version of Node.JS.
+Removes the specified version(s) of Node.JS.
 
 Usage example:
 
 ```
 pnpm env remove --global 14.0.0
+pnpm env remove --global 14.0.0 16.2.3
 ```
 
 ### list, ls
