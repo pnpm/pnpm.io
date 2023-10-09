@@ -878,7 +878,7 @@ installation will fail.
 ### save-prefix
 
 * Default: **'^'**
-* Type: **String**
+* Type: **'^'**, **'~'**, **''**
 
 Configure how versions of packages installed to a `package.json` file get
 prefixed.
