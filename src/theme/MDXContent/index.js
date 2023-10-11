@@ -8,7 +8,7 @@ export default function MDXContentWrapper(props) {
       <MDXContent {...props} />
     <script src="//m.servedby-buysellads.com/monetization.custom.js"></script>
     <script dangerouslySetInnerHTML={{__html: `
-(function() {
+setTimeout(function() {
   if (typeof _bsa !== 'undefined' && _bsa) {
     _bsa.init('custom', 'CEAIPK3U', 'placement:pnpmio', {
       target: '#bsa-custom-01',
@@ -31,7 +31,7 @@ export default function MDXContentWrapper(props) {
 \`,
     });
   }
-})();`}} >
+}, 1);`}} >
     </script>
     </>
   );
