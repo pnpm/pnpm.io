@@ -6,7 +6,7 @@ export default function MDXContentWrapper(props) {
     <>
       <div id="bsa-custom-01" class="bsa-standard"></div>
       <MDXContent {...props} />
-    <script src="//cdn.carbonads.com/carbon.js" id="_carbonads_js"></script>
+    <script src="//m.servedby-buysellads.com/monetization.custom.js"></script>
     <script dangerouslySetInnerHTML={{__html: `
 if (typeof _bsa !== 'undefined' && _bsa) {
   _bsa.init('custom', 'CWYI4K7E', 'placement:pnpmio', {
