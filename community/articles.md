@@ -41,6 +41,7 @@ In French:
 - `2021-03-19`: [Migration pnpm chez Malt](https://medium.com/nerds-malt/migration-pnpm-chez-malt-4464e5e8069c)
 
 In Chinese:
+- `2023-10-13`: [pnpm包管理的高效存储机制解析](https://juejin.cn/post/7288963210954555448)
 - `2022-10-24`: [pnpm 原理解析](https://github.com/lvqq/blog/issues/60)
 - `2022-01-28`: [新一代包管理工具 pnpm](https://www.qjidea.com/pnpm/)
 - `2022-01-28`: [都2022年了，pnpm快到碗里来!](https://juejin.cn/post/7053340250210795557)
