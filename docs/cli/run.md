@@ -63,7 +63,9 @@ to be implicit rather than explicit, obfuscating the execution flow. It also led
 to surprising executions with `pnpm serve` also running `pnpm preserve`.
 
 If for some reason you need the pre/post scripts behavior of npm, use the
-`enable-pre-post-scripts` option.
+[`enable-pre-post-scripts`] option.
+
+[`enable-pre-post-scripts`]: ../npmrc.md#enable-pre-post-scripts
 
 ## Environment
 
@@ -100,41 +102,6 @@ will run:
 webpack --watch --no-color
 ```
 
-### script-shell
-
-* Default: **null**
-* Type: **path**
-
-The shell to use for scripts run with the `pnpm run` command.
-
-For instance, to force usage of Git Bash on Windows:
-
-```
-pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
-```
-
-### shell-emulator
-
-* Default: **false**
-* Type: **Boolean**
-
-When `true`, pnpm will use a JavaScript implementation of a [bash-like shell] to
-execute scripts.
-
-This option simplifies cross-platform scripting. For instance, by default, the
-next script will fail on non-POSIX-compliant systems:
-
-```json
-"scripts": {
-  "test": "NODE_ENV=test node test.js"
-}
-```
-
-But if the `shell-emulator` setting is set to `true`, it will work on all
-platforms.
-
-[bash-like shell]: https://www.npmjs.com/package/@yarnpkg/shell
-
 ### --recursive, -r
 
 This runs an arbitrary command from each package's "scripts" object.
@@ -162,14 +129,6 @@ package directory. This allows output from different packages to be interleaved.
 ### --aggregate-output
 
 Aggregate output from child processes that are run in parallel, and only print output when the child process is finished. It makes reading large logs after running `pnpm -r <command>` with `--parallel` or with `--workspace-concurrency=<number>` much easier (especially on CI). Only `--reporter=append-only` is supported.
-
-### enable-pre-post-scripts
-
-* Default: **false**
-* Type: **Boolean**
-
-When `true`, pnpm will run any pre/post scripts automatically. So running `pnpm foo`
-will be like running `pnpm prefoo && pnpm foo && pnpm postfoo`.
 
 ### --resume-from &lt;package_name\>
 
@@ -206,3 +165,48 @@ Hide workspace prefix from output from child processes that are run in parallel,
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
+
+## .npmrc settings
+
+### enable-pre-post-scripts
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, pnpm will run any pre/post scripts automatically. So running `pnpm foo`
+will be like running `pnpm prefoo && pnpm foo && pnpm postfoo`.
+
+### script-shell
+
+* Default: **null**
+* Type: **path**
+
+The shell to use for scripts run with the `pnpm run` command.
+
+For instance, to force usage of Git Bash on Windows:
+
+```
+pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+```
+
+### shell-emulator
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, pnpm will use a JavaScript implementation of a [bash-like shell] to
+execute scripts.
+
+This option simplifies cross-platform scripting. For instance, by default, the
+next script will fail on non-POSIX-compliant systems:
+
+```json
+"scripts": {
+  "test": "NODE_ENV=test node test.js"
+}
+```
+
+But if the `shell-emulator` setting is set to `true`, it will work on all
+platforms.
+
+[bash-like shell]: https://www.npmjs.com/package/@yarnpkg/shell
