@@ -65,7 +65,7 @@ to surprising executions with `pnpm serve` also running `pnpm preserve`.
 If for some reason you need the pre/post scripts behavior of npm, use the
 [`enable-pre-post-scripts`] option.
 
-[`enable-pre-post-scripts`]: ../npmrc.md#enable-pre-post-scripts
+[`enable-pre-post-scripts`]: #enable-pre-post-scripts
 
 ## Environment
 
