@@ -115,6 +115,7 @@ RUN pnpm run -r build
 
 FROM base AS common
 COPY --from=prod-deps /app/packages/common/node_modules/ /app/packages/common/node_modules
+COPY --from=prod-deps /app/node_modules/.pnpm /app/node_modules/.pnpm
 COPY --from=build /app/packages/common/dist /app/packages/common/dist
 
 FROM common AS app1
