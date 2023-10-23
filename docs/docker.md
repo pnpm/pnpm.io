@@ -57,6 +57,12 @@ CMD [ "pnpm", "start" ]
 
 ### Example 2: Build multiple Docker images in a monorepo
 
+:::note
+
+Because of a [bug](https://github.com/pnpm/pnpm/issues/6300), `--filter` cannot yet be utilized to optimize image sizes.
+
+:::
+
 Assuming you have a monorepo with 3 packages: app1, app2, and common; app1 and app2 depend on common but not each other.
 
 ```text title="Structure of the monorepo"
