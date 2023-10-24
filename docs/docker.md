@@ -59,6 +59,8 @@ CMD [ "pnpm", "start" ]
 
 Assuming you have a monorepo with 3 packages: app1, app2, and common; app1 and app2 depend on common but not each other.
 
+You want to save only necessary dependencies for each package, `pnpm deploy` should help you with copying only necessary files and packages.
+
 ```text title="Structure of the monorepo"
 ./
 ├── Dockerfile
@@ -103,31 +105,24 @@ FROM node:20-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
-COPY . /app
-WORKDIR /app
 
-FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
-
-FROM base AS build
+FROM base as build
+COPY . /dev
+WORKDIR /dev
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run -r build
+RUN pnpm deploy --filter=app1 --prod /prod/app1
+RUN pnpm deploy --filter=app2 --prod /prod/app2
 
-FROM base AS common
-COPY --from=prod-deps /app/packages/common/node_modules/ /app/packages/common/node_modules
-COPY --from=build /app/packages/common/dist /app/packages/common/dist
-
-FROM common AS app1
-COPY --from=prod-deps /app/packages/app1/node_modules/ /app/packages/app1/node_modules
-COPY --from=build /app/packages/app1/dist /app/packages/app1/dist
-WORKDIR /app/packages/app1
+FROM base as app1
+COPY --from=build /prod/app1 /prod/app1
+WORKDIR /prod/app1
 EXPOSE 8000
 CMD [ "pnpm", "start" ]
 
-FROM common AS app2
-COPY --from=prod-deps /app/packages/app2/node_modules/ /app/packages/app2/node_modules
-COPY --from=build /app/packages/app2/dist /app/packages/app2/dist
-WORKDIR /app/packages/app2
+FROM base as app2
+COPY --from=build /prod/app2 /prod/app2
+WORKDIR /prod/app2
 EXPOSE 8001
 CMD [ "pnpm", "start" ]
 ```
