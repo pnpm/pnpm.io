@@ -12,7 +12,7 @@ Git branch lockfiles allows you to totally avoid lockfile merge conflicts and so
 You can turn on this feature by configuring the `.npmrc` file.
 
 ```ini
-git-branch-lockfiles=true
+git-branch-lockfile=true
 ```
 
 By doing this, lockfile name will be generated based on the current branch name.
