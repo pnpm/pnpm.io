@@ -594,6 +594,40 @@ Scripts listed in this array will be required in each project of the workspace. 
 }
 ```
 
+## pnpm.supportedArchitectures
+
+Added in: v8.10.0
+
+You can specify architectures for which you'd like to install optional dependencies, even if they don't match the architecture of the system running the install.
+
+For example, the following configuration tells to install optional dependencies for Windows x64:
+
+```json
+{
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": ["win32"],
+      "cpu": ["x64"]
+    }
+  }
+}
+```
+
+Whereas this configuration will install optional dependencies for Windows, macOS, and the architecture of the system currently running the install. It includes artifacts for both x64 and arm64 CPUs:
+
+```json
+{
+  "pnpm": {
+    "supportedArchitectures": {
+      "os": ["win32", "darwin", "current"],
+      "cpu": ["x64", "arm64"]
+    }
+  }
+}
+```
+
+Additionally, `supportedArchitectures` also supports specifying the `libc` of the system.
+
 ## resolutions
 
 Functionally identical to [`pnpm.overrides`], this field is intended to make it easier to migrate from Yarn.
@@ -602,3 +636,4 @@ Functionally identical to [`pnpm.overrides`], this field is intended to make it 
 
 [pnpm patch-commit]: ./cli/patch-commit.md
 [`pnpm.overrides`]: #pnpmoverrides
+
