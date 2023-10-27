@@ -22,6 +22,7 @@ jobs:
       - run: |
           corepack enable
           corepack prepare pnpm@next-8 --activate
+          corepack prepare yarn@stable --activate
       - run: curl https://bun.sh/install | bash
       - run: /home/runner/.bun/bin/bun -v
       - run: pnpm --dir=benchmarks install
