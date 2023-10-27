@@ -35,7 +35,9 @@ Additional meta information used for dependencies declared inside `dependencies`
 
 ### dependenciesMeta.*.injected
 
-If this is set to true for a local dependency, the package will be hard linked to the modules directory, not symlinked.
+If this is set to `true` for a local dependency, the package will be hard linked to the virtual store (`node_modules/.pnpm`) and symlinked from the virtual store to the modules directory.
+
+If this is set to `false` or not set for a local dependency, the package will be symlinked directly from its location in the workspace to the module directory.
 
 For instance, the following `package.json` in a workspace will create a symlink to `button` in the `node_modules` directory of `card`:
 
@@ -278,7 +280,7 @@ The referenced package does not need to match the overridden one:
     "overrides": {
       "bar": "$foo"
     }
-  }  
+  }
 }
 ```
 
