@@ -18,6 +18,7 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@next-8 --activate
+          corepack prepare yarn@stable --activate
       - name: Install dependencies
         run: pnpm install
       - name: Build
