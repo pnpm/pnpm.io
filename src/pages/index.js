@@ -13,7 +13,7 @@ const features = [
     imageUrl: 'img/features/fast.svg',
     description: (
       <Translate>
-        pnpm is up to 2x faster than the alternatives
+        pnpm is up to 2x faster than npm
       </Translate>
     ),
   },
