@@ -1,5 +1,5 @@
 {
-  "version-7.x/docs": [
+  "docs": [
     {
       "collapsed": true,
       "type": "category",
@@ -7,11 +7,11 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-7.x/motivation"
+          "id": "motivation"
         },
         {
           "type": "doc",
-          "id": "version-7.x/installation"
+          "id": "installation"
         },
         {
           "type": "doc",
@@ -26,19 +26,19 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-7.x/pnpm-cli"
+          "id": "pnpm-cli"
         },
         {
           "type": "doc",
-          "id": "version-7.x/configuring"
+          "id": "configuring"
         },
         {
           "type": "doc",
-          "id": "version-7.x/filtering"
+          "id": "filtering"
         },
         {
           "type": "doc",
-          "id": "version-7.x/scripts"
+          "id": "scripts"
         }
       ]
     },
@@ -54,59 +54,59 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-7.x/cli/add"
+              "id": "cli/add"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/install"
+              "id": "cli/install"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/update"
+              "id": "cli/update"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/remove"
+              "id": "cli/remove"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/link"
+              "id": "cli/link"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/unlink"
+              "id": "cli/unlink"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/import"
+              "id": "cli/import"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/rebuild"
+              "id": "cli/rebuild"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/prune"
+              "id": "cli/prune"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/fetch"
+              "id": "cli/fetch"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/install-test"
+              "id": "cli/install-test"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/patch"
+              "id": "cli/patch"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/patch-commit"
+              "id": "cli/patch-commit"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/dedupe"
+              "id": "cli/dedupe"
             }
           ]
         },
@@ -117,23 +117,23 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-7.x/cli/audit"
+              "id": "cli/audit"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/list"
+              "id": "cli/list"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/outdated"
+              "id": "cli/outdated"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/why"
+              "id": "cli/why"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/licenses"
+              "id": "cli/licenses"
             }
           ]
         },
@@ -144,27 +144,27 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-7.x/cli/run"
+              "id": "cli/run"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/test"
+              "id": "cli/test"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/exec"
+              "id": "cli/exec"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/dlx"
+              "id": "cli/dlx"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/create"
+              "id": "cli/create"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/start"
+              "id": "cli/start"
             }
           ]
         },
@@ -172,7 +172,7 @@
           "type": "category",
           "label": "Manage environments",
           "items": [
-            "version-7.x/cli/env"
+            "cli/env"
           ]
         },
         {
@@ -182,51 +182,51 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-7.x/cli/publish"
+              "id": "cli/publish"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/pack"
+              "id": "cli/pack"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/recursive"
+              "id": "cli/recursive"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/server"
+              "id": "cli/server"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/store"
+              "id": "cli/store"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/root"
+              "id": "cli/root"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/bin"
+              "id": "cli/bin"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/setup"
+              "id": "cli/setup"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/init"
+              "id": "cli/init"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/deploy"
+              "id": "cli/deploy"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/doctor"
+              "id": "cli/doctor"
             },
             {
               "type": "doc",
-              "id": "version-7.x/cli/config"
+              "id": "cli/config"
             }
           ]
         }
@@ -239,19 +239,19 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-7.x/package_json"
+          "id": "package_json"
         },
         {
           "type": "doc",
-          "id": "version-7.x/npmrc"
+          "id": "npmrc"
         },
         {
           "type": "doc",
-          "id": "version-7.x/pnpm-workspace_yaml"
+          "id": "pnpm-workspace_yaml"
         },
         {
           "type": "doc",
-          "id": "version-7.x/pnpmfile"
+          "id": "pnpmfile"
         }
       ]
     },
@@ -262,19 +262,19 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-7.x/workspaces"
+          "id": "workspaces"
         },
         {
           "type": "doc",
-          "id": "version-7.x/aliases"
+          "id": "aliases"
         },
         {
           "type": "doc",
-          "id": "version-7.x/completion"
+          "id": "completion"
         },
         {
           "type": "doc",
-          "id": "version-7.x/git_branch_lockfiles"
+          "id": "git_branch_lockfiles"
         }
       ]
     },
@@ -285,15 +285,15 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-7.x/using-changesets"
+          "id": "using-changesets"
         },
         {
           "type": "doc",
-          "id": "version-7.x/continuous-integration"
+          "id": "continuous-integration"
         },
         {
           "type": "doc",
-          "id": "version-7.x/git"
+          "id": "git"
         }
       ]
     },
@@ -304,31 +304,31 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-7.x/errors"
+          "id": "errors"
         },
         {
           "type": "doc",
-          "id": "version-7.x/logos"
+          "id": "logos"
         },
         {
           "type": "doc",
-          "id": "version-7.x/limitations"
+          "id": "limitations"
         },
         {
           "type": "doc",
-          "id": "version-7.x/symlinked-node-modules-structure"
+          "id": "symlinked-node-modules-structure"
         },
         {
           "type": "doc",
-          "id": "version-7.x/how-peers-are-resolved"
+          "id": "how-peers-are-resolved"
         },
         {
           "type": "doc",
-          "id": "version-7.x/uninstall"
+          "id": "uninstall"
         },
         {
           "type": "doc",
-          "id": "version-7.x/pnpm-vs-npm"
+          "id": "pnpm-vs-npm"
         }
       ]
     }

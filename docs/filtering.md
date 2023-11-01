@@ -80,7 +80,7 @@ run tests for all packages dependent on `foo`:
 pnpm --filter "...^foo" test
 ```
 
-### --filter ./&lt;glob>, --filter {&lt;glob>}
+### --filter ./&lt;glob>, --filter \{&lt;glob>\}
 
 A glob pattern relative to the current working directory matching projects.
 

@@ -758,7 +758,7 @@ This way, even if someone is using Node.js v16, they will not be able to install
 * Default: **`https://nodejs.org/download/<releaseDir>/`**
 * Type: **URL**
 
-Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this setting can be any directory from <https://nodejs.org/download>: `release`, `rc`, `nightly`, `v8-canary`, etc.
+Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this setting can be any directory from [https://nodejs.org/download]: `release`, `rc`, `nightly`, `v8-canary`, etc.
 
 Here is how pnpm may be configured to download Node.js from Node.js mirror in China:
 
@@ -767,6 +767,8 @@ node-mirror:release=https://npmmirror.com/mirrors/node/
 node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
 node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 ```
+
+[https://nodejs.org/download]: https://nodejs.org/download
 
 ## Workspace Settings
 
