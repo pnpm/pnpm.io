@@ -102,6 +102,11 @@ will run:
 webpack --watch --no-color
 ```
 
+### --dir, -C &lt;dir&gt;
+
+Run the command from the directory &lt;dir&gt;.  
+Default is the current directory.
+
 ### --recursive, -r
 
 This runs an arbitrary command from each package's "scripts" object.
