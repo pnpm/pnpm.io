@@ -3,7 +3,7 @@ id: patch-commit
 title: "pnpm patch-commit <path>"
 ---
 
-Generate a patch out of a directory (inspired by a similar command in Yarn).
+Generate a patch out of a directory and save it (inspired by a similar command in Yarn).
 
 ```sh
 pnpm patch-commit <path>
