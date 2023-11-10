@@ -101,7 +101,9 @@ When you use `pnpm link`, the linked package is symlinked from the source code. 
 When you use the `file:` protocol in `dependencies`, the linked package is hard-linked to your project `node_modules`, you can modify the source code of the linked package, and the changes will be reflected in your project. With this method pnpm will also install the dependencies of the linked package, overriding the `node_modules` of the linked package.
 
 :::info
+
 When dealing with **peer dependencies** it is recommended to use the `file:` protocol. It better resolves the peer dependencies from the project dependencies, ensuring that the linked dependency correctly uses the versions of the dependencies specified in your main project, leading to more consistent and expected behaviors.
+
 :::
 
 | Feature                                      | `pnpm link`                                        | `file:` Protocol                                    |
