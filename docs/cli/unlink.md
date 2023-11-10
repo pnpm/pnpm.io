@@ -12,8 +12,10 @@ This is similar to `yarn unlink`, except pnpm re-installs the dependency after
 removing the external link.
 
 :::info
+
 If you want to remove a link made with `pnpm link --global <package>`, you should use `pnpm uninstall --global <package>`. 
 `pnpm unlink` only removes the links in your current directory.
+
 :::
 
 ## Options
