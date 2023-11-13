@@ -55,7 +55,7 @@ Tells the registry whether the published package should be public or restricted.
 
 Don't check if current branch is your publish branch, clean, and up-to-date with remote.
 
-### --publish-branch
+### --publish-branch &lt;branch\>
 
 * Default: **master** and **main**
 * Types: **String**
