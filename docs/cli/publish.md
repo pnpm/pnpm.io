@@ -85,8 +85,8 @@ An example of a `pnpm-publish-summary.json` file:
       "name": "bar",
       "version": "2.0.0"
     }
-  }
-]
+  ]
+}
 ```
 
 ### --dry-run
