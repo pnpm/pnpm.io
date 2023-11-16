@@ -318,5 +318,12 @@
     "infoLink": "https://tinyhttp.v1rtl.site",
     "pinned": false,
     "width": 180
+  },
+  {
+    "caption": "Lodine",
+    "image": "/img/users/lodine.svg",
+    "infoLink": "https://lodine.xyz",
+    "pinned": false,
+    "width": 300
   }
 ]
