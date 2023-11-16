@@ -106,7 +106,6 @@ webpack --watch --no-color
 
 This runs an arbitrary command from each package's "scripts" object.
 If a package doesn't have the command, it is skipped.
-If none of the packages have the command, the command fails.
 
 ### --if-present
 
