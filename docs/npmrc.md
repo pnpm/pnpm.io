@@ -661,6 +661,28 @@ Regardless of this configuration, installation will always fail if a project
 
 The location of the npm binary that pnpm uses for some actions, like publishing.
 
+### shell-emulator
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, pnpm will use a JavaScript implementation of a [bash-like shell] to
+execute scripts.
+
+This option simplifies cross-platform scripting. For instance, by default, the
+next script will fail on non-POSIX-compliant systems:
+
+```json
+"scripts": {
+  "test": "NODE_ENV=test node test.js"
+}
+```
+
+But if the `shell-emulator` setting is set to `true`, it will work on all
+platforms.
+
+[bash-like shell]: https://www.npmjs.com/package/@yarnpkg/shell
+
 ## Build Settings
 
 ### ignore-scripts
@@ -848,6 +870,13 @@ If `foo@1.0.0` is in the workspace and you run `pnpm add foo` in another project
 * Type: **Boolean**
 
 When executing commands recursively in a workspace, execute them on the root workspace project as well.
+
+### ignore-workspace-root-check
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, adding a new dependency to the root workspace package will not fail.
 
 ### ignore-workspace-cycles
 
