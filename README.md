@@ -1,6 +1,3 @@
-# pnpm.io
-
-[![](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://stackblitz.com/~/github.com/pnpm/pnpm.io)
 
 ## Testing locally
 
