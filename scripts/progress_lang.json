@@ -1,6 +1,6 @@
 {
     "de": {
-        "translationProgress": 5,
+        "translationProgress": 6,
         "approvalProgress": 4
     },
     "es-ES": {
@@ -24,7 +24,7 @@
         "approvalProgress": 69
     },
     "ko": {
-        "translationProgress": 59,
+        "translationProgress": 60,
         "approvalProgress": 58
     },
     "pl": {
@@ -56,7 +56,7 @@
         "approvalProgress": 89
     },
     "zh-TW": {
-        "translationProgress": 40,
-        "approvalProgress": 39
+        "translationProgress": 44,
+        "approvalProgress": 43
     }
 }
