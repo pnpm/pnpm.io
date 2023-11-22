@@ -325,5 +325,12 @@
     "infoLink": "https://lodine.xyz",
     "pinned": false,
     "width": 300
+  },
+  {
+    "caption": "Kiebot",
+    "image": "/img/users/kiebot.png",
+    "infoLink": "https://kiebot.com",
+    "pinned": false,
+    "width": 300
   }
 ]
