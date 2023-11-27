@@ -150,7 +150,12 @@ Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 Do not execute any scripts defined in the project `package.json` and its
 dependencies.
 
-### --filter &lt;package_selector>
+### --filter 
+:::warning
+Filter currently does not work properly with v8 default config, you have to implicitly set [dedupe-peer-dependents](../npmrc.md#dedupe-peer-dependents) to `false` to have that work. For more info and progress please refer to [#6300](https://github.com/pnpm/pnpm/issues/6300)
+:::
+
+&lt;package_selector>
 
 [Read more about filtering.](../filtering.md)
 
