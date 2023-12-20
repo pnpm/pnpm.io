@@ -122,7 +122,7 @@ build:
   stage: build
   image: node:18.17.1
   before_script:
-    - corepack enable
+    - corepack enable --install-directory ~/bin
     - corepack prepare pnpm@latest-8 --activate
     - pnpm config set store-dir .pnpm-store
   script:
