@@ -189,6 +189,25 @@
         {
           "collapsed": true,
           "type": "category",
+          "label": "Inspect the store",
+          "items": [
+            {
+              "type": "doc",
+              "id": "cli/cat-file"
+            },
+            {
+              "type": "doc",
+              "id": "cli/cat-index"
+            },
+            {
+              "type": "doc",
+              "id": "cli/find-hash"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
           "label": "Misc.",
           "items": [
             {
