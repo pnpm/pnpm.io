@@ -1037,3 +1037,11 @@ Added in: v8.1.0
 
 When set to `true`, dependencies that are already symlinked to the root `node_modules` directory of the workspace will not be symlinked to subproject `node_modules` directories.
 
+### dedupe-injected-deps
+
+Added in: v8.13.1
+
+* Default: **false**
+* Type: **Boolean**
+
+When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.

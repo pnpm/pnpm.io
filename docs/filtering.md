@@ -130,6 +130,12 @@ For example, the next command will run tests in all changed packages since
 pnpm --filter "...[origin/master]" test
 ```
 
+### --fail-if-no-match
+
+Added in: v8.13.1
+
+Use this flag if you want the CLI to fail if no packages have matched the filters.
+
 ## Excluding
 
 Any of the filter selectors may work as exclusion operators when they have a
