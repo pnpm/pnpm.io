@@ -181,7 +181,7 @@ source code of the package, tests will run in the dependent packages as well:
 pnpm --filter="...[origin/master]" --test-pattern="test/*" test
 ```
 
-## --changed-files-ignore-pattern &ltglob>
+## --changed-files-ignore-pattern &lt;glob>
 
 Allows to ignore changed files by glob patterns when filtering for changed projects since the specified commit/branch.
 
