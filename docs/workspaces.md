@@ -146,6 +146,7 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Slidev](https://github.com/slidevjs/slidev) | ![](https://img.shields.io/github/stars/slidevjs/slidev) | 2021-04-12 | `d6783323eb1ab1fc612577eb63579c8f7bc99c3a` |
 | [Astro](https://github.com/withastro/astro) | ![](https://img.shields.io/github/stars/withastro/astro) | 2022-03-08 | `240d88aefe66c7d73b9c713c5da42ae789c011ce` |
 | [Turborepo](https://github.com/vercel/turborepo) | ![](https://img.shields.io/github/stars/vercel/turborepo) | 2022-03-02 | `fd171519ec02a69c9afafc1bc5d9d1b481fba721` |
+| [Ember.js](https://github.com/emberjs/ember.js) | ![](https://img.shields.io/github/stars/emberjs/ember.js) | 2023-10-18 | `b6b05da662497183434136fb0148e1dec544db04` |
 | [Element Plus](https://github.com/element-plus/element-plus) | ![](https://img.shields.io/github/stars/element-plus/element-plus) | 2021-09-23 | `f9e192535ff74d1443f1d9e0c5394fad10428629` |
 | [Verdaccio](https://github.com/verdaccio/verdaccio) | ![](https://img.shields.io/github/stars/verdaccio/verdaccio) | 2021-09-21 | `9dbf73e955fcb70b0a623c5ab89649b95146c744` |
 | [NextAuth.js](https://github.com/nextauthjs/next-auth) | ![](https://img.shields.io/github/stars/nextauthjs/next-auth) | 2022-05-03 | `4f29d39521451e859dbdb83179756b372e3dd7aa` |
