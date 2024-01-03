@@ -33,6 +33,15 @@ Values in the `.npmrc` files may contain env variables using the `${NAME}` synta
 When `true`, all dependencies are hoisted to `node_modules/.pnpm/node_modules`. This makes
 unlisted dependencies accessible to all packages inside `node_modules`.
 
+### hoist-workspace-packages
+
+Added in: v8.14.0
+
+* Default: **false**
+* Type: **boolean**
+
+When `true`, packages from the workspaces are symlinked to either `<workspace_root>/node_modules/.pnpm/node_modules` or to `<workspace_root>/node_modules` depending on other hoisting settings (`hoist-pattern` and `public-hoist-pattern`).
+
 ### hoist-pattern
 
 * Default: **['\*']**
