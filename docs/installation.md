@@ -146,6 +146,14 @@ If you have Volta installed, you can install pnpm using the following command:
 volta install pnpm
 ```
 
+## Using pkgx
+
+If you have pkgx installed, you can install pnpm using the following command:
+
+```
+pkgx install pnpm
+```
+
 :::tip
 
 Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).
