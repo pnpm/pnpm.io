@@ -11,7 +11,8 @@ export default {
       '--cache=cache',
       '--registry=https://registry.npmjs.org/',
       '--legacy-peer-deps',
-      '--install-strategy=linked',
+      // npm CLI fails on the benchmarks with this option. So, commenting out for now.
+      // '--install-strategy=linked',
     ]
   },
   pnpm: {
