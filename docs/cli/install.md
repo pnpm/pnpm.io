@@ -60,7 +60,7 @@ determining the environment.
 
 If `true`, pnpm will not install any package listed in `devDependencies` and will remove 
 those insofar they were already installed.
-If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`
+If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`.
 
 ### --dev, -D
 
