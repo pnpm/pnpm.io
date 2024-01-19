@@ -212,6 +212,7 @@ jobs:
           command: |
             corepack enable
             corepack prepare pnpm@latest-8 --activate
+            pnpm config set store-dir .pnpm-store
       - run:
           name: Install Dependencies
           command: |
@@ -220,7 +221,7 @@ jobs:
           name: Save pnpm Package Cache
           key: pnpm-packages-{{ checksum "pnpm-lock.yaml" }}
           paths:
-            - node_modules
+            - .pnpm-store
 ```
 
 ## Jenkins
