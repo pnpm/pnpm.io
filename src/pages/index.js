@@ -91,11 +91,14 @@ const Showcase = props => {
               <a href={addUTM("https://bit.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
               </a>
+              <a href={addUTM("https://figma.com/")} target="_blank">
+                <img style={{padding: '0 20px'}} width="120" alt="Figma" title="Figma" src="/img/users/figma.svg" />
+              </a>
               <a href={addUTM("https://discord.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="260" alt="bit" src="/img/users/discord.svg" />
+                <img style={{padding: '20px'}} width="260" alt="Discord" src="/img/users/discord.svg" />
               </a>
               <a href={addUTM("https://www.jetbrains.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="140" alt="Prisma" src="/img/users/jetbrains.svg" />
+                <img style={{padding: '20px'}} width="140" alt="JetBrains" src="/img/users/jetbrains.svg" />
               </a>
               <a href={addUTM("https://prisma.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
@@ -104,7 +107,7 @@ const Showcase = props => {
                 <img style={{padding: '20px'}} width="240" alt="u|screen" src="/img/users/uscreen.svg" />
               </a>
               <a href={addUTM("https://nx.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="160" alt="u|screen" src="/img/users/nx.svg" />
+                <img style={{padding: '20px'}} width="160" alt="nx" src="/img/users/nx.svg" />
               </a>
               <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
