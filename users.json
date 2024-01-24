@@ -332,5 +332,12 @@
     "infoLink": "https://emberjs.com",
     "pinned": false,
     "width": 250
+  },
+  {
+    "caption": "MUI",
+    "image": "/img/users/mui.svg",
+    "infoLink": "https://mui.com",
+    "pinned": false,
+    "width": 130
   }
 ]
