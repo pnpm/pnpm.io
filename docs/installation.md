@@ -78,7 +78,7 @@ brew install corepack
 
 This will automatically install pnpm on your system.
 
-You can pin the version of pnpm used on your project useing the following command:
+You can pin the version of pnpm used on your project using the following command:
 
 ```
 corepack use pnpm@latest
