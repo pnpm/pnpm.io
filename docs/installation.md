@@ -67,7 +67,7 @@ If you have installed Node.js with `pnpm env` Corepack won't be installed on you
 :::
 
 ```
-corepack enable
+corepack enable pnpm
 ```
 
 If you installed Node.js using Homebrew, you'll need to install corepack separately:
@@ -76,17 +76,15 @@ If you installed Node.js using Homebrew, you'll need to install corepack separat
 brew install corepack
 ```
 
-This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the [latest pnpm version](https://github.com/pnpm/pnpm/releases/latest) and run:
+This will automatically install pnpm on your system.
+
+You can pin the version of pnpm used on your project useing the following command:
 
 ```
-corepack prepare pnpm@<version> --activate
+corepack use pnpm@latest
 ```
 
-With Node.js v16.17 or newer, you may install the `latest` version of pnpm by just specifying the tag:
-
-```
-corepack prepare pnpm@latest --activate
-```
+This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
 
 ## Using npm
 
