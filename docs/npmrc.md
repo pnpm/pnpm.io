@@ -534,6 +534,14 @@ The maximum amount of time to wait for HTTP requests to complete.
 
 When `true`, any missing non-optional peer dependencies are automatically installed.
 
+#### Version Conflicts
+
+If there are conflicting version requirements for a peer dependency from different packages, pnpm will not install any version of the conflicting peer dependency automatically. Instead, a warning is printed. For example, if one dependency requires `react@^16.0.0` and another requires `react@^17.0.0`, these requirements conflict, and no automatic installation will occur.
+
+#### Conflict Resolution
+
+In case of a version conflict, you'll need to evaluate which version of the peer dependency to install yourself, or update the dependencies to align their peer dependency requirements.
+
 ### dedupe-peer-dependents
 
 * Default: **true**
