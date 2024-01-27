@@ -15,7 +15,7 @@ When used without arguments, updates all dependencies.
 | Command              | Meaning                                                                  |
 |----------------------|--------------------------------------------------------------------------|
 |`pnpm up`             | Updates all dependencies, adhering to ranges specified in `package.json` |
-|`pnpm up --latest`    | Updates all dependencies, ignoring ranges specified in `package.json`    |
+|`pnpm up --latest`    | Updates all dependencies to their latest versions                        |
 |`pnpm up foo@2`       | Updates `foo` to the latest version on v2                                |
 |`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
 
@@ -60,7 +60,7 @@ pnpm --recursive update typescript@latest
 
 ### --latest, -L
 
-Ignores the version range specified in `package.json`. Instead, the version specified by the `latest` tag will be used (potentially upgrading the packages across major versions).
+Update the dependencies to their latest stable version as determined by their `latest` tags (potentially upgrading the packages across major versions) as long as the version range specified in `package.json` is older than the `latest` tag (i.e. it will not downgrade prereleases).
 
 ### --global, -g
 
