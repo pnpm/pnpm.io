@@ -60,7 +60,7 @@ pnpm --recursive update typescript@latest
 
 ### --latest, -L
 
-Update the dependencies to their latest stable version as determined by their `latest` tags (potentially upgrading the packages across major versions) as long as the version range specified in `package.json` is older than the `latest` tag (i.e. it will not downgrade prereleases).
+Update the dependencies to their latest stable version as determined by their `latest` tags (potentially upgrading the packages across major versions) as long as the version range specified in `package.json` is lower than the `latest` tag (i.e. it will not downgrade prereleases).
 
 ### --global, -g
 
