@@ -142,24 +142,25 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Vite](https://github.com/vitejs/vite) | ![](https://img.shields.io/github/stars/vitejs/vite) | 2021-09-26 | `3e1cce01d01493d33e50966d0d0fd39a86d229f9` |
 | [Nuxt](https://github.com/nuxt/nuxt) | ![](https://img.shields.io/github/stars/nuxt/nuxt) | 2022-10-17 | `74a90c566c936164018c086030c7de65b26a5cb6` |
 | [Vue 3.0](https://github.com/vuejs/vue-next) | ![](https://img.shields.io/github/stars/vuejs/vue-next) | 2021-10-09 | `61c5fbd3e35152f5f32e95bf04d3ee083414cecb` |
-| [Prisma](https://github.com/prisma/prisma) | ![](https://img.shields.io/github/stars/prisma/prisma) | 2021-09-21 | `c4c83e788aa16d61bae7a6d00adc8a58b3789a06` |
-| [n8n](https://github.com/n8n-io/n8n) | ![](https://img.shields.io/github/stars/n8n-io/n8n) | 2022-11-09 | `736777385c54d5b20174c9c1fda38bb31fbf14b4` |
-| [Slidev](https://github.com/slidevjs/slidev) | ![](https://img.shields.io/github/stars/slidevjs/slidev) | 2021-04-12 | `d6783323eb1ab1fc612577eb63579c8f7bc99c3a` |
 | [Astro](https://github.com/withastro/astro) | ![](https://img.shields.io/github/stars/withastro/astro) | 2022-03-08 | `240d88aefe66c7d73b9c713c5da42ae789c011ce` |
+| [n8n](https://github.com/n8n-io/n8n) | ![](https://img.shields.io/github/stars/n8n-io/n8n) | 2022-11-09 | `736777385c54d5b20174c9c1fda38bb31fbf14b4` |
+| [Prisma](https://github.com/prisma/prisma) | ![](https://img.shields.io/github/stars/prisma/prisma) | 2021-09-21 | `c4c83e788aa16d61bae7a6d00adc8a58b3789a06` |
+| [Slidev](https://github.com/slidevjs/slidev) | ![](https://img.shields.io/github/stars/slidevjs/slidev) | 2021-04-12 | `d6783323eb1ab1fc612577eb63579c8f7bc99c3a` |
 | [Turborepo](https://github.com/vercel/turborepo) | ![](https://img.shields.io/github/stars/vercel/turborepo) | 2022-03-02 | `fd171519ec02a69c9afafc1bc5d9d1b481fba721` |
 | [Ember.js](https://github.com/emberjs/ember.js) | ![](https://img.shields.io/github/stars/emberjs/ember.js) | 2023-10-18 | `b6b05da662497183434136fb0148e1dec544db04` |
 | [Element Plus](https://github.com/element-plus/element-plus) | ![](https://img.shields.io/github/stars/element-plus/element-plus) | 2021-09-23 | `f9e192535ff74d1443f1d9e0c5394fad10428629` |
-| [Verdaccio](https://github.com/verdaccio/verdaccio) | ![](https://img.shields.io/github/stars/verdaccio/verdaccio) | 2021-09-21 | `9dbf73e955fcb70b0a623c5ab89649b95146c744` |
 | [NextAuth.js](https://github.com/nextauthjs/next-auth) | ![](https://img.shields.io/github/stars/nextauthjs/next-auth) | 2022-05-03 | `4f29d39521451e859dbdb83179756b372e3dd7aa` |
+| [Qwik](https://github.com/BuilderIO/qwik) | ![](https://img.shields.io/github/stars/BuilderIO/qwik) | 2022-11-14 | `021b12f58cca657e0a008119bc711405513e1ee9` |
 | [VueUse](https://github.com/vueuse/vueuse) | ![](https://img.shields.io/github/stars/vueuse/vueuse) | 2021-09-25 | `826351ba1d9c514e34426c85f3d69fb9875c7dd9` |
 | [SvelteKit](https://github.com/sveltejs/kit) | ![](https://img.shields.io/github/stars/sveltejs/kit) | 2021-09-26 | `b164420ab26fa04fd0fbe0ac05431f36a89ef193` |
-| [Cycle.js](https://github.com/cyclejs/cyclejs) | ![](https://img.shields.io/github/stars/cyclejs/cyclejs) | 2021-09-21 | `f2187ab6688368edb904b649bd371a658f6a8637` |
+| [Verdaccio](https://github.com/verdaccio/verdaccio) | ![](https://img.shields.io/github/stars/verdaccio/verdaccio) | 2021-09-21 | `9dbf73e955fcb70b0a623c5ab89649b95146c744` |
 | [Vercel](https://github.com/vercel/vercel) | ![](https://img.shields.io/github/stars/vercel/vercel) | 2023-01-12 | `9c768b98b71cfc72e8638bf5172be88c39e8fa69` |
 | [Vitest](https://github.com/vitest-dev/vitest) | ![](https://img.shields.io/github/stars/vitest-dev/vitest) | 2021-12-13 | `d6ff0ccb819716713f5eab5c046861f4d8e4f988` |
+| [Cycle.js](https://github.com/cyclejs/cyclejs) | ![](https://img.shields.io/github/stars/cyclejs/cyclejs) | 2021-09-21 | `f2187ab6688368edb904b649bd371a658f6a8637` |
 | [Milkdown](https://github.com/Saul-Mirone/milkdown) | ![](https://img.shields.io/github/stars/Saul-Mirone/milkdown) | 2021-09-26 | `4b2e1dd6125bc2198fd1b851c4f00eda70e9b913` |
 | [Nhost](https://github.com/nhost/nhost) | ![](https://img.shields.io/github/stars/nhost/nhost) | 2022-02-07 | `10a1799a1fef2f558f737de3bb6cadda2b50e58f` |
 | [Logto](https://github.com/logto-io/logto) | ![](https://img.shields.io/github/stars/logto-io/logto) | 2021-07-29 | `0b002e07850c8e6d09b35d22fab56d3e99d77043` |
-| [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
 | [Rollup plugins](https://github.com/rollup/plugins) | ![](https://img.shields.io/github/stars/rollup/plugins) | 2021-09-21 | `53fb18c0c2852598200c547a0b1d745d15b5b487` |
 | [icestark](https://github.com/ice-lab/icestark) | ![](https://img.shields.io/github/stars/ice-lab/icestark) | 2021-12-16 | `4862326a8de53d02f617e7b1986774fd7540fccd` |
+| [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
 
