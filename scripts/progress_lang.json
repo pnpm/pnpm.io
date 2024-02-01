@@ -12,11 +12,11 @@
         "approvalProgress": 40
     },
     "id": {
-        "translationProgress": 33,
+        "translationProgress": 34,
         "approvalProgress": 28
     },
     "it": {
-        "translationProgress": 74,
+        "translationProgress": 76,
         "approvalProgress": 68
     },
     "ja": {
@@ -52,7 +52,7 @@
         "approvalProgress": 0
     },
     "zh-CN": {
-        "translationProgress": 92,
+        "translationProgress": 93,
         "approvalProgress": 86
     },
     "zh-TW": {
