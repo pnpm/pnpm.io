@@ -31,7 +31,7 @@ If you don't have curl installed, you would like to use wget:
 wget -qO- https://get.pnpm.io/install.sh | sh -
 ```
 
-### In docker container
+### In a Docker container
 
 ```sh
 # bash
