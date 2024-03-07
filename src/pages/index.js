@@ -100,6 +100,9 @@ const Showcase = props => {
               <a href={addUTM("https://www.jetbrains.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="140" alt="JetBrains" src="/img/users/jetbrains.svg" />
               </a>
+              <a href={addUTM("https://coderabbit.ai/")} target="_blank">
+                <img style={{padding: '20px'}} width="240" alt="CodeRabbit" src="/img/users/coderabbit.svg" />
+              </a>
               <a href={addUTM("https://prisma.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
               </a>
