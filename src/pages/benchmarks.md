@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Mar 3, 2024, 2:44 AM_ (_daily_ updated).
+**Last benchmarked at**: _Mar 10, 2024, 2:47 AM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,14 +22,14 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchm
 
 | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-| install |       |          |             | 42.2s | 8.6s | 7.2s | 3.6s |
-| install | ✔     | ✔        | ✔           | 1.5s | 1.1s | 4.9s | n/a |
-| install | ✔     | ✔        |             | 8.2s | 2.6s | 5.4s | 1.4s |
-| install | ✔     |          |             | 13.2s | 6s | 7.2s | 3.1s |
+| install |       |          |             | 42.2s | 8.6s | 8.2s | 4s |
+| install | ✔     | ✔        | ✔           | 1.5s | 1.1s | 5.2s | n/a |
+| install | ✔     | ✔        |             | 8.1s | 2.6s | 5.4s | 1.4s |
+| install | ✔     |          |             | 13.1s | 6s | 8s | 3.5s |
 | install |       | ✔        |             | 16.5s | 5.3s | 5.4s | 1.4s |
-| install | ✔     |          | ✔           | 1.8s | 2.3s | 7s | n/a |
-| install |       | ✔        | ✔           | 1.5s | 1.1s | 4.9s | n/a |
-| install |       |          | ✔           | 1.7s | 5.3s | 6.9s | n/a |
-| update  | n/a | n/a | n/a | 8.9s | 3.6s | 5.7s | 3.1s |
+| install | ✔     |          | ✔           | 1.8s | 2.3s | 7.5s | n/a |
+| install |       | ✔        | ✔           | 1.5s | 1.1s | 5.2s | n/a |
+| install |       |          | ✔           | 1.7s | 5.3s | 7.4s | n/a |
+| update  | n/a | n/a | n/a | 8.9s | 3.6s | 6.2s | 3.6s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
