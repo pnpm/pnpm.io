@@ -539,7 +539,7 @@ When `true`, installation won't fail if some of the patches from the `patchedDep
   "pnpm": {
     "patchedDependencies": {
       "express@4.18.1": "patches/express@4.18.1.patch"
-    }
+    },
     "allowNonAppliedPatches": true
 }
 ```
