@@ -307,7 +307,7 @@ will enforce that when you use `pnpm add @babel/core`, or any `@babel` scoped
 package, the package will be fetched from `https://example.com/packages/npm`
 instead of the default registry.
 
-### &lt;URL\>:_authToken
+### &lt;URL&gt;&#58;_authToken
 
 Define the authentication bearer token to use when accessing the specified
 registry. For example:
@@ -328,7 +328,7 @@ Or you may just use an environment variable directly, without changing `.npmrc` 
 npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 ```
 
-### &lt;URL\>:tokenHelper
+### &lt;URL&gt;&#58;tokenHelper
 
 A token helper is an executable which outputs an auth token. This can be used in situations where the authToken is not a constant value but is something that refreshes regularly, where a script or other tool can use an existing refresh token to obtain a new access token.
 
@@ -383,7 +383,7 @@ certificates. Similar to the `ca` setting, but allows for multiple CAs, as well
 as for the CA information to be stored in a file instead of being specified via
 CLI.
 
-### &lt;URL\>:cafile
+### &lt;URL&gt;&#58;cafile
 
 Define the path to a Certificate Authority file to use when accessing the specified
 registry. For example:
@@ -406,7 +406,7 @@ cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 
 It is not the path to a certificate file.
 
-### &lt;URL\>:certfile
+### &lt;URL&gt;&#58;certfile
 
 Define the path to a certificate file to use when accessing the specified
 registry. For example:
@@ -431,7 +431,7 @@ It is not the path to a key file (and there is no `keyfile` option).
 
 This setting contains sensitive information. Don't write it to a local `.npmrc` file committed to the repository.
 
-### &lt;URL\>:keyfile
+### &lt;URL&gt;&#58;keyfile
 
 Define the path to a client key file to use when accessing the specified
 registry. For example:

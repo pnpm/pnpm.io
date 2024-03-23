@@ -309,7 +309,7 @@ will enforce that when you use `pnpm add @babel/core`, or any `@babel` scoped
 package, the package will be fetched from `https://example.com/packages/npm`
 instead of the default registry.
 
-### &lt;URL\>:_authToken
+### &lt;URL&gt;&#58;_authToken
 
 Define the authentication bearer token to use when accessing the specified
 registry. For example:
@@ -330,7 +330,7 @@ Or you may just use an environment variable directly, without changing `.npmrc` 
 npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 ```
 
-### &lt;URL\>:tokenHelper
+### &lt;URL&gt;&#58;tokenHelper
 
 A token helper is an executable which outputs an auth token. This can be used in situations where the authToken is not a constant value but is something that refreshes regularly, where a script or other tool can use an existing refresh token to obtain a new access token.
 
