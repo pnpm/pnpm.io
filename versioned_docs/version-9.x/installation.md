@@ -16,38 +16,19 @@ You may install pnpm even if you don't have Node.js installed, using the followi
 Using PowerShell:
 
 ```powershell
-iwr https://get.pnpm.io/install.ps1 -useb | iex
+$env:PNPM_VERSION = "9.0.0-beta.0"; iwr https://get.pnpm.io/install.ps1 -useb | iex
 ```
 
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.0.0-beta.0 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | sh -
-```
-
-### In a Docker container
-
-```sh
-# bash
-wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
-# sh
-wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
-# dash
-wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
-```
-
-### Installing a specific version
-
-Prior to running the install script, you may optionally set an env variable `PNPM_VERSION` to install a specific version of pnpm:
-
-```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=9.0.0-beta.0 sh -
 ```
 
 :::tip
@@ -81,7 +62,7 @@ This will automatically install pnpm on your system.
 You can pin the version of pnpm used on your project using the following command:
 
 ```
-corepack use pnpm@latest
+corepack use pnpm@9.0.0-beta.0
 ```
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
@@ -95,53 +76,13 @@ We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
 
 ```sh
-npm install -g pnpm
+npm install -g pnpm@9.0.0-beta.0
 ```
 
 or
 
 ```sh
-npm install -g @pnpm/exe
-```
-
-## Using Homebrew
-
-If you have the package manager installed, you can install pnpm using the following command:
-
-```
-brew install pnpm
-```
-
-## Using winget
-
-If you have winget installed, you can install pnpm using the following command:
-
-```
-winget install pnpm
-```
-
-## Using Scoop
-
-If you have Scoop installed, you can install pnpm using the following command:
-
-```
-scoop install nodejs-lts pnpm
-```
-
-## Using Choco
-
-If you have Chocolatey installed, you can install pnpm using the following command:
-
-```
-choco install pnpm
-```
-
-## Using Volta
-
-If you have Volta installed, you can install pnpm using the following command:
-
-```
-volta install pnpm
+npm install -g @pnpm/exe@9.0.0-beta.0
 ```
 
 :::tip
