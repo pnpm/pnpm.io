@@ -383,6 +383,15 @@ certificates. Similar to the `ca` setting, but allows for multiple CAs, as well
 as for the CA information to be stored in a file instead of being specified via
 CLI.
 
+### &lt;URL\>:cafile
+
+Define the path to a Certificate Authority file to use when accessing the specified
+registry. For example:
+
+```sh
+//registry.npmjs.org/:keyfile=client-cert.pem
+```
+
 ### cert
 
 * Default: **null**
@@ -395,7 +404,16 @@ PEM format (AKA "Base-64 encoded X.509 (.CER)"). For example:
 cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 ```
 
-It is not the path to a certificate file (and there is no `certfile` option).
+It is not the path to a certificate file.
+
+### &lt;URL\>:certfile
+
+Define the path to a certificate file to use when accessing the specified
+registry. For example:
+
+```sh
+//registry.npmjs.org/:certfile=server-cert.pem
+```
 
 ### key
 
@@ -412,6 +430,15 @@ key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
 It is not the path to a key file (and there is no `keyfile` option).
 
 This setting contains sensitive information. Don't write it to a local `.npmrc` file committed to the repository.
+
+### &lt;URL\>:keyfile
+
+Define the path to a client key file to use when accessing the specified
+registry. For example:
+
+```sh
+//registry.npmjs.org/:keyfile=server-key.pem
+```
 
 ### git-shallow-hosts
 
@@ -728,6 +755,13 @@ Only use the side effects cache if present, do not create it for new packages.
 
 Set to true to enable UID/GID switching when running package scripts.
 If set explicitly to false, then installing as a non-root user will fail.
+
+### node-options
+
+* Default: **NULL**
+* Type: **String**
+
+Options to pass through to Node.js via the `NODE_OPTIONS` environment variable. This does not impact how pnpm itself is executed but it does impact how lifecycle scripts are called.
 
 ## Node.js Settings
 

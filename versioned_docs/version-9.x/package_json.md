@@ -537,7 +537,7 @@ When `true`, installation won't fail if some of the patches from the `patchedDep
   "pnpm": {
     "patchedDependencies": {
       "express@4.18.1": "patches/express@4.18.1.patch"
-    }
+    },
     "allowNonAppliedPatches": true
 }
 ```
@@ -623,6 +623,18 @@ Whereas this configuration will install optional dependencies for Windows, macOS
 ```
 
 Additionally, `supportedArchitectures` also supports specifying the `libc` of the system.
+
+## pnpm.ignoredOptionalDependencies
+
+If an optional dependency has its name included in this array, it will be skipped. For example:
+
+```json
+{
+  "pnpm": {
+    "ignoredOptionalDependencies": ["fsevents", "@esbuild/*"]
+  }
+}
+```
 
 ## resolutions
 
