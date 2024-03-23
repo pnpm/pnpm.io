@@ -37,7 +37,7 @@ pnpm -r publish
 
 ### --link-workspace-packages
 
-* Default: **true**
+* Default: **false**
 * Type: **true, false, deep**
 
 Link locally available packages in workspaces of a monorepo into `node_modules`

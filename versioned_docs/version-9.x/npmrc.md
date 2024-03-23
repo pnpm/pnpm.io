@@ -35,7 +35,7 @@ unlisted dependencies accessible to all packages inside `node_modules`.
 
 ### hoist-workspace-packages
 
-* Default: **false**
+* Default: **true**
 * Type: **boolean**
 
 When `true`, packages from the workspaces are symlinked to either `<workspace_root>/node_modules/.pnpm/node_modules` or to `<workspace_root>/node_modules` depending on other hoisting settings (`hoist-pattern` and `public-hoist-pattern`).
@@ -789,7 +789,7 @@ node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 
 ### link-workspace-packages
 
-* Default: **true**
+* Default: **false**
 * Type: **true**, **false**, **deep**
 
 If this is enabled, locally available packages are linked to `node_modules`
@@ -1048,7 +1048,7 @@ When set to `true`, dependencies that are already symlinked to the root `node_mo
 
 ### dedupe-injected-deps
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
