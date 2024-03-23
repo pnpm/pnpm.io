@@ -132,8 +132,6 @@ pnpm --filter "...[origin/master]" test
 
 ### --fail-if-no-match
 
-Added in: v8.13.1
-
 Use this flag if you want the CLI to fail if no packages have matched the filters.
 
 ## Excluding

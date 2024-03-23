@@ -3,8 +3,6 @@ id: cat-file
 title: "pnpm cat-file"
 ---
 
-Added in: v8.13.1
-
 Prints the contents of a file based on the hash value stored in the index file. For example:
 
 ```

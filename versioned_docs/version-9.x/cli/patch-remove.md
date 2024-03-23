@@ -3,8 +3,6 @@ id: patch-remove
 title: "pnpm patch-remove <pkg...>"
 ---
 
-Added in: v8.5.0
-
 Remove existing patch files and settings in `pnpm.patchedDependencies`.
 
 ```sh

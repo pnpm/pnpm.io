@@ -169,6 +169,4 @@ Filter currently does not work properly with v8 default config, you have to impl
 
 ### --resolution-only
 
-Added in: v8.3.0
-
 Re-runs resolution: useful for printing out peer dependency issues.

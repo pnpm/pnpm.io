@@ -3,8 +3,6 @@ id: find-hash
 title: "pnpm find-hash"
 ---
 
-Added in: v8.13.1
-
 :::warning
 
 This command is experimental

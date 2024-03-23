@@ -35,8 +35,6 @@ unlisted dependencies accessible to all packages inside `node_modules`.
 
 ### hoist-workspace-packages
 
-Added in: v8.14.0
-
 * Default: **false**
 * Type: **boolean**
 
@@ -868,16 +866,12 @@ When executing commands recursively in a workspace, execute them on the root wor
 
 ### ignore-workspace-cycles
 
-Added in: v8.1.0
-
 * Default: **false**
 * Type: **Boolean**
 
 When set to `true`, no workspace cycle warnings will be printed.
 
 ### disallow-workspace-cycles
-
-Added in: v8.9.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -1047,16 +1041,12 @@ When deploying a package or installing a local package, all files of the package
 
 ### dedupe-direct-deps
 
-Added in: v8.1.0
-
 * Default: **false**
 * Type: **Boolean**
 
 When set to `true`, dependencies that are already symlinked to the root `node_modules` directory of the workspace will not be symlinked to subproject `node_modules` directories.
 
 ### dedupe-injected-deps
-
-Added in: v8.13.1
 
 * Default: **false**
 * Type: **Boolean**

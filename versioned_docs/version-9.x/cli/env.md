@@ -57,8 +57,6 @@ pnpm env use --global argon
 
 ### add
 
-Added in: v8.9.0
-
 Installs the specified version(s) of Node.js without activating them as the current version.
 
 Example:

@@ -13,8 +13,6 @@ Directory in which `pnpm pack` will save tarballs. The default is the current wo
 
 ### --pack-gzip-level &lt;level\>
 
-Added in: v8.3.0
-
 Specifying custom compression level.
 
 ## Life Cycle Scripts
