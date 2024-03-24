@@ -52,3 +52,30 @@
   withWarmModulesAndLockfile: 1133
   withWarmModules: 5402
   updatedDependencies: 3631
+- firstInstall: 9676
+  repeatInstall: 1121
+  withWarmCacheAndLockfile: 2780
+  withWarmCache: 5919
+  withLockfile: 5489
+  withWarmCacheAndModules: 2332
+  withWarmModulesAndLockfile: 1140
+  withWarmModules: 5937
+  updatedDependencies: 4188
+- firstInstall: 8629
+  repeatInstall: 1119
+  withWarmCacheAndLockfile: 2750
+  withWarmCache: 6173
+  withLockfile: 5405
+  withWarmCacheAndModules: 2345
+  withWarmModulesAndLockfile: 1145
+  withWarmModules: 5958
+  updatedDependencies: 4052
+- firstInstall: 8930
+  repeatInstall: 1124
+  withWarmCacheAndLockfile: 2729
+  withWarmCache: 6441
+  withLockfile: 5439
+  withWarmCacheAndModules: 2300
+  withWarmModulesAndLockfile: 1152
+  withWarmModules: 5504
+  updatedDependencies: 4059
