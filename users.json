@@ -339,5 +339,12 @@
     "infoLink": "https://mui.com",
     "pinned": false,
     "width": 130
+  },
+    {
+    "caption": "Avanti inc.",
+    "image": "/img/users/avantiinc.svg",
+    "infoLink": "https://avantiinc.com",
+    "pinned": false,
+    "width": 130
   }
 ]
