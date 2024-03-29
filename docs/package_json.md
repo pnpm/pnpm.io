@@ -227,11 +227,15 @@ For example:
 
 ## pnpm.overrides
 
+:::note
+
+If you are using workspace, `overrides` can only be set at the root package.
+
+:::
+
 This field allows you to instruct pnpm to override any dependency in the
 dependency graph. This is useful to enforce all your packages to use a single
 version of a dependency, backport a fix, or replace a dependency with a fork.
-
-Note that the overrides field can only be set at the root of the project.
 
 An example of the `"pnpm"."overrides"` field:
 
@@ -285,6 +289,12 @@ The referenced package does not need to match the overridden one:
 ```
 
 ## pnpm.packageExtensions
+
+:::note
+
+If you are using workspace, `packageExtensions` can only be set at the root package.
+
+:::
 
 The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
 
