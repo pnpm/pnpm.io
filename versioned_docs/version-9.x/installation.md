@@ -16,19 +16,19 @@ You may install pnpm even if you don't have Node.js installed, using the followi
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION = "9.0.0-beta.1"; iwr https://get.pnpm.io/install.ps1 -useb | iex
+$env:PNPM_VERSION = "9.0.0-beta.2"; iwr https://get.pnpm.io/install.ps1 -useb | iex
 ```
 
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.0.0-beta.1 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.0.0-beta.2 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=9.0.0-beta.1 sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=9.0.0-beta.2 sh -
 ```
 
 :::tip
@@ -62,7 +62,7 @@ This will automatically install pnpm on your system.
 You can pin the version of pnpm used on your project using the following command:
 
 ```
-corepack use pnpm@9.0.0-beta.1
+corepack use pnpm@9.0.0-beta.2
 ```
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
@@ -76,13 +76,13 @@ We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
 
 ```sh
-npm install -g pnpm@9.0.0-beta.1
+npm install -g pnpm@9.0.0-beta.2
 ```
 
 or
 
 ```sh
-npm install -g @pnpm/exe@9.0.0-beta.1
+npm install -g @pnpm/exe@9.0.0-beta.2
 ```
 
 :::tip
