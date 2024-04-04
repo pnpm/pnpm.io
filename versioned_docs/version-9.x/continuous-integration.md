@@ -23,7 +23,7 @@ cache:
     - "~/.pnpm-store"
 before_install:
   - corepack enable
-  - corepack prepare pnpm@latest-8 --activate
+  - corepack prepare pnpm@next-9 --activate
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
@@ -50,7 +50,7 @@ blocks:
         - name: pnpm install
           commands:
             - corepack enable
-            - corepack prepare pnpm@latest-8 --activate
+            - corepack prepare pnpm@next-9 --activate
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -68,7 +68,7 @@ to your `appveyor.yml`:
 install:
   - ps: Install-Product node $env:nodejs_version
   - corepack enable
-  - corepack prepare pnpm@latest-8 --activate
+  - corepack prepare pnpm@next-9 --activate
   - pnpm install
 ```
 
@@ -123,7 +123,7 @@ build:
   image: node:18.17.1
   before_script:
     - corepack enable
-    - corepack prepare pnpm@latest-8 --activate
+    - corepack prepare pnpm@next-9 --activate
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -152,7 +152,7 @@ pipelines:
           image: node:18.17.1
           script:
             - corepack enable
-            - corepack prepare pnpm@latest-8 --activate
+            - corepack prepare pnpm@next-9 --activate
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
@@ -176,7 +176,7 @@ steps:
 
   - script: |
       corepack enable
-      corepack prepare pnpm@latest-8 --activate
+      corepack prepare pnpm@next-9 --activate
       pnpm config set store-dir $(pnpm_config_cache)
     displayName: "Setup pnpm"
 
@@ -211,7 +211,7 @@ jobs:
           name: Install pnpm package manager
           command: |
             corepack enable
-            corepack prepare pnpm@latest-8 --activate
+            corepack prepare pnpm@next-9 --activate
             pnpm config set store-dir .pnpm-store
       - run:
           name: Install Dependencies
@@ -240,7 +240,7 @@ pipeline {
         stage('Build') { 
             steps {
                 sh 'corepack enable'
-                sh 'corepack prepare pnpm@latest-8 --activate'
+                sh 'corepack prepare pnpm@next-9 --activate'
                 sh 'pnpm install'
             }
         }
