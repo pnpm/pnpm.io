@@ -4,7 +4,7 @@
         "approvalProgress": 3
     },
     "es-ES": {
-        "translationProgress": 60,
+        "translationProgress": 61,
         "approvalProgress": 49
     },
     "fr": {
@@ -36,7 +36,7 @@
         "approvalProgress": 56
     },
     "ru": {
-        "translationProgress": 38,
+        "translationProgress": 39,
         "approvalProgress": 33
     },
     "tr": {
@@ -56,7 +56,7 @@
         "approvalProgress": 79
     },
     "zh-TW": {
-        "translationProgress": 45,
-        "approvalProgress": 36
+        "translationProgress": 46,
+        "approvalProgress": 37
     }
 }
