@@ -58,7 +58,8 @@ It will publish to the registry once the PR is opened by `changeset version`.
 ```json
 {
    "scripts": {
-      "ci:publish": "pnpm publish -r"
+      "ci:publish": "pnpm changeset version",
+      "ci:publish": "pnpm publish -r --no-git-checks"
    },
    ...
 }
