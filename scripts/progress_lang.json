@@ -1,6 +1,6 @@
 {
     "de": {
-        "translationProgress": 8,
+        "translationProgress": 9,
         "approvalProgress": 3
     },
     "es-ES": {
@@ -20,7 +20,7 @@
         "approvalProgress": 59
     },
     "ja": {
-        "translationProgress": 69,
+        "translationProgress": 68,
         "approvalProgress": 60
     },
     "ko": {
@@ -36,11 +36,11 @@
         "approvalProgress": 56
     },
     "ru": {
-        "translationProgress": 39,
+        "translationProgress": 38,
         "approvalProgress": 33
     },
     "tr": {
-        "translationProgress": 27,
+        "translationProgress": 29,
         "approvalProgress": 11
     },
     "uk": {
@@ -52,7 +52,7 @@
         "approvalProgress": 0
     },
     "zh-CN": {
-        "translationProgress": 82,
+        "translationProgress": 83,
         "approvalProgress": 79
     },
     "zh-TW": {
