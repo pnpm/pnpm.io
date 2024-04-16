@@ -470,8 +470,6 @@ Example:
 
 ## pnpm.onlyBuiltDependenciesFile
 
-Added in: v8.9.0
-
 This configuration option allows users to specify a JSON file that lists the only packages permitted to run installation scripts during the pnpm install process. By using this, you can enhance security or ensure that only specific dependencies execute scripts during installation.
 
 Example:
@@ -596,8 +594,6 @@ Scripts listed in this array will be required in each project of the workspace. 
 
 ## pnpm.supportedArchitectures
 
-Added in: v8.10.0
-
 You can specify architectures for which you'd like to install optional dependencies, even if they don't match the architecture of the system running the install.
 
 For example, the following configuration tells to install optional dependencies for Windows x64:
@@ -627,6 +623,18 @@ Whereas this configuration will install optional dependencies for Windows, macOS
 ```
 
 Additionally, `supportedArchitectures` also supports specifying the `libc` of the system.
+
+## pnpm.ignoredOptionalDependencies
+
+If an optional dependency has its name included in this array, it will be skipped. For example:
+
+```json
+{
+  "pnpm": {
+    "ignoredOptionalDependencies": ["fsevents", "@esbuild/*"]
+  }
+}
+```
 
 ## resolutions
 

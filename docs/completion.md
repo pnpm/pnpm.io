@@ -6,17 +6,11 @@ title: Command line tab-completion
 Unlike other popular package managers, which usually require plugins, pnpm
 supports command line tab-completion for Bash, Zsh, Fish, and similar shells.
 
-To setup autocompletion, run:
+To setup autocompletion for Bash, run:
 
 ```text
-pnpm install-completion
-```
-
-The CLI will ask for which shell to generate the autocompletion script.
-Alternatively, the target shell may be specified in the command line:
-
-```text
-pnpm install-completion zsh
+pnpm completion bash > ~/completion-for-pnpm.bash
+echo 'source ~/completion-for-pnpm.bash' >> ~/.bashrc
 ```
 
 To see examples of completion, read [this article].

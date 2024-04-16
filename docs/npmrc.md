@@ -35,9 +35,7 @@ unlisted dependencies accessible to all packages inside `node_modules`.
 
 ### hoist-workspace-packages
 
-Added in: v8.14.0
-
-* Default: **false**
+* Default: **true**
 * Type: **boolean**
 
 When `true`, packages from the workspaces are symlinked to either `<workspace_root>/node_modules/.pnpm/node_modules` or to `<workspace_root>/node_modules` depending on other hoisting settings (`hoist-pattern` and `public-hoist-pattern`).
@@ -385,6 +383,15 @@ certificates. Similar to the `ca` setting, but allows for multiple CAs, as well
 as for the CA information to be stored in a file instead of being specified via
 CLI.
 
+### &lt;URL&gt;&#58;cafile
+
+Define the path to a Certificate Authority file to use when accessing the specified
+registry. For example:
+
+```sh
+//registry.npmjs.org/:keyfile=client-cert.pem
+```
+
 ### cert
 
 * Default: **null**
@@ -397,7 +404,16 @@ PEM format (AKA "Base-64 encoded X.509 (.CER)"). For example:
 cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 ```
 
-It is not the path to a certificate file (and there is no `certfile` option).
+It is not the path to a certificate file.
+
+### &lt;URL&gt;&#58;certfile
+
+Define the path to a certificate file to use when accessing the specified
+registry. For example:
+
+```sh
+//registry.npmjs.org/:certfile=server-cert.pem
+```
 
 ### key
 
@@ -414,6 +430,15 @@ key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
 It is not the path to a key file (and there is no `keyfile` option).
 
 This setting contains sensitive information. Don't write it to a local `.npmrc` file committed to the repository.
+
+### &lt;URL&gt;&#58;keyfile
+
+Define the path to a client key file to use when accessing the specified
+registry. For example:
+
+```sh
+//registry.npmjs.org/:keyfile=server-key.pem
+```
 
 ### git-shallow-hosts
 
@@ -731,6 +756,13 @@ Only use the side effects cache if present, do not create it for new packages.
 Set to true to enable UID/GID switching when running package scripts.
 If set explicitly to false, then installing as a non-root user will fail.
 
+### node-options
+
+* Default: **NULL**
+* Type: **String**
+
+Options to pass through to Node.js via the `NODE_OPTIONS` environment variable. This does not impact how pnpm itself is executed but it does impact how lifecycle scripts are called.
+
 ## Node.js Settings
 
 ### use-node-version
@@ -791,7 +823,7 @@ node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 
 ### link-workspace-packages
 
-* Default: **true**
+* Default: **false**
 * Type: **true**, **false**, **deep**
 
 If this is enabled, locally available packages are linked to `node_modules`
@@ -868,16 +900,12 @@ When executing commands recursively in a workspace, execute them on the root wor
 
 ### ignore-workspace-cycles
 
-Added in: v8.1.0
-
 * Default: **false**
 * Type: **Boolean**
 
 When set to `true`, no workspace cycle warnings will be printed.
 
 ### disallow-workspace-cycles
-
-Added in: v8.9.0
 
 * Default: **false**
 * Type: **Boolean**
@@ -1047,8 +1075,6 @@ When deploying a package or installing a local package, all files of the package
 
 ### dedupe-direct-deps
 
-Added in: v8.1.0
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -1056,9 +1082,7 @@ When set to `true`, dependencies that are already symlinked to the root `node_mo
 
 ### dedupe-injected-deps
 
-Added in: v8.13.1
-
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
