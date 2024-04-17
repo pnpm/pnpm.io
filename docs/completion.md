@@ -4,7 +4,7 @@ title: Command line tab-completion
 ---
 
 Unlike other popular package managers, which usually require plugins, pnpm
-supports command line tab-completion for Bash, Zsh, Fish, and similar shells.
+supports command line tab-completion for Bash, Zsh, Fish, Pwsh and similar shells.
 
 To setup autocompletion for Bash, run:
 
