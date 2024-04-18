@@ -1086,3 +1086,12 @@ When set to `true`, dependencies that are already symlinked to the root `node_mo
 * Type: **Boolean**
 
 When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
+
+### package-manager-strict
+
+* Default: **true**
+* Type: **Boolean**
+
+When this setting is disabled, pnpm will not fail if its version doesn't match the one specified in the `packageManager` field of `package.json`.
+
+Alternatively, you can set the `COREPACK_ENABLE_STRICT` environment variable to `0`.
