@@ -83,17 +83,19 @@ like so (belongs in `.github/workflows/NAME.yml`):
 name: pnpm Example Workflow
 on:
   push:
+
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
-        node-version: [15]
+        node-version: [20]
     steps:
-    - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@v3
+    - uses: actions/checkout@v4
+    - name: Install pnpm
+      uses: pnpm/action-setup@v3
       with:
-        version: 8
+        version: 9
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
