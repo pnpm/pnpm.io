@@ -109,6 +109,17 @@ With this layout, most of the packages in the ecosystem work with no issues.
 However, if some tooling only works when the hoisted dependencies are in the
 root of `node_modules`, you can set this to `true` to hoist them for you.
 
+## Other Dependency Settings
+
+### optional
+
+* Default: **true**
+* Type: **Boolean**
+
+By default, pnpm installs `optionalDependencies` of your dependencies and their
+transitive dependencies.  If `optional` is set to `false`, pnpm will not install
+optional dependencies, just like if you use the `--no-optional` CLI option.
+
 ## Node-Modules Settings
 
 ### store-dir
