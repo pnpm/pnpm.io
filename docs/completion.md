@@ -3,6 +3,14 @@ id: completion
 title: Command line tab-completion
 ---
 
+:::info
+
+Completion for pnpm v9 is incompatible with completion for older pnpm versions.
+If you already install pnpm completion for version older than v9, you must uninstall it first so that completion for v9 may work properly.
+You may do so by removing section of code that contains `__tabtab` in your dot files.
+
+:::
+
 Unlike other popular package managers, which usually require plugins, pnpm
 supports command line tab-completion for Bash, Zsh, Fish, and similar shells.
 
