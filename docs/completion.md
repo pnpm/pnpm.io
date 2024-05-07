@@ -6,8 +6,10 @@ title: Command line tab-completion
 :::info
 
 Completion for pnpm v9 is incompatible with completion for older pnpm versions.
-If you already install pnpm completion for version older than v9, you must uninstall it first so that completion for v9 may work properly.
-You may do so by removing section of code that contains `__tabtab` in your dot files.
+
+If you have already installed pnpm completion for a version older than v9, you must uninstall it first to ensure that completion for v9 works properly.
+
+You can do this by removing the section of code that contains `__tabtab` in your dot files.
 
 :::
 
