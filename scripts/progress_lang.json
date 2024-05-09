@@ -13,7 +13,7 @@
     },
     "id": {
         "translationProgress": 34,
-        "approvalProgress": 27
+        "approvalProgress": 26
     },
     "it": {
         "translationProgress": 68,
@@ -32,12 +32,12 @@
         "approvalProgress": 0
     },
     "pt-BR": {
-        "translationProgress": 64,
+        "translationProgress": 63,
         "approvalProgress": 55
     },
     "ru": {
         "translationProgress": 39,
-        "approvalProgress": 33
+        "approvalProgress": 32
     },
     "tr": {
         "translationProgress": 29,
@@ -53,7 +53,7 @@
     },
     "zh-CN": {
         "translationProgress": 83,
-        "approvalProgress": 79
+        "approvalProgress": 78
     },
     "zh-TW": {
         "translationProgress": 46,
