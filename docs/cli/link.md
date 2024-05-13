@@ -112,4 +112,3 @@ When dealing with **peer dependencies** it is recommended to use the `file:` pro
 | Reflects source code modifications           | Yes                                                | Yes                                                 |
 | Installs dependencies of the linked package  | No (manual installation required)                  | Yes (overrides `node_modules` of the linked package)|
 | Use different package manager for dependency | Possible (e.g., use `npm` for linked pkg)          | No, it will use pnpm                                |
-

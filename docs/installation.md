@@ -140,7 +140,7 @@ Once done, install pnpm again and it should work as expected.
 
 ## Using a shorter alias
 
-`pnpm` might be hard to type, so you may use a shorter alias like `pn` instead. 
+`pnpm` might be hard to type, so you may use a shorter alias like `pn` instead.
 
 #### Adding a permanent alias on POSIX systems
 
