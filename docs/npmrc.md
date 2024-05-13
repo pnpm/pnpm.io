@@ -239,8 +239,7 @@ switching branches or downgrading dependencies.
 * Type: **number**
 
 The time in minutes after which dlx cache is expired.
-pnpm keeps a cache for each dlx command after executing which would omit the installation step
-for subsequent calls to the same dlx command.
+After executing a dlx command, pnpm keeps a cache that omits the installation step for subsequent calls to the same dlx command.
 
 ## Lockfile Settings
 
