@@ -1002,7 +1002,7 @@ The directory where pnpm creates the `pnpm-state.json` file that is currently us
   * On Linux: **~/.cache/pnpm**
 * Type: **path**
 
-The location of the package metadata cache.
+The location of the cache (package metadata and dlx).
 
 ### use-stderr
 
