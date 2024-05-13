@@ -233,6 +233,14 @@ The time in minutes after which orphan packages from the modules directory shoul
 pnpm keeps a cache of packages in the modules directory. This boosts installation speed when
 switching branches or downgrading dependencies.
 
+### dlx-cache-max-age
+
+* Default: **1440** (1 day in minutes)
+* Type: **number**
+
+The time in minutes after which dlx cache expires.
+After executing a dlx command, pnpm keeps a cache that omits the installation step for subsequent calls to the same dlx command.
+
 ## Lockfile Settings
 
 ### lockfile
@@ -993,7 +1001,7 @@ The directory where pnpm creates the `pnpm-state.json` file that is currently us
   * On Linux: **~/.cache/pnpm**
 * Type: **path**
 
-The location of the package metadata cache.
+The location of the cache (package metadata and dlx).
 
 ### use-stderr
 
