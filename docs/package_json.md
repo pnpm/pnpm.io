@@ -35,11 +35,11 @@ Additional meta information used for dependencies declared inside `dependencies`
 
 ### dependenciesMeta.*.injected
 
-If this is set to `true` for a local dependency, the package will be hard linked to the virtual store (`node_modules/.pnpm`) and symlinked from the virtual store to the modules directory.
+If this is set to `true` for a dependency that is a local workspace package, that package will be installed by creating a hard linked copy in the virtual store (`node_modules/.pnpm`).
 
-If this is set to `false` or not set for a local dependency, the package will be symlinked directly from its location in the workspace to the module directory.
+If this is set to `false` or not set, then the dependency will instead be installed by creating a `node_modules` symlink that points to the package's source directory in the workspace.  This is the default, as it is faster and ensures that any modifications to the dependency will be immediately visible to its consumers.
 
-For instance, the following `package.json` in a workspace will create a symlink to `button` in the `node_modules` directory of `card`:
+For example, suppose the following `package.json` is a local workspace package:
 
 ```json
 {
@@ -50,9 +50,11 @@ For instance, the following `package.json` in a workspace will create a symlink 
 }
 ```
 
-But what if `button` has `react` in its peer dependencies? If all projects in the monorepo use the same version of `react`, then no problem. But what if `button` is required by `card` that uses `react@16` and `form` with `react@17`? Without using `inject`, you'd have to choose a single version of `react` and install it as dev dependency of `button`. But using the `injected` field you can inject `button` to a package, and `button` will be installed with the `react` version of that package.
+The `button` dependency will normally be installed by creating a symlink in the `node_modules` directory of `card`, pointing to the development directory for `button`.
 
-So this will be the `package.json` of `card`:
+But what if `button` specifies `react` in its `peerDependencies`? If all projects in the monorepo use the same version of `react`, then there is no problem. But what if `button` is required by `card` that uses `react@16` and `form` that uses `react@17`? Normally you'd have to choose a single version of `react` and specify it using `devDependencies` of `button`. Symlinking does not provide a way for the `react` peer dependency to be satisfied differently by different consumers such as `card` and `form`.
+
+The `injected` field solves this problem by installing a hard linked copies of `button` in the virtual store. To accomplish this, the `package.json` of `card` could be configured as follows:
 
 ```json
 {
@@ -69,9 +71,7 @@ So this will be the `package.json` of `card`:
 }
 ```
 
-`button` will be hard linked into the dependencies of `card`, and `react@16` will be symlinked to the dependencies of `card/node_modules/button`.
-
-And this will be the `package.json` of `form`:
+Whereas the `package.json` of `form` could be configured as follows:
 
 ```json
 {
@@ -88,11 +88,9 @@ And this will be the `package.json` of `form`:
 }
 ```
 
-`button` will be hard linked into the dependencies of `form`, and `react@17` will be symlinked to the dependencies of `form/node_modules/button`.
+With these changes, we say that `button` is an "injected dependency" of `card` and `form`.  When `button` imports `react`, it will resolve to `react@16` in the context of `card`, but resolve to `react@17` in the context of `form`.
 
-In contrast to normal dependencies, injected ones are not symlinked to the destination folder, so they are not updated automatically, e.g. after running the build script. To update the hard linked folder contents to the latest state of the dependency package folder, call `pnpm i` again.
-
-Note that the `button` package must have any lifecycle script that runs on install in order for `pnpm` to detect the changes and update it. For example, the package can be rebuilt on install: `"prepare": "pnpm run build"`. Any script would work, even a simple unrelated command without side effects, like this: `"prepare": "pnpm root"`.
+Because injected dependencies produce copies of their workspace source directory, these copies must be updated somehow whenever the code is modified; otherwise, the new state will not be reflected for consumers. When building multiple projects with a command such as `pnpm --recursive run build`, this update must occur after each injected package is rebuilt but before its consumers are rebuilt. For simple use cases, it can be accomplished by invoking `pnpm install` again, perhaps using a `package.json` lifecycle script such as `"prepare": "pnpm run build"` to rebuild that one project.  Third party tools such as [pnpm-sync](https://www.npmjs.com/package/pnpm-sync-lib) and [pnpm-sync-dependencies-meta-injected](https://www.npmjs.com/package/pnpm-sync-dependencies-meta-injected) provide a more robust and efficient solution for updating injected dependencies, as well as watch mode support.
 
 ## peerDependenciesMeta
 
