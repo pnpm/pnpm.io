@@ -334,7 +334,7 @@ You may also use an environment variable. For example:
 Or you may just use an environment variable directly, without changing `.npmrc` at all:
 
 ```
-npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 ```
 
 ### &lt;URL&gt;&#58;tokenHelper
