@@ -238,7 +238,7 @@ switching branches or downgrading dependencies.
 * Default: **1440** (1 day in minutes)
 * Type: **number**
 
-The time in minutes after which dlx cache is expired.
+The time in minutes after which dlx cache expires.
 After executing a dlx command, pnpm keeps a cache that omits the installation step for subsequent calls to the same dlx command.
 
 ## Lockfile Settings
