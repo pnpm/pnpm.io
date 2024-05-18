@@ -93,7 +93,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Install pnpm
-      uses: pnpm/action-setup@v3
+      uses: pnpm/action-setup@v4
       with:
         version: 9
     - name: Use Node.js ${{ matrix.node-version }}
