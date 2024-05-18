@@ -20,6 +20,12 @@ Manages the Node.js environment.
 
 Install and use the specified version of Node.js
 
+Install the latest version of Node.js:
+
+```
+pnpm env use --global latest
+```
+
 Install the LTS version of Node.js:
 
 ```
