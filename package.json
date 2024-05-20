@@ -40,6 +40,5 @@
     "@types/node": "^20.12.2",
     "shx": "^0.3.4",
     "ts-node": "10.9.2"
-  },
-  "packageManager": "pnpm@9.1.1+sha512.14e915759c11f77eac07faba4d019c193ec8637229e62ec99eefb7cf3c3b75c64447882b7c485142451ee3a6b408059cdfb7b7fa0341b975f12d0f7629c71195"
+  }
 }
