@@ -7,7 +7,7 @@ One of the best features of pnpm is that in one project, a specific version of a
 package will always have one set of dependencies. There is one exception from
 this rule, though - packages with [peer dependencies].
 
-[peer dependencies]: https://docs.npmjs.com/files/package.json#peerdependencies
+[peer dependencies]: https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies
 
 Peer dependencies are resolved from dependencies installed higher in the
 dependency graph, since they share the same version as their parent. That means
