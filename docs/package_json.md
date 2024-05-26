@@ -217,7 +217,7 @@ For example:
   "name": "foo",
   "version": "1.0.0",
   "publishConfig": {
-    "directory": "dist"
+    "directory": "dist",
     "linkDirectory": true
   }
 }
