@@ -339,5 +339,12 @@
     "infoLink": "https://mui.com",
     "pinned": false,
     "width": 130
+  },
+  {
+    "caption": "RealGolf",
+    "image": "/img/users/realgolf.png",
+    "infoLink": "https://realgolf.games",
+    "pinned": false,
+    "width": 300
   }
 ]
