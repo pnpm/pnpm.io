@@ -98,7 +98,7 @@ const Showcase = props => {
                 <img style={{padding: '20px'}} width="260" alt="Discord" src="/img/users/discord.svg" />
               </a>
               <a href={addUTM("https://www.jetbrains.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="140" alt="JetBrains" src="/img/users/jetbrains.svg" />
+                <img style={{padding: '20px'}} width="240" alt="JetBrains" src="/img/users/jetbrains.svg" />
               </a>
               <a href={addUTM("https://coderabbit.ai/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="CodeRabbit" src="/img/users/coderabbit.svg" />
