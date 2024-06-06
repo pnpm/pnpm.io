@@ -45,6 +45,10 @@ Execute the shell command in every project of the workspace.
 The name of the current package is available through the environment variable
 `PNPM_PACKAGE_NAME`.
 
+### --no-reporter-hide-prefix
+
+Do not hide prefix when running commands in parallel.
+
 #### Examples
 
 Prune `node_modules` installations for all packages:
@@ -66,7 +70,7 @@ Resume execution from a particular project. This can be useful if you are workin
 ### --parallel
 
 Completely disregard concurrency and topological sorting, running a given script
-immediately in all matching packages with prefixed streaming output. This is the
+immediately in all matching packages. This is the
 preferred flag for long-running processes over many packages, for instance, a
 lengthy build process.
 
