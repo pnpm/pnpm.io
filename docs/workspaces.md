@@ -25,7 +25,7 @@ Bit uses pnpm under the hood but automates a lot of the things that are currentl
 
 ## Workspace protocol (workspace:)
 
-By default, pnpm will link packages from the workspace if the available packages
+If [link-workspace-packages] is set to `true`, pnpm will link packages from the workspace if the available packages
 match the declared ranges. For instance, `foo@1.0.0` is linked into `bar` if
 `bar` has `"foo": "^1.0.0"` in its dependencies and `foo@1.0.0` is in the workspace. However, if `bar` has
 `"foo": "2.0.0"` in dependencies and `foo@2.0.0` is not in the workspace,
@@ -164,4 +164,3 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Rollup plugins](https://github.com/rollup/plugins) | ![](https://img.shields.io/github/stars/rollup/plugins) | 2021-09-21 | `53fb18c0c2852598200c547a0b1d745d15b5b487` |
 | [icestark](https://github.com/ice-lab/icestark) | ![](https://img.shields.io/github/stars/ice-lab/icestark) | 2021-12-16 | `4862326a8de53d02f617e7b1986774fd7540fccd` |
 | [ByteMD](https://github.com/bytedance/bytemd) | ![](https://img.shields.io/github/stars/bytedance/bytemd) | 2021-02-18 | `36ef25f1ea1cd0b08752df5f8c832302017bb7fb` |
-
