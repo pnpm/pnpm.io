@@ -203,6 +203,15 @@ higher.
 project should have its own virtual store (except for in workspaces where the
 root is shared).
 
+### virtual-store-dir-max-length
+
+Added in: v9.1.0
+
+* Default: **120**
+* Types: **number**
+
+Sets the maximum allowed length of directory names inside the virtual store directory (`node_modules/.pnpm`). You may set this to a lower number if you encounter long path issues on Windows.
+
 ### package-import-method
 
 * Default: **auto**
@@ -1103,3 +1112,12 @@ When this setting is enabled, [dependencies that are injected](package_json.md#d
 When this setting is disabled, pnpm will not fail if its version doesn't match the one specified in the `packageManager` field of `package.json`.
 
 Alternatively, you can set the `COREPACK_ENABLE_STRICT` environment variable to `0`.
+
+### package-manager-strict-version
+
+Added in: v9.2.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When enabled, pnpm will fail if its version doesn't exactly match the version specified in the `packageManager` field of `package.json`.
