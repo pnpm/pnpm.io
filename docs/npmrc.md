@@ -307,6 +307,15 @@ merge-git-branch-lockfiles-branch-pattern[]=release*
 
 You may also exclude patterns using `!`.
 
+### peers-suffix-max-length
+
+Added in: v9.3.0
+
+* Default: **1000**
+* Type: **number**
+
+Max length of the peer IDs suffix added to dependency keys in the lockfile. If the suffix is longer, it is replaced with a hash.
+
 ## Registry & Authentication Settings
 
 ### registry
