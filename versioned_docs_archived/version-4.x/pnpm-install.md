@@ -208,7 +208,7 @@ the installation progress.
 * **silent** - no output is logged to the console, except fatal errors
 * **default** - the default reporter when the stdout is TTY
 * **append-only** (Added in v1.29.1) - the output is always appended to the end. No cursor manipulations are performed
-* **ndjson** - the most verbose reporter. Prints all logs in [ndjson](http://ndjson.org/) format
+* **ndjson** - the most verbose reporter. Prints all logs in [ndjson](https://github.com/ndjson/ndjson-spec) format
 
 ## use-store-server
 
