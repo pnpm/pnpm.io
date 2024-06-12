@@ -124,4 +124,4 @@ Development packages will not be fetched
 
 
 
-[official guide]: https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+[official guide]: https://github.com/nodejs/docker-node#readme
