@@ -37,6 +37,25 @@ You may use the [pnpm env] command then to install Node.js.
 
 :::
 
+### In a Docker container
+
+```sh
+# bash
+wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+# sh
+wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+# dash
+wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
+```
+
+### Installing a specific version
+
+Prior to running the install script, you may optionally set an env variable `PNPM_VERSION` to install a specific version of pnpm:
+
+```sh
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
+```
+
 ## Using Corepack
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
@@ -83,6 +102,46 @@ or
 
 ```sh
 npm install -g @pnpm/exe
+```
+
+## Using Homebrew
+
+If you have the package manager installed, you can install pnpm using the following command:
+
+```
+brew install pnpm
+```
+
+## Using winget
+
+If you have winget installed, you can install pnpm using the following command:
+
+```
+winget install pnpm
+```
+
+## Using Scoop
+
+If you have Scoop installed, you can install pnpm using the following command:
+
+```
+scoop install nodejs-lts pnpm
+```
+
+## Using Choco
+
+If you have Chocolatey installed, you can install pnpm using the following command:
+
+```
+choco install pnpm
+```
+
+## Using Volta
+
+If you have Volta installed, you can install pnpm using the following command:
+
+```
+volta install pnpm
 ```
 
 :::tip
