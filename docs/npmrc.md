@@ -1118,9 +1118,9 @@ When this setting is enabled, [dependencies that are injected](package_json.md#d
 * Default: **true**
 * Type: **Boolean**
 
-When this setting is disabled, pnpm will not fail if its version doesn't match the one specified in the `packageManager` field of `package.json`.
+If this setting is disabled, pnpm will not fail if a different package manager is specified in the `packageManager` field of `package.json`. When enabled, only the package name is checked (since pnpm v9.2.0), so you can still run any version of pnpm regardless of the version specified in the `packageManager` field.
 
-Alternatively, you can set the `COREPACK_ENABLE_STRICT` environment variable to `0`.
+Alternatively, you can disable this setting by setting the `COREPACK_ENABLE_STRICT` environment variable to `0`.
 
 ### package-manager-strict-version
 
