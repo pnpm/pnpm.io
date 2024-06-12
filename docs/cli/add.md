@@ -91,6 +91,18 @@ You may install from Git by:
 * branch: `pnpm add kevva/is-positive#master`
 * version range: `pnpm add kevva/is-positive#semver:^2.0.0`
 
+You may also install just a subdirectory from a Git-hosted monorepo. For instance:
+
+```
+pnpm add myorg/repo#path:packages/foo
+```
+
+It is possible to combine multiple parameters by separating them with `&`. For instance, you can extend the above command by specifying which branch to fetch from:
+
+```
+pnpm add myorg/repo#path:packages/foo&next
+```
+
 ## Options
 
 ### --save-prod, -P
