@@ -16,11 +16,11 @@ From that guide, we learn to write an optimized Dockerfile for projects using
 pnpm, which looks like
 
 ```Dockerfile
-FROM node:14
+FROM node:20
 
 WORKDIR /path/to/somewhere
 
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+RUN corepack enable pnpm && corepack install -g pnpm@latest-9
 
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
@@ -51,11 +51,11 @@ It's also hard to maintain a Dockerfile that builds a monorepo project, it may
 look like
 
 ```Dockerfile
-FROM node:14
+FROM node:20
 
 WORKDIR /path/to/somewhere
 
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+RUN corepack enable pnpm && corepack install -g pnpm@latest-9
 
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
@@ -85,11 +85,11 @@ sub-packages.
 to load packages into the virtual store using only information from a lockfile.
 
 ```Dockerfile
-FROM node:14
+FROM node:20
 
 WORKDIR /path/to/somewhere
 
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+RUN corepack enable pnpm && corepack install -g pnpm@latest-9
 
 # pnpm fetch does require only lockfile
 COPY pnpm-lock.yaml ./
