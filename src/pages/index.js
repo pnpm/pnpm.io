@@ -136,6 +136,9 @@ const Showcase = props => {
               <a href={addUTM("https://vpsserver.com/en-us/")} target="_blank">
                 <img style={{padding: '20px'}} width="200" alt="Cerbos" src="/img/users/vpsserver.svg" />
               </a>
+              <a href={addUTM("https://insfollowpro.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="200" alt="Ins Follow Pro" src="/img/users/insfollowpro.svg" />
+              </a>
             </div>
           </div>
           <div>
