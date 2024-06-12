@@ -3,6 +3,12 @@ id: server
 title: pnpm server
 ---
 
+:::danger
+
+Deprecated feature
+
+:::
+
 Manage a store server.
 
 ## Commands
