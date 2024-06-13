@@ -45,10 +45,6 @@ Execute the shell command in every project of the workspace.
 The name of the current package is available through the environment variable
 `PNPM_PACKAGE_NAME`.
 
-### --no-reporter-hide-prefix
-
-Do not hide prefix when running commands in parallel.
-
 #### Examples
 
 Prune `node_modules` installations for all packages:
@@ -62,6 +58,10 @@ View package information for all packages. This should be used with the `--shell
 ```
 pnpm -rc exec pnpm view \$PNPM_PACKAGE_NAME
 ```
+
+### --no-reporter-hide-prefix
+
+Do not hide prefix when running commands in parallel.
 
 ### --resume-from &lt;package_name\>
 
