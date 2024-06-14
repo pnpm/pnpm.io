@@ -117,7 +117,7 @@ brew install pnpm
 If you have winget installed, you can install pnpm using the following command:
 
 ```
-winget install pnpm
+winget install -e --id pnpm.pnpm
 ```
 
 ## Using Scoop
