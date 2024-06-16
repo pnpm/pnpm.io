@@ -3,6 +3,7 @@ id: articles
 title: Articles
 ---
 
+- `2024-06-16`: [How to decrease deployment time by 44% with pnpm](https://shramko.dev/blog/pnpm)
 - `2023-08-22`: [Phantom Dependencies In Node.js And How PNPM Prevents Them](https://broadcrunch.com/technology/computing/phantom-dependencies-in-nodejs-and-how-pnpm-prevents-them/)
 - `2022-09-01`: [What is pnpm & why you should try it as a frontend developer](https://javascript.plainenglish.io/what-is-pnpm-why-you-should-try-it-as-a-frontend-developer-69a3a7b34f5b)
 - `2022-07-22`: [Managing a full-stack, multi-package monorepo using pnpm](https://blog.logrocket.com/managing-full-stack-monorepo-pnpm/)
