@@ -5,6 +5,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: deploy
+    env:
+      COREPACK_ENABLE_AUTO_PIN: 0
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
