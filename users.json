@@ -346,5 +346,12 @@
     "infoLink": "https://realgolf.games",
     "pinned": false,
     "width": 300
+  },
+  {
+    "caption": "MacPaw",
+    "image": "/img/users/macpaw.svg",
+    "infoLink": "https://macpaw.com/",
+    "pinned": false,
+    "width": 250
   }
 ]
