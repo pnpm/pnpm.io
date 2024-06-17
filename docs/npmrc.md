@@ -111,30 +111,6 @@ root of `node_modules`, you can set this to `true` to hoist them for you.
 
 ## Node-Modules Settings
 
-### store-dir
-
-* Default:
-  * If the **$PNPM_HOME** env variable is set, then **$PNPM_HOME/store**
-  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/store**
-  * On Windows: **~/AppData/Local/pnpm/store**
-  * On macOS: **~/Library/pnpm/store**
-  * On Linux: **~/.local/share/pnpm/store**
-* Type: **path**
-
-The location where all the packages are saved on the disk.
-
-The store should be always on the same disk on which installation is happening,
-so there will be one store per disk. If there is a home directory on the current
-disk, then the store is created inside it. If there is no home on the disk,
-then the store is created at the root of the filesystem. For
-example, if installation is happening on a filesystem mounted at `/mnt`,
-then the store will be created at `/mnt/.pnpm-store`. The same goes for Windows
-systems.
-
-It is possible to set a store from a different disk but in that case pnpm will
-copy packages from the store instead of hard-linking them, as hard links are
-only possible on the same filesystem.
-
 ### modules-dir
 
 * Default: **node_modules**
@@ -249,6 +225,62 @@ switching branches or downgrading dependencies.
 
 The time in minutes after which dlx cache expires.
 After executing a dlx command, pnpm keeps a cache that omits the installation step for subsequent calls to the same dlx command.
+
+## Store Settings
+
+### store-dir
+
+* Default:
+  * If the **$PNPM_HOME** env variable is set, then **$PNPM_HOME/store**
+  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/store**
+  * On Windows: **~/AppData/Local/pnpm/store**
+  * On macOS: **~/Library/pnpm/store**
+  * On Linux: **~/.local/share/pnpm/store**
+* Type: **path**
+
+The location where all the packages are saved on the disk.
+
+The store should be always on the same disk on which installation is happening,
+so there will be one store per disk. If there is a home directory on the current
+disk, then the store is created inside it. If there is no home on the disk,
+then the store is created at the root of the filesystem. For
+example, if installation is happening on a filesystem mounted at `/mnt`,
+then the store will be created at `/mnt/.pnpm-store`. The same goes for Windows
+systems.
+
+It is possible to set a store from a different disk but in that case pnpm will
+copy packages from the store instead of hard-linking them, as hard links are
+only possible on the same filesystem.
+
+### verify-store-integrity
+
+* Default: **true**
+* Type: **Boolean**
+
+By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's `node_modules`. If `verify-store-integrity` is set to `false`, files in the content-addressable store will not be checked during installation.
+
+### use-running-store-server
+
+:::danger
+
+Deprecated feature
+
+:::
+
+* Default: **false**
+* Type: **Boolean**
+
+Only allows installation with a store server. If no store server is running,
+installation will fail.
+
+### strict-store-pkg-content-check
+
+Added in: v9.4.0
+
+* Default: **true**
+* Type: **Boolean**
+
+Some registries allow the exact same content to be published under different package names and/or versions. This breaks the validity checks of packages in the store. To avoid errors when verifying the names and versions of such packages in the store, you may set the `strict-store-pkg-content-check` setting to `false`.
 
 ## Lockfile Settings
 
@@ -940,14 +972,6 @@ When set to `true`, installation will fail if the workspace has cycles.
 
 ## Other Settings
 
-### use-running-store-server
-
-* Default: **false**
-* Type: **Boolean**
-
-Only allows installation with a store server. If no store server is running,
-installation will fail.
-
 ### save-prefix
 
 * Default: **'^'**
@@ -1041,13 +1065,6 @@ Set to `false` to suppress the update notification when using an older version o
 * Type: **Boolean**
 
 Create symlinks to executables in `node_modules/.bin` instead of command shims. This setting is ignored on Windows, where only command shims work.
-
-### verify-store-integrity
-
-* Default: **true**
-* Type: **Boolean**
-
-By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's `node_modules`. If `verify-store-integrity` is set to `false`, files in the content-addressable store will not be checked during installation.
 
 ### ignore-compatibility-db
 
