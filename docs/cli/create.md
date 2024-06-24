@@ -10,4 +10,3 @@ Create a project from a `create-*` or `@foo/create-*` starter kit.
 ```
 pnpm create react-app my-app
 ```
-

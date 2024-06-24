@@ -20,4 +20,3 @@ Specifying custom compression level.
 * `prepack`
 * `prepare`
 * `postpack`
-

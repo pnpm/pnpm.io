@@ -17,4 +17,4 @@ the global store, so it will not make any requests to the registry. This is
 recommended **ONLY** for environments where external access to the registry is
 unavailable for whatever reason.
 
-[store location option]: npmrc#store-dir 
+[store location option]: npmrc#store-dir
