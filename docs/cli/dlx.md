@@ -3,6 +3,8 @@ id: dlx
 title: "pnpm dlx"
 ---
 
+Aliases: `pnpx` is an alias for `pnpm dlx`
+
 Fetches a package from the registry without installing it as a dependency, hotloads it, and runs whatever default command binary it exposes.
 
 For example, to use `create-react-app` anywhere to bootstrap a react app without
