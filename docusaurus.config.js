@@ -219,22 +219,18 @@ module.exports={
           title: 'Community',
           items: [
             {
-              label: 'User Showcase',
-              to: 'users'
-            },
-            {
               label: 'Project Chat',
               href: 'https://r.pnpm.io/chat',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/pnpmjs'
+              label: 'X (Twitter)',
+              href: 'https://x.com/pnpmjs'
             },
-            {
-              label: 'Mastodon',
-              href: 'https://fosstodon.org/@pnpm',
-              rel: 'me',
-            },
+            // {
+              // label: 'Mastodon',
+              // href: 'https://fosstodon.org/@pnpm',
+              // rel: 'me',
+            // },
             {
               label: 'YouTube',
               href: 'https://www.youtube.com/@pnpmjs',
@@ -246,18 +242,6 @@ module.exports={
             {
               label: 'Reddit',
               href: 'https://reddit.com/r/pnpm/'
-            },
-            {
-              label: 'DEV',
-              href: 'https://dev.to/t/pnpm/'
-            },
-            {
-              label: 'Hashnode',
-              href: 'https://hashnode.com/n/pnpm'
-            },
-            {
-              label: 'Keybase',
-              href: 'https://keybase.io/pnpm'
             },
           ]
         },
