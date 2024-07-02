@@ -26,7 +26,7 @@ Changes the link location to `<dir>`.
 
 Links package from `<dir>` folder to node_modules of package from where you're executing this command or specified via `--dir` option.
 
-> For example, if you are inside `~/projects/foo` and you execute `pnpm link --dir ../bar`, then `foo` will be linked to `bar/node_modules/foo`.
+> For example, if you are inside `~/projects/foo` and you execute `pnpm link ../bar`, then a link to `bar` will be created in `foo/node_modules/bar`.
 
 ### `pnpm link --global`
 
