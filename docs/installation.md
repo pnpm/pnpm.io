@@ -186,7 +186,7 @@ Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node
 }
 ```
 
-First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run this command in Git Bash.
+First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run `where.exe pnpm.*`
 You'll get the location of the pnpm command, for instance:
 
 ```
