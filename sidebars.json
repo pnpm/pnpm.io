@@ -95,6 +95,7 @@
     ],
     "Features": [
       "workspaces",
+      "catalogs",
       "aliases",
       "completion",
       "git_branch_lockfiles"

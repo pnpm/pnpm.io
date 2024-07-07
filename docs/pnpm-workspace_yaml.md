@@ -22,4 +22,22 @@ packages:
 The root package is always included, even when custom location wildcards are
 used.
 
+Catalogs are also defined in the `pnpm-workspace.yaml` file. See [_Catalogs_](./catalogs.md) for details.
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - 'packages/*'
+
+catalog:
+  chalk: ^4.1.2
+
+catalogs:
+  react16:
+    react: ^16.7.0
+    react-dom: ^16.7.0
+  react17:
+    react: ^17.10.0
+    react-dom: ^17.10.0
+```
+
 [workspace]: workspaces.md
