@@ -5,13 +5,7 @@ title: Catalogs
 
 Added in: v9.5.0
 
-"_Catalogs_" are a [workspace feature](./workspaces.md) for defining dependency version ranges as reusable constants. Constants defined in catalogs can later be referenced in `package.json` files. 
-
-:::tip 
-
-Adopt this feature by running: ```pnpx codemod@latest pnpm/catalog```. Click [here](https://go.codemod.com/pnpm-catalog) for more info about the codemod.
-
-:::
+"_Catalogs_" are a [workspace feature](./workspaces.md) for defining dependency version ranges as reusable constants. Constants defined in catalogs can later be referenced in `package.json` files.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PuRUk4mV2jc" title="pnpm Catalogs — A New Tool to Manage Dependencies in monorepos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -71,6 +65,16 @@ Catalogs are defined in the `pnpm-workspace.yaml` file. There are two ways to de
 
 1. Using the (singular) `catalog` field to create a catalog named `default`.
 2. Using the (plural) `catalogs` field to create arbitrarily named catalogs.
+
+:::tip
+
+If you have an existing workspace that you want to migrate to using catalogs, you can use the following [codemod](https://go.codemod.com/pnpm-catalog):
+
+```
+pnpx codemod pnpm/catalog
+```
+
+:::
 
 ### Default Catalog
 
