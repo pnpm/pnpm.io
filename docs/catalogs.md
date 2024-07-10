@@ -66,6 +66,16 @@ Catalogs are defined in the `pnpm-workspace.yaml` file. There are two ways to de
 1. Using the (singular) `catalog` field to create a catalog named `default`.
 2. Using the (plural) `catalogs` field to create arbitrarily named catalogs.
 
+:::tip
+
+If you have an existing workspace that you want to migrate to using catalogs, you can use the following [codemod](https://go.codemod.com/pnpm-catalog):
+
+```
+pnpx codemod pnpm/catalog
+```
+
+:::
+
 ### Default Catalog
 
 The top-level `catalog` field allows users to define a catalog named `default`.
