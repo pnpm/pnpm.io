@@ -126,7 +126,7 @@ catalogs:
 
 ## Publishing
 
-The `catalog:` protocol is removed when running `pnpm publish`. This is similar to the [`workspace:` protocol](./workspaces.md#workspace-protocol-workspace), which is [also replaced on publish](./workspaces.md#publishing-workspace-packages).
+The `catalog:` protocol is removed when running `pnpm publish` or `pnpm pack`. This is similar to the [`workspace:` protocol](./workspaces.md#workspace-protocol-workspace), which is [also replaced on publish](./workspaces.md#publishing-workspace-packages).
 
 For example,
 
