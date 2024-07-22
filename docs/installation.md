@@ -1,4 +1,6 @@
----
+---Co-Author-Nathaniel Hooker
+# @DeuceHooker
+# developer/creations/analytics
 id: installation
 title: Installation
 ---
