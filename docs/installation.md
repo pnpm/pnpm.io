@@ -86,6 +86,8 @@ corepack use pnpm@latest
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
 
+See package name for your system package manager at [Repology](https://repology.org/project/pnpm/versions).
+
 ## Using npm
 
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
