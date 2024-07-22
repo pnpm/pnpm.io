@@ -662,4 +662,3 @@ Functionally identical to [`pnpm.overrides`], this field is intended to make it 
 
 [pnpm patch-commit]: ./cli/patch-commit.md
 [`pnpm.overrides`]: #pnpmoverrides
-
