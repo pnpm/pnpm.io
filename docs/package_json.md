@@ -634,6 +634,26 @@ If an optional dependency has its name included in this array, it will be skippe
 }
 ```
 
+## pnpm.executionEnv.nodeVersion
+
+Added in: v9.6.0
+
+Specifies which exact Node.js version should be used for the project's runtime.
+pnpm will automatically install the specified version of Node.js and use it for
+running `pnpm run` commands or the `pnpm node` command.
+
+For example:
+
+```json
+{
+  "pnpm": {
+    "executionEnv": {
+      "nodeVersion": "16.16.0"
+    }
+  }
+}
+```
+
 ## resolutions
 
 Functionally identical to [`pnpm.overrides`], this field is intended to make it easier to migrate from Yarn.

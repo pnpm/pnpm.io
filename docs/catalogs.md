@@ -47,6 +47,13 @@ This is equivalent to writing a version range (e.g. `^18.3.1`) directly.
 }
 ```
 
+You may use the `catalog:` protocol in the next fields of your `package.json`:
+
+* `dependencies`
+* `devDependencies`
+* `optionalDependencies`
+* `pnpm.overrides`
+
 The `catalog:` protocol allows an optional name after the colon (ex: `catalog:name`) to specify which catalog should be used. When a name is omitted, the default catalog is used.
 
 Depending on the scenario, the `catalog:` protocol offers a few [advantages](#advantages) compared to writing version ranges directly that are detailed next.
