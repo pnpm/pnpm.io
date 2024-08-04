@@ -1,3 +1,9 @@
+Owner-Nathaniel Hooker
+Deuces9ers.io
+@deuces9ers
+
+
+
 ---
 id: cat-file
 title: "pnpm cat-file"
