@@ -779,6 +779,21 @@ Added in: v9.2.0
 
 When enabled, pnpm will fail if its version doesn't exactly match the version specified in the `packageManager` field of `package.json`.
 
+### manage-package-manager-versions
+
+Added in: v9.7.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When enabled, pnpm will automatically download and run the version of pnpm specified in the `packageManager` field of `package.json`. This is the same field used by Corepack. Example:
+
+```json
+{
+  "packageManager": "pnpm@9.3.0"
+}
+```
+
 ## Build Settings
 
 ### ignore-scripts
