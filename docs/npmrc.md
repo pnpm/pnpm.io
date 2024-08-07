@@ -761,6 +761,24 @@ Regardless of this configuration, installation will always fail if a project
 
 The location of the npm binary that pnpm uses for some actions, like publishing.
 
+### package-manager-strict
+
+* Default: **true**
+* Type: **Boolean**
+
+If this setting is disabled, pnpm will not fail if a different package manager is specified in the `packageManager` field of `package.json`. When enabled, only the package name is checked (since pnpm v9.2.0), so you can still run any version of pnpm regardless of the version specified in the `packageManager` field.
+
+Alternatively, you can disable this setting by setting the `COREPACK_ENABLE_STRICT` environment variable to `0`.
+
+### package-manager-strict-version
+
+Added in: v9.2.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When enabled, pnpm will fail if its version doesn't exactly match the version specified in the `packageManager` field of `package.json`.
+
 ## Build Settings
 
 ### ignore-scripts
@@ -1133,21 +1151,3 @@ When set to `true`, dependencies that are already symlinked to the root `node_mo
 * Type: **Boolean**
 
 When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
-
-### package-manager-strict
-
-* Default: **true**
-* Type: **Boolean**
-
-If this setting is disabled, pnpm will not fail if a different package manager is specified in the `packageManager` field of `package.json`. When enabled, only the package name is checked (since pnpm v9.2.0), so you can still run any version of pnpm regardless of the version specified in the `packageManager` field.
-
-Alternatively, you can disable this setting by setting the `COREPACK_ENABLE_STRICT` environment variable to `0`.
-
-### package-manager-strict-version
-
-Added in: v9.2.0
-
-* Default: **false**
-* Type: **Boolean**
-
-When enabled, pnpm will fail if its version doesn't exactly match the version specified in the `packageManager` field of `package.json`.
