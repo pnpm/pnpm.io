@@ -148,6 +148,7 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Novu](https://github.com/novuhq/novu) | ![](https://img.shields.io/github/stars/novuhq/novu) | 2021-12-23 | `f2ea61f7d7ac7e12db4c9e70767082841ed98b2b` |
 | [Slidev](https://github.com/slidevjs/slidev) | ![](https://img.shields.io/github/stars/slidevjs/slidev) | 2021-04-12 | `d6783323eb1ab1fc612577eb63579c8f7bc99c3a` |
 | [Turborepo](https://github.com/vercel/turborepo) | ![](https://img.shields.io/github/stars/vercel/turborepo) | 2022-03-02 | `fd171519ec02a69c9afafc1bc5d9d1b481fba721` |
+| [Quasar Framework](https://github.com/quasarframework/quasar) | ![](https://img.shields.io/github/stars/quasarframework/quasar) | 2024-03-13 | `7f8e550bb7b6ab639ce423d02008e7f5e61cbf55` |
 | [Element Plus](https://github.com/element-plus/element-plus) | ![](https://img.shields.io/github/stars/element-plus/element-plus) | 2021-09-23 | `f9e192535ff74d1443f1d9e0c5394fad10428629` |
 | [NextAuth.js](https://github.com/nextauthjs/next-auth) | ![](https://img.shields.io/github/stars/nextauthjs/next-auth) | 2022-05-03 | `4f29d39521451e859dbdb83179756b372e3dd7aa` |
 | [Ember.js](https://github.com/emberjs/ember.js) | ![](https://img.shields.io/github/stars/emberjs/ember.js) | 2023-10-18 | `b6b05da662497183434136fb0148e1dec544db04` |
