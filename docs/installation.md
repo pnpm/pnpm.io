@@ -16,7 +16,7 @@ You may install pnpm even if you don't have Node.js installed, using the followi
 Using PowerShell:
 
 ```powershell
-iwr https://get.pnpm.io/install.ps1 -useb | iex
+Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 ### On POSIX systems
