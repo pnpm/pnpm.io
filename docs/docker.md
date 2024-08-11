@@ -133,3 +133,32 @@ Run the following commands to build images for app1 and app2:
 docker build . --target app1 --tag app1:latest
 docker build . --target app2 --tag app2:latest
 ```
+
+### Example 3: Build on CI/CD
+
+On CI or CD environments, the BuildKit cache mounts might now be available, because the VM or container is ephemeral and only normal docker cache will work.
+
+So an alternative is to use a typical Dockerfile with layers that are built incrementally.
+
+```dockerfile title="Dockerfile"
+FROM node:20-slim AS base
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+FROM base AS prod
+
+COPY pnpm-lock.yaml /app
+WORKDIR /app
+RUN pnpm fetch --prod
+
+COPY . /app
+RUN pnpm run build
+
+FROM base
+COPY --from=prod /app/node_modules /app/node_modules
+COPY --from=prod /app/dist /app/dist
+EXPOSE 8000
+CMD [ "pnpm", "start" ]
+```
