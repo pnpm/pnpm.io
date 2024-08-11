@@ -136,7 +136,7 @@ docker build . --target app2 --tag app2:latest
 
 ### Example 3: Build on CI/CD
 
-On CI or CD environments, the BuildKit cache mounts might now be available, because the VM or container is ephemeral and only normal docker cache will work.
+On CI or CD environments, the BuildKit cache mounts might not be available, because the VM or container is ephemeral and only normal docker cache will work.
 
 So an alternative is to use a typical Dockerfile with layers that are built incrementally, for this scenario, `pnpm fetch` is the best option, as it only needs the `pnpm-lock.yaml` file and the layer cache will only be lost when you change the dependencies.
 
