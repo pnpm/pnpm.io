@@ -55,5 +55,8 @@ Packages in `devDependencies` won't be installed.
 
 ## Files included in the deployed project
 
-By default, all the files of the project are copied during deployment. The project's `package.json` may contain a "files" field to list the files and directories that should be copied.
+By default, all the files of the project are copied during deployment but this can be modified in _one_ of the following ways which are resolved in order:
 
+1. The project's `package.json` may contain a "files" field to list the files and directories that should be copied.
+2. If there is an `.npmignore` file in the application directory then any files listed here are ignored.
+3. If there is a `.gitignore` file in the application directory then any files listed here are ignored.
