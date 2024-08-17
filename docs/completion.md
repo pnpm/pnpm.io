@@ -21,6 +21,12 @@ pnpm completion bash > ~/completion-for-pnpm.bash
 echo 'source ~/completion-for-pnpm.bash' >> ~/.bashrc
 ```
 
+To setup autocompletion for Fish, run:
+
+```text
+pnpm completion fish > ~/.config/fish/completions/pnpm.fish
+```
+
 ## g-plane/pnpm-shell-completion
 
 [pnpm-shell-completion] is a shell plugin maintained by Pig Fang on Github.
