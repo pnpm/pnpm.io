@@ -1,5 +1,12 @@
 [
   {
+    "caption": "Alova",
+    "image": "/img/users/alova.svg",
+    "infoLink": "https://alova.js.org",
+    "pinned": true,
+    "width": 150
+  },
+  {
     "caption": "Compass",
     "image": "/img/users/compass.svg",
     "infoLink": "https://compass.com",
