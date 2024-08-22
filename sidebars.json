@@ -72,6 +72,7 @@
         "type": "category",
         "label": "Misc.",
         "items": [
+          "cli/self-update",
           "cli/publish",
           "cli/pack",
           "cli/recursive",

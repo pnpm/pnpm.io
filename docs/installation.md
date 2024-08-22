@@ -86,7 +86,9 @@ corepack use pnpm@latest
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
 
-## Using npm
+## Using other package managers
+
+### Using npm
 
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
@@ -104,7 +106,7 @@ or
 npm install -g @pnpm/exe
 ```
 
-## Using Homebrew
+### Using Homebrew
 
 If you have the package manager installed, you can install pnpm using the following command:
 
@@ -112,7 +114,7 @@ If you have the package manager installed, you can install pnpm using the follow
 brew install pnpm
 ```
 
-## Using winget
+### Using winget
 
 If you have winget installed, you can install pnpm using the following command:
 
@@ -120,7 +122,7 @@ If you have winget installed, you can install pnpm using the following command:
 winget install -e --id pnpm.pnpm
 ```
 
-## Using Scoop
+### Using Scoop
 
 If you have Scoop installed, you can install pnpm using the following command:
 
@@ -128,7 +130,7 @@ If you have Scoop installed, you can install pnpm using the following command:
 scoop install nodejs-lts pnpm
 ```
 
-## Using Choco
+### Using Choco
 
 If you have Chocolatey installed, you can install pnpm using the following command:
 
@@ -136,7 +138,7 @@ If you have Chocolatey installed, you can install pnpm using the following comma
 choco install pnpm
 ```
 
-## Using Volta
+### Using Volta
 
 If you have Volta installed, you can install pnpm using the following command:
 
@@ -224,6 +226,16 @@ set-alias -name pn -value pnpm
 ```
 
 Save the file and close the window. You may need to close any open Powershell window in order for the alias to take effect.
+
+## Updating pnpm
+
+To update pnpm, run the [`self-update`] command:
+
+```
+pnpm self-update
+```
+
+[`self-update`]: ./cli/self-update.md
 
 ## Uninstalling pnpm
 
