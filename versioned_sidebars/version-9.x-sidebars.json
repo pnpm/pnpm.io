@@ -212,6 +212,10 @@
           "items": [
             {
               "type": "doc",
+              "id": "cli/self-update"
+            },
+            {
+              "type": "doc",
               "id": "cli/publish"
             },
             {
