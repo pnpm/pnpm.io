@@ -1,6 +1,6 @@
 ---
 id: npmrc
-title: ".npmrc"
+title: "Settings (.npmrc)"
 ---
 
 pnpm gets its configuration from the command line, environment variables, and
