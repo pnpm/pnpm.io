@@ -92,7 +92,7 @@ This will add a `"packageManager"` field in your local `package.json` which will
 
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
-- [`pnpm`](https://www.npmjs.com/package/pnpm) is a ordinary version of pnpm, which needs Node.js to run.
+- [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run.
 - [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed.
 
 
