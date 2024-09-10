@@ -578,6 +578,29 @@ A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
 
 [`pnpm audit`]: ./cli/audit.md
 
+### pnpm.auditConfig.ignoreGhsas
+
+Added in: v9.10.0
+
+A list of GHSA Codes that will be ignored by the [`pnpm audit`] command.
+
+```json
+{
+  "pnpm": {
+    "auditConfig": {
+      "ignoreGhsas": [
+        "GHSA-42xw-2xvc-qx8m",
+        "GHSA-4w2v-q235-vp99",
+        "GHSA-cph5-m8f7-6c5x",
+        "GHSA-vh95-rmgr-6w4m"
+      ]
+    }
+  }
+}
+```
+
+[`pnpm audit`]: ./cli/audit.md
+
 ## pnpm.requiredScripts
 
 Scripts listed in this array will be required in each project of the workspace. Otherwise, `pnpm -r run <script name>` will fail.
