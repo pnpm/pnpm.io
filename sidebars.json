@@ -84,7 +84,8 @@
           "cli/init",
           "cli/deploy",
           "cli/doctor",
-          "cli/config"
+          "cli/config",
+          "cli/completion"
         ]
       }
     ],
