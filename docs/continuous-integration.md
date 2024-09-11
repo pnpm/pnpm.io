@@ -105,12 +105,6 @@ jobs:
       run: pnpm install
 ```
 
-:::note
-
-Caching packages dependencies with `actions/setup-node@v2` requires you to install pnpm with version **6.10+**.
-
-:::
-
 ## GitLab CI
 
 On GitLab, you can use pnpm for installing and caching your dependencies
