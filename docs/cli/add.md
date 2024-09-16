@@ -81,26 +81,87 @@ pnpm add <git remote url>
 ```
 
 Installs the package from the hosted Git provider, cloning it with Git.
-You can use a protocol for certain Git providers. For example,
-`pnpm add github:user/repo`
 
-You may install from Git by:
-
-* latest commit from master: `pnpm add kevva/is-positive`
-* commit: `pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678`
-* branch: `pnpm add kevva/is-positive#master`
-* version range: `pnpm add kevva/is-positive#semver:^2.0.0`
-
-You may also install just a subdirectory from a Git-hosted monorepo. For instance:
+You may install packages from Git by:
 
 ```
-pnpm add myorg/repo#path:packages/foo
+# latest commit from default branch
+pnpm add kevva/is-positive
+
+# git commit hash
+pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678
+
+# git branch
+pnpm add kevva/is-positive#master
+
+# git branch relative to refs
+pnpm add zkochan/is-negative#heads/canary
+
+# git tag
+pnpm add zkochan/is-negative#2.0.1
+
+# v-prefixed git tag
+pnpm add andreineculau/npm-publish-git#v0.0.
 ```
 
-It is possible to combine multiple parameters by separating them with `&`. For instance, you can extend the above command by specifying which branch to fetch from:
+### Semver
+
+You can specify version (range) to install using the `semver:` parameter. For example:
 
 ```
-pnpm add myorg/repo#path:packages/foo&next
+# strict semver
+pnpm add zkochan/is-negative#semver:1.0.0
+
+# v-prefixed strict semver 
+pnpm add andreineculau/npm-publish-git#semver:v0.0.7
+
+# semver version range
+pnpm add kevva/is-positive#semver:^2.0.0
+
+# v-prefixed semver version range
+pnpm add andreineculau/npm-publish-git#semver:<=v0.0.7
+```
+
+#### Subdirectory
+
+You may also install just a subdirectory from a Git-hosted monorepo using the `path:` parameter. For instance:
+
+```
+pnpm add RexSkz/test-git-subfolder-fetch#path:/packages/simple-react-app
+```
+
+#### Full URL
+
+If you want to be more explicit or are using alternative git hosting, you might want to spell out full git URL:
+
+```
+# git+ssh
+pnpm add git+ssh://git@github.com:zkochan/is-negative.git#2.0.1
+
+# https
+pnpm add https://github.com/zkochan/is-negative.git#2.0.1
+```
+
+#### Providers shorthand
+
+You can use a protocol shorthand `[provier]:` for certain Git providers:
+
+```
+pnpm add github:zkochan/is-negative
+pnpm add bitbucket:pnpmjs/git-resolver
+pnpm add gitlab:pnpm/git-resolver
+```
+
+If `[provider]:` is omited, it defaults to `github:`.
+
+#### Parameters combination
+
+It is possible to combine multiple parameters by separating them with `&`. This can be useful for forks of monorepos:
+
+```
+# Install git branch `beta`
+# Install only subfolder `/packages/simple-react-app`
+pnpm add RexSkz/test-git-subfolder-fetch.git#beta&path:/packages/simple-react-app
 ```
 
 ## Options
