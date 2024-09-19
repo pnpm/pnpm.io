@@ -14,13 +14,19 @@ needing to install it under another project, you can run:
 pnpm dlx create-react-app ./my-app
 ```
 
-This will fetch `create-react-app` from the registry and run it with the given arguments.
+This will fetch `create-react-app` from the registry, download it to a temporary location (see below) and run it with the given arguments.
 
 You may also specify which exact version of the package you'd like to use:
 
 ```
 pnpm dlx create-react-app@next ./my-app
 ```
+
+The temporary location of the downloaded files is:
+
+* On Windows: **~/AppData/Local/pnpm/dlx**
+* On macOS: **~/Library/Caches/pnpm/dlx**
+* On Linux: **~/.cache/pnpm/dlx**
 
 ## Options
 
