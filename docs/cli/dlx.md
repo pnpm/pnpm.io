@@ -24,7 +24,7 @@ pnpm dlx create-react-app@next ./my-app
 
 The temporary location of the downloaded files is:
 
-* On Windows: **~/AppData/Local/pnpm/dlx**
+* On Windows: **~/AppData/Local/pnpm-cache/dlx**
 * On macOS: **~/Library/Caches/pnpm/dlx**
 * On Linux: **~/.cache/pnpm/dlx**
 
