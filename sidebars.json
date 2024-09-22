@@ -70,6 +70,16 @@
       },
       {
         "type": "category",
+        "label": "Manage cache",
+        "items": [
+          "cli/cache-list",
+          "cli/cache-list-registries",
+          "cli/cache-view",
+          "cli/cache-delete"
+        ]
+      },
+      {
+        "type": "category",
         "label": "Misc.",
         "items": [
           "cli/self-update",
