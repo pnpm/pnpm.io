@@ -54,6 +54,6 @@ Checks only `dependencies` and `optionalDependencies`.
 
 Doesn't check `optionalDependencies`.
 
-### --sort
+### --sort-by
 
 Specifies the order in which the output results are sorted. Currently only the value `name` is accepted.
