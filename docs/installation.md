@@ -13,6 +13,14 @@ You may install pnpm even if you don't have Node.js installed, using the followi
 
 ### On Windows
 
+:::warning
+
+Sometimes, Windows Defender may block our executable if you install pnpm this way.
+
+Due to this issue, we currently recommend installing pnpm using [npm](#using-npm) or [Corepack](#using-corepack) on Windows.
+
+:::
+
 Using PowerShell:
 
 ```powershell
