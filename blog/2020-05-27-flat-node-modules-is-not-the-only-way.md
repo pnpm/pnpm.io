@@ -91,7 +91,7 @@ Now let's look into the real location of `express`:
       Readme.md
 ```
 
-Is it a scam? It still lacks `node_modules`! The second trick of pnpm's `node_modules` structure is that the dependencies of packages are on the same directory level on which the real location of the dependent package. So dependencies of `express` are not in `.pnpm/express@4.17.1/node_modules/express/node_modules/` but in [.pnpm/express@4.17.1/node_modules/](https://github.com/zkochan/comparing-node-modules/tree/master/pnpm5-example/node_modules/.pnpm/express@4.17.1/node_modules):
+Is it a scam? It still lacks `node_modules`! The second trick of pnpm's `node_modules` structure is that the dependencies of packages are on the same directory level as the real location of the dependent package. So dependencies of `express` are not in `.pnpm/express@4.17.1/node_modules/express/node_modules/` but in [.pnpm/express@4.17.1/node_modules/](https://github.com/zkochan/comparing-node-modules/tree/master/pnpm5-example/node_modules/.pnpm/express@4.17.1/node_modules):
 
 ```text
 ▾ node_modules
