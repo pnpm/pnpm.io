@@ -3,7 +3,8 @@ id: exec
 title: pnpm exec
 ---
 
-Execute a shell command in scope of a project.
+Execute a shell command in scope of a project, which means that it will always treat the project root as the current working directory,
+may lead to confusion when you run a command after changing to a subdirectory.
 
 `node_modules/.bin` is added to the `PATH`, so `pnpm exec` allows executing commands of dependencies.
 
