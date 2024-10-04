@@ -226,8 +226,9 @@ For example:
 ## pnpm.overrides
 
 This field allows you to instruct pnpm to override any dependency in the
-dependency graph. This is useful to enforce all your packages to use a single
-version of a dependency, backport a fix, or replace a dependency with a fork.
+dependency graph. This is useful for enforcing all your packages to use a single
+version of a dependency, backporting a fix, replacing a dependency with a fork, or
+removing an unused dependency.
 
 Note that the overrides field can only be set at the root of the project.
 
@@ -246,7 +247,7 @@ An example of the `"pnpm"."overrides"` field:
 }
 ```
 
-You may specify the package the overriden dependency belongs to by
+You may specify the package the overridden dependency belongs to by
 separating the package selector from the dependency selector with a ">", for
 example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
 any other dependencies.
@@ -281,6 +282,22 @@ The referenced package does not need to match the overridden one:
   }
 }
 ```
+
+Added in: v9.12.0
+
+If you find that your use of a certain package doesn’t require one of its dependencies, you may use `-` to remove it. For example, if package `foo@1.0.0` requires a large package named `bar` for a function that you don’t use, removing it could reduce install time:
+
+```json
+{
+  "pnpm": {
+    "overrides": {
+      "foo@1.0.0>bar": "-"
+    }
+  }
+}
+```
+
+This feature is especially useful with `optionalDependencies`, where most optional packages can be safely skipped.
 
 ## pnpm.packageExtensions
 
@@ -685,4 +702,3 @@ Functionally identical to [`pnpm.overrides`], this field is intended to make it 
 
 [pnpm patch-commit]: ./cli/patch-commit.md
 [`pnpm.overrides`]: #pnpmoverrides
-
