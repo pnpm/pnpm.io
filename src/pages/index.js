@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import Translate, {translate} from '@docusaurus/Translate'
+import Translate from '@docusaurus/Translate'
 import styles from './styles.module.css';
 
 const features = [
@@ -137,25 +137,6 @@ const Showcase = props => {
                 <img style={{padding: '20px'}} width="200" alt="vlt" src="/img/users/vlt.svg" />
               </a>
             </div>
-          </div>
-          <div>
-            <div className="prose">
-              <h1><Translate>Who's Using This?</Translate></h1>
-              <p><Translate>This project is used by many folks</Translate></p>
-            </div>
-            <div className="logos" style={{
-              alignItems: 'center',
-              display: 'flex',
-              flexFlow: 'row wrap',
-              justifyContent: 'center',
-            }}>{showcase}</div>
-            <Link
-              style={{margin: '0 20px'}}
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
           </div>
         </div>
       </div>
