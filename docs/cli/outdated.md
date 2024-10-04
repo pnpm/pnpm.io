@@ -56,4 +56,6 @@ Doesn't check `optionalDependencies`.
 
 ### --sort-by
 
+Added in: v9.12.0
+
 Specifies the order in which the output results are sorted. Currently only the value `name` is accepted.
