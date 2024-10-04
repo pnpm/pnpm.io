@@ -84,13 +84,34 @@ Installs the package from the hosted Git provider, cloning it with Git.
 
 You may install packages from Git by:
 
-* latest commit from default branch: `pnpm add kevva/is-positive`
-* git commit hash: `pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678`
-* git branch: `pnpm add kevva/is-positive#master`
-* git branch relative to refs: `pnpm add zkochan/is-negative#heads/canary`
-* git tag: `pnpm add zkochan/is-negative#2.0.1`
-* v-prefixed git tag: `pnpm add andreineculau/npm-publish-git#v0.0.7`
-* version range: `pnpm add kevva/is-positive#semver:^2.0.0`
+* Latest commit from default branch:
+```
+pnpm add kevva/is-positive
+```
+* Git commit hash:
+```
+pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678
+```
+* Git branch:
+```
+pnpm add kevva/is-positive#master
+```
+* Git branch relative to refs:
+```
+pnpm add zkochan/is-negative#heads/canary
+```
+* Git tag:
+```
+pnpm add zkochan/is-negative#2.0.1
+```
+* V-prefixed Git tag:
+```
+pnpm add andreineculau/npm-publish-git#v0.0.7
+```
+* Version range:
+```
+pnpm add kevva/is-positive#semver:^2.0.0
+```
 
 ### Semver
 
