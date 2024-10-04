@@ -120,7 +120,7 @@ pnpm add RexSkz/test-git-subfolder-fetch#path:/packages/simple-react-app
 
 #### Full URL
 
-If you want to be more explicit or are using alternative git hosting, you might want to spell out full git URL:
+If you want to be more explicit or are using alternative Git hosting, you might want to spell out full Git URL:
 
 ```
 # git+ssh
