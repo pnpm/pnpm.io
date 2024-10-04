@@ -117,17 +117,20 @@ pnpm add kevva/is-positive#semver:^2.0.0
 
 You can specify version (range) to install using the `semver:` parameter. For example:
 
+* Strict semver:
 ```
-# strict semver
 pnpm add zkochan/is-negative#semver:1.0.0
-
-# v-prefixed strict semver 
+```
+* V-prefixed strict semver:
+```
 pnpm add andreineculau/npm-publish-git#semver:v0.0.7
-
-# semver version range
+```
+* Semver version range:
+```
 pnpm add kevva/is-positive#semver:^2.0.0
-
-# v-prefixed semver version range
+```
+* V-prefixed semver version range:
+```
 pnpm add andreineculau/npm-publish-git#semver:<=v0.0.7
 ```
 
