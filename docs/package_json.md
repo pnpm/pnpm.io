@@ -226,8 +226,8 @@ For example:
 ## pnpm.overrides
 
 This field allows you to instruct pnpm to override any dependency in the
-dependency graph. This is useful to enforce all your packages to use a single
-version of a dependency, backport a fix, replace a dependency with a fork, or
+dependency graph. This is useful for enforcing all your packages to use a single
+version of a dependency, backporting a fix, replacing a dependency with a fork, or
 removing an unused dependency.
 
 Note that the overrides field can only be set at the root of the project.
@@ -283,9 +283,9 @@ The referenced package does not need to match the overridden one:
 }
 ```
 
-If you find that your use of a certain package doesn't require one of its dependency,
-you may use `-` to remove them. For example, package `foo@1.0.0` requires a big package
-named `bar` for a function that you don't use, removing it could reduce install time:
+Added in: v9.12.0
+
+If you find that your use of a certain package doesn’t require one of its dependencies, you may use `-` to remove it. For example, if package `foo@1.0.0` requires a large package named `bar` for a function that you don’t use, removing it could reduce install time:
 
 ```json
 {
@@ -296,6 +296,8 @@ named `bar` for a function that you don't use, removing it could reduce install 
   }
 }
 ```
+
+This feature is especially useful with `optionalDependencies`, where most optional packages can be safely skipped.
 
 ## pnpm.packageExtensions
 
