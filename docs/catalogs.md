@@ -51,6 +51,7 @@ You may use the `catalog:` protocol in the next fields of your `package.json`:
 
 * `dependencies`
 * `devDependencies`
+* `peerDependencies`
 * `optionalDependencies`
 * `pnpm.overrides`
 
