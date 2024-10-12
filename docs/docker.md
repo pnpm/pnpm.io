@@ -3,6 +3,8 @@ id: docker
 title: Working with Docker
 ---
 
+Also see [pnpm fetch](./cli/fetch.md) for a command that can be used to speed up consecutive builds.
+
 :::note
 
 It is impossible to create reflinks or hardlinks between a Docker container and the host filesystem during build time.
