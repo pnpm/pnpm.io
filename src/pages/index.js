@@ -136,6 +136,9 @@ const Showcase = props => {
               <a href={addUTM("https://vlt.sh/")} target="_blank">
                 <img style={{padding: '20px'}} width="200" alt="vlt" src="/img/users/vlt.svg" />
               </a>
+              <a href={addUTM("https://vite.dev/")} target="_blank">
+                <img style={{padding: '20px'}} width="120" alt="vite" src="/img/users/vitejs.svg" />
+              </a>
             </div>
           </div>
         </div>
