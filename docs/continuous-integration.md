@@ -228,8 +228,8 @@ You can use pnpm for installing and caching your dependencies:
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim' 
-            args '-p 3000:3000' 
+            image 'node:lts-bullseye-slim'
+            args '-p 3000:3000'
         }
     }
     stages {
@@ -243,3 +243,5 @@ pipeline {
     }
 }
 ```
+
+Note, if you have permission issues with `corepack enable`, using `args '-u root:sudo -p 3000:3000'` might solve it.
