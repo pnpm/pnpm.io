@@ -14,12 +14,16 @@ lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
 
 ### TL;DR
 
-| Hook Function                                         | Process                                                    | Uses                                               |
-|-------------------------------------------------------|------------------------------------------------------------|----------------------------------------------------|
-| `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json` |
-| `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                 |
+| Hook Function                                         | Process                                                     | Uses                                                      |
+|-------------------------------------------------------|-------------------------------------------------------------|-----------------------------------------------------------|
+| `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.           | Mutate the lockfile.                                      |
+| `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest. | Mutate a dependency's `package.json`                      |
+| `hooks.filterLog(log): boolean`                       | Called before a log is printed.                             | Filter logs by level and/or message content.              |
+| `hooks.fetchers[*](opts): fetcher`                    | Called to construct package fetcher.                        | Fully customize how packages are brought into the store.  |
+| `hooks.importPackage(to, opts): string?`              | Called to import a package into `node_modules`.             | Fully customize how packages are imported from the store. |
+| `hooks.preResolution(context, logger): void`          | Called before dependencies have been resolved.              | Run code before dependency resolution starts.             |
 
-### `hooks.readPackage(pkg, context): pkg | Promise<pkg>`
+### `hooks.readPackage(pkg, context): pkg | Promise<pkg>` (global then local)
 
 Allows you to mutate a dependency's `package.json` after parsing and prior to
 resolution. These mutations are not saved to the filesystem, however, they will
@@ -42,11 +46,11 @@ the `package.json` content.
 * `context` - Context object for the step. Method `#log(msg)` allows you to use
 a debug log for the step.
 
-#### Usage
+#### Usage example
 
 Example `.pnpmfile.cjs` (changes the dependencies of a dependency):
 
-```js
+```js title=".pnpmfile.cjs"
 function readPackage(pkg, context) {
   // Override the manifest of foo@1.x after downloading it from the registry
   if (pkg.name === 'foo' && pkg.version.startsWith('1.')) {
@@ -81,7 +85,7 @@ reads the `package.json` of the package from the package's archive, which is not
 affected by the hook. In order to ignore a package's build, use the
 [pnpm.neverBuiltDependencies](package_json.md#pnpmneverbuiltdependencies) field.
 
-### `hooks.afterAllResolved(lockfile, context): lockfile | Promise<lockfile>`
+### `hooks.afterAllResolved(lockfile, context): lockfile | Promise<lockfile>` (global then local)
 
 Allows you to mutate the lockfile output before it is serialized.
 
@@ -111,6 +115,143 @@ module.exports = {
 
 There are none - anything that can be done with the lockfile can be modified via
 this function, and you can even extend the lockfile's functionality.
+
+### `hooks.filterLog(log): boolean` (global then local)
+
+Allows you to granularly filter console logging.
+
+#### Arguments
+
+* `log` - The log data object with properties such as;
+  * `name`
+  * `level`
+  * `prefix`
+  * `message`
+
+#### Usage example
+
+```js title=".pnpmfile.cjs"
+function filterLog(log) {
+  return log.message?.includes('common-error') ?? false;
+}
+
+module.exports = {
+  hooks: {
+    filterLog
+  }
+}
+```
+
+### `hooks.fetchers[*](opts): fetcher` (global)
+
+Allows you to completely customize how packages are fetched.
+
+#### Types
+
+* `localTarball`
+* `remoteTarball`
+* `gitHostedTarball`
+* `directory`
+* `git`
+
+#### Arguments
+
+* `opts` - Options object passed to the fetcher factory.
+  * `defaultFetchers` - Object containing all default fetcher implementations.
+
+#### Usage example
+
+```js title="~/.pnpm/global_pnpmfile.cjs"
+const fetchers = {
+  directory({ defaultFetchers }) {
+    // Wrapping the default fetcher with custom logic
+    return (cafs, resolution, opts) => {
+      // ...
+      return defaultFetchers.directory(cafs, resolution, opts)
+    }
+  }
+}
+
+module.exports = {
+  hooks: {
+    fetchers
+  }
+}
+```
+
+### `hooks.importPackage(to, opts): string|undefined|Promise<string|undefined>` (global)
+
+Allows you to completely customize how packages are imported into `node_modules` from the store.
+
+This overrides the `package-import-method` configuration.
+
+#### Arguments
+
+* `to` - The absolute path where the package should be imported to.
+* `opts` - Options object specifying what to import and some some related configuration.
+  * `disableRelinkLocalDirDeps`
+  * `filesMap`
+  * `force`
+  * `resolvedFrom`
+  * `keepModulesDir`
+
+#### Example usage
+
+```js title="~/.pnpm/global_pnpmfile.cjs"
+const path = require('node:path')
+const fs = require('node:fs')
+
+// Naive copy implementation
+function importPackage(to, opts) {
+  const pkgJsonPath = path.join(to, 'package.json')
+
+  if (opts.resolvedFrom !== 'store' || opts.force || !fs.existsSync(pkgJsonPath)) {
+    for (const [f, src] of Object.entries(opts.filesMap)) {
+      const dest = path.join(to, f)
+      fs.mkdirSync(path.join(dest, '..'), { recursive: true })
+      fs.copyFileSync(src, dest)
+    }
+    return 'naive-copy'
+  }
+  return undefined
+}
+
+module.exports = {
+  hooks: {
+    importPackage
+  }
+}
+```
+
+### `hooks.preResolution(context, logger): void | Promise<void>` (global)
+
+Allows you to run code before dependency resolution starts.
+
+#### Arguments
+
+* `context` - Object containing various pre-resolution values.
+  * `wantedLockfile` - `pnpm-lock.yaml` with conflicts and related issues resolved.
+  * `currentLockfile` - `node_modules/.pnpm/lock.yaml` or a generated fallback.
+  * `existsWantedLockfile` - Whether `pnpm-lock.yaml` exists.
+  * `existsCurrentLockfile` - Whether `node_modules/.pnpm/lock.yaml` exists.
+  * `lockfileDir` - Directory containing wanted lockfile.
+  * `storeDir` - Store directory, e.g. `~/.local/share/pnpm/store/v3`.
+  * `registries` - Object containing the default and scoped registries.
+* `logger` - Logger object with `info` and `warn` logging methods.
+
+#### Example usage
+
+```js title="~/.pnpm/global_pnpmfile.cjs"
+function preResolution(context, logger) {
+  logger.info(`Registries: ${Object.values(context.registries).join(', ')}`)
+}
+
+module.exports = {
+  hooks: {
+    preResolution
+  }
+}
+```
 
 ## Related Configuration
 
