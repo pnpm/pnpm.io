@@ -85,7 +85,7 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: lts/*
       - name: install pnpm
         run: npm i pnpm@latest -g
       - name: Setup npmrc
