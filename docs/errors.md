@@ -64,6 +64,9 @@ For example:
 
 To fix this error, either remove the release channel prefix or correct the version suffix.
 
+Note that it is not allowed to specify node versions like `lts/Jod`.
+The correct syntax for stable release is strictly X.Y.Z or release/X.Y.Z.
+
 ## ERR_PNPM_INVALID_NODE_VERSION
 
 The value of config field `use-node-version` has an invalid syntax.
