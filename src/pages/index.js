@@ -91,6 +91,9 @@ const Showcase = props => {
               <a href={addUTM("https://bit.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
               </a>
+              <a href={addUTM("https://sanity.io/")} target="_blank">
+                <img style={{padding: '20px'}} width="260" alt="Sanity" src="/img/users/sanity.svg" />
+              </a>
               <a href={addUTM("https://figma.com/")} target="_blank">
                 <img style={{padding: '0 20px'}} width="120" alt="Figma" title="Figma" src="/img/users/figma.svg" />
               </a>
@@ -138,6 +141,9 @@ const Showcase = props => {
               </a>
               <a href={addUTM("https://vite.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="vite" src="/img/users/vitejs.svg" />
+              </a>
+              <a href={addUTM("https://macpaw.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="200" alt="MacPaw" src="/img/users/macpaw.svg" />
               </a>
             </div>
           </div>
