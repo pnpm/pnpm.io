@@ -95,6 +95,10 @@ Don't update packages in `optionalDependencies`.
 
 Show outdated dependencies and select which ones to update.
 
+### --no-save
+
+Don't update the ranges in `package.json`.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
