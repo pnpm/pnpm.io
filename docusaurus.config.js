@@ -243,6 +243,10 @@ module.exports={
               label: 'Reddit',
               href: 'https://reddit.com/r/pnpm/'
             },
+            {
+              label: 'Bluesky',
+              href: 'https://bsky.app/profile/pnpm.io'
+            },
           ]
         },
         {
