@@ -11,6 +11,8 @@ For example:
 
 ```yaml title="pnpm-workspace.yaml"
 packages:
+  # specify a package dir
+  - 'my-app/'
   # all packages in direct subdirs of packages/
   - 'packages/*'
   # all packages in subdirs of components/
