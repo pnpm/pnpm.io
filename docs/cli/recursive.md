@@ -60,7 +60,7 @@ may override that if necessary.
 Set the maximum number of tasks to run simultaneously. For unlimited concurrency
 use `Infinity`.
 
-You can set the `workpace-concurrency` as `<= 0` and it will use amount of cores of the host as: `max(1, (number of cores) - abs(workspace-concurrency))`
+You can set the `workspace-concurrency` as `<= 0` and it will use amount of cores of the host as: `max(1, (number of cores) - abs(workspace-concurrency))`
 
 ### --[no-]bail
 
