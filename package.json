@@ -1,7 +1,7 @@
 {
   "scripts": {
     "examples": "docusaurus-examples",
-    "copy-docs": "shx rm -rf versioned_docs/version-9.x && shx cp -r docs versioned_docs/version-9.x",
+    "copy-docs": "shx rm -rf versioned_docs/version-10.x && shx cp -r docs versioned_docs/version-10.x",
     "start": "pnpm copy-docs && docusaurus start",
     "build": "pnpm copy-docs && docusaurus build",
     "publish-gh-pages": "docusaurus-publish --skip-image-compression",
