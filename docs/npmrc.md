@@ -68,7 +68,7 @@ hoist-pattern[]=!@types/react
 
 ### public-hoist-pattern
 
-* Default: **['\*eslint\*', '\*prettier\*']**
+* Default: **[]**
 * Type: **string[]**
 
 Unlike `hoist-pattern`, which hoists dependencies to a hidden modules directory
@@ -181,9 +181,9 @@ root is shared).
 
 ### virtual-store-dir-max-length
 
-Added in: v9.1.0
-
-* Default: **120**
+* Default:
+  * On Linux/MacOS: **120**
+  * On Windows: **60**
 * Types: **number**
 
 Sets the maximum allowed length of directory names inside the virtual store directory (`node_modules/.pnpm`). You may set this to a lower number if you encounter long path issues on Windows.
@@ -275,8 +275,6 @@ installation will fail.
 
 ### strict-store-pkg-content-check
 
-Added in: v9.4.0
-
 * Default: **true**
 * Type: **Boolean**
 
@@ -340,8 +338,6 @@ merge-git-branch-lockfiles-branch-pattern[]=release*
 You may also exclude patterns using `!`.
 
 ### peers-suffix-max-length
-
-Added in: v9.3.0
 
 * Default: **1000**
 * Type: **number**
@@ -772,8 +768,6 @@ Alternatively, you can disable this setting by setting the `COREPACK_ENABLE_STRI
 
 ### package-manager-strict-version
 
-Added in: v9.2.0
-
 * Default: **false**
 * Type: **Boolean**
 
@@ -781,9 +775,7 @@ When enabled, pnpm will fail if its version doesn't exactly match the version sp
 
 ### manage-package-manager-versions
 
-Added in: v9.7.0
-
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When enabled, pnpm will automatically download and run the version of pnpm specified in the `packageManager` field of `package.json`. This is the same field used by Corepack. Example:

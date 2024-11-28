@@ -17,8 +17,6 @@ Specifying custom compression level.
 
 ### --json
 
-Added in: v9.14.1
-
 Log output in JSON format.
 
 ## Life Cycle Scripts

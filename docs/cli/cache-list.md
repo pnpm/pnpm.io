@@ -3,8 +3,6 @@ id: cache-list
 title: pnpm cache list
 ---
 
-Added in: v9.11.0
-
 :::warning
 
 This command is experimental

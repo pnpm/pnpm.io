@@ -8,71 +8,41 @@ Aliases: `ln`
 Makes the current local package accessible system-wide, or in another location.
 
 ```text
-pnpm link <dir>
-pnpm link --global
-pnpm link --global <pkg>
+pnpm link <dir|pkg name>
+pnpm link
 ```
 
 ## Options
 
-### --dir &lt;dir\>, -C
-
-* **Default**: Current working directory
-* **Type**: Path string
-
-Changes the link location to `<dir>`.
-
 ### `pnpm link <dir>`
 
-Links package from `<dir>` folder to node_modules of package from where you're executing this command or specified via `--dir` option.
+Links package from `<dir>` directory to `node_modules` of package from where you're executing this command.
 
 > For example, if you are inside `~/projects/foo` and you execute `pnpm link ../bar`, then a link to `bar` will be created in `foo/node_modules/bar`.
 
-### `pnpm link --global`
+### `pnpm link`
 
-Links package from location where this command was executed or specified via `--dir` option to global `node_modules`, so it can be referred from another package with `pnpm link --global <pkg>`. Also if the package has a `bin` field, then the package's binaries become available system-wide.
+Links package from location where this command was executed to global `node_modules`, so it can be referred from another package with `pnpm link <pkg>`. Also if the package has a `bin` field, then the package's binaries become available system-wide.
 
-### `pnpm link --global <pkg>`
+### `pnpm link <pkg>`
 
-Links the specified package (`<pkg>`) from global `node_modules` to the `node_modules` of package from where this command was executed or specified via `--dir` option.
-
-## Difference between `pnpm link <dir>` and `pnpm link --dir <dir>`
-
-`pnpm link <dir>` links the package from `<dir>` to the `node_modules` of the package where the command was executed. `pnpm link --dir <dir>` links the package from the current working directory to `<dir>`.
-
-```bash
-# The current directory is foo
-pnpm link ../bar
-
-- foo
-  - node_modules
-    - bar -> ../../bar
-- bar
-
-# The current directory is bar
-pnpm link --dir ../foo
-
-- foo
-  - node_modules
-    - bar -> ../../bar
-- bar
-```
+Links the specified package (`<pkg>`) from global `node_modules` to the `node_modules` of package from where this command was executed.
 
 ## Use Cases
 
 ### Replace an installed package with a local version of it
 
-Let's say you have a project that uses `foo` package. You want to make changes to `foo` and test them in your project. In this scenario, you can use `pnpm link` to link the local version of `foo` to your project, while the `package.json` won't be modified.
+Let's say you have a project that uses `foo` package. You want to make changes to `foo` and test them in your project. In this scenario, you can use `pnpm link` to link the local version of `foo` to your project.
 
 ```bash
 cd ~/projects/foo
 pnpm install # install dependencies of foo
-pnpm link --global # link foo globally
+pnpm link # link foo globally
 cd ~/projects/my-project
-pnpm link --global foo # link foo to my-project
+pnpm link foo # link foo to my-project
 ```
 
-You can also link a package from a directory to another directory, without using the global `node_modules` folder:
+You can also link a package from a directory to another directory, without using the global `node_modules` directory:
 
 ```bash
 cd ~/projects/foo
@@ -83,7 +53,7 @@ pnpm link ~/projects/foo # link foo to my-project
 
 ### Add a binary globally
 
-If you are developing a package that has a binary, for example, a CLI tool, you can use `pnpm link --global` to make the binary available system-wide.
+If you are developing a package that has a binary, for example, a CLI tool, you can use `pnpm link` to make the binary available system-wide.
 This is the same as using `pnpm install -g foo`, but it will use the local version of `foo` instead of downloading it from the registry.
 
 Remember that the binary will be available only if the package has a `bin` field in its `package.json`.
@@ -91,7 +61,7 @@ Remember that the binary will be available only if the package has a `bin` field
 ```bash
 cd ~/projects/foo
 pnpm install # install dependencies of foo
-pnpm link --global # link foo globally
+pnpm link # link foo globally
 ```
 
 ## What's the difference between `pnpm link` and using the `file:` protocol?
