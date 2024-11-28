@@ -24,19 +24,19 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION = "10.0.0-alpha.4"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=10.0.0-alpha.4 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=10.0.0-alpha.4 sh -
 ```
 
 :::tip
@@ -89,7 +89,7 @@ This will automatically install pnpm on your system.
 You can pin the version of pnpm used on your project using the following command:
 
 ```
-corepack use pnpm@latest
+corepack use pnpm@latest-10
 ```
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
@@ -105,13 +105,13 @@ We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
 
 ```sh
-npm install -g pnpm
+npm install -g pnpm@latest-10
 ```
 
 or
 
 ```sh
-npm install -g @pnpm/exe
+npm install -g @pnpm/exe@latest-10
 ```
 
 ### Using Homebrew
@@ -164,13 +164,13 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 Here is a list of past pnpm versions with respective Node.js version support.
 
-| Node.js    | pnpm 7 | pnpm 8 | pnpm 9 |
-|------------|--------|--------|--------|
-| Node.js 12 | ❌     | ❌     | ❌     |
-| Node.js 14 | ✔️      | ❌     | ❌     |
-| Node.js 16 | ✔️      | ✔️      | ❌     |
-| Node.js 18 | ✔️      | ✔️      | ✔️      |
-| Node.js 20 | ✔️      | ✔️      | ✔️      |
+| Node.js    | pnpm 8 | pnpm 9 | pnpm 10 |
+|------------|--------|--------|---------|
+| Node.js 14 | ❌     | ❌     | ❌      |
+| Node.js 16 | ✔️      | ❌     | ❌      |
+| Node.js 18 | ✔️      | ✔️      | ✔️       |
+| Node.js 20 | ✔️      | ✔️      | ✔️       |
+| Node.js 22 | ✔️      | ✔️      | ✔️       |
 
 ## Troubleshooting
 
