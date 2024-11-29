@@ -11,8 +11,6 @@ across all major Node.JS package managers, including pnpm.
 
 You can specify the version of Node and pnpm that your software works on:
 
-```json
-
 If you find that your use of a certain package doesn’t require one of its dependencies, you may use `-` to remove it. For example, if package `foo@1.0.0` requires a large package named `bar` for a function that you don’t use, removing it could reduce install time:
 
 ```json
