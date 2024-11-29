@@ -182,7 +182,7 @@ root is shared).
 ### virtual-store-dir-max-length
 
 * Default:
-  * On Linux/MacOS: **120**
+  * On Linux/macOS: **120**
   * On Windows: **60**
 * Types: **number**
 
