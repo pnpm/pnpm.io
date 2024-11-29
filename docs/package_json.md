@@ -5,7 +5,7 @@ title: package.json
 
 The manifest file of a package. It contains all the package's metadata,
 including dependencies, title, author, et cetera. This is a standard preserved
-across all major Node.JS package managers, including pnpm.
+across all major Node.js package managers, including pnpm.
 
 ## engines
 
