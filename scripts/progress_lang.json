@@ -1,50 +1,50 @@
 {
     "de": {
-        "translationProgress": 8,
+        "translationProgress": 9,
         "approvalProgress": 4
     },
     "es-ES": {
-        "translationProgress": 65,
-        "approvalProgress": 41
+        "translationProgress": 67,
+        "approvalProgress": 42
     },
     "fr": {
-        "translationProgress": 49,
-        "approvalProgress": 33
+        "translationProgress": 50,
+        "approvalProgress": 35
     },
     "id": {
-        "translationProgress": 31,
-        "approvalProgress": 22
+        "translationProgress": 32,
+        "approvalProgress": 23
     },
     "it": {
-        "translationProgress": 60,
-        "approvalProgress": 49
+        "translationProgress": 61,
+        "approvalProgress": 51
     },
     "ja": {
-        "translationProgress": 65,
-        "approvalProgress": 50
+        "translationProgress": 66,
+        "approvalProgress": 52
     },
     "ko": {
-        "translationProgress": 50,
-        "approvalProgress": 41
+        "translationProgress": 52,
+        "approvalProgress": 43
     },
     "pl": {
-        "translationProgress": 10,
+        "translationProgress": 8,
         "approvalProgress": 0
     },
     "pt-BR": {
-        "translationProgress": 58,
-        "approvalProgress": 46
+        "translationProgress": 59,
+        "approvalProgress": 48
     },
     "ru": {
-        "translationProgress": 37,
-        "approvalProgress": 30
+        "translationProgress": 38,
+        "approvalProgress": 32
     },
     "tr": {
-        "translationProgress": 27,
-        "approvalProgress": 9
+        "translationProgress": 28,
+        "approvalProgress": 10
     },
     "uk": {
-        "translationProgress": 66,
+        "translationProgress": 68,
         "approvalProgress": 8
     },
     "vi": {
@@ -53,10 +53,10 @@
     },
     "zh-CN": {
         "translationProgress": 94,
-        "approvalProgress": 93
+        "approvalProgress": 94
     },
     "zh-TW": {
         "translationProgress": 43,
-        "approvalProgress": 33
+        "approvalProgress": 34
     }
 }
