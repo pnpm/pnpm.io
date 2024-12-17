@@ -109,6 +109,9 @@ const Showcase = props => {
               <a href={addUTM("https://route4me.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Route4Me" src="/img/users/route4me.svg" />
               </a>
+              <a href={addUTM("https://workleap.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="210" alt="Workleap" src="/img/users/workleap.svg" />
+              </a>
               <a href={addUTM("https://prisma.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
               </a>
@@ -144,6 +147,9 @@ const Showcase = props => {
               </a>
               <a href={addUTM("https://macpaw.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="200" alt="MacPaw" src="/img/users/macpaw.svg" />
+              </a>
+              <a href={addUTM("https://opensource.mercedes-benz.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="100" alt="Mercedes-Benz FOSS" src="/img/users/mercedes.svg" />
               </a>
             </div>
           </div>
