@@ -934,6 +934,13 @@ can use the `deep` setting.
 Else, packages are downloaded and installed from the registry. However,
 workspace packages can still be linked by using the `workspace:` range protocol.
 
+### inject-workspace-packages
+
+* Default: **false**
+* Type: **Boolean**
+
+Enables hard-linking of all local workspace dependencies instead of symlinking them. Alternatively, this can be achieved using [`dependenciesMeta[].injected`](package_json.md#dependenciesmetainjected), which allows to selectively enable hard-linking for specific dependencies.
+
 ### prefer-workspace-packages
 
 * Default: **false**
