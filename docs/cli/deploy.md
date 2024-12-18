@@ -39,7 +39,7 @@ ENTRYPOINT ["node", "index.js"]
 
 ### --dev, -D
 
-Only `devDependencies` are installed regardless of the `NODE_ENV`.
+Only `devDependencies` are installed.
 
 ### --no-optional
 

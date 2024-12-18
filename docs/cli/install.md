@@ -50,13 +50,8 @@ will be requested from the server. To force full offline mode, use `--offline`.
 
 ### --prod, -P
 
-* Default:
-  * If `NODE_ENV` is `production`: `true`
-  * If `NODE_ENV` is **not** `production`: `false`
-* Type: Boolean
-
-If set, pnpm will ignore `NODE_ENV` and instead use this boolean value for
-determining the environment.
+* Default: **false**
+* Type: **Boolean**
 
 If `true`, pnpm will not install any package listed in `devDependencies` and will remove 
 those insofar they were already installed.
@@ -65,7 +60,7 @@ If `false`, pnpm will install all packages listed in `devDependencies` and `depe
 ### --dev, -D
 
 Only `devDependencies` are installed and `dependencies` are removed insofar they 
-were already installed, regardless of the `NODE_ENV`.
+were already installed.
 
 ### --no-optional
 
