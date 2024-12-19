@@ -443,7 +443,7 @@ Define the path to a Certificate Authority file to use when accessing the specif
 registry. For example:
 
 ```sh
-//registry.npmjs.org/:keyfile=client-cert.pem
+//registry.npmjs.org/:cafile=ca-cert.pem
 ```
 
 ### cert
