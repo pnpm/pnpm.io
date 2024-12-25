@@ -78,12 +78,6 @@ If you have installed Node.js with `pnpm env` Corepack won't be installed on you
 corepack enable pnpm
 ```
 
-If you installed Node.js using Homebrew, you'll need to install corepack separately:
-
-```
-brew install corepack
-```
-
 This will automatically install pnpm on your system.
 
 You can pin the version of pnpm used on your project using the following command:
