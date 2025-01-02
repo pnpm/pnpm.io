@@ -196,7 +196,7 @@ pnpm's default semver range operator.
 Using `--save-peer` will add one or more packages to `peerDependencies` and
 install them as dev dependencies.
 
-### --ignore-workspace-root-check
+### --ignore-workspace-root-check, -w
 
 Adding a new dependency to the root workspace package fails, unless the
 `--ignore-workspace-root-check` or `-w` flag is used.
