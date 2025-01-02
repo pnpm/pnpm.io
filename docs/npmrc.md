@@ -1012,6 +1012,15 @@ When executing commands recursively in a workspace, execute them on the root wor
 
 When set to `true`, no workspace cycle warnings will be printed.
 
+### ignore-workspace-root-check
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, you can add dependencies to the workspace root _without_ using the `--ignore-workspace-root-check` or `-w` flag.
+
+For instance, `pnpm add debug` will fail in the workspace root unless this setting is true. (`pnpm add debug -w` will always work.)
+
 ### disallow-workspace-cycles
 
 * Default: **false**
