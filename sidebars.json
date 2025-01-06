@@ -107,6 +107,7 @@
     "Features": [
       "workspaces",
       "catalogs",
+      "config-dependencies",
       "aliases",
       "completion",
       "git_branch_lockfiles"

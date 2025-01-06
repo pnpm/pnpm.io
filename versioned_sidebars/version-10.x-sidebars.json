@@ -326,6 +326,10 @@
         },
         {
           "type": "doc",
+          "id": "config-dependencies"
+        },
+        {
+          "type": "doc",
           "id": "aliases"
         },
         {
