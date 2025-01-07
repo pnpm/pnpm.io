@@ -24,7 +24,7 @@ jobs:
       - name: Install pnpm
         run: |
           corepack enable
-          corepack prepare pnpm@next-9 --activate
+          corepack prepare pnpm@next-10 --activate
       - name: Install dependencies
         run: pnpm install
       - name: update translations

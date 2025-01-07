@@ -58,7 +58,7 @@ module.exports={
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
-          lastVersion: '9.x',
+          lastVersion: '10.x',
         },
         "gtag": {
           trackingID: "UA-91385296-1",
