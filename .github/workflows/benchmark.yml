@@ -23,7 +23,7 @@ jobs:
           node-version: 22
       - run: |
           corepack enable
-          corepack prepare pnpm@next-10 --activate
+          corepack prepare pnpm@next-9 --activate
           corepack prepare yarn@stable --activate
       - run: curl https://bun.sh/install | bash
       - run: /home/runner/.bun/bin/bun -v
