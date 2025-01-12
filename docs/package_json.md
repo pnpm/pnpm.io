@@ -506,6 +506,21 @@ The JSON file itself should contain an array of package names:
 ]
 ```
 
+
+## pnpm.ignoredBuiltDependencies
+
+When a package is in the list, pnpm will not print an info message about that package not being built.
+
+Example:
+
+```json
+{
+  "pnpm": {
+    "ignoredBuiltDependencies": ["fsevents"]
+  }
+}
+```
+
 ## pnpm.allowedDeprecatedVersions
 
 This setting allows muting deprecation warnings of specific packages.
