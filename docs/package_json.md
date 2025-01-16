@@ -1,11 +1,16 @@
 ---
 id: package_json
-title: package.json
+title: Package manifest (package.json, package.json5, package.yaml)
 ---
 
 The manifest file of a package. It contains all the package's metadata,
 including dependencies, title, author, et cetera. This is a standard preserved
 across all major Node.js package managers, including pnpm.
+
+In addition to the traditional `package.json` format, pnpm also supports `package.json5` (via [json5]) and `package.yaml` (via [js-yaml]).
+
+[json5]: https://www.npmjs.com/package/json5
+[js-yaml]: https://www.npmjs.com/package/@zkochan/js-yaml
 
 ## engines
 
