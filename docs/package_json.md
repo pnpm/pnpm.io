@@ -508,7 +508,9 @@ The JSON file itself should contain an array of package names:
 
 ## pnpm.ignoredBuiltDependencies
 
-When a package is in the list, pnpm will not print an info message about that package not being built.
+Added in: v10.1.0
+
+A list of package names that should not be built during installation.
 
 Example:
 
