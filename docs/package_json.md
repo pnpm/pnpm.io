@@ -474,7 +474,7 @@ An example of the `"pnpm"."neverBuiltDependencies"` field:
 
 ## pnpm.onlyBuiltDependencies
 
-A list of package names that are allowed to be executed during installation. If this field exists, only the listed packages will be able to run install scripts.
+A list of package names that are allowed to be executed during installation. Only packages listed in this array will be able to run install scripts. If `onlyBuiltDependenciesFile` and `neverBuiltDependencies` are not set, this configuration option will default to blocking all install scripts.
 
 Example:
 
