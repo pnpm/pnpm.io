@@ -160,7 +160,7 @@ pnpm add bitbucket:pnpmjs/git-resolver
 pnpm add gitlab:pnpm/git-resolver
 ```
 
-If `[provider]:` is omited, it defaults to `github:`.
+If `[provider]:` is omitted, it defaults to `github:`.
 
 #### Install from a Git repository combining different parameters
 
