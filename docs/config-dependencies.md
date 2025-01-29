@@ -19,7 +19,7 @@ Configurational dependencies cannot have dependencies of their own or lifecycle 
 
 ## Usage
 
-### Loading an allow list of buit dependencies
+### Loading an allow list of built dependencies
 
 You may load a list of package names that are allowed to be built via configurational dependencies and the [`pnpm.onlyBuiltDependenciesFile`] setting. For example, you may publish a package with an `allow.json` file in its root directory:
 
