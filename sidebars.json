@@ -58,7 +58,9 @@
           "cli/exec",
           "cli/dlx",
           "cli/create",
-          "cli/start"
+          "cli/start",
+          "cli/approve-builds",
+          "cli/ignored-builds"
         ]
       },
       {

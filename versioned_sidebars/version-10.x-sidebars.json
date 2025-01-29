@@ -176,6 +176,14 @@
             {
               "type": "doc",
               "id": "cli/start"
+            },
+            {
+              "type": "doc",
+              "id": "cli/approve-builds"
+            },
+            {
+              "type": "doc",
+              "id": "cli/ignored-builds"
             }
           ]
         },
