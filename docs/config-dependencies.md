@@ -46,3 +46,21 @@ Let's say this package is called `my-configs`, then your project's `package.json
 This way your project will load the list of packages that are allowed to be built from `my-configs`.
 
 [`pnpm.onlyBuiltDependenciesFile`]: package_json.md#pnpmonlybuiltdependenciesfile
+
+### Installing dependencies used in hooks
+
+Configurational dependencies are installed before the hooks from [`.pnpmfile.cjs`] are loaded, so you can use them as dependencies for your hooks.
+
+For instance, you may have a configurational dependency called "my-hooks" that exports a `readPackage` hook. In this case, you can import it into your `.pnpmfile.cjs` like this:
+
+```js
+const { readPackage } = require('.pnpm-config/my-hooks')
+
+module.exports = {
+  hooks: {
+    readPackage
+  }
+}
+```
+
+[`.pnpmfile.cjs`]: ./pnpmfile.md
