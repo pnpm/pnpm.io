@@ -1178,3 +1178,12 @@ When set to `true`, dependencies that are already symlinked to the root `node_mo
 * Type: **Boolean**
 
 When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
+
+### optimistic-repeat-install
+
+Added in: v10.1.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When enabled, a fast check will be performed before proceeding to installation. This way a repeat install or an install on a project with everything up-to-date becomes a lot faster.
