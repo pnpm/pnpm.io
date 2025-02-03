@@ -64,3 +64,22 @@ module.exports = {
 ```
 
 [`.pnpmfile.cjs`]: ./pnpmfile.md
+
+### Loading patches
+
+You can reference [patch files] installed via configurational dependencies. For instance, if you have a configurational dependency called "my-patches", you can load patches from it:
+
+```json
+{
+  "pnpm": {
+    "configDependencies": {
+      "my-patches": "1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="
+    },
+    "patchedDependencies": {
+      "react": "node_modules/.pnpm-config/react.patch"
+    }
+  }
+}
+```
+
+[patch files]: ./cli/patch.md
