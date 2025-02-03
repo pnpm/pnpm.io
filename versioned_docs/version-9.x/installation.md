@@ -24,19 +24,19 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION = "9.15.5"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.15.5 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=9.15.5 sh -
 ```
 
 :::tip
