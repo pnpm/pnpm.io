@@ -167,7 +167,7 @@ If `[provider]:` is omitted, it defaults to `github:`.
 It is possible to combine multiple parameters by separating them with `&`. This can be useful for forks of monorepos:
 
 ```
-pnpm add RexSkz/test-git-subdir-fetch.git#beta&path:/packages/simple-react-app
+pnpm add RexSkz/test-git-subdir-fetch.git#beta\&path:/packages/simple-react-app
 ```
 
 Installs from the `beta` branch and only the subdirectory at `/packages/simple-react-app`.
