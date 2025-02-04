@@ -41,6 +41,20 @@ Multiple packages can be provided for installation:
 pnpm --package=yo --package=generator-webapp dlx yo webapp --skip-install
 ```
 
+### --allow-build
+
+Added in: v10.2.0
+
+A list of package names that are allowed to run postinstall scripts during installation.
+
+Example:
+
+```
+pnpm --allow-build=esbuild my-bundler bundle
+```
+
+The actual packages executed by `dlx` are allowed to run postinstall scripts by default. So if in the above example `my-bundler` has to be built before execution, it will be built.
+
 ### --shell-mode, -c
 
 Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
