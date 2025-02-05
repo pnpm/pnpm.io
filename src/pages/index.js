@@ -94,9 +94,6 @@ const Showcase = props => {
               <a href={addUTM("https://sanity.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="260" alt="Sanity" src="/img/users/sanity.svg" />
               </a>
-              <a href={addUTM("https://figma.com/")} target="_blank">
-                <img style={{padding: '0 20px'}} width="120" alt="Figma" title="Figma" src="/img/users/figma.svg" />
-              </a>
               <a href={addUTM("https://discord.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="260" alt="Discord" src="/img/users/discord.svg" />
               </a>
