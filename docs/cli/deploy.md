@@ -53,6 +53,12 @@ Packages in `devDependencies` won't be installed.
 
 [Read more about filtering.](../filtering.md)
 
+## --legacy
+
+Force legacy deploy implementation.
+
+Since pnpm v10, by default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior.
+
 ## Files included in the deployed project
 
 By default, all the files of the project are copied during deployment but this can be modified in _one_ of the following ways which are resolved in order:
