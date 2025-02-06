@@ -63,7 +63,7 @@ Packages in `devDependencies` won't be installed.
 
 Force legacy deploy implementation.
 
-Since pnpm v10, by default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior and also allows using the deploy command without the `injected-workspace-dependencies=true` setting.
+By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior and also allows using the deploy command without the `injected-workspace-dependencies=true` setting.
 
 ## Files included in the deployed project
 
