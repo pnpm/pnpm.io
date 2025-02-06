@@ -7,7 +7,7 @@ Deploy a package from a workspace. During deployment, the files of the deployed 
 
 :::note
 
-By default, the deploy command only works with workspaces that have the `injected-workspace-dependencies` setting set to `true`. If you want to use deploy without "injected dependencies", use the `--legacy` flag or set `force-legacy-deploy` to `true`.
+By default, the deploy command only works with workspaces that have the `inject-workspace-packages` setting set to `true`. If you want to use deploy without "injected dependencies", use the `--legacy` flag or set `force-legacy-deploy` to `true`.
 
 :::
 
@@ -63,7 +63,7 @@ Packages in `devDependencies` won't be installed.
 
 Force legacy deploy implementation.
 
-By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior and also allows using the deploy command without the `injected-workspace-dependencies=true` setting.
+By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior and also allows using the deploy command without the `inject-workspace-packages=true` setting.
 
 ## Files included in the deployed project
 
