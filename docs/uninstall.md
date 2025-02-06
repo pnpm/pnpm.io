@@ -17,7 +17,7 @@ To list all the global packages, run `pnpm ls -g`. There are two ways to remove 
 If you used the standalone script to install pnpm, then you should be able to uninstall the pnpm CLI by removing the pnpm home directory:
 
 ```
-rm -rf $PNPM_HOME
+rm -rf "$PNPM_HOME"
 ```
 
 You might also want to clean the `PNPM_HOME` env variable in your shell configuration file (`$HOME/.bashrc`, `$HOME/.zshrc` or `$HOME/.config/fish/config.fish`).
@@ -31,7 +31,7 @@ npm rm -g pnpm
 ## Removing the global content-addressable store
 
 ```
-rm -rf $(pnpm store path)
+rm -rf "$(pnpm store path)"
 ```
 
 If you used pnpm in non-primary disks, then you must run the above command in every disk, where pnpm was used.
