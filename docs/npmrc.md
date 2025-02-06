@@ -1026,7 +1026,7 @@ When set to `true`, installation will fail if the workspace has cycles.
 * Default: **false**
 * Type: **Boolean**
 
-Since pnpm v10, by default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. If this setting is set to `true`, the legacy `deploy` behavior will be used.
+By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. If this setting is set to `true`, the legacy `deploy` behavior will be used.
 
 ## Other Settings
 

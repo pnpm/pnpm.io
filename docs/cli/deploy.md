@@ -5,7 +5,11 @@ title: "pnpm deploy"
 
 Deploy a package from a workspace. During deployment, the files of the deployed package are copied to the target directory. All dependencies of the deployed package, including dependencies from the workspace, are installed inside an isolated `node_modules` directory at the target directory. The target directory will contain a portable package that can be copied to a server and executed without additional steps.
 
-From pnpm v10.0.0 to v10.2.1, `deploy` requires the `injected-workspace-dependencies` setting to be set to `true`. From pnpm v10.2.1 onward, `injected-workspace-dependencies=true` is only required for lockfile deploy.
+:::note
+
+By default, the deploy command only works with workspaces that have the `injected-workspace-dependencies` setting set to `true`. If you want to use deploy without "injected dependencies", use the `--legacy` flag or set `force-legacy-deploy` to `true`.
+
+:::
 
 Usage:
 
@@ -55,11 +59,11 @@ Packages in `devDependencies` won't be installed.
 
 [Read more about filtering.](../filtering.md)
 
-## --legacy
+### --legacy
 
 Force legacy deploy implementation.
 
-Since pnpm v10, by default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior.
+Since pnpm v10, by default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior and also allows using the deploy command without the `injected-workspace-dependencies=true` setting.
 
 ## Files included in the deployed project
 
