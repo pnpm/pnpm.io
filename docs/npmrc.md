@@ -1019,6 +1019,15 @@ When set to `true`, no workspace cycle warnings will be printed.
 
 When set to `true`, installation will fail if the workspace has cycles.
 
+## Deploy Settings
+
+### force-legacy-deploy
+
+* Default: **false**
+* Type: **Boolean**
+
+By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. If this setting is set to `true`, the legacy `deploy` behavior will be used.
+
 ## Other Settings
 
 ### save-prefix
