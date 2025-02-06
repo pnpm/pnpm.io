@@ -66,6 +66,12 @@ curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 
 ## Using Corepack
 
+Due to an issue with [outdated signatures in Corepack](https://github.com/nodejs/corepack/issues/612), Corepack should be updated to its latest version first:
+
+```
+npm install --global corepack
+```
+
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
 
 :::info

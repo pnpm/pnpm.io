@@ -22,6 +22,7 @@ cache:
   directories:
     - "~/.pnpm-store"
 before_install:
+  - npm install --global corepack@latest
   - corepack enable
   - corepack prepare pnpm@latest-10 --activate
   - pnpm config set store-dir ~/.pnpm-store
@@ -49,6 +50,7 @@ blocks:
       jobs:
         - name: pnpm install
           commands:
+            - npm install --global corepack@latest
             - corepack enable
             - corepack prepare pnpm@latest-10 --activate
             - checkout
@@ -67,6 +69,7 @@ to your `appveyor.yml`:
 ```yaml title="appveyor.yml"
 install:
   - ps: Install-Product node $env:nodejs_version
+  - npm install --global corepack@latest
   - corepack enable
   - corepack prepare pnpm@latest-10 --activate
   - pnpm install
@@ -118,6 +121,7 @@ build:
   stage: build
   image: node:18.17.1
   before_script:
+    - npm install --global corepack@latest
     - corepack enable
     - corepack prepare pnpm@latest-10 --activate
     - pnpm config set store-dir .pnpm-store
@@ -147,6 +151,7 @@ pipelines:
           name: Build and test
           image: node:18.17.1
           script:
+            - npm install --global corepack@latest
             - corepack enable
             - corepack prepare pnpm@latest-10 --activate
             - pnpm install
@@ -171,6 +176,7 @@ steps:
     displayName: Cache pnpm
 
   - script: |
+      npm install --global corepack@latest
       corepack enable
       corepack prepare pnpm@latest-10 --activate
       pnpm config set store-dir $(pnpm_config_cache)
@@ -206,6 +212,7 @@ jobs:
       - run:
           name: Install pnpm package manager
           command: |
+            npm install --global corepack@latest
             corepack enable
             corepack prepare pnpm@latest-10 --activate
             pnpm config set store-dir .pnpm-store
@@ -235,6 +242,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
+                sh 'npm install --global corepack@latest'
                 sh 'corepack enable'
                 sh 'corepack prepare pnpm@latest-10 --activate'
                 sh 'pnpm install'
