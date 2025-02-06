@@ -5,6 +5,8 @@ title: "pnpm deploy"
 
 Deploy a package from a workspace. During deployment, the files of the deployed package are copied to the target directory. All dependencies of the deployed package, including dependencies from the workspace, are installed inside an isolated `node_modules` directory at the target directory. The target directory will contain a portable package that can be copied to a server and executed without additional steps.
 
+Since pnpm v10, `deploy` requires the `injected-workspace-dependencies` setting to be set to `true`.
+
 Usage:
 
 ```
