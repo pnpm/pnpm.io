@@ -21,7 +21,7 @@ Bit uses pnpm under the hood but automates a lot of the things that are currentl
 :::
 
 [Bit]: https://bit.dev/?utm_source=pnpm&utm_medium=workspace_page
-[Painless Monorepo Dependency Management with Bit]: https://bit.dev/blog/painless-monorepo-dependency-management-with-bit-lxd5425c?utm_source=pnpm&utm_medium=workspace_page
+[Painless Monorepo Dependency Management with Bit]: https://bit.dev/blog/painless-monorepo-dependency-management-with-bit-l4f9fzyw?utm_source=pnpm&utm_medium=workspace_page
 
 ## Workspace protocol (workspace:)
 
