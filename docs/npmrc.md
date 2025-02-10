@@ -848,7 +848,7 @@ Options to pass through to Node.js via the `NODE_OPTIONS` environment variable. 
 
 ### verify-deps-before-run
 
-* Default: `false`
+* Default: **false**
 * Type: **install**, **warn**, **error**, **prompt**, **false**
 
 This setting allows the checking of the state of dependencies before running scripts. The check runs on `pnpm run` and `pnpm exec` commands. The following values are supported:
@@ -858,6 +858,15 @@ This setting allows the checking of the state of dependencies before running scr
 - `prompt` - Prompts the user for permission to run install if `node_modules` is not up to date.
 - `error` - Throws an error if `node_modules` is not up to date.
 - `false` - Disables dependency checks.
+
+### strict-dep-builds
+
+Added in: v10.3.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `strict-dep-builds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
 
 ## Node.js Settings
 
