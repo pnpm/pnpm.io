@@ -809,6 +809,14 @@ This flag does not prevent the execution of [.pnpmfile.cjs](./pnpmfile.md)
 
 Do not execute any scripts of the installed packages. Scripts of the projects are executed.
 
+:::note
+
+Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in the [`pnpm.onlyBuiltDependencies`] field of `package.json`.
+
+:::
+
+[`pnpm.onlyBuiltDependencies`]: package_json.md#pnpmonlybuiltdependencies
+
 ### child-concurrency
 
 * Default: **5**
