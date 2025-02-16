@@ -66,10 +66,7 @@ were already installed, regardless of the `NODE_ENV`.
 
 ### --no-lockfile
 
-* Default: **false**
-* Type: **Boolean**
-
-If `true`, pnpm doesn't read or generate a `pnpm-lock.yaml` file.
+Don't read or generate a `pnpm-lock.yaml` file.
 
 ### --lockfile-only
 
