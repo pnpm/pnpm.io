@@ -66,6 +66,10 @@ were already installed.
 
 `optionalDependencies` are not installed.
 
+### --no-lockfile
+
+Don't read or generate a `pnpm-lock.yaml` file.
+
 ### --lockfile-only
 
 * Default: **false**
