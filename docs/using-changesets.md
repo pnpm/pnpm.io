@@ -6,7 +6,7 @@ title: Using Changesets with pnpm
 :::note
 
 At the time of writing this documentation, the latest pnpm version was
-v6.14. The latest [Changesets](https://github.com/changesets/changesets) version was v2.16.0.
+v10.4.1. The latest [Changesets](https://github.com/changesets/changesets) version was v2.28.0.
 
 :::
 
@@ -19,7 +19,7 @@ in the root of the workspace:
 pnpm add -Dw @changesets/cli
 ```
 
-Then changesets' init command:
+Then run changesets' init command to generate a changesets config:
 
 ```sh
 pnpm changeset init
@@ -41,18 +41,13 @@ to the repository.
 4. Run `pnpm publish -r`. This command will publish all packages that have
    bumped versions not yet present in the registry.
 
-## Using GitHub Actions
+## Integration with GitHub Actions
 
-To automate the process, you can use `changeset version` with GitHub actions.
+To automate the process, you can use `changeset version` with GitHub actions. The action will detect when changeset files arrive in the `main` branch, and then open a new PR listing all the packages with bumped versions. The PR will automatically update itself every time a new changeset file arrives in `main`. Once merged the packages will be updated, and if the `publish` input has been specified on the action they will  be published using the given command.
 
-### Bump up package versions
+### Add a publish script
 
-The action will detect when changeset files arrive in the `main` branch, and then open a new PR listing all the packages with bumped versions. Once merged, the packages will be updated and you can decide whether to publish or not by adding the `publish` property.
-
-### Publishing
-
-Add a new script `ci:publish` which executes `pnpm publish -r`. 
-It will publish to the registry once the PR is opened by `changeset version`.
+Add a new script called `ci:publish` which executes `pnpm publish -r`. This will publish to the registry once the PR created by `changeset version` has been merged. If the package is public and scoped, adding `--access=public` may be necessary to prevent npm rejecting the publish.
 
 **package.json**
 ```json
@@ -64,46 +59,52 @@ It will publish to the registry once the PR is opened by `changeset version`.
 }
 ```
 
+### Add the workflow
+
+Add a new workflow at `.github/workflows/changesets.yml`. This workflow will create a new branch and PR, so Actions should be given **read and write** permissions in the repo settings (`github.com/<repo-owner>/<repo-name>/settings/actions`). If including the `publish` input on the `changesets/action` step, the repo should also include an auth token for npm as a repository secret named `NPM_TOKEN`.
+
+**.github/workflows/changesets.yml**
 ```yaml
 name: Changesets
+
 on:
   push:
     branches:
       - main
+
 env:
   CI: true
-  PNPM_CACHE_FOLDER: .pnpm-store
+
 jobs:
   version:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
-      - name: checkout code repository
-        uses: actions/checkout@v3
+      - name: Checkout code repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup node.js
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-      - name: setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
-      - name: install pnpm
-        run: npm i pnpm@latest -g
-      - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-      - name: setup pnpm config
-        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
-      - name: install dependencies
+          node-version: 20
+          cache: 'pnpm'
+      
+      - name: Install dependencies
         run: pnpm install
-      - name: create and publish versions
+      
+      - name: Create and publish versions
         uses: changesets/action@v1
         with:
-          version: pnpm ci:version
           commit: "chore: update versions"
           title: "chore: update versions"
           publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
-More info and documentation regarding this action can be found
+More info and documentation regarding the changesets action can be found
 [here](https://github.com/changesets/action).
