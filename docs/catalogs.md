@@ -9,6 +9,11 @@ title: Catalogs
 
 ## The Catalog Protocol (`catalog:`)
 
+:::note
+PNPM catalogs are supported from **version 9.5.0 and above**. Ensure you have at least this version to use the `catalog:` protocol.
+:::
+
+
 Once a catalog is defined in `pnpm-workspace.yaml`,
 
 ```yaml title="pnpm-workspace.yaml"
