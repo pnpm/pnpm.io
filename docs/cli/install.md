@@ -57,6 +57,23 @@ If `true`, pnpm will not install any package listed in `devDependencies` and wil
 those insofar they were already installed.
 If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`.
 
+:::note
+
+Without a lockfile, pnpm has to create one, and it must be consistent regardless of dependencies
+filtering, so running `pnpm install --prod` on a directory without a lockfile would still resolve the
+dev dependencies, and it would error if the resolution is unsuccessful. The only exception for this rule
+are `link:` dependencies.
+
+:::
+
+:::note
+
+Without `--frozen-lockfile`, pnpm will check for outdated information from `file:` dependencies, so
+running `pnpm install --prod` without `--frozen-lockfile` on an environment where the target of `file:`
+has been removed would error.
+
+:::
+
 ### --dev, -D
 
 Only `devDependencies` are installed and `dependencies` are removed insofar they 
