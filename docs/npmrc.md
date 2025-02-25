@@ -958,6 +958,15 @@ workspace packages can still be linked by using the `workspace:` range protocol.
 
 Enables hard-linking of all local workspace dependencies instead of symlinking them. Alternatively, this can be achieved using [`dependenciesMeta[].injected`](package_json.md#dependenciesmetainjected), which allows to selectively enable hard-linking for specific dependencies.
 
+### sync-injected-deps-after-scripts
+
+* Default: **undefined**
+* Type: **string[]**
+
+Injected workspace dependencies are collections of hardlinks, which don't add or remove the files when their sources change. This cause problems in packages that need to be built (such as in TypeScript projects).
+
+This setting lists names of scripts, which, when being executed in a workspace package, their injected counterparts inside `node_modules` would also synchronize.
+
 ### prefer-workspace-packages
 
 * Default: **false**
