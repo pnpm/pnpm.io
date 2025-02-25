@@ -93,8 +93,6 @@ packages:
 ```
 
 ```ini title=".npmrc"
-# These settings only work in pnpm@10.5 or above.
-# For pnpm versions older than 10, they are completely unnecessary.
 sync-injected-deps-after-scripts[]=build
 inject-workspace-packages=true
 ```
