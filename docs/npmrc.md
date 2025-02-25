@@ -965,7 +965,7 @@ Enables hard-linking of all local workspace dependencies instead of symlinking t
 
 Injected workspace dependencies are collections of hardlinks, which don't add or remove the files when their sources change. This cause problems in packages that need to be built (such as in TypeScript projects).
 
-This setting lists names of scripts, which, when being executed in a workspace package, their injected counterparts inside `node_modules` would also synchronize.
+Since pnpm v10.5, this setting is a list of script names, which, when being executed in a workspace package, their injected counterparts inside `node_modules` would also synchronize.
 
 ### prefer-workspace-packages
 
