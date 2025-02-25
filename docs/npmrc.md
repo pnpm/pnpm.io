@@ -961,7 +961,7 @@ Enables hard-linking of all local workspace dependencies instead of symlinking t
 ### sync-injected-deps-after-scripts
 
 * Default: **undefined**
-* Type: **string[]**
+* Type: **String[]**
 
 Injected workspace dependencies are collections of hardlinks, which don't add or remove the files when their sources change. This cause problems in packages that need to be built (such as in TypeScript projects).
 
