@@ -26,6 +26,35 @@ setting to `false`.
 | `pnpm i --frozen-lockfile`        | `pnpm-lock.yaml` is not updated     |
 | `pnpm i --lockfile-only`          | Only `pnpm-lock.yaml` is updated    |
 
+## Options for filtering dependencies
+
+Without a lockfile, pnpm has to create one, and it must be consistent regardless of dependencies
+filtering, so running `pnpm install --prod` on a directory without a lockfile would still resolve the
+dev dependencies, and it would error if the resolution is unsuccessful. The only exception for this rule
+are `link:` dependencies.
+
+Without `--frozen-lockfile`, pnpm will check for outdated information from `file:` dependencies, so
+running `pnpm install --prod` without `--frozen-lockfile` on an environment where the target of `file:`
+has been removed would error.
+
+### --prod, -P
+
+* Default: **false**
+* Type: **Boolean**
+
+If `true`, pnpm will not install any package listed in `devDependencies` and will remove 
+those insofar they were already installed.
+If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`.
+
+### --dev, -D
+
+Only `devDependencies` are installed and `dependencies` are removed insofar they 
+were already installed.
+
+### --no-optional
+
+`optionalDependencies` are not installed.
+
 ## Options
 
 ### --force
@@ -47,41 +76,6 @@ If a package won't be found locally, the installation will fail.
 
 If `true`, staleness checks for cached data will be bypassed, but missing data
 will be requested from the server. To force full offline mode, use `--offline`.
-
-### --prod, -P
-
-* Default: **false**
-* Type: **Boolean**
-
-If `true`, pnpm will not install any package listed in `devDependencies` and will remove 
-those insofar they were already installed.
-If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`.
-
-:::note
-
-Without a lockfile, pnpm has to create one, and it must be consistent regardless of dependencies
-filtering, so running `pnpm install --prod` on a directory without a lockfile would still resolve the
-dev dependencies, and it would error if the resolution is unsuccessful. The only exception for this rule
-are `link:` dependencies.
-
-:::
-
-:::note
-
-Without `--frozen-lockfile`, pnpm will check for outdated information from `file:` dependencies, so
-running `pnpm install --prod` without `--frozen-lockfile` on an environment where the target of `file:`
-has been removed would error.
-
-:::
-
-### --dev, -D
-
-Only `devDependencies` are installed and `dependencies` are removed insofar they 
-were already installed.
-
-### --no-optional
-
-`optionalDependencies` are not installed.
 
 ### --no-lockfile
 
