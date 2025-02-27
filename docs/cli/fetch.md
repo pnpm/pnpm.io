@@ -20,7 +20,7 @@ FROM node:20
 
 WORKDIR /path/to/somewhere
 
-RUN corepack enable pnpm && corepack install -g pnpm@latest-9
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.cjs ./
@@ -55,7 +55,7 @@ FROM node:20
 
 WORKDIR /path/to/somewhere
 
-RUN corepack enable pnpm && corepack install -g pnpm@latest-9
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.cjs ./
@@ -89,7 +89,7 @@ FROM node:20
 
 WORKDIR /path/to/somewhere
 
-RUN corepack enable pnpm && corepack install -g pnpm@latest-9
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 # pnpm fetch does require only lockfile
 COPY pnpm-lock.yaml pnpm-workspace.yaml ./
