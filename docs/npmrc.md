@@ -809,6 +809,14 @@ This flag does not prevent the execution of [.pnpmfile.cjs](./pnpmfile.md)
 
 Do not execute any scripts of the installed packages. Scripts of the projects are executed.
 
+:::note
+
+Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in the [`pnpm.onlyBuiltDependencies`] field of `package.json`.
+
+:::
+
+[`pnpm.onlyBuiltDependencies`]: package_json.md#pnpmonlybuiltdependencies
+
 ### child-concurrency
 
 * Default: **5**
@@ -949,6 +957,17 @@ workspace packages can still be linked by using the `workspace:` range protocol.
 * Type: **Boolean**
 
 Enables hard-linking of all local workspace dependencies instead of symlinking them. Alternatively, this can be achieved using [`dependenciesMeta[].injected`](package_json.md#dependenciesmetainjected), which allows to selectively enable hard-linking for specific dependencies.
+
+### sync-injected-deps-after-scripts
+
+Added in: v10.5.0
+
+* Default: **undefined**
+* Type: **String[]**
+
+Injected workspace dependencies are collections of hardlinks, which don't add or remove the files when their sources change. This causes problems in packages that need to be built (such as in TypeScript projects).
+
+This setting is a list of script names. When any of these scripts are executed in a workspace package, the injected dependencies inside `node_modules` will also be synchronized.
 
 ### prefer-workspace-packages
 

@@ -19,7 +19,7 @@ jobs:
       - name: Install pnpm
         run: |
           npm i -g --force corepack && corepack enable
-          corepack prepare pnpm@next-9 --activate
+          corepack prepare pnpm@next-10 --activate
       - name: Install dependencies
         run: pnpm install
       - name: Build

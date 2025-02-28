@@ -92,6 +92,11 @@ packages:
   - 'packages/*'
 ```
 
+```ini title=".npmrc"
+sync-injected-deps-after-scripts[]=build
+inject-workspace-packages=true
+```
+
 ```text title=".dockerignore"
 node_modules
 .git

@@ -1,4 +1,5 @@
 {
+  "packageManager": "pnpm@10.5.2",
   "scripts": {
     "examples": "docusaurus-examples",
     "copy-docs": "shx rm -rf versioned_docs/version-10.x && shx cp -r docs versioned_docs/version-10.x",
@@ -19,11 +20,11 @@
   },
   "dependencies": {
     "@algolia/client-search": "^4.23.2",
-    "@crowdin/cli": "3.19.1",
-    "@docusaurus/core": "3.6.3",
-    "@docusaurus/plugin-client-redirects": "3.6.3",
-    "@docusaurus/plugin-content-docs": "3.6.3",
-    "@docusaurus/preset-classic": "3.6.3",
+    "@crowdin/cli": "4.6.1",
+    "@docusaurus/core": "3.7.0",
+    "@docusaurus/plugin-client-redirects": "3.7.0",
+    "@docusaurus/plugin-content-docs": "3.7.0",
+    "@docusaurus/preset-classic": "3.7.0",
     "@types/react": "^17.0.49",
     "clsx": "^1.2.1",
     "prism-react-renderer": "^1.3.5",
@@ -36,7 +37,7 @@
     "node": "22"
   },
   "devDependencies": {
-    "@crowdin/crowdin-api-client": "1.33.0",
+    "@crowdin/crowdin-api-client": "1.41.2",
     "@types/node": "^20.12.2",
     "shx": "^0.3.4",
     "ts-node": "10.9.2"

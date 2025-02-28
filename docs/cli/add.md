@@ -211,6 +211,21 @@ Install a package globally.
 
 Only adds the new dependency if it is found in the workspace.
 
+
+### --allow-build
+
+Added in: v10.4.0
+
+A list of package names that are allowed to run postinstall scripts during installation.
+
+Example:
+
+```
+pnpm --allow-build=esbuild add my-bundler
+```
+
+This will run `esbuild`'s postinstall script and also add it to the `pnpm.onlyBuiltDependencies` field of `package.json`. So, `esbuild` will always be allowed to run its scripts in the future.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
