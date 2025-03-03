@@ -20,6 +20,6 @@
         "write-yaml-file": "^4.2.0"
     },
     "engines": {
-        "pnpm": "9"
+        "pnpm": "9 || 10"
     }
 }
