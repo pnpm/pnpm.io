@@ -289,6 +289,13 @@ Some registries allow the exact same content to be published under different pac
 
 When set to `false`, pnpm won't read or generate a `pnpm-lock.yaml` file.
 
+### package-lock
+
+* Default: **true**
+* Type: **Boolean**
+
+The effect is the same as **lockfile**, and the priority is lower than **lockfile**.
+
 ### prefer-frozen-lockfile
 
 * Default: **true**
