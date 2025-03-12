@@ -76,7 +76,7 @@ You can reference [patch files] installed via configurational dependencies. For 
       "my-patches": "1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="
     },
     "patchedDependencies": {
-      "react": "node_modules/.pnpm-config/react.patch"
+      "react": "node_modules/.pnpm-config/my-patches/react.patch"
     }
   }
 }
