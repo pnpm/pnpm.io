@@ -53,7 +53,8 @@ Add a new script called `ci:publish` which executes `pnpm publish -r`. This will
 ```json
 {
    "scripts": {
-      "ci:publish": "pnpm publish -r"
+      "ci:publish": "pnpm changeset version",
+      "ci:publish": "pnpm publish -r --no-git-checks"
    },
    ...
 }
