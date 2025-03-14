@@ -238,7 +238,7 @@ After executing a dlx command, pnpm keeps a cache that omits the installation st
   * On Linux: **~/.local/share/pnpm/store**
 * Type: **path**
 
-The location where all the packages are saved on the disk.
+The location where all the packages are saved on the disk (exception: [`pnpm dlx`](./cli/dlx.md)).
 
 The store should be always on the same disk on which installation is happening,
 so there will be one store per disk. If there is a home directory on the current
