@@ -30,6 +30,11 @@
       "source": "/en/:splat*",
       "destination": "/:splat*",
       "permanent": true
+    },
+    {
+      "source": "/v/:splat*",
+      "destination": "https://github.com/pnpm/pnpm/releases/tag/v:splat*",
+      "permanent": true
     }
   ]
 }
