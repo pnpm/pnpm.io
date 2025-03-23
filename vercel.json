@@ -27,6 +27,11 @@
       "permanent": false
     },
     {
+      "source": "/npmrc",
+      "destination": "/settings",
+      "permanent": true
+    },
+    {
       "source": "/en/:splat*",
       "destination": "/:splat*",
       "permanent": true

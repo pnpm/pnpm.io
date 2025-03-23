@@ -1,21 +1,17 @@
 ---
-id: npmrc
-title: "Settings (.npmrc)"
+id: settings
+title: "Settings (pnpm-workspace.yaml)"
 ---
 
-pnpm gets its configuration from the command line, environment variables, and
+pnpm gets its configuration from the command line, environment variables, `pnpm-workspace.yaml`, and
 `.npmrc` files.
 
-The `pnpm config` command can be used to update and edit the contents of the
-user and global `.npmrc` files.
+The `pnpm config` command can be used to read and edit the contents of the project and global configuration files.
 
-The four relevant files are:
+The relevant configuration files are:
 
-* per-project configuration file (`/path/to/my/project/.npmrc`)
-* per-workspace configuration file (the directory that contains the
-`pnpm-workspace.yaml` file)
-* per-user configuration file (`~/.npmrc`)
-* global configuration file (`/etc/npmrc`)
+* per-project configuration file (`/path/to/my/project/pnpm-workspace.yaml`)
+* global configuration file (`~/.config/pnpm/rc`)
 
 All `.npmrc` files are an [INI-formatted] list of `key = value` parameters.
 
