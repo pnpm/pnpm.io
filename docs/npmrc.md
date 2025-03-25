@@ -951,6 +951,8 @@ can use the `deep` setting.
 Else, packages are downloaded and installed from the registry. However,
 workspace packages can still be linked by using the `workspace:` range protocol.
 
+Packages are only linked if their versions satisfy the dependency ranges.
+
 ### inject-workspace-packages
 
 * Default: **false**
