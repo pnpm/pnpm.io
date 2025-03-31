@@ -582,9 +582,9 @@ patchedDependencies:
   foo@2.1.0: patches/foo-3.patch
 ```
 
-• `patches/foo-3.patch` is applied to `foo@2.1.0`.
-• `patches/foo-2.patch` applies to all foo versions matching `^2.0.0`, except `2.1.0`.
-• `patches/foo-1.patch` applies to all other foo versions.
+* `patches/foo-3.patch` is applied to `foo@2.1.0`.
+* `patches/foo-2.patch` applies to all foo versions matching `^2.0.0`, except `2.1.0`.
+* `patches/foo-1.patch` applies to all other foo versions.
 
 Avoid overlapping version ranges. If you need to specialize a sub-range, explicitly exclude it from the broader range.
 
