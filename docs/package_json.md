@@ -548,7 +548,10 @@ With the above configuration pnpm will not print deprecation warnings about any 
 
 ## pnpm.patchedDependencies
 
-This field is added/updated automatically when you run [pnpm patch-commit]. It is a dictionary where the key should be the package name and exact version. The value should be a relative path to a patch file.
+This field is added/updated automatically when you run [pnpm patch-commit]. It defines patches for dependencies using a dictionary where:
+
+* **Keys**: Package names with an exact version, a version range, or just the name.
+* **Values**: Relative paths to patch files.
 
 Example:
 
@@ -562,7 +565,47 @@ Example:
 }
 ```
 
-## pnpm.allowNonAppliedPatches
+Dependencies can be patched by version range. The priority order is:
+
+1. Exact versions (highest priority)
+2. Version ranges
+3. Name-only patches (applies to all versions unless overridden)
+
+A special case: the version range `*` behaves like a name-only patch but does not ignore patch failures.
+
+Exampe:
+
+```yaml
+patchedDependencies:
+  foo: patches/foo-1.patch
+  foo@^2.0.0: patches/foo-2.patch
+  foo@2.1.0: patches/foo-3.patch
+```
+
+* `patches/foo-3.patch` is applied to `foo@2.1.0`.
+* `patches/foo-2.patch` applies to all foo versions matching `^2.0.0`, except `2.1.0`.
+* `patches/foo-1.patch` applies to all other foo versions.
+
+Avoid overlapping version ranges. If you need to specialize a sub-range, explicitly exclude it from the broader range.
+
+Example:
+
+```yaml
+patchedDependencies:
+  # Specialized sub-range
+  "foo@2.2.0-2.8.0": patches/foo.2.2.0-2.8.0.patch
+  # General patch, excluding the sub-range above
+  "foo@>=2.0.0 <2.2.0 || >2.8.0": patches/foo.gte2.patch
+```
+
+In most cases, defining an exact version is enough to override a broader range.
+
+## pnpm.allowUnusedPatches
+
+Added in: v10.7.0 (Previously named `allowNonAppliedPatches`)
+
+* Default: **false**
+* Type: **Boolean**
 
 When `true`, installation won't fail if some of the patches from the `patchedDependencies` field were not applied.
 
@@ -572,9 +615,26 @@ When `true`, installation won't fail if some of the patches from the `patchedDep
     "patchedDependencies": {
       "express@4.18.1": "patches/express@4.18.1.patch"
     },
-    "allowNonAppliedPatches": true
+    "allowUnusedPatches": true
 }
 ```
+
+## pnpm.ignorePatchFailures
+
+Added in: v10.7.0
+
+* Default: **undefined**
+* Type: **Boolean**, **undefined**
+
+Controls how patch failures are handled.
+
+Behaviour:
+
+* **undefined (default)**:
+  * Errors out when a patch with an exact version or version range fails.
+  * Ignores failures from name-only patches.
+* **false**: Errors out for any patch failure.
+* **true**: Prints a warning instead of failing when any patch cannot be applied.
 
 ## pnpm.updateConfig
 
