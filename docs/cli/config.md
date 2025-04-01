@@ -7,9 +7,9 @@ Aliases: `c`
 
 Manage the configuration files.
 
-The configuration files are in `INI` format.
+The configuration files are in `init` (the global) and `YAML` (the local) formats.
 
-The local configuration file is located in the root of the project and is named `.npmrc`.
+The local configuration file is located in the root of the project and is named `pnpm-workspace.yaml`.
 
 The global configuration file is located at one of the following locations:
 

@@ -210,8 +210,8 @@ module.exports={
               to: 'workspaces',
             },
             {
-              label: '.npmrc',
-              to: 'npmrc',
+              label: 'Settings (pnpm-workspace.yaml)',
+              to: 'settings',
             },
           ]
         },

@@ -90,11 +90,9 @@ You want to save only necessary dependencies for each package, `pnpm deploy` sho
 ```yaml title="pnpm-workspace.yaml"
 packages:
   - 'packages/*'
-```
-
-```ini title=".npmrc"
-sync-injected-deps-after-scripts[]=build
-inject-workspace-packages=true
+syncInjectedDepsAfterScripts:
+- build
+injectWorkspacePackages: true
 ```
 
 ```text title=".dockerignore"
