@@ -102,7 +102,7 @@
     ],
     "Configuration": [
       "package_json",
-      "npmrc",
+      "settings",
       "pnpm-workspace_yaml",
       "pnpmfile"
     ],

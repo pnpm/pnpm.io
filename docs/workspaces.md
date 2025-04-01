@@ -8,10 +8,9 @@ multi-project repositories, or monolithic repositories). You can create a
 workspace to unite multiple projects inside a single repository.
 
 A workspace must have a [`pnpm-workspace.yaml`] file in its
-root. A workspace also may have an [`.npmrc`] in its root.
+root.
 
 [`pnpm-workspace.yaml`]: pnpm-workspace_yaml.md
-[`.npmrc`]: npmrc.md
 
 :::tip
 
@@ -41,7 +40,7 @@ This protocol is especially useful when the [link-workspace-packages] option is
 set to `false`. In that case, pnpm will only link packages from the workspace if
 the `workspace:` protocol is used.
 
-[link-workspace-packages]: npmrc.md#link-workspace-packages
+[link-workspace-packages]: settings.md#link-workspace-packages
 
 ### Referencing workspace packages through aliases
 

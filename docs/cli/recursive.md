@@ -106,4 +106,4 @@ pnpm -r --reverse run clean
 
 [Read more about filtering.](../filtering.md)
 
-[include-workspace-root]: ../npmrc.md#include-workspace-root
+[include-workspace-root]: ../settings.md#include-workspace-root
