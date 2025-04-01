@@ -129,65 +129,6 @@ If you use `packageExtensions`, consider sending a PR upstream and contributing 
 
 [`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
 
-### peerDependencyRules
-
-#### peerDependencyRules.ignoreMissing
-
-pnpm will not print warnings about missing peer dependencies from this list.
-
-For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
-
-```yaml
-peerDependencyRules:
-  ignoreMissing:
-  - react
-```
-
-Package name patterns may also be used:
-
-```yaml
-peerDependencyRules:
-  ignoreMissing:
-  - "@babel/*"
-  - "@eslint/*"
-```
-
-#### peerDependencyRules.allowedVersions
-
-Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
-
-For instance, if you have some dependencies that need `react@16` but you know that they work fine with `react@17`, then you may use the following configuration:
-
-```yaml
-peerDependencyRules:
-  allowedVersions:
-    react: "17"
-```
-
-This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
-
-It is also possible to suppress the warnings only for peer dependencies of specific packages. For instance, with the following configuration `react` v17 will be only allowed when it is in the peer dependencies of the `button` v2 package or in the dependencies of any `card` package:
-
-```yaml
-peerDependencyRules:
-  allowedVersions:
-    "button@2>react": "17",
-    "card>react": "17"
-```
-
-#### peerDependencyRules.allowAny
-
-`allowAny` is an array of package name patterns, any peer dependency matching the pattern will be resolved from any version, regardless of the range specified in `peerDependencies`. For instance:
-
-```yaml
-peerDependencyRules:
-  allowAny:
-  - "@babel/*"
-  - "eslint"
-```
-
-The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
-
 ### allowedDeprecatedVersions
 
 This setting allows muting deprecation warnings of specific packages.
@@ -552,7 +493,7 @@ based on the current branch name to completely avoid merge conflicts. For exampl
 if the current branch name is `feature-foo`, the corresponding lockfile name will
 be `pnpm-lock.feature-foo.yaml` instead of `pnpm-lock.yaml`. It is typically used 
 in conjunction with the command line argument `--merge-git-branch-lockfiles` or by
-setting `mergeGitBranchLockfilesBranchPattern` in the `.npmrc` file.
+setting `mergeGitBranchLockfilesBranchPattern` in the `pnpm-workspace.yaml` file.
 
 ### mergeGitBranchLockfilesBranchPattern
 
@@ -603,7 +544,7 @@ instead of the default registry.
 Define the authentication bearer token to use when accessing the specified
 registry. For example:
 
-```init
+```ini
 //registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 ```
 
@@ -738,7 +679,7 @@ registry. For example:
 
 When fetching dependencies that are Git repositories, if the host is listed in this setting, pnpm will use shallow cloning to fetch only the needed commit, not all the history.
 
-### httpsProxy
+### https-proxy
 
 * Default: **null**
 * Type: **url**
@@ -750,13 +691,13 @@ used instead.
 If your proxy URL contains a username and password, make sure to URL-encode them.
 For instance:
 
-```
-httpsProxy=https://use%21r:pas%2As@my.proxy:1234/foo
+```ini
+https-proxy=https://use%21r:pas%2As@my.proxy:1234/foo
 ```
 
 Do not encode the colon (`:`) between the username and password.
 
-### httpProxy
+### http-proxy
 ### proxy
 
 * Default: **null**
@@ -766,7 +707,7 @@ A proxy to use for outgoing http requests. If the HTTP_PROXY or http_proxy
 environment variables are set, proxy settings will be honored by the underlying
 request library.
 
-### localAddress
+### local-address
 
 * Default: **undefined**
 * Type: **IP Address**
@@ -788,7 +729,7 @@ The maximum number of connections to use per origin (protocol/host/port combinat
 
 A comma-separated string of domain extensions that a proxy should not be used for.
 
-### strictSsl
+### strict-ssl
 
 * Default: **true**
 * Type: **Boolean**
@@ -932,6 +873,65 @@ dependency in the tree.
 When enabled, dependencies of the root workspace project are used to resolve peer dependencies of any projects in the workspace.
 It is a useful feature as you can install your peer dependencies only in the root of the workspace, and you can be sure that all projects in the workspace use the same versions of the peer dependencies.
 
+### peerDependencyRules
+
+#### peerDependencyRules.ignoreMissing
+
+pnpm will not print warnings about missing peer dependencies from this list.
+
+For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
+
+```yaml
+peerDependencyRules:
+  ignoreMissing:
+  - react
+```
+
+Package name patterns may also be used:
+
+```yaml
+peerDependencyRules:
+  ignoreMissing:
+  - "@babel/*"
+  - "@eslint/*"
+```
+
+#### peerDependencyRules.allowedVersions
+
+Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
+
+For instance, if you have some dependencies that need `react@16` but you know that they work fine with `react@17`, then you may use the following configuration:
+
+```yaml
+peerDependencyRules:
+  allowedVersions:
+    react: "17"
+```
+
+This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
+
+It is also possible to suppress the warnings only for peer dependencies of specific packages. For instance, with the following configuration `react` v17 will be only allowed when it is in the peer dependencies of the `button` v2 package or in the dependencies of any `card` package:
+
+```yaml
+peerDependencyRules:
+  allowedVersions:
+    "button@2>react": "17",
+    "card>react": "17"
+```
+
+#### peerDependencyRules.allowAny
+
+`allowAny` is an array of package name patterns, any peer dependency matching the pattern will be resolved from any version, regardless of the range specified in `peerDependencies`. For instance:
+
+```yaml
+peerDependencyRules:
+  allowAny:
+  - "@babel/*"
+  - "eslint"
+```
+
+The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
+
 ## CLI Settings
 
 ### [no-]color
@@ -942,10 +942,10 @@ It is a useful feature as you can install your peer dependencies only in the roo
 Controls colors in the output.
 
 * **auto** - output uses colors when the standard output is a terminal or TTY.
-* **always** - ignore the difference between terminals and pipes. You'll rarely
+* **always** - ignore the difference between terminals and pipes. You’ll rarely
   want this; in most scenarios, if you want color codes in your redirected
   output, you can instead pass a `--color` flag to the pnpm command to force it
-  to use color codes. The default setting is almost always what you'll want.
+  to use color codes. The default setting is almost always what you’ll want.
 * **never** - turns off colors. This is the setting used by `--no-color`.
 
 ### loglevel
@@ -999,7 +999,7 @@ The location of the npm binary that pnpm uses for some actions, like publishing.
 * Default: **true**
 * Type: **Boolean**
 
-If this setting is disabled, pnpm will not fail if a different package manager is specified in the `packageManager` field of `package.json`.
+If this setting is disabled, pnpm will not fail if a different package manager is specified in the `packageManager` field of `package.json`. When enabled, only the package name is checked (since pnpm v9.2.0), so you can still run any version of pnpm regardless of the version specified in the `packageManager` field.
 
 Alternatively, you can disable this setting by setting the `COREPACK_ENABLE_STRICT` environment variable to `0`.
 
@@ -1015,7 +1015,13 @@ When enabled, pnpm will fail if its version doesn't exactly match the version sp
 * Default: **true**
 * Type: **Boolean**
 
-When enabled, pnpm will automatically download and run the version of pnpm specified in the `packageManager` field of `package.json`.
+When enabled, pnpm will automatically download and run the version of pnpm specified in the `packageManager` field of `package.json`. This is the same field used by Corepack. Example:
+
+```json
+{
+  "packageManager": "pnpm@9.3.0"
+}
+```
 
 ## Build Settings
 
@@ -1187,7 +1193,7 @@ Use this `pnpm-workspace.yaml` file:
 useNodeVersion: 16.16.0
 ```
 
-This setting works only in a `.npmrc` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`pnpm.executionEnv.nodeVersion`] field of `package.json` instead.
+This setting works only in a `pnpm-workspace.yaml` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`pnpm.executionEnv.nodeVersion`] field of `package.json` instead.
 
 [`pnpm.executionEnv.nodeVersion`]: ./package_json.md#pnpmexecutionenvnodeversion
 
@@ -1198,7 +1204,7 @@ This setting works only in a `.npmrc` file that is in the root of your workspace
 
 The Node.js version to use when checking a package's `engines` setting.
 
-If you want to prevent contributors of your project from adding new incompatible dependencies, use `nodeVersion` and `engineStrict` in a `.npmrc` file at the root of the project:
+If you want to prevent contributors of your project from adding new incompatible dependencies, use `nodeVersion` and `engineStrict` in a `pnpm-workspace.yaml` file at the root of the project:
 
 ```ini
 nodeVersion: 12.22.0
@@ -1207,7 +1213,7 @@ engineStrict: true
 
 This way, even if someone is using Node.js v16, they will not be able to install a new dependency that doesn't support Node.js v12.22.0.
 
-### nodeMirror
+### node-mirror
 
 * Default: **`https://nodejs.org/download/<releaseDir>/`**
 * Type: **URL**
@@ -1217,9 +1223,9 @@ Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this se
 Here is how pnpm may be configured to download Node.js from Node.js mirror in China:
 
 ```
-nodeMirror:release=https://npmmirror.com/mirrors/node/
-nodeMirror:rc=https://npmmirror.com/mirrors/node-rc/
-nodeMirror:nightly=https://npmmirror.com/mirrors/node-nightly/
+node-mirror:release=https://npmmirror.com/mirrors/node/
+node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
+node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 ```
 
 [https://nodejs.org/download]: https://nodejs.org/download
