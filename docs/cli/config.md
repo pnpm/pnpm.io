@@ -7,7 +7,7 @@ Aliases: `c`
 
 Manage the configuration files.
 
-The configuration files are in `init` (the global) and `YAML` (the local) formats.
+The configuration files are in `INI` (the global) and `YAML` (the local) formats.
 
 The local configuration file is located in the root of the project and is named `pnpm-workspace.yaml`.
 
