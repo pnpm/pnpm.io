@@ -10,12 +10,16 @@ The `pnpm config` command can be used to read and edit the contents of the proje
 
 The relevant configuration files are:
 
-* per-project configuration file (`/path/to/my/project/pnpm-workspace.yaml`)
-* global configuration file (`~/.config/pnpm/rc`)
+* Per-project configuration file: `/path/to/my/project/pnpm-workspace.yaml`
+* Global configuration file: `~/.config/pnpm/rc` (an [INI-formatted] list of `key = value` parameters)
 
-All `.npmrc` files are an [INI-formatted] list of `key = value` parameters.
+:::note
 
-Values in the `.npmrc` files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string.
+Authorization-related settings are handled by npm's configuration system. So, `pnpm config set registry=<value>` will actually save the setting to npm's global configuration file.
+
+:::
+
+Values in the configuration files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string.
 
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
