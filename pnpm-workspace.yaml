@@ -1,0 +1,4 @@
+publicHoistPattern:
+  - '@mdx-js/react'
+  - url-loader
+
