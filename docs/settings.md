@@ -23,6 +23,238 @@ Values in the configuration files may contain env variables using the `${NAME}` 
 
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
+## Dependency Resolution
+
+### overrides
+
+This field allows you to instruct pnpm to override any dependency in the
+dependency graph. This is useful for enforcing all your packages to use a single
+version of a dependency, backporting a fix, replacing a dependency with a fork, or
+removing an unused dependency.
+
+Note that the overrides field can only be set at the root of the project.
+
+An example of the `overrides` field:
+
+```yaml
+overrides:
+  "foo": "^1.0.0"
+  "quux": "npm:@myorg/quux@^1.0.0"
+  "bar@^2.1.0": "3.0.0"
+  "qar@1>zoo": "2"
+```
+
+You may specify the package the overridden dependency belongs to by
+separating the package selector from the dependency selector with a ">", for
+example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
+any other dependencies.
+
+An override may be defined as a reference to a direct dependency's spec.
+This is achieved by prefixing the name of the dependency with a `$`:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "foo": "^1.0.0"
+  }
+}
+```
+
+```yaml title="pnpm-workspace.yaml"
+overrides:
+  foo: "$foo"
+```
+
+The referenced package does not need to match the overridden one:
+
+```yaml title="pnpm-workspace.yaml"
+overrides:
+  bar: "$foo"
+```
+
+If you find that your use of a certain package doesn’t require one of its dependencies, you may use `-` to remove it. For example, if package `foo@1.0.0` requires a large package named `bar` for a function that you don’t use, removing it could reduce install time:
+
+```yaml
+overrides:
+  "foo@1.0.0>bar": "-"
+```
+
+This feature is especially useful with `optionalDependencies`, where most optional packages can be safely skipped.
+
+### packageExtensions
+
+The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
+
+```yaml
+packageExtensions:
+  react-redux:
+    peerDependencies:
+      react-dom: "*"
+```
+
+The keys in `packageExtensions` are package names or package names and semver ranges, so it is possible to patch only some versions of a package:
+
+```yaml
+packageExtensions:
+  react-redux@1:
+    peerDependencies:
+      react-dom: "*"
+```
+
+The following fields may be extended using `packageExtensions`: `dependencies`, `optionalDependencies`, `peerDependencies`, and `peerDependenciesMeta`.
+
+A bigger example:
+
+```yaml
+packageExtensions:
+  express@1:
+    optionalDependencies:
+      typescript: "2"
+  fork-ts-checker-webpack-plugin:
+    dependencies:
+      "@babel/core": "1"
+    peerDependencies:
+      eslint: ">= 6"
+    peerDependenciesMeta:
+      eslint: {
+        optional: true
+```
+
+:::tip
+
+Together with Yarn, we maintain a database of `packageExtensions` to patch broken packages in the ecosystem.
+If you use `packageExtensions`, consider sending a PR upstream and contributing your extension to the [`@yarnpkg/extensions`] database.
+
+:::
+
+[`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
+
+### peerDependencyRules
+
+#### peerDependencyRules.ignoreMissing
+
+pnpm will not print warnings about missing peer dependencies from this list.
+
+For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
+
+```yaml
+peerDependencyRules:
+  ignoreMissing:
+  - react
+```
+
+Package name patterns may also be used:
+
+```yaml
+peerDependencyRules:
+  ignoreMissing:
+  - "@babel/*"
+  - "@eslint/*"
+```
+
+#### peerDependencyRules.allowedVersions
+
+Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
+
+For instance, if you have some dependencies that need `react@16` but you know that they work fine with `react@17`, then you may use the following configuration:
+
+```yaml
+peerDependencyRules:
+  allowedVersions:
+    react: "17"
+```
+
+This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
+
+It is also possible to suppress the warnings only for peer dependencies of specific packages. For instance, with the following configuration `react` v17 will be only allowed when it is in the peer dependencies of the `button` v2 package or in the dependencies of any `card` package:
+
+```yaml
+peerDependencyRules:
+  allowedVersions:
+    "button@2>react": "17",
+    "card>react": "17"
+```
+
+#### peerDependencyRules.allowAny
+
+`allowAny` is an array of package name patterns, any peer dependency matching the pattern will be resolved from any version, regardless of the range specified in `peerDependencies`. For instance:
+
+```yaml
+peerDependencyRules:
+  allowAny:
+  - "@babel/*"
+  - "eslint"
+```
+
+The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
+
+### allowedDeprecatedVersions
+
+This setting allows muting deprecation warnings of specific packages.
+
+Example:
+
+```yaml
+allowedDeprecatedVersions:
+  express: "1"
+  request: "*"
+```
+
+With the above configuration pnpm will not print deprecation warnings about any version of `request` and about v1 of `express`.
+
+### updateConfig
+
+#### updateConfig.ignoreDependencies
+
+Sometimes you can't update a dependency. For instance, the latest version of the dependency started to use ESM but your project is not yet in ESM. Annoyingly, such a package will be always printed out by the `pnpm outdated` command and updated, when running `pnpm update --latest`. However, you may list packages that you don't want to upgrade in the `ignoreDependencies` field:
+
+```yaml
+updateConfig: {
+  ignoreDependencies:
+  - load-json-file
+```
+
+Patterns are also supported, so you may ignore any packages from a scope: `@babel/*`.
+
+### supportedArchitectures
+
+You can specify architectures for which you'd like to install optional dependencies, even if they don't match the architecture of the system running the install.
+
+For example, the following configuration tells to install optional dependencies for Windows x64:
+
+```yaml
+supportedArchitectures:
+  os:
+  - win32
+  cpu:
+  - x64
+```
+
+Whereas this configuration will install optional dependencies for Windows, macOS, and the architecture of the system currently running the install. It includes artifacts for both x64 and arm64 CPUs:
+
+```yaml
+supportedArchitectures:
+  os:
+  - win32
+  - darwin
+  - current
+  cpu:
+  - x64
+  - arm64
+```
+
+Additionally, `supportedArchitectures` also supports specifying the `libc` of the system.
+
+### ignoredOptionalDependencies
+
+If an optional dependency has its name included in this array, it will be skipped. For example:
+
+```yaml
+ignoredOptionalDependencies:
+- fsevents
+- "@esbuild/*"
+```
+
 ## Dependency Hoisting Settings
 
 ### hoist
@@ -876,6 +1108,63 @@ Added in: v10.3.0
 
 When `strict-dep-builds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
 
+### neverBuiltDependencies
+
+This field allows to ignore the builds of specific dependencies.
+The "preinstall", "install", and "postinstall" scripts of the listed packages will not be executed during installation.
+
+An example of the `neverBuiltDependencies` field:
+
+```yaml
+neverBuiltDependencies:
+- fsevents
+- level
+```
+
+### onlyBuiltDependencies
+
+A list of package names that are allowed to be executed during installation. Only packages listed in this array will be able to run install scripts. If `onlyBuiltDependenciesFile` and `neverBuiltDependencies` are not set, this configuration option will default to blocking all install scripts.
+
+Example:
+
+```yaml
+onlyBuiltDependencies:
+- fsevents
+```
+
+### onlyBuiltDependenciesFile
+
+This configuration option allows users to specify a JSON file that lists the only packages permitted to run installation scripts during the pnpm install process. By using this, you can enhance security or ensure that only specific dependencies execute scripts during installation.
+
+Example:
+
+```yaml
+configDependencies:
+  "@my-org/policy": 1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==
+onlyBuiltDependenciesFile: node_modules/.pnpm-config/@my-org/policy/onlyBuiltDependencies.json
+```
+
+The JSON file itself should contain an array of package names:
+
+```json title="node_modules/@my-org/policy/onlyBuiltDependencies.json"
+[
+  "fsevents"
+]
+```
+
+### ignoredBuiltDependencies
+
+Added in: v10.1.0
+
+A list of package names that should not be built during installation.
+
+Example:
+
+```yaml
+ignoredBuiltDependencies:
+- fsevents
+```
+
 ## Node.js Settings
 
 ### use-node-version
@@ -935,6 +1224,19 @@ node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 ```
 
 [https://nodejs.org/download]: https://nodejs.org/download
+
+### executionEnv.nodeVersion
+
+Specifies which exact Node.js version should be used for the project's runtime.
+pnpm will automatically install the specified version of Node.js and use it for
+running `pnpm run` commands or the `pnpm node` command.
+
+For example:
+
+```json
+executionEnv:
+  nodeVersion: 16.16.0
+```
 
 ## Workspace Settings
 
@@ -1057,6 +1359,122 @@ When set to `true`, installation will fail if the workspace has cycles.
 * Type: **Boolean**
 
 By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. If this setting is set to `true`, the legacy `deploy` behavior will be used.
+
+## Patching Dependencies
+
+### patchedDependencies
+
+This field is added/updated automatically when you run [pnpm patch-commit]. It defines patches for dependencies using a dictionary where:
+
+[pnpm patch-commit]: ./cli/patch-commit.md
+
+* **Keys**: Package names with an exact version, a version range, or just the name.
+* **Values**: Relative paths to patch files.
+
+Example:
+
+```yaml
+patchedDependencies:
+  express@4.18.1: patches/express@4.18.1.patch
+```
+
+Dependencies can be patched by version range. The priority order is:
+
+1. Exact versions (highest priority)
+2. Version ranges
+3. Name-only patches (applies to all versions unless overridden)
+
+A special case: the version range `*` behaves like a name-only patch but does not ignore patch failures.
+
+Exampe:
+
+```yaml
+patchedDependencies:
+  foo: patches/foo-1.patch
+  foo@^2.0.0: patches/foo-2.patch
+  foo@2.1.0: patches/foo-3.patch
+```
+
+* `patches/foo-3.patch` is applied to `foo@2.1.0`.
+* `patches/foo-2.patch` applies to all foo versions matching `^2.0.0`, except `2.1.0`.
+* `patches/foo-1.patch` applies to all other foo versions.
+
+Avoid overlapping version ranges. If you need to specialize a sub-range, explicitly exclude it from the broader range.
+
+Example:
+
+```yaml
+patchedDependencies:
+  # Specialized sub-range
+  "foo@2.2.0-2.8.0": patches/foo.2.2.0-2.8.0.patch
+  # General patch, excluding the sub-range above
+  "foo@>=2.0.0 <2.2.0 || >2.8.0": patches/foo.gte2.patch
+```
+
+In most cases, defining an exact version is enough to override a broader range.
+
+## allowUnusedPatches
+
+Added in: v10.7.0 (Previously named `allowNonAppliedPatches`)
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, installation won't fail if some of the patches from the `patchedDependencies` field were not applied.
+
+```json
+patchedDependencies:
+  express@4.18.1: patches/express@4.18.1.patch
+allowUnusedPatches: true
+```
+
+## ignorePatchFailures
+
+Added in: v10.7.0
+
+* Default: **undefined**
+* Type: **Boolean**, **undefined**
+
+Controls how patch failures are handled.
+
+Behaviour:
+
+* **undefined (default)**:
+  * Errors out when a patch with an exact version or version range fails.
+  * Ignores failures from name-only patches.
+* **false**: Errors out for any patch failure.
+* **true**: Prints a warning instead of failing when any patch cannot be applied.
+
+## Audit Settings
+
+### auditConfig
+
+#### auditConfig.ignoreCves
+
+A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
+
+```yaml
+auditConfig:
+  ignoreCves:
+    CVE-2022-36313
+```
+
+[`pnpm audit`]: ./cli/audit.md
+
+#### auditConfig.ignoreGhsas
+
+A list of GHSA Codes that will be ignored by the [`pnpm audit`] command.
+
+```yaml
+auditConfig:
+  ignoreGhsas:
+    GHSA-42xw-2xvc-qx8m
+    GHSA-4w2v-q235-vp99
+    GHSA-cph5-m8f7-6c5x
+    GHSA-vh95-rmgr-6w4m
+```
+
+[`pnpm audit`]: ./cli/audit.md
 
 ## Other Settings
 
@@ -1226,3 +1644,12 @@ Added in: v10.1.0
 * Type: **Boolean**
 
 When enabled, a fast check will be performed before proceeding to installation. This way a repeat install or an install on a project with everything up-to-date becomes a lot faster.
+
+### requiredScripts
+
+Scripts listed in this array will be required in each project of the workspace. Otherwise, `pnpm -r run <script name>` will fail.
+
+```yaml
+requiredScripts:
+- build
+```
