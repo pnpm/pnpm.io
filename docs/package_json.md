@@ -28,11 +28,11 @@ You can specify the version of Node and pnpm that your software works on:
 During local development, pnpm will always fail with an error message
 if its version does not match the one specified in the `engines` field.
 
-Unless the user has set the `engine-strict` config flag (see [.npmrc]), this
+Unless the user has set the `engine-strict` config flag (see [settings]), this
 field is advisory only and will only produce warnings when your package is
 installed as a dependency.
 
-[.npmrc]: ./npmrc.md#engine-strict
+[settings]: ./settings.md#engine-strict
 
 ## dependenciesMeta
 

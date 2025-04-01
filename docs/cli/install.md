@@ -141,7 +141,7 @@ the installation progress.
 
 If you want to change what type of information is printed, use the [loglevel] setting.
 
-[loglevel]: ../npmrc.md#loglevel
+[loglevel]: ../settings.md#loglevel
 
 ### --use-store-server
 
@@ -177,7 +177,7 @@ dependencies.
 
 :::warning
 
-Filter currently does not work properly with v8 default config, you have to implicitly set [dedupe-peer-dependents](../npmrc.md#dedupe-peer-dependents) to `false` to have that work. For more info and progress please refer to [#6300](https://github.com/pnpm/pnpm/issues/6300)
+Filter currently does not work properly with v8 default config, you have to implicitly set [dedupe-peer-dependents](../settings.md#dedupe-peer-dependents) to `false` to have that work. For more info and progress please refer to [#6300](https://github.com/pnpm/pnpm/issues/6300)
 
 :::
 
