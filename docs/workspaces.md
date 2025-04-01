@@ -24,7 +24,7 @@ Bit uses pnpm under the hood but automates a lot of the things that are currentl
 
 ## Workspace protocol (workspace:)
 
-If [link-workspace-packages] is set to `true`, pnpm will link packages from the workspace if the available packages
+If [linkWorkspacePackages] is set to `true`, pnpm will link packages from the workspace if the available packages
 match the declared ranges. For instance, `foo@1.0.0` is linked into `bar` if
 `bar` has `"foo": "^1.0.0"` in its dependencies and `foo@1.0.0` is in the workspace. However, if `bar` has
 `"foo": "2.0.0"` in dependencies and `foo@2.0.0` is not in the workspace,
@@ -36,11 +36,11 @@ this protocol is used, pnpm will refuse to resolve to anything other than a
 local workspace package. So, if you set `"foo": "workspace:2.0.0"`, this time
 installation will fail because `"foo@2.0.0"` isn't present in the workspace.
 
-This protocol is especially useful when the [link-workspace-packages] option is
+This protocol is especially useful when the [linkWorkspacePackages] option is
 set to `false`. In that case, pnpm will only link packages from the workspace if
 the `workspace:` protocol is used.
 
-[link-workspace-packages]: settings.md#link-workspace-packages
+[linkWorkspacePackages]: settings.md#linkWorkspacePackages
 
 ### Referencing workspace packages through aliases
 

@@ -7,10 +7,10 @@ Git branch lockfiles allows you to totally avoid lockfile merge conflicts and so
 
 ## Use git branch lockfiles
 
-You can turn on this feature by configuring the `.npmrc` file.
+You can turn on this feature by configuring the `pnpm-workspace.yaml` file.
 
-```ini
-git-branch-lockfile=true
+```yaml
+gitBranchLockfile: true
 ```
 
 By doing this, lockfile name will be generated based on the current branch name.
@@ -45,10 +45,11 @@ After that, all git branch lockfiles will be merged into one `pnpm-lock.yaml`
 
 pnpm allows you to specify `--merge-git-branch-lockfiles` by matching the current branch name.
 
-For instance, by the following setting in `.npmrc` file, `pnpm install` will merge all git branch lockfiles when 
+For instance, by the following setting in `pnpm-workspace.yaml` file, `pnpm install` will merge all git branch lockfiles when 
 running in the `main` branch and the branch name starts with `release`.
 
-```ini
-merge-git-branch-lockfiles-branch-pattern[]=main
-merge-git-branch-lockfiles-branch-pattern[]=release*
+```yaml
+mergeGitBranchLockfilesBranchPattern:
+- main
+- release*
 ```

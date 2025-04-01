@@ -25,7 +25,7 @@ when used with the following commands:
 * `test`
 * `add`
 
-If you want the root project be included even when running scripts, set the [include-workspace-root] setting to `true`.
+If you want the root project be included even when running scripts, set the [includeWorkspaceRoot] setting to `true`.
 
 Usage example:
 
@@ -46,11 +46,11 @@ similar to `yarn workspaces`.
 
 When this is set to deep, local packages can also be linked to subdependencies.
 
-Be advised that it is encouraged instead to use [npmrc] for this setting, to
+Be advised that it is encouraged instead to use [`pnpm-workspace.yaml`] for this setting, to
 enforce the same behaviour in all environments. This option exists solely so you
 may override that if necessary.
 
-[npmrc]: ../workspaces.md#link-workspace-packages
+[`pnpm-workspace.yaml`]: ../settings.md#linkWorkspacePackages
 
 ### --workspace-concurrency
 
@@ -106,4 +106,4 @@ pnpm -r --reverse run clean
 
 [Read more about filtering.](../filtering.md)
 
-[include-workspace-root]: ../settings.md#include-workspace-root
+[includeWorkspaceRoot]: ../settings.md#includeWorkspaceRoot

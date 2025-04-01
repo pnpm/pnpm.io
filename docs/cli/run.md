@@ -152,9 +152,9 @@ Hide workspace prefix from output from child processes that are run in parallel,
 
 [Read more about filtering.](../filtering.md)
 
-## .npmrc settings
+## pnpm-workspace.yaml settings
 
-### enable-pre-post-scripts
+### enablePrePostScripts
 
 * Default: **true**
 * Type: **Boolean**
@@ -162,7 +162,7 @@ Hide workspace prefix from output from child processes that are run in parallel,
 When `true`, pnpm will run any pre/post scripts automatically. So running `pnpm foo`
 will be like running `pnpm prefoo && pnpm foo && pnpm postfoo`.
 
-### script-shell
+### scriptShell
 
 * Default: **null**
 * Type: **path**
@@ -172,10 +172,10 @@ The shell to use for scripts run with the `pnpm run` command.
 For instance, to force usage of Git Bash on Windows:
 
 ```
-pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+pnpm config set scriptShell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
-### shell-emulator
+### shellEmulator
 
 * Default: **false**
 * Type: **Boolean**
@@ -192,7 +192,7 @@ next script will fail on non-POSIX-compliant systems:
 }
 ```
 
-But if the `shell-emulator` setting is set to `true`, it will work on all
+But if the `shellEmulator` setting is set to `true`, it will work on all
 platforms.
 
 [bash-like shell]: https://www.npmjs.com/package/@yarnpkg/shell

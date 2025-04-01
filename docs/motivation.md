@@ -55,6 +55,6 @@ creates and why it works fine with the Node.js ecosystem, read:
 
 :::tip
 
-If your tooling doesn't work well with symlinks, you may still use pnpm and set the [node-linker](npmrc#node-linker) setting to `hoisted`. This will instruct pnpm to create a node_modules directory that is similar to those created by npm and Yarn Classic.
+If your tooling doesn't work well with symlinks, you may still use pnpm and set the [nodeLinker](settings#nodeLinker) setting to `hoisted`. This will instruct pnpm to create a node_modules directory that is similar to those created by npm and Yarn Classic.
 
 :::

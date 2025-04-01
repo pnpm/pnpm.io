@@ -112,10 +112,10 @@ workarounds to make the buggy packages work.
 
 ### Solution 1
 
-In case there are issues, you can use the [`node-linker=hoisted`] setting.
+In case there are issues, you can use the [`nodeLinker: hoisted`] setting.
 This creates a flat `node_modules` structure similar to the one created by `npm`.
 
-[`node-linker=hoisted`]: npmrc#node-linker
+[`nodeLinker: hoisted`]: settings#nodeLinker
 
 ### Solution 2
 
