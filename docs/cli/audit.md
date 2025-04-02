@@ -10,22 +10,17 @@ If a simple update does not fix all the issues, use [overrides] to force
 versions that are not vulnerable. For instance, if `lodash@<2.1.0` is vulnerable,
 use this overrides to force `lodash@^2.1.0`:
 
-```json title="package.json"
-{
-    "pnpm": {
-        "overrides": {
-            "lodash@<2.1.0": "^2.1.0"
-        }
-    }
-}
+```yaml title="pnpm-workspace.yaml"
+overrides:
+  "lodash@<2.1.0": "^2.1.0"
 ```
 
 Or alternatively, run `pnpm audit --fix`.
 
-If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`pnpm.auditConfig.ignoreCves`] setting.
+If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`auditConfig.ignoreCves`] setting.
 
-[overrides]: ../package_json.md#pnpmoverrides
-[`pnpm.auditConfig.ignoreCves`]: ../package_json.md#pnpmauditconfigignorecves
+[overrides]: ../settings.md#overrides
+[`auditConfig.ignoreCves`]: ../settings.md#auditconfigignorecves
 
 ## Options
 

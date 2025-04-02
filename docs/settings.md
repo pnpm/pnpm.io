@@ -1048,11 +1048,11 @@ Do not execute any scripts of the installed packages. Scripts of the projects ar
 
 :::note
 
-Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in the [`pnpm.onlyBuiltDependencies`] field of `package.json`.
+Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in [`onlyBuiltDependencies`].
 
 :::
 
-[`pnpm.onlyBuiltDependencies`]: package_json.md#pnpmonlybuiltdependencies
+[`onlyBuiltDependencies`]: settings.md#onlybuiltdependencies
 
 ### childConcurrency
 
@@ -1193,9 +1193,9 @@ Use this `pnpm-workspace.yaml` file:
 useNodeVersion: 16.16.0
 ```
 
-This setting works only in a `pnpm-workspace.yaml` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`pnpm.executionEnv.nodeVersion`] field of `package.json` instead.
+This setting works only in a `pnpm-workspace.yaml` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`executionEnv.nodeVersion`] field of `package.json` instead.
 
-[`pnpm.executionEnv.nodeVersion`]: ./package_json.md#pnpmexecutionenvnodeversion
+[`executionEnv.nodeVersion`]: ./settings.md.md#pnpmexecutionenvnodeversion
 
 ### nodeVersion
 

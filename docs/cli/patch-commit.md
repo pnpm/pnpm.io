@@ -5,7 +5,7 @@ title: "pnpm patch-commit <path>"
 
 Generate a patch out of a directory and save it (inspired by a similar command in Yarn).
 
-This command will compare the changes from `path` to the package it was supposed to patch, generate a patch file, save the a patch file to `patchesDir` (which can be customized by the `--patches-dir` option), and add an entry to `patchesDependencies` in the top level manifest file.
+This command will compare the changes from `path` to the package it was supposed to patch, generate a patch file, save the a patch file to `patchesDir` (which can be customized by the `--patches-dir` option), and add an entry to [`patchedDependencies`].
 
 Usage:
 
@@ -20,3 +20,5 @@ pnpm patch-commit <path>
 ### ---patches-dir &lt;patchesDir>
 
 The generated patch file will be saved to this directory. By default, patches are saved to the `patches` directory in the root of the project.
+
+[`patchedDependencies`]: ../settings.md#patcheddependencies

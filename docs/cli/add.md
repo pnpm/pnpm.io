@@ -224,7 +224,7 @@ Example:
 pnpm --allow-build=esbuild add my-bundler
 ```
 
-This will run `esbuild`'s postinstall script and also add it to the `pnpm.onlyBuiltDependencies` field of `package.json`. So, `esbuild` will always be allowed to run its scripts in the future.
+This will run `esbuild`'s postinstall script and also add it to the `onlyBuiltDependencies` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
 
 ### --filter &lt;package_selector\>
 

@@ -35,7 +35,10 @@ To fix this error, all dependencies that use the [workspace protocol] should be 
 
 `pnpm install` will fail if the project has unresolved peer dependencies or the peer dependencies are not matching the wanted ranges. To fix this, install the missing peer dependencies.
 
-You may also selectively ignore these errors using the [pnpm.peerDependencyRules.ignoreMissing](package_json#pnpmpeerdependencyrulesignoremissing) and [pnpm.peerDependencyRules.allowedVersions](package_json#pnpmpeerdependencyrulesallowedversions) fields in `package.json`.
+You may also selectively ignore these errors using the [peerDependencyRules.ignoreMissing] and [peerDependencyRules.allowedVersions] settings.
+
+[peerDependencyRules.ignoreMissing]: settings#peerdependencyrulesignoremissing
+[peerDependencyRules.allowedVersions]: settings#peerdependencyrulesallowedversions
 
 ## ERR_PNPM_OUTDATED_LOCKFILE
 
