@@ -2,7 +2,7 @@
 
 /**
  * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
+ * and scoped locally
  */
 
 .heroBanner {
@@ -26,6 +26,7 @@
 }
 
 .features {
+  margin-top: 57px;
   display: flex;
   align-items: center;
   padding: 2rem 0;
@@ -33,11 +34,12 @@
 }
 
 .featureImage {
-  height: 200px;
-  width: 200px;
+  height: 100px;
+  width: 100px;
 }
 
 .youtubeVideo {
+margin-top: 20px;
   width: 560px;
   height: 315px;
 }
