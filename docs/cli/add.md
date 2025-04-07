@@ -196,6 +196,12 @@ pnpm's default semver range operator.
 Using `--save-peer` will add one or more packages to `peerDependencies` and
 install them as dev dependencies.
 
+### --config
+
+Added in: v10.8.0
+
+Save the dependency to [configDependencies](config-dependencies.md).
+
 ### --ignore-workspace-root-check
 
 Adding a new dependency to the root workspace package fails, unless the

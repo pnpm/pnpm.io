@@ -81,6 +81,31 @@ reads the `package.json` of the package from the package's archive, which is not
 affected by the hook. In order to ignore a package's build, use the
 [neverBuiltDependencies](settings.md#neverbuiltdependencies) field.
 
+### `hooks.updateConfig(config): config | Promise<config>`
+
+Added in: v10.8.0
+
+Allows you to modify the configuration settings used by pnpm. This hook is most useful when paired with [configDependencies](config-dependencies), allowing you to share and reuse settings across different Git repositories.
+
+For example, [@pnpm/better-defaults](https://github.com/pnpm/better-defaults) uses the `updateConfig` hook to apply a curated set of recommended settings.
+
+#### Usage example
+
+```js title=".pnpmfile.cjs"
+module.exports = {
+  hooks: {
+    updateConfig (config) {
+      return Object.assign(config, {
+        enablePrePostScripts: false,
+        optimisticRepeatInstall: true,
+        resolutionMode: 'lowest-direct',
+        verifyDepsBeforeRun: 'install',
+      })
+    }
+  }
+}
+```
+
 ### `hooks.afterAllResolved(lockfile, context): lockfile | Promise<lockfile>`
 
 Allows you to mutate the lockfile output before it is serialized.
