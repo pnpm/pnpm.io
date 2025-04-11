@@ -44,7 +44,7 @@ Set the configuration in the global config file.
 
 ### --location
 
-When set to `project`, the `.npmrc` file at the nearest `package.json` will be used.
+When set to `project`, the `.npmrc` file at the nearest `package.json` will be used. If no `.npmrc` file is present in the directory, the seeting will be written to a `pnpm-workspace.yaml` file.
 
 When set to `global`, the performance is the same as setting the `--global` option.
 
