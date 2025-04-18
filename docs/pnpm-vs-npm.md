@@ -53,16 +53,12 @@ instance in the case of a monorepo, you should look at the documentation for
 
 ## Workspaces
 
-Pnpm deals with workspaces slightly differently than npm.
+Pnpm deals with workspaces slightly differently than npm, starting with conflicting terminology:
 
-Terminology: 
-| pnpm     | npm     |
-| -------- | ------- |
-| "workspace" | "workspace root" |
-| "workspace package" | "workspace" |
+Pnpm uses the term "workspace" to refer to a *collection* of packages, and sometimes the directory containing such packages. Pnpm uses the term "project" to refer to an individial package in the workspace tree (as contrasted to a package retrieved from a package repository like npm).
 
-For clarity, we will refer to "workspace root" and "workspace package" 
+Npm uses the term "workspace" to refer to the individual packages being co-developed inside a monorepo. The "workspace root" is the package defining which packages are "workspaces" (in the npm sense).
 
-In npm, there is a `package.json` file in the workspace root. The `"workspaces"` field in this file describes where to look for dependencies. Whenever a package name matches that of a workspace package, it resolves to the workspace package (regardless of the requested version).
+In npm, there is a `package.json` file in the workspace root. The `"workspaces"` field in this file describes where to look for dependencies. Whenever a dependency matches the name of a workspace package, it resolves to the workspace package (regardless of the requested version).
 
-In pnpm, the workspace root contains a `pnpm-workspaces.yaml` file. There may be a `package.json` in the same folder as `pnpm-workspaces.yaml`, but this is regarded as any other package.
+In pnpm, the workspace root contains a `pnpm-workspaces.yaml` file. There may be a `package.json` in the same folder as `pnpm-workspaces.yaml`, but this is regarded as any other package. Workspace packages do not *necessarily* prevent use of registry packages by the same name - resolution is controlled by the `linkWorkspacePackages` option or `workspace:...` dependencies.
