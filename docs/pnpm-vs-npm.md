@@ -61,4 +61,4 @@ Npm uses the term "workspace" to refer to the individual packages being co-devel
 
 In npm, there is a `package.json` file in the workspace root. The `"workspaces"` field in this file describes where to look for dependencies. Whenever a dependency matches the name of a workspace package, it resolves to the workspace package (regardless of the requested version).
 
-In pnpm, the workspace root contains a `pnpm-workspaces.yaml` file. There may be a `package.json` in the same folder as `pnpm-workspaces.yaml`, but this is regarded as any other package. Workspace packages do not *necessarily* prevent use of registry packages by the same name - resolution is controlled by the `linkWorkspacePackages` option or `workspace:...` dependencies.
+In pnpm, the workspace root contains a `pnpm-workspaces.yaml` file. There may be a `package.json` in the same folder as `pnpm-workspaces.yaml`, but this is regarded as any other package. Workspace packages do not implicitly override registry packages by the same name - resolution is controlled by the `linkWorkspacePackages` option or `workspace:...` dependencies.
