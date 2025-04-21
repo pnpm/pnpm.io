@@ -36,6 +36,20 @@ You may also install packages by:
 
 [the corresponding guide]: #install-from-remote-tarball
 
+### Install from the JSR registry
+
+Added in: v10.9.0
+
+To install packages from the [JSR](https://jsr.io/) registry, use the `jsr:` protocol prefix:
+
+```
+pnpm add jsr:@hono/hono
+pnpm add jsr:@hono/hono@4
+pnpm add jsr:@hono/hono@latest
+```
+
+This works just like installing from npm, but tells pnpm to resolve the package through JSR instead.
+
 ### Install from the workspace
 
 Note that when adding dependencies and working within a [workspace], packages
