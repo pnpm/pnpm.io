@@ -9,7 +9,7 @@ Usage examples:
 
 ```
 pnpm self-update
-pnpm self-update 9
+pnpm self-update 10
 pnpm self-update next-10
-pnpm self-update 9.10.0
+pnpm self-update 10.6.5
 ```
