@@ -23,14 +23,14 @@ node_modules
 └── .pnpm
     ├── bar@1.0.0
     │   └── node_modules
-    │       └── bar -> <store>/bar
-    │           ├── index.js
-    │           └── package.json
+    │       └── bar
+    │           ├── index.js     -> <store>/001
+    │           └── package.json -> <store>/002
     └── foo@1.0.0
         └── node_modules
-            └── foo -> <store>/foo
-                ├── index.js
-                └── package.json
+            └── foo
+                ├── index.js     -> <store>/003
+                └── package.json -> <store>/004
 ```
 
 These are the only "real" files in `node_modules`. Once all the packages are
@@ -55,10 +55,10 @@ node_modules
 └── .pnpm
     ├── bar@1.0.0
     │   └── node_modules
-    │       └── bar -> <store>/bar
+    │       └── bar -> <store>
     └── foo@1.0.0
         └── node_modules
-            ├── foo -> <store>/foo
+            ├── foo -> <store>
             └── bar -> ../../bar@1.0.0/node_modules/bar
 ```
 
@@ -71,10 +71,10 @@ node_modules
 └── .pnpm
     ├── bar@1.0.0
     │   └── node_modules
-    │       └── bar -> <store>/bar
+    │       └── bar -> <store>
     └── foo@1.0.0
         └── node_modules
-            ├── foo -> <store>/foo
+            ├── foo -> <store>
             └── bar -> ../../bar@1.0.0/node_modules/bar
 ```
 
@@ -90,16 +90,16 @@ node_modules
 └── .pnpm
     ├── bar@1.0.0
     │   └── node_modules
-    │       ├── bar -> <store>/bar
+    │       ├── bar -> <store>
     │       └── qar -> ../../qar@2.0.0/node_modules/qar
     ├── foo@1.0.0
     │   └── node_modules
-    │       ├── foo -> <store>/foo
+    │       ├── foo -> <store>
     │       ├── bar -> ../../bar@1.0.0/node_modules/bar
     │       └── qar -> ../../qar@2.0.0/node_modules/qar
     └── qar@2.0.0
         └── node_modules
-            └── qar -> <store>/qar
+            └── qar -> <store>
 ```
 
 As you may see, even though the graph is deeper now (`foo > bar > qar`), the
@@ -116,5 +116,9 @@ A great bonus of this layout is that only packages that are really in the
 dependencies are accessible. With a flattened `node_modules` structure, all
 hoisted packages are accessible. To read more about why this is an advantage,
 see "[pnpm's strictness helps to avoid silly bugs][bugs]"
+
+Unfortunately, many packages in the ecosystem are broken — they use dependencies that are not listed in their `package.json`. To minimize the number of issues new users encounter, pnpm hoists all dependencies by default into `node_modules/.pnpm/node_modules`. To disable this hoisting, set [hoist] to `false`.
+
+[hoist]: settings.md#hoist
 
 [bugs]: https://www.kochan.io/nodejs/pnpms-strictness-helps-to-avoid-silly-bugs.html
