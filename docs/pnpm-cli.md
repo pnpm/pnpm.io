@@ -49,7 +49,7 @@ then pnpm will execute the command as a shell script, so you can do things like 
 
 Some environment variables that are not pnpm related might change the behaviour of pnpm:
 
-* [`CI`](./cli/install.md#frozen-lockfile)
+* [`CI`](./cli/install.md#--frozen-lockfile)
 
 These environment variables may influence what directories pnpm will use for storing global information:
 
