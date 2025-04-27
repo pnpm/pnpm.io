@@ -137,6 +137,43 @@ module.exports = {
 There are none - anything that can be done with the lockfile can be modified via
 this function, and you can even extend the lockfile's functionality.
 
+### `hooks.preResolution(options): Promise<void>`
+
+This hook is executed after reading and parsing the lockfiles of the project, but before resolving dependencies. It allows modifications to the lockfile objects.
+
+#### Arguments
+
+* `options.existsCurrentLockfile` - A boolean that is true if the lockfile at `node_modules/.pnpm/lock.yaml` exists.
+* `options.currentLockfile` - The lockfile object from `node_modules/.pnpm/lock.yaml`.
+* `options.existsNonEmptyWantedLockfile` - A boolean that is true if the lockfile at `pnpm-lock.yaml` exists.
+* `options.wantedLockfile` - The lockfile object from `pnpm-lock.yaml`.
+* `options.lockfileDir` - The directory where the wanted lockfile is found.
+* `options.storeDir` - The location of the store directory.
+* `options.registries` - A map of scopes to registry URLs.
+
+### `hooks.importPackage(destinationDir, options): Promise<string | undefined>`
+
+This hook allows to change how packages are written to `node_modules`. The return value is optional and states what method was used for importing the dependency, e.g.: clone, hardlink.
+
+#### Arguments
+
+* `destinationDir` - The destination directory where the package should be written.
+* `options.disableRelinkLocalDirDeps`
+* `options.filesMap`
+* `options.force`
+* `options.resolvedFrom`
+* `options.keepModulesDir`
+
+### `hooks.fetchers`
+
+This hook allows to override the fetchers that are used for different types of dependencies. It is an object that may have the following fields:
+
+* `localTarball`
+* `remoteTarball`
+* `gitHostedTarball`
+* `directory`
+* `git`
+
 ## Related Configuration
 
 ### ignore-pnpmfile
