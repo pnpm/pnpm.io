@@ -1,11 +1,11 @@
 ---
 id: config-dependencies
-title: Configurational dependencies
+title: Config dependencies
 ---
 
-Configurational dependencies are installed before all the other types of dependencies (before "dependencies", "devDependencies", "optionalDependencies").
+Config dependencies are installed before all the other types of dependencies (before "dependencies", "devDependencies", "optionalDependencies").
 
-Configurational dependencies cannot have dependencies of their own or lifecycle scripts. They should be added using exact version and the integrity checksum. Example:
+Config dependencies cannot have dependencies of their own or lifecycle scripts. They should be added using exact version and the integrity checksum. Example:
 
 ```yaml title="pnpm-workspace.yaml"
 configDependencies:
@@ -16,7 +16,7 @@ configDependencies:
 
 ### Loading an allow list of built dependencies
 
-You may load a list of package names that are allowed to be built via configurational dependencies and the [`onlyBuiltDependenciesFile`] setting. For example, you may publish a package with an `allow.json` file in its root directory:
+You may load a list of package names that are allowed to be built via config dependencies and the [`onlyBuiltDependenciesFile`] setting. For example, you may publish a package with an `allow.json` file in its root directory:
 
 ```json
 [
@@ -39,9 +39,9 @@ This way your project will load the list of packages that are allowed to be buil
 
 ### Installing dependencies used in hooks
 
-Configurational dependencies are installed before the hooks from [`.pnpmfile.cjs`] are loaded, so you can use them as dependencies for your hooks.
+Config dependencies are installed before the hooks from [`.pnpmfile.cjs`] are loaded, so you can use them as dependencies for your hooks.
 
-For instance, you may have a configurational dependency called "my-hooks" that exports a `readPackage` hook. In this case, you can import it into your `.pnpmfile.cjs` like this:
+For instance, you may have a config dependency called "my-hooks" that exports a `readPackage` hook. In this case, you can import it into your `.pnpmfile.cjs` like this:
 
 ```js
 const { readPackage } = require('.pnpm-config/my-hooks')
@@ -104,7 +104,7 @@ This makes it easy to maintain and share centralized configuration and dependenc
 
 ### Loading patches
 
-You can reference [patch files] installed via configurational dependencies. For instance, if you have a configurational dependency called "my-patches", you can load patches from it:
+You can reference [patch files] installed via config dependencies. For instance, if you have a config dependency called "my-patches", you can load patches from it:
 
 ```yaml
 configDependencies:
