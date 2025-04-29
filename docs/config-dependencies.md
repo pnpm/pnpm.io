@@ -55,6 +55,53 @@ module.exports = {
 
 [`.pnpmfile.cjs`]: ./pnpmfile.md
 
+#### Loading any type of settings
+
+Using the [`updateConfig`] hook, you can dynamically update any configuration settings used by pnpm. Because hooks can be loaded from config dependencies, you can also share settings across projects by publishing them as config dependencies.
+
+For example, the following pnpmfile defines a hook that adds a new [catalog] entry to pnpm's configuration. This allows you to refer to the catalog entry when specifying dependency versions:
+
+```js title="my-catalogs/pnpmfile.cjs"
+module.exports = {
+  hooks: {
+    updateConfig (config) {
+      config.catalogs.default ??= {}
+      config.catalogs.default['is-odd'] = '1.0.0'
+      return config
+    }
+  }
+}
+```
+
+You can publish this pnpmfile inside a config dependency. Once published and installed, you can load it by specifying the following settings in your `pnpm-workspace.yaml`:
+
+```yaml
+configDependencies:
+  my-catalogs: "1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="
+pnpmfile: "node_modules/.pnpm-config/my-catalogs/pnpmfile.cjs"
+```
+
+Now, you can run:
+
+```
+pnpm add is-odd@catalog:
+```
+
+This will install `is-odd@1.0.0` into your `node_modules`, and add the following entry to your `package.json`:
+
+```json
+{
+  "dependencies": {
+    "is-odd": "catalog:"
+  }
+}
+```
+
+This makes it easy to maintain and share centralized configuration and dependency versions across projects.
+
+[updateConfig]: ./pnpmfile.md#hooksupdateconfigconfig-config--promiseconfig
+[catalog]: ./catalogs.md
+
 ### Loading patches
 
 You can reference [patch files] installed via configurational dependencies. For instance, if you have a configurational dependency called "my-patches", you can load patches from it:
