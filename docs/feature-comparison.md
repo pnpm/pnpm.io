@@ -6,7 +6,7 @@ title: Feature Comparison
 | Feature                          |pnpm              |Yarn              |npm               | Notes |
 | ---                              |:--:              |:--:              |:--:              | ---   |
 | Workspace support                |:white_check_mark:|:white_check_mark:|:white_check_mark:|
-| Isolated `node_modules`          |:white_check_mark:|:white_check_mark:|:x:               | Default in pnpm. |
+| Isolated `node_modules`          |:white_check_mark:|:white_check_mark:|:white_check_mark:| Default in pnpm. |
 | Hoisted `node_modules`           |:white_check_mark:|:white_check_mark:|:white_check_mark:| Default in npm. |
 | Plug'n'Play                      |:white_check_mark:|:white_check_mark:|:x:               | Default in Yarn. |
 | Autoinstalling peers             |:white_check_mark:|:x:               |:white_check_mark:|
