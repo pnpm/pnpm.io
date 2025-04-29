@@ -8,7 +8,7 @@ title: Feature Comparison
 | Workspace support                                       | ✔️ | ✔️ | ✔️ |
 | Isolated `node_modules`                                 | ✔️ | ✔️ | ✔️ | For pnpm this is the default one |
 | Hoisted `node_modules`                                  | ✔️ | ✔️ | ✔️ | For npm this is the default one |
-| Autoinstalling peers                                    | ✔️ | ✔️ | ✔️ |
+| Autoinstalling peers                                    | ✔️ | ❌| ✔️ |
 | Plug'n'Play                                             | ✔️ | ✔️ | ❌| For Yarn this is the default one |
 | Zero-Installs                                           | ❌| ✔️ | ❌|
 | Patching dependencies                                   | ✔️ | ✔️ | ❌|
@@ -22,12 +22,12 @@ title: Feature Comparison
 | [Catalogs]                                              | ✔️ | ❌| ❌|
 | [Config dependencies]                                   | ✔️ | ❌| ❌|
 | [JSR registry support]                                  | ✔️ | ✔️ | ❌|
-| [Running install automatically before runnings scripts] | ✔️ | ❌| ❌| In case of Yarn, if Plug'n'Play is used, dependencies are always up-to-date |
+| [Running install automatically before running scripts] | ✔️ | ❌| ❌| In case of Yarn, if Plug'n'Play is used, dependencies are always up-to-date |
 | [Hooks]                                                 | ✔️ | ✔️ | ❌|
 | Listing licenses                                        | ✔️ | ✔️ | ❌| pnpm supports it via `pnpm licenses list`. Yarn has a plugin for it. |
 
 [Catalogs]: ./catalogs.md
 [Config dependencies]: ./config-dependencies.md
 [JSR registry support]: ./cli/add.md#install-from-the-jsr-registry
-[Running install automatically before runnings scripts]: ./settings.md#verifydepsbeforerun
+[Running install automatically before running scripts]: ./settings.md#verifydepsbeforerun
 [hooks]: ./pnpmfile.md
