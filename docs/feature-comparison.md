@@ -16,7 +16,7 @@ title: Feature Comparison
 | Managing versions of itself      |:white_check_mark:|:white_check_mark:|:x:               |
 | Has a lockfile                   |:white_check_mark:|:white_check_mark:|:white_check_mark:| `pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`. |
 | Overrides support                |:white_check_mark:|:white_check_mark:|:white_check_mark:| Known as "resolutions" in Yarn. |
-| Content-addressable storage      |:white_check_mark:|:x:               |:x:               |
+| Content-addressable storage      |:white_check_mark:|:white_check_mark:|:x:               | Yarn uses a CAS when `nodeLinker` is set to `pnpm`. |
 | Dynamic package execution        |:white_check_mark:|:white_check_mark:|:white_check_mark:| `pnpm dlx`, `yarn dlx`, `npx`. |
 | Side-effects cache               |:white_check_mark:|:x:               |:x:               |
 | [Catalogs]                       |:white_check_mark:|:x:               |:x:               |
@@ -31,3 +31,4 @@ title: Feature Comparison
 [JSR registry support]: ./cli/add.md#install-from-the-jsr-registry
 [Auto-install before script run]: ./settings.md#verifydepsbeforerun
 [hooks]: ./pnpmfile.md
+
