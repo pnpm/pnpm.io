@@ -104,7 +104,7 @@ export default async function benchmark (pm, fixture, opts) {
   const env = createEnv(opts.managersDir)
   const cwd = path.join(TMP, pm.scenario, fixture)
   fsx.copySync(path.join(FIXTURES_DIR, fixture), cwd)
-  const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
+  const modules = opts.hasNodeModules && ! pm.name==="npm_linked" ? path.join(cwd, 'node_modules') : null
 
   cleanLockfile(pm, cwd, env)
 
