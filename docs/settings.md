@@ -150,7 +150,7 @@ With the above configuration pnpm will not print deprecation warnings about any 
 Sometimes you can't update a dependency. For instance, the latest version of the dependency started to use ESM but your project is not yet in ESM. Annoyingly, such a package will be always printed out by the `pnpm outdated` command and updated, when running `pnpm update --latest`. However, you may list packages that you don't want to upgrade in the `ignoreDependencies` field:
 
 ```yaml
-updateConfig: {
+updateConfig:
   ignoreDependencies:
   - load-json-file
 ```
