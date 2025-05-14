@@ -1069,6 +1069,17 @@ node_modules.
 
 Use and cache the results of (pre/post)install hooks.
 
+When a pre/post install script modify the contents of a package (e.g. build output), pnpm saves the modified package in the global store. On future installs on the same machine, pnpm reuses this cached, prebuilt version—making installs significantly faster.
+
+:::note
+
+You may want to disable this setting if:
+
+1. The install scripts modify files *outside* the package directory (pnpm cannot track or cache these changes).
+1. The scripts perform side effects that are unrelated to building the package.
+
+:::
+
 ### sideEffectsCacheReadonly
 
 * Default: **false**
