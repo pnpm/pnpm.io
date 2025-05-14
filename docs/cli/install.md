@@ -175,12 +175,6 @@ dependencies.
 
 ### --filter &lt;package_selector>
 
-:::warning
-
-Filter currently does not work properly with v8 default config, you have to implicitly set [dedupePeerDependents](../settings.md#dedupePeerDependents) to `false` to have that work. For more info and progress please refer to [#6300](https://github.com/pnpm/pnpm/issues/6300)
-
-:::
-
 [Read more about filtering.](../filtering.md)
 
 ### --resolution-only
