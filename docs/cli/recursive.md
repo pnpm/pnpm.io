@@ -11,6 +11,7 @@ Runs a command in every project of a workspace, when used with the following com
 * `list`
 * `outdated`
 * `publish`
+* `pack`
 * `rebuild`
 * `remove`
 * `unlink`

@@ -55,3 +55,15 @@ Don't audit `optionalDependencies`.
 
 If the registry responds with a non-200 status code, the process should exit with 0.
 So the process will fail only if the registry actually successfully responds with found vulnerabilities.
+
+### --ignore-unfixable
+
+Added in: v10.11.0
+
+Ignore all CVEs with no resolution.
+
+### --ignore &lt;vulnerability\>
+
+Added in: v10.11.0
+
+Ignore a vulnerability by CVE.
