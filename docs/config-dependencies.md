@@ -29,12 +29,13 @@ configDependencies:
 
 You can load a list of package names that are allowed to be built, using the [`onlyBuiltDependenciesFile`] setting.
 
-Example `allow.json` file inside a config dependency:
+Example `allow.json` file inside a config dependency ([@pnpm/trusted-deps]):
 
 ```json title="allow.json"
 [
-  "esbuild",
-  "fsevents"
+  "@airbnb/node-memwatch",
+  "@apollo/protobufjs",
+  ...
 ]
 ```
 
@@ -42,10 +43,11 @@ Your workspace configuration:
 
 ```yaml title="pnpm-workspace.yaml"
 configDependencies:
-  my-configs: "1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="
-onlyBuiltDependenciesFile: "node_modules/.pnpm-config/my-configs/allow.json"
+  '@pnpm/trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
+onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json
 ```
 
+[@pnpm/trusted-deps]: https://github.com/pnpm/trusted-deps
 [`onlyBuiltDependenciesFile`]: settings.md#onlybuiltdependenciesfile
 
 ### Installing Dependencies Used in Hooks
