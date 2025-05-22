@@ -877,9 +877,7 @@ Use this `.npmrc` file:
 use-node-version=16.16.0
 ```
 
-This setting works only in a `.npmrc` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`pnpm.executionEnv.nodeVersion`] field of `package.json` instead.
-
-[`pnpm.executionEnv.nodeVersion`]: ./package_json.md#pnpmexecutionenvnodeversion
+This setting works only in a `.npmrc` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`pnpm.executionEnv.nodeVersion`](./package_json.md#pnpmexecutionenvnodeversion) field of `package.json` instead.
 
 ### node-version
 
