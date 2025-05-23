@@ -20,17 +20,12 @@ packageExtensions:
       '@types/react': '*'
 ```
 
-or by creating this `.pnpmfile.cjs`:
+Alternatively, you can install a config dependency that we created to deal with these issues [`@pnpm/types-fixer`]. Run:
 
-```js
-module.exports = {
-  hooks: {
-    readPackage (pkg) {
-      if (pkg.dependencies['react'] || pkg.peerDependencies['react']) {
-        pkg.peerDependencies['@types/react'] = '*'
-      }
-      return pkg
-    }
-  }
-}
+```sh
+pnpm add @pnpm/types-fixer --config
+pnpm config set pnpmfile node_modules/.pnpm-config/@pnpm/types-fixer/pnpmfile.cjs --location=project
 ```
+
+[`@pnpm/types-fixer`]: https://github.com/pnpm/types-fixer
+
