@@ -118,6 +118,7 @@
     "Recipes": [
       "using-changesets",
       "continuous-integration",
+      "typescript",
       "git",
       "docker",
       "podman"

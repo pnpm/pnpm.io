@@ -365,6 +365,10 @@
         },
         {
           "type": "doc",
+          "id": "typescript"
+        },
+        {
+          "type": "doc",
           "id": "git"
         },
         {
