@@ -1453,7 +1453,7 @@ patchedDependencies:
 
 In most cases, defining an exact version is enough to override a broader range.
 
-## allowUnusedPatches
+### allowUnusedPatches
 
 Added in: v10.7.0 (Previously named `allowNonAppliedPatches`)
 
@@ -1468,7 +1468,7 @@ patchedDependencies:
 allowUnusedPatches: true
 ```
 
-## ignorePatchFailures
+### ignorePatchFailures
 
 Added in: v10.7.0
 
@@ -1693,3 +1693,15 @@ Scripts listed in this array will be required in each project of the workspace. 
 requiredScripts:
 - build
 ```
+
+import EnablePrePostScripts from './settings/_enablePrePostScripts.mdx'
+
+<EnablePrePostScripts />
+
+import ScriptShell from './settings/_scriptShell.mdx'
+
+<ScriptShell />
+
+import ShellEmulator from './settings/_shellEmulator.mdx'
+
+<ShellEmulator />

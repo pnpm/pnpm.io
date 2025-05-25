@@ -154,45 +154,14 @@ Hide workspace prefix from output from child processes that are run in parallel,
 
 ## pnpm-workspace.yaml settings
 
-### enablePrePostScripts
+import EnablePrePostScripts from '../settings/_enablePrePostScripts.mdx'
 
-* Default: **true**
-* Type: **Boolean**
+<EnablePrePostScripts />
 
-When `true`, pnpm will run any pre/post scripts automatically. So running `pnpm foo`
-will be like running `pnpm prefoo && pnpm foo && pnpm postfoo`.
+import ScriptShell from '../settings/_scriptShell.mdx'
 
-### scriptShell
+<ScriptShell />
 
-* Default: **null**
-* Type: **path**
+import ShellEmulator from '../settings/_shellEmulator.mdx'
 
-The shell to use for scripts run with the `pnpm run` command.
-
-For instance, to force usage of Git Bash on Windows:
-
-```
-pnpm config set scriptShell "C:\\Program Files\\git\\bin\\bash.exe"
-```
-
-### shellEmulator
-
-* Default: **false**
-* Type: **Boolean**
-
-When `true`, pnpm will use a JavaScript implementation of a [bash-like shell] to
-execute scripts.
-
-This option simplifies cross-platform scripting. For instance, by default, the
-next script will fail on non-POSIX-compliant systems:
-
-```json
-"scripts": {
-  "test": "NODE_ENV=test node test.js"
-}
-```
-
-But if the `shellEmulator` setting is set to `true`, it will work on all
-platforms.
-
-[bash-like shell]: https://www.npmjs.com/package/@yarnpkg/shell
+<ShellEmulator />
