@@ -44,6 +44,15 @@ const features = [
       </Translate>
     ),
   },
+  {
+    title: <Translate>Secure</Translate>,
+    imageUrl: 'img/features/secure.svg',
+    description: (
+      <Translate>
+        pnpm ensures the integrity of your packages with strict verification
+      </Translate>
+    ),
+  },
 ];
 
 function addUTM(urlAddress) {
@@ -54,9 +63,10 @@ function addUTM(urlAddress) {
   return url.toString();
 }
 
-function Feature({imageUrl, title, description}) {
+function Feature({ imageUrl, title, description }) {
   return (
     <div className={clsx('col col--3', styles.feature)}>
+      <img className={styles.featureImage} src={useBaseUrl(imageUrl)} alt={title} />
       <h3>{title}</h3>
       <p>{description}</p>
     </div>
@@ -65,7 +75,7 @@ function Feature({imageUrl, title, description}) {
 
 const Showcase = props => {
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
 
   const showcase = siteConfig.customFields.users.filter(({ pinned }) => pinned).map((user, i) => {
     return (
@@ -77,10 +87,10 @@ const Showcase = props => {
   });
 
   return (
-    <div className="mainContainer" style={{backgroundColor: 'var(--ifm-color-emphasis-100)', padding: '2rem 0'}}>
-      <div style={{margin: '0 auto', maxWidth: '1100px', padding: '0 20px'}}>
+    <div className="mainContainer" style={{ backgroundColor: 'var(--ifm-color-emphasis-100)', padding: '2rem 0' }}>
+      <div style={{ margin: '0 auto', maxWidth: '1100px', padding: '0 20px' }}>
         <div className="showcaseSection text--center">
-          <div className="prose" style={{marginBottom: '20px'}}>
+          <div className="prose" style={{ marginBottom: '20px' }}>
             <h1><Translate>Sponsored By</Translate></h1>
             <div className="logos" style={{
               alignItems: 'center',
@@ -89,67 +99,67 @@ const Showcase = props => {
               justifyContent: 'center',
             }}>
               <a href={addUTM("https://bit.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
+                <img style={{ padding: '20px' }} width="120" alt="bit" src="/img/users/bit.svg" />
               </a>
               <a href={addUTM("https://sanity.io/")} target="_blank">
-                <img style={{padding: '20px'}} width="260" alt="Sanity" src="/img/users/sanity.svg" />
+                <img style={{ padding: '20px' }} width="260" alt="Sanity" src="/img/users/sanity.svg" />
               </a>
               <a href={addUTM("https://syntax.fm")} target="_blank">
-                <img style={{padding: '20px'}} width="140" alt="Syntax" src="/img/users/syntaxfm.svg" />
+                <img style={{ padding: '20px' }} width="140" alt="Syntax" src="/img/users/syntaxfm.svg" />
               </a>
               <a href={addUTM("https://discord.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="260" alt="Discord" src="/img/users/discord.svg" />
+                <img style={{ padding: '20px' }} width="260" alt="Discord" src="/img/users/discord.svg" />
               </a>
               <a href={addUTM("https://www.jetbrains.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="JetBrains" src="/img/users/jetbrains.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="JetBrains" src="/img/users/jetbrains.svg" />
               </a>
               <a href={addUTM("https://coderabbit.ai/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="CodeRabbit" src="/img/users/coderabbit.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="CodeRabbit" src="/img/users/coderabbit.svg" />
               </a>
               <a href={addUTM("https://route4me.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Route4Me" src="/img/users/route4me.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="Route4Me" src="/img/users/route4me.svg" />
               </a>
               <a href={addUTM("https://workleap.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="210" alt="Workleap" src="/img/users/workleap.svg" />
+                <img style={{ padding: '20px' }} width="210" alt="Workleap" src="/img/users/workleap.svg" />
               </a>
               <a href={addUTM("https://stackblitz.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="210" alt="Stackblitz" src="/img/users/stackblitz.svg" />
+                <img style={{ padding: '20px' }} width="210" alt="Stackblitz" src="/img/users/stackblitz.svg" />
               </a>
               <a href={addUTM("https://uscreen.de/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="u|screen" src="/img/users/uscreen.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="u|screen" src="/img/users/uscreen.svg" />
               </a>
               <a href={addUTM("https://nx.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="160" alt="nx" src="/img/users/nx.svg" />
+                <img style={{ padding: '20px' }} width="160" alt="nx" src="/img/users/nx.svg" />
               </a>
               <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
+                <img style={{ padding: '20px' }} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
               </a>
               <a href={addUTM("https://vercel.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Vercel" src="/img/users/vercel.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="Vercel" src="/img/users/vercel.svg" />
               </a>
               <a href={addUTM("https://depot.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Depot" src="/img/users/depot_dynamic.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="Depot" src="/img/users/depot_dynamic.svg" />
               </a>
               <a href={addUTM("https://moonrepo.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Moonrepo" src="/img/users/moonrepo.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="Moonrepo" src="/img/users/moonrepo.svg" />
               </a>
               <a href={addUTM("https://devowl.io/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="devowl" src="/img/users/devowlio.svg" />
+                <img style={{ padding: '20px' }} width="240" alt="devowl" src="/img/users/devowlio.svg" />
               </a>
               <a href={addUTM("https://cerbos.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="200" alt="Cerbos" src="/img/users/cerbos.svg" />
+                <img style={{ padding: '20px' }} width="200" alt="Cerbos" src="/img/users/cerbos.svg" />
               </a>
               <a href={addUTM("https://vlt.sh/")} target="_blank">
-                <img style={{padding: '20px'}} width="200" alt="vlt" src="/img/users/vlt.svg" />
+                <img style={{ padding: '20px' }} width="200" alt="vlt" src="/img/users/vlt.svg" />
               </a>
               <a href={addUTM("https://vite.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="120" alt="vite" src="/img/users/vitejs.svg" />
+                <img style={{ padding: '20px' }} width="120" alt="vite" src="/img/users/vitejs.svg" />
               </a>
               <a href={addUTM("https://macpaw.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="200" alt="MacPaw" src="/img/users/macpaw.svg" />
+                <img style={{ padding: '20px' }} width="200" alt="MacPaw" src="/img/users/macpaw.svg" />
               </a>
               <a href={addUTM("https://opensource.mercedes-benz.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="100" alt="Mercedes-Benz FOSS" src="/img/users/mercedes.svg" />
+                <img style={{ padding: '20px' }} width="100" alt="Mercedes-Benz FOSS" src="/img/users/mercedes.svg" />
               </a>
             </div>
           </div>
@@ -161,7 +171,7 @@ const Showcase = props => {
 
 function Home() {
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
   return (
     <Layout
       title={siteConfig.tagline}
@@ -172,7 +182,7 @@ function Home() {
           <p className="hero__subtitle"><Translate>Fast, disk space efficient package manager</Translate></p>
           <div className={styles.buttons}>
             <Link
-              style={{margin: '0 20px'}}
+              style={{ margin: '0 20px' }}
               className={clsx(
                 'button button--secondary button--lg',
                 styles.getStarted,
@@ -194,7 +204,7 @@ function Home() {
           <section className={styles.features}>
             <div className="container">
               <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CEAIPK3U&placement=pnpmio" id="_carbonads_js"></script>
-              <div style={{ marginBottom: '24px', textAlign: 'center' }}>
+              <div style={{ marginBottom: '24px', textAlign: 'center', paddingBottom: '53px', borderBottom: '1px solid var(--ifm-color-emphasis-300)' }}>
                 <iframe className={styles.youtubeVideo} src="https://www.youtube-nocookie.com/embed/ZIKDJBrk56k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
               </div>
               <div className="row">
