@@ -94,32 +94,23 @@ const Showcase = props => {
               <a href={addUTM("https://sanity.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="260" alt="Sanity" src="/img/users/sanity.svg" />
               </a>
-              <a href={addUTM("https://syntax.fm")} target="_blank">
-                <img style={{padding: '20px'}} width="140" alt="Syntax" src="/img/users/syntaxfm.svg" />
-              </a>
               <a href={addUTM("https://discord.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="260" alt="Discord" src="/img/users/discord.svg" />
-              </a>
-              <a href={addUTM("https://www.jetbrains.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="JetBrains" src="/img/users/jetbrains.svg" />
               </a>
               <a href={addUTM("https://coderabbit.ai/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="CodeRabbit" src="/img/users/coderabbit.svg" />
               </a>
-              <a href={addUTM("https://route4me.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Route4Me" src="/img/users/route4me.svg" />
-              </a>
               <a href={addUTM("https://workleap.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="210" alt="Workleap" src="/img/users/workleap.svg" />
+              </a>
+              <a href={addUTM("https://vite.dev/")} target="_blank">
+                <img style={{padding: '20px'}} width="120" alt="vite" src="/img/users/vitejs.svg" />
               </a>
               <a href={addUTM("https://stackblitz.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="210" alt="Stackblitz" src="/img/users/stackblitz.svg" />
               </a>
               <a href={addUTM("https://uscreen.de/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="u|screen" src="/img/users/uscreen.svg" />
-              </a>
-              <a href={addUTM("https://nx.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="160" alt="nx" src="/img/users/nx.svg" />
               </a>
               <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
@@ -130,9 +121,6 @@ const Showcase = props => {
               <a href={addUTM("https://depot.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Depot" src="/img/users/depot_dynamic.svg" />
               </a>
-              <a href={addUTM("https://moonrepo.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Moonrepo" src="/img/users/moonrepo.svg" />
-              </a>
               <a href={addUTM("https://devowl.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="devowl" src="/img/users/devowlio.svg" />
               </a>
@@ -141,12 +129,6 @@ const Showcase = props => {
               </a>
               <a href={addUTM("https://vlt.sh/")} target="_blank">
                 <img style={{padding: '20px'}} width="200" alt="vlt" src="/img/users/vlt.svg" />
-              </a>
-              <a href={addUTM("https://vite.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="120" alt="vite" src="/img/users/vitejs.svg" />
-              </a>
-              <a href={addUTM("https://macpaw.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="200" alt="MacPaw" src="/img/users/macpaw.svg" />
               </a>
               <a href={addUTM("https://opensource.mercedes-benz.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="100" alt="Mercedes-Benz FOSS" src="/img/users/mercedes.svg" />
