@@ -405,7 +405,7 @@ After executing a dlx command, pnpm keeps a cache that omits the installation st
 
 ### enableGlobalVirtualStore
 
-Added in: v10.12.0
+Added in: v10.12.1
 
 * Default: **false** (always **false** in CI)
 * Type: **Boolean**

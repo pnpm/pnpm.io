@@ -210,6 +210,20 @@ pnpm's default semver range operator.
 Using `--save-peer` will add one or more packages to `peerDependencies` and
 install them as dev dependencies.
 
+### --save-catalog
+
+Added in: v10.12.1
+
+Save the new dependency to the default [catalog].
+
+### --save-catalog-name &lt;catalog_name\>
+
+Added in: v10.12.1
+
+Save the new dependency to the specified [catalog].
+
+[catalog]: catalogs.md
+
 ### --config
 
 Added in: v10.8.0
