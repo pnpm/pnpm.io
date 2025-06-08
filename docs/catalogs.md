@@ -160,6 +160,12 @@ Will become the following on publish.
 
 The `catalog:` protocol replacement process allows the `@example/components` package to be used by other workspaces or package managers.
 
+## Settings
+
+import CatalogMode from './settings/_catalogMode.mdx'
+
+<CatalogMode />
+
 ## Caveats
 
 The `pnpm update` command does not yet support catalogs.

@@ -1723,3 +1723,8 @@ import ScriptShell from './settings/_scriptShell.mdx'
 import ShellEmulator from './settings/_shellEmulator.mdx'
 
 <ShellEmulator />
+
+import CatalogMode from './settings/_catalogMode.mdx'
+
+<CatalogMode />
+
