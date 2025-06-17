@@ -38,14 +38,6 @@ DLKgbRj1PYWevezdJeFLcTnH8RjxNE8R7V
 
 ![](../../static/crypto/doge.png)
 
-## Monero (XMR)
-
-```
-46bxpSpL9gvNiAqBKQJjjeBS1xC5TPK3w8kgkAjhvBFNFKZXQrbLgrJ3DNCqcAe8VdVB1QzSrL3DQRgL6JhrYZv6D9rgKCn
-```
-
-![](../../static/crypto/xmr.png)
-
 ## ZCash (ZEC)
 
 ```
