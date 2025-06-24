@@ -133,6 +133,9 @@ const Showcase = props => {
               <a href={addUTM("https://opensource.mercedes-benz.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="100" alt="Mercedes-Benz FOSS" src="/img/users/mercedes.svg" />
               </a>
+              <a href={addUTM("https://oomol.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="240" alt="OOMOL Studio" src="/img/users/oomol.svg" />
+              </a>
             </div>
           </div>
         </div>
