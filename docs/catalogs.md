@@ -165,9 +165,3 @@ The `catalog:` protocol replacement process allows the `@example/components` pac
 import CatalogMode from './settings/_catalogMode.mdx'
 
 <CatalogMode />
-
-## Caveats
-
-The `pnpm update` command does not yet support catalogs.
-
-To update dependencies defined in `pnpm-workspace.yaml`, newer version ranges will need to be chosen manually until a future version of pnpm handles this.
