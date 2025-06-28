@@ -3,7 +3,7 @@ id: fetch
 title: pnpm fetch
 ---
 
-Fetch packages from a lockfile into virtual store, package manifest is ignored.
+Fetch packages from a lockfile into dependency graph store, package manifest is ignored.
 
 ## Usage scenario
 
@@ -82,7 +82,7 @@ As you can see, the Dockerfile has to be updated when you add or remove
 sub-packages.
 
 `pnpm fetch` solves the above problem perfectly by providing the ability
-to load packages into the virtual store using only information from a lockfile and a configuration file (`pnpm-workspace.yaml`).
+to load packages into the dependency graph store using only information from a lockfile and a configuration file (`pnpm-workspace.yaml`).
 
 ```Dockerfile
 FROM node:20
@@ -110,7 +110,7 @@ CMD [ "node", "server.js" ]
 
 It works for both simple and monorepo projects, `--offline` enforces
 pnpm not to communicate with the package registry as all needed packages are
-already present in the virtual store.
+already present in the dependency graph store.
 
 As long as the lockfile is not changed, the build cache is valid up to the
 layer, so `RUN pnpm install -r --offline --prod`, will save you much
