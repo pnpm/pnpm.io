@@ -73,7 +73,7 @@ OK, so now we know the purpose of the `.pnpm/` folder. `.pnpm/` stores all the p
 .pnpm/<name>@<version>/node_modules/<name>
 ```
 
-We call it the virtual store directory.
+We call it the dependency graph store directory (previously known as "virtual store").
 
 This flat structure avoids the long path issues that were caused by the nested `node_modules` created by npm v2 but keeps packages isolated unlike the flat `node_modules` created by npm v3,4,5,6 or Yarn v1.
 
