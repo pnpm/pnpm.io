@@ -27,6 +27,13 @@ Using PowerShell:
 Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
+::: tip
+
+On Windows, Microsoft Defender can significantly slow down installation of packages. After installing pnpm, you can
+[add the pnpm store to Microsoft Defender's list of excluded folders](#windows-performance) to get a significant speedup.
+
+:::
+
 ### On POSIX systems
 
 ```sh
@@ -206,6 +213,15 @@ $ which pnpm
 
 Now that you know where the pnpm CLI is, open that directory and remove any pnpm-related files (`pnpm.cmd`, `pnpx.cmd`, `pnpm`, etc).
 Once done, install pnpm again and it should work as expected.
+
+### Windows performance
+
+On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
+of excluded folders in a PowerShell window with administrator rights by executing:
+
+```powershell
+Add-MpPreference -ExclusionPath $(pnpm store path)
+```
 
 ## Using a shorter alias
 
