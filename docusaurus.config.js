@@ -219,10 +219,6 @@ module.exports={
           title: 'Community',
           items: [
             {
-              label: 'Project Chat',
-              href: 'https://r.pnpm.io/chat',
-            },
-            {
               label: 'X (Twitter)',
               href: 'https://x.com/pnpmjs'
             },
