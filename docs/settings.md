@@ -1120,6 +1120,12 @@ If set explicitly to false, then installing as a non-root user will fail.
 
 Options to pass through to Node.js via the `NODE_OPTIONS` environment variable. This does not impact how pnpm itself is executed but it does impact how lifecycle scripts are called.
 
+To preserve existing `NODE_OPTIONS` you can reference the existing environment variable using `${NODE_OPTIONS}` in your configuration:
+
+```yaml
+nodeOptions: "${NODE_OPTIONS} --experimental-vm-modules"
+```
+
 ### verifyDepsBeforeRun
 
 * Default: **false**
