@@ -20,12 +20,11 @@ packageExtensions:
       '@types/react': '*'
 ```
 
-Alternatively, you can install a config dependency that we created to deal with these issues [`@pnpm/types-fixer`]. Run:
+Alternatively, you can install a config dependency that we created to deal with these issues [`@pnpm/plugin-types-fixer`]. Run:
 
 ```sh
-pnpm add @pnpm/types-fixer --config
-pnpm config set pnpmfile node_modules/.pnpm-config/@pnpm/types-fixer/pnpmfile.cjs --location=project
+pnpm add @pnpm/plugin-types-fixer --config
 ```
 
-[`@pnpm/types-fixer`]: https://github.com/pnpm/types-fixer
+[`@pnpm/plugin-types-fixer`]: https://github.com/pnpm/plugin-types-fixer
 

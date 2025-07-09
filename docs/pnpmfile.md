@@ -87,7 +87,7 @@ Added in: v10.8.0
 
 Allows you to modify the configuration settings used by pnpm. This hook is most useful when paired with [configDependencies](config-dependencies), allowing you to share and reuse settings across different Git repositories.
 
-For example, [@pnpm/better-defaults](https://github.com/pnpm/better-defaults) uses the `updateConfig` hook to apply a curated set of recommended settings.
+For example, [@pnpm/plugin-better-defaults](https://github.com/pnpm/plugin-better-defaults) uses the `updateConfig` hook to apply a curated set of recommended settings.
 
 #### Usage example
 
