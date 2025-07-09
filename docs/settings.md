@@ -1123,7 +1123,7 @@ Options to pass through to Node.js via the `NODE_OPTIONS` environment variable. 
 To preserve existing `NODE_OPTIONS` you can reference the existing environment variable using `${NODE_OPTIONS}` in your configuration:
 
 ```yaml
-nodeOptions: "${NODE_OPTIONS} --experimental-vm-modules"
+nodeOptions: "${NODE_OPTIONS:- } --experimental-vm-modules"
 ```
 
 ### verifyDepsBeforeRun
