@@ -1540,6 +1540,20 @@ auditConfig:
 
 [`pnpm audit`]: ./cli/audit.md
 
+## Pnpmfile
+
+import IgnorePnpmfile from './settings/_ignorePnpmfile.mdx'
+
+<IgnorePnpmfile />
+
+import Pnpmfile from './settings/_pnpmfile.mdx'
+
+<Pnpmfile />
+
+import GlobalPnpmfile from './settings/_globalPnpmfile.mdx'
+
+<GlobalPnpmfile />
+
 ## Other Settings
 
 ### savePrefix

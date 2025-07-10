@@ -176,36 +176,16 @@ This hook allows to override the fetchers that are used for different types of d
 
 ## Related Configuration
 
-### ignore-pnpmfile
+import IgnorePnpmfile from './settings/_ignorePnpmfile.mdx'
 
-* Default: **false**
-* Type: **Boolean**
+<IgnorePnpmfile />
 
-`.pnpmfile.cjs` will be ignored. Useful together with `--ignore-scripts` when you
-want to make sure that no script gets executed during install.
+import Pnpmfile from './settings/_pnpmfile.mdx'
 
-### pnpmfile
+<Pnpmfile />
 
-* Default: **.pnpmfile.cjs**
-* Type: **path**
-* Example: **.pnpm/.pnpmfile.cjs**
+import GlobalPnpmfile from './settings/_globalPnpmfile.mdx'
 
-The location of the local pnpmfile.
-
-### global-pnpmfile
-
-* Default: **null**
-* Type: **path**
-* Example: **~/.pnpm/global_pnpmfile.cjs**
-
-The location of a global pnpmfile. A global pnpmfile is used by all projects
-during installation.
-
-:::note
-
-It is recommended to use local pnpmfiles. Only use a global pnpmfile
-if you use pnpm on projects that don't use pnpm as the primary package manager.
-
-:::
+<GlobalPnpmfile />
 
 [`pnpm patch`]: ./cli/patch.md
