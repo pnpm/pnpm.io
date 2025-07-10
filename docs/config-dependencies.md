@@ -7,6 +7,8 @@ Config dependencies allow you to share and centralize configuration files, setti
 
 Config dependencies help you keep all the hooks, settings, patches, overrides, catalogs, rules in a single place and use them across multiple repositories.
 
+If your config dependency is named following the `pnpm-plugin-*` pattern, pnpm will automatically load the `pnpmfile.cjs` from its root.
+
 ## How to Add a Config Dependency
 
 Config dependencies are defined in your `pnpm-workspace.yaml` and must be installed using an exact version and an integrity checksum.
