@@ -419,6 +419,18 @@ In the central virtual store, each package is hard linked into a directory whose
 
 Using a global virtual store can significantly speed up installations when a warm cache is available. However, in CI environments (where caches are typically absent), it may slow down installation. If pnpm detects that it is running in CI, this setting is automatically disabled.
 
+:::important
+
+To support hoisted dependencies when using a global virtual store, pnpm relies on the `NODE_PATH` environment variable. This allows Node.js to resolve packages from the hoisted `node_modules` directory. However, **this workaround does not work with ESM modules**, because Node.js no longer respects `NODE_PATH` when using ESM.
+
+If your dependencies are ESM and they import packages **not declared in their own `package.json`** (which is considered bad practice), you’ll likely run into resolution errors. There are two ways to fix this:
+* Use [packageExtensions] to explicitly add the missing dependencies.
+* Add the [@pnpm/plugin-esm-node-path] config dependency to your project. This plugin registers a custom ESM loader that restores `NODE_PATH` support for ESM, allowing hoisted dependencies to be resolved correctly.
+
+:::
+
+[packageExtensions]: #packageextensions
+[@pnpm/plugin-esm-node-path]: https://github.com/pnpm/plugin-esm-node-path
 [NixOS manages packages]: https://nixos.org/guides/how-nix-works/
 
 ## Store Settings
