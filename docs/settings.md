@@ -1326,6 +1326,19 @@ Packages are only linked if their versions satisfy the dependency ranges.
 
 Enables hard-linking of all local workspace dependencies instead of symlinking them. Alternatively, this can be achieved using [`dependenciesMeta[].injected`](package_json.md#dependenciesmetainjected), which allows to selectively enable hard-linking for specific dependencies.
 
+::: note
+
+Even if this setting is enabled, pnpm will prefer to deduplicate injected dependencies using symlinks—unless multiple dependency graphs are required due to mismatched peer dependencies. This behaviour is controlled by the `dedupeInjectedDeps` setting.
+
+:::
+
+### dedupeInjectedDeps
+
+* Default: **true**
+* Type: **Boolean**
+
+When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
+
 ### syncInjectedDepsAfterScripts
 
 Added in: v10.5.0
@@ -1706,13 +1719,6 @@ When deploying a package or installing a local package, all files of the package
 * Type: **Boolean**
 
 When set to `true`, dependencies that are already symlinked to the root `node_modules` directory of the workspace will not be symlinked to subproject `node_modules` directories.
-
-### dedupeInjectedDeps
-
-* Default: **true**
-* Type: **Boolean**
-
-When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
 
 ### optimisticRepeatInstall
 
