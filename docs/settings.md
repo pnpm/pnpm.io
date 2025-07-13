@@ -116,7 +116,7 @@ packageExtensions:
     peerDependencies:
       eslint: ">= 6"
     peerDependenciesMeta:
-      eslint: {
+      eslint:
         optional: true
 ```
 
