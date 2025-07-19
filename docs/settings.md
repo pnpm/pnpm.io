@@ -1266,7 +1266,7 @@ useNodeVersion: 16.16.0
 
 This setting works only in a `pnpm-workspace.yaml` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`executionEnv.nodeVersion`] field of `package.json` instead.
 
-[`executionEnv.nodeVersion`]: ./settings.md.md#pnpmexecutionenvnodeversion
+[`executionEnv.nodeVersion`]: #executionenvnodeversion
 
 ### nodeVersion
 
