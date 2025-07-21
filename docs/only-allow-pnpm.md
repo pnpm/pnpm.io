@@ -8,13 +8,13 @@ When many developers are working on the same project together, you need a failsa
 To prevent dependency management conflicts between package managers:
 
 1. Create a file, if it doesn't already exist, named `.npmrc` at the root of your project.
-2. Write the following content into your `.npmrc`:
+2. Toggle the following configuration variable in your `.npmrc` on:
 
 ```
 engine-strict=true
 ```
 
-3. Write the following content into your `package.json`:
+3. Specify the following fields in your `package.json`:
 
 ```
 {
@@ -50,6 +50,8 @@ npm error EBADDEVENGINES   required: { name: 'pnpm', onFail: 'error' }
 npm error EBADDEVENGINES }
 npm error A complete log of this run can be found in: /Users/username/.npm/_logs/2021-08-21T00_00_00_000Z-debug-0.log
 ```
+
+---
 
 Alternatively, in your `package.json`, you can specify the following `preinstall` script:
 
