@@ -3,7 +3,7 @@ id: only-allow-pnpm
 title: Only Allow PNPM
 ---
 
-When many developers are working on the same project together, you need a failsafe in case someone accidentally runs commands with another package manager (like NPM, Yarn, Bun).
+When many developers are working on the same project together, you need a failsafe in case someone accidentally runs commands with another package manager (like NPM, Yarn, or Bun).
 
 To prevent dependency management conflicts between package managers:
 
@@ -25,6 +25,7 @@ engine-strict=true
     },
     "packageManager": {
       "name": "pnpm",
+      "version": "10.13.1",
       "onFail": "error"
     }
   },
@@ -35,7 +36,7 @@ engine-strict=true
 }
 ```
 
-- Now, when you run `npm i`, `npm i -D` (or an equivalent), these commands return this error (before the preinstall script can run):
+- Now, when you run `npm i`, `npm i -D` (or an equivalent), these commands return this error:
 
 ```
 username@hostname some-project % npm i -D package
@@ -49,3 +50,16 @@ npm error EBADDEVENGINES   required: { name: 'pnpm', onFail: 'error' }
 npm error EBADDEVENGINES }
 npm error A complete log of this run can be found in: /Users/username/.npm/_logs/2021-08-21T00_00_00_000Z-debug-0.log
 ```
+
+Alternatively, in your `package.json`, you can specify the following `preinstall` script:
+
+```
+{
+  "scripts": {
+    "preinstall": "npx only-allow pnpm"
+  }
+}
+```
+
+- You may also install the package `only-allow` as a dev dependency.
+- For NPM version 7+, you may need to run `npx -y only-allow pnpm` instead.
