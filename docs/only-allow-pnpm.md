@@ -5,10 +5,10 @@ title: Only Allow PNPM
 
 When many developers are working on the same project together, you need a failsafe in case someone accidentally runs commands with another package manager (like NPM, Yarn, or Bun).
 
-To prevent dependency management conflicts between package managers:
+As of Node v16.9.0 (backported to v14.19.0), to prevent dependency management conflicts between package managers:
 
 1. Create a file, if it doesn't already exist, named `.npmrc` at the root of your project.
-2. Toggle the following configuration variable in your `.npmrc` on:
+2. Set the following configuration variable in your `.npmrc` to `true`:
 
 ```
 engine-strict=true
