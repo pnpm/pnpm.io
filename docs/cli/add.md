@@ -149,7 +149,7 @@ pnpm add andreineculau/npm-publish-git#semver:<=v0.0.7
 You may also install just a subdirectory from a Git-hosted monorepo using the `path:` parameter. For instance:
 
 ```
-pnpm add RexSkz/test-git-subdir-fetch#path:/packages/simple-react-app
+pnpm add RexSkz/test-git-subfolder-fetch#path:/packages/simple-react-app
 ```
 
 #### Install from a Git repository via a full URL
