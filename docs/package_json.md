@@ -34,6 +34,53 @@ installed as a dependency.
 
 [settings]: ./settings.md#engineStrict
 
+## devEngines.runtime
+
+Added in: v10.14
+
+Allows to specify one or more JavaScript runtime engines used by the project. Supported runtimes are Node.js, Deno, and Bun.
+
+For instance, here is how to add `node@^24.4.0` to your dependencies:
+
+```json
+{
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.4.0",
+      "onFail": "download"
+    }
+  }
+}
+```
+
+You can also add multiple runtimes to the same `package.json`:
+
+```json
+{
+  "devEngines": {
+    "runtime": [
+      {
+        "name": "node",
+        "version": "^24.4.0",
+        "onFail": "download"
+      },
+      {
+        "name": "deno",
+        "version": "^2.4.3",
+        "onFail": "download"
+      }
+    ]
+  }
+}
+```
+
+How it works:
+
+1. `pnpm install` resolves your specified range to the latest matching runtime version.
+1. The exact version (and checksum) is saved in the lockfile.
+1. Scripts use the local runtime, ensuring consistency across environments.
+
 ## dependenciesMeta
 
 Additional meta information used for dependencies declared inside `dependencies`, `optionalDependencies`, and `devDependencies`.
