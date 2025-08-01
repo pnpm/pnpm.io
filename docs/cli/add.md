@@ -263,3 +263,15 @@ This will run `esbuild`'s postinstall script and also add it to the `onlyBuiltDe
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
+
+import CpuFlag from '../settings/_cpuFlag.mdx'
+
+<CpuFlag />
+
+import OsFlag from '../settings/_osFlag.mdx'
+
+<OsFlag />
+
+import LibcFlag from '../settings/_libcFlag.mdx'
+
+<LibcFlag />

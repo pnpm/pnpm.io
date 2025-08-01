@@ -180,3 +180,15 @@ dependencies.
 ### --resolution-only
 
 Re-runs resolution: useful for printing out peer dependency issues.
+
+import CpuFlag from '../settings/_cpuFlag.mdx'
+
+<CpuFlag />
+
+import OsFlag from '../settings/_osFlag.mdx'
+
+<OsFlag />
+
+import LibcFlag from '../settings/_libcFlag.mdx'
+
+<LibcFlag />
