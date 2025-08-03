@@ -31,7 +31,7 @@ Don't check packages from `optionalDependencies`.
 
 ### --prod, -P
 
-Check only "dependencies" and "optionalDependencies".
+Check only `dependencies` and `optionalDependencies`.
 
 ### --filter &lt;package_selector\>
 
