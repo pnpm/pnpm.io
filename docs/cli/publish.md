@@ -103,13 +103,13 @@ When publishing packages that require two-factor authentication, this option can
 
 ## Configuration
 
-You can also set `git-checks`, `publish-branch` options in the `.npmrc` file.
+You can also set `gitChecks`, `publishBranch` options in the `pnpm-workspace.yaml` file.
 
 For example:
 
-```ini title=".npmrc"
-git-checks=false
-publish-branch=production
+```yaml title="pnpm-workspace.yaml"
+gitChecks: false
+publishBranch: production
 ```
 
 ## Life Cycle Scripts

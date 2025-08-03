@@ -79,7 +79,32 @@ Removing the `scripts` field from a dependency's manifest via `readPackage` will
 not prevent pnpm from building the dependency. When building a dependency, pnpm
 reads the `package.json` of the package from the package's archive, which is not
 affected by the hook. In order to ignore a package's build, use the
-[pnpm.neverBuiltDependencies](package_json.md#pnpmneverbuiltdependencies) field.
+[neverBuiltDependencies](settings.md#neverbuiltdependencies) field.
+
+### `hooks.updateConfig(config): config | Promise<config>`
+
+Added in: v10.8.0
+
+Allows you to modify the configuration settings used by pnpm. This hook is most useful when paired with [configDependencies](config-dependencies), allowing you to share and reuse settings across different Git repositories.
+
+For example, [@pnpm/plugin-better-defaults](https://github.com/pnpm/plugin-better-defaults) uses the `updateConfig` hook to apply a curated set of recommended settings.
+
+#### Usage example
+
+```js title=".pnpmfile.cjs"
+module.exports = {
+  hooks: {
+    updateConfig (config) {
+      return Object.assign(config, {
+        enablePrePostScripts: false,
+        optimisticRepeatInstall: true,
+        resolutionMode: 'lowest-direct',
+        verifyDepsBeforeRun: 'install',
+      })
+    }
+  }
+}
+```
 
 ### `hooks.afterAllResolved(lockfile, context): lockfile | Promise<lockfile>`
 
@@ -112,38 +137,55 @@ module.exports = {
 There are none - anything that can be done with the lockfile can be modified via
 this function, and you can even extend the lockfile's functionality.
 
+### `hooks.preResolution(options): Promise<void>`
+
+This hook is executed after reading and parsing the lockfiles of the project, but before resolving dependencies. It allows modifications to the lockfile objects.
+
+#### Arguments
+
+* `options.existsCurrentLockfile` - A boolean that is true if the lockfile at `node_modules/.pnpm/lock.yaml` exists.
+* `options.currentLockfile` - The lockfile object from `node_modules/.pnpm/lock.yaml`.
+* `options.existsNonEmptyWantedLockfile` - A boolean that is true if the lockfile at `pnpm-lock.yaml` exists.
+* `options.wantedLockfile` - The lockfile object from `pnpm-lock.yaml`.
+* `options.lockfileDir` - The directory where the wanted lockfile is found.
+* `options.storeDir` - The location of the store directory.
+* `options.registries` - A map of scopes to registry URLs.
+
+### `hooks.importPackage(destinationDir, options): Promise<string | undefined>`
+
+This hook allows to change how packages are written to `node_modules`. The return value is optional and states what method was used for importing the dependency, e.g.: clone, hardlink.
+
+#### Arguments
+
+* `destinationDir` - The destination directory where the package should be written.
+* `options.disableRelinkLocalDirDeps`
+* `options.filesMap`
+* `options.force`
+* `options.resolvedFrom`
+* `options.keepModulesDir`
+
+### `hooks.fetchers`
+
+This hook allows to override the fetchers that are used for different types of dependencies. It is an object that may have the following fields:
+
+* `localTarball`
+* `remoteTarball`
+* `gitHostedTarball`
+* `directory`
+* `git`
+
 ## Related Configuration
 
-### ignore-pnpmfile
+import IgnorePnpmfile from './settings/_ignorePnpmfile.mdx'
 
-* Default: **false**
-* Type: **Boolean**
+<IgnorePnpmfile />
 
-`.pnpmfile.cjs` will be ignored. Useful together with `--ignore-scripts` when you
-want to make sure that no script gets executed during install.
+import Pnpmfile from './settings/_pnpmfile.mdx'
 
-### pnpmfile
+<Pnpmfile />
 
-* Default: **.pnpmfile.cjs**
-* Type: **path**
-* Example: **.pnpm/.pnpmfile.cjs**
+import GlobalPnpmfile from './settings/_globalPnpmfile.mdx'
 
-The location of the local pnpmfile.
-
-### global-pnpmfile
-
-* Default: **null**
-* Type: **path**
-* Example: **~/.pnpm/global_pnpmfile.cjs**
-
-The location of a global pnpmfile. A global pnpmfile is used by all projects
-during installation.
-
-:::note
-
-It is recommended to use local pnpmfiles. Only use a global pnpmfile
-if you use pnpm on projects that don't use pnpm as the primary package manager.
-
-:::
+<GlobalPnpmfile />
 
 [`pnpm patch`]: ./cli/patch.md

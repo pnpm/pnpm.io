@@ -35,7 +35,10 @@ To fix this error, all dependencies that use the [workspace protocol] should be 
 
 `pnpm install` will fail if the project has unresolved peer dependencies or the peer dependencies are not matching the wanted ranges. To fix this, install the missing peer dependencies.
 
-You may also selectively ignore these errors using the [pnpm.peerDependencyRules.ignoreMissing](package_json#pnpmpeerdependencyrulesignoremissing) and [pnpm.peerDependencyRules.allowedVersions](package_json#pnpmpeerdependencyrulesallowedversions) fields in `package.json`.
+You may also selectively ignore these errors using the [peerDependencyRules.ignoreMissing] and [peerDependencyRules.allowedVersions] settings.
+
+[peerDependencyRules.ignoreMissing]: settings#peerdependencyrulesignoremissing
+[peerDependencyRules.allowedVersions]: settings#peerdependencyrulesallowedversions
 
 ## ERR_PNPM_OUTDATED_LOCKFILE
 
@@ -63,6 +66,9 @@ For example:
 * `release/20.0.0-rc.0` defines a `release` channel but the version is that of an RC release.
 
 To fix this error, either remove the release channel prefix or correct the version suffix.
+
+Note that it is not allowed to specify node versions like `lts/Jod`.
+The correct syntax for stable release is strictly X.Y.Z or release/X.Y.Z.
 
 ## ERR_PNPM_INVALID_NODE_VERSION
 

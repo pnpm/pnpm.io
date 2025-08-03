@@ -26,6 +26,35 @@ setting to `false`.
 | `pnpm i --frozen-lockfile`        | `pnpm-lock.yaml` is not updated     |
 | `pnpm i --lockfile-only`          | Only `pnpm-lock.yaml` is updated    |
 
+## Options for filtering dependencies
+
+Without a lockfile, pnpm has to create one, and it must be consistent regardless of dependencies
+filtering, so running `pnpm install --prod` on a directory without a lockfile would still resolve the
+dev dependencies, and it would error if the resolution is unsuccessful. The only exception for this rule
+are `link:` dependencies.
+
+Without `--frozen-lockfile`, pnpm will check for outdated information from `file:` dependencies, so
+running `pnpm install --prod` without `--frozen-lockfile` on an environment where the target of `file:`
+has been removed would error.
+
+### --prod, -P
+
+* Default: **false**
+* Type: **Boolean**
+
+If `true`, pnpm will not install any package listed in `devDependencies` and will remove 
+those insofar they were already installed.
+If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`.
+
+### --dev, -D
+
+Only `devDependencies` are installed and `dependencies` are removed insofar they 
+were already installed.
+
+### --no-optional
+
+`optionalDependencies` are not installed.
+
 ## Options
 
 ### --force
@@ -48,28 +77,9 @@ If a package won't be found locally, the installation will fail.
 If `true`, staleness checks for cached data will be bypassed, but missing data
 will be requested from the server. To force full offline mode, use `--offline`.
 
-### --prod, -P
+### --no-lockfile
 
-* Default:
-  * If `NODE_ENV` is `production`: `true`
-  * If `NODE_ENV` is **not** `production`: `false`
-* Type: Boolean
-
-If set, pnpm will ignore `NODE_ENV` and instead use this boolean value for
-determining the environment.
-
-If `true`, pnpm will not install any package listed in `devDependencies` and will remove 
-those insofar they were already installed.
-If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`.
-
-### --dev, -D
-
-Only `devDependencies` are installed and `dependencies` are removed insofar they 
-were already installed, regardless of the `NODE_ENV`.
-
-### --no-optional
-
-`optionalDependencies` are not installed.
+Don't read or generate a `pnpm-lock.yaml` file.
 
 ### --lockfile-only
 
@@ -131,7 +141,7 @@ the installation progress.
 
 If you want to change what type of information is printed, use the [loglevel] setting.
 
-[loglevel]: ../npmrc.md#loglevel
+[loglevel]: ../settings.md#loglevel
 
 ### --use-store-server
 
@@ -165,14 +175,20 @@ dependencies.
 
 ### --filter &lt;package_selector>
 
-:::warning
-
-Filter currently does not work properly with v8 default config, you have to implicitly set [dedupe-peer-dependents](../npmrc.md#dedupe-peer-dependents) to `false` to have that work. For more info and progress please refer to [#6300](https://github.com/pnpm/pnpm/issues/6300)
-
-:::
-
 [Read more about filtering.](../filtering.md)
 
 ### --resolution-only
 
 Re-runs resolution: useful for printing out peer dependency issues.
+
+import CpuFlag from '../settings/_cpuFlag.mdx'
+
+<CpuFlag />
+
+import OsFlag from '../settings/_osFlag.mdx'
+
+<OsFlag />
+
+import LibcFlag from '../settings/_libcFlag.mdx'
+
+<LibcFlag />

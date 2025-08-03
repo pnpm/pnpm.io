@@ -5,6 +5,12 @@ title: "pnpm deploy"
 
 Deploy a package from a workspace. During deployment, the files of the deployed package are copied to the target directory. All dependencies of the deployed package, including dependencies from the workspace, are installed inside an isolated `node_modules` directory at the target directory. The target directory will contain a portable package that can be copied to a server and executed without additional steps.
 
+:::note
+
+By default, the deploy command only works with workspaces that have the `inject-workspace-packages` setting set to `true`. If you want to use deploy without "injected dependencies", use the `--legacy` flag or set `force-legacy-deploy` to `true`.
+
+:::
+
 Usage:
 
 ```
@@ -39,7 +45,7 @@ ENTRYPOINT ["node", "index.js"]
 
 ### --dev, -D
 
-Only `devDependencies` are installed regardless of the `NODE_ENV`.
+Only `devDependencies` are installed.
 
 ### --no-optional
 
@@ -52,6 +58,12 @@ Packages in `devDependencies` won't be installed.
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
+
+### --legacy
+
+Force legacy deploy implementation.
+
+By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. The `--legacy` flag disables this behavior and also allows using the deploy command without the `inject-workspace-packages=true` setting.
 
 ## Files included in the deployed project
 

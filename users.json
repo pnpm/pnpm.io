@@ -1,5 +1,12 @@
 [
   {
+    "caption": "Alova",
+    "image": "/img/users/alova.svg",
+    "infoLink": "https://alova.js.org",
+    "pinned": true,
+    "width": 150
+  },
+  {
     "caption": "Compass",
     "image": "/img/users/compass.svg",
     "infoLink": "https://compass.com",
@@ -351,6 +358,13 @@
     "caption": "MacPaw",
     "image": "/img/users/macpaw.svg",
     "infoLink": "https://macpaw.com/",
+    "pinned": false,
+    "width": 250
+  },
+    {
+    "caption": "FlashProxy",
+    "image": "/img/users/flashproxy.svg",
+    "infoLink": "https://flashproxy.io/",
     "pinned": false,
     "width": 250
   }

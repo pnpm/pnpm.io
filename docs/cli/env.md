@@ -67,7 +67,7 @@ pnpm env add --global lts 18 20.0.1
 
 ### remove, rm
 
-Removes the specified version(s) of Node.JS.
+Removes the specified version(s) of Node.js.
 
 Usage example:
 

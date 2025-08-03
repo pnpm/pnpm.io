@@ -36,6 +36,20 @@ You may also install packages by:
 
 [the corresponding guide]: #install-from-remote-tarball
 
+### Install from the JSR registry
+
+Added in: v10.9.0
+
+To install packages from the [JSR](https://jsr.io/) registry, use the `jsr:` protocol prefix:
+
+```
+pnpm add jsr:@hono/hono
+pnpm add jsr:@hono/hono@4
+pnpm add jsr:@hono/hono@latest
+```
+
+This works just like installing from npm, but tells pnpm to resolve the package through JSR instead.
+
 ### Install from the workspace
 
 Note that when adding dependencies and working within a [workspace], packages
@@ -81,27 +95,96 @@ pnpm add <git remote url>
 ```
 
 Installs the package from the hosted Git provider, cloning it with Git.
-You can use a protocol for certain Git providers. For example,
-`pnpm add github:user/repo`
 
-You may install from Git by:
+You may install packages from Git by:
 
-* latest commit from master: `pnpm add kevva/is-positive`
-* commit: `pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678`
-* branch: `pnpm add kevva/is-positive#master`
-* version range: `pnpm add kevva/is-positive#semver:^2.0.0`
+* Latest commit from default branch:
+```
+pnpm add kevva/is-positive
+```
+* Git commit hash:
+```
+pnpm add kevva/is-positive#97edff6f525f192a3f83cea1944765f769ae2678
+```
+* Git branch:
+```
+pnpm add kevva/is-positive#master
+```
+* Git branch relative to refs:
+```
+pnpm add zkochan/is-negative#heads/canary
+```
+* Git tag:
+```
+pnpm add zkochan/is-negative#2.0.1
+```
+* V-prefixed Git tag:
+```
+pnpm add andreineculau/npm-publish-git#v0.0.7
+```
 
-You may also install just a subdirectory from a Git-hosted monorepo. For instance:
+#### Install from a Git repository using semver
+
+You can specify version (range) to install using the `semver:` parameter. For example:
+
+* Strict semver:
+```
+pnpm add zkochan/is-negative#semver:1.0.0
+```
+* V-prefixed strict semver:
+```
+pnpm add andreineculau/npm-publish-git#semver:v0.0.7
+```
+* Semver version range:
+```
+pnpm add kevva/is-positive#semver:^2.0.0
+```
+* V-prefixed semver version range:
+```
+pnpm add andreineculau/npm-publish-git#semver:<=v0.0.7
+```
+
+#### Install from a subdirectory of a Git repository
+
+You may also install just a subdirectory from a Git-hosted monorepo using the `path:` parameter. For instance:
 
 ```
-pnpm add myorg/repo#path:packages/foo
+pnpm add RexSkz/test-git-subdir-fetch#path:/packages/simple-react-app
 ```
 
-It is possible to combine multiple parameters by separating them with `&`. For instance, you can extend the above command by specifying which branch to fetch from:
+#### Install from a Git repository via a full URL
+
+If you want to be more explicit or are using alternative Git hosting, you might want to spell out full Git URL:
 
 ```
-pnpm add myorg/repo#path:packages/foo&next
+# git+ssh
+pnpm add git+ssh://git@github.com:zkochan/is-negative.git#2.0.1
+
+# https
+pnpm add https://github.com/zkochan/is-negative.git#2.0.1
 ```
+
+#### Install from a Git repository using hosting providers shorthand
+
+You can use a protocol shorthand `[provider]:` for certain Git providers:
+
+```
+pnpm add github:zkochan/is-negative
+pnpm add bitbucket:pnpmjs/git-resolver
+pnpm add gitlab:pnpm/git-resolver
+```
+
+If `[provider]:` is omitted, it defaults to `github:`.
+
+#### Install from a Git repository combining different parameters
+
+It is possible to combine multiple parameters by separating them with `&`. This can be useful for forks of monorepos:
+
+```
+pnpm add RexSkz/test-git-subdir-fetch.git#beta\&path:/packages/simple-react-app
+```
+
+Installs from the `beta` branch and only the subdirectory at `/packages/simple-react-app`.
 
 ## Options
 
@@ -127,6 +210,26 @@ pnpm's default semver range operator.
 Using `--save-peer` will add one or more packages to `peerDependencies` and
 install them as dev dependencies.
 
+### --save-catalog
+
+Added in: v10.12.1
+
+Save the new dependency to the default [catalog].
+
+### --save-catalog-name &lt;catalog_name\>
+
+Added in: v10.12.1
+
+Save the new dependency to the specified [catalog].
+
+[catalog]: catalogs.md
+
+### --config
+
+Added in: v10.8.0
+
+Save the dependency to [configDependencies](config-dependencies.md).
+
 ### --ignore-workspace-root-check
 
 Adding a new dependency to the root workspace package fails, unless the
@@ -142,6 +245,33 @@ Install a package globally.
 
 Only adds the new dependency if it is found in the workspace.
 
+
+### --allow-build
+
+Added in: v10.4.0
+
+A list of package names that are allowed to run postinstall scripts during installation.
+
+Example:
+
+```
+pnpm --allow-build=esbuild add my-bundler
+```
+
+This will run `esbuild`'s postinstall script and also add it to the `onlyBuiltDependencies` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
+
+import CpuFlag from '../settings/_cpuFlag.mdx'
+
+<CpuFlag />
+
+import OsFlag from '../settings/_osFlag.mdx'
+
+<OsFlag />
+
+import LibcFlag from '../settings/_libcFlag.mdx'
+
+<LibcFlag />

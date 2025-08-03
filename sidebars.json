@@ -2,6 +2,7 @@
   "docs": {
     "Introduction": [
       "motivation",
+      "feature-comparison",
       "installation"
     ],
     "Usage": [
@@ -58,7 +59,9 @@
           "cli/exec",
           "cli/dlx",
           "cli/create",
-          "cli/start"
+          "cli/start",
+          "cli/approve-builds",
+          "cli/ignored-builds"
         ]
       },
       {
@@ -70,8 +73,19 @@
       },
       {
         "type": "category",
+        "label": "Manage cache",
+        "items": [
+          "cli/cache-list",
+          "cli/cache-list-registries",
+          "cli/cache-view",
+          "cli/cache-delete"
+        ]
+      },
+      {
+        "type": "category",
         "label": "Misc.",
         "items": [
+          "cli/self-update",
           "cli/publish",
           "cli/pack",
           "cli/recursive",
@@ -89,13 +103,14 @@
     ],
     "Configuration": [
       "package_json",
-      "npmrc",
+      "settings",
       "pnpm-workspace_yaml",
       "pnpmfile"
     ],
     "Features": [
       "workspaces",
       "catalogs",
+      "config-dependencies",
       "aliases",
       "completion",
       "git_branch_lockfiles"
@@ -103,12 +118,12 @@
     "Recipes": [
       "using-changesets",
       "continuous-integration",
+      "typescript",
       "git",
       "docker",
       "podman"
     ],
     "Advanced": [
-      "feature-comparison",
       "errors",
       "logos",
       "limitations",

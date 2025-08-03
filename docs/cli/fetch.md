@@ -23,12 +23,12 @@ pnpm, which looks like
 FROM node:20
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm && corepack install -g pnpm@latest-9
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 WORKDIR /path/to/somewhere
 
 # Files required by pnpm install
-COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
+COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.cjs ./
 
 # If you patched any package, include patches before install too
 COPY patches patches
@@ -42,7 +42,7 @@ EXPOSE 8080
 CMD [ "node", "server.js" ]
 ```
 
-As long as there are no changes to `.npmrc`, `package.json`, `pnpm-lock.yaml`,
+As long as there are no changes to `.npmrc`, `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`,
 `.pnpmfile.cjs`, docker build cache is still valid up to the layer of
 `RUN pnpm install --frozen-lockfile --prod`, which cost most of the time
 when building a docker image.
@@ -59,12 +59,12 @@ look like
 FROM node:20
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm && corepack install -g pnpm@latest-9
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 WORKDIR /path/to/somewhere
 
 # Files required by pnpm install
-COPY .npmrc package.json pnpm-lock.yaml .pnpmfile.cjs ./
+COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.cjs ./
 
 # If you patched any package, include patches before install too
 COPY patches patches
@@ -88,18 +88,18 @@ As you can see, the Dockerfile has to be updated when you add or remove
 sub-packages.
 
 `pnpm fetch` solves the above problem perfectly by providing the ability
-to load packages into the virtual store using only information from a lockfile.
+to load packages into the virtual store using only information from a lockfile and a configuration file (`pnpm-workspace.yaml`).
 
 ```Dockerfile
 FROM node:20
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable pnpm && corepack install -g pnpm@latest-9
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 WORKDIR /path/to/somewhere
 
 # pnpm fetch does require only lockfile
-COPY pnpm-lock.yaml ./
+COPY pnpm-lock.yaml pnpm-workspace.yaml ./
 
 # If you patched any package, include patches before running pnpm fetch
 COPY patches patches

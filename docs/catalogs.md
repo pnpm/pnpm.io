@@ -3,8 +3,6 @@ id: catalogs
 title: Catalogs
 ---
 
-Added in: v9.5.0
-
 "_Catalogs_" are a [workspace feature](./workspaces.md) for defining dependency version ranges as reusable constants. Constants defined in catalogs can later be referenced in `package.json` files.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/PuRUk4mV2jc" title="pnpm Catalogs — A New Tool to Manage Dependencies in monorepos" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
@@ -47,12 +45,15 @@ This is equivalent to writing a version range (e.g. `^18.3.1`) directly.
 }
 ```
 
-You may use the `catalog:` protocol in the next fields of your `package.json`:
+You may use the `catalog:` protocol in the next fields:
 
-* `dependencies`
-* `devDependencies`
-* `optionalDependencies`
-* `pnpm.overrides`
+* `package.json`:
+  * `dependencies`
+  * `devDependencies`
+  * `peerDependencies`
+  * `optionalDependencies`
+* `pnpm-workspace.yaml`
+    * `overrides`
 
 The `catalog:` protocol allows an optional name after the colon (ex: `catalog:name`) to specify which catalog should be used. When a name is omitted, the default catalog is used.
 
@@ -159,8 +160,8 @@ Will become the following on publish.
 
 The `catalog:` protocol replacement process allows the `@example/components` package to be used by other workspaces or package managers.
 
-## Caveats
+## Settings
 
-The `pnpm update` command does not yet support catalogs.
+import CatalogMode from './settings/_catalogMode.mdx'
 
-To update dependencies defined in `pnpm-workspace.yaml`, newer version ranges will need to be chosen manually until a future version of pnpm handles this.
+<CatalogMode />

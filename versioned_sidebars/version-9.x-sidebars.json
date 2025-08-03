@@ -206,10 +206,36 @@
           ]
         },
         {
+          "type": "category",
+          "label": "Manage cache",
+          "items": [
+            {
+              "type": "doc",
+              "id": "cli/cache-list"
+            },
+            {
+              "type": "doc",
+              "id": "cli/cache-list-registries"
+            },
+            {
+              "type": "doc",
+              "id": "cli/cache-view"
+            },
+            {
+              "type": "doc",
+              "id": "cli/cache-delete"
+            }
+          ]
+        },
+        {
           "collapsed": true,
           "type": "category",
           "label": "Misc.",
           "items": [
+            {
+              "type": "doc",
+              "id": "cli/self-update"
+            },
             {
               "type": "doc",
               "id": "cli/publish"

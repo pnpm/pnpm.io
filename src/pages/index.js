@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import Translate, {translate} from '@docusaurus/Translate'
+import Translate from '@docusaurus/Translate'
 import styles from './styles.module.css';
 
 const features = [
@@ -91,26 +91,23 @@ const Showcase = props => {
               <a href={addUTM("https://bit.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="bit" src="/img/users/bit.svg" />
               </a>
-              <a href={addUTM("https://figma.com/")} target="_blank">
-                <img style={{padding: '0 20px'}} width="120" alt="Figma" title="Figma" src="/img/users/figma.svg" />
-              </a>
               <a href={addUTM("https://discord.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="260" alt="Discord" src="/img/users/discord.svg" />
-              </a>
-              <a href={addUTM("https://www.jetbrains.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="JetBrains" src="/img/users/jetbrains.svg" />
               </a>
               <a href={addUTM("https://coderabbit.ai/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="CodeRabbit" src="/img/users/coderabbit.svg" />
               </a>
-              <a href={addUTM("https://prisma.io/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Prisma" src="/img/users/prisma.svg" />
+              <a href={addUTM("https://workleap.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="210" alt="Workleap" src="/img/users/workleap.svg" />
+              </a>
+              <a href={addUTM("https://vite.dev/")} target="_blank">
+                <img style={{padding: '20px'}} width="120" alt="vite" src="/img/users/vitejs.svg" />
+              </a>
+              <a href={addUTM("https://stackblitz.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="210" alt="Stackblitz" src="/img/users/stackblitz.svg" />
               </a>
               <a href={addUTM("https://uscreen.de/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="u|screen" src="/img/users/uscreen.svg" />
-              </a>
-              <a href={addUTM("https://nx.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="160" alt="nx" src="/img/users/nx.svg" />
               </a>
               <a href={addUTM("https://www.leniolabs.com/")} target="_blank">
                 <img style={{padding: '20px'}} width="120" alt="Leniolabs_" src="/img/users/leniolabs.jpg" />
@@ -121,41 +118,22 @@ const Showcase = props => {
               <a href={addUTM("https://depot.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="Depot" src="/img/users/depot_dynamic.svg" />
               </a>
-              <a href={addUTM("https://moonrepo.dev/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="Moonrepo" src="/img/users/moonrepo.svg" />
-              </a>
               <a href={addUTM("https://devowl.io/")} target="_blank">
                 <img style={{padding: '20px'}} width="240" alt="devowl" src="/img/users/devowlio.svg" />
-              </a>
-              <a href={addUTM("https://macpaw.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="240" alt="MacPaw" src="/img/users/macpaw.svg" />
               </a>
               <a href={addUTM("https://cerbos.dev/")} target="_blank">
                 <img style={{padding: '20px'}} width="200" alt="Cerbos" src="/img/users/cerbos.svg" />
               </a>
-              <a href={addUTM("https://sidesmedia.com/")} target="_blank">
-                <img style={{padding: '20px'}} width="200" alt="Sides Media" src="/img/users/sides-media.png" />
+              <a href={addUTM("https://vlt.sh/")} target="_blank">
+                <img style={{padding: '20px'}} width="200" alt="vlt" src="/img/users/vlt.svg" />
+              </a>
+              <a href={addUTM("https://opensource.mercedes-benz.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="100" alt="Mercedes-Benz FOSS" src="/img/users/mercedes.svg" />
+              </a>
+              <a href={addUTM("https://oomol.com/")} target="_blank">
+                <img style={{padding: '20px'}} width="240" alt="OOMOL Studio" src="/img/users/oomol.svg" />
               </a>
             </div>
-          </div>
-          <div>
-            <div className="prose">
-              <h1><Translate>Who's Using This?</Translate></h1>
-              <p><Translate>This project is used by many folks</Translate></p>
-            </div>
-            <div className="logos" style={{
-              alignItems: 'center',
-              display: 'flex',
-              flexFlow: 'row wrap',
-              justifyContent: 'center',
-            }}>{showcase}</div>
-            <Link
-              style={{margin: '0 20px'}}
-              className={clsx(
-                'button button--outline button--secondary button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('users')}><Translate>More pnpm users</Translate></Link>
           </div>
         </div>
       </div>

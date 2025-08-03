@@ -53,3 +53,7 @@ Checks only `dependencies` and `optionalDependencies`.
 ### --no-optional
 
 Doesn't check `optionalDependencies`.
+
+### --sort-by
+
+Specifies the order in which the output results are sorted. Currently only the value `name` is accepted.

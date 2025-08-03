@@ -22,13 +22,28 @@
   ],
   "redirects": [
     {
-      "source": "/9.x/:splat*",
+      "source": "/10.x/:splat*",
       "destination": "/:splat*",
       "permanent": false
     },
     {
+      "source": "/npmrc",
+      "destination": "/settings",
+      "permanent": true
+    },
+    {
+      "source": "/next/npmrc",
+      "destination": "/next/settings",
+      "permanent": true
+    },
+    {
       "source": "/en/:splat*",
       "destination": "/:splat*",
+      "permanent": true
+    },
+    {
+      "source": "/v/:splat*",
+      "destination": "https://github.com/pnpm/pnpm/releases/tag/v:splat*",
       "permanent": true
     }
   ]

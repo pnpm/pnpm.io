@@ -7,11 +7,12 @@ import { promises as fs } from 'fs'
 import getFolderSize from 'get-folder-size'
 import rimraf from 'rimraf'
 import { fileURLToPath } from 'url'
+import tempy from 'tempy'
 
 const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
 
 const FIXTURES_DIR = path.join(DIRNAME, 'fixtures')
-const TMP = path.join(DIRNAME, '.tmp')
+const TMP = tempy.directory()
 
 const lockfileNameByPM = {
   npm: 'package-lock.json',

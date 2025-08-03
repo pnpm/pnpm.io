@@ -116,8 +116,8 @@ async function run () {
     fs.promises.mkdir(managersDir, { recursive: true }),
     fs.promises.mkdir(BENCH_IMGS, { recursive: true }),
   ])
-  spawn.sync('pnpm', ['init', '--yes'], { cwd: managersDir })
-  spawn.sync('pnpm', ['add', 'npm@latest', 'pnpm@next-9'], { cwd: managersDir, stdio: 'inherit' })
+  fs.writeFileSync(path.join(managersDir, 'package.json'), '{}', 'utf8')
+  spawn.sync('pnpm', ['add', 'npm@latest', 'pnpm@next-10'], { cwd: managersDir, stdio: 'inherit' })
   spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDir, stdio: 'inherit' })
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]

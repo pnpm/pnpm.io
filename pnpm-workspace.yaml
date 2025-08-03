@@ -1,0 +1,6 @@
+publicHoistPattern:
+  - '@mdx-js/react'
+  - url-loader
+ignoredBuiltDependencies:
+  - core-js
+  - core-js-pure

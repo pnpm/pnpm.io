@@ -61,6 +61,10 @@ Don't display packages from `optionalDependencies`.
 
 Display only dependencies that are also projects within the workspace.
 
+### --exclude-peers
+
+Exclude peer dependencies from the results (but dependencies of peer dependencies are not ignored).
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)

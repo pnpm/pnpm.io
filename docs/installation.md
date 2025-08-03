@@ -13,6 +13,14 @@ You may install pnpm even if you don't have Node.js installed, using the followi
 
 ### On Windows
 
+:::warning
+
+Sometimes, Windows Defender may block our executable if you install pnpm this way.
+
+Due to this issue, we currently recommend installing pnpm using [npm](#using-npm) or [Corepack](#using-corepack) on Windows.
+
+:::
+
 Using PowerShell:
 
 ```powershell
@@ -58,6 +66,12 @@ curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 
 ## Using Corepack
 
+Due to an issue with [outdated signatures in Corepack](https://github.com/nodejs/corepack/issues/612), Corepack should be updated to its latest version first:
+
+```
+npm install --global corepack@latest
+```
+
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
 
 :::info
@@ -70,41 +84,37 @@ If you have installed Node.js with `pnpm env` Corepack won't be installed on you
 corepack enable pnpm
 ```
 
-If you installed Node.js using Homebrew, you'll need to install corepack separately:
-
-```
-brew install corepack
-```
-
 This will automatically install pnpm on your system.
 
 You can pin the version of pnpm used on your project using the following command:
 
 ```
-corepack use pnpm@latest
+corepack use pnpm@latest-10
 ```
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
 
-## Using npm
+## Using other package managers
+
+### Using npm
 
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
-- [`pnpm`](https://www.npmjs.com/package/pnpm) is a ordinary version of pnpm, which needs Node.js to run.
+- [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run.
 - [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed.
 
 
 ```sh
-npm install -g pnpm
+npm install -g pnpm@latest-10
 ```
 
 or
 
 ```sh
-npm install -g @pnpm/exe
+npm install -g @pnpm/exe@latest-10
 ```
 
-## Using Homebrew
+### Using Homebrew
 
 If you have the package manager installed, you can install pnpm using the following command:
 
@@ -112,7 +122,7 @@ If you have the package manager installed, you can install pnpm using the follow
 brew install pnpm
 ```
 
-## Using winget
+### Using winget
 
 If you have winget installed, you can install pnpm using the following command:
 
@@ -120,7 +130,7 @@ If you have winget installed, you can install pnpm using the following command:
 winget install -e --id pnpm.pnpm
 ```
 
-## Using Scoop
+### Using Scoop
 
 If you have Scoop installed, you can install pnpm using the following command:
 
@@ -128,7 +138,7 @@ If you have Scoop installed, you can install pnpm using the following command:
 scoop install nodejs-lts pnpm
 ```
 
-## Using Choco
+### Using Choco
 
 If you have Chocolatey installed, you can install pnpm using the following command:
 
@@ -136,7 +146,7 @@ If you have Chocolatey installed, you can install pnpm using the following comma
 choco install pnpm
 ```
 
-## Using Volta
+### Using Volta
 
 If you have Volta installed, you can install pnpm using the following command:
 
@@ -154,13 +164,13 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 Here is a list of past pnpm versions with respective Node.js version support.
 
-| Node.js    | pnpm 7 | pnpm 8 | pnpm 9 |
-|------------|--------|--------|--------|
-| Node.js 12 | ❌     | ❌     | ❌     |
-| Node.js 14 | ✔️      | ❌     | ❌     |
-| Node.js 16 | ✔️      | ✔️      | ❌     |
-| Node.js 18 | ✔️      | ✔️      | ✔️      |
-| Node.js 20 | ✔️      | ✔️      | ✔️      |
+| Node.js    | pnpm 8 | pnpm 9 | pnpm 10 |
+|------------|--------|--------|---------|
+| Node.js 14 | ❌     | ❌     | ❌      |
+| Node.js 16 | ✔️      | ❌     | ❌      |
+| Node.js 18 | ✔️      | ✔️      | ✔️       |
+| Node.js 20 | ✔️      | ✔️      | ✔️       |
+| Node.js 22 | ✔️      | ✔️      | ✔️       |
 
 ## Troubleshooting
 
@@ -186,7 +196,7 @@ Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node
 }
 ```
 
-First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run `where.exe pnpm.*`
+First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run `where.exe pnpm.*`.
 You'll get the location of the pnpm command, for instance:
 
 ```
@@ -224,6 +234,16 @@ set-alias -name pn -value pnpm
 ```
 
 Save the file and close the window. You may need to close any open Powershell window in order for the alias to take effect.
+
+## Updating pnpm
+
+To update pnpm, run the [`self-update`] command:
+
+```
+pnpm self-update
+```
+
+[`self-update`]: ./cli/self-update.md
 
 ## Uninstalling pnpm
 

@@ -58,7 +58,7 @@ module.exports={
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
-          lastVersion: '9.x',
+          lastVersion: '10.x',
         },
         "gtag": {
           trackingID: "UA-91385296-1",
@@ -210,18 +210,14 @@ module.exports={
               to: 'workspaces',
             },
             {
-              label: '.npmrc',
-              to: 'npmrc',
+              label: 'Settings (pnpm-workspace.yaml)',
+              to: 'settings',
             },
           ]
         },
         {
           title: 'Community',
           items: [
-            {
-              label: 'Project Chat',
-              href: 'https://r.pnpm.io/chat',
-            },
             {
               label: 'X (Twitter)',
               href: 'https://x.com/pnpmjs'
@@ -242,6 +238,10 @@ module.exports={
             {
               label: 'Reddit',
               href: 'https://reddit.com/r/pnpm/'
+            },
+            {
+              label: 'Bluesky',
+              href: 'https://bsky.app/profile/pnpm.io'
             },
           ]
         },

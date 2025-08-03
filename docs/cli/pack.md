@@ -7,6 +7,16 @@ Create a tarball from a package.
 
 ## Options
 
+### --recursive, -r
+
+Added in: v10.11.0
+
+Pack all packages from the workspace.
+
+### --out &lt;path\>
+
+Customizes the output path for the tarball. Use `%s` and `%v` to include the package name and version, e.g., `%s.tgz` or `some-dir/%s-%v.tgz`. By default, the tarball is saved in the current working directory with the name `<package-name>-<version>.tgz`.
+
 ### --pack-destination &lt;dir\>
 
 Directory in which `pnpm pack` will save tarballs. The default is the current working directory.
@@ -14,6 +24,16 @@ Directory in which `pnpm pack` will save tarballs. The default is the current wo
 ### --pack-gzip-level &lt;level\>
 
 Specifying custom compression level.
+
+### --json
+
+Log output in JSON format.
+
+### --filter &lt;package_selector\>
+
+Added in: v10.11.0
+
+[Read more about filtering.](../filtering.md)
 
 ## Life Cycle Scripts
 

@@ -1,8 +1,6 @@
 ---
 title: Node-Modules configuration options with pnpm
-author: Zoltan Kochan
-authorURL: "http://twitter.com/zoltankochan"
-authorImageURL: "https://gravatar.com/avatar/1f59f040fb37d5799e3879fa678c2373?s=48"
+authors: zkochan
 ---
 
 There are many ways to create a node_modules directory.

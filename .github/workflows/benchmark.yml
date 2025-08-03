@@ -20,10 +20,11 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - run: |
+          npm install --global corepack
           corepack enable
-          corepack prepare pnpm@next-9 --activate
+          corepack prepare pnpm@next-10 --activate
           corepack prepare yarn@stable --activate
       - run: curl https://bun.sh/install | bash
       - run: /home/runner/.bun/bin/bun -v
