@@ -32,7 +32,7 @@ Unless the user has set the `engineStrict` config flag (see [settings]), this
 field is advisory only and will only produce warnings when your package is
 installed as a dependency.
 
-[settings]: ./settings.md#engineStrict
+[settings]: ./settings.md#enginestrict
 
 ## devEngines.runtime
 
