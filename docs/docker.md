@@ -208,12 +208,11 @@ FROM node:22-slim AS runtime
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ENV COREPACK_HOME="/corepack"
-RUN corepack enable
 
 WORKDIR /app
 COPY --link --from=build /workspace/deploy .
 
-RUN corepack install
+RUN corepack enable && corepack install
 ENV COREPACK_DEFAULT_TO_LATEST=0 COREPACK_ENABLE_NETWORK=0
 
 USER 1000
