@@ -1774,3 +1774,10 @@ Added in: v10.12.1
 * Type: **Boolean**
 
 This setting explicitly tells pnpm whether the current environment is a CI (Continuous Integration) environment.
+
+### cleanupUnusedCatalogs
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, pnpm will remove unused catalog entries during installation.
