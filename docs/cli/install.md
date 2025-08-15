@@ -8,7 +8,8 @@ Aliases: `i`
 `pnpm install` is used to install all dependencies for a project.
 
 In a CI environment, installation fails if a lockfile is present but needs an
-update.
+update. If you still need to run install in such cases, use `pnpm install --no
+-frozen-lockfile`.
 
 Inside a [workspace], `pnpm install` installs all dependencies in all the
 projects. If you want to disable this behavior, set the `recursive-install`
