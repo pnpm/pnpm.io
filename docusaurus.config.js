@@ -1,4 +1,5 @@
 const path = require('path');
+const { themes } = require('prism-react-renderer');
 const progress = require("./scripts/progress_lang.json");
 
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
@@ -90,8 +91,10 @@ module.exports={
       respectPrefersColorScheme: true,
     },
     "prism": {
-      theme: require('prism-react-renderer/themes/github'),
-      darkTheme: require('prism-react-renderer/themes/dracula'),
+      theme: themes.github,
+      darkTheme: themes.dracula,
+      // https://docusaurus.io/docs/migration/v3#prism-react-renderer-v20
+      additionalLanguages: ['bash', 'diff', 'json', 'powershell', 'yaml', 'docker', 'ini'],
     },
     "navbar": {
       "title": "pnpm",
