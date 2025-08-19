@@ -1774,3 +1774,7 @@ Added in: v10.12.1
 * Type: **Boolean**
 
 This setting explicitly tells pnpm whether the current environment is a CI (Continuous Integration) environment.
+
+import CleanupUnusedCatalogs from './settings/_cleanupUnusedCatalogs.mdx'
+
+<CleanupUnusedCatalogs />
