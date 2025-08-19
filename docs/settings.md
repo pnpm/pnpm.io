@@ -1775,9 +1775,6 @@ Added in: v10.12.1
 
 This setting explicitly tells pnpm whether the current environment is a CI (Continuous Integration) environment.
 
-### cleanupUnusedCatalogs
+import CleanupUnusedCatalogs from './settings/_cleanupUnusedCatalogs.mdx'
 
-* Default: **false**
-* Type: **Boolean**
-
-When set to `true`, pnpm will remove unused catalog entries during installation.
+<CleanupUnusedCatalogs />

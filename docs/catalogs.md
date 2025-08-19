@@ -165,3 +165,7 @@ The `catalog:` protocol replacement process allows the `@example/components` pac
 import CatalogMode from './settings/_catalogMode.mdx'
 
 <CatalogMode />
+
+import CleanupUnusedCatalogs from './settings/_cleanupUnusedCatalogs.mdx'
+
+<CleanupUnusedCatalogs />
