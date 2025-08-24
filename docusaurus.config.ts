@@ -1,6 +1,8 @@
-const path = require('path');
-const { themes } = require('prism-react-renderer');
-const progress = require("./scripts/progress_lang.json");
+import path from 'node:path';
+import { themes } from 'prism-react-renderer';
+import progress from "./scripts/progress_lang.json" with { type: "json" };
+import type { Config } from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
 const GITHUB_SPONSOR_URL = 'https://github.com/sponsors/pnpm';
@@ -9,7 +11,7 @@ const TRANSLATE_URL = "https://translate.pnpm.io";
 const CRYPTO_DONATIONS_HREF = '/crypto-donations';
 const LOCALE_CI = process.env.LOCALE_CI;
 const DEFAULT_LOCALE = 'en';
-const LOCALE_FULL_CODE = {
+const LOCALE_FULL_CODE: Record<string, string> = {
   zh: 'zh-CN',
   pt: 'pt-BR',
   es: 'es-ES',
@@ -19,7 +21,7 @@ const PROJECT_NAME = 'pnpm.io'
 
 const lastDocsVersion = '10.x';
 
-function makeEditUrl (locale, path1, path2) {
+function makeEditUrl (locale: string, path1: string, path2: string): string {
   // Link to Crowdin for non-English docs
   if (locale !== DEFAULT_LOCALE) {
     return `https://translate.pnpm.io/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
@@ -31,7 +33,7 @@ function makeEditUrl (locale, path1, path2) {
   return `https://github.com/pnpm/${PROJECT_NAME}/edit/main/${path1}/${path2}`;
 }
 
-module.exports={
+const docusaurusConfig = {
   "title": "pnpm",
   "tagline": "Fast, disk space efficient package manager",
   "url": "https://pnpm.io",
@@ -74,7 +76,7 @@ module.exports={
         "theme": {
           customCss: require.resolve('./src/css/customTheme.css'),
         }
-      }
+      } satisfies Preset.Options
     ]
   ],
   "plugins": [
@@ -293,7 +295,7 @@ module.exports={
       "indexName": "pnpm",
       "contextualSearch": true,
     },
-  },
+  } satisfies Preset.ThemeConfig,
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
     locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'zh-TW', 'ru', 'uk', 'fr', 'tr', 'es', 'id'],
@@ -322,4 +324,6 @@ module.exports={
       // de: { label: `Deutsch (${progress["de"].translationProgress}%)` },
     },
   },
-}
+} satisfies Config;
+
+export default docusaurusConfig;
