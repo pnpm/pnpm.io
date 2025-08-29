@@ -27,6 +27,13 @@ Using PowerShell:
 Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
+On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
+of excluded folders in a PowerShell window with administrator rights by executing:
+
+```powershell
+Add-MpPreference -ExclusionPath $(pnpm store path)
+```
+
 ### On POSIX systems
 
 ```sh
