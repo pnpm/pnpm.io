@@ -142,6 +142,7 @@ So an alternative is to use a typical Dockerfile with layers that are built incr
 
 ```dockerfile title="Dockerfile"
 FROM node:20-slim AS base
+WORKDIR /app
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
