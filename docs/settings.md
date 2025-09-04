@@ -1271,7 +1271,7 @@ This setting works only in a `pnpm-workspace.yaml` file that is in the root of y
 ### nodeVersion
 
 * Default: the value returned by **node -v**, without the v prefix
-* Type: **semver**
+* Type: **exact semver version (not a range)**
 
 The Node.js version to use when checking a package's `engines` setting.
 
