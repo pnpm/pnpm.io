@@ -1192,13 +1192,13 @@ Example:
 
 ```yaml
 configDependencies:
-  '@pnpm/trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
-onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json
+  '@pnpm/plugin-trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
+onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/plugin-trusted-deps/allow.json
 ```
 
 The JSON file itself should contain an array of package names:
 
-```json title="node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json"
+```json title="node_modules/.pnpm-config/@pnpm/plugin-trusted-deps/allow.json"
 [
   "@airbnb/node-memwatch",
   "@apollo/protobufjs",
