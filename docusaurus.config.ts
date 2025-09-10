@@ -1,6 +1,8 @@
-const path = require('path');
-const { themes } = require('prism-react-renderer');
-const progress = require("./scripts/progress_lang.json");
+import path from 'node:path';
+import { themes } from 'prism-react-renderer';
+import progress from "./scripts/progress_lang.json" with { type: "json" };
+import type { Config } from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
 const GITHUB_URL = 'https://github.com/pnpm/pnpm';
 const GITHUB_SPONSOR_URL = 'https://github.com/sponsors/pnpm';
@@ -29,7 +31,7 @@ function makeEditUrl (locale, path1, path2) {
   return `https://github.com/pnpm/${PROJECT_NAME}/edit/main/${path1}/${path2}`;
 }
 
-module.exports={
+const docusaurusConfig = {
   "title": "pnpm",
   "tagline": "Fast, disk space efficient package manager",
   "url": "https://pnpm.io",
@@ -72,7 +74,7 @@ module.exports={
         "theme": {
           customCss: require.resolve('./src/css/customTheme.css'),
         }
-      }
+      } satisfies Preset.Options
     ]
   ],
   "plugins": [
@@ -291,7 +293,7 @@ module.exports={
       "indexName": "pnpm",
       "contextualSearch": true,
     },
-  },
+  } satisfies Preset.ThemeConfig,
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
     locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'zh-TW', 'ru', 'uk', 'fr', 'tr', 'es', 'id'],
@@ -320,4 +322,6 @@ module.exports={
       // de: { label: `Deutsch (${progress["de"].translationProgress}%)` },
     },
   },
-}
+} satisfies Config;
+
+export default docusaurusConfig;
