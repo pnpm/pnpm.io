@@ -347,6 +347,10 @@
         {
           "type": "doc",
           "id": "git_branch_lockfiles"
+        },
+        {
+          "type": "doc",
+          "id": "finders"
         }
       ]
     },

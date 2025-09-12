@@ -174,6 +174,34 @@ This hook allows to override the fetchers that are used for different types of d
 * `directory`
 * `git`
 
+## Finders
+
+Added in: v10.16.0
+
+Finder functions are used with `pnpm list` and `pnpm why` via the `--find-by` flag.
+
+Example:
+
+```js title=".pnpmfile.cjs"
+module.exports = {
+  finders: {
+    react17: (ctx) => {
+      return ctx.readManifest().peerDependencies?.react === "^17.0.0"
+    }
+  }
+}
+```
+
+Usage:
+
+```
+pnpm why --find-by=react17
+```
+
+See [Finders] for more details.
+
+[Finders]: ./finders.md
+
 ## Related Configuration
 
 import IgnorePnpmfile from './settings/_ignorePnpmfile.mdx'

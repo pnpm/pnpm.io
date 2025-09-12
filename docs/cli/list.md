@@ -68,3 +68,7 @@ Exclude peer dependencies from the results (but dependencies of peer dependencie
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
+
+import FindBy from '../settings/_findBy.mdx'
+
+<FindBy />

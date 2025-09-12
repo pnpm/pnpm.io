@@ -113,7 +113,8 @@
       "config-dependencies",
       "aliases",
       "completion",
-      "git_branch_lockfiles"
+      "git_branch_lockfiles",
+      "finders"
     ],
     "Recipes": [
       "using-changesets",
