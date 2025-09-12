@@ -196,6 +196,43 @@ ignoredOptionalDependencies:
 - "@esbuild/*"
 ```
 
+### minimumReleaseAge
+
+Added in: v10.16.0
+
+* Default: **0**
+* Type: **number (minutes)**
+
+To reduce the risk of installing compromised packages, you can delay the installation of newly published versions. In most cases, malicious releases are discovered and removed from the registry within an hour.
+
+`minimumReleaseAge` defines the minimum number of minutes that must pass after a version is published before pnpm will install it. This applies to **all dependencies**, including transitive ones.
+
+For example, the following setting ensures that only packages released at least one day ago can be installed:
+
+```yaml
+minimumReleaseAge: 1440
+```
+
+### minimumReleaseAgeExclude
+
+Added in: v10.16.0
+
+* Default: **undefined**
+* Type: **string[]**
+
+If you set `minimumReleaseAge` but need certain dependencies to always install the newest version immediately, you can list them under `minimumReleaseAgeExclude`. The exclusion works by **package name** and applies to all versions of that package.
+
+Example:
+
+```yaml
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+- webpack
+- react
+```
+
+In this case, all dependencies must be at least a day old, except `webpack` and `react`, which are installed immediately upon release.
+
 ## Dependency Hoisting Settings
 
 ### hoist
