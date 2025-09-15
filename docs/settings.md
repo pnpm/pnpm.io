@@ -11,7 +11,7 @@ The `pnpm config` command can be used to read and edit the contents of the proje
 The relevant configuration files are:
 
 * Per-project configuration file: `/path/to/my/project/pnpm-workspace.yaml`
-* Global configuration file: `~/.config/pnpm/rc` (an [INI-formatted] list of `key = value` parameters)
+* [Global configuration file](./cli/config.md)
 
 :::note
 
