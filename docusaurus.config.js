@@ -17,12 +17,14 @@ const LOCALE_FULL_CODE = {
 
 const PROJECT_NAME = 'pnpm.io'
 
+const lastDocsVersion = '10.x';
+
 function makeEditUrl (locale, path1, path2) {
   // Link to Crowdin for non-English docs
   if (locale !== DEFAULT_LOCALE) {
     return `https://translate.pnpm.io/project/pnpm/${LOCALE_FULL_CODE[locale] || locale}`;
   }
-  if (path1 === 'versioned_docs/version-9.x') {
+  if (path1 === `versioned_docs/version-${lastDocsVersion}`) {
     return `https://github.com/pnpm/${PROJECT_NAME}/edit/main/docs/${path2}`;
   }
   // Link to GitHub for English docs
@@ -59,7 +61,7 @@ module.exports={
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
-          lastVersion: '10.x',
+          lastVersion: lastDocsVersion,
         },
         "gtag": {
           trackingID: "UA-91385296-1",
