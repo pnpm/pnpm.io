@@ -119,6 +119,7 @@
     "Recipes": [
       "using-changesets",
       "continuous-integration",
+      "supply-chain-security",
       "typescript",
       "git",
       "docker",
