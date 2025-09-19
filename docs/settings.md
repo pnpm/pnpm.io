@@ -233,6 +233,16 @@ minimumReleaseAgeExclude:
 
 In this case, all dependencies must be at least a day old, except `webpack` and `react`, which are installed immediately upon release.
 
+Added in: v10.17.0
+
+You may also use patterns. For instance, allow all packages from your org:
+
+```yaml
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+- '@myorg/*'
+```
+
 ## Dependency Hoisting Settings
 
 ### hoist
