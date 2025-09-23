@@ -44,6 +44,8 @@ Set the configuration in the global config file.
 
 ### --location
 
+By default, `--location` is set to `global`.
+
 When set to `project`, the `.npmrc` file at the nearest `package.json` will be used. If no `.npmrc` file is present in the directory, the setting will be written to a `pnpm-workspace.yaml` file.
 
 When set to `global`, the performance is the same as setting the `--global` option.
