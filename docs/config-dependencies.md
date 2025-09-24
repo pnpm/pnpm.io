@@ -31,7 +31,7 @@ configDependencies:
 
 You can load a list of package names that are allowed to be built, using the [`onlyBuiltDependenciesFile`] setting.
 
-Example `allow.json` file inside a config dependency ([@pnpm/trusted-deps]):
+Example `allow.json` file inside a config dependency ([@pnpm/plugin-trusted-deps]):
 
 ```json title="allow.json"
 [
@@ -45,11 +45,11 @@ Your workspace configuration:
 
 ```yaml title="pnpm-workspace.yaml"
 configDependencies:
-  '@pnpm/trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
-onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json
+  '@pnpm/plugin-trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
+onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/plugin-trusted-deps/allow.json
 ```
 
-[@pnpm/trusted-deps]: https://github.com/pnpm/trusted-deps
+[@pnpm/plugin-trusted-deps]: https://github.com/pnpm/plugin-trusted-deps
 [`onlyBuiltDependenciesFile`]: settings.md#onlybuiltdependenciesfile
 
 ### Installing Dependencies Used in Hooks
