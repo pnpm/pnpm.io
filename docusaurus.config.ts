@@ -52,6 +52,13 @@ const docusaurusConfig = {
   },
   "onBrokenLinks": "log",
   "onBrokenMarkdownLinks": "log",
+  "future": {
+    "experimental_faster": true,
+    "v4": {
+      "removeLegacyPostBuildHeadAttribute": true,
+      "useCssCascadeLayers": false, // FIXME Primary color will be changed to blue if this is enabled
+    },
+  },
   "presets": [
     [
       "@docusaurus/preset-classic",

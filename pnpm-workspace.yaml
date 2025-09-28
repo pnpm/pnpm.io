@@ -4,3 +4,5 @@ publicHoistPattern:
 ignoredBuiltDependencies:
   - core-js
   - core-js-pure
+onlyBuiltDependencies:
+  - '@swc/core'
