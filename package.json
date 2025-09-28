@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@crowdin/crowdin-api-client": "1.41.2",
+    "@docusaurus/types": "^3.8.1",
     "@types/node": "^20.12.2",
     "shx": "^0.3.4",
     "ts-node": "10.9.2"
