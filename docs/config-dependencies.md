@@ -7,13 +7,13 @@ Config dependencies allow you to share and centralize configuration files, setti
 
 Config dependencies help you keep all the hooks, settings, patches, overrides, catalogs, rules in a single place and use them across multiple repositories.
 
-If your config dependency is named following the `pnpm-plugin-*` pattern, pnpm will automatically load the `pnpmfile.cjs` from its root.
+If your config dependency is named following the `pnpm-plugin-*` or `@*/pnpm-plugin-*` pattern, pnpm will automatically load the `pnpmfile.cjs` from its root.
 
 ## How to Add a Config Dependency
 
 Config dependencies are defined in your `pnpm-workspace.yaml` and must be installed using an exact version and an integrity checksum.
 
-Example:
+For example, running `pnpm add --config my-configs` will add this entry to your `pnpm-workspace.yaml`:
 
 ```yaml title="pnpm-workspace.yaml"
 configDependencies:
@@ -31,7 +31,7 @@ configDependencies:
 
 You can load a list of package names that are allowed to be built, using the [`onlyBuiltDependenciesFile`] setting.
 
-Example `allow.json` file inside a config dependency ([@pnpm/trusted-deps]):
+Example `allow.json` file inside a config dependency:
 
 ```json title="allow.json"
 [
@@ -45,11 +45,10 @@ Your workspace configuration:
 
 ```yaml title="pnpm-workspace.yaml"
 configDependencies:
-  '@pnpm/trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
-onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json
+  '@myorg/trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
+onlyBuiltDependenciesFile: node_modules/.pnpm-config/@myorg/trusted-deps/allow.json
 ```
 
-[@pnpm/trusted-deps]: https://github.com/pnpm/trusted-deps
 [`onlyBuiltDependenciesFile`]: settings.md#onlybuiltdependenciesfile
 
 ### Installing Dependencies Used in Hooks
@@ -76,7 +75,7 @@ Using the [`updateConfig`] hook, you can dynamically update pnpm’s settings us
 
 For example, the following `pnpmfile` adds a new [catalog] entry to pnpm's configuration:
 
-```js title="my-catalogs/pnpmfile.cjs"
+```js title="@myorg/pnpm-plugin-my-catalogs/pnpmfile.cjs"
 module.exports = {
   hooks: {
     updateConfig (config) {
@@ -88,12 +87,10 @@ module.exports = {
 }
 ```
 
-Install and load it:
+If you install it as config dependency:
 
-```yaml title="pnpm-workspace.yaml"
-configDependencies:
-  my-catalogs: "1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="
-pnpmfile: "node_modules/.pnpm-config/my-catalogs/pnpmfile.cjs"
+```
+pnpm add --config @myorg/pnpm-plugin-my-catalogs
 ```
 
 Then you can run:
