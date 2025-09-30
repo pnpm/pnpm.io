@@ -302,6 +302,9 @@ const docusaurusConfig = {
       "indexName": "pnpm",
       "contextualSearch": true,
     },
+    announcementBar: {
+      content: `Learn how to <b><a href="https://pnpm.io/supply-chain-security">Mitigate supply chain attacks with pnpm</a></b>`,
+    },
   } satisfies Preset.ThemeConfig,
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
