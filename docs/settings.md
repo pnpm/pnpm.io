@@ -859,6 +859,24 @@ too long.
 
 The maximum amount of time to wait for HTTP requests to complete.
 
+### fetchWarnTimeoutMs
+
+Added in: v10.18.0
+
+* Default: **10000 ms (10 seconds)**
+* Type: **Number**
+
+A warning message is displayed if a metadata request to the registry takes longer than the specified threshold (in milliseconds).
+
+### fetchMinSpeedKiBps
+
+Added in: v10.18.0
+
+* Default: **50 KiB/s**
+* Type: **Number**
+
+A warning message is displayed if the download speed of a tarball from the registry falls below the specified threshold (in KiB/s).
+
 ## Peer Dependency Settings
 
 ### autoInstallPeers
