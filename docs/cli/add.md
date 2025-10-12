@@ -260,6 +260,16 @@ pnpm --allow-build=esbuild add my-bundler
 
 This will run `esbuild`'s postinstall script and also add it to the `onlyBuiltDependencies` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
 
+### --registry
+
+Specify the registry to use for this installation.
+
+Example:
+
+```
+pnpm add --registry=https://registry.npmjs.org/ lodash
+```
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
