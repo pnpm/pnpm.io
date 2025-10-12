@@ -178,6 +178,7 @@ Here is a list of past pnpm versions with respective Node.js version support.
 | Node.js 18 | ✔️      | ✔️      | ✔️       |
 | Node.js 20 | ✔️      | ✔️      | ✔️       |
 | Node.js 22 | ✔️      | ✔️      | ✔️       |
+| Node.js 24 | ✔️      | ✔️      | ✔️       |
 
 ## Troubleshooting
 
