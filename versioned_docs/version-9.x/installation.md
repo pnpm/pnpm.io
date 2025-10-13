@@ -251,3 +251,31 @@ If you need to remove the pnpm CLI from your system and any files it has written
 
 [Uninstalling pnpm]: ./uninstall.md
 [pnpm env]: ./cli/env.md
+
+## Updating pnpm
+
+Keeping pnpm up-to-date ensures that you benefit from the latest features and improvements. The process to update your pnpm version is straightforward and can be accomplished with a simple command.
+
+:::info
+
+Before updating, you might want to check the current version of pnpm installed on your system by executing `pnpm --version`. This helps you verify the update after completion.
+
+:::
+
+To update pnpm to the latest version, execute the following command in your terminal:
+
+```sh
+pnpm install -g pnpm
+```
+
+This command will install the latest version of pnpm globally, replacing the current one. If you're specifically targeting a version, you can specify it by appending @version to pnpm in the command above, like so:
+
+```sh
+pnpm install -g pnpm@9.0.0
+```
+
+:::tip
+
+After updating, run pnpm --version again to confirm that pnpm has been successfully updated to the desired version.
+
+:::
