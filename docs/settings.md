@@ -1540,7 +1540,7 @@ Dependencies can be patched by version range. The priority order is:
 
 A special case: the version range `*` behaves like a name-only patch but does not ignore patch failures.
 
-Exampe:
+Example:
 
 ```yaml
 patchedDependencies:
