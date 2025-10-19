@@ -11,6 +11,12 @@ The next best thing you can do is using BuildKit cache mount to share cache betw
 
 :::
 
+:::note
+
+If you are using node version newer than 25, you may replace `corepack enable` with `npm install -g pnpm@latest`.
+
+:::
+
 [podman]: ./podman.md
 
 ## Minimizing Docker image size and build time
