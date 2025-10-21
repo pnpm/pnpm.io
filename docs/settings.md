@@ -243,6 +243,17 @@ minimumReleaseAgeExclude:
 - '@myorg/*'
 ```
 
+Added in: v10.19.0
+
+You may also exempt specific versions (or a list of specific versions using a disjunction with `||`). This allows pinning exceptions to mature-time rules:
+
+```yaml
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+- nx@21.6.5
+- webpack@4.47.0 || 5.102.1
+```
+
 ## Dependency Hoisting Settings
 
 ### hoist
@@ -1247,6 +1258,16 @@ Example:
 ```yaml
 onlyBuiltDependencies:
 - fsevents
+```
+
+Added in: v10.19.0
+
+You may restrict allowances to specific versions (and lists of versions using a disjunction with `||`). When versions are specified, only those versions of the package may run lifecycle scripts:
+
+```yaml
+onlyBuiltDependencies:
+- nx@21.6.4 || 21.6.5
+- esbuild@0.25.1
 ```
 
 ### onlyBuiltDependenciesFile
