@@ -1300,11 +1300,14 @@ Added in: v10.1.0
 
 A list of package names that are NOT allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation and will not warn or ask to be executed.
 
+This is useful when you want to hide the warning because you know the lifecycle scripts are not needed.
+
 Example:
 
 ```yaml
 ignoredBuiltDependencies:
 - fsevents
+- sharp
 ```
 
 ### dangerouslyAllowAllBuilds
