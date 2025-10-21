@@ -1238,8 +1238,9 @@ When `strictDepBuilds` is enabled, the installation will exit with a non-zero ex
 
 ### neverBuiltDependencies
 
-This field allows to ignore the builds of specific dependencies.
-The "preinstall", "install", and "postinstall" scripts of the listed packages will not be executed during installation.
+A list of package names that are NOT allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation.
+
+Be careful when using `neverBuiltDependencies` without `onlyBuiltDependencies` because it implies all other dependencies are allowed.
 
 An example of the `neverBuiltDependencies` field:
 
@@ -1251,7 +1252,8 @@ neverBuiltDependencies:
 
 ### onlyBuiltDependencies
 
-A list of package names that are allowed to be executed during installation. Only packages listed in this array will be able to run install scripts. If `onlyBuiltDependenciesFile` and `neverBuiltDependencies` are not set, this configuration option will default to blocking all install scripts.
+A list of package names that are allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation.
+Only the packages listed in this array will be able to run those lifecycle scripts. If `onlyBuiltDependenciesFile` and `neverBuiltDependencies` are omitted, this configuration option will default to blocking all install scripts.
 
 Example:
 
@@ -1296,7 +1298,7 @@ The JSON file itself should contain an array of package names:
 
 Added in: v10.1.0
 
-A list of package names that should not be built during installation.
+A list of package names that are NOT allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation and will not warn or ask to be executed.
 
 Example:
 
