@@ -291,6 +291,10 @@
             {
               "type": "doc",
               "id": "cli/config"
+            },
+            {
+              "type": "doc",
+              "id": "cli/help"
             }
           ]
         }
