@@ -134,6 +134,10 @@ pnpm --filter "...[origin/master]" test
 
 Use this flag if you want the CLI to fail if no packages have matched the filters.
 
+You may also set this permanently with a [`failIfNoMatch` setting].
+
+[`failIfNoMatch` setting]: settings.md#failifnomatch
+
 ## Excluding
 
 Any of the filter selectors may work as exclusion operators when they have a

@@ -1531,6 +1531,19 @@ When set to `true`, no workspace cycle warnings will be printed.
 
 When set to `true`, installation will fail if the workspace has cycles.
 
+### failIfNoMatch
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, the CLI will exit with a non-zero code if no packages match the provided filters.
+
+For example, the following command will exit with a non-zero code because `bad-pkg-name` is not present in the workspace:
+
+```sh
+pnpm --filter=bad-pkg-name test
+```
+
 ## Deploy Settings
 
 ### forceLegacyDeploy
