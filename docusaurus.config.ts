@@ -79,6 +79,8 @@ const docusaurusConfig = {
         "blog": {
           "path": "blog",
           editUrl: ({locale, blogDirPath, blogPath}) => makeEditUrl(locale, blogDirPath, blogPath),
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
         },
         "theme": {
           customCss: require.resolve('./src/css/customTheme.css'),
