@@ -19,7 +19,8 @@ Sometimes, Windows Defender may block our executable if you install pnpm this wa
 Due to this issue, we currently recommend installing pnpm using [npm](#using-npm) or [Corepack](#using-corepack) on Windows.
 
 If you get the The underlying connection was closed: An unexpected error occurred on a send. error, create a .ps1 file with the following content and run it.
-dd-type @"
+```powershell
+add-type @"
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 public class TrustAllCertsPolicy : ICertificatePolicy {
@@ -32,6 +33,7 @@ public class TrustAllCertsPolicy : ICertificatePolicy {
 "@
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
 Invoke-WebRequest https://get.pnpm.io/
+```
 
 
 :::
