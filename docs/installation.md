@@ -16,8 +16,23 @@ You may install pnpm even if you don't have Node.js installed, using the followi
 :::warning
 
 Sometimes, Windows Defender may block our executable if you install pnpm this way.
-
 Due to this issue, we currently recommend installing pnpm using [npm](#using-npm) or [Corepack](#using-corepack) on Windows.
+
+If you get the The underlying connection was closed: An unexpected error occurred on a send. error, create a .ps1 file with the following content and run it.
+dd-type @"
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+public class TrustAllCertsPolicy : ICertificatePolicy {
+    public bool CheckValidationResult(
+        ServicePoint srvPoint, X509Certificate certificate,
+        WebRequest request, int certificateProblem) {
+            return true;
+        }
+ }
+"@
+[System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
+Invoke-WebRequest https://get.pnpm.io/
+
 
 :::
 
