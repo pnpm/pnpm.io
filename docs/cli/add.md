@@ -58,8 +58,8 @@ will be installed from the configured sources, depending on whether or not
 [`workspace: range protocol`].
 
 [workspace]: ../workspaces.md
-[`link-workspace-packages`]: ../workspaces.md#link-workspace-packages
-[`workspace: range protocol`]: ../workspaces.md#workspace-ranges-workspace
+[`link-workspace-packages`]: ./recursive#--link-workspace-packages
+[`workspace: range protocol`]: ../workspaces.md#workspace-protocol-workspace
 
 ### Install from local file system
 
