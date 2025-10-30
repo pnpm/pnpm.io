@@ -54,12 +54,12 @@ This works just like installing from npm, but tells pnpm to resolve the package 
 
 Note that when adding dependencies and working within a [workspace], packages
 will be installed from the configured sources, depending on whether or not
-[`link-workspace-packages`] is set, and use of the
+[`linkWorkspacePackages`] is set, and use of the
 [`workspace: range protocol`].
 
 [workspace]: ../workspaces.md
-[`link-workspace-packages`]: ../workspaces.md#link-workspace-packages
-[`workspace: range protocol`]: ../workspaces.md#workspace-ranges-workspace
+[`linkWorkspacePackages`]: ../settings.md#linkworkspacepackages
+[`workspace: range protocol`]: ../workspaces.md#workspace-protocol-workspace
 
 ### Install from local file system
 
