@@ -254,6 +254,15 @@ minimumReleaseAgeExclude:
 - webpack@4.47.0 || 5.102.1
 ```
 
+### trustPolicy
+
+Added in: v10.21.0
+
+* Default: **off**
+* Type: **no-downgrade** | **off**
+
+When set to `no-downgrade`, pnpm will fail if a package's trust level has decreased compared to previous releases. For example, if a package was previously published by a trusted publisher but now only has provenance or no trust evidence, installation will fail. This helps prevent installing potentially compromised versions.
+
 ## Dependency Hoisting Settings
 
 ### hoist

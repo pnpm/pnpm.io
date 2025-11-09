@@ -34,6 +34,31 @@ installed as a dependency.
 
 [settings]: ./settings.md#enginestrict
 
+## engines.runtime
+
+Added in: v10.21.0
+
+Specifies the Node.js runtime required by a dependency. When declared, pnpm will automatically install the specified Node.js version.
+
+```json
+{
+  "engines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.11.0",
+      "onFail": "download"
+    }
+  }
+}
+```
+
+When a package declares a runtime:
+
+1. **For CLI apps**: pnpm binds the CLI to the required Node.js version, ensuring it uses the correct runtime regardless of the globally installed Node.js instance.
+2. **For packages with `postinstall` scripts**: The script executes using the specified Node.js version.
+
+This is particularly useful for dependencies that require specific Node.js versions to function correctly.
+
 ## devEngines.runtime
 
 Added in: v10.14

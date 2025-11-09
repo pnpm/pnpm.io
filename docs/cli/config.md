@@ -18,6 +18,12 @@ The global configuration file is located at one of the following locations:
 * On macOS: **~/Library/Preferences/pnpm/rc**
 * On Linux: **~/.config/pnpm/rc**
 
+You can also retrieve the path to your global config file by running (added in v10.21.0):
+
+```sh
+pnpm config get globalconfig
+```
+
 ## Commands
 
 ### set &lt;key> &lt;value>
