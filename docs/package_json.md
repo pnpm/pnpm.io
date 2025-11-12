@@ -220,6 +220,7 @@ The following fields may be overridden:
 * [`typesVersions`](https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html#version-selection-with-typesversions)
 * cpu
 * os
+* `engines` (Added in v10.22.0)
 
 To override a field, add the publish version of the field to `publishConfig`.
 

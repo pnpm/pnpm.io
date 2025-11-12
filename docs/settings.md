@@ -263,6 +263,24 @@ Added in: v10.21.0
 
 When set to `no-downgrade`, pnpm will fail if a package's trust level has decreased compared to previous releases. For example, if a package was previously published by a trusted publisher but now only has provenance or no trust evidence, installation will fail. This helps prevent installing potentially compromised versions.
 
+### trustPolicyExclude
+
+Added in: v10.22.0
+
+* Default: **[]**
+* Type: **string[]**
+
+A list of package selectors that should be excluded from the trust policy check. This allows you to install specific packages or versions even if they don't satisfy the `trustPolicy` requirement.
+
+For example:
+
+```yaml
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  - chokidar@4.0.3
+  - webpack@4.47.0 || 5.102.1
+```
+
 ## Dependency Hoisting Settings
 
 ### hoist

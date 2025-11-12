@@ -17,6 +17,8 @@ Another way to reduce the risk of installing compromised packages is to delay up
 
 To further protect your supply chain, pnpm also supports a [trustPolicy] setting. When set to `no-downgrade`, this setting will prevent installation of a package if its trust level has decreased compared to previous releases (for example, if it was previously published by a trusted publisher but now only has provenance or no trust evidence). This helps you avoid installing potentially compromised or less trustworthy versions.
 
+If you need to allow specific packages or versions to bypass the trust policy check, you can use the [trustPolicyExclude] setting. This is useful for known packages that may not meet the trust requirements but are still safe to use.
+
 ### Use a lockfile
 
 It goes without saying that you should always lock your dependencies with a lockfile. Commit your lockfile to your repository to avoid unexpected updates.
@@ -28,3 +30,4 @@ It goes without saying that you should always lock your dependencies with a lock
 [it might get compromised]: https://socket.dev/blog/nx-packages-compromised
 [minimumReleaseAge]: settings.md#minimumreleaseage
 [trustPolicy]: settings.md#trustpolicy
+[trustPolicyExclude]: settings.md#trustpolicyexclude
