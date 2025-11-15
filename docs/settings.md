@@ -646,6 +646,17 @@ Max length of the peer IDs suffix added to dependency keys in the lockfile. If t
 
 The base URL of the npm package registry (trailing slash included).
 
+### @jsr\:registry
+
+Added in: v10.9.0
+
+* Default: **https://npm.jsr.io/**
+* Type: **url**
+
+The base URL of the [JSR] package registry.
+
+[JSR]: cli/add.md#install-from-the-jsr-registry
+
 #### &lt;scope\>:registry
 
 The npm registry that should be used for packages of the specified scope. For
