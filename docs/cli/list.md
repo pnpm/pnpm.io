@@ -27,6 +27,12 @@ Log output in JSON format.
 
 Show extended information.
 
+### --lockfile-only
+
+Added in: v10.23.0
+
+Read package information from the lockfile instead of checking the actual `node_modules` directory. This is useful for quickly inspecting what would be installed without requiring a full installation.
+
 ### --parseable
 
 Outputs package directories in a parseable format instead of their tree view.
