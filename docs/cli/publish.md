@@ -97,6 +97,10 @@ Does everything a publish would do except actually publishing to the registry.
 
 When publishing packages that require two-factor authentication, this option can specify a one-time password.
 
+### --provenance
+
+When publishing from a supported cloud CI/CD system, the package will be publicly linked to where it was built and published from.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
