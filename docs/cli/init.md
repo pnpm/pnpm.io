@@ -5,12 +5,15 @@ title: "pnpm init"
 
 Create a `package.json` file.
 
-Options
+## Options
 
---init-type
+### --init-type &lt;type\>
 
-Set the module system for the package. Defaults to "commonjs".
+* Default: **commonjs**
+* Type: **commonjs**, **module**
 
---init-package-manager
+Set the module system for the package.
+
+### --init-package-manager
 
 Pin the project to the current pnpm version by adding a "packageManager" field to package.json.
