@@ -1,6 +1,6 @@
 ---
 title: How We're Protecting Our Newsroom from npm Supply Chain Attacks
-authors: Ryan Sobol
+authors: ryansobol
 ---
 
 We got lucky with Shai-Hulud 2.0.
@@ -45,8 +45,7 @@ One of the main reasons we considered pnpm was learning that it **blocks lifecyc
 
 In practice, when a package has preinstall or postinstall scripts, pnpm blocks them but installation continues with a warning. This already provides significant protection—malicious scripts won't execute without you explicitly allowing them. However, we were concerned that warnings would be too easy to ignore, especially since installation appears to succeed. We wanted stricter control with `strictDepBuilds: true`:
 
-```yaml
-# pnpm-workspace.yaml
+```yaml title="pnpm-workspace.yaml"
 strictDepBuilds: true
 
 onlyBuiltDependencies:
@@ -71,8 +70,7 @@ For our team, this ensures we're making deliberate choices upfront rather than p
 
 This control blocks installation of package versions published within a cooldown period. The idea is to give the community time to detect and remove malicious packages before they reach your environment.
 
-```yaml
-# pnpm-workspace.yaml
+```yaml title="pnpm-workspace.yaml"
 minimumReleaseAge: <duration-in-minutes>
 
 minimumReleaseAgeExclude:
@@ -89,8 +87,7 @@ Looking at recent attacks, malicious packages have been detected and removed in 
 
 This control blocks installation when a package version has weaker authentication than previously published versions—often a sign that an attacker compromised maintainer credentials and published from their own machine instead of the official CI/CD pipeline.
 
-```yaml
-# pnpm-workspace.yaml
+```yaml title="pnpm-workspace.yaml"
 trustPolicy: no-downgrade
 
 trustPolicyExclude:
