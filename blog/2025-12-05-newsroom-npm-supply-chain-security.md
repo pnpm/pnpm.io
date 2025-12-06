@@ -98,9 +98,9 @@ trustPolicyExclude:
 ```
 
 **How it works:** npm tracks three trust levels for published packages (strongest to weakest):
-- **Trusted Publisher:** Published via GitHub Actions with OIDC tokens and npm provenance
-- **Provenance:** Signed attestation from a CI/CD system
-- **No Trust Evidence:** Published with username/password or token authentication
+1. **Trusted Publisher:** Published via GitHub Actions with OIDC tokens and npm provenance
+2. **Provenance:** Signed attestation from a CI/CD system
+3. **No Trust Evidence:** Published with username/password or token authentication
 
 If a newer version has weaker authentication than an older version, installation fails. For example, if v1.0.0 was published with Trusted Publisher but v1.0.1 was published with basic auth, pnpm blocks v1.0.1.
 
@@ -123,8 +123,8 @@ Here's how the layered defense would work in this scenario:
 **What you'd do:** Add the specific React version to `minimumReleaseAgeExclude` after reviewing the vulnerability disclosure and verifying the patch was legitimate.
 
 **What still protects you:**
-- **Lifecycle Script Management** is still active—if the React package had lifecycle scripts (it doesn't, but hypothetically), you'd catch unexpected ones
-- **Trust Policy** is still active—if an attacker had somehow compromised React's publishing and pushed a malicious "patch," you'd detect the trust downgrade
+- **Lifecycle Script Management** is still active—if an attacker had injected malicious lifecycle scripts into the React patch, they would be blocked (React normally has no lifecycle scripts, so any scripts would be immediately suspicious)
+- **Trust Policy** is still active—if an attacker had compromised React's publishing credentials and pushed a malicious "patch" from their own machine, the trust downgrade would be blocked
 
 This is why we think exceptions are expected and okay. You make a conscious, documented decision to bypass one control for a legitimate reason, but you still have robust protection from the other layers. No single point of failure.
 
