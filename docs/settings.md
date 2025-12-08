@@ -750,6 +750,18 @@ registry. For example:
 //registry.npmjs.org/:cafile=ca-cert.pem
 ```
 
+### &lt;URL&gt;&#58;ca
+
+Added in: v10.25.0
+
+Define an inline Certificate Authority certificate for the specified registry.
+The value must be PEM-encoded, like the global `ca` setting, but it only applies
+to the matching registry URL.
+
+```sh
+//registry.example.com/:ca=-----BEGIN CERTIFICATE-----...-----END CERTIFICATE-----
+```
+
 ### cert
 
 * Default: **null**
@@ -763,6 +775,17 @@ cert="-----BEGIN CERTIFICATE-----\nXXXX\nXXXX\n-----END CERTIFICATE-----"
 ```
 
 It is not the path to a certificate file.
+
+### &lt;URL&gt;&#58;cert
+
+Added in: v10.25.0
+
+Define an inline client certificate to use when accessing the specified
+registry. Example:
+
+```sh
+//registry.example.com/:cert=-----BEGIN CERTIFICATE-----...-----END CERTIFICATE-----
+```
 
 ### &lt;URL&gt;&#58;certfile
 
@@ -785,9 +808,20 @@ A client key to pass when accessing the registry. Values should be in PEM format
 key="-----BEGIN PRIVATE KEY-----\nXXXX\nXXXX\n-----END PRIVATE KEY-----"
 ```
 
-It is not the path to a key file (and there is no `keyfile` option).
+It is not the path to a key file. Use `<URL>&#58;keyfile` if you need to reference
+the file system instead of inlining the key.
 
 This setting contains sensitive information. Don't write it to a local `.npmrc` file committed to the repository.
+
+### &lt;URL&gt;&#58;key
+
+Added in: v10.25.0
+
+Define an inline client key for the specified registry URL.
+
+```sh
+//registry.example.com/:key=-----BEGIN PRIVATE KEY-----...-----END PRIVATE KEY-----
+```
 
 ### &lt;URL&gt;&#58;keyfile
 

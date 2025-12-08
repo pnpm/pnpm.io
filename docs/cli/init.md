@@ -7,6 +7,12 @@ Create a `package.json` file.
 
 ## Options
 
+### --bare
+
+Added in: v10.25.0
+
+Creates a `package.json` with only the required fields.
+
 ### --init-type &lt;type\>
 
 * Default: **commonjs**
