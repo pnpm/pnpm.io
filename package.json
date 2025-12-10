@@ -26,8 +26,11 @@
     "@docusaurus/plugin-client-redirects": "3.9.1",
     "@docusaurus/plugin-content-docs": "3.9.1",
     "@docusaurus/preset-classic": "3.9.1",
+    "@pnpm/design.pnpm-theme": "0.0.0-a9954b056f08e7452102b332a44ead977c0d83d3",
+    "@pnpm/website.pages.homepage": "0.0.0-3a1b1907b7712c333f4e5be702b9c8f3c5f47cf6",
     "@types/react": "^19.1.9",
     "clsx": "^1.2.1",
+    "docusaurus-plugin-sass": "^0.2.6",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
@@ -48,6 +51,8 @@
     "@crowdin/crowdin-api-client": "1.48.3",
     "@docusaurus/types": "^3.9.1",
     "@types/node": "^20.12.2",
+    "sass": "^1.95.1",
+    "sass-loader": "^16.0.6",
     "shx": "^0.3.4",
     "ts-node": "10.9.2"
   }
