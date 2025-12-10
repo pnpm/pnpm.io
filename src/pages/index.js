@@ -7,7 +7,6 @@ import { PnpmTheme, useThemeController } from "@pnpm/design.pnpm-theme";
 import {
   Homepage as BaseHome,
   XIcon,
-  WorkleapIcon,
   CerbosIcon,
   NextJsIcon,
   N8nIcon,
@@ -49,7 +48,7 @@ const features = {
   features: [
     {
       title: <Translate>Fast</Translate>,
-      description: <Translate>pnpm is up to 2x faster than npm and Yarn. We believe waiting for dependencies to install is a waste of time. Your time is valuable, and so is ours.</Translate>,
+      description: <Translate>pnpm is optimized for installation speed. We believe waiting for dependencies to install is a waste of time. Your time is valuable, and so is ours.</Translate>,
       image: "https://static.bit.dev/pnpm-io/Fast.png",
       alt: "Illustration of pnpm Fast feature.",
     },
@@ -90,7 +89,7 @@ const sponsors = {
   platinumSponsors: [
     {
       name: "Bit.cloud",
-      logo: "https://static.bit.dev/pnpm-io/bit.svg",
+      logo: "/img/users/bit.svg",
       alt: "bit",
       url: addUTM("https://bit.dev/"),
     },
@@ -98,56 +97,57 @@ const sponsors = {
   goldSponsors: [
     {
       name: "Discord",
-      logo: "https://static.bit.dev/pnpm-io/discord.svg",
+      logo: "/img/users/discord_min.svg",
       alt: "Discord",
       url: addUTM("https://discord.com/"),
     },
     {
       name: "Code Rabbit",
-      logo: "https://static.bit.dev/pnpm-io/code-rabbit.svg",
+      logo: "/img/users/coderabbit_min.svg",
       alt: "CodeRabbit",
       url: addUTM("https://coderabbit.ai/"),
     },
     {
       name: "StackBlitz",
-      logo: "https://static.bit.dev/pnpm-io/StackBlitz.svg",
+      logo: "/img/users/stackblitz_min.svg",
       alt: "StackBlitz",
       url: addUTM("https://stackblitz.com/"),
     },
     {
       name: "Vitejs",
-      logo: "https://static.bit.dev/pnpm-io/vitejs.svg",
+      logo: "/img/users/vitejs.svg",
       alt: "Vitejs",
       url: addUTM("https://vite.dev/"),
     },
     {
       name: "Workleap",
-      icon: <WorkleapIcon />,
+      logo: "/img/users/workleap.svg",
+      alt: "Workleap",
       url: addUTM("https://workleap.com/"),
     },
   ],
   silverSponsors: [
     {
       name: "Mercedes",
-      logo: "https://static.bit.dev/pnpm-io/mercedes.svg",
+      logo: "/img/users/mercedes.svg",
       alt: "Mercedes-Benz FOSS",
       url: addUTM("https://opensource.mercedes-benz.com/"),
     },
     {
       name: "Devowlio",
-      logo: "https://static.bit.dev/pnpm-io/devowlio.svg",
+      logo: "/img/users/devowlio_min.svg",
       alt: "devowl",
       url: addUTM("https://devowl.io/"),
     },
     {
       name: "Uscreen",
-      logo: "https://static.bit.dev/pnpm-io/Uscreen.svg",
+      logo: "/img/users/uscreen.svg",
       alt: "Uscreen",
       url: addUTM("https://uscreen.de/"),
     },
     {
       name: "Leniolabs",
-      logo: "https://static.bit.dev/pnpm-io/Leniolabs.svg",
+      logo: "/img/users/leniolabs.jpg",
       alt: "Leniolabs",
       url: addUTM("https://www.leniolabs.com"),
     },
@@ -196,118 +196,96 @@ const ossProjects = {
     {
       name: "next.js",
       icon: <NextJsIcon />,
-      url: "https://nextjs.org",
     },
     {
       name: "n8n",
       icon: <N8nIcon />,
-      url: "https://n8n.io",
     },
     {
       name: "Material UI",
-      logoUrl: "https://static.bit.dev/pnpm-io/MaterialUI.svg",
+      logoUrl: "/img/users/mui.svg",
       alt: "Material UI",
-      url: "https://mui.com",
     },
     {
       name: "Vite",
-      logoUrl: "https://static.bit.dev/pnpm-io/vitejs.svg",
+      logoUrl: "/img/users/vitejs.svg",
       alt: "Vite",
-      url: "https://vitejs.dev",
     },
     {
       name: "Nuxt",
-      logoUrl: "https://static.bit.dev/pnpm-io/Nuxt.svg",
+      logoUrl: "/img/users/nuxt_min.svg",
       alt: "Nuxt",
-      url: "https://nuxt.com",
     },
     {
       name: "Vue",
-      logoUrl: "https://static.bit.dev/pnpm-io/Vue.svg",
+      logoUrl: "/img/users/vue.svg",
       alt: "Vue",
-      url: "https://vuejs.org",
     },
     {
       name: "Astro",
       icon: <AstroIcon />,
-      url: "https://astro.build",
     },
     {
       name: "Prisma",
       icon: <PrismaIcon />,
-      url: "https://www.prisma.io",
     },
     {
       name: "Novu",
-      logoUrl: "https://static.bit.dev/pnpm-io/novu.svg",
-      alt: "Novu",
       icon: <NovuIcon />,
-      url: "https://novu.co",
     },
     {
       name: "Slidev",
-      logoUrl: "https://static.bit.dev/pnpm-io/Slidev.svg",
+      logoUrl: "/img/users/slidev_min.svg",
       alt: "Slidev",
-      url: "https://sli.dev",
     },
     {
       name: "Turborepo",
-      logoUrl: "https://static.bit.dev/pnpm-io/Turborepo.svg",
+      logoUrl: "/img/users/turborepo_min.svg",
       alt: "Turborepo",
-      url: "https://turbo.build/repo",
     },
     {
       name: "Quasar Framework",
-      logoUrl: "https://static.bit.dev/pnpm-io/quasar.svg",
+      logoUrl: "/img/users/quasar_min.svg",
       alt: "Quasar Framework",
-      url: "https://quasar.dev",
     },
     {
       name: "Element Plus",
-      logoUrl: "https://static.bit.dev/pnpm-io/element-logo.svg",
+      logoUrl: "/img/users/element-plus_min.svg",
       alt: "Element Plus",
-      url: "https://element-plus.org",
     },
     {
       name: "NextAuth.js",
-      logoUrl: "https://static.bit.dev/pnpm-io/NextAuth.js.svg",
+      logoUrl: "/img/users/next-auth_min.svg",
       alt: "NextAuth.js",
-      url: "https://next-auth.js.org",
     },
     {
       name: "Ember.js",
-      logoUrl: "https://static.bit.dev/pnpm-io/ember.svg",
+      logoUrl: "/img/users/emberjs.svg",
       alt: "Ember.js",
-      url: "https://emberjs.com",
     },
     {
       name: "Qwik",
-      logoUrl: "https://static.bit.dev/pnpm-io/qwik.svg",
+      logoUrl: "/img/users/qwik_min.svg",
       alt: "Qwik",
-      url: "https://qwik.builder.io",
     },
     {
       name: "VueUse",
-      logoUrl: "https://static.bit.dev/pnpm-io/VueUse.svg",
+      logoUrl: "/img/users/vue-use_min.svg",
       alt: "VueUse",
-      url: "https://vueuse.org",
     },
     {
       name: "SvelteKit",
-      logoUrl: "https://static.bit.dev/pnpm-io/sveltekit.svg",
+      logoUrl: "/img/users/sveltekit_min.svg",
       alt: "SvelteKit",
-      url: "https://kit.svelte.dev",
     },
     {
       name: "Verdaccio",
-      logoUrl: "https://static.bit.dev/pnpm-io/verdaccio.svg",
+      logoUrl: "/img/users/verdaccio_min.svg",
       alt: "Verdaccio",
-      url: "https://verdaccio.org",
     },
     {
       name: "Vercel",
       icon: <VercelIcon />,
-      url: "https://vercel.com",
     },
   ],
 };
@@ -321,14 +299,14 @@ const homepageContent = {
 };
 
 function useGithubStarsCount() {
-  const [count, setCount] = useState("33.4K"); // TO SUPPORT STRING
+  const [count, setCount] = useState("33.4K");
 
   useEffect(() => {
     const url = "https://api.github.com/repos/pnpm/pnpm";
     fetch(url).then(async (res) => {
       const data = await res.json();
       const starsCount = data.stargazers_count;
-      setCount(`${starsCount}`);
+      setCount(starsCount);
     });
   }, []);
 

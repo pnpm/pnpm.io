@@ -206,13 +206,12 @@ const docusaurusConfig = {
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
         },
-        // {
-        //   label: "Bit", // TODO
-        //   href: 'https://bit.cloud/pnpm',
-        //   position: 'right',
-        //   // className: 'header-github-link',
-        //   'aria-label': 'Bit.cloud',
-        // },
+        {
+          href: 'https://bit.cloud/pnpm',
+          position: 'right',
+          className: 'header-bit-cloud-link',
+          'aria-label': 'Bit.cloud',
+        },
       ],
     },
     "image": "img/ogimage.png",

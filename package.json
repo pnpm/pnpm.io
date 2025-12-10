@@ -27,7 +27,7 @@
     "@docusaurus/plugin-content-docs": "3.9.1",
     "@docusaurus/preset-classic": "3.9.1",
     "@pnpm/design.pnpm-theme": "0.0.0-a9954b056f08e7452102b332a44ead977c0d83d3",
-    "@pnpm/website.pages.homepage": "0.0.0-3a1b1907b7712c333f4e5be702b9c8f3c5f47cf6",
+    "@pnpm/website.pages.homepage": "0.0.0-98517028f90832bf8f3e1bd911bfa9454f339c47",
     "@types/react": "^19.1.9",
     "clsx": "^1.2.1",
     "docusaurus-plugin-sass": "^0.2.6",
