@@ -1,8 +1,11 @@
-publicHoistPattern:
-  - '@mdx-js/react'
-  - url-loader
 ignoredBuiltDependencies:
   - core-js
   - core-js-pure
+
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - '@swc/core'
+
+publicHoistPattern:
+  - '@mdx-js/react'
+  - url-loader
