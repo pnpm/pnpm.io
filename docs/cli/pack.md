@@ -35,6 +35,12 @@ Added in: v10.11.0
 
 [Read more about filtering.](../filtering.md)
 
+### --dry-run
+
+Added in: v10.26.0
+
+Does everything a normal run does, except actually packing the tarball. Useful for verifying the contents of the tarball.
+
 ## Life Cycle Scripts
 
 * `prepack`

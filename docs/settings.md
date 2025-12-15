@@ -281,6 +281,21 @@ trustPolicyExclude:
   - webpack@4.47.0 || 5.102.1
 ```
 
+### blockExoticSubdeps
+
+Added in: v10.26.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, only direct dependencies (those listed in your root `package.json`) may use exotic sources (like git repositories or direct tarball URLs). All transitive dependencies must be resolved from a trusted source, such as the configured registry, local file paths, workspace links, or trusted GitHub repositories (node, bun, deno).
+
+This setting helps secure the dependency supply chain by preventing transitive dependencies from pulling in code from untrusted locations.
+
+Exotic sources include:
+* Git repositories (`git+ssh://...`)
+* Direct URL links to tarballs (`https://.../package.tgz`)
+
 ## Dependency Hoisting Settings
 
 ### hoist
@@ -1310,6 +1325,19 @@ Added in: v10.3.0
 
 When `strictDepBuilds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
 
+### allowBuilds
+ 
+Added in: v10.26.0
+ 
+A map of package matchers to explicitly allow (`true`) or disallow (`false`) script execution. This field replaces `onlyBuiltDependencies` and `ignoredBuiltDependencies` (which are also deprecated by this new setting), providing a single source of truth.
+ 
+```yaml
+allowBuilds:
+  esbuild: true
+  core-js: false
+  nx@21.6.4 || 21.6.5: true
+```
+ 
 ### neverBuiltDependencies
 
 A list of package names that are NOT allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation.
