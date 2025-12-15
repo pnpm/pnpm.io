@@ -5,8 +5,8 @@
 ## Testing locally
 
 ```
-pnpm install
-pnpm start
+bun install
+bun start
 ```
 
 ## How to publish
