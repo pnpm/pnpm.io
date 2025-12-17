@@ -49,25 +49,25 @@ const features = {
     {
       title: <Translate>Fast</Translate>,
       description: <Translate>pnpm is optimized for installation speed. We believe waiting for dependencies to install is a waste of time. Your time is valuable, and so is ours.</Translate>,
-      image: "https://static.bit.dev/pnpm-io/Fast.png",
+      image: "/img/features/fast-pumpkin.webp",
       alt: "Illustration of pnpm Fast feature.",
     },
     {
       title: <Translate>Saving Disk Space</Translate>,
       description: <Translate>Files inside node_modules are linked from a single content-addressable storage.</Translate>,
-      image: "https://static.bit.dev/pnpm-io/saving-disk-space.png",
+      image: "/img/features/saving-disk-space-pumpkin.webp",
       alt: "Illustration of pnpm Saving Disk Space feature.",
     },
     {
       title: <Translate>Workspace Support</Translate>,
       description: <Translate>Built-in support for monorepos with strict hoisting and workspace protocols.</Translate>,
-      image: "https://static.bit.dev/pnpm-io/workspace-support.png",
+      image: "/img/features/workspace-support-pumpkin.webp",
       alt: "Illustration of pnpm Workspace Support feature.",
     },
     {
       title: <Translate>Managing Runtimes</Translate>,
       description: <Translate>Manage Node.js versions automatically without external tools.</Translate>,
-      image: "https://static.bit.dev/pnpm-io/managing-runtimes.png",
+      image: "/img/features/managing-runtimes-pumpkin.webp",
       alt: "Illustration of pnpm Managing Runtimes feature.",
     },
   ],
@@ -127,12 +127,6 @@ const sponsors = {
     },
   ],
   silverSponsors: [
-    {
-      name: "Mercedes",
-      logo: "/img/users/mercedes.svg",
-      alt: "Mercedes-Benz FOSS",
-      url: addUTM("https://opensource.mercedes-benz.com/"),
-    },
     {
       name: "Devowlio",
       logo: "/img/users/devowlio_min.svg",
