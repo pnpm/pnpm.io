@@ -25,3 +25,9 @@ yarn-error.log*
 versioned_docs/version-10.x
 
 .idea/
+
+# vscode history
+.history
+
+# local Claude Code settings
+.claude/settings.local.json
