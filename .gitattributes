@@ -2,6 +2,8 @@
 
 *.tgz binary
 *.png binary
+*.jpg binary
+*.webp binary
 *.woff binary
 *.ttf binary
 *.eot binary
