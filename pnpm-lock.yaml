@@ -6,6 +6,11 @@ settings:
 
 pnpmfileChecksum: sha256-EVoK8SvKkLGQiihVg3ukp2vGhz3fOpCRIUiFhPgEXaw=
 
+patchedDependencies:
+  '@pnpm/design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c':
+    hash: c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5
+    path: patches/@pnpm__design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c.patch
+
 importers:
 
   .:
@@ -8446,7 +8451,7 @@ snapshots:
 
   '@pnpm/design.content.avatar@0.0.0-46ccf46619ffeb6963d646b5b8c73ec97ef82403(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
@@ -8460,13 +8465,13 @@ snapshots:
 
   '@pnpm/design.content.card@0.0.0-d72dd49fc13c23dbddd7a6bc360d9f4741831ef6(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
@@ -8572,7 +8577,7 @@ snapshots:
 
   '@pnpm/website.sections.oss-projects@0.0.0-d3482afa0bd4c60189fadae52f909b4f319513a3(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@pnpm/design.layouts.section-layout': 0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@pnpm/design.navigation.link': 0.0.0-248c97d25dcabdf1d750a01f15c7388ebd632b58(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -8583,7 +8588,7 @@ snapshots:
   '@pnpm/website.sections.sponsors@0.0.0-ce323302f9a48ac2872365db91da4fe70a5d7f5a(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@pnpm/design.content.badge': 0.0.0-944a69120231724acbc4d5b604f80c1b0b021e5f(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@pnpm/design.layouts.section-layout': 0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
