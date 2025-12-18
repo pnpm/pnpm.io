@@ -98,6 +98,7 @@ const docusaurusConfig = {
         "sidebarPath": path.join(__dirname, "sidebarsCommunity.json"),
       }),
     ],
+    'docusaurus-plugin-sass',
   ],
   "themeConfig": {
     "colorMode": {
@@ -204,6 +205,12 @@ const docusaurusConfig = {
           position: 'right',
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
+        },
+        {
+          href: 'https://bit.cloud/pnpm',
+          position: 'right',
+          className: 'header-bit-cloud-link',
+          'aria-label': 'Bit.cloud',
         },
       ],
     },
