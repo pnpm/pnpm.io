@@ -91,7 +91,7 @@ const sponsors = {
       name: "Bit.cloud",
       logo: "/img/users/bit.svg",
       alt: "bit",
-      url: addUTM("https://bit.dev/"),
+      url: addUTM("https://bit.cloud/"),
     },
   ],
   goldSponsors: [

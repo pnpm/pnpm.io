@@ -13,7 +13,7 @@ title: Tools
 <!-- alphabetical order -->
 
 - [Bazel](https://bazel.build) (via [rules_js](https://github.com/aspect-build/rules_js)) - Google's massively scalable multi-language build tool.
-- [Bit](https://bit.dev/) - A toolchain for component-driven development.
+- [Bit](https://bit.cloud/) - A toolchain for component-driven development.
 - [changesets](https://github.com/changesets/changesets) - A way to manage your versioning and changelogs with a focus on monorepos.
 - [handpick](https://github.com/redaxmedia/handpick) - Handpick conditional dependencies like a boss.
 - [Kretes](https://kretes.dev/) - A programming environment for building full-stack apps in TypeScript.
