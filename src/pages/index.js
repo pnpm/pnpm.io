@@ -16,7 +16,7 @@ import {
   VercelIcon,
   DepotIcon,
 } from "@pnpm/website.pages.homepage";
-import { useDocusaurusTheme, getThemeMode } from "./use-docusaurus-theme";
+import { useDocusaurusTheme, getThemeMode } from "../utils/use-docusaurus-theme";
 // import styles from './styles.module.css';
 
 const hero = {
