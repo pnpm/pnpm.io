@@ -20,7 +20,7 @@ import { useDocusaurusTheme, getThemeMode } from "../utils/use-docusaurus-theme"
 // import styles from './styles.module.css';
 
 const hero = {
-  title: <Translate>Save time. Save disk space. Supercharge your monorepos.</Translate>,
+  title: <Translate>pnpm: Save time. Save disk space. Supercharge your monorepos.</Translate>,
   subtitle: <Translate>Get lightning-fast installation speeds and a smarter, safer way to manage dependencies.</Translate>,
   ctaText: <Translate>Getting started</Translate>,
   ctaHref: "/installation",
@@ -212,7 +212,7 @@ const testimonials = {
 };
 
 const ossProjects = {
-  title: <Translate>OSS projects that use Pnpm</Translate>,
+  title: <Translate>OSS projects that use pnpm</Translate>,
   projects: [
     {
       name: "next.js",
