@@ -6,11 +6,6 @@ settings:
 
 pnpmfileChecksum: sha256-EVoK8SvKkLGQiihVg3ukp2vGhz3fOpCRIUiFhPgEXaw=
 
-patchedDependencies:
-  '@pnpm/design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c':
-    hash: c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5
-    path: patches/@pnpm__design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c.patch
-
 importers:
 
   .:
@@ -37,11 +32,11 @@ importers:
         specifier: 3.9.1
         version: 3.9.1(@algolia/client-search@4.25.3)(@docusaurus/faster@3.9.2(@docusaurus/types@3.9.2(@swc/core@1.15.3)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)))(@mdx-js/react@3.1.1(@types/react@19.2.7)(react@19.2.3))(@rspack/core@1.6.7)(@swc/core@1.15.3)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(search-insights@2.17.3)(typescript@5.9.3)
       '@pnpm/design.pnpm-theme':
-        specifier: 0.0.0-a9954b056f08e7452102b332a44ead977c0d83d3
-        version: 0.0.0-a9954b056f08e7452102b332a44ead977c0d83d3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: 1.0.0
+        version: 1.0.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@pnpm/website.pages.homepage':
-        specifier: 0.0.0-d3155b268605234a36a5c6d754a1bee8eecd2049
-        version: 0.0.0-d3155b268605234a36a5c6d754a1bee8eecd2049(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+        specifier: 1.0.0
+        version: 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@types/react':
         specifier: ^19.1.9
         version: 19.2.7
@@ -1557,88 +1552,88 @@ packages:
     resolution: {integrity: sha512-t7tZvE34z3Us83W/OoWCHNLL1BGHz+v2XMAiq1CUisNfMziumCkC7eWQPed98cvvW7sX9tsnaUHb6u9UgDdRuA==}
     engines: {node: '>=12.22.0'}
 
-  '@pnpm/design.actions.button@0.0.0-d3bfd478da14771532eae96ede7b3162a0ae212e':
-    resolution: {integrity: sha512-VIDhidQqTLQ91TWhPmlPeolcdtYoKSLky3/mvO+Shb5FaIvHfhxU4wJ1SKLVL4JoVtU/MJl7hcEpIWxXOKgbXw==}
+  '@pnpm/design.actions.button@1.0.0':
+    resolution: {integrity: sha512-mwAwMj8ahj/2IIJRys2Gyx7kBKPkzBlQesUbVgNFv+aCXdhycul+JcZufikynUB6bWx2X24ueg64pYjvHWDKQQ==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/design.actions.cta-button@0.0.0-6dfe87ce34a77bb3f57354b0e1aaa7aee73c7069':
-    resolution: {integrity: sha512-+2+OebDsas9c+fo0VC2ecBNi6fCglE19zH1IKlkKekcqnpzozjq5lkQiYzWWDP4gWGf4H30c5Qk1lOLtp+aS8g==}
+  '@pnpm/design.actions.cta-button@1.0.0':
+    resolution: {integrity: sha512-ha1Z2sKuKugnlFG3OZQ7M4jQTY3xEoUUSwOj4fi2RQHAoCXIwICQxiB4MCQPSg9WcCbyVG/qHgyoJgDdfXHbKA==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/design.content.avatar@0.0.0-46ccf46619ffeb6963d646b5b8c73ec97ef82403':
-    resolution: {integrity: sha512-K/8EWdYULIrPYxdr/w1ikDkBsRzehU2g+RjVInaUl8puI1Ji1HNYXv1t8utQWp3eUUAZic4quveONaDiDciIUQ==}
+  '@pnpm/design.content.avatar@1.0.0':
+    resolution: {integrity: sha512-R85EJtR/oDoYjcnulzQRg5h8ASpPRIIpgDj1x6ZnJaWDm/41dse6V+QrTlz11YpcqT9XyBVJ3NZ1H9Vl9ipwXw==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/design.content.badge@0.0.0-944a69120231724acbc4d5b604f80c1b0b021e5f':
-    resolution: {integrity: sha512-AUpryDlAO6yPI6UD6lvZ1cRJR6mx7BGwg3BpA8/Yg+e4V/DR3Ehv8QpNKR+FvVBrvZyyn2eajeMaAIRgr2l/YA==}
+  '@pnpm/design.content.badge@1.0.0':
+    resolution: {integrity: sha512-O9cZiPKMyNbOTSePQofF0HVE8WQkEMr4JIbirSARmQtc4X0eMbzOGXCxFMFaCU2crNIfC4J6qyn7fnrtSio7tg==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/design.content.card@0.0.0-d72dd49fc13c23dbddd7a6bc360d9f4741831ef6':
-    resolution: {integrity: sha512-EPONr4IbaM6zpbRbV9IfOqD+SO8Q5PwWteohonOUv8P2Jne3mw4H9NXlRl2bGYPFRuKGuF1QEazbJa/pTIcOtw==}
-    peerDependencies:
-      '@testing-library/react': ^16.0.0
-      react: ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-router-dom: ^5.3.4
-
-  '@pnpm/design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c':
-    resolution: {integrity: sha512-mCWZTDbJJ2pZpNavQi3uqEgGGnXPh7Lus5iE00uCgJi+triHyPvMfotg4kBVDU4typ2BXr5yzH3/tIPPf9ObwA==}
+  '@pnpm/design.content.card@1.0.0':
+    resolution: {integrity: sha512-3Rpp9BFwfAFDUPpMMipw2TeTVV2xEKBt1AsUX74gJF1f/DyE6wSzDNLzl9InEiBI9ybcmTA/kfyTQB0u3jeesA==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/design.layouts.page-layout@0.0.0-32d279302584d042e145691db84462d35dc932f9':
-    resolution: {integrity: sha512-A84EOXQ3tan3lOX8cvHsq/REVZHsrPaatlZ881vY8UvjyrPLUGGDsEOqE/IZhZxzsk8EsQJe9XIBUbwLtANh3A==}
+  '@pnpm/design.content.image@1.0.0':
+    resolution: {integrity: sha512-hNxbMjWNgaTVHewSqvpb76KaMuATvABwC1kKBKaMWT+DKo+OvtwP2uZluTq1W5fAKcspCM6n2io4/v83jEjeUA==}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-router-dom: ^5.3.4
+
+  '@pnpm/design.layouts.page-layout@1.0.0':
+    resolution: {integrity: sha512-1DrgvOQrCcfv+Nvht718/zNiLCbvpsMFKwt9bJzq9JKhZrkCqXvyJTq7czwrkN5JdIxXH0CwZz+SL1mG+n8iiw==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-helmet: ^6.1.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/design.layouts.section-layout@0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92':
-    resolution: {integrity: sha512-TTg4MnPLVG0OJjApPP/AIE527doBHhKMrdwneaYmMRqu8ugGkWlNhfuWh3VvmlJye07y7eF/tb7qSkl8wV/Pcg==}
+  '@pnpm/design.layouts.section-layout@1.0.0':
+    resolution: {integrity: sha512-BkqS67LNpZ4ogFvIMLSs6fugdHzs/44GCD34YMBHYOUyGEoPRDkg00j7Z6aOy3slIWx8OOsCH+PBlXKEWYmYkQ==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/design.media.video-embed@0.0.0-fea251aac3ec7a278e0476a8ecb18df5d7cb688a':
-    resolution: {integrity: sha512-FCxylKCo6YVjIeVNoxCBgqD7owb90OkWagwHlr3wGlQ8RbDGSW+joqBbv6tihjvMVCzURAL8/j3P415H9mfF8g==}
+  '@pnpm/design.media.video-embed@1.0.0':
+    resolution: {integrity: sha512-lZ53oeOc1CIyT5/6EgxswwXXhTxFFZl0zmvb4ZJdJpjYOm4icBiK59tEfz27o5K7W9PVfDjS5usoWcJ2IRRdlA==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/design.navigation.link@0.0.0-248c97d25dcabdf1d750a01f15c7388ebd632b58':
-    resolution: {integrity: sha512-RYJdUzOlvfAWIZZrsZLkBdjVVCuGTMx8etGPUPYjqrH+ZSwpoCR/kOuq46Dl99+ivoftCd7lx3IDe8FQr/KGJA==}
+  '@pnpm/design.navigation.link@1.0.0':
+    resolution: {integrity: sha512-MVt21dvxjcz0uV6WS2tWE9QAUAyw5cdC0eyQalc+dR+N0C0HQxiadkbx3IXZuxIkXZvseM1iFZ+xeA8toHZ4sA==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/design.pnpm-theme@0.0.0-a9954b056f08e7452102b332a44ead977c0d83d3':
-    resolution: {integrity: sha512-MOy7nZkg0xcWNPO4xuMJkEsDzziTSmFEXhhbM3QGFGy/F3outKE7LqhjSEo9+csZLnk83FYN+40KQIPPQ+aYpA==}
+  '@pnpm/design.pnpm-theme@1.0.0':
+    resolution: {integrity: sha512-UMRH+zfjVnyRVRJWWaPTsrB/IxdbZwvjqzFiFtsriCmGYnIODS4fi3hdIFHNrb48WYJHIWdYKxbBKM5kbKUDnw==}
     peerDependencies:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/design.typography.heading@0.0.0-2cd7e48991bb6977f39da2d16f1d645c3d03f853':
-    resolution: {integrity: sha512-h5WhqH44FvpAttpR8Xx7rHhUWpZKTgSyVEKepAoJ4bWtNHWBpKhLgKbilWYDMNvoDpeioV96QCQnehmmul0Oww==}
+  '@pnpm/design.typography.heading@1.0.0':
+    resolution: {integrity: sha512-uAuj6H0IAMgL0BXimgW+Bnxq7KFwgiqeb90KhVH3NnsOc4dRy1RgEeXVTN9yk+GZzYBoK9zAZ2eC/SLkgfUcNw==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/design.typography.paragraph@0.0.0-fc3b10d751f35d39423edfee2c07c1ad58282106':
-    resolution: {integrity: sha512-UrEwXTsCiah4/kqBAWw0M6V6cY8SsU6wxo8LqmubDMt1adXw7MDNAQBD7Y0fqiDwfJg9RE2lLUBv9++4QL+JfA==}
+  '@pnpm/design.typography.paragraph@1.0.0':
+    resolution: {integrity: sha512-e4bKTjhBjO/w6rm2FpeRN54UpX2kAQdAdlslF+g9/6c/v2CFJW6pCWJGWSDYU8l2mv+4ypCflA5Tj5XOucx9dg==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -1651,57 +1646,57 @@ packages:
     resolution: {integrity: sha512-c83qWb22rNRuB0UaVCI0uRPNRr8Z0FWnEIvT47jiHAmOIUHbBOg5XvV7pM5x+rKn9HRpjxquDbXYSXr3fAKFcw==}
     engines: {node: '>=12'}
 
-  '@pnpm/website.pages.homepage@0.0.0-d3155b268605234a36a5c6d754a1bee8eecd2049':
-    resolution: {integrity: sha512-SUgZB0ekz0KSlbUmlVmzYhpgIXLQJmB416raX0rPylUpsv+/b7rLxiIUJnaViucPgAdgr2sSSFYZOmRYaeo5Tw==}
+  '@pnpm/website.pages.homepage@1.0.0':
+    resolution: {integrity: sha512-ccRRp0ro9IJd6XB8RTFsTqXzQLnj7vdz3HChIf2TosnO1CDTOMonnA0/cZMNkLn+6efewO5VeqZUaGQ/rvowPQ==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.features@0.0.0-36e9fedf30482ddd1355d0f5f5b2e94fc87b21b7':
-    resolution: {integrity: sha512-GfB2lya81joU7xC+RHco9fE0sZXVifY0L9ndIVUIJhY1+I+tUjru9wIZk/GCYfXqIOcqJ/HJFvqnF02T5eW7Qg==}
+  '@pnpm/website.sections.features@1.0.0':
+    resolution: {integrity: sha512-8Knf96lKMKG7ceRxmHnF4b3XeKh5984J6INBvQCqvJqjSkLaHfCbDeKXa9YnlOLoNKT7yzlRxUB3puDwJRHOzQ==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.hero@0.0.0-b3d99e42b151ec4786189aa07b164561a5c498e1':
-    resolution: {integrity: sha512-eNDunXGyB7bYeyOTxv75KW6pMNfWA2QHekezrYssQRM+PSQ+sWfndanokduRKS/eHkezBu3YJEb0o7mzxpQIlA==}
+  '@pnpm/website.sections.hero@1.0.0':
+    resolution: {integrity: sha512-A2mqNZITFdHVUHzkr7/FCTiOU7H82++jfivYTTfVeNPuwof4n148J/jFttK2ZlsDCReoufLU4WCn3NiBzMGyXA==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.oss-projects@0.0.0-d3482afa0bd4c60189fadae52f909b4f319513a3':
-    resolution: {integrity: sha512-qCYsY9tyS/vcRQCHjhILuJxMNqqfeawBkzITDWdqkDGKxqNWhqUW8VMr2cbONJuCftQJLRkLcXiwsxenve9sog==}
+  '@pnpm/website.sections.oss-projects@1.0.0':
+    resolution: {integrity: sha512-QBi1ajHoAPFm7GdMyxJvOpjJtNTpATAaRcOZA6QyI3COC5ypY0djt9Xa8GTO581pU520AmHw5yWJRYM3Mh4DQQ==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.sponsors@0.0.0-ce323302f9a48ac2872365db91da4fe70a5d7f5a':
-    resolution: {integrity: sha512-NjkvgziFSxFPeE4nUSPds0Xwd7T87tUtS7RPqj+v0ivNoA8I9Ko4PDPjNOvXzPnCdOsAIrlhT0Efo7Rs25x5ww==}
+  '@pnpm/website.sections.sponsors@1.0.0':
+    resolution: {integrity: sha512-tdguQQqOVZE6+yCY6XhWvkrBrzeu6GrPAVHCxHOL+0+7/ku6IIZ83GoSwBzMVtLSpqQ4UIFu1QTE+KyWOmAOTw==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.testimonials@0.0.0-2808bdd1272dcb84863bd2e2fd43e9a2880b154a':
-    resolution: {integrity: sha512-U7TQt8XbsWXJuGclyVVlKKaWuL/LrTlz/zDtXvw0vH2BHynSui3qNm74Mqhp81H8zj/E/DacSMiFnZO+XfoDgA==}
+  '@pnpm/website.sections.testimonials@1.0.0':
+    resolution: {integrity: sha512-rcYERiUbDPZUMQtBDQ9VRv6trXwvFvOSuNr3MiQncz7UZZ+I9UP7E5aW+Sb/IjKknczKa7W7eplge/l5IIrgdg==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.ui.github-stars-button@0.0.0-c0c027f0f35be4ba9f49e516a20ae14105dd5e27':
-    resolution: {integrity: sha512-7JEADfOHI5U2IgQV+vaugT8KYxW80AG98W/PxHtHynicGMMJKduy3/spGmImj+r3uAnP/bOxJstNpJcEkW/8HQ==}
+  '@pnpm/website.ui.github-stars-button@1.0.0':
+    resolution: {integrity: sha512-spqf+M0/7TUstPw6PX/+Qm3etHmMNZMaCN5LBiGaSdutN9wXDaTL6F6VbGsVcSeTxcnXDDuUJ5FVRg5/LMBOAw==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.ui.testimonial-card@0.0.0-865d0182d4f855939da3fa25124d07fdece9ce8e':
-    resolution: {integrity: sha512-ooQ+VM7qf6S/ug0NGZfYBRgM7NpEgpaMpZXqRvSZto8lZnJrz3vif2Eaz7yWNb9uNXy+DOTj2gaLoT+aEM0AgQ==}
+  '@pnpm/website.ui.testimonial-card@1.0.0':
+    resolution: {integrity: sha512-v/OUxMMBA3qxIEBdFB1/oFXE22N5GQb2MLUSpeujje2h/GbSA+D0/IzGIxpOlCZA5mmQnYNmeNNDJ+IwYAAzJg==}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -8433,52 +8428,52 @@ snapshots:
 
   '@pnpm/config.env-replace@1.1.0': {}
 
-  '@pnpm/design.actions.button@0.0.0-d3bfd478da14771532eae96ede7b3162a0ae212e(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.actions.button@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.navigation.link': 0.0.0-248c97d25dcabdf1d750a01f15c7388ebd632b58(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.navigation.link': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.actions.cta-button@0.0.0-6dfe87ce34a77bb3f57354b0e1aaa7aee73c7069(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.actions.cta-button@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.actions.button': 0.0.0-d3bfd478da14771532eae96ede7b3162a0ae212e(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.actions.button': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.content.avatar@0.0.0-46ccf46619ffeb6963d646b5b8c73ec97ef82403(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.content.avatar@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.image': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.content.badge@0.0.0-944a69120231724acbc4d5b604f80c1b0b021e5f(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.content.badge@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
 
-  '@pnpm/design.content.card@0.0.0-d72dd49fc13c23dbddd7a6bc360d9f4741831ef6(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.content.card@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      classnames: 2.5.1
-      react: 19.2.3
-      react-router-dom: 5.3.4(react@19.2.3)
-
-  '@pnpm/design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
-    dependencies:
+      '@pnpm/design.content.image': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.layouts.page-layout@0.0.0-32d279302584d042e145691db84462d35dc932f9(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.content.image@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      classnames: 2.5.1
+      react: 19.2.3
+      react-router-dom: 5.3.4(react@19.2.3)
+
+  '@pnpm/design.layouts.page-layout@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
@@ -8486,29 +8481,29 @@ snapshots:
       react-helmet: 6.1.0(react@19.2.3)
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.layouts.section-layout@0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.layouts.section-layout@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.typography.heading': 0.0.0-2cd7e48991bb6977f39da2d16f1d645c3d03f853(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.typography.paragraph': 0.0.0-fc3b10d751f35d39423edfee2c07c1ad58282106(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.media.video-embed@0.0.0-fea251aac3ec7a278e0476a8ecb18df5d7cb688a(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.media.video-embed@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
 
-  '@pnpm/design.navigation.link@0.0.0-248c97d25dcabdf1d750a01f15c7388ebd632b58(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.navigation.link@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/design.pnpm-theme@0.0.0-a9954b056f08e7452102b332a44ead977c0d83d3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.pnpm-theme@1.0.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@bitdesign/sparks.sparks-theme': 0.0.17(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
@@ -8516,13 +8511,13 @@ snapshots:
     transitivePeerDependencies:
       - react-dom
 
-  '@pnpm/design.typography.heading@0.0.0-2cd7e48991bb6977f39da2d16f1d645c3d03f853(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.typography.heading@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
 
-  '@pnpm/design.typography.paragraph@0.0.0-fc3b10d751f35d39423edfee2c07c1ad58282106(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
+  '@pnpm/design.typography.paragraph@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
@@ -8538,86 +8533,86 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@pnpm/website.pages.homepage@0.0.0-d3155b268605234a36a5c6d754a1bee8eecd2049(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.pages.homepage@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.layouts.page-layout': 0.0.0-32d279302584d042e145691db84462d35dc932f9(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/website.sections.features': 0.0.0-36e9fedf30482ddd1355d0f5f5b2e94fc87b21b7(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/website.sections.hero': 0.0.0-b3d99e42b151ec4786189aa07b164561a5c498e1(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/website.sections.oss-projects': 0.0.0-d3482afa0bd4c60189fadae52f909b4f319513a3(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/website.sections.sponsors': 0.0.0-ce323302f9a48ac2872365db91da4fe70a5d7f5a(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/website.sections.testimonials': 0.0.0-2808bdd1272dcb84863bd2e2fd43e9a2880b154a(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.layouts.page-layout': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-helmet@6.1.0(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/website.sections.features': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/website.sections.hero': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/website.sections.oss-projects': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/website.sections.sponsors': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/website.sections.testimonials': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
     transitivePeerDependencies:
       - react-helmet
 
-  '@pnpm/website.sections.features@0.0.0-36e9fedf30482ddd1355d0f5f5b2e94fc87b21b7(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.sections.features@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.layouts.section-layout': 0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.typography.heading': 0.0.0-2cd7e48991bb6977f39da2d16f1d645c3d03f853(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.typography.paragraph': 0.0.0-fc3b10d751f35d39423edfee2c07c1ad58282106(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/website.sections.hero@0.0.0-b3d99e42b151ec4786189aa07b164561a5c498e1(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.sections.hero@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.actions.cta-button': 0.0.0-6dfe87ce34a77bb3f57354b0e1aaa7aee73c7069(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.layouts.section-layout': 0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.media.video-embed': 0.0.0-fea251aac3ec7a278e0476a8ecb18df5d7cb688a(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.typography.heading': 0.0.0-2cd7e48991bb6977f39da2d16f1d645c3d03f853(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.typography.paragraph': 0.0.0-fc3b10d751f35d39423edfee2c07c1ad58282106(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/website.ui.github-stars-button': 0.0.0-c0c027f0f35be4ba9f49e516a20ae14105dd5e27(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.actions.cta-button': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.media.video-embed': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/website.ui.github-stars-button': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/website.sections.oss-projects@0.0.0-d3482afa0bd4c60189fadae52f909b4f319513a3(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.sections.oss-projects@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.layouts.section-layout': 0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.navigation.link': 0.0.0-248c97d25dcabdf1d750a01f15c7388ebd632b58(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.image': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.navigation.link': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/website.sections.sponsors@0.0.0-ce323302f9a48ac2872365db91da4fe70a5d7f5a(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.sections.sponsors@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.badge': 0.0.0-944a69120231724acbc4d5b604f80c1b0b021e5f(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.content.image': 0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c(patch_hash=c127ee52c580f9a63b7b6f1fe2a931a8d0aca73508c7333460f6557dbcb6f3e5)(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.layouts.section-layout': 0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.badge': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.image': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/website.sections.testimonials@0.0.0-2808bdd1272dcb84863bd2e2fd43e9a2880b154a(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.sections.testimonials@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.layouts.section-layout': 0.0.0-551c9e677692ea73b3d8f83e25f5d739cedffe92(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/website.ui.testimonial-card': 0.0.0-865d0182d4f855939da3fa25124d07fdece9ce8e(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/website.ui.testimonial-card': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/website.ui.github-stars-button@0.0.0-c0c027f0f35be4ba9f49e516a20ae14105dd5e27(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.ui.github-stars-button@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.actions.button': 0.0.0-d3bfd478da14771532eae96ede7b3162a0ae212e(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.actions.button': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3
       react-router-dom: 5.3.4(react@19.2.3)
 
-  '@pnpm/website.ui.testimonial-card@0.0.0-865d0182d4f855939da3fa25124d07fdece9ce8e(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
+  '@pnpm/website.ui.testimonial-card@1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)':
     dependencies:
-      '@pnpm/design.content.avatar': 0.0.0-46ccf46619ffeb6963d646b5b8c73ec97ef82403(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.content.card': 0.0.0-d72dd49fc13c23dbddd7a6bc360d9f4741831ef6(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.typography.heading': 0.0.0-2cd7e48991bb6977f39da2d16f1d645c3d03f853(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
-      '@pnpm/design.typography.paragraph': 0.0.0-fc3b10d751f35d39423edfee2c07c1ad58282106(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.avatar': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.content.card': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-router-dom@5.3.4(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+      '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       '@testing-library/react': 16.3.0(@testing-library/dom@10.4.1)(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       classnames: 2.5.1
       react: 19.2.3

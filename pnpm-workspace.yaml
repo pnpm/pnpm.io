@@ -6,9 +6,6 @@ onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
 
-patchedDependencies:
-  '@pnpm/design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c': patches/@pnpm__design.content.image@0.0.0-6cf35611b098e881dc1b3979f3f40beee9262a7c.patch
-
 publicHoistPattern:
   - '@mdx-js/react'
   - url-loader
