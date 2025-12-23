@@ -88,7 +88,7 @@ const sponsors = {
   silverLabel: <Translate>SILVER SPONSORS</Translate>,
   platinumSponsors: [
     {
-      name: "Bit.cloud",
+      name: "Bit Cloud",
       logo: "/img/users/bit.svg",
       alt: "bit",
       url: addUTM("https://bit.cloud/"),
