@@ -1633,6 +1633,15 @@ When set to `true`, no workspace cycle warnings will be printed.
 
 When set to `true`, installation will fail if the workspace has cycles.
 
+### workspaceConcurrency
+
+* Default: **4**
+* Type: **Number**
+
+Set the maximum number of tasks to run simultaneously. For unlimited concurrency use `Infinity`.
+
+You can set `workspaceConcurrency` to a value less than or equal to `0`, and pnpm will use the number of available CPU cores minus the absolute value of the provided number. For example, if you have 8 cores and set `workspaceConcurrency` to `-1`, pnpm will use `max(1, 8 - 1) = 7` concurrent tasks.
+
 ### failIfNoMatch
 
 * Default: **false**
