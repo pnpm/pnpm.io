@@ -1337,6 +1337,8 @@ allowBuilds:
   core-js: false
   nx@21.6.4 || 21.6.5: true
 ```
+
+**Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and a warning is printed. If [`strictDepBuilds`](#strictdepbuilds) is set to `true`, an error will be printed instead.
  
 ### neverBuiltDependencies
 
