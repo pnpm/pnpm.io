@@ -2,6 +2,7 @@
 title: The year 2022 for pnpm
 authors: zkochan
 image: "/img/blog/2022-review.png"
+tags: [recap]
 ---
 
 It is the end of the year. A really hard year. As you may know, I live in Ukraine, so due to Russia's war against us, it was harder to lead this project than in previous years. Nevertheless, it was a good year for pnpm. We've got a lot of new users, contributors, and we have implemented many great features.
