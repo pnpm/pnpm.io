@@ -109,6 +109,7 @@
       "pnpmfile"
     ],
     "Features": [
+      "package-sources",
       "workspaces",
       "catalogs",
       "config-dependencies",

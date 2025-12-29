@@ -330,6 +330,10 @@
       "items": [
         {
           "type": "doc",
+          "id": "package-sources"
+        },
+        {
+          "type": "doc",
           "id": "workspaces"
         },
         {
