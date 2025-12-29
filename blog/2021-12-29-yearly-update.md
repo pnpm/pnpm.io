@@ -1,6 +1,7 @@
 ---
 title: The year 2021 for pnpm
 authors: zkochan
+tags: [recap]
 ---
 
 It is the end of the year and it was a good year for pnpm, so let's see how it went.
