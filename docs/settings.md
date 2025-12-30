@@ -281,6 +281,15 @@ trustPolicyExclude:
   - webpack@4.47.0 || 5.102.1
 ```
 
+### trustPolicyIgnoreAfter
+
+Added in: v10.27.0
+
+* Default: **undefined**
+* Type: **number (minutes)**
+
+Allows ignoring the trust policy check for packages published more than the specified number of minutes ago. This is useful when enabling strict trust policies, as it allows older versions of packages (which may lack a process for publishing with signatures or provenance) to be installed without manual exclusion, assuming they are safe due to their age.
+
 ### blockExoticSubdeps
 
 Added in: v10.26.0

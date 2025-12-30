@@ -23,6 +23,8 @@ To further protect your supply chain, pnpm also supports a [trustPolicy] setting
  
 If you need to allow specific packages or versions to bypass the trust policy check, you can use the [trustPolicyExclude] setting. This is useful for known packages that may not meet the trust requirements but are still safe to use.
 
+Additionally, the [trustPolicyIgnoreAfter] setting allows you to ignore trust checks for packages published more than a specified time ago. This is helpful for older versions of packages that lack a process for publishing with signatures or provenance.
+
 ### Use a lockfile
 
 It goes without saying that you should always lock your dependencies with a lockfile. Commit your lockfile to your repository to avoid unexpected updates.
@@ -37,3 +39,4 @@ It goes without saying that you should always lock your dependencies with a lock
 [trustPolicyExclude]: settings.md#trustpolicyexclude
 [allowBuilds]: settings.md#allowbuilds
 [blockExoticSubdeps]: settings.md#blockexoticsubdeps
+[trustPolicyIgnoreAfter]: settings.md#trustpolicyignoreafter
