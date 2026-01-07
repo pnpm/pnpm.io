@@ -1953,7 +1953,7 @@ When set to `true`, dependencies that are already symlinked to the root `node_mo
 
 Added in: v10.1.0
 
-* Default: **true**
+* Default: **false**
 * Type: **Boolean**
 
 When enabled, a fast check will be performed before proceeding to installation. This way a repeat install or an install on a project with everything up-to-date becomes a lot faster.
