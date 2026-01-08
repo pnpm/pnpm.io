@@ -125,6 +125,12 @@ const sponsors = {
       alt: "Workleap",
       url: addUTM("https://workleap.com/"),
     },
+    {
+      name: "Nx",
+      logo: "/img/users/nx.svg",
+      alt: "Nx",
+      url: addUTM("https://nx.dev/"),
+    },
   ],
   silverSponsors: [
     {
@@ -307,6 +313,11 @@ const ossProjects = {
     {
       name: "Vercel",
       icon: <VercelIcon />,
+    },
+    {
+      name: "Nx",
+      logoUrl: "/img/users/nx.svg",
+      alt: "Nx",
     },
   ],
 };
