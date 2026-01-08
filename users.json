@@ -374,5 +374,12 @@
     "infoLink": "https://osmos.ai/",
     "pinned": false,
     "width": 250
+  },
+  {
+    "caption": "Nx",
+    "image": "/img/users/nx.svg",
+    "infoLink": "https://nx.dev",
+    "pinned": false,
+    "width": 150
   }
 ]
