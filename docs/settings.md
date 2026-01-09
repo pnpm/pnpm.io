@@ -294,7 +294,7 @@ Allows ignoring the trust policy check for packages published more than the spec
 
 Added in: v10.26.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When set to `true`, only direct dependencies (those listed in your root `package.json`) may use exotic sources (like git repositories or direct tarball URLs). All transitive dependencies must be resolved from a trusted source, such as the configured registry, local file paths, workspace links, or trusted GitHub repositories (node, bun, deno).
@@ -1329,7 +1329,7 @@ This setting allows the checking of the state of dependencies before running scr
 
 Added in: v10.3.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When `strictDepBuilds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
