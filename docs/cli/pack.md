@@ -47,3 +47,9 @@ Does everything a normal run does, except actually packing the tarball. Useful f
 * `prepare`
 * `postpack`
 
+:::tip
+
+You can also use the [`beforePacking` hook](../pnpmfile.md#hooksbeforepackingpkg-pkg--promisepkg) to programmatically modify the `package.json` contents before the tarball is created. This is useful for removing development-only fields or adding publication metadata without modifying your local `package.json`.
+
+:::
+

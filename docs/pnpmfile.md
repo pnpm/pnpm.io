@@ -18,6 +18,7 @@ lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
 |-------------------------------------------------------|------------------------------------------------------------|----------------------------------------------------|
 | `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json` |
 | `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                 |
+| `hooks.beforePacking(pkg): pkg`                       | Called before creating a tarball during pack/publish       | Allows you to customize the published `package.json` |
 
 ### `hooks.readPackage(pkg, context): pkg | Promise<pkg>`
 
@@ -136,6 +137,50 @@ module.exports = {
 
 There are none - anything that can be done with the lockfile can be modified via
 this function, and you can even extend the lockfile's functionality.
+
+### `hooks.beforePacking(pkg): pkg | Promise<pkg>`
+
+Added in: v10.28.0
+
+Allows you to modify the `package.json` manifest before it is packed into a tarball during `pnpm pack` or `pnpm publish`. This is useful for customizing the published package without affecting your local development `package.json`.
+
+Unlike `hooks.readPackage`, which modifies how dependencies are resolved during installation, `beforePacking` only affects the contents of the tarball that gets published.
+
+#### Arguments
+
+* `pkg` - The package manifest object that will be included in the published tarball.
+
+#### Usage example
+
+```js title=".pnpmfile.cjs"
+function beforePacking(pkg) {
+  // Remove development-only fields from published package
+  delete pkg.devDependencies
+  delete pkg.scripts.test
+  
+  // Add publication metadata
+  pkg.publishedAt = new Date().toISOString()
+  
+  // Modify package exports for production
+  if (pkg.name === 'my-package') {
+    pkg.main = './dist/index.js'
+  }
+  
+  return pkg
+}
+
+module.exports = {
+  hooks: {
+    beforePacking
+  }
+}
+```
+
+:::note
+
+The modifications made by this hook only affect the `package.json` inside the tarball. Your local `package.json` file remains unchanged.
+
+:::
 
 ### `hooks.preResolution(options): Promise<void>`
 
