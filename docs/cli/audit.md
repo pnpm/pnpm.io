@@ -67,3 +67,32 @@ Ignore all CVEs with no resolution.
 Added in: v10.11.0
 
 Ignore a vulnerability by CVE.
+
+## Configuration
+
+### auditConfig
+
+#### auditConfig.ignoreCves
+
+A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
+
+```yaml
+auditConfig:
+  ignoreCves:
+    - CVE-2022-36313
+```
+
+[`pnpm audit`]: #
+
+#### auditConfig.ignoreGhsas
+
+A list of GHSA Codes that will be ignored by the [`pnpm audit`] command.
+
+```yaml
+auditConfig:
+  ignoreGhsas:
+    - GHSA-42xw-2xvc-qx8m
+    - GHSA-4w2v-q235-vp99
+    - GHSA-cph5-m8f7-6c5x
+    - GHSA-vh95-rmgr-6w4m
+```

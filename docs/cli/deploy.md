@@ -72,3 +72,12 @@ By default, all the files of the project are copied during deployment but this c
 1. The project's `package.json` may contain a "files" field to list the files and directories that should be copied.
 2. If there is an `.npmignore` file in the application directory then any files listed here are ignored.
 3. If there is a `.gitignore` file in the application directory then any files listed here are ignored.
+
+## Configuration
+
+### forceLegacyDeploy
+
+* Default: **false**
+* Type: **Boolean**
+
+By default, `pnpm deploy` will try creating a dedicated lockfile from a shared lockfile for deployment. If this setting is set to `true`, the legacy `deploy` behavior will be used.

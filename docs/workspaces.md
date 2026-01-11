@@ -40,7 +40,7 @@ This protocol is especially useful when the [linkWorkspacePackages] option is
 set to `false`. In that case, pnpm will only link packages from the workspace if
 the `workspace:` protocol is used.
 
-[linkWorkspacePackages]: settings.md#linkWorkspacePackages
+[linkWorkspacePackages]: #linkworkspacepackages
 
 ### Referencing workspace packages through aliases
 
@@ -167,3 +167,142 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Stimulus Components](https://github.com/stimulus-components/stimulus-components) | ![](https://img.shields.io/github/stars/stimulus-components/stimulus-components) | 2024-10-26 | [`8e100d5b2c02ad5bf0b965822880a60f543f5ec3`](https://github.com/stimulus-components/stimulus-components/commit/8e100d5b2c02ad5bf0b965822880a60f543f5ec3) |
 | [Serenity/JS](https://github.com/serenity-js/serenity-js) | ![](https://img.shields.io/github/stars/serenity-js/serenity-js) | 2025-01-01 | [`43dbe6f440d8dd81811da303e542381a17d06b4d`](https://github.com/serenity-js/serenity-js/commit/43dbe6f440d8dd81811da303e542381a17d06b4d) |
 | [kysely](https://github.com/kysely-org/kysely) | ![](https://img.shields.io/github/stars/kysely-org/kysely) | 2025-07-29 | [`5ac19105ddb17af310c67e004c11fa3345454b66`](https://github.com/kysely-org/kysely/commit/5ac19105ddb17af310c67e004c11fa3345454b66) |
+
+## Configuration
+
+### linkWorkspacePackages
+
+* Default: **false**
+* Type: **true**, **false**, **deep**
+
+If this is enabled, locally available packages are linked to `node_modules`
+instead of being downloaded from the registry. This is very convenient in a
+monorepo. If you need local packages to also be linked to subdependencies, you
+can use the `deep` setting.
+
+Else, packages are downloaded and installed from the registry. However,
+workspace packages can still be linked by using the `workspace:` range protocol.
+
+Packages are only linked if their versions satisfy the dependency ranges.
+
+### injectWorkspacePackages
+
+* Default: **false**
+* Type: **Boolean**
+
+Enables hard-linking of all local workspace dependencies instead of symlinking them. Alternatively, this can be achieved using [`dependenciesMeta[].injected`](package_json.md#dependenciesmetainjected), which allows to selectively enable hard-linking for specific dependencies.
+
+:::note
+
+Even if this setting is enabled, pnpm will prefer to deduplicate injected dependencies using symlinks—unless multiple dependency graphs are required due to mismatched peer dependencies. This behaviour is controlled by the `dedupeInjectedDeps` setting.
+
+:::
+
+### dedupeInjectedDeps
+
+* Default: **true**
+* Type: **Boolean**
+
+When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
+
+### syncInjectedDepsAfterScripts
+
+Added in: v10.5.0
+
+* Default: **undefined**
+* Type: **String[]**
+
+Injected workspace dependencies are collections of hardlinks, which don't add or remove the files when their sources change. This causes problems in packages that need to be built (such as in TypeScript projects).
+
+This setting is a list of script names. When any of these scripts are executed in a workspace package, the injected dependencies inside `node_modules` will also be synchronized.
+
+### preferWorkspacePackages
+
+* Default: **false**
+* Type: **Boolean**
+
+If this is enabled, local packages from the workspace are preferred over
+packages from the registry, even if there is a newer version of the package in
+the registry.
+
+This setting is only useful if the workspace doesn't use
+`saveWorkspaceProtocol`.
+
+### sharedWorkspaceLockfile
+
+* Default: **true**
+* Type: **Boolean**
+
+If this is enabled, pnpm creates a single `pnpm-lock.yaml` file in the root of
+the workspace. This also means that all dependencies of workspace packages will
+be in a single `node_modules` (and get symlinked to their package `node_modules`
+folder for Node's module resolution).
+
+Advantages of this option:
+* every dependency is a singleton
+* faster installations in a monorepo
+* fewer changes in code reviews as they are all in one file
+
+:::note
+
+Even though all the dependencies will be hard linked into the root
+`node_modules`, packages will have access only to those dependencies
+that are declared in their `package.json`, so pnpm's strictness is preserved.
+This is a result of the aforementioned symbolic linking.
+
+:::
+
+### saveWorkspaceProtocol
+
+* Default: **rolling**
+* Type: **true**, **false**, **rolling**
+
+This setting controls how dependencies that are linked from the workspace are added to `package.json`.
+
+If `foo@1.0.0` is in the workspace and you run `pnpm add foo` in another project of the workspace, below is how `foo` will be added to the dependencies field. The `savePrefix` setting also influences how the spec is created.
+
+| saveWorkspaceProtocol | savePrefix | spec |
+|--|--|--|
+| false | `''` | `1.0.0` |
+| false | `'~'` | `~1.0.0` |
+| false | `'^'` | `^1.0.0` |
+| true | `''` | `workspace:1.0.0` |
+| true | `'~'` | `workspace:~1.0.0` |
+| true | `'^'` | `workspace:^1.0.0` |
+| rolling | `''` | `workspace:*` |
+| rolling | `'~'` | `workspace:~` |
+| rolling | `'^'` | `workspace:^` |
+
+### includeWorkspaceRoot
+
+* Default: **false**
+* Type: **Boolean**
+
+When executing commands recursively in a workspace, execute them on the root workspace project as well.
+
+### ignoreWorkspaceCycles
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, no workspace cycle warnings will be printed.
+
+### disallowWorkspaceCycles
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, installation will fail if the workspace has cycles.
+
+### failIfNoMatch
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, the CLI will exit with a non-zero code if no packages match the provided filters.
+
+For example, the following command will exit with a non-zero code because `bad-pkg-name` is not present in the workspace:
+
+```sh
+pnpm --filter=bad-pkg-name test
+```

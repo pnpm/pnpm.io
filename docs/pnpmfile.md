@@ -249,16 +249,37 @@ See [Finders] for more details.
 
 ## Related Configuration
 
-import IgnorePnpmfile from './settings/_ignorePnpmfile.mdx'
+### ignorePnpmfile
 
-<IgnorePnpmfile />
+* Default: **false**
+* Type: **Boolean**
 
-import Pnpmfile from './settings/_pnpmfile.mdx'
+`.pnpmfile.cjs` will be ignored. Useful together with `--ignore-scripts` when you
+want to make sure that no script gets executed during install.
 
-<Pnpmfile />
+### pnpmfile
 
-import GlobalPnpmfile from './settings/_globalPnpmfile.mdx'
+* Default: **['.pnpmfile.cjs']**
+* Type: **path[]**
+* Example: **['.pnpm/.pnpmfile.cjs']**
 
-<GlobalPnpmfile />
+The location of the local pnpmfile(s).
+
+### globalPnpmfile
+
+* Default: **null**
+* Type: **path**
+* Example: **~/.pnpm/global_pnpmfile.cjs**
+
+The location of a global pnpmfile. A global pnpmfile is used by all projects
+during installation.
+
+:::note
+
+It is recommended to use local pnpmfiles. Only use a global pnpmfile
+if you use pnpm on projects that don't use pnpm as the primary package manager.
+
+:::
 
 [`pnpm patch`]: ./cli/patch.md
+
