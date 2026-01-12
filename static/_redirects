@@ -2,3 +2,4 @@ https://pnpm.js.org/pnpm.js   https://get.pnpm.io/v5.js                 200
 https://pnpm.js.org/*         https://pnpm.io/js-org-placeholder.html   200!
 /8.x/*                        /:splat                                   302
 /en/*                         /:splat                                   301
+/:version/cli/completion      /:version/completion                      301
