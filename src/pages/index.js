@@ -98,7 +98,7 @@ const sponsors = {
     {
       name: "Discord",
       logo: "/img/users/discord_min.svg",
-      alt: "Discord",
+      alt: "",
       url: addUTM("https://discord.com/"),
     },
     {
@@ -110,25 +110,25 @@ const sponsors = {
     {
       name: "StackBlitz",
       logo: "/img/users/stackblitz_min.svg",
-      alt: "StackBlitz",
+      alt: "",
       url: addUTM("https://stackblitz.com/"),
     },
     {
       name: "Vitejs",
       logo: "/img/users/vitejs.svg",
-      alt: "Vitejs",
+      alt: "",
       url: addUTM("https://vite.dev/"),
     },
     {
       name: "Workleap",
       logo: "/img/users/workleap.svg",
-      alt: "Workleap",
+      alt: "",
       url: addUTM("https://workleap.com/"),
     },
     {
       name: "Nx",
       logo: "/img/users/nx.svg",
-      alt: "Nx",
+      alt: "",
       url: addUTM("https://nx.dev/"),
     },
   ],
@@ -142,13 +142,13 @@ const sponsors = {
     {
       name: "Uscreen",
       logo: "/img/users/uscreen.svg",
-      alt: "Uscreen",
+      alt: "",
       url: addUTM("https://uscreen.de/"),
     },
     {
       name: "Leniolabs",
       logo: "/img/users/leniolabs.jpg",
-      alt: "Leniolabs",
+      alt: "",
       url: addUTM("https://www.leniolabs.com"),
     },
     {
