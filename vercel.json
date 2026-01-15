@@ -45,6 +45,11 @@
       "source": "/v/:splat*",
       "destination": "https://github.com/pnpm/pnpm/releases/tag/v:splat*",
       "permanent": true
+    },
+    {
+      "source": "/:version/cli/completion",
+      "destination": "/:version/completion",
+      "permanent": true
     }
   ]
 }
