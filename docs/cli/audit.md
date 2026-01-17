@@ -33,7 +33,7 @@ Only print advisories with severity greater than or equal to `<severity>`.
 
 ### --fix
 
-Add overrides to the `package.json` file in order to force non-vulnerable versions of the dependencies.
+Add overrides to the `pnpm-workspace.yaml` file in order to force non-vulnerable versions of the dependencies.
 
 ### --json
 
