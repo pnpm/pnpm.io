@@ -104,3 +104,10 @@ pnpm env list --remote 16
 
 The changes are made systemwide.
 
+## Managing Versions
+
+Add a `use-node-version` directive to `.npmrc` to make pnpm default to that node version when running scripts in your project:
+
+```
+use-node-version=18.17.1
+```
