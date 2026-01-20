@@ -101,6 +101,14 @@ corepack use pnpm@latest-10
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
 
+:::warning
+
+Having multiple package manager versions installed can cause an incorrect version of a package manager being used, regardless of the version that is specified in the package.json.
+
+To verify there are not multiple version installed, see this [corepack issue 659](https://github.com/nodejs/corepack/issues/659#issuecomment-2658982866).
+
+:::
+
 ## Using other package managers
 
 ### Using npm
