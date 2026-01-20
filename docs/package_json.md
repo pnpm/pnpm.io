@@ -112,7 +112,7 @@ Additional meta information used for dependencies declared inside `dependencies`
 
 ### dependenciesMeta.*.injected
 
-If this is set to `true` for a dependency that is a local workspace package, that package will be installed by creating a hard linked copy in the virtual store (`node_modules/.pnpm`).
+If this is set to `true` for a dependency that is a local workspace package, that package will be installed by creating a hard linked copy in the dependency graph store (`node_modules/.pnpm`).
 
 If this is set to `false` or not set, then the dependency will instead be installed by creating a `node_modules` symlink that points to the package's source directory in the workspace.  This is the default, as it is faster and ensures that any modifications to the dependency will be immediately visible to its consumers.
 
@@ -131,7 +131,7 @@ The `button` dependency will normally be installed by creating a symlink in the 
 
 But what if `button` specifies `react` in its `peerDependencies`? If all projects in the monorepo use the same version of `react`, then there is no problem. But what if `button` is required by `card` that uses `react@16` and `form` that uses `react@17`? Normally you'd have to choose a single version of `react` and specify it using `devDependencies` of `button`. Symlinking does not provide a way for the `react` peer dependency to be satisfied differently by different consumers such as `card` and `form`.
 
-The `injected` field solves this problem by installing a hard linked copies of `button` in the virtual store. To accomplish this, the `package.json` of `card` could be configured as follows:
+The `injected` field solves this problem by installing a hard linked copies of `button` in the dependency graph store. To accomplish this, the `package.json` of `card` could be configured as follows:
 
 ```json
 {

@@ -357,7 +357,7 @@ hoistPattern:
 * Type: **string[]**
 
 Unlike `hoistPattern`, which hoists dependencies to a hidden modules directory
-inside the virtual store, `publicHoistPattern` hoists dependencies matching
+inside the dependency graph store, `publicHoistPattern` hoists dependencies matching
 the pattern to the root modules directory. Hoisting to the root modules
 directory means that application code will have access to phantom dependencies,
 even if they modify the resolution strategy improperly.
@@ -413,7 +413,7 @@ The directory in which dependencies will be installed (instead of
 
 Defines what linker should be used for installing Node packages.
 
-* **isolated** - dependencies are symlinked from a virtual store at `node_modules/.pnpm`.
+* **isolated** - dependencies are symlinked from a dependency graph store at `node_modules/.pnpm`.
 * **hoisted** - a flat `node_modules` without symlinks is created. Same as the `node_modules` created by npm or Yarn Classic. One of Yarn's libraries is used for hoisting, when this setting is used. Legitimate reasons to use this setting:
   1. Your tooling doesn't work well with symlinks. A React Native project will most probably only work if you use a hoisted `node_modules`.
   1. Your project is deployed to a serverless hosting provider. Some serverless providers (for instance, AWS Lambda) don't support symlinks. An alternative solution for this problem is to bundle your application before deployment.
@@ -431,7 +431,7 @@ your linker.
 * Default: **true**
 * Type: **Boolean**
 
-When `symlink` is set to `false`, pnpm creates a virtual store directory without
+When `symlink` is set to `false`, pnpm creates a dependency graph store directory without
 any symlinks. It is a useful setting together with `nodeLinker=pnp`.
 
 ### enableModulesDir
@@ -455,15 +455,15 @@ The directory with links to the store. All direct and indirect dependencies of
 the project are linked into this directory.
 
 This is a useful setting that can solve issues with long paths on Windows. If
-you have some dependencies with very long paths, you can select a virtual store
+you have some dependencies with very long paths, you can select a dependency graph store
 in the root of your drive (for instance `C:\my-project-store`).
 
-Or you can set the virtual store to `.pnpm` and add it to `.gitignore`. This
+Or you can set the dependency graph store to `.pnpm` and add it to `.gitignore`. This
 will make stacktraces cleaner as paths to dependencies will be one directory
 higher.
 
-**NOTE:** the virtual store cannot be shared between several projects. Every
-project should have its own virtual store (except for in workspaces where the
+**NOTE:** the dependency graph store cannot be shared between several projects. Every
+project should have its own dependency graph store (except for in workspaces where the
 root is shared).
 
 ### virtualStoreDirMaxLength
@@ -473,7 +473,7 @@ root is shared).
   * On Windows: **60**
 * Types: **number**
 
-Sets the maximum allowed length of directory names inside the virtual store directory (`node_modules/.pnpm`). You may set this to a lower number if you encounter long path issues on Windows.
+Sets the maximum allowed length of directory names inside the local dependency graph store directory (`node_modules/.pnpm`). You may set this to a lower number if you encounter long path issues on Windows.
 
 ### packageImportMethod
 
@@ -521,13 +521,13 @@ Added in: v10.12.1
 * Type: **Boolean**
 * Status: **Experimental**
 
-When enabled, `node_modules` contains only symlinks to a central virtual store, rather than to `node_modules/.pnpm`. By default, this central store is located at `<store-path>/links` (use `pnpm store path` to find `<store-path>`).
+When enabled, `node_modules` contains only symlinks to a global dependency graph store, rather than to `node_modules/.pnpm`. By default, this central store is located at `<store-path>/links` (use `pnpm store path` to find `<store-path>`).
 
-In the central virtual store, each package is hard linked into a directory whose name is the hash of its dependency graph. As a result, all projects on the system can symlink their dependencies from this shared location on disk. This approach is conceptually similar to how [NixOS manages packages], using dependency graph hashes to create isolated and shareable package directories in the Nix store.
+In the dependency graph store, each package is hard linked into a directory whose name is the hash of its fully resolved dependency graph snapshot. As a result, all projects on the system can symlink their dependencies from this shared location on disk. This approach is conceptually similar to how [NixOS manages packages], using dependency graph hashes to create isolated and shareable package directories in the Nix store.
 
-> This should not be confused with the global content-addressable store. The actual package files are still hard linked from the content-addressable store—but instead of being linked directly into `node_modules/.pnpm`, they are linked into the global virtual store.
+> This should not be confused with the global content-addressable store. The actual package files are still hard linked from the content-addressable store—but instead of being linked directly into `node_modules/.pnpm`, they are linked into the global dependency graph store.
 
-Using a global virtual store can significantly speed up installations when a warm cache is available. However, in CI environments (where caches are typically absent), it may slow down installation. If pnpm detects that it is running in CI, this setting is automatically disabled.
+Using a global dependency graph store can significantly speed up installations when a warm cache is available. However, in CI environments (where caches are typically absent), it may slow down installation. If pnpm detects that it is running in CI, this setting is automatically disabled.
 
 :::important
 
