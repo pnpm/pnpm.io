@@ -1621,7 +1621,7 @@ Create symlinks to executables in `node_modules/.bin` instead of command shims. 
 * Default: **false**
 * Type: **Boolean**
 
-During installation the dependencies of some packages are automatically patched. If you want to disable this, set this config to `false`.
+During installation the dependencies of some packages are automatically patched. If you want to disable this, set this config to `true`.
 
 The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
 
