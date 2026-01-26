@@ -96,6 +96,12 @@ const sponsors = {
   ],
   goldSponsors: [
     {
+      name: "Sanity",
+      logo: "/img/users/sanity.svg",
+      alt: "",
+      url: addUTM("https://sanity.io/"),
+    },
+    {
       name: "Discord",
       logo: "/img/users/discord_min.svg",
       alt: "",
@@ -160,6 +166,12 @@ const sponsors = {
       name: "Cerbos",
       icon: <CerbosIcon />,
       url: addUTM("https://cerbos.dev/"),
+    },
+    {
+      name: "Time.now",
+      icon: <span style={{fontSize: '4rem'}}>⏱️</span>,
+      // logo: "/img/users/timenow.svg",
+      url: addUTM("https://time.now/"),
     },
   ],
 };
