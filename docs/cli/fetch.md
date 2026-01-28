@@ -12,15 +12,20 @@ This command is specifically designed to improve building a docker image.
 You may have read the [official guide] to writing a Dockerfile for a Node.js
 app, if you haven't read it yet, you may want to read it first.
 
+Also see [Working wirh Docker](../docker.md), for examples of multi-stage
+builds, and `pnpm deploy` that can be combined with this command for a smaller
+final image.
+
 From that guide, we learn to write an optimized Dockerfile for projects using
 pnpm, which looks like
 
 ```Dockerfile
 FROM node:20
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 WORKDIR /path/to/somewhere
-
-RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.cjs ./
@@ -28,7 +33,7 @@ COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.cjs ./
 # If you patched any package, include patches before install too
 COPY patches patches
 
-RUN pnpm install --frozen-lockfile --prod
+RUN pnpm --mount=type=cache,id=pnpm,target=/pnpm/store install --frozen-lockfile --prod
 
 # Bundle app source
 COPY . .
@@ -52,10 +57,11 @@ look like
 
 ```Dockerfile
 FROM node:20
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 WORKDIR /path/to/somewhere
-
-RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 # Files required by pnpm install
 COPY .npmrc package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.cjs ./
@@ -69,7 +75,7 @@ COPY patches patches
 COPY packages/foo/package.json packages/foo/
 COPY packages/bar/package.json packages/bar/
 
-RUN pnpm install --frozen-lockfile --prod
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile --prod
 
 # Bundle app source
 COPY . .
@@ -86,10 +92,11 @@ to load packages into the virtual store using only information from a lockfile a
 
 ```Dockerfile
 FROM node:20
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 WORKDIR /path/to/somewhere
-
-RUN corepack enable pnpm && corepack install -g pnpm@latest-10
 
 # pnpm fetch does require only lockfile
 COPY pnpm-lock.yaml pnpm-workspace.yaml ./
@@ -97,7 +104,7 @@ COPY pnpm-lock.yaml pnpm-workspace.yaml ./
 # If you patched any package, include patches before running pnpm fetch
 COPY patches patches
 
-RUN pnpm fetch --prod
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm fetch --prod
 
 
 ADD . ./
