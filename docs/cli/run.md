@@ -109,6 +109,12 @@ immediately in all matching packages with prefixed streaming output. This is the
 preferred flag for long-running processes over many packages, for instance, a
 lengthy build process.
 
+### --sequential
+
+Alias for `--workspace-concurrency=1`. Run scripts one after another in a blocking
+manner rather than concurrently. Note that there are no guarantees that the scripts
+will run in topological sort order.
+
 ### --stream
 
 Stream output from child processes immediately, prefixed with the originating
