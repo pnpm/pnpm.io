@@ -57,7 +57,7 @@ However, if some of your dependencies are trying to access packages that they do
 
 ## The worst case - hoisting to the root
 
-Some tools might not work even with the default configuration of pnpm, which hoists everything to the root of the virtual store and some packages to the root. In this case, you can hoist either everything or a subset of dependencies to the root of the modules directory.
+Some tools might not work even with the default configuration of pnpm, which hoists everything to the root of the local dependency graph store (`node_modules/.pnpm/node_modules`) and some packages to the root. In this case, you can hoist either everything or a subset of dependencies to the root of the modules directory.
 
 Hoisting everything to the root of node_modules:
 
