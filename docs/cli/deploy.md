@@ -43,6 +43,21 @@ ENTRYPOINT ["node", "index.js"]
 
 ## Options
 
+### --force
+
+If the target directory that you deploy to is not empty, the deploy command will fail with error `ERR_PNPM_DEPLOY_DIR_NOT_EMPTY`.
+
+Use `--force` option to override this behavior and allow deploying to a non-empty directory.
+
+### --ignore-scripts
+
+`pnpm deploy` will call `pnpm install` behind the scenes to resolve dependencies,
+which in turn may trigger lifecycle scripts like `prepare`, `preinstall`, `postinstall`, etc.
+
+Use `--ignore-scripts` option to prevent running those scripts during deployment.
+
+Read more at [install --ignore-scripts](./install.md#--ignore-scripts).
+
 ### --dev, -D
 
 Only `devDependencies` are installed.
