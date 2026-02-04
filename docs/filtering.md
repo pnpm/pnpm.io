@@ -136,7 +136,7 @@ Use this flag if you want the CLI to fail if no packages have matched the filter
 
 You may also set this permanently with a [`failIfNoMatch` setting].
 
-[`failIfNoMatch` setting]: settings.md#failifnomatch
+[`failIfNoMatch` setting]: workspaces.md#failifnomatch
 
 ## Excluding
 
