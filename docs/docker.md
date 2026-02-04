@@ -3,6 +3,8 @@ id: docker
 title: Working with Docker
 ---
 
+Also see [pnpm fetch](./cli/fetch.md) for a command that can be used to speed up consecutive builds.
+
 :::note
 
 It is impossible to create reflinks or hardlinks between a Docker container and the host filesystem during build time.
@@ -164,4 +166,55 @@ COPY --from=prod /app/node_modules /app/node_modules
 COPY --from=prod /app/dist /app/dist
 EXPOSE 8000
 CMD [ "pnpm", "start" ]
+```
+
+### Example 4: All techniques in one
+
+A verstaile option is to just use both fetch, deploy, cache mounts, newer Docker
+features like `--link` all in one Docker file, and benefit from the build
+performance and image size reducation at the cost of a more complex Dockerfile.
+
+This also includes running as a normal user instead of root, and properly
+caching pnpm with corepack so the image won't need to download it on startup.
+
+```dockerfile title="Dockerfile"
+# syntax=docker/dockerfile:1
+FROM node:22 AS build
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+ENV COREPACK_HOME="/corepack"
+# Package to be built and deployed from the workspace
+ARG PACKAGE=example
+
+WORKDIR /workspace
+# The package.json is for corepack, pnpm fetch needs only the lockfile and workspace configuration
+COPY --link package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+# If you have patches:
+# COPY --link patches patches
+RUN corepack enable && corepack install
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    pnpm fetch
+
+COPY --link . .
+
+RUN pnpm install --offline --frozen-lockfile
+
+RUN pnpm --filter $PACKAGE... build
+
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    pnpm --filter $PACKAGE deploy --prod deploy
+
+FROM node:22-slim AS runtime
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+ENV COREPACK_HOME="/corepack"
+
+WORKDIR /app
+COPY --link --from=build /workspace/deploy .
+
+RUN corepack enable && corepack install
+ENV COREPACK_DEFAULT_TO_LATEST=0 COREPACK_ENABLE_NETWORK=0
+
+USER 1000
+CMD ["pnpm", "--silent", "start"]
 ```
