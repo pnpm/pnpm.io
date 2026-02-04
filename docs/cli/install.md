@@ -118,6 +118,13 @@ exports.isCI = !!(
 
 [CI environments]: https://github.com/watson/ci-info#supported-ci-tools
 
+### --no-frozen-lockfile
+
+* Default: **false**
+* Type: **Boolean**
+
+Allows lockfile updates during installation. This is the inverse of `--frozen-lockfile`.
+
 ### --merge-git-branch-lockfiles
 
 Merge all git branch lockfiles.
