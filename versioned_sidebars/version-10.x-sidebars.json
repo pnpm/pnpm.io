@@ -315,6 +315,10 @@
         },
         {
           "type": "doc",
+          "id": "npmrc"
+        },
+        {
+          "type": "doc",
           "id": "pnpm-workspace_yaml"
         },
         {
