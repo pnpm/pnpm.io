@@ -3,9 +3,9 @@ id: npmrc
 title: "Auth & Registry Settings (.npmrc)"
 ---
 
-The settings on this page can only be configured via `.npmrc` files. They use URL-scoped or INI-specific syntax that cannot be represented in `pnpm-workspace.yaml`.
+The settings on this page must be configured via `.npmrc` files. pnpm uses the npm CLI under the hood for publishing, so these settings need to be in a format that npm can read.
 
-pnpm reads these settings through npm's configuration system. For details on how `.npmrc` files are loaded, see the [`pnpm config`](./cli/config.md) command.
+For details on how `.npmrc` files are loaded, see the [`pnpm config`](./cli/config.md) command.
 
 For settings that can be configured in `pnpm-workspace.yaml`, see [Settings (pnpm-workspace.yaml)](./settings.md).
 
