@@ -108,6 +108,18 @@ const sponsors = {
       url: addUTM("https://discord.com/"),
     },
     {
+      name: "Vitejs",
+      logo: "/img/users/vitejs.svg",
+      alt: "",
+      url: addUTM("https://vite.dev/"),
+    },
+    {
+      name: "SerpApi",
+      logo: "/img/users/serpapi.svg",
+      alt: "",
+      url: addUTM("https://serpapi.com/"),
+    },
+    {
       name: "Code Rabbit",
       logo: "/img/users/coderabbit_min.svg",
       alt: "CodeRabbit",
@@ -118,12 +130,6 @@ const sponsors = {
       logo: "/img/users/stackblitz_min.svg",
       alt: "",
       url: addUTM("https://stackblitz.com/"),
-    },
-    {
-      name: "Vitejs",
-      logo: "/img/users/vitejs.svg",
-      alt: "",
-      url: addUTM("https://vite.dev/"),
     },
     {
       name: "Workleap",
