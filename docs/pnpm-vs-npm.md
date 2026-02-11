@@ -50,3 +50,15 @@ instance in the case of a monorepo, you should look at the documentation for
 [`pnpm -r`].
 
 [`pnpm -r`]: cli/recursive
+
+## Workspaces
+
+Pnpm deals with workspaces slightly differently than npm, starting with conflicting terminology:
+
+Pnpm uses the term "workspace" to refer to a *collection* of packages, and sometimes the directory containing such packages. Pnpm uses the term "project" to refer to an individial package in the workspace tree (as contrasted to a package retrieved from a package repository like npm).
+
+Npm uses the term "workspace" to refer to the individual packages being co-developed inside a monorepo. The "workspace root" is the package defining which packages are "workspaces" (in the npm sense).
+
+In npm, there is a `package.json` file in the workspace root. The `"workspaces"` field in this file describes where to look for dependencies. Whenever a dependency matches the name of a workspace package, it resolves to the workspace package (regardless of the requested version).
+
+In pnpm, the workspace root contains a `pnpm-workspaces.yaml` file. There may be a `package.json` in the same folder as `pnpm-workspaces.yaml`, but this is regarded as any other package. Workspace packages do not implicitly override registry packages by the same name - resolution depends on the package specifier.
