@@ -22,6 +22,7 @@ FROM node:20-slim
 
 # corepack is an experimental feature in Node.js v20 which allows
 # installing and managing versions of pnpm, npm, yarn
+# If you are using node version newer than 25, replace it with `npm install -g pnpm@latest`.
 RUN corepack enable
 
 VOLUME [ "/pnpm-store", "/app/node_modules" ]
