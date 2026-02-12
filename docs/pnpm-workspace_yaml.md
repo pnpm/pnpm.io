@@ -42,4 +42,10 @@ catalogs:
     react-dom: ^17.10.0
 ```
 
+A [_schema_](https://json-schema.org/understanding-json-schema/about) is available for this file:
+
+```yaml title="$schema"
+$schema: https://pnpm.io/schema/pnpm-workspace.json
+```
+
 [workspace]: workspaces.md
