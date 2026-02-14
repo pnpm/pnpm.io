@@ -130,7 +130,7 @@ pnpm cannot guarantee that scripts will be run in topological order if there are
 
 If you see the message `There are cyclic workspace dependencies`, please inspect workspace dependencies declared in `dependencies`, `optionalDependencies` and `devDependencies`.
 
-## Usage examples
+## Workspaces in the wild
 
 Here are a few of the most popular open source projects that use the workspace feature of pnpm:
 
