@@ -108,7 +108,7 @@ allowUnusedPatches: true
 
 ### ignorePatchFailures
 
-Added in: v10.7.0
+Added in: v10.7.0 (but will be removed in v11)
 
 * Default: **undefined**
 * Type: **Boolean**, **undefined**
