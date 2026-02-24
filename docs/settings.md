@@ -310,7 +310,7 @@ Allows ignoring the trust policy check for packages published more than the spec
 
 Added in: v10.26.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When set to `true`, only direct dependencies (those listed in your root `package.json`) may use exotic sources (like git repositories or direct tarball URLs). All transitive dependencies must be resolved from a trusted source, such as the configured registry, local file paths, workspace links, or trusted GitHub repositories (node, bun, deno).
@@ -1016,11 +1016,11 @@ Do not execute any scripts of the installed packages. Scripts of the projects ar
 
 :::note
 
-Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in [`onlyBuiltDependencies`].
+Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in [`allowBuilds`].
 
 :::
 
-[`onlyBuiltDependencies`]: settings.md#onlybuiltdependencies
+[`allowBuilds`]: settings.md#allowbuilds
 
 ### childConcurrency
 
@@ -1093,7 +1093,7 @@ This setting allows the checking of the state of dependencies before running scr
 
 Added in: v10.3.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When `strictDepBuilds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
@@ -1102,7 +1102,7 @@ When `strictDepBuilds` is enabled, the installation will exit with a non-zero ex
  
 Added in: v10.26.0
  
-A map of package matchers to explicitly allow (`true`) or disallow (`false`) script execution. This field replaces `onlyBuiltDependencies` and `ignoredBuiltDependencies` (which are also deprecated by this new setting), providing a single source of truth.
+A map of package matchers to explicitly allow (`true`) or disallow (`false`) script execution.
  
 ```yaml
 allowBuilds:
@@ -1111,81 +1111,7 @@ allowBuilds:
   nx@21.6.4 || 21.6.5: true
 ```
 
-**Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and a warning is printed. If [`strictDepBuilds`](#strictdepbuilds) is set to `true`, an error will be printed instead.
- 
-### neverBuiltDependencies
-
-A list of package names that are NOT allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation.
-
-Be careful when using `neverBuiltDependencies` without `onlyBuiltDependencies` because it implies all other dependencies are allowed.
-
-An example of the `neverBuiltDependencies` field:
-
-```yaml
-neverBuiltDependencies:
-- fsevents
-- level
-```
-
-### onlyBuiltDependencies
-
-A list of package names that are allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation.
-Only the packages listed in this array will be able to run those lifecycle scripts. If `onlyBuiltDependenciesFile` and `neverBuiltDependencies` are omitted, this configuration option will default to blocking all install scripts.
-
-Example:
-
-```yaml
-onlyBuiltDependencies:
-- fsevents
-```
-
-Added in: v10.19.0
-
-You may restrict allowances to specific versions (and lists of versions using a disjunction with `||`). When versions are specified, only those versions of the package may run lifecycle scripts:
-
-```yaml
-onlyBuiltDependencies:
-- nx@21.6.4 || 21.6.5
-- esbuild@0.25.1
-```
-
-### onlyBuiltDependenciesFile
-
-This configuration option allows users to specify a JSON file that lists the only packages permitted to run installation scripts during the pnpm install process. By using this, you can enhance security or ensure that only specific dependencies execute scripts during installation.
-
-Example:
-
-```yaml
-configDependencies:
-  '@pnpm/trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
-onlyBuiltDependenciesFile: node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json
-```
-
-The JSON file itself should contain an array of package names:
-
-```json title="node_modules/.pnpm-config/@pnpm/trusted-deps/allow.json"
-[
-  "@airbnb/node-memwatch",
-  "@apollo/protobufjs",
-  ...
-]
-```
-
-### ignoredBuiltDependencies
-
-Added in: v10.1.0
-
-A list of package names that are NOT allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation and will not warn or ask to be executed.
-
-This is useful when you want to hide the warning because you know the lifecycle scripts are not needed.
-
-Example:
-
-```yaml
-ignoredBuiltDependencies:
-- fsevents
-- sharp
-```
+**Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and an error is printed (since [`strictDepBuilds`](#strictdepbuilds) is `true` by default). If `strictDepBuilds` is set to `false`, a warning is printed instead.
 
 ### dangerouslyAllowAllBuilds
 
@@ -1210,31 +1136,6 @@ For maximum safety, only enable this if you’re fully aware of the risks and tr
 :::
 
 ## Node.js Settings
-
-### useNodeVersion
-
-* Default: **undefined**
-* Type: **semver**
-
-Specifies which exact Node.js version should be used for the project's runtime.
-pnpm will automatically install the specified version of Node.js and use it for
-running `pnpm run` commands or the `pnpm node` command.
-
-This may be used instead of `.nvmrc` and `nvm`. Instead of the following `.nvmrc` file:
-
-```
-16.16.0
-```
-
-Use this `pnpm-workspace.yaml` file:
-
-```yaml
-useNodeVersion: 16.16.0
-```
-
-This setting works only in a `pnpm-workspace.yaml` file that is in the root of your workspace. If you need to specify a custom Node.js for a project in the workspace, use the [`executionEnv.nodeVersion`] field of `package.json` instead.
-
-[`executionEnv.nodeVersion`]: #executionenvnodeversion
 
 ### nodeVersion
 
@@ -1268,20 +1169,6 @@ node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
 ```
 
 [https://nodejs.org/download]: https://nodejs.org/download
-
-### executionEnv.nodeVersion
-
-Specifies which exact Node.js version should be used for the project's runtime.
-pnpm will automatically install the specified version of Node.js and use it for
-running `pnpm run` commands or the `pnpm node` command.
-
-For example:
-
-```json
-executionEnv:
-  nodeVersion: 16.16.0
-```
-
 
 ## Other Settings
 

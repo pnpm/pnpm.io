@@ -45,7 +45,7 @@ pnpm config set --location=project --json nodeVersion '"22.0.0"'
 The `--json` flag also allows `pnpm config set` to create arrays and objects:
 
 ```sh
-pnpm config set --location=project --json onlyBuiltDependencies '["react", "react-dom"]'
+pnpm config set --location=project --json allowBuilds '{"react": true, "react-dom": true}'
 pnpm config set --location=project --json catalog '{ "react": "19" }'
 ```
 
@@ -61,7 +61,7 @@ The `key` can be a simple key:
 pnpm config get nodeVersion
 pnpm config get --json nodeVersion
 pnpm config get --json packageExtensions
-pnpm config get --json onlyBuiltDependencies
+pnpm config get --json allowBuilds
 pnpm config get --json catalog
 ```
 
@@ -70,8 +70,8 @@ It can also be a property path:
 ```sh
 pnpm config get 'packageExtensions["@babel/parser"].peerDependencies["@babel/types"]'
 pnpm config get --json 'packageExtensions["@babel/parser"].peerDependencies["@babel/types"]'
-pnpm config get 'onlyBuiltDependencies[0]'
-pnpm config get --json 'onlyBuiltDependencies[0]'
+pnpm config get 'allowBuilds.react'
+pnpm config get --json 'allowBuilds.react'
 pnpm config get catalog.react
 pnpm config get --json catalog.react
 ```

@@ -89,7 +89,6 @@
           "cli/publish",
           "cli/pack",
           "cli/recursive",
-          "cli/server",
           "cli/store",
           "cli/root",
           "cli/bin",

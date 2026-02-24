@@ -106,19 +106,3 @@ patchedDependencies:
 allowUnusedPatches: true
 ```
 
-### ignorePatchFailures
-
-Added in: v10.7.0
-
-* Default: **undefined**
-* Type: **Boolean**, **undefined**
-
-Controls how patch failures are handled.
-
-Behaviour:
-
-* **undefined (default)**:
-  * Errors out when a patch with an exact version or version range fails.
-  * Ignores failures from name-only patches.
-* **false**: Errors out for any patch failure.
-* **true**: Prints a warning instead of failing when any patch cannot be applied.

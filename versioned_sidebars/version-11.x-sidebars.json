@@ -258,10 +258,6 @@
             },
             {
               "type": "doc",
-              "id": "cli/server"
-            },
-            {
-              "type": "doc",
               "id": "cli/store"
             },
             {

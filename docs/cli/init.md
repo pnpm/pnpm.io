@@ -15,7 +15,7 @@ Creates a `package.json` with only the required fields.
 
 ### --init-type &lt;type\>
 
-* Default: **commonjs**
+* Default: **module**
 * Type: **commonjs**, **module**
 
 Set the module system for the package.

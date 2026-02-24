@@ -80,7 +80,7 @@ Removing the `scripts` field from a dependency's manifest via `readPackage` will
 not prevent pnpm from building the dependency. When building a dependency, pnpm
 reads the `package.json` of the package from the package's archive, which is not
 affected by the hook. In order to ignore a package's build, use the
-[neverBuiltDependencies](settings.md#neverbuiltdependencies) field.
+[allowBuilds](settings.md#allowbuilds) field.
 
 ### `hooks.updateConfig(config): config | Promise<config>`
 
@@ -208,16 +208,6 @@ This hook allows to change how packages are written to `node_modules`. The retur
 * `options.force`
 * `options.resolvedFrom`
 * `options.keepModulesDir`
-
-### `hooks.fetchers`
-
-This hook allows to override the fetchers that are used for different types of dependencies. It is an object that may have the following fields:
-
-* `localTarball`
-* `remoteTarball`
-* `gitHostedTarball`
-* `directory`
-* `git`
 
 ## Finders
 

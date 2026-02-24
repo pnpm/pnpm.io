@@ -30,19 +30,19 @@ pnpm supports installing packages from various sources. See the [Supported packa
 
 ## Options
 
-### --save-prod, -P
+### --save-prod, -P, -p
 
 Install the specified packages as regular `dependencies`.
 
-### --save-dev, -D
+### --save-dev, -D, -d
 
 Install the specified packages as `devDependencies`.
 
-### --save-optional, -O
+### --save-optional, -O, -o
 
 Install the specified packages as `optionalDependencies`.
 
-### --save-exact, -E
+### --save-exact, -E, -e
 
 Saved dependencies will be configured with an exact version rather than using
 pnpm's default semver range operator.
@@ -100,7 +100,7 @@ Example:
 pnpm --allow-build=esbuild add my-bundler
 ```
 
-This will run `esbuild`'s postinstall script and also add it to the `onlyBuiltDependencies` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
+This will run `esbuild`'s postinstall script and also add it to the `allowBuilds` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
 
 ### --filter &lt;package_selector\>
 

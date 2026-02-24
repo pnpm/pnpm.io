@@ -143,20 +143,6 @@ If you want to change what type of information is printed, use the [loglevel] se
 
 [loglevel]: ../settings.md#loglevel
 
-### --use-store-server
-
-* Default: **false**
-* Type: **Boolean**
-
-:::danger
-
-Deprecated feature
-
-:::
-
-Starts a store server in the background. The store server will keep running
-after installation is done. To stop the store server, run `pnpm server stop`
-
 ### --shamefully-hoist
 
 * Default: **false**

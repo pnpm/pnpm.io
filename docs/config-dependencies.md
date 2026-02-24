@@ -27,30 +27,6 @@ configDependencies:
 
 ## Usage
 
-### Loading an Allow List of Built Dependencies
-
-You can load a list of package names that are allowed to be built, using the [`onlyBuiltDependenciesFile`] setting.
-
-Example `allow.json` file inside a config dependency:
-
-```json title="allow.json"
-[
-  "@airbnb/node-memwatch",
-  "@apollo/protobufjs",
-  ...
-]
-```
-
-Your workspace configuration:
-
-```yaml title="pnpm-workspace.yaml"
-configDependencies:
-  '@myorg/trusted-deps': 0.1.0+sha512-IERT0uXPBnSZGsCmoSuPzYNWhXWWnKkuc9q78KzLdmDWJhnrmvc7N4qaHJmaNKIusdCH2riO3iE34Osohj6n8w==
-onlyBuiltDependenciesFile: node_modules/.pnpm-config/@myorg/trusted-deps/allow.json
-```
-
-[`onlyBuiltDependenciesFile`]: settings.md#onlybuiltdependenciesfile
-
 ### Installing Dependencies Used in Hooks
 
 Config dependencies are installed **before** hooks from your [`.pnpmfile.cjs`] are loaded, allowing you to import logic from config packages.
