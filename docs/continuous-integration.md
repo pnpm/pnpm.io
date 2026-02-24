@@ -21,7 +21,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm install --global corepack@latest
   - corepack enable
-  - corepack prepare pnpm@latest-10 --activate
+  - corepack prepare pnpm@next-11 --activate
   - pnpm install
 ```
 
@@ -45,7 +45,7 @@ steps:
   - script: |
       npm install --global corepack@latest
       corepack enable
-      corepack prepare pnpm@latest-10 --activate
+      corepack prepare pnpm@next-11 --activate
       pnpm config set store-dir $(pnpm_config_cache)
     displayName: "Setup pnpm"
 
@@ -73,7 +73,7 @@ pipelines:
           script:
             - npm install --global corepack@latest
             - corepack enable
-            - corepack prepare pnpm@latest-10 --activate
+            - corepack prepare pnpm@next-11 --activate
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
@@ -105,7 +105,7 @@ jobs:
           command: |
             npm install --global corepack@latest
             corepack enable
-            corepack prepare pnpm@latest-10 --activate
+            corepack prepare pnpm@next-11 --activate
             pnpm config set store-dir .pnpm-store
       - run:
           name: Install Dependencies
@@ -139,7 +139,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 11
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
@@ -164,7 +164,7 @@ build:
   before_script:
     - npm install --global corepack@latest
     - corepack enable
-    - corepack prepare pnpm@latest-10 --activate
+    - corepack prepare pnpm@next-11 --activate
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -193,7 +193,7 @@ pipeline {
             steps {
                 sh 'npm install --global corepack@latest'
                 sh 'corepack enable'
-                sh 'corepack prepare pnpm@latest-10 --activate'
+                sh 'corepack prepare pnpm@next-11 --activate'
                 sh 'pnpm install'
             }
         }
@@ -221,7 +221,7 @@ blocks:
           commands:
             - npm install --global corepack@latest
             - corepack enable
-            - corepack prepare pnpm@latest-10 --activate
+            - corepack prepare pnpm@next-11 --activate
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -243,7 +243,7 @@ cache:
 before_install:
   - npm install --global corepack@latest
   - corepack enable
-  - corepack prepare pnpm@latest-10 --activate
+  - corepack prepare pnpm@next-11 --activate
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
