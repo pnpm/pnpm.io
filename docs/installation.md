@@ -170,14 +170,15 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 Here is a list of past pnpm versions with respective Node.js version support.
 
-| Node.js    | pnpm 8 | pnpm 9 | pnpm 10 |
-|------------|--------|--------|---------|
-| Node.js 14 | ❌     | ❌     | ❌      |
-| Node.js 16 | ✔️      | ❌     | ❌      |
-| Node.js 18 | ✔️      | ✔️      | ✔️       |
-| Node.js 20 | ✔️      | ✔️      | ✔️       |
-| Node.js 22 | ✔️      | ✔️      | ✔️       |
-| Node.js 24 | ✔️      | ✔️      | ✔️       |
+| Node.js    | pnpm 8 | pnpm 9 | pnpm 10 | pnpm 11 |
+|------------|--------|--------|---------|---------|
+| Node.js 14 | ❌     | ❌     | ❌      | ❌      |
+| Node.js 16 | ✔️      | ❌     | ❌      | ❌      |
+| Node.js 18 | ✔️      | ✔️      | ✔️       | ❌      |
+| Node.js 20 | ✔️      | ✔️      | ✔️       | ❌      |
+| Node.js 22 | ✔️      | ✔️      | ✔️       | ✔️       |
+| Node.js 24 | ✔️      | ✔️      | ✔️       | ✔️       |
+| Node.js 26 | ✔️      | ✔️      | ✔️       | ✔️       |
 
 ## Troubleshooting
 
