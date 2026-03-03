@@ -146,6 +146,12 @@ const sponsors = {
   ],
   silverSponsors: [
     {
+      name: "Replit",
+      logo: "/img/users/replit.svg",
+      alt: "Replit",
+      url: addUTM("https://replit.com/"),
+    },
+    {
       name: "Devowlio",
       logo: "/img/users/devowlio_min.svg",
       alt: "devowl",
