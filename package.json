@@ -16,7 +16,8 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "NODE_OPTIONS=--max-old-space-size=10000 docusaurus deploy",
     "docusaurus": "docusaurus",
-    "update-progress": "ts-node ./scripts/translations.ts"
+    "update-progress": "ts-node ./scripts/translations.ts",
+    "generate-sponsors": "node scripts/generate-sponsors.mjs"
   },
   "dependencies": {
     "@algolia/client-search": "^4.23.2",
