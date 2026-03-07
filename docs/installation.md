@@ -48,7 +48,7 @@ wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-alpha.13 sh -
 
 :::tip
 
-You may use the [pnpm env] command then to install Node.js.
+You may use the [pnpm runtime] command then to install Node.js.
 
 :::
 
@@ -83,7 +83,7 @@ Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.htm
 
 :::info
 
-If you have installed Node.js with `pnpm env` Corepack won't be installed on your system, you will need to install it separately. See [#4029](https://github.com/pnpm/pnpm/issues/4029).
+If you have installed Node.js with `pnpm runtime` Corepack won't be installed on your system, you will need to install it separately. See [#4029](https://github.com/pnpm/pnpm/issues/4029).
 
 :::
 
@@ -258,4 +258,4 @@ pnpm self-update
 If you need to remove the pnpm CLI from your system and any files it has written to your disk, see [Uninstalling pnpm].
 
 [Uninstalling pnpm]: ./uninstall.md
-[pnpm env]: ./cli/env.md
+[pnpm runtime]: ./cli/runtime.md
