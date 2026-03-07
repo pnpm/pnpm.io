@@ -10,11 +10,12 @@ const NPM_COLOR = '#cd3731'
 const YARN_COLOR = '#248ebd'
 const YARN_PNP_COLOR = '#40a9ff'
 const PNPM_COLOR = '#fbae00'
+const PNPM11_COLOR = '#f69220'
 
 export default (resultArrays, pms, tests, formattedNow) => {
   let svgStr = ''
   // colors taken from logos (where possible)
-  const colors = [ NPM_COLOR, PNPM_COLOR, YARN_COLOR, YARN_PNP_COLOR ]
+  const colors = [ NPM_COLOR, PNPM_COLOR, PNPM11_COLOR, YARN_COLOR, YARN_PNP_COLOR ]
   // empty areas next to the graph
   const offset = {
     left: 40,

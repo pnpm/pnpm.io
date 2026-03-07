@@ -21,5 +21,6 @@
     },
     "engines": {
         "pnpm": "9 || 10"
-    }
+    },
+    "packageManager": "pnpm@10.30.3"
 }
