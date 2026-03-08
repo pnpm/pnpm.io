@@ -7,15 +7,14 @@ import { PnpmTheme, useThemeController } from "@pnpm/design.pnpm-theme";
 import {
   Homepage as BaseHome,
   XIcon,
-  CerbosIcon,
   NextJsIcon,
   N8nIcon,
   AstroIcon,
   PrismaIcon,
   NovuIcon,
   VercelIcon,
-  DepotIcon,
 } from "@pnpm/website.pages.homepage";
+import sponsorData from '../../sponsors.json';
 import { useDocusaurusTheme, getThemeMode } from "../utils/use-docusaurus-theme";
 // import styles from './styles.module.css';
 
@@ -81,105 +80,24 @@ function addUTM(urlAddress) {
   return url.toString();
 }
 
+function mapSponsor(s) {
+  return {
+    name: s.name,
+    ...(s.logo ? { logo: `/img/users/${s.logo}` } : {}),
+    ...(s.emoji ? { icon: <span style={{fontSize: '4rem'}}>{s.emoji}</span> } : {}),
+    alt: s.alt || s.name,
+    url: addUTM(s.url),
+  };
+}
+
 const sponsors = {
   title: <Translate>These are the sponsors</Translate>,
   platinumLabel: <Translate>PLATINUM SPONSORS</Translate>,
   goldLabel: <Translate>GOLD SPONSORS</Translate>,
   silverLabel: <Translate>SILVER SPONSORS</Translate>,
-  platinumSponsors: [
-    {
-      name: "Bit Cloud",
-      logo: "/img/users/bit.svg",
-      alt: "bit",
-      url: addUTM("https://bit.cloud/"),
-    },
-  ],
-  goldSponsors: [
-    {
-      name: "Sanity",
-      logo: "/img/users/sanity.svg",
-      alt: "",
-      url: addUTM("https://sanity.io/"),
-    },
-    {
-      name: "Discord",
-      logo: "/img/users/discord_min.svg",
-      alt: "",
-      url: addUTM("https://discord.com/"),
-    },
-    {
-      name: "Vitejs",
-      logo: "/img/users/vitejs.svg",
-      alt: "",
-      url: addUTM("https://vite.dev/"),
-    },
-    {
-      name: "SerpApi",
-      logo: "/img/users/serpapi.svg",
-      alt: "",
-      url: addUTM("https://serpapi.com/"),
-    },
-    {
-      name: "Code Rabbit",
-      logo: "/img/users/coderabbit_min.svg",
-      alt: "CodeRabbit",
-      url: addUTM("https://coderabbit.ai/"),
-    },
-    {
-      name: "StackBlitz",
-      logo: "/img/users/stackblitz_min.svg",
-      alt: "",
-      url: addUTM("https://stackblitz.com/"),
-    },
-    {
-      name: "Workleap",
-      logo: "/img/users/workleap.svg",
-      alt: "",
-      url: addUTM("https://workleap.com/"),
-    },
-    {
-      name: "Nx",
-      logo: "/img/users/nx.svg",
-      alt: "",
-      url: addUTM("https://nx.dev/"),
-    },
-  ],
-  silverSponsors: [
-    {
-      name: "Devowlio",
-      logo: "/img/users/devowlio_min.svg",
-      alt: "devowl",
-      url: addUTM("https://devowl.io/"),
-    },
-    {
-      name: "Uscreen",
-      logo: "/img/users/uscreen.svg",
-      alt: "",
-      url: addUTM("https://uscreen.de/"),
-    },
-    {
-      name: "Leniolabs",
-      logo: "/img/users/leniolabs.jpg",
-      alt: "",
-      url: addUTM("https://www.leniolabs.com"),
-    },
-    {
-      name: "Depot",
-      icon: <DepotIcon />,
-      url: addUTM("https://depot.dev/"),
-    },
-    {
-      name: "Cerbos",
-      icon: <CerbosIcon />,
-      url: addUTM("https://cerbos.dev/"),
-    },
-    {
-      name: "Time.now",
-      icon: <span style={{fontSize: '4rem'}}>⏱️</span>,
-      // logo: "/img/users/timenow.svg",
-      url: addUTM("https://time.now/"),
-    },
-  ],
+  platinumSponsors: sponsorData.platinum.map(mapSponsor),
+  goldSponsors: sponsorData.gold.map(mapSponsor),
+  silverSponsors: sponsorData.silver.map(mapSponsor),
 };
 
 const testimonials = {

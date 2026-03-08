@@ -68,6 +68,7 @@
         "type": "category",
         "label": "Manage environments",
         "items": [
+          "cli/runtime",
           "cli/env"
         ]
       },

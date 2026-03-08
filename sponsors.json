@@ -1,0 +1,111 @@
+{
+  "platinum": [
+    {
+      "name": "Bit Cloud",
+      "logo": "bit.svg",
+      "alt": "Bit",
+      "url": "https://bit.cloud/",
+      "width": 80
+    }
+  ],
+  "gold": [
+    {
+      "name": "Sanity",
+      "logo": "sanity.svg",
+      "url": "https://sanity.io/",
+      "width": 120
+    },
+    {
+      "name": "Discord",
+      "logo": "discord_min.svg",
+      "url": "https://discord.com/",
+      "width": 220
+    },
+    {
+      "name": "Vitejs",
+      "logo": "vitejs.svg",
+      "alt": "Vite",
+      "url": "https://vite.dev/",
+      "width": 42
+    },
+    {
+      "name": "SerpApi",
+      "logo": "serpapi.svg",
+      "url": "https://serpapi.com/",
+      "width": 160
+    },
+    {
+      "name": "Code Rabbit",
+      "logo": "coderabbit_min.svg",
+      "alt": "CodeRabbit",
+      "url": "https://coderabbit.ai/",
+      "width": 220
+    },
+    {
+      "name": "StackBlitz",
+      "logo": "stackblitz_min.svg",
+      "alt": "Stackblitz",
+      "url": "https://stackblitz.com/",
+      "width": 190
+    },
+    {
+      "name": "Workleap",
+      "logo": "workleap.svg",
+      "url": "https://workleap.com/",
+      "width": 190
+    },
+    {
+      "name": "Nx",
+      "logo": "nx.svg",
+      "url": "https://nx.dev/",
+      "width": 50
+    }
+  ],
+  "silver": [
+    {
+      "name": "Replit",
+      "logo": "replit_min.svg",
+      "url": "https://replit.com/",
+      "width": 140
+    },
+    {
+      "name": "Devowlio",
+      "logo": "devowlio_min.svg",
+      "alt": "devowl.io",
+      "url": "https://devowl.io/",
+      "width": 100
+    },
+    {
+      "name": "Uscreen",
+      "logo": "uscreen.svg",
+      "alt": "u|screen",
+      "url": "https://uscreen.de/",
+      "width": 180
+    },
+    {
+      "name": "Leniolabs",
+      "logo": "leniolabs.jpg",
+      "alt": "Leniolabs_",
+      "url": "https://www.leniolabs.com",
+      "width": 40
+    },
+    {
+      "name": "Depot",
+      "logo": "depot.svg",
+      "url": "https://depot.dev/",
+      "width": 100
+    },
+    {
+      "name": "Cerbos",
+      "logo": "cerbos.svg",
+      "url": "https://cerbos.dev/",
+      "width": 90
+    },
+    {
+      "name": "Time.now",
+      "emoji": "⏱️",
+      "url": "https://time.now/",
+      "width": 40
+    }
+  ]
+}

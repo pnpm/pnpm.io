@@ -109,61 +109,79 @@ run()
   .catch(err => console.error(err))
 
 async function run () {
-  const managersDir = path.join(tempy.directory(), 'managers')
+  const tmpDir = tempy.directory()
+  const managersDirs = {}
+  for (const pm of ['npm', 'pnpm', 'pnpm11', 'yarn']) {
+    managersDirs[pm] = path.join(tmpDir, pm)
+  }
   await Promise.allSettled([
     rimraf(TMP),
-    // make sure folder exists
-    fs.promises.mkdir(managersDir, { recursive: true }),
+    ...Object.values(managersDirs).map(dir => fs.promises.mkdir(dir, { recursive: true })),
     fs.promises.mkdir(BENCH_IMGS, { recursive: true }),
   ])
-  fs.writeFileSync(path.join(managersDir, 'package.json'), '{}', 'utf8')
-  spawn.sync('pnpm', ['add', 'npm@latest', 'pnpm@next-10'], { cwd: managersDir, stdio: 'inherit' })
-  spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDir, stdio: 'inherit' })
+  for (const dir of Object.values(managersDirs)) {
+    fs.writeFileSync(path.join(dir, 'package.json'), '{}', 'utf8')
+  }
+  spawn.sync('pnpm', ['add', 'npm@latest'], { cwd: managersDirs.npm, stdio: 'inherit' })
+  spawn.sync('pnpm', ['add', 'pnpm@next-10'], { cwd: managersDirs.pnpm, stdio: 'inherit' })
+  spawn.sync('pnpm', ['add', 'pnpm@next-11'], { cwd: managersDirs.pnpm11, stdio: 'inherit' })
+  spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDirs.yarn, stdio: 'inherit' })
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
-  const pms = [ 'npm', 'pnpm', 'yarn', 'yarn_pnp' ]
+  const pmConfigs = [
+    { key: 'npm', managersDir: managersDirs.npm },
+    { key: 'pnpm', managersDir: managersDirs.pnpm },
+    { key: 'pnpm11', managersDir: managersDirs.pnpm11 },
+    { key: 'yarn', managersDir: managersDirs.yarn },
+    { key: 'yarn_pnp', managersDir: managersDirs.yarn, hasNodeModules: false },
+  ]
+  const pms = pmConfigs.map(({ key }) => key)
+  const tableRows = [
+    { test: 'firstInstall',              action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: ' '   },
+    { test: 'repeatInstall',             action: 'install', cache: '✔',   lockfile: '✔',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'withWarmCacheAndLockfile',   action: 'install', cache: '✔',   lockfile: '✔',   nodeModules: ' '   },
+    { test: 'withWarmCache',             action: 'install', cache: '✔',   lockfile: ' ',   nodeModules: ' '   },
+    { test: 'withLockfile',              action: 'install', cache: ' ',   lockfile: '✔',   nodeModules: ' '   },
+    { test: 'withWarmCacheAndModules',   action: 'install', cache: '✔',   lockfile: ' ',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'withWarmModulesAndLockfile', action: 'install', cache: ' ',   lockfile: '✔',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'withWarmModules',           action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'updatedDependencies',       action: 'update',  cache: 'n/a', lockfile: 'n/a', nodeModules: 'n/a' },
+  ]
   const sections = []
   const svgs = []
-  const opts = {
-    limitRuns: LIMIT_RUNS,
-    hasNodeModules: true,
-    managersDir,
-  }
   for (const fixture of fixtures) {
-    const npmRes = min(await benchmark(cmdsMap.npm, fixture.name, opts))
-    const yarnRes = min(await benchmark(cmdsMap.yarn, fixture.name, opts))
-    const yarnPnPRes = min(await benchmark(cmdsMap.yarn_pnp, fixture.name, {
-      ...opts,
-      hasNodeModules: false,
-    }))
-    const pnpmRes = min(await benchmark(cmdsMap.pnpm, fixture.name, opts))
-    const resArray = toArray(pms, {
-      'npm': npmRes,
-      'pnpm': pnpmRes,
-      'yarn': yarnRes,
-      'yarn_pnp': yarnPnPRes,
-    })
+    const results = {}
+    for (const { key, managersDir, hasNodeModules } of pmConfigs) {
+      results[key] = min(await benchmark(cmdsMap[key], fixture.name, {
+        limitRuns: LIMIT_RUNS,
+        hasNodeModules: hasNodeModules ?? true,
+        managersDir,
+      }))
+    }
+    const resArray = toArray(pms, results)
+
+    const headerLegends = pms.map(pm => cmdsMap[pm].legend).join(' | ')
+    const headerSep = pms.map(() => '---').join(' | ')
+    const rows = tableRows.map(({ test, action, cache, lockfile, nodeModules, needsNodeModules }) => {
+      const values = pmConfigs.map(({ key, hasNodeModules: pmHasNodeModules }) => {
+        if (needsNodeModules && pmHasNodeModules === false) return 'n/a'
+        return prettyMs(results[key][test])
+      }).join(' | ')
+      return `| ${action} | ${cache} | ${lockfile} | ${nodeModules} | ${values} |`
+    }).join('\n')
 
     sections.push(stripIndents`
       ${fixture.mdDesc}
 
-      | action  | cache | lockfile | node_modules| npm | pnpm | Yarn | Yarn PnP |
-      | ---     | ---   | ---      | ---         | --- | ---  | ---  | ---      |
-      | install |       |          |             | ${prettyMs(npmRes.firstInstall)} | ${prettyMs(pnpmRes.firstInstall)} | ${prettyMs(yarnRes.firstInstall)} | ${prettyMs(yarnPnPRes.firstInstall)} |
-      | install | ✔     | ✔        | ✔           | ${prettyMs(npmRes.repeatInstall)} | ${prettyMs(pnpmRes.repeatInstall)} | ${prettyMs(yarnRes.repeatInstall)} | n/a |
-      | install | ✔     | ✔        |             | ${prettyMs(npmRes.withWarmCacheAndLockfile)} | ${prettyMs(pnpmRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnRes.withWarmCacheAndLockfile)} | ${prettyMs(yarnPnPRes.withWarmCacheAndLockfile)} |
-      | install | ✔     |          |             | ${prettyMs(npmRes.withWarmCache)} | ${prettyMs(pnpmRes.withWarmCache)} | ${prettyMs(yarnRes.withWarmCache)} | ${prettyMs(yarnPnPRes.withWarmCache)} |
-      | install |       | ✔        |             | ${prettyMs(npmRes.withLockfile)} | ${prettyMs(pnpmRes.withLockfile)} | ${prettyMs(yarnRes.withLockfile)} | ${prettyMs(yarnPnPRes.withLockfile)} |
-      | install | ✔     |          | ✔           | ${prettyMs(npmRes.withWarmCacheAndModules)} | ${prettyMs(pnpmRes.withWarmCacheAndModules)} | ${prettyMs(yarnRes.withWarmCacheAndModules)} | n/a |
-      | install |       | ✔        | ✔           | ${prettyMs(npmRes.withWarmModulesAndLockfile)} | ${prettyMs(pnpmRes.withWarmModulesAndLockfile)} | ${prettyMs(yarnRes.withWarmModulesAndLockfile)} | n/a |
-      | install |       |          | ✔           | ${prettyMs(npmRes.withWarmModules)} | ${prettyMs(pnpmRes.withWarmModules)} | ${prettyMs(yarnRes.withWarmModules)} | n/a |
-      | update  | n/a | n/a | n/a | ${prettyMs(npmRes.updatedDependencies)} | ${prettyMs(pnpmRes.updatedDependencies)} | ${prettyMs(yarnRes.updatedDependencies)} | ${prettyMs(yarnPnPRes.updatedDependencies)} |
+      | action  | cache | lockfile | node_modules| ${headerLegends} |
+      | ---     | ---   | ---      | ---         | ${headerSep} |
+      ${rows}
 
       <img alt="Graph of the ${fixture.name} results" src="/img/benchmarks/${fixture.name}.svg" />
     `)
 
     svgs.push({
       path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
-      file: generateSvg(resArray, [cmdsMap.npm, cmdsMap.pnpm, cmdsMap.yarn, cmdsMap.yarn_pnp], testDescriptions, formattedNow)
+      file: generateSvg(resArray, pms.map(pm => cmdsMap[pm]), testDescriptions, formattedNow)
     })
   }
 

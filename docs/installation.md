@@ -24,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION = "11.0.0-alpha.11"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION = "11.0.0-alpha.13"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -37,18 +37,18 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-alpha.11 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-alpha.13 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-alpha.11 sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-alpha.13 sh -
 ```
 
 :::tip
 
-You may use the [pnpm env] command then to install Node.js.
+You may use the [pnpm runtime] command then to install Node.js.
 
 :::
 
@@ -83,7 +83,7 @@ Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.htm
 
 :::info
 
-If you have installed Node.js with `pnpm env` Corepack won't be installed on your system, you will need to install it separately. See [#4029](https://github.com/pnpm/pnpm/issues/4029).
+If you have installed Node.js with `pnpm runtime` Corepack won't be installed on your system, you will need to install it separately. See [#4029](https://github.com/pnpm/pnpm/issues/4029).
 
 :::
 
@@ -258,4 +258,4 @@ pnpm self-update
 If you need to remove the pnpm CLI from your system and any files it has written to your disk, see [Uninstalling pnpm].
 
 [Uninstalling pnpm]: ./uninstall.md
-[pnpm env]: ./cli/env.md
+[pnpm runtime]: ./cli/runtime.md

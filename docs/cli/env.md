@@ -3,6 +3,12 @@ id: env
 title: "pnpm env <cmd>"
 ---
 
+:::warning Deprecated
+
+`pnpm env` is deprecated. Use [`pnpm runtime`](./runtime.md) instead. For example, `pnpm env use --global lts` becomes `pnpm runtime set node lts -g`.
+
+:::
+
 Manages the Node.js environment.
 
 :::danger
