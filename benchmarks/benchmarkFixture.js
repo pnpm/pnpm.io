@@ -2,8 +2,7 @@
 import path from 'path'
 import pathKey from 'path-key'
 import spawn from "cross-spawn"
-import fsx from 'fs-extra'
-import { promises as fs } from 'fs'
+import { promises as fs, cpSync } from 'fs/promises'
 import getFolderSize from 'get-folder-size'
 import rimraf from 'rimraf'
 import { fileURLToPath } from 'url'
@@ -103,7 +102,7 @@ async function updateDependenciesInPackageJson (cwd) {
 export default async function benchmark (pm, fixture, opts) {
   const env = createEnv(opts.managersDir)
   const cwd = path.join(TMP, pm.scenario, fixture)
-  fsx.copySync(path.join(FIXTURES_DIR, fixture), cwd)
+  cpSync(path.join(FIXTURES_DIR, fixture), cwd)
   const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
 
   cleanLockfile(pm, cwd, env)
