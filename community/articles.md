@@ -47,7 +47,7 @@ In Chinese:
 - `2022-10-24`: [pnpm 原理解析](https://github.com/lvqq/blog/issues/60)
 - `2022-01-28`: [新一代包管理工具 pnpm](https://www.qjidea.com/pnpm/)
 - `2022-01-28`: [都2022年了，pnpm快到碗里来!](https://juejin.cn/post/7053340250210795557)
-- `2021-12-07`: [为什么 Vue 源码及生态仓库要迁移 pnpm?](https://mp.weixin.qq.com/s/EgTzleaX2bNRO9X-ebNLCg)
+- `2021-12-06`: [为什么 Vue 源码及生态仓库要迁移 pnpm?](https://mp.weixin.qq.com/s/EgTzleaX2bNRO9X-ebNLCg)
 - `2021-08-28`: [pnpm: 最先进的包管理工具](https://mp.weixin.qq.com/s/5Zo576QFpdAfwXmhfTwWZQ)
 
 In Japanese:
