@@ -3,7 +3,7 @@ id: supply-chain-security
 title: Mitigating supply chain attacks
 ---
 
-Sometimes npm packages are compromised and published with malware. Luckily, there are companies like [Socket], [Snyk], and [Aikido] that detect these compromised packages early. The npm registry usually removes the affected versions within hours. However, there is always a window of time between when the malware is published and when it is detected, during which you could be exposed. Fortunately, there are some things you can do with pnpm to minimize the risks.
+Sometimes npm packages are compromised and published with malware. Luckily, there are companies like [Socket], [Snyk], [Xygeni] and [Aikido] that detect these compromised packages early. The npm registry usually removes the affected versions within hours. However, there is always a window of time between when the malware is published and when it is detected, during which you could be exposed. Fortunately, there are some things you can do with pnpm to minimize the risks.
 
 ### Block risky postinstall scripts
  
@@ -31,6 +31,7 @@ It goes without saying that you should always lock your dependencies with a lock
 
 [Socket]: https://socket.dev/
 [Snyk]: https://snyk.io
+[Xygeni]: https://xygeni.io/
 [Aikido]: https://www.aikido.dev/
 [dangerouslyAllowAllBuilds]: settings.md#dangerouslyallowallbuilds
 [it might get compromised]: https://socket.dev/blog/nx-packages-compromised
