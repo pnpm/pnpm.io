@@ -14,6 +14,12 @@ The approved dependencies are added to the [`onlyBuiltDependencies`] array in `p
 
 ## Options
 
+### --all
+
+Added in: v10.32.0
+
+Approve all pending builds without interactive prompts.
+
 ### --global, -g
 
 Added in: v10.4.0
