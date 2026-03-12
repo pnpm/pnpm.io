@@ -34,7 +34,7 @@ pnpm run "/<regex>/"
 Run all scripts that start with `watch:`:
 
 ```sh
-pnpm run "/^watch:.*/"
+pnpm run "/^watch:/"
 ```
 
 ## Details
