@@ -360,6 +360,10 @@
         {
           "type": "doc",
           "id": "finders"
+        },
+        {
+          "type": "doc",
+          "id": "global-virtual-store"
         }
       ]
     },
@@ -387,6 +391,10 @@
         {
           "type": "doc",
           "id": "git"
+        },
+        {
+          "type": "doc",
+          "id": "git-worktrees"
         },
         {
           "type": "doc",

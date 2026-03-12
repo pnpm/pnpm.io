@@ -117,7 +117,8 @@
       "aliases",
       "completion",
       "git_branch_lockfiles",
-      "finders"
+      "finders",
+      "global-virtual-store"
     ],
     "Recipes": [
       "using-changesets",
@@ -125,6 +126,7 @@
       "supply-chain-security",
       "typescript",
       "git",
+      "git-worktrees",
       "docker",
       "podman"
     ],
