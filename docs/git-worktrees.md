@@ -124,7 +124,7 @@ The script handles a few things beyond plain `git worktree add`:
 - Branch names with slashes (e.g. `feat/my-feature`) are converted to dashes for the directory name (e.g. `feat-my-feature`).
 - The `.claude` directory is symlinked from the bare repo's git common directory into the new worktree, so all worktrees share the same Claude Code settings and approved commands.
 
-There's also a shell helper (`shell/wt.sh`) that wraps the script and `cd`s into the new worktree:
+There's also a shell helper [`shell/wt.sh`](https://github.com/pnpm/pnpm/blob/main/shell/wt.sh) that wraps the script and `cd`s into the new worktree:
 
 ```sh
 # Source it in your shell config, then:
