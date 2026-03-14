@@ -25,6 +25,7 @@
           "cli/import",
           "cli/rebuild",
           "cli/prune",
+          "cli/clean",
           "cli/fetch",
           "cli/install-test",
           "cli/dedupe"

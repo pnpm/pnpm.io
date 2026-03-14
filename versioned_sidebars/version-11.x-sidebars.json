@@ -90,6 +90,10 @@
             },
             {
               "type": "doc",
+              "id": "cli/clean"
+            },
+            {
+              "type": "doc",
               "id": "cli/fetch"
             },
             {
