@@ -2,7 +2,7 @@
 import path from 'path'
 import pathKey from 'path-key'
 import spawn from "cross-spawn"
-import { promises as fs, cpSync } from 'fs/promises'
+import { promises as fs, cpSync } from 'fs'
 import getFolderSize from 'get-folder-size'
 import rimraf from 'rimraf'
 import { fileURLToPath } from 'url'
