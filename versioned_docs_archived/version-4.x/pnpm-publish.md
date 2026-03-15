@@ -35,7 +35,7 @@ Tells the registry whether the published package should be public or restricted.
 Added in: v3.4.0
 
 It is possible to override some fields in the manifest, before the package is packed.
-The following fields may be overriden: `typings`, `types`, `main` and `module`.
+The following fields may be overridden: `typings`, `types`, `main` and `module`.
 To override a field, add the publish version of the field to `publishConfig`.
 
 For instance, the following `package.json`:
