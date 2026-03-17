@@ -69,6 +69,12 @@
       "width": 140
     },
     {
+      "name": "Cybozu",
+      "logo": "cybozu_min.svg",
+      "url": "https://cybozu.co.jp/",
+      "width": 100
+    },
+    {
       "name": "Devowlio",
       "logo": "devowlio_min.svg",
       "alt": "devowl.io",
