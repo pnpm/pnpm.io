@@ -13,6 +13,8 @@ import {
   PrismaIcon,
   NovuIcon,
   VercelIcon,
+  DepotIcon,
+  CerbosIcon,
 } from "@pnpm/website.pages.homepage";
 import sponsorData from '../../sponsors.json';
 import { useDocusaurusTheme, getThemeMode } from "../utils/use-docusaurus-theme";
@@ -80,10 +82,16 @@ function addUTM(urlAddress) {
   return url.toString();
 }
 
+const sponsorIcons = {
+  'Depot': <DepotIcon />,
+  'Cerbos': <CerbosIcon />,
+};
+
 function mapSponsor(s) {
+  const icon = sponsorIcons[s.name];
   return {
     name: s.name,
-    ...(s.logo ? { logo: `/img/users/${s.logo}` } : {}),
+    ...(icon ? { icon } : s.logo ? { logo: `/img/users/${s.logo}` } : {}),
     ...(s.emoji ? { icon: <span style={{fontSize: '4rem'}}>{s.emoji}</span> } : {}),
     alt: s.alt || s.name,
     url: addUTM(s.url),
