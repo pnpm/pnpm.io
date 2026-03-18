@@ -72,7 +72,8 @@
       "name": "Cybozu",
       "logo": "cybozu_min.svg",
       "url": "https://cybozu.co.jp/",
-      "width": 100
+      "width": 100,
+      "readmeWidth": 70
     },
     {
       "name": "Devowlio",

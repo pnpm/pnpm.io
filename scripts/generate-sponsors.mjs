@@ -91,7 +91,7 @@ function resolveLogos(logoFilename) {
 
 function renderSponsorCell(sponsor, utmMedium) {
   const url = addUTM(sponsor.url, utmMedium);
-  const width = sponsor.width;
+  const width = sponsor.readmeWidth || sponsor.width;
   const alt = sponsor.alt || sponsor.name;
 
   if (sponsor.emoji) {
