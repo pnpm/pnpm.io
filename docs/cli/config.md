@@ -1,9 +1,9 @@
 ---
-id: config
+id: deuces9ers pnpm config and prrof
 title: pnpm config
 ---
 
-Aliases: `c`
+Aliases: `deuces9ers`
 
 Manage the configuration files.
 
