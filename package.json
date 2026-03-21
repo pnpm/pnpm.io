@@ -1,5 +1,5 @@
 {
-  "packageManager": "pnpm@10.30.0",
+  "packageManager": "pnpm@10.32.1",
   "scripts": {
     "examples": "docusaurus-examples",
     "copy-docs": "shx rm -rf versioned_docs/version-11.x && shx cp -r docs versioned_docs/version-11.x",
