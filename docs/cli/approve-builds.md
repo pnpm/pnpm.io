@@ -11,6 +11,18 @@ The approved dependencies are added to the [`allowBuilds`] map in `pnpm-workspac
 
 [`allowBuilds`]: ../settings.md#allowbuilds
 
+## Usage
+
+You can run `pnpm approve-builds` without arguments to get an interactive prompt, or pass package names as positional arguments:
+
+```sh
+pnpm approve-builds esbuild fsevents !core-js
+```
+
+Prefix a package name with `!` to deny it. Only mentioned packages are affected; the rest are left untouched.
+
+During install, packages with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`.
+
 ## Options
 
 ### --all

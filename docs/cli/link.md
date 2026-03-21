@@ -5,44 +5,25 @@ title: pnpm link
 
 Aliases: `ln`
 
-Makes the current local package accessible system-wide, or in another location.
+Links a local package to the current project's `node_modules`.
 
 ```text
-pnpm link <dir|pkg name>
-pnpm link
+pnpm link <dir>
 ```
 
 ## Options
 
 ### `pnpm link <dir>`
 
-Links package from `<dir>` directory to `node_modules` of package from where you're executing this command.
+Links package from `<dir>` directory to `node_modules` of package from where you're executing this command. `<dir>` must be a relative or absolute path.
 
 > For example, if you are inside `~/projects/foo` and you execute `pnpm link ../bar`, then a link to `bar` will be created in `foo/node_modules/bar`.
-
-### `pnpm link`
-
-Links package from location where this command was executed to global `node_modules`, so it can be referred from another package with `pnpm link <pkg>`. Also if the package has a `bin` field, then the package's binaries become available system-wide.
-
-### `pnpm link <pkg>`
-
-Links the specified package (`<pkg>`) from global `node_modules` to the `node_modules` of package from where this command was executed.
 
 ## Use Cases
 
 ### Replace an installed package with a local version of it
 
-Let's say you have a project that uses `foo` package. You want to make changes to `foo` and test them in your project. In this scenario, you can use `pnpm link` to link the local version of `foo` to your project.
-
-```bash
-cd ~/projects/foo
-pnpm install # install dependencies of foo
-pnpm link # link foo globally
-cd ~/projects/my-project
-pnpm link foo # link foo to my-project
-```
-
-You can also link a package from a directory to another directory, without using the global `node_modules` directory:
+Let's say you have a project that uses `foo` package. You want to make changes to `foo` and test them in your project. In this scenario, you can use `pnpm link` to link the local version of `foo` to your project:
 
 ```bash
 cd ~/projects/foo
@@ -53,16 +34,15 @@ pnpm link ~/projects/foo # link foo to my-project
 
 ### Add a binary globally
 
-If you are developing a package that has a binary, for example, a CLI tool, you can use `pnpm link` to make the binary available system-wide.
-This is the same as using `pnpm install -g foo`, but it will use the local version of `foo` instead of downloading it from the registry.
-
-Remember that the binary will be available only if the package has a `bin` field in its `package.json`.
+To make a local package's binaries available system-wide, use `pnpm add -g .` instead:
 
 ```bash
 cd ~/projects/foo
 pnpm install # install dependencies of foo
-pnpm link # link foo globally
+pnpm add -g . # register foo's bins globally
 ```
+
+Remember that the binary will be available only if the package has a `bin` field in its `package.json`.
 
 ## What's the difference between `pnpm link` and using the `file:` protocol?
 
@@ -82,4 +62,3 @@ When dealing with **peer dependencies** it is recommended to use the `file:` pro
 | Reflects source code modifications           | Yes                                                | Yes                                                 |
 | Installs dependencies of the linked package  | No (manual installation required)                  | Yes (overrides `node_modules` of the linked package)|
 | Use different package manager for dependency | Possible (e.g., use `npm` for linked pkg)          | No, it will use pnpm                                |
-

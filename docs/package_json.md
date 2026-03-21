@@ -106,6 +106,23 @@ How it works:
 1. The exact version (and checksum) is saved in the lockfile.
 1. Scripts use the local runtime, ensuring consistency across environments.
 
+## devEngines.packageManager
+
+Added in: v11.0.0
+
+Allows specifying the pnpm version via `devEngines.packageManager` in `package.json`. Unlike the `packageManager` field, this supports version ranges. The resolved version is stored in `pnpm-lock.yaml` and reused if it still satisfies the range.
+
+```json
+{
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": ">=11.0.0"
+    }
+  }
+}
+```
+
 ## dependenciesMeta
 
 Additional meta information used for dependencies declared inside `dependencies`, `optionalDependencies`, and `devDependencies`.

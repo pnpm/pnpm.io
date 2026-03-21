@@ -26,6 +26,7 @@
           "cli/rebuild",
           "cli/prune",
           "cli/clean",
+          "cli/ci",
           "cli/fetch",
           "cli/install-test",
           "cli/dedupe"
@@ -45,6 +46,7 @@
         "label": "Review dependencies",
         "items": [
           "cli/audit",
+          "cli/sbom",
           "cli/list",
           "cli/outdated",
           "cli/why",

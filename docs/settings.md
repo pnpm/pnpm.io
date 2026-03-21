@@ -490,6 +490,15 @@ root is shared).
 
 Sets the maximum allowed length of directory names inside the virtual store directory (`node_modules/.pnpm`). You may set this to a lower number if you encounter long path issues on Windows.
 
+### virtualStoreOnly
+
+Added in: v11.0.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, pnpm populates the virtual store without creating importer symlinks, hoisting, bin links, or running lifecycle scripts. This is useful for pre-populating a store (e.g., in Nix builds) without creating unnecessary project-level artifacts. `pnpm fetch` uses this mode internally.
+
 ### packageImportMethod
 
 * Default: **auto**
@@ -1078,7 +1087,7 @@ nodeOptions: "${NODE_OPTIONS:- } --experimental-vm-modules"
 
 ### verifyDepsBeforeRun
 
-* Default: **false**
+* Default: **install**
 * Type: **install**, **warn**, **error**, **prompt**, **false**
 
 This setting allows the checking of the state of dependencies before running scripts. The check runs on `pnpm run` and `pnpm exec` commands. The following values are supported:
@@ -1215,13 +1224,19 @@ Specify a custom directory to store global packages.
 ### globalBinDir
 
 * Default:
-  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm**
-  * On Windows: **~/AppData/Local/pnpm**
-  * On macOS: **~/Library/pnpm**
-  * On Linux: **~/.local/share/pnpm**
+  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/bin**
+  * On Windows: **~/AppData/Local/pnpm/bin**
+  * On macOS: **~/Library/pnpm/bin**
+  * On Linux: **~/.local/share/pnpm/bin**
 * Type: **path**
 
 Allows to set the target directory for the bin files of globally installed packages.
+
+:::tip
+
+In pnpm v11, globally installed binaries are stored in a `bin` subdirectory of `PNPM_HOME` instead of directly in `PNPM_HOME`. This prevents internal directories like `global/` and `store/` from polluting shell autocompletion when `PNPM_HOME` is on PATH. After upgrading, run `pnpm setup` to update your shell configuration.
+
+:::
 
 ### stateDir
 
@@ -1368,7 +1383,7 @@ When set to `true`, dependencies that are already symlinked to the root `node_mo
 
 Added in: v10.1.0
 
-* Default: **false**
+* Default: **true**
 * Type: **Boolean**
 
 When enabled, a fast check will be performed before proceeding to installation. This way a repeat install or an install on a project with everything up-to-date becomes a lot faster.

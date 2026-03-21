@@ -97,6 +97,17 @@ Does everything a publish would do except actually publishing to the registry.
 
 When publishing packages that require two-factor authentication, this option can specify a one-time password.
 
+You can also provide the OTP via the `PNPM_CONFIG_OTP` environment variable:
+
+```sh
+export PNPM_CONFIG_OTP='<your OTP here>'
+pnpm publish --no-git-checks
+```
+
+If the registry requests OTP and you have not provided it via the environment variable or the `--otp` flag, pnpm will prompt you directly for an OTP code.
+
+If the registry requests web-based authentication, pnpm will print a scannable QR code along with the URL.
+
 ### --provenance
 
 When publishing from a supported cloud CI/CD system, the package will be publicly linked to where it was built and published from.

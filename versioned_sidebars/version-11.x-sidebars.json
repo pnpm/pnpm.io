@@ -94,6 +94,10 @@
             },
             {
               "type": "doc",
+              "id": "cli/ci"
+            },
+            {
+              "type": "doc",
               "id": "cli/fetch"
             },
             {
@@ -133,6 +137,10 @@
             {
               "type": "doc",
               "id": "cli/audit"
+            },
+            {
+              "type": "doc",
+              "id": "cli/sbom"
             },
             {
               "type": "doc",
