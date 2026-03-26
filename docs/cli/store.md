@@ -49,10 +49,6 @@ When the [global virtual store] is enabled, `pnpm store prune` also performs mar
 
 [global virtual store]: ../settings.md#enableglobalvirtualstore
 
-Please note that this command is prohibited when a [store server] is running.
-
-[store server]: ./server.md
-
 ### path
 
 Returns the path to the active store directory.
