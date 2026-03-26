@@ -69,7 +69,7 @@ pipelines:
     "**":
       - step:
           name: Build and test
-          image: node:18.17.1
+          image: node:24.14.1
           script:
             - npm install --global corepack@latest
             - corepack enable
@@ -130,18 +130,18 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        node-version: [20]
+        node-version: [24]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v5
         with:
           version: 11
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
@@ -160,7 +160,7 @@ stages:
 
 build:
   stage: build
-  image: node:18.17.1
+  image: node:24.14.1
   before_script:
     - npm install --global corepack@latest
     - corepack enable
@@ -212,7 +212,7 @@ name: Semaphore CI pnpm example
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2404
 blocks:
   - name: Install dependencies
     task:
