@@ -157,6 +157,10 @@
             {
               "type": "doc",
               "id": "cli/licenses"
+            },
+            {
+              "type": "doc",
+              "id": "cli/peers"
             }
           ]
         },
@@ -256,6 +260,10 @@
             {
               "type": "doc",
               "id": "cli/self-update"
+            },
+            {
+              "type": "doc",
+              "id": "cli/version"
             },
             {
               "type": "doc",
@@ -372,6 +380,10 @@
         {
           "type": "doc",
           "id": "finders"
+        },
+        {
+          "type": "doc",
+          "id": "global-packages"
         },
         {
           "type": "doc",

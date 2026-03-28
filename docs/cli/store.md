@@ -45,7 +45,9 @@ again. This could occur when switching branches and installing older
 dependencies, in which case pnpm would need to re-download all removed packages,
 briefly slowing down the installation process.
 
-When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on the global virtual store's `links/` directory. Projects using the store are registered via symlinks in `{storeDir}/v10/projects/`, allowing pnpm to track active usage and safely remove unused packages from the global virtual store.
+After pruning, pnpm displays the total size of removed files.
+
+When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on the global virtual store's `links/` directory. Projects using the store are registered via symlinks in `{storeDir}/v11/projects/`, allowing pnpm to track active usage and safely remove unused packages from the global virtual store.
 
 [global virtual store]: ../settings.md#enableglobalvirtualstore
 

@@ -541,9 +541,14 @@ After executing a dlx command, pnpm keeps a cache that omits the installation st
 
 Added in: v10.12.1
 
-* Default: **false** (always **false** in CI)
+* Default: **false**
 * Type: **Boolean**
-* Status: **Experimental**
+
+:::note
+
+In pnpm v11, global installs (`pnpm add -g`) and `pnpm dlx` use the global virtual store by default.
+
+:::
 
 When enabled, `node_modules` contains only symlinks to a central virtual store, rather than to `node_modules/.pnpm`. By default, this central store is located at `<store-path>/links` (use `pnpm store path` to find `<store-path>`).
 
@@ -833,6 +838,17 @@ project2
 ```
 
 In this case, we cannot dedupe `webpack` as `webpack` has `react` in its peer dependencies and `react` is resolved from two different versions in the context of the two projects.
+
+### dedupePeers
+
+Added in: v11.0.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When enabled, peer dependency suffixes use version-only identifiers (`name@version`) instead of full dep paths, eliminating nested suffixes like `(foo@1.0.0(bar@2.0.0))`. This dramatically reduces the number of package instances in projects with many recursive peer dependencies.
+
+This is different from [`dedupePeerDependents`](#dedupepeerdependents), which deduplicates packages that have the same peer dependencies across different workspace projects. `dedupePeers` simplifies the peer dependency suffix format itself.
 
 ### strictPeerDependencies
 

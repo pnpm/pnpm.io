@@ -50,7 +50,8 @@
           "cli/list",
           "cli/outdated",
           "cli/why",
-          "cli/licenses"
+          "cli/licenses",
+          "cli/peers"
         ]
       },
       {
@@ -90,6 +91,7 @@
         "label": "Misc.",
         "items": [
           "cli/self-update",
+          "cli/version",
           "cli/publish",
           "cli/pack",
           "cli/recursive",
@@ -121,6 +123,7 @@
       "completion",
       "git_branch_lockfiles",
       "finders",
+      "global-packages",
       "global-virtual-store"
     ],
     "Recipes": [

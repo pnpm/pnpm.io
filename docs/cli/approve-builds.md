@@ -31,9 +31,11 @@ Added in: v10.32.0
 
 Approve all pending builds without interactive prompts.
 
-### --global, -g
+### ~~--global, -g~~
 
-Added in: v10.4.0
+:::warning Removed in v11.0.0
 
-Approve dependencies of globally installed packages.
+`pnpm approve-builds -g` is no longer supported with isolated global packages. Instead, use `--allow-build` when installing globally (e.g., `pnpm add -g --allow-build=esbuild esbuild`), or approve builds via the interactive prompt that pnpm shows during global install.
+
+:::
 

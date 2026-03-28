@@ -60,9 +60,13 @@ It also speeds up installations across unrelated projects on the same machine, s
 
 :::note
 
-The global virtual store is currently disabled by default and marked as experimental, as some tools may not work correctly with symlinked `node_modules`. You need to explicitly set `enableGlobalVirtualStore: true` in `pnpm-workspace.yaml` to use it. In pnpm v11, the global virtual store is enabled by default for packages installed via `pnpm dlx` (`pnpx`) and globally installed packages. The goal is to enable it by default for all installations in a future version.
+The global virtual store is currently disabled by default for project installs and marked as experimental, as some tools may not work correctly with symlinked `node_modules`. You need to explicitly set `enableGlobalVirtualStore: true` in `pnpm-workspace.yaml` to use it for project installs. In pnpm v11, the global virtual store is enabled by default for packages installed via `pnpm dlx` (`pnpx`) and globally installed packages. The goal is to enable it by default for all installations in a future version.
 
 :::
+
+## Global packages
+
+In pnpm v11, global installs (`pnpm add -g`) and `pnpm dlx` use the global virtual store by default. See [Global Packages](./global-packages.md) for the full guide on how global package management works in v11, including isolated installations and the new binaries location.
 
 ## Configuration
 

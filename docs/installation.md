@@ -5,7 +5,7 @@ title: Installation
 
 ## Prerequisites
 
-If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v18.12) to be installed on your system.
+If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v22) to be installed on your system.
 
 ## Using a standalone script
 
@@ -24,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION = "11.0.0-beta.2"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION = "11.0.0-beta.3"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -37,13 +37,13 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.2 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.3 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.2 sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.3 sh -
 ```
 
 :::tip

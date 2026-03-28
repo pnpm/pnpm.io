@@ -3,6 +3,12 @@ id: pnpm-cli
 title: pnpm CLI
 ---
 
+## Short aliases
+
+Added in: v11.0.0
+
+`pn` is available as a short alias for `pnpm`, and `pnx` as a short alias for `pnpx` (`pnpm dlx`).
+
 ## Differences vs npm
 
 Unlike npm, pnpm validates all options. For example, `pnpm install --target_arch x64` will

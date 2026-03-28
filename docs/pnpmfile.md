@@ -205,19 +205,11 @@ This hook allows to change how packages are written to `node_modules`. The retur
 
 ### `hooks.fetchers`
 
-:::warning Deprecated
+:::danger Removed in v11.0.0
 
-This hook is deprecated and will be removed in a future version. Use top-level `fetchers` instead. See the [Custom Fetchers](#custom-fetchers) section for the new API.
+`hooks.fetchers` has been removed. Use top-level `fetchers` instead. See the [Custom Fetchers](#custom-fetchers) section for the new API.
 
 :::
-
-This hook allows to override the fetchers that are used for different types of dependencies. It is an object that may have the following fields:
-
-* `localTarball`
-* `remoteTarball`
-* `gitHostedTarball`
-* `directory`
-* `git`
 
 
 ## Finders
