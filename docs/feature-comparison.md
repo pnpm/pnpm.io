@@ -30,7 +30,7 @@ title: Feature Comparison
 [Autoinstalling peers]: ./settings.md#autoinstallpeers
 [Catalogs]: ./catalogs.md
 [Config dependencies]: ./config-dependencies.md
-[Dynamic package execution]: ./cli/dlx.md
+[Dynamic package execution]: ./cli/pnx.md
 [Hoisted `node_modules`]: ./settings.md#nodelinker
 [JSR registry support]: ./cli/add.md#install-from-the-jsr-registry
 [Listing licenses]: ./cli/licenses.md

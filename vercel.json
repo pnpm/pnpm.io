@@ -40,6 +40,16 @@
       "source": "/v/:splat*",
       "destination": "https://github.com/pnpm/pnpm/releases/tag/v:splat*",
       "permanent": true
+    },
+    {
+      "source": "/next/cli/dlx",
+      "destination": "/next/cli/pnx",
+      "permanent": true
+    },
+    {
+      "source": "/11.x/cli/dlx",
+      "destination": "/11.x/cli/pnx",
+      "permanent": true
     }
   ]
 }

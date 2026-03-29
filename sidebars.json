@@ -62,7 +62,7 @@
           "cli/run",
           "cli/test",
           "cli/exec",
-          "cli/dlx",
+          "cli/pnx",
           "cli/create",
           "cli/start",
           "cli/approve-builds",
