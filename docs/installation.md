@@ -24,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION = "11.0.0-beta.3"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION = "11.0.0-beta.5"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -37,13 +37,13 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.3 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.5 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.3 sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.5 sh -
 ```
 
 :::tip

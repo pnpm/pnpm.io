@@ -22,6 +22,20 @@ Scripts with names starting with `.` are hidden. They cannot be run directly via
 
 In this example, `pnpm run .helper` would fail, but `pnpm run build` would succeed because `.helper` is called from another script.
 
+## Environment Variables
+
+pnpm sets the following environment variables during lifecycle script execution:
+
+- `npm_package_name` — the package name
+- `npm_package_version` — the package version
+- `npm_lifecycle_event` — the name of the running script (e.g., `postinstall`)
+
+## Built-in Command and Script Name Conflicts
+
+Added in: v11.0.0
+
+The following built-in commands prefer user scripts: `clean`, `setup`, `deploy`, and `rebuild`. If your `package.json` defines a script with one of these names, `pnpm <name>` will execute the script instead of the built-in command.
+
 ## Lifecycle Scripts
 
 ### `pnpm:devPreinstall`

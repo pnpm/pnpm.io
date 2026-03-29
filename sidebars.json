@@ -51,7 +51,8 @@
           "cli/outdated",
           "cli/why",
           "cli/licenses",
-          "cli/peers"
+          "cli/peers",
+          "cli/view"
         ]
       },
       {
@@ -90,6 +91,7 @@
         "type": "category",
         "label": "Misc.",
         "items": [
+          "cli/login",
           "cli/self-update",
           "cli/version",
           "cli/publish",
