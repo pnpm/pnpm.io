@@ -7,26 +7,26 @@ title: pnpm CLI
 
 Added in: v11.0.0
 
-`pn` is available as a short alias for `pnpm`, and [`pnx`](./cli/pnx.md) as a short alias for `pnpx` (`pnpm dlx`). You can use them anywhere you'd use `pnpm` or `pnpx`:
+`pn` is available as a short alias for `pnpm`, and [`pnx`](./cli/pnx.md) as a short alias for `pnpm dlx`. You can use them anywhere you'd use `pnpm` or `pnpx`:
 
 ```sh
 pn install
 pn add express
-pn run build
+pn build
 pn test
 pnx create-vue my-app
 ```
 
 ## Differences vs npm
 
-Unlike npm, pnpm validates all options. For example, `pn install --target_arch x64` will
-fail as `--target_arch` is not a valid option for `pn install`.
+Unlike npm, pnpm validates all options. For example, `pnpm install --target_arch x64` will
+fail as `--target_arch` is not a valid option for `pnpm install`.
 
 However, some dependencies may use the `npm_config_` environment variable, which
 is populated from the CLI options. In this case, you have the following options:
 
-1. explicitly set the env variable: `npm_config_target_arch=x64 pn install`
-1. force the unknown option with `--config.`: `pn install --config.target_arch=x64`
+1. explicitly set the env variable: `npm_config_target_arch=x64 pnpm install`
+1. force the unknown option with `--config.`: `pnpm install --config.target_arch=x64`
 
 ## Options
 
@@ -46,19 +46,19 @@ a list of handy npm equivalents to get you started:
 
 | npm command     | pnpm equivalent    |
 |-----------------|--------------------|
-| `npm install`   | [`pn install`]     |
-| `npm i <pkg>`   | [`pn add <pkg>`]   |
-| `npm run <cmd>` | [`pn <cmd>`]       |
+| `npm install`   | [`pnpm install`]     |
+| `npm i <pkg>`   | [`pnpm add <pkg>`]   |
+| `npm run <cmd>` | [`pnpm <cmd>`]       |
 | `npx <pkg>`     | [`pnx <pkg>`]      |
 
 When an unknown command is used, pnpm will search for a script with the given name,
-so `pn run lint` is the same as `pn lint`. If there is no script with the specified name,
-then pnpm will execute the command as a shell script, so you can do things like `pn eslint` (see [`pn exec`]).
+so `pnpm run lint` is the same as `pnpm lint`. If there is no script with the specified name,
+then pnpm will execute the command as a shell script, so you can do things like `pnpm eslint` (see [`pnpm exec`]).
 
-[`pn install`]: ./cli/install.md
-[`pn add <pkg>`]: ./cli/add.md
-[`pn <cmd>`]: ./cli/run.md
-[`pn exec`]: ./cli/exec.md
+[`pnpm install`]: ./cli/install.md
+[`pnpm add <pkg>`]: ./cli/add.md
+[`pnpm <cmd>`]: ./cli/run.md
+[`pnpm exec`]: ./cli/exec.md
 [`pnx <pkg>`]: ./cli/pnx.md
 
 ## Environment variables
