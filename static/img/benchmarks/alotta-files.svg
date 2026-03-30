@@ -17,7 +17,7 @@
   <text x="60" y="18" class="font s3" text-anchor="middle">v10.33.0</text>
   <circle cx="76" cy="6" r="4" fill="#f69220"></circle>
   <text x="76" y="14" class="font s4" text-anchor="middle">pnpm v11</text>
-  <text x="76" y="18" class="font s3" text-anchor="middle">v11.0.0-beta.5</text>
+  <text x="76" y="18" class="font s3" text-anchor="middle">v11.0.0-beta.6</text>
   <circle cx="92" cy="6" r="4" fill="#248ebd"></circle>
   <text x="92" y="14" class="font s4" text-anchor="middle">Yarn</text>
   <text x="92" y="18" class="font s3" text-anchor="middle">v4.13.0</text>
@@ -44,7 +44,7 @@
   <text x="290" y="20" class="font s4 text" font-style="italic" text-anchor="end">Installation time in seconds (lower is better)</text>
   <rect x="40" y="35" width="224" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="41.5" width="54" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="48" width="71" height="6" fill="#f69220" rx="1" ry="1"></rect>
+  <rect x="40" y="48" width="75" height="6" fill="#f69220" rx="1" ry="1"></rect>
   <rect x="40" y="54.5" width="53" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="61" width="26" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="71.5" width="9" height="6" fill="#cd3731" rx="1" ry="1"></rect>
@@ -54,12 +54,12 @@
   <rect x="40" y="97.5" width="0" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="108" width="54" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="114.5" width="14" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="121" width="25" height="6" fill="#f69220" rx="1" ry="1"></rect>
+  <rect x="40" y="121" width="16" height="6" fill="#f69220" rx="1" ry="1"></rect>
   <rect x="40" y="127.5" width="38" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="134" width="10" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="144.5" width="86" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="151" width="39" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="157.5" width="49" height="6" fill="#f69220" rx="1" ry="1"></rect>
+  <rect x="40" y="157.5" width="46" height="6" fill="#f69220" rx="1" ry="1"></rect>
   <rect x="40" y="164" width="52" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="170.5" width="21" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="181" width="77" height="6" fill="#cd3731" rx="1" ry="1"></rect>
@@ -69,7 +69,7 @@
   <rect x="40" y="207" width="10" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="217.5" width="13" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="224" width="15" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="230.5" width="17" height="6" fill="#f69220" rx="1" ry="1"></rect>
+  <rect x="40" y="230.5" width="18" height="6" fill="#f69220" rx="1" ry="1"></rect>
   <rect x="40" y="237" width="50" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="243.5" width="0" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="254" width="9" height="6" fill="#cd3731" rx="1" ry="1"></rect>
@@ -79,7 +79,7 @@
   <rect x="40" y="280" width="0" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="290.5" width="13" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="297" width="36" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="303.5" width="52" height="6" fill="#f69220" rx="1" ry="1"></rect>
+  <rect x="40" y="303.5" width="66" height="6" fill="#f69220" rx="1" ry="1"></rect>
   <rect x="40" y="310" width="50" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="316.5" width="0" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="327" width="47" height="6" fill="#cd3731" rx="1" ry="1"></rect>
@@ -102,5 +102,5 @@
   <text x="38" y="265.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
   <text x="38" y="300" class="font s4" dominant-baseline="middle" text-anchor="end">with node_modules</text>
   <text x="38" y="336.5" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="375.5" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.14.0 at: Mar 30, 2026, 6:32 AM</text>
+  <text x="290" y="375.5" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.14.0 at: Mar 30, 2026, 4:42 PM</text>
 </svg>
