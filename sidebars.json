@@ -104,6 +104,7 @@
           "cli/init",
           "cli/deploy",
           "cli/doctor",
+          "cli/pm",
           "cli/config",
           "cli/help"
         ]

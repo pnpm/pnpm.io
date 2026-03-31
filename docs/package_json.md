@@ -117,7 +117,8 @@ Allows specifying the pnpm version via `devEngines.packageManager` in `package.j
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": ">=11.0.0"
+      "version": ">=11.0.0",
+      "onFail": "download"
     }
   }
 }

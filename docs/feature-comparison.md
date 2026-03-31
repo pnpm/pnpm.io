@@ -12,7 +12,7 @@ title: Feature Comparison
 | [Autoinstalling peers]           |:white_check_mark:|:x:               |:white_check_mark:|
 | Zero-Installs                    |:x:               |:white_check_mark:|:x:               |
 | [Patching dependencies]          |:white_check_mark:|:white_check_mark:|:x:               |
-| [Managing Node.js versions]      |:white_check_mark:|:x:               |:x:               |
+| [Managing runtimes]              |:white_check_mark:|:x:               |:x:               |
 | [Managing versions of itself]    |:white_check_mark:|:white_check_mark:|:x:               |
 | Has a lockfile                   |:white_check_mark:|:white_check_mark:|:white_check_mark:| `pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`. |
 | [Overrides support]              |:white_check_mark:|:white_check_mark:|:white_check_mark:| Known as "resolutions" in Yarn. |
@@ -24,6 +24,8 @@ title: Feature Comparison
 | [JSR registry support]           |:white_check_mark:|:white_check_mark:|:x:               |
 | [Auto-install before script run] |:white_check_mark:|:x:               |:x:               | In Yarn, Plug'n'Play ensures dependencies are always up to date. |
 | [Hooks]                          |:white_check_mark:|:white_check_mark:|:x:               |
+| [Build script security]          |:white_check_mark:|:x:               |:x:               |
+| [SBOM generation]                |:white_check_mark:|:x:               |:white_check_mark:| `pnpm sbom`, `npm sbom`. |
 | [Listing licenses]               |:white_check_mark:|:white_check_mark:|:x:               | pnpm supports it via `pnpm licenses list`. Yarn has a plugin for it. |
 
 [Auto-install before script run]: ./settings.md#verifydepsbeforerun
@@ -34,10 +36,12 @@ title: Feature Comparison
 [Hoisted `node_modules`]: ./settings.md#nodelinker
 [JSR registry support]: ./cli/add.md#install-from-the-jsr-registry
 [Listing licenses]: ./cli/licenses.md
-[Managing Node.js versions]: ./cli/env.md
+[Build script security]: ./settings.md#allowbuilds
+[Managing runtimes]: ./cli/runtime.md
 [Managing versions of itself]: ./settings.md#managepackagemanagerversions
 [Overrides support]: ./settings.md#overrides
 [Patching dependencies]: ./cli/patch.md
+[SBOM generation]: ./cli/sbom.md
 [Side-effects cache]: ./settings.md#sideeffectscache
 [Workspace support]: ./workspaces.md
 [hooks]: ./pnpmfile.md

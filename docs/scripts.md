@@ -36,6 +36,8 @@ Added in: v11.0.0
 
 The following built-in commands prefer user scripts: `clean`, `setup`, `deploy`, and `rebuild`. If your `package.json` defines a script with one of these names, `pnpm <name>` will execute the script instead of the built-in command.
 
+To force the built-in command, use [`pnpm pm <name>`](./cli/pm.md).
+
 ## Lifecycle Scripts
 
 ### `pnpm:devPreinstall`
