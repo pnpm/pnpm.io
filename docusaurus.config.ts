@@ -266,6 +266,10 @@ const docusaurusConfig = {
               label: 'Bluesky',
               href: 'https://bsky.app/profile/pnpm.io'
             },
+            {
+              label: 'Discord',
+              href: 'https://bit.ly/pnpm-discord-invite'
+            },
           ]
         },
         {
