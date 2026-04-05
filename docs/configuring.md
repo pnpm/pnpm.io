@@ -5,10 +5,8 @@ title: Configuring
 
 pnpm settings are divided into two categories:
 
-- **Registry and auth settings** are stored in INI files: the global `rc` file and local `.npmrc` files.
-- **pnpm-specific settings** are stored in YAML files: the global `config.yaml` and the local `pnpm-workspace.yaml`.
-
-pnpm no longer reads non-auth and non-registry settings from rc files. Other settings must be defined in `pnpm-workspace.yaml` or the global `config.yaml`.
+- **Authentication and certificate settings** are stored in INI files. These contain sensitive credentials and should not be committed to your repository. See [Authentication Settings](./npmrc.md#auth-file-locations) for details.
+- **All other settings** are stored in YAML files: the project `pnpm-workspace.yaml` and the global `config.yaml`.
 
 pnpm also no longer reads settings from the `pnpm` field of `package.json`. Settings should be defined in `pnpm-workspace.yaml`.
 
@@ -40,6 +38,12 @@ The global `rc` file (for registry and auth settings only) is at:
 ## Environment variables
 
 Environment variables whose names start with `pnpm_config_` are loaded into configuration. These override settings from `pnpm-workspace.yaml` but not CLI arguments.
+
+:::warning
+
+pnpm no longer reads `npm_config_*` environment variables. Use `pnpm_config_*` environment variables instead (e.g., `pnpm_config_registry` instead of `npm_config_registry`).
+
+:::
 
 For example:
 

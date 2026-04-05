@@ -3,8 +3,9 @@ id: settings
 title: "Settings (pnpm-workspace.yaml)"
 ---
 
-pnpm gets its configuration from the command line, environment variables, `pnpm-workspace.yaml`, and
-`.npmrc` files.
+pnpm gets its configuration from the command line, environment variables, and `pnpm-workspace.yaml`.
+
+Only auth and registry settings are read from `.npmrc` files. All other settings (like `hoistPattern`, `nodeLinker`, `shamefullyHoist`, etc.) must be configured in `pnpm-workspace.yaml` or the global `~/.config/pnpm/config.yaml`.
 
 The `pnpm config` command can be used to read and edit the contents of the project and global configuration files.
 
@@ -215,7 +216,7 @@ ignoredOptionalDependencies:
 
 Added in: v10.16.0
 
-* Default: **0**
+* Default: **1440** (since v11), **0** (before v11)
 * Type: **number (minutes)**
 
 To reduce the risk of installing compromised packages, you can delay the installation of newly published versions. In most cases, malicious releases are discovered and removed from the registry within an hour.
@@ -320,6 +321,22 @@ This setting helps secure the dependency supply chain by preventing transitive d
 Exotic sources include:
 * Git repositories (`git+ssh://...`)
 * Direct URL links to tarballs (`https://.../package.tgz`)
+
+### registries
+
+Added in: v11.0.0
+
+* Default: **undefined**
+* Type: **Record&lt;string, string&gt;**
+
+Configure registries for scoped packages in `pnpm-workspace.yaml`. The `default` key sets the main registry (equivalent to the `registry` `.npmrc` setting). Scoped keys configure registries for specific package scopes.
+
+```yaml
+registries:
+  default: https://registry.npmjs.org/
+  "@my-org": https://private.example.com/
+  "@internal": https://nexus.corp.com/
+```
 
 ## Dependency Hoisting Settings
 
@@ -625,6 +642,65 @@ installation will fail.
 * Type: **Boolean**
 
 Some registries allow the exact same content to be published under different package names and/or versions. This breaks the validity checks of packages in the store. To avoid errors when verifying the names and versions of such packages in the store, you may set the `strictStorePkgContentCheck` setting to `false`.
+
+## Network Settings
+
+### httpsProxy
+
+* Default: **null**
+* Type: **url**
+
+A proxy to use for outgoing HTTPS requests. If the `HTTPS_PROXY`, `https_proxy`,
+`HTTP_PROXY` or `http_proxy` environment variables are set, their values will be
+used instead.
+
+If your proxy URL contains a username and password, make sure to URL-encode them.
+For instance:
+
+```yaml
+httpsProxy: "https://use%21r:pas%2As@my.proxy:1234/foo"
+```
+
+Do not encode the colon (`:`) between the username and password.
+
+### httpProxy
+
+* Default: **null**
+* Type: **url**
+
+A proxy to use for outgoing HTTP requests. If the `HTTP_PROXY` or `http_proxy`
+environment variables are set, proxy settings will be honored by the underlying
+request library.
+
+### noProxy
+
+* Default: **null**
+* Type: **String**
+
+A comma-separated string of domain extensions that a proxy should not be used for.
+
+### localAddress
+
+* Default: **undefined**
+* Type: **IP Address**
+
+The IP address of the local interface to use when making connections to the npm
+registry.
+
+### maxsockets
+
+* Default: **networkConcurrency x 3**
+* Type: **Number**
+
+The maximum number of connections to use per origin (protocol/host/port combination).
+
+### strictSsl
+
+* Default: **true**
+* Type: **Boolean**
+
+Whether or not to do SSL key validation when making requests to the registry via
+HTTPS.
 
 ## Lockfile Settings
 
@@ -1178,22 +1254,23 @@ engineStrict: true
 
 This way, even if someone is using Node.js v16, they will not be able to install a new dependency that doesn't support Node.js v12.22.0.
 
-### node-mirror
+### nodeDownloadMirrors
 
-* Default: **`https://nodejs.org/download/<releaseDir>/`**
-* Type: **URL**
+Added in: v11.0.0
 
-Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this setting can be any directory from [https://nodejs.org/download]: `release`, `rc`, `nightly`, `v8-canary`, etc.
+* Default: **undefined**
+* Type: **Record&lt;string, string&gt;**
 
-Here is how pnpm may be configured to download Node.js from Node.js mirror in China:
+Configure custom Node.js download mirrors in `pnpm-workspace.yaml`. The keys are release channels (`release`, `rc`, `nightly`, `v8-canary`, etc.) and the values are base URLs.
 
+Here is how pnpm may be configured to download Node.js from a mirror in China:
+
+```yaml
+nodeDownloadMirrors:
+  release: https://npmmirror.com/mirrors/node/
+  rc: https://npmmirror.com/mirrors/node-rc/
+  nightly: https://npmmirror.com/mirrors/node-nightly/
 ```
-node-mirror:release=https://npmmirror.com/mirrors/node/
-node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
-node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
-```
-
-[https://nodejs.org/download]: https://nodejs.org/download
 
 ## Other Settings
 
@@ -1253,6 +1330,15 @@ Allows to set the target directory for the bin files of globally installed packa
 In pnpm v11, globally installed binaries are stored in a `bin` subdirectory of `PNPM_HOME` instead of directly in `PNPM_HOME`. This prevents internal directories like `global/` and `store/` from polluting shell autocompletion when `PNPM_HOME` is on PATH. After upgrading, run `pnpm setup` to update your shell configuration.
 
 :::
+
+### npmrcAuthFile
+
+Added in: v11.0.0
+
+* Default: **~/.npmrc**
+* Type: **path**
+
+The path to a file containing registry authentication tokens. By default, pnpm reads auth tokens from `~/.npmrc` as a fallback for registry authentication. Use this setting to point to a different file instead.
 
 ### stateDir
 

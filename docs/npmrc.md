@@ -1,41 +1,26 @@
 ---
 id: npmrc
-title: "Auth & Registry Settings (.npmrc)"
+title: "Authentication Settings"
 ---
 
-The settings on this page must be configured via `.npmrc` files. pnpm uses the npm CLI under the hood for publishing, so these settings need to be in a format that npm can read.
+The settings on this page contain sensitive credentials and are stored in INI-formatted files. Do not commit these files to your repository.
 
-For details on how `.npmrc` files are loaded, see the [`pnpm config`](./cli/config.md) command.
+For non-sensitive settings (proxy, SSL, registries, etc.), see [Settings (pnpm-workspace.yaml)](./settings.md).
 
-For settings that can be configured in `pnpm-workspace.yaml`, see [Settings (pnpm-workspace.yaml)](./settings.md).
+## Auth file locations
 
-## Registry Settings
+pnpm reads authentication settings from the following files, in order of priority (highest first):
 
-### registry
+1. **`<workspace root>/.npmrc`** — project-level auth. This file should be listed in `.gitignore`.
+2. **`<pnpm config>/auth.ini`** — the primary user-level auth file. `pnpm login` writes tokens here.
+3. **`~/.npmrc`** — read as a fallback for easier migration from npm. Use the [`npmrcAuthFile`](./settings.md#npmrcauthfile) setting to point to a different file.
 
-* Default: **https://registry.npmjs.org/**
-* Type: **url**
+The `<pnpm config>` directory is:
 
-The base URL of the npm package registry (trailing slash included).
-
-### @jsr\:registry
-
-Added in: v10.9.0
-
-* Default: **https://npm.jsr.io/**
-* Type: **url**
-
-The base URL of the [JSR] package registry.
-
-[JSR]: cli/add.md#install-from-the-jsr-registry
-
-### &lt;scope&gt;&#58;registry
-
-The npm registry that should be used for packages of the specified scope. For
-example, setting `@babel:registry=https://example.com/packages/npm/`
-will enforce that when you use `pnpm add @babel/core`, or any `@babel` scoped
-package, the package will be fetched from `https://example.com/packages/npm`
-instead of the default registry.
+* If the **$XDG_CONFIG_HOME** env variable is set: **$XDG_CONFIG_HOME/pnpm/**
+* On Windows: **~/AppData/Local/pnpm/config/**
+* On macOS: **~/Library/Preferences/pnpm/**
+* On Linux: **~/.config/pnpm/**
 
 ## Authentication Settings
 
@@ -52,12 +37,6 @@ You may also use an environment variable. For example:
 
 ```ini
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
-```
-
-Or you may just use an environment variable directly, without changing `.npmrc` at all:
-
-```
-npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
 ### &lt;URL&gt;&#58;tokenHelper
@@ -77,70 +56,6 @@ Setting a token helper for the specified registry:
 ```
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
-
-## Proxy Settings
-
-### https-proxy
-
-* Default: **null**
-* Type: **url**
-
-A proxy to use for outgoing HTTPS requests. If the `HTTPS_PROXY`, `https_proxy`,
-`HTTP_PROXY` or `http_proxy` environment variables are set, their values will be
-used instead.
-
-If your proxy URL contains a username and password, make sure to URL-encode them.
-For instance:
-
-```ini
-https-proxy=https://use%21r:pas%2As@my.proxy:1234/foo
-```
-
-Do not encode the colon (`:`) between the username and password.
-
-### http-proxy
-### proxy
-
-* Default: **null**
-* Type: **url**
-
-A proxy to use for outgoing http requests. If the HTTP_PROXY or http_proxy
-environment variables are set, proxy settings will be honored by the underlying
-request library.
-
-### local-address
-
-* Default: **undefined**
-* Type: **IP Address**
-
-The IP address of the local interface to use when making connections to the npm
-registry.
-
-### maxsockets
-
-* Default: **networkConcurrency x 3**
-* Type: **Number**
-
-The maximum number of connections to use per origin (protocol/host/port combination).
-
-### noproxy
-
-* Default: **null**
-* Type: **String**
-
-A comma-separated string of domain extensions that a proxy should not be used for.
-
-## SSL Settings
-
-### strict-ssl
-
-* Default: **true**
-* Type: **Boolean**
-
-Whether or not to do SSL key validation when making requests to the registry via
-HTTPS.
-
-See also the `ca` option.
 
 ## Certificate Settings
 
@@ -167,7 +82,7 @@ ca[]="..."
 ca[]="..."
 ```
 
-See also the `strict-ssl` config.
+See also the [`strictSsl`](./settings.md#strictssl) setting.
 
 ### cafile
 
