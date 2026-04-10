@@ -1108,21 +1108,6 @@ This flag does not prevent the execution of [.pnpmfile.mjs](./pnpmfile.md)
 
 :::
 
-### ignoreDepScripts
-
-* Default: **false**
-* Type: **Boolean**
-
-Do not execute any scripts of the installed packages. Scripts of the projects are executed.
-
-:::note
-
-Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in [`allowBuilds`].
-
-:::
-
-[`allowBuilds`]: settings.md#allowbuilds
-
 ### childConcurrency
 
 * Default: **5**
@@ -1213,6 +1198,34 @@ allowBuilds:
 ```
 
 **Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and an error is printed (since [`strictDepBuilds`](#strictdepbuilds) is `true` by default). If `strictDepBuilds` is set to `false`, a warning is printed instead.
+
+During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](./cli/add.md) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
+
+:::info Migrating from older settings
+
+The following settings have been removed in v11 and replaced by `allowBuilds`: `onlyBuiltDependencies`, `onlyBuiltDependenciesFile`, `neverBuiltDependencies`, `ignoredBuiltDependencies`, and `ignoreDepScripts`.
+
+Before:
+
+```yaml
+onlyBuiltDependencies:
+  - electron
+neverBuiltDependencies:
+  - core-js
+ignoredBuiltDependencies:
+  - esbuild
+```
+
+After:
+
+```yaml
+allowBuilds:
+  electron: true
+  core-js: false
+  esbuild: false
+```
+
+:::
 
 ### dangerouslyAllowAllBuilds
 

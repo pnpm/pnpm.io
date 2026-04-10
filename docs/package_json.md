@@ -12,6 +12,12 @@ In addition to the traditional `package.json` format, pnpm also supports `packag
 [json5]: https://www.npmjs.com/package/json5
 [js-yaml]: https://www.npmjs.com/package/@zkochan/js-yaml
 
+:::note
+
+Since v11, pnpm no longer reads settings from the `pnpm` field of `package.json`. Settings must be defined in `pnpm-workspace.yaml` instead. See [Configuring](./configuring.md).
+
+:::
+
 ## engines
 
 You can specify the version of Node and pnpm that your software works on:

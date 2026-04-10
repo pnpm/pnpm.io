@@ -24,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION = "11.0.0-beta.7"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION = "11.0.0-rc.0"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -37,13 +37,13 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.7 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-rc.0 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-beta.7 sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.0-rc.0 sh -
 ```
 
 :::tip
@@ -107,8 +107,8 @@ This will add a `"packageManager"` field in your local `package.json` which will
 
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
-- [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run.
-- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed.
+- [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run. Since v11, pnpm is distributed as pure ESM.
+- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. The standalone Linux executable requires at least glibc 2.27.
 
 ```sh
 npx pnpm@next-11 dlx @pnpm/exe@next-11 setup

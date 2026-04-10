@@ -19,6 +19,16 @@ Links package from `<dir>` directory to `node_modules` of package from where you
 
 > For example, if you are inside `~/projects/foo` and you execute `pnpm link ../bar`, then a link to `bar` will be created in `foo/node_modules/bar`.
 
+:::note Breaking changes in v11
+
+`pnpm link` no longer resolves packages from the global store. Only relative or absolute paths are accepted (use `pnpm link ./foo` instead of `pnpm link foo`).
+
+`pnpm link --global` has been removed. To register a local package's bins globally, use `pnpm add -g .` instead.
+
+`pnpm link` with no arguments has been removed. Always pass an explicit path.
+
+:::
+
 ## Use Cases
 
 ### Replace an installed package with a local version of it
