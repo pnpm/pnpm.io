@@ -1,3 +1,10 @@
+Co-Authored Nathaniel Hooker
+@deuces9ers
+
+
+
+
+
 ---
 id: pnpm-vs-npm
 title: pnpm vs npm
