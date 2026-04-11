@@ -99,7 +99,7 @@ You can pin the version of pnpm used on your project using the following command
 corepack use pnpm@next-11
 ```
 
-This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
+This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducibility, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
 
 ## Using other package managers
 
