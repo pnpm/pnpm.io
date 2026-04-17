@@ -1063,34 +1063,44 @@ Regardless of this configuration, installation will always fail if a project
 
 The location of the npm binary that pnpm uses for some actions, like publishing.
 
-### packageManagerStrict
+### pmOnFail
 
-* Default: **true**
-* Type: **Boolean**
+Added in: v11.0.0
 
-If this setting is disabled, pnpm will not fail if a different package manager is specified in the `packageManager` field of `package.json`. When enabled, only the package name is checked (since pnpm v9.2.0), so you can still run any version of pnpm regardless of the version specified in the `packageManager` field.
+* Default: **download**
+* Type: **download**, **error**, **warn**, **ignore**
 
-Alternatively, you can disable this setting by setting the `COREPACK_ENABLE_STRICT` environment variable to `0`.
+Overrides the `onFail` behavior of both the `packageManager` field and `devEngines.packageManager` when the running pnpm version does not match the declared one.
 
-### packageManagerStrictVersion
+* `download` — download and run the declared pnpm version (this is the default and matches the previous `managePackageManagerVersions: true` behavior).
+* `error` — fail the command (equivalent to the previous `packageManagerStrictVersion: true`).
+* `warn` — print a warning but continue (equivalent to the previous `packageManagerStrict: false` or `COREPACK_ENABLE_STRICT=0`).
+* `ignore` — skip the check entirely (equivalent to the previous `managePackageManagerVersions: false`). Useful when version management is handled by an external tool such as asdf, mise, or Volta.
 
-* Default: **false**
-* Type: **Boolean**
+Can be set via CLI flag, environment variable, or `pnpm-workspace.yaml`:
 
-When enabled, pnpm will fail if its version doesn't exactly match the version specified in the `packageManager` field of `package.json`.
-
-### managePackageManagerVersions
-
-* Default: **true**
-* Type: **Boolean**
-
-When enabled, pnpm will automatically download and run the version of pnpm specified in the `packageManager` field of `package.json`. This is the same field used by Corepack. Example:
-
-```json
-{
-  "packageManager": "pnpm@9.3.0"
-}
+```sh
+pnpm install --pm-on-fail=ignore
+pnpm_config_pm_on_fail=ignore pnpm install
 ```
+
+```yaml title="pnpm-workspace.yaml"
+pmOnFail: ignore
+```
+
+This setting replaces the removed `managePackageManagerVersions`, `packageManagerStrict`, and `packageManagerStrictVersion` settings, as well as the `COREPACK_ENABLE_STRICT` environment variable.
+
+Migration:
+
+| Removed setting                       | Replace with                   |
+| ------------------------------------- | ------------------------------ |
+| `managePackageManagerVersions: true`  | `pmOnFail: download` (default) |
+| `managePackageManagerVersions: false` | `pmOnFail: ignore`             |
+| `packageManagerStrict: false`         | `pmOnFail: warn`               |
+| `packageManagerStrictVersion: true`   | `pmOnFail: error`              |
+| `COREPACK_ENABLE_STRICT=0`            | `pmOnFail: warn`               |
+
+See also [`pnpm with`](./cli/with.md) for running pnpm at a specific version without changing this setting.
 
 ## Build Settings
 
@@ -1266,6 +1276,19 @@ engineStrict: true
 ```
 
 This way, even if someone is using Node.js v16, they will not be able to install a new dependency that doesn't support Node.js v12.22.0.
+
+### runtimeOnFail
+
+Added in: v11.0.0
+
+* Default: **undefined**
+* Type: **download**, **error**, **warn**, **ignore**
+
+Overrides the `onFail` field of [`devEngines.runtime`](./package_json.md#devenginesruntime) (and `engines.runtime`) in the root project's `package.json`. This is useful when you want a different local behavior than what is written in the manifest — for instance, forcing pnpm to download the declared runtime even when the manifest sets `onFail: "warn"`:
+
+```yaml title="pnpm-workspace.yaml"
+runtimeOnFail: download
+```
 
 ### nodeDownloadMirrors
 

@@ -17,10 +17,12 @@ overrides:
 
 Or alternatively, run `pnpm audit --fix`.
 
-If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`auditConfig.ignoreCves`] setting.
+If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`auditConfig.ignoreGhsas`] setting.
+
+Since v11, `pnpm audit` queries the registry's `/-/npm/v1/security/advisories/bulk` endpoint. The response does not include CVE identifiers, so advisories are filtered by GitHub advisory ID (GHSA) instead. If you previously listed CVEs under `auditConfig.ignoreCves`, replace each entry with the corresponding `GHSA-xxxx-xxxx-xxxx` value (shown in the `More info` column of `pnpm audit` output) under `auditConfig.ignoreGhsas`.
 
 [overrides]: ../settings.md#overrides
-[`auditConfig.ignoreCves`]: ../settings.md#auditconfigignorecves
+[`auditConfig.ignoreGhsas`]: #auditconfigignoreghsas
 
 ## Options
 
@@ -66,33 +68,23 @@ So the process will fail only if the registry actually successfully responds wit
 
 Added in: v10.11.0
 
-Ignore all CVEs with no resolution.
+Ignore all advisories with no resolution.
+
+Since v11, unfixable advisories are tracked by GHSA rather than CVE.
 
 ### --ignore &lt;vulnerability\>
 
 Added in: v10.11.0
 
-Ignore a vulnerability by CVE.
+Ignore a vulnerability by its GitHub advisory ID (GHSA). Before v11 this flag accepted CVE identifiers.
 
 ## Configuration
 
 ### auditConfig
 
-#### auditConfig.ignoreCves
-
-A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
-
-```yaml
-auditConfig:
-  ignoreCves:
-    - CVE-2022-36313
-```
-
-[`pnpm audit`]: #
-
 #### auditConfig.ignoreGhsas
 
-A list of GHSA Codes that will be ignored by the [`pnpm audit`] command.
+A list of GHSA codes that will be ignored by the [`pnpm audit`] command.
 
 ```yaml
 auditConfig:
@@ -102,3 +94,7 @@ auditConfig:
     - GHSA-cph5-m8f7-6c5x
     - GHSA-vh95-rmgr-6w4m
 ```
+
+Before v11, `auditConfig.ignoreCves` was used to filter advisories by CVE identifier. That setting is no longer recognized.
+
+[`pnpm audit`]: #

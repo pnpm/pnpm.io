@@ -74,3 +74,12 @@ pnx --package cowsay --package lolcatjs -c 'echo "hi pnpm" | cowsay | lolcatjs'
 ### --silent, -s
 
 Only the output of the executed command is printed.
+
+## Security and trust policies
+
+Since v11.0.0, `pnx` (and its `pnpm dlx` / `pnpx` aliases) honors the project-level security and trust policy settings when resolving and fetching the requested package:
+
+* [`minimumReleaseAge`](../settings.md#minimumreleaseage), [`minimumReleaseAgeExclude`](../settings.md#minimumreleaseageexclude), [`minimumReleaseAgeStrict`](../settings.md#minimumreleaseage)
+* [`trustPolicy`](../settings.md#trustpolicy), [`trustPolicyExclude`](../settings.md#trustpolicyexclude), [`trustPolicyIgnoreAfter`](../settings.md#trustpolicyignoreafter)
+
+This means `pnx` will refuse to execute freshly published or insufficiently trusted packages the same way a regular `pnpm install` would.

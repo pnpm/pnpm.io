@@ -112,11 +112,13 @@ How it works:
 1. The exact version (and checksum) is saved in the lockfile.
 1. Scripts use the local runtime, ensuring consistency across environments.
 
+To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings.md#runtimeonfail) setting.
+
 ## devEngines.packageManager
 
 Added in: v11.0.0
 
-Allows specifying the pnpm version via `devEngines.packageManager` in `package.json`. Unlike the `packageManager` field, this supports version ranges. The resolved version is stored in `pnpm-lock.yaml` and reused if it still satisfies the range.
+Allows specifying the pnpm version via `devEngines.packageManager` in `package.json`. Unlike the `packageManager` field, this supports version ranges. The resolved version is stored in `pnpm-lock.yaml` under `packageManagerDependencies` and reused if it still satisfies the range.
 
 ```json
 {
@@ -129,6 +131,14 @@ Allows specifying the pnpm version via `devEngines.packageManager` in `package.j
   }
 }
 ```
+
+:::note
+
+When pnpm is declared via the legacy `packageManager` field (not `devEngines.packageManager`), its resolution info is **not** written to `pnpm-lock.yaml` — unless the pinned pnpm version is v12 or newer. This keeps the lockfile stable when upgrading from pnpm v10 to v11 without forcing projects off the legacy field.
+
+:::
+
+To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings.md#pmonfail) setting.
 
 ## dependenciesMeta
 

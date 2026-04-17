@@ -161,6 +161,18 @@
             {
               "type": "doc",
               "id": "cli/peers"
+            },
+            {
+              "type": "doc",
+              "id": "cli/view"
+            },
+            {
+              "type": "doc",
+              "id": "cli/search"
+            },
+            {
+              "type": "doc",
+              "id": "cli/docs"
             }
           ]
         },
@@ -259,7 +271,23 @@
           "items": [
             {
               "type": "doc",
+              "id": "cli/login"
+            },
+            {
+              "type": "doc",
+              "id": "cli/logout"
+            },
+            {
+              "type": "doc",
+              "id": "cli/whoami"
+            },
+            {
+              "type": "doc",
               "id": "cli/self-update"
+            },
+            {
+              "type": "doc",
+              "id": "cli/with"
             },
             {
               "type": "doc",
@@ -272,6 +300,26 @@
             {
               "type": "doc",
               "id": "cli/pack"
+            },
+            {
+              "type": "doc",
+              "id": "cli/deprecate"
+            },
+            {
+              "type": "doc",
+              "id": "cli/unpublish"
+            },
+            {
+              "type": "doc",
+              "id": "cli/dist-tag"
+            },
+            {
+              "type": "doc",
+              "id": "cli/star"
+            },
+            {
+              "type": "doc",
+              "id": "cli/ping"
             },
             {
               "type": "doc",
