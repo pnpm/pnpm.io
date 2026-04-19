@@ -15,13 +15,7 @@ The next best thing you can do is using BuildKit cache mount to share cache betw
 
 ## Official pnpm base image
 
-An official pnpm base image is published to GitHub Container Registry:
-
-```
-ghcr.io/pnpm/pnpm
-```
-
-It is based on `debian:stable-slim` and contains only the pnpm [standalone binary] — Node.js is **not** bundled. This lets you pick the Node.js version yourself (inside your Dockerfile or at runtime) instead of being locked to whatever Node version a base image ships with.
+An official pnpm base image is published to GitHub Container Registry as [`ghcr.io/pnpm/pnpm`](https://github.com/pnpm/pnpm/pkgs/container/pnpm). It is based on `debian:stable-slim` and contains only the pnpm [standalone binary] — Node.js is **not** bundled. This lets you pick the Node.js version yourself (inside your Dockerfile or at runtime) instead of being locked to whatever Node version a base image ships with.
 
 [standalone binary]: ./installation.md#using-a-standalone-script
 
