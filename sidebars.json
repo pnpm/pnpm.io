@@ -101,6 +101,7 @@
           "cli/version",
           "cli/publish",
           "cli/pack",
+          "cli/pack-app",
           "cli/deprecate",
           "cli/unpublish",
           "cli/dist-tag",

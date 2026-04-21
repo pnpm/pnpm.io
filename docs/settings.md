@@ -270,6 +270,19 @@ minimumReleaseAgeExclude:
 - webpack@4.47.0 || 5.102.1
 ```
 
+### minimumReleaseAgeIgnoreMissingTime
+
+Added in: v11.0.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When `true`, pnpm skips the [`minimumReleaseAge`](#minimumreleaseage) check for a package whose registry metadata does not include the `time` field (some private registries and mirrors omit it). Set to `false` to fail resolution in that case instead of installing the package.
+
+```yaml
+minimumReleaseAgeIgnoreMissingTime: false
+```
+
 ### trustPolicy
 
 Added in: v10.21.0

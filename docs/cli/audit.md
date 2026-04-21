@@ -43,6 +43,12 @@ Use `--fix=update` (added in v11.0.0) to fix vulnerabilities by updating package
 
 When [`minimumReleaseAge`](../settings.md#minimumreleaseage) is set, `--fix` also adds the minimum patched version of each advisory to [`minimumReleaseAgeExclude`](../settings.md#minimumreleaseageexclude) in `pnpm-workspace.yaml`, so the security fix can be installed without waiting for the release age window.
 
+### --interactive, -i
+
+Added in: v11.0.0
+
+Review the advisories selected by `--fix` and pick which ones to apply. Only usable together with `--fix`.
+
 ### --json
 
 Output audit report in JSON format.

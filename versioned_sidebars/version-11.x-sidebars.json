@@ -303,6 +303,10 @@
             },
             {
               "type": "doc",
+              "id": "cli/pack-app"
+            },
+            {
+              "type": "doc",
               "id": "cli/deprecate"
             },
             {
