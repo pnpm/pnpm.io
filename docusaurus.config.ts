@@ -268,7 +268,7 @@ const docusaurusConfig = {
             },
             {
               label: 'Discord',
-              href: 'https://bit.ly/pnpm-discord-invite'
+              href: 'https://r.pnpm.io/chat'
             },
           ]
         },
