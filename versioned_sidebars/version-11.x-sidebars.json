@@ -493,6 +493,10 @@
       "items": [
         {
           "type": "doc",
+          "id": "migration"
+        },
+        {
+          "type": "doc",
           "id": "errors"
         },
         {
