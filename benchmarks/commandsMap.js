@@ -15,21 +15,6 @@ export default {
       // '--install-strategy=linked',
     ]
   },
-  pnpm: {
-    scenario: 'pnpm',
-    legend: 'pnpm',
-    name: 'pnpm',
-    args: [
-      'install',
-      '--ignore-scripts',
-      '--store-dir=cache/store',
-      '--cache-dir=cache/cache',
-      '--registry=https://registry.npmjs.org/',
-      '--no-strict-peer-dependencies',
-      '--config.auto-install-peers=false',
-      '--config.resolution-mode=highest',
-    ]
-  },
   pnpm11: {
     scenario: 'pnpm11',
     legend: 'pnpm v11',
@@ -43,6 +28,16 @@ export default {
       '--no-strict-peer-dependencies',
       '--config.auto-install-peers=false',
       '--config.resolution-mode=highest',
+    ]
+  },
+  pnpm12: {
+    scenario: 'pnpm12',
+    legend: 'pnpm 🦀',
+    mdLegend: '[pnpm 🦀](https://github.com/pnpm/pacquet)',
+    name: 'pacquet',
+    args: [
+      'install',
+      '--frozen-lockfile',
     ]
   },
   yarn: {

@@ -111,7 +111,7 @@ run()
 async function run () {
   const tmpDir = tempy.directory()
   const managersDirs = {}
-  for (const pm of ['npm', 'pnpm', 'pnpm11', 'yarn']) {
+  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn']) {
     managersDirs[pm] = path.join(tmpDir, pm)
   }
   await Promise.allSettled([
@@ -123,14 +123,21 @@ async function run () {
     fs.writeFileSync(path.join(dir, 'package.json'), '{}', 'utf8')
   }
   spawn.sync('pnpm', ['add', 'npm@latest'], { cwd: managersDirs.npm, stdio: 'inherit' })
-  spawn.sync('pnpm', ['add', 'pnpm@next-10'], { cwd: managersDirs.pnpm, stdio: 'inherit' })
   spawn.sync('pnpm', ['add', 'pnpm@next-11'], { cwd: managersDirs.pnpm11, stdio: 'inherit' })
+  spawn.sync('pnpm', ['add', 'pacquet@latest'], { cwd: managersDirs.pnpm12, stdio: 'inherit' })
   spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDirs.yarn, stdio: 'inherit' })
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pmConfigs = [
     { key: 'npm', managersDir: managersDirs.npm },
-    { key: 'pnpm', managersDir: managersDirs.pnpm },
     { key: 'pnpm11', managersDir: managersDirs.pnpm11 },
+    {
+      key: 'pnpm12',
+      managersDir: managersDirs.pnpm12,
+      hasNodeModules: false,
+      supportedTests: ['withWarmCacheAndLockfile', 'withLockfile'],
+      prepPm: cmdsMap.pnpm11,
+      prepManagersDir: managersDirs.pnpm11,
+    },
     { key: 'yarn', managersDir: managersDirs.yarn },
     { key: 'yarn_pnp', managersDir: managersDirs.yarn, hasNodeModules: false },
   ]
@@ -150,19 +157,23 @@ async function run () {
   const svgs = []
   for (const fixture of fixtures) {
     const results = {}
-    for (const { key, managersDir, hasNodeModules } of pmConfigs) {
+    for (const { key, managersDir, hasNodeModules, supportedTests, prepPm, prepManagersDir } of pmConfigs) {
       results[key] = min(await benchmark(cmdsMap[key], fixture.name, {
         limitRuns: LIMIT_RUNS,
         hasNodeModules: hasNodeModules ?? true,
         managersDir,
+        supportedTests,
+        prepPm,
+        prepManagersDir,
       }))
     }
     const resArray = toArray(pms, results)
 
-    const headerLegends = pms.map(pm => cmdsMap[pm].legend).join(' | ')
+    const headerLegends = pms.map(pm => cmdsMap[pm].mdLegend ?? cmdsMap[pm].legend).join(' | ')
     const headerSep = pms.map(() => '---').join(' | ')
     const rows = tableRows.map(({ test, action, cache, lockfile, nodeModules, needsNodeModules }) => {
-      const values = pmConfigs.map(({ key, hasNodeModules: pmHasNodeModules }) => {
+      const values = pmConfigs.map(({ key, hasNodeModules: pmHasNodeModules, supportedTests }) => {
+        if (supportedTests && !supportedTests.includes(test)) return 'n/a'
         if (needsNodeModules && pmHasNodeModules === false) return 'n/a'
         return prettyMs(results[key][test])
       }).join(' | ')

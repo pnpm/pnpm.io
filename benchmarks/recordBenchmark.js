@@ -22,6 +22,9 @@ export default async function (pm, fixture, opts) {
   const newResults = await benchmark(pm, fixture, {
     hasNodeModules: opts.hasNodeModules,
     managersDir: opts.managersDir,
+    supportedTests: opts.supportedTests,
+    prepPm: opts.prepPm,
+    prepManagersDir: opts.prepManagersDir,
   })
   const results = [...prevResults, newResults]
   await writeYamlFile(resultsFile, results)
@@ -36,7 +39,8 @@ function getPMVersion (pmName, opts) {
   if (status !== 0) {
     throw new Error(`Couldn't detect version of ${pmName}. ${stderr?.toString()}`)
   }
-  return stdout.toString().trim()
+  // pacquet --version prints "pacquet <version>"; other PMs print just the version.
+  return stdout.toString().trim().replace(/^\S+\s+/, '')
 }
 
 async function safeLoadYamlFile (filename) {
