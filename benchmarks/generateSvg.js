@@ -88,7 +88,7 @@ export default (resultArrays, pms, tests, formattedNow) => {
     svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${pm.legend}</text>` + '\n'
 
     // add version under name
-    const text = `v${pm.version}`
+    const text = `v${pm.displayVersion ?? pm.version}`
     textY += 4
     svgStr += `  <text x="${x}" y="${textY}" class="font s3" text-anchor="${anchor}">${text}</text>` + '\n'
   })

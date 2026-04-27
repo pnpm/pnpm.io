@@ -18,7 +18,7 @@ export default {
   },
   pnpm11: {
     scenario: 'pnpm11',
-    legend: 'pnpm v11',
+    legend: 'pnpm',
     color: '#fbae00',
     name: 'pnpm',
     args: [
@@ -36,7 +36,8 @@ export default {
     scenario: 'pnpm12',
     legend: 'pnpm 🦀',
     mdLegend: '[pnpm 🦀](https://github.com/pnpm/pacquet)',
-    color: '#ce422b',
+    color: '#fbae00',
+    displayVersion: '12',
     name: 'pacquet',
     args: [
       'install',
