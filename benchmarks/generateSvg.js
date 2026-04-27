@@ -151,6 +151,12 @@ export default (resultArrays, pms, tests, formattedNow) => {
       const length = Math.round(result * ratio)
       const x = graph.x
       svgStr += `  <rect x="${x}" y="${y}" width="${length}" height="${thickness}" fill="${colors[indexR]}" rx="${roundedCorners}" ry="${roundedCorners}"></rect>` + '\n'
+      const mascot = pms[indexR].mascot
+      if (mascot && result > 0) {
+        const mascotX = x + length + 2
+        const mascotY = y + thickness / 2
+        svgStr += `  <text x="${mascotX}" y="${mascotY}" class="font" font-size="7" dominant-baseline="central">${mascot}</text>` + '\n'
+      }
     })
   })
 

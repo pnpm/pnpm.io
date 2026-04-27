@@ -38,6 +38,7 @@ export default {
     mdLegend: '[pnpm 🦀](https://github.com/pnpm/pacquet)',
     color: '#fbae00',
     displayVersion: '12',
+    mascot: '🦀',
     name: 'pacquet',
     args: [
       'install',
