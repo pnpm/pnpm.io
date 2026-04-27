@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Apr 26, 2026, 3:54 AM_ (_daily_ updated).
+**Last benchmarked at**: _Apr 27, 2026, 12:57 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -20,16 +20,16 @@ Here's a quick explanation of how these tests could apply to the real world:
 
 The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchmarks/fixtures/alotta-files/package.json)
 
-| action  | cache | lockfile | node_modules| npm | pnpm | pnpm v11 | Yarn | Yarn PnP |
+| action  | cache | lockfile | node_modules| npm | pnpm v11 | [pnpm 🦀](https://github.com/pnpm/pacquet) | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
-| install |   |   |   | 34s | 8.1s | 8.2s | 8.3s | 3.4s |
-| install | ✔ | ✔ | ✔ | 1.3s | 712ms | 590ms | 5.9s | n/a |
-| install | ✔ | ✔ |   | 9.4s | 2.4s | 2.3s | 5.9s | 1.3s |
-| install | ✔ |   |   | 14s | 5.2s | 4s | 8.1s | 2.9s |
-| install |   | ✔ |   | 12.6s | 5.1s | 4.7s | 6s | 1.3s |
-| install | ✔ |   | ✔ | 1.8s | 2.1s | 2.3s | 8s | n/a |
-| install |   | ✔ | ✔ | 1.3s | 691ms | 594ms | 5.9s | n/a |
-| install |   |   | ✔ | 1.8s | 5.1s | 7s | 8s | n/a |
-| update | n/a | n/a | n/a | 6.9s | 2.9s | 3.2s | 6.7s | 2.9s |
+| install |   |   |   | 34s | 8.2s | n/a | 8.3s | 3.4s |
+| install | ✔ | ✔ | ✔ | 1.3s | 590ms | n/a | 5.9s | n/a |
+| install | ✔ | ✔ |   | 9.4s | 2.3s | 902ms | 5.9s | 1.3s |
+| install | ✔ |   |   | 14s | 4s | n/a | 8.1s | 2.9s |
+| install |   | ✔ |   | 12.6s | 4.7s | 3.1s | 6s | 1.3s |
+| install | ✔ |   | ✔ | 1.8s | 2.3s | n/a | 8s | n/a |
+| install |   | ✔ | ✔ | 1.3s | 594ms | n/a | 5.9s | n/a |
+| install |   |   | ✔ | 1.8s | 7s | n/a | 8s | n/a |
+| update | n/a | n/a | n/a | 6.9s | 3.2s | n/a | 6.7s | 2.9s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
