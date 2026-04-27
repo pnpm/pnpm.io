@@ -2,6 +2,7 @@ export default {
   npm: {
     scenario: 'npm',
     legend: 'npm',
+    color: '#cd3731',
     name: 'npm',
     args: [
       'install',
@@ -18,6 +19,7 @@ export default {
   pnpm11: {
     scenario: 'pnpm11',
     legend: 'pnpm v11',
+    color: '#fbae00',
     name: 'pnpm',
     args: [
       'install',
@@ -34,6 +36,7 @@ export default {
     scenario: 'pnpm12',
     legend: 'pnpm 🦀',
     mdLegend: '[pnpm 🦀](https://github.com/pnpm/pacquet)',
+    color: '#ce422b',
     name: 'pacquet',
     args: [
       'install',
@@ -43,6 +46,7 @@ export default {
   yarn: {
     scenario: 'yarn',
     legend: 'Yarn',
+    color: '#248ebd',
     name: 'yarn',
     args: [
       'install'
@@ -51,6 +55,7 @@ export default {
   yarn_pnp: {
     scenario: 'yarn_pnp',
     legend: 'Yarn PnP',
+    color: '#40a9ff',
     name: 'yarn',
     args: [
       'install'

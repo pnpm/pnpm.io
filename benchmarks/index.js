@@ -194,6 +194,52 @@ async function run () {
       path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
       file: generateSvg(resArray, pms.map(pm => cmdsMap[pm]), testDescriptions, formattedNow)
     })
+
+    // pnpm-only comparison: include only scenarios that every selected pnpm version supports.
+    const pnpmConfigs = pmConfigs.filter(({ key }) => key.startsWith('pnpm'))
+    const pnpmKeys = pnpmConfigs.map(({ key }) => key)
+    const sharedTestIndexes = tests
+      .map((test, i) => ({ test, i }))
+      .filter(({ test }) => pnpmConfigs.every(({ supportedTests }) => !supportedTests || supportedTests.includes(test)))
+      .filter(({ test }) => {
+        const row = tableRows.find((r) => r.test === test)
+        if (!row?.needsNodeModules) return true
+        return pnpmConfigs.every(({ hasNodeModules }) => hasNodeModules !== false)
+      })
+      .map(({ i }) => i)
+
+    const pnpmTests = sharedTestIndexes.map((i) => tests[i])
+    const pnpmTestDescriptions = sharedTestIndexes.map((i) => testDescriptions[i])
+    const pnpmResArray = pnpmTests.map((test) =>
+      pnpmKeys
+        .map((key) => results[key][test])
+        .map((time) => Math.round(time / 100) / 10)
+    )
+    const pnpmHeaderLegends = pnpmKeys.map((key) => cmdsMap[key].mdLegend ?? cmdsMap[key].legend).join(' | ')
+    const pnpmHeaderSep = pnpmKeys.map(() => '---').join(' | ')
+    const pnpmRows = pnpmTests.map((test) => {
+      const row = tableRows.find((r) => r.test === test)
+      const values = pnpmKeys.map((key) => prettyMs(results[key][test])).join(' | ')
+      return `| ${row.action} | ${row.cache} | ${row.lockfile} | ${row.nodeModules} | ${values} |`
+    }).join('\n')
+
+    const pnpmTitle = pnpmConfigs.map(({ key }) => cmdsMap[key].legend).join(' vs ')
+    sections.push(stripIndents`
+      ### ${pnpmTitle}
+
+      Only scenarios supported by every benchmarked pnpm version are shown.
+
+      | action  | cache | lockfile | node_modules| ${pnpmHeaderLegends} |
+      | ---     | ---   | ---      | ---         | ${pnpmHeaderSep} |
+      ${pnpmRows}
+
+      <img alt="Graph comparing pnpm versions on the ${fixture.name} fixture" src="/img/benchmarks/${fixture.name}-pnpm.svg" />
+    `)
+
+    svgs.push({
+      path: path.join(BENCH_IMGS, `${fixture.name}-pnpm.svg`),
+      file: generateSvg(pnpmResArray, pnpmConfigs.map(({ key }) => cmdsMap[key]), pnpmTestDescriptions, formattedNow)
+    })
   }
 
   const introduction = stripIndents`
