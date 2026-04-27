@@ -227,7 +227,7 @@ async function run () {
     sections.push(stripIndents`
       ### ${pnpmTitle}
 
-      Only scenarios supported by every benchmarked pnpm version are shown.
+      pnpm v12 will use a new installation engine for fetching and linking written in Rust. See [pacquet](https://github.com/pnpm/pacquet).
 
       | action  | cache | lockfile | node_modules| ${pnpmHeaderLegends} |
       | ---     | ---   | ---      | ---         | ${pnpmHeaderSep} |
