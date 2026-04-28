@@ -4,7 +4,7 @@
 
 ## Testing locally
 
-```
+```sh
 pnpm install
 pnpm start
 ```

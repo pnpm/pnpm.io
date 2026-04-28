@@ -128,7 +128,7 @@ We are always open to [your feedback](https://github.com/facebookincubator/creat
 
 After creation, your project should look like this:
 
-```
+```text
 my-app/
   README.md
   node_modules/
@@ -565,7 +565,7 @@ yarn add node-sass-chokidar
 
 Then in `package.json`, add the following lines to `scripts`:
 
-```diff
+```diff filename="package.json"
    "scripts": {
 +    "build-css": "node-sass-chokidar src/ -o src/",
 +    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -582,7 +582,7 @@ To share variables between Sass files, you can use Sass imports. For example, `s
 
 To enable importing files without using relative paths, you can add the  `--include-path` option to the command in `package.json`.
 
-```
+```json filename="package.json"
 "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
 "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
 ```
@@ -610,7 +610,7 @@ yarn add npm-run-all
 
 Then we can change `start` and `build` scripts to include the CSS preprocessor commands:
 
-```diff
+```diff filename="package.json"
    "scripts": {
      "build-css": "node-sass-chokidar src/ -o src/",
      "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -950,7 +950,7 @@ REACT_APP_SECRET_CODE=abcdef npm start
 
 To define permanent environment variables, create a file called `.env` in the root of your project:
 
-```
+```env filename=".env"
 REACT_APP_SECRET_CODE=abcdef
 ```
 >Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid [accidentally exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
@@ -986,7 +986,7 @@ Expand variables already on your machine for use in your `.env` file (using [dot
 
 For example, to get the environment variable `npm_package_version`:
 
-```
+```env filename=".env"
 REACT_APP_VERSION=$npm_package_version
 # also works:
 # REACT_APP_VERSION=${npm_package_version}
@@ -994,7 +994,7 @@ REACT_APP_VERSION=$npm_package_version
 
 Or expand variables local to the current `.env` file:
 
-```
+```env filename=".env"
 DOMAIN=www.example.com
 REACT_APP_FOO=$DOMAIN/foo
 REACT_APP_BAR=$DOMAIN/bar
@@ -1048,7 +1048,7 @@ You can find the companion GitHub repository [here](https://github.com/fullstack
 People often serve the front-end React app from the same host and port as their backend implementation.<br>
 For example, a production setup might look like this after the app is deployed:
 
-```
+```plain
 /             - static server returns index.html with React app
 /todos        - static server returns index.html with React app
 /api/todos    - server handles any /api/* requests using the backend implementation
@@ -1066,7 +1066,7 @@ This way, when you `fetch('/api/todos')` in development, the development server 
 
 Conveniently, this avoids [CORS issues](http://stackoverflow.com/questions/21854516/understanding-ajax-cors-and-security-considerations) and error messages like this in development:
 
-```
+```plain
 Fetch API cannot load http://localhost:4000/api/todos. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:3000' is therefore not allowed access. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
 ```
 
@@ -1089,7 +1089,7 @@ This shouldn’t affect you when developing on `localhost`, but if you develop r
 
 To work around it, you can specify your public development host in a file called `.env.development` in the root of your project:
 
-```
+```env filename=".env.development"
 HOST=mypublicdevhost.com
 ```
 
@@ -1097,7 +1097,7 @@ If you restart the development server now and load the app from the specified ho
 
 If you are still having issues or if you’re using a more exotic environment like a cloud editor, you can bypass the host check completely by adding a line to `.env.development.local`. **Note that this is dangerous and exposes your machine to remote code execution from malicious websites:**
 
-```
+```env filename=".env.development.local"
 # NOTE: THIS IS DANGEROUS!
 # It exposes your machine to attacks from the websites you visit.
 DANGEROUSLY_DISABLE_HOST_CHECK=true
@@ -1530,7 +1530,7 @@ Popular CI servers already set the environment variable `CI` by default but you 
 
 1. Following the [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) guide for syncing your GitHub repository with Travis.  You may need to initialize some settings manually in your [profile](https://travis-ci.org/profile) page.
 1. Add a `.travis.yml` file to your git repository.
-```
+```yaml filename=".travis.yml"
 language: node_js
 node_js:
   - 6
@@ -1654,7 +1654,7 @@ $ npm run test:debug
 This will start running your Jest tests, but pause before executing to allow a debugger to attach to the process.
 
 Open the following in Chrome
-```
+```plain
 about:inspect
 ```
 
@@ -1667,7 +1667,7 @@ After opening that link, the Chrome Developer Tools will be displayed. Select `i
 Debugging Jest tests is supported out of the box for [Visual Studio Code](https://code.visualstudio.com).
 
 Use the following [`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) configuration file:
-```
+```json filename="launch.json"
 {
   "version": "0.2.0",
   "configurations": [
@@ -1902,7 +1902,7 @@ yarn add source-map-explorer
 
 Then in `package.json`, add the following line to `scripts`:
 
-```diff
+```diff filename="package.json"
    "scripts": {
 +    "analyze": "source-map-explorer build/static/js/main.*",
      "start": "react-scripts start",
@@ -1913,7 +1913,7 @@ Then in `package.json`, add the following line to `scripts`:
 Then to analyze the bundle run the production build then run the analyze
 script.
 
-```
+```sh
 npm run build
 npm run analyze
 ```
@@ -1982,7 +1982,7 @@ This is because when there is a fresh page load for a `/todos/42`, the server lo
 
 If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to create a `.htaccess` file in the `public` folder that looks like this:
 
-```
+```htaccess filename=".htaccess"
     Options -MultiViews
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -2091,7 +2091,7 @@ Then run the `firebase init` command from your project’s root. You need to cho
 
 IMPORTANT: you need to set proper HTTP caching headers for `service-worker.js` file in `firebase.json` file or you will not be able to see changes after first deployment ([issue #2440](https://github.com/facebookincubator/create-react-app/issues/2440)). It should be added inside `"hosting"` key like next:
 
-```
+```json filename="firebase.json"
 {
   "hosting": {
     ...
@@ -2222,7 +2222,7 @@ Sometimes `npm run build` works locally but fails during deploy via Heroku. Foll
 
 If you get something like this:
 
-```
+```plain
 remote: Failed to create a production build. Reason:
 remote: Module not found: Error: Cannot resolve 'file' or 'directory'
 MyDirectory in /tmp/build_1234/src
@@ -2236,7 +2236,7 @@ This is important because Linux (the operating system used by Heroku) is case se
 
 If you exclude or ignore necessary files from the package you will see a error similar this one:
 
-```
+```plain
 remote: Could not find a required file.
 remote:   Name: `index.html`
 remote:   Searched in: /tmp/build_a2875fc163b209225122d68916f1d4df/public
@@ -2271,7 +2271,7 @@ With this setup Netlify will build and deploy when you push to git or open a pul
 
 To support `pushState`, make sure to create a `public/_redirects` file with the following rewrite rules:
 
-```
+```plain
 /*  /index.html  200
 ```
 
@@ -2289,7 +2289,7 @@ Now offers a zero-configuration single-command deployment. You can use `now` to 
 
 4. Run `now --name your-project-name` from within the build directory. You will see a **now.sh** URL in your output like this:
 
-    ```
+    ```plain
     > Ready! https://your-project-name-tpspyhtdtk.now.sh (copied to clipboard)
     ```
 
@@ -2358,7 +2358,7 @@ We recommend deleting `node_modules` in your project and running `npm install` (
 
 It is reported that installing Watchman 4.7.0 or newer fixes the issue. If you use [Homebrew](http://brew.sh/), you can run these commands to update it:
 
-```
+```sh
 watchman shutdown-server
 brew update
 brew reinstall watchman

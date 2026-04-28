@@ -31,7 +31,7 @@ You may use the [pnpm env] command then to install Node.js.
 
 On Linux or macOS:
 
-```
+```sh
 curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@latest-6
 ```
 
@@ -47,7 +47,7 @@ The standalone script is signed. [Here's how to verify it](https://github.com/pn
 
 If you have the package manager installed, you can install pnpm using the following command:
 
-```
+```sh
 brew install pnpm
 ```
 
@@ -55,7 +55,7 @@ brew install pnpm
 
 If you have Scoop installed, you can install pnpm using the following command:
 
-```
+```pwsh
 scoop install nodejs-lts pnpm
 ```
 
@@ -63,13 +63,13 @@ scoop install nodejs-lts pnpm
 
 Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
 
-```
+```sh
 corepack enable
 ```
 
 This will automatically install pnpm on your system. However, it probably won't be the latest version of pnpm. To upgrade it, check what is the latest pnpm version and run:
 
-```
+```sh
 corepack prepare pnpm@6.32.11 --activate
 ```
 
@@ -120,7 +120,7 @@ If pnpm is broken and you cannot fix it by reinstalling, you might need to remov
 
 Let's assume you have the following error when running `pnpm install`:
 
-```
+```console
 C:\src>pnpm install
 internal/modules/cjs/loader.js:883
   throw err;
@@ -141,7 +141,7 @@ Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node
 First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run this command in Git Bash.
 You'll get the location of the pnpm command, for instance:
 
-```
+```console
 $ which pnpm
 /c/Program Files/nodejs/pnpm
 ```

@@ -586,7 +586,7 @@ A list of CVE IDs that will be ignored by the [`pnpm audit`] command.
 
 Scripts listed in this array will be required in each project of the workspace. Otherwise, `pnpm -r run <script name>` will fail.
 
-```
+```json
 {
   "pnpm": {
     "requiredScripts": ["build"]

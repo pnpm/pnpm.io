@@ -42,7 +42,7 @@ command will exit with a non-zero code.
 
 Usage example. Run tests in every package. Continue if tests fail in one of the packages:
 
-```
+```sh
 pnpm recursive test --no-bail
 ```
 

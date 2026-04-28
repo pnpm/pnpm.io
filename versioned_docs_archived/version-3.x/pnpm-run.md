@@ -6,7 +6,7 @@ original_id: pnpm-run
 
 Runs a defined package script.
 
-```
+```sh
 pnpm run <command> [-- <args>...]
 ```
 

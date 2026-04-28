@@ -12,7 +12,7 @@ pnpm's `node_modules` layout uses symbolic links to create a nested structure of
 Every `package@version` is linked to `node_modules` from the [global store](about-the-package-store.md) only once.
 Let's say you install `foo@1.0.0` that depends on `bar@1.0.0`. pnpm will hard link both packages to `node_modules` like this:
 
-```
+```plain
 node_modules
 └─ .registry.npmjs.org
    ├─ bar/1.0.0/node_modules/bar
@@ -36,7 +36,7 @@ For Node.js it doesn't make a difference whether dependencies are inside the pac
 
 The next stage of installation is symlinking dependencies. `bar` is going to be symlinked to the `foo/1.0.0/node_modules` folder:
 
-```
+```plain
 node_modules
 └─ .registry.npmjs.org
    ├─ bar/1.0.0/node_modules/bar
@@ -47,7 +47,7 @@ node_modules
 
 `foo` is going to be symlinked to the root `node_modules` folder because `foo` is a dependency of the project:
 
-```
+```plain
 node_modules
 ├─ foo -> .registry.npmjs.org/foo/1.0.0/node_modules/foo
 └─ .registry.npmjs.org
@@ -62,7 +62,7 @@ and the depth of the dependency graph.
 
 Let's add `qar@2.0.0` as a dependency of `bar` and `foo`. This is how the `node_modules` will look like:
 
-```
+```plain
 node_modules
 ├─ foo -> .registry.npmjs.org/foo/1.0.0/node_modules/foo
 └─ .registry.npmjs.org

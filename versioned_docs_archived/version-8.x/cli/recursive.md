@@ -29,7 +29,7 @@ If you want the root project be included even when running scripts, set the [inc
 
 Usage example:
 
-```
+```sh
 pnpm -r publish
 ```
 
@@ -98,7 +98,7 @@ pnpm -r --no-sort test
 
 When `true`, the order of packages is reversed.
 
-```
+```sh
 pnpm -r --reverse run clean
 ```
 

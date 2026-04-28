@@ -230,7 +230,7 @@ export const finders = {
 
 Usage:
 
-```
+```sh
 pnpm why --find-by=react17
 ```
 

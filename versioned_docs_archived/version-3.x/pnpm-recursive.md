@@ -28,7 +28,7 @@ This is very convenient in a multi-package repository.
 
 Create a `.npmrc` file in the root of your multi-package repository with the following content:
 
-```
+```plain
 link-workspace-packages = true
 ```
 
@@ -154,7 +154,7 @@ If true, stops when a task throws an error.
 
 Usage example. Run tests in every package. Continue if tests fail in one of the packages:
 
-```
+```sh
 pnpm recursive test --no-bail
 ```
 

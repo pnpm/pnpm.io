@@ -11,7 +11,7 @@ The **global virtual store** (`enableGlobalVirtualStore: true`) changes this. In
 
 ### Default (per-project virtual store)
 
-```
+```plain
 project-a/
 └── node_modules/
     ├── lodash → .pnpm/lodash@4.17.21/node_modules/lodash
@@ -32,7 +32,7 @@ Each project has its own `.pnpm` with hardlinks. The file contents aren't duplic
 
 ### With global virtual store
 
-```
+```plain
 project-a/
 └── node_modules/
     └── lodash → <global-store>/links/@/lodash/4.17.21/<hash>/node_modules/lodash

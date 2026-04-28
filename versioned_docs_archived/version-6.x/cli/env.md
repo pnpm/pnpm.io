@@ -15,14 +15,14 @@ Install and use the specified version of Node.js
 
 Install the LTS version of Node.js:
 
-```
+```sh
 pnpm env use --global lts
 pnpm env use --global argon
 ```
 
 Install Node.js v16:
 
-```
+```sh
 pnpm env use --global 16
 ```
 
@@ -30,7 +30,7 @@ Also since v6.18.0:
 
 Install a prerelease version of Node.js:
 
-```
+```sh
 pnpm env use --global nightly
 pnpm env use --global rc
 pnpm env use --global 16.0.0-rc.0
@@ -39,7 +39,7 @@ pnpm env use --global rc/14
 
 Install the latest version of Node.js:
 
-```
+```sh
 pnpm env use --global latest
 ```
 

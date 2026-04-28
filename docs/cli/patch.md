@@ -11,7 +11,7 @@ Once you're done with your changes, run `pnpm patch-commit <path>` (with `<path>
 
 Usage:
 
-```
+```sh
 pnpm patch <pkg name>@<version>
 ```
 

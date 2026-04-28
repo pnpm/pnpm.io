@@ -75,7 +75,7 @@ curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 
 Due to an issue with [outdated signatures in Corepack](https://github.com/nodejs/corepack/issues/612), Corepack should be updated to its latest version first:
 
-```
+```sh
 npm install --global corepack@latest
 ```
 
@@ -87,7 +87,7 @@ If you have installed Node.js with `pnpm runtime` Corepack won't be installed on
 
 :::
 
-```
+```sh
 corepack enable pnpm
 ```
 
@@ -95,7 +95,7 @@ This will automatically install pnpm on your system.
 
 You can pin the version of pnpm used on your project using the following command:
 
-```
+```sh
 corepack use pnpm@next-11
 ```
 
@@ -124,7 +124,7 @@ npm install -g pnpm@next-11
 
 If you have the package manager installed, you can install pnpm using the following command:
 
-```
+```sh
 brew install pnpm
 ```
 
@@ -132,7 +132,7 @@ brew install pnpm
 
 If you have winget installed, you can install pnpm using the following command:
 
-```
+```sh
 winget install -e --id pnpm.pnpm
 ```
 
@@ -140,7 +140,7 @@ winget install -e --id pnpm.pnpm
 
 If you have Scoop installed, you can install pnpm using the following command:
 
-```
+```sh
 scoop install nodejs-lts pnpm
 ```
 
@@ -148,7 +148,7 @@ scoop install nodejs-lts pnpm
 
 If you have Chocolatey installed, you can install pnpm using the following command:
 
-```
+```sh
 choco install pnpm
 ```
 
@@ -156,7 +156,7 @@ choco install pnpm
 
 If you have Volta installed, you can install pnpm using the following command:
 
-```
+```sh
 volta install pnpm
 ```
 
@@ -186,7 +186,7 @@ If pnpm is broken and you cannot fix it by reinstalling, you might need to remov
 
 Let's assume you have the following error when running `pnpm install`:
 
-```
+```console
 C:\src>pnpm install
 internal/modules/cjs/loader.js:883
   throw err;
@@ -207,7 +207,7 @@ Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node
 First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run `where.exe pnpm.*`.
 You'll get the location of the pnpm command, for instance:
 
-```
+```console
 $ which pnpm
 /c/Program Files/nodejs/pnpm
 ```
@@ -219,7 +219,7 @@ Once done, install pnpm again and it should work as expected.
 
 To update pnpm, run the [`self-update`] command:
 
-```
+```sh
 pnpm self-update
 ```
 

@@ -14,7 +14,7 @@ With aliases, you have a third option.
 
 Publish a new package called `awesome-lodash` and install it using `lodash` as its alias:
 
-```
+```sh
 pnpm install lodash@npm:awesome-lodash
 ```
 

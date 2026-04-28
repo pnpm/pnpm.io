@@ -12,7 +12,7 @@ Aliases: `m`, `multi`, `recursive`, `<command> -r`
 
 Usage example:
 
-```
+```sh
 pnpm -r publish
 ```
 
@@ -89,7 +89,7 @@ Added in: v5.17.1
 
 When `true`, the order of packages is reversed.
 
-```
+```sh
 pnpm -r --reverse run clean
 ```
 

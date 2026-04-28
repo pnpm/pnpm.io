@@ -9,13 +9,13 @@ Deploy a package from a workspace.
 
 Usage:
 
-```
+```sh
 pnpm --filter=<deployed project name> deploy <target directory>
 ```
 
 In case you build your project before deployment, also use the `--prod` option to skip `devDependencies` installation.
 
-```
+```sh
 pnpm --filter=<deployed project name> --prod deploy <target directory>
 ```
 

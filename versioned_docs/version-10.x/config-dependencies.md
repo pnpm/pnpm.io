@@ -89,19 +89,19 @@ module.exports = {
 
 If you install it as config dependency:
 
-```
+```sh
 pnpm add --config @myorg/pnpm-plugin-my-catalogs
 ```
 
 Then you can run:
 
-```
+```sh
 pnpm add is-odd@catalog:
 ```
 
 This will install `is-odd@1.0.0` and add the following to your `package.json`:
 
-```json
+```json filename="package.json"
 {
   "dependencies": {
     "is-odd": "catalog:"

@@ -254,7 +254,7 @@ registry. For example:
 
 You may also use an environment variable. For example:
 
-```
+```plain
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 

@@ -185,7 +185,7 @@ The shell to use for scripts run with the `pnpm run` command.
 
 For instance, to force usage of Git Bash on Windows:
 
-```
+```bash
 pnpm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 

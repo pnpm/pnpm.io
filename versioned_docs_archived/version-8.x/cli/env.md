@@ -22,19 +22,19 @@ Install and use the specified version of Node.js
 
 Install the LTS version of Node.js:
 
-```
+```sh
 pnpm env use --global lts
 ```
 
 Install Node.js v16:
 
-```
+```sh
 pnpm env use --global 16
 ```
 
 Install a prerelease version of Node.js:
 
-```
+```sh
 pnpm env use --global nightly
 pnpm env use --global rc
 pnpm env use --global 16.0.0-rc.0
@@ -43,13 +43,13 @@ pnpm env use --global rc/14
 
 Install the latest version of Node.js:
 
-```
+```sh
 pnpm env use --global latest
 ```
 
 Install an LTS version of Node.js using its [codename]:
 
-```
+```sh
 pnpm env use --global argon
 ```
 
@@ -63,7 +63,7 @@ Installs the specified version(s) of Node.js without activating them as the curr
 
 Example:
 
-```
+```sh
 pnpm env add --global lts 18 20.0.1
 ```
 
@@ -73,7 +73,7 @@ Removes the specified version(s) of Node.JS.
 
 Usage example:
 
-```
+```sh
 pnpm env remove --global 14.0.0
 pnpm env remove --global 14.0.0 16.2.3
 ```
@@ -84,19 +84,19 @@ List Node.js versions available locally or remotely.
 
 Print locally installed versions:
 
-```
+```sh
 pnpm env list
 ```
 
 Print remotely available Node.js versions:
 
-```
+```sh
 pnpm env list --remote
 ```
 
 Print remotely available Node.js v16 versions:
 
-```
+```sh
 pnpm env list --remote 16
 ```
 
