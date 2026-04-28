@@ -1088,7 +1088,7 @@ Overrides the `onFail` behavior of both the `packageManager` field and `devEngin
 * `download` — download and run the declared pnpm version (this is the default and matches the previous `managePackageManagerVersions: true` behavior).
 * `error` — fail the command (equivalent to the previous `packageManagerStrictVersion: true`).
 * `warn` — print a warning but continue (equivalent to the previous `packageManagerStrict: false` or `COREPACK_ENABLE_STRICT=0`).
-* `ignore` — skip the check entirely (equivalent to the previous `managePackageManagerVersions: false`). Useful when version management is handled by an external tool such as asdf, mise, or Volta.
+* `ignore` — skip the check entirely (equivalent to the previous `managePackageManagerVersions: false`). Useful when version management is handled by an external tool such as asdf, mise.
 
 Can be set via CLI flag, environment variable, or `pnpm-workspace.yaml`:
 

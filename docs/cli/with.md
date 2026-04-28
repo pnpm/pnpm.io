@@ -37,7 +37,7 @@ pnpm with next install
 
 ### pmOnFail
 
-If you want to permanently skip the `packageManager` / `devEngines.packageManager` check (for example, because version management is handled by asdf, mise, Volta, or a similar tool), set the [`pmOnFail`](../settings.md#pmonfail) setting to `ignore` instead of running every command through `pnpm with`:
+If you want to permanently skip the `packageManager` / `devEngines.packageManager` check (for example, because version management is handled by asdf, mise, or a similar tool), set the [`pmOnFail`](../settings.md#pmonfail) setting to `ignore` instead of running every command through `pnpm with`:
 
 ```yaml title="pnpm-workspace.yaml"
 pmOnFail: ignore

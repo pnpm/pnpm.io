@@ -152,12 +152,12 @@ If you have Chocolatey installed, you can install pnpm using the following comma
 choco install pnpm
 ```
 
-### Using Volta
+### Using Mise
 
-If you have Volta installed, you can install pnpm using the following command:
+If you have Mise installed, you can install pnpm using the following command:
 
 ```
-volta install pnpm
+mise use -g pnpm
 ```
 
 :::tip
