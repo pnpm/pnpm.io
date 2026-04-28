@@ -101,7 +101,7 @@ pnpm add is-odd@catalog:
 
 This will install `is-odd@1.0.0` and add the following to your `package.json`:
 
-```json filename="package.json"
+```json title="package.json"
 {
   "dependencies": {
     "is-odd": "catalog:"

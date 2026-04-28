@@ -565,7 +565,7 @@ yarn add node-sass-chokidar
 
 Then in `package.json`, add the following lines to `scripts`:
 
-```diff filename="package.json"
+```diff title="package.json"
    "scripts": {
 +    "build-css": "node-sass-chokidar src/ -o src/",
 +    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -582,7 +582,7 @@ To share variables between Sass files, you can use Sass imports. For example, `s
 
 To enable importing files without using relative paths, you can add the  `--include-path` option to the command in `package.json`.
 
-```json filename="package.json"
+```json title="package.json"
 "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
 "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
 ```
@@ -610,7 +610,7 @@ yarn add npm-run-all
 
 Then we can change `start` and `build` scripts to include the CSS preprocessor commands:
 
-```diff filename="package.json"
+```diff title="package.json"
    "scripts": {
      "build-css": "node-sass-chokidar src/ -o src/",
      "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
@@ -950,7 +950,7 @@ REACT_APP_SECRET_CODE=abcdef npm start
 
 To define permanent environment variables, create a file called `.env` in the root of your project:
 
-```env filename=".env"
+```env title=".env"
 REACT_APP_SECRET_CODE=abcdef
 ```
 >Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid [accidentally exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
@@ -986,7 +986,7 @@ Expand variables already on your machine for use in your `.env` file (using [dot
 
 For example, to get the environment variable `npm_package_version`:
 
-```env filename=".env"
+```env title=".env"
 REACT_APP_VERSION=$npm_package_version
 # also works:
 # REACT_APP_VERSION=${npm_package_version}
@@ -994,7 +994,7 @@ REACT_APP_VERSION=$npm_package_version
 
 Or expand variables local to the current `.env` file:
 
-```env filename=".env"
+```env title=".env"
 DOMAIN=www.example.com
 REACT_APP_FOO=$DOMAIN/foo
 REACT_APP_BAR=$DOMAIN/bar
@@ -1089,7 +1089,7 @@ This shouldn’t affect you when developing on `localhost`, but if you develop r
 
 To work around it, you can specify your public development host in a file called `.env.development` in the root of your project:
 
-```env filename=".env.development"
+```env title=".env.development"
 HOST=mypublicdevhost.com
 ```
 
@@ -1097,7 +1097,7 @@ If you restart the development server now and load the app from the specified ho
 
 If you are still having issues or if you’re using a more exotic environment like a cloud editor, you can bypass the host check completely by adding a line to `.env.development.local`. **Note that this is dangerous and exposes your machine to remote code execution from malicious websites:**
 
-```env filename=".env.development.local"
+```env title=".env.development.local"
 # NOTE: THIS IS DANGEROUS!
 # It exposes your machine to attacks from the websites you visit.
 DANGEROUSLY_DISABLE_HOST_CHECK=true
@@ -1530,7 +1530,7 @@ Popular CI servers already set the environment variable `CI` by default but you 
 
 1. Following the [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) guide for syncing your GitHub repository with Travis.  You may need to initialize some settings manually in your [profile](https://travis-ci.org/profile) page.
 1. Add a `.travis.yml` file to your git repository.
-```yaml filename=".travis.yml"
+```yaml title=".travis.yml"
 language: node_js
 node_js:
   - 6
@@ -1667,7 +1667,7 @@ After opening that link, the Chrome Developer Tools will be displayed. Select `i
 Debugging Jest tests is supported out of the box for [Visual Studio Code](https://code.visualstudio.com).
 
 Use the following [`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) configuration file:
-```json filename="launch.json"
+```json title="launch.json"
 {
   "version": "0.2.0",
   "configurations": [
@@ -1902,7 +1902,7 @@ yarn add source-map-explorer
 
 Then in `package.json`, add the following line to `scripts`:
 
-```diff filename="package.json"
+```diff title="package.json"
    "scripts": {
 +    "analyze": "source-map-explorer build/static/js/main.*",
      "start": "react-scripts start",
@@ -1982,7 +1982,7 @@ This is because when there is a fresh page load for a `/todos/42`, the server lo
 
 If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to create a `.htaccess` file in the `public` folder that looks like this:
 
-```htaccess filename=".htaccess"
+```htaccess title=".htaccess"
     Options -MultiViews
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -2091,7 +2091,7 @@ Then run the `firebase init` command from your project’s root. You need to cho
 
 IMPORTANT: you need to set proper HTTP caching headers for `service-worker.js` file in `firebase.json` file or you will not be able to see changes after first deployment ([issue #2440](https://github.com/facebookincubator/create-react-app/issues/2440)). It should be added inside `"hosting"` key like next:
 
-```json filename="firebase.json"
+```json title="firebase.json"
 {
   "hosting": {
     ...
