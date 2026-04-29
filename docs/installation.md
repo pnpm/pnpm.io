@@ -152,14 +152,6 @@ If you have Chocolatey installed, you can install pnpm using the following comma
 choco install pnpm
 ```
 
-### Using Volta
-
-If you have Volta installed, you can install pnpm using the following command:
-
-```
-volta install pnpm
-```
-
 :::tip
 
 Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).
