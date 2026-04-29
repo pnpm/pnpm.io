@@ -67,7 +67,7 @@ This is very convenient in a multi-package repository.
 
 Create a `.npmrc` file in the root of your multi-package repository with the following content:
 
-```
+```plain
 link-workspace-packages = true
 ```
 

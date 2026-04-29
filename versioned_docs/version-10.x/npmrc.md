@@ -56,7 +56,7 @@ You may also use an environment variable. For example:
 
 Or you may just use an environment variable directly, without changing `.npmrc` at all:
 
-```
+```plain
 npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
@@ -74,7 +74,7 @@ tokenHelper=/home/ivan/token-generator
 
 Setting a token helper for the specified registry:
 
-```
+```plain
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 

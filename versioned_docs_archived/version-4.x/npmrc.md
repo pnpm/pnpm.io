@@ -282,7 +282,7 @@ However, if you know that only some buggy packages are requiring unlisted depend
 
 For instance:
 
-```
+```plain
 hoist-pattern[]=*eslint*
 hoist-pattern[]=*babel*
 ```

@@ -10,6 +10,6 @@ pnpm offers the same tool via the `pnpx` command. The only difference is that `p
 The following command installs a temporary create-react-app and calls it,
 without polluting global installs or requiring more than one step!
 
-```
+```sh
 pnpx create-react-app my-cool-new-app
 ```

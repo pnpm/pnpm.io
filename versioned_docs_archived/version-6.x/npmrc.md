@@ -270,7 +270,7 @@ registry. For example:
 
 You may also use an environment variable. For example:
 
-```
+```plain
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 
@@ -284,13 +284,13 @@ The configuration for the path to the helper must be an absolute path, with no a
 
 Setting a token helper for the default registry:
 
-```
+```plain
 tokenHelper=/home/ivan/token-generator
 ```
 
 Setting a token helper for the specified registry:
 
-```
+```plain
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 
@@ -611,7 +611,7 @@ Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this se
 
 Here is how pnpm may be configured to download Node.js from Node.js mirror in China:
 
-```
+```plain
 node-mirror:release=https://npmmirror.com/mirrors/node/
 node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
 node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/

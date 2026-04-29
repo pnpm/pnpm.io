@@ -81,7 +81,7 @@ Added in: v5.17.1
 
 When `true`, the order of packages is reversed.
 
-```
+```sh
 pnpm -r --reverse run clean
 ```
 

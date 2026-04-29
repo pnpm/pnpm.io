@@ -55,7 +55,7 @@ Added in: v5.12.0
 
 In a workspace with 2 packages:
 
-```
+```plain
 + packages
 	+ foo
 	+ bar

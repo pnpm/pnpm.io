@@ -76,7 +76,7 @@ When `false`, packages are downloaded and installed from the registry. However, 
 
 Create a `.npmrc` file in the root of your monorepo with the following content:
 
-```
+```plain
 link-workspace-packages = true
 ```
 

@@ -19,7 +19,7 @@ pnpm recursive outdated [--filter <package selector>]
 
 ## Examples
 
-```
+```sh
 pnpm outdated
 pnpm outdated gulp-* @babel/core
 ```

@@ -66,13 +66,13 @@ If you have installed Node.js with `pnpm env` Corepack won't be installed on you
 
 :::
 
-```
+```sh
 corepack enable pnpm
 ```
 
 If you installed Node.js using Homebrew, you'll need to install corepack separately:
 
-```
+```sh
 brew install corepack
 ```
 
@@ -80,7 +80,7 @@ This will automatically install pnpm on your system.
 
 You can pin the version of pnpm used on your project using the following command:
 
-```
+```sh
 corepack use pnpm@latest-8
 ```
 
@@ -108,7 +108,7 @@ npm install -g @pnpm/exe@latest-8
 
 If you have the package manager installed, you can install pnpm using the following command:
 
-```
+```sh
 brew install pnpm
 ```
 
@@ -116,7 +116,7 @@ brew install pnpm
 
 If you have winget installed, you can install pnpm using the following command:
 
-```
+```pwsh
 winget install pnpm
 ```
 
@@ -124,7 +124,7 @@ winget install pnpm
 
 If you have Scoop installed, you can install pnpm using the following command:
 
-```
+```pwsh
 scoop install nodejs-lts pnpm
 ```
 
@@ -132,7 +132,7 @@ scoop install nodejs-lts pnpm
 
 If you have Chocolatey installed, you can install pnpm using the following command:
 
-```
+```pwsh
 choco install pnpm
 ```
 
@@ -140,7 +140,7 @@ choco install pnpm
 
 If you have Volta installed, you can install pnpm using the following command:
 
-```
+```sh
 volta install pnpm
 ```
 
@@ -168,7 +168,7 @@ If pnpm is broken and you cannot fix it by reinstalling, you might need to remov
 
 Let's assume you have the following error when running `pnpm install`:
 
-```
+```console
 C:\src>pnpm install
 internal/modules/cjs/loader.js:883
   throw err;
@@ -189,7 +189,7 @@ Error: Cannot find module 'C:\Users\Bence\AppData\Roaming\npm\pnpm-global\4\node
 First, try to find the location of pnpm by running: `which pnpm`. If you're on Windows, run this command in Git Bash.
 You'll get the location of the pnpm command, for instance:
 
-```
+```console
 $ which pnpm
 /c/Program Files/nodejs/pnpm
 ```
@@ -205,7 +205,7 @@ Once done, install pnpm again and it should work as expected.
 
 Just put the following line to your `.bashrc`, `.zshrc`, or `config.fish`:
 
-```
+```sh
 alias pn=pnpm
 ```
 
@@ -213,13 +213,13 @@ alias pn=pnpm
 
 In a Powershell window with admin rights, execute:
 
-```
+```pwsh
 notepad $profile.AllUsersAllHosts
 ```
 
 In the `profile.ps1` file that opens, put:
 
-```
+```pwsh
 set-alias -name pn -value pnpm
 ```
 

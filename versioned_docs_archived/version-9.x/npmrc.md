@@ -82,7 +82,7 @@ resolve dependencies properly.
 
 For instance:
 
-```
+```plain
 public-hoist-pattern[]=*plugin*
 ```
 
@@ -376,13 +376,13 @@ registry. For example:
 
 You may also use an environment variable. For example:
 
-```
+```plain
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 
 Or you may just use an environment variable directly, without changing `.npmrc` at all:
 
-```
+```plain
 npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 ```
 
@@ -394,13 +394,13 @@ The configuration for the path to the helper must be an absolute path, with no a
 
 Setting a token helper for the default registry:
 
-```
+```plain
 tokenHelper=/home/ivan/token-generator
 ```
 
 Setting a token helper for the specified registry:
 
-```
+```plain
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 
@@ -517,7 +517,7 @@ used instead.
 If your proxy URL contains a username and password, make sure to URL-encode them.
 For instance:
 
-```
+```plain
 https-proxy=https://use%21r:pas%2As@my.proxy:1234/foo
 ```
 
@@ -634,7 +634,7 @@ When this setting is set to `true`, packages with peer dependencies will be dedu
 
 For instance, let's say we have a workspace with two projects and both of them have `webpack` in their dependencies. `webpack` has `esbuild` in its optional peer dependencies, and one of the projects has `esbuild` in its dependencies. In this case, pnpm will link two instances of `webpack` to the `node_modules/.pnpm` directory: one with `esbuild` and another one without it:
 
-```
+```plain
 node_modules
   .pnpm
     webpack@1.0.0_esbuild@1.0.0
@@ -650,7 +650,7 @@ project2
 
 This makes sense because `webpack` is used in two projects, and one of the projects doesn't have `esbuild`, so the two projects cannot share the same instance of `webpack`. However, this is not what most developers expect, especially since in a hoisted `node_modules`, there would only be one instance of `webpack`. Therefore, you may now use the `dedupe-peer-dependents` setting to deduplicate `webpack` when it has no conflicting peer dependencies (explanation at the end). In this case, if we set `dedupe-peer-dependents` to `true`, both projects will use the same `webpack` instance, which is the one that has `esbuild` resolved:
 
-```
+```plain
 node_modules
   .pnpm
     webpack@1.0.0_esbuild@1.0.0
@@ -665,7 +665,7 @@ project2
 
 **What are conflicting peer dependencies?** By conflicting peer dependencies we mean a scenario like the following one:
 
-```
+```plain
 node_modules
   .pnpm
     webpack@1.0.0_react@16.0.0_esbuild@1.0.0
@@ -867,13 +867,13 @@ running `pnpm run` commands or the `pnpm node` command.
 
 This may be used instead of `.nvmrc` and `nvm`. Instead of the following `.nvmrc` file:
 
-```
+```plain
 16.16.0
 ```
 
 Use this `.npmrc` file:
 
-```
+```plain
 use-node-version=16.16.0
 ```
 
@@ -906,7 +906,7 @@ Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this se
 
 Here is how pnpm may be configured to download Node.js from Node.js mirror in China:
 
-```
+```plain
 node-mirror:release=https://npmmirror.com/mirrors/node/
 node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
 node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/

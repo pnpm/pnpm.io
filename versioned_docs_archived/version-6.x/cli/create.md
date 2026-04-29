@@ -9,7 +9,7 @@ Create a project from a `create-*` starter kit.
 
 ## Examples
 
-```
+```sh
 pnpm create react-app my-app
 ```
 

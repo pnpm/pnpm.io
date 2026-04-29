@@ -239,7 +239,7 @@ module.exports = {
 
 Usage:
 
-```
+```sh
 pnpm why --find-by=react17
 ```
 

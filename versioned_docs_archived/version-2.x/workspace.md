@@ -32,7 +32,7 @@ packages:
 When working inside a workspace, you want your dependencies to be linked from the monorepo but declared as regular dependencies.
 Let's suppose that you have this workspace:
 
-```
+```plain
 .
 ├─ pnpm-workspace.yaml
 └─ packages

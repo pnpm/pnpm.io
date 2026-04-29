@@ -5,13 +5,13 @@ title: pnpm self-update
 
 Updates pnpm to the latest version or the one specified.
 
-```
+```sh
 pnpm self-update [<version>]
 ```
 
 Usage examples:
 
-```
+```sh
 pnpm self-update
 pnpm self-update 10
 pnpm self-update next-10

@@ -6,7 +6,7 @@ original_id: configuring
 
 pnpm uses [npm's configs](https://docs.npmjs.com/misc/config). Hence, you should set configs the same way you would for npm. For example,
 
-```
+```sh
 npm config set store-dir /path/to/.pnpm-store
 ```
 
@@ -17,7 +17,7 @@ Furthermore, pnpm uses the same configs that npm uses for doing installations. I
 to work with it, pnpm should be able to authorize requests as well, with no additional configuration.
 
 In addition to those options, pnpm also allows you to use all parameters that are flags (for example `--filter` or `--workspace-concurrency`) as option:
-```
+```plain
 workspace-concurrency = 1
 filter = @my-scope/*
 ```

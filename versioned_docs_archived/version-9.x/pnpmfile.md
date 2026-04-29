@@ -46,7 +46,7 @@ a debug log for the step.
 
 Example `.pnpmfile.cjs` (changes the dependencies of a dependency):
 
-```js
+```js title=".pnpmfile.cjs"
 function readPackage(pkg, context) {
   // Override the manifest of foo@1.x after downloading it from the registry
   if (pkg.name === 'foo' && pkg.version.startsWith('1.')) {

@@ -6,7 +6,7 @@ original_id: pnpm-publish
 
 Publishes a package to the registry.
 
-```
+```sh
 pnpm publish [<tarball>|<folder>] [--tag <tag>] [--access <public|restricted>]
 ```
 

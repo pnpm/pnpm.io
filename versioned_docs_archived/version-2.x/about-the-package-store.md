@@ -21,7 +21,7 @@ Path structure: `<package source>/<package id>`. The path to a package in the st
 
 E.g.:
 
-```
+```plain
 registry.npmjs.org/gulp/2.1.0
 registry.npmjs.org/@cycle/dom/14.1.0
 registry.node-modules.io/@wmhilton/log/1.1.0

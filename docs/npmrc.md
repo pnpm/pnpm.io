@@ -53,7 +53,7 @@ tokenHelper=/home/ivan/token-generator
 
 Setting a token helper for the specified registry:
 
-```
+```plain
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 

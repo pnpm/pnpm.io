@@ -6,7 +6,7 @@ title: Configuring
 pnpm uses [npm's configuration] formats. Hence, you should set configuration
 the same way you would for npm. For example,
 
-```
+```sh
 pnpm config set store-dir /path/to/.pnpm-store
 ```
 
@@ -22,7 +22,7 @@ configuration.
 In addition to those options, pnpm also allows you to use all parameters that
 are flags (for example `--filter` or `--workspace-concurrency`) as options:
 
-```
+```plain
 workspace-concurrency = 1
 filter = @my-scope/*
 ```

@@ -96,7 +96,7 @@ A list of package names that are allowed to run postinstall scripts during insta
 
 Example:
 
-```
+```sh
 pnpm --allow-build=esbuild add my-bundler
 ```
 

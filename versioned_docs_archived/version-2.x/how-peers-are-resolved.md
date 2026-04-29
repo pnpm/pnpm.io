@@ -11,7 +11,7 @@ Peer dependencies are resolved from dependencies installed higher in the depende
 That means if `foo@1.0.0` has two peers (`bar@^1` and `baz@^1`) then it might have different sets of dependencies
 in the same project.
 
-```
+```plain
 - foo-parent-1
   - bar@1.0.0
   - baz@1.0.0
