@@ -930,7 +930,7 @@ In this case, we cannot dedupe `webpack` as `webpack` has `react` in its peer de
 
 ### dedupePeers
 
-Added in: v11.0.0
+Added in: v10.33.0
 
 * Default: **false**
 * Type: **Boolean**
