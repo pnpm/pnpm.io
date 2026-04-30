@@ -23,6 +23,12 @@ pnpm runtime set <name> <version> [-g]
 - `deno` - Deno
 - `bun` - Bun
 
+:::info
+
+Since v11.0.0, installing a Node.js runtime (via `pnpm runtime set node …` or `node@runtime:<version>`) does not extract the bundled `npm`, `npx`, and `corepack` from the Node.js archive. This roughly halves the number of files pnpm has to hash, write to the CAS, and link during a runtime install. If you still need `npm`, install it separately with `pnpm add -g npm`.
+
+:::
+
 #### Examples
 
 Install Node.js v22 globally:

@@ -7,11 +7,19 @@ Aliases: `c`
 
 Manage the configuration files.
 
-The configuration files are in `INI` (the global) and `YAML` (the local) formats.
+pnpm settings are split across two kinds of configuration files:
 
-The local configuration file is located in the root of the project and is named `pnpm-workspace.yaml`.
+* **Registry and authentication settings** live in INI files — the global `rc` file and local `.npmrc` files.
+* **All other pnpm settings** live in YAML files — the global `config.yaml` and the per-project `pnpm-workspace.yaml`.
 
-The global configuration file is located at one of the following locations:
+The local workspace configuration file is located at the root of the project and is named `pnpm-workspace.yaml`. The global YAML configuration file (`config.yaml`) is located at:
+
+* If the **$XDG_CONFIG_HOME** env variable is set, then **$XDG_CONFIG_HOME/pnpm/config.yaml**
+* On Windows: **~/AppData/Local/pnpm/config/config.yaml**
+* On macOS: **~/Library/Preferences/pnpm/config.yaml**
+* On Linux: **~/.config/pnpm/config.yaml**
+
+The global `rc` file (registry/auth settings only) is at:
 
 * If the **$XDG_CONFIG_HOME** env variable is set, then **$XDG_CONFIG_HOME/pnpm/rc**
 * On Windows: **~/AppData/Local/pnpm/config/rc**
@@ -84,7 +92,15 @@ Remove the config key from the config file.
 
 ### list
 
-Show all the config settings.
+Show all the config settings. Output is a JSON object.
+
+Auth-related settings are hidden from the output; use `pnpm config get <key>` to read them explicitly.
+
+:::note
+
+Since v11, `pnpm config get` (without `--json`) no longer prints INI-formatted text. It prints JSON for objects and arrays, and raw strings for strings, numbers, booleans, and nulls. `pnpm config get --json` prints all values as JSON. `pnpm config list` always prints a JSON object.
+
+:::
 
 ## Options
 
@@ -96,9 +112,9 @@ Set the configuration in the global config file.
 
 By default, `--location` is set to `global`.
 
-When set to `project`, the `.npmrc` file at the nearest `package.json` will be used. If no `.npmrc` file is present in the directory, the setting will be written to a `pnpm-workspace.yaml` file.
+When set to `project`, pnpm writes the setting to `pnpm-workspace.yaml` at the workspace root (or, for registry/auth settings, to the `.npmrc` in the workspace root).
 
-When set to `global`, the performance is the same as setting the `--global` option.
+When set to `global`, the behavior is the same as passing the `--global` option.
 
 ### --json
 

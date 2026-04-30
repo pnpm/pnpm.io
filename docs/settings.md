@@ -3,8 +3,9 @@ id: settings
 title: "Settings (pnpm-workspace.yaml)"
 ---
 
-pnpm gets its configuration from the command line, environment variables, `pnpm-workspace.yaml`, and
-`.npmrc` files.
+pnpm gets its configuration from the command line, environment variables, and `pnpm-workspace.yaml`.
+
+Only auth and registry settings are read from `.npmrc` files. All other settings (like `hoistPattern`, `nodeLinker`, `shamefullyHoist`, etc.) must be configured in `pnpm-workspace.yaml` or the global `~/.config/pnpm/config.yaml`.
 
 The `pnpm config` command can be used to read and edit the contents of the project and global configuration files.
 
@@ -215,7 +216,7 @@ ignoredOptionalDependencies:
 
 Added in: v10.16.0
 
-* Default: **0**
+* Default: **1440** (since v11), **0** (before v11)
 * Type: **number (minutes)**
 
 To reduce the risk of installing compromised packages, you can delay the installation of newly published versions. In most cases, malicious releases are discovered and removed from the registry within an hour.
@@ -269,6 +270,19 @@ minimumReleaseAgeExclude:
 - webpack@4.47.0 || 5.102.1
 ```
 
+### minimumReleaseAgeIgnoreMissingTime
+
+Added in: v11.0.0
+
+* Default: **true**
+* Type: **Boolean**
+
+When `true`, pnpm skips the [`minimumReleaseAge`](#minimumreleaseage) check for a package whose registry metadata does not include the `time` field (some private registries and mirrors omit it). Set to `false` to fail resolution in that case instead of installing the package.
+
+```yaml
+minimumReleaseAgeIgnoreMissingTime: false
+```
+
 ### trustPolicy
 
 Added in: v10.21.0
@@ -320,6 +334,22 @@ This setting helps secure the dependency supply chain by preventing transitive d
 Exotic sources include:
 * Git repositories (`git+ssh://...`)
 * Direct URL links to tarballs (`https://.../package.tgz`)
+
+### registries
+
+Added in: v11.0.0
+
+* Default: **undefined**
+* Type: **Record&lt;string, string&gt;**
+
+Configure registries for scoped packages in `pnpm-workspace.yaml`. The `default` key sets the main registry (equivalent to the `registry` `.npmrc` setting). Scoped keys configure registries for specific package scopes.
+
+```yaml
+registries:
+  default: https://registry.npmjs.org/
+  "@my-org": https://private.example.com/
+  "@internal": https://nexus.corp.com/
+```
 
 ## Dependency Hoisting Settings
 
@@ -625,6 +655,65 @@ installation will fail.
 * Type: **Boolean**
 
 Some registries allow the exact same content to be published under different package names and/or versions. This breaks the validity checks of packages in the store. To avoid errors when verifying the names and versions of such packages in the store, you may set the `strictStorePkgContentCheck` setting to `false`.
+
+## Network Settings
+
+### httpsProxy
+
+* Default: **null**
+* Type: **url**
+
+A proxy to use for outgoing HTTPS requests. If the `HTTPS_PROXY`, `https_proxy`,
+`HTTP_PROXY` or `http_proxy` environment variables are set, their values will be
+used instead.
+
+If your proxy URL contains a username and password, make sure to URL-encode them.
+For instance:
+
+```yaml
+httpsProxy: "https://use%21r:pas%2As@my.proxy:1234/foo"
+```
+
+Do not encode the colon (`:`) between the username and password.
+
+### httpProxy
+
+* Default: **null**
+* Type: **url**
+
+A proxy to use for outgoing HTTP requests. If the `HTTP_PROXY` or `http_proxy`
+environment variables are set, proxy settings will be honored by the underlying
+request library.
+
+### noProxy
+
+* Default: **null**
+* Type: **String**
+
+A comma-separated string of domain extensions that a proxy should not be used for.
+
+### localAddress
+
+* Default: **undefined**
+* Type: **IP Address**
+
+The IP address of the local interface to use when making connections to the npm
+registry.
+
+### maxsockets
+
+* Default: **networkConcurrency x 3**
+* Type: **Number**
+
+The maximum number of connections to use per origin (protocol/host/port combination).
+
+### strictSsl
+
+* Default: **true**
+* Type: **Boolean**
+
+Whether or not to do SSL key validation when making requests to the registry via
+HTTPS.
 
 ## Lockfile Settings
 
@@ -987,34 +1076,44 @@ Regardless of this configuration, installation will always fail if a project
 
 The location of the npm binary that pnpm uses for some actions, like publishing.
 
-### packageManagerStrict
+### pmOnFail
 
-* Default: **true**
-* Type: **Boolean**
+Added in: v11.0.0
 
-If this setting is disabled, pnpm will not fail if a different package manager is specified in the `packageManager` field of `package.json`. When enabled, only the package name is checked (since pnpm v9.2.0), so you can still run any version of pnpm regardless of the version specified in the `packageManager` field.
+* Default: **download**
+* Type: **download**, **error**, **warn**, **ignore**
 
-Alternatively, you can disable this setting by setting the `COREPACK_ENABLE_STRICT` environment variable to `0`.
+Overrides the `onFail` behavior of both the `packageManager` field and `devEngines.packageManager` when the running pnpm version does not match the declared one.
 
-### packageManagerStrictVersion
+* `download` — download and run the declared pnpm version (this is the default and matches the previous `managePackageManagerVersions: true` behavior).
+* `error` — fail the command (equivalent to the previous `packageManagerStrictVersion: true`).
+* `warn` — print a warning but continue (equivalent to the previous `packageManagerStrict: false` or `COREPACK_ENABLE_STRICT=0`).
+* `ignore` — skip the check entirely (equivalent to the previous `managePackageManagerVersions: false`). Useful when version management is handled by an external tool such as asdf, mise, or Volta.
 
-* Default: **false**
-* Type: **Boolean**
+Can be set via CLI flag, environment variable, or `pnpm-workspace.yaml`:
 
-When enabled, pnpm will fail if its version doesn't exactly match the version specified in the `packageManager` field of `package.json`.
-
-### managePackageManagerVersions
-
-* Default: **true**
-* Type: **Boolean**
-
-When enabled, pnpm will automatically download and run the version of pnpm specified in the `packageManager` field of `package.json`. This is the same field used by Corepack. Example:
-
-```json
-{
-  "packageManager": "pnpm@9.3.0"
-}
+```sh
+pnpm install --pm-on-fail=ignore
+pnpm_config_pm_on_fail=ignore pnpm install
 ```
+
+```yaml title="pnpm-workspace.yaml"
+pmOnFail: ignore
+```
+
+This setting replaces the removed `managePackageManagerVersions`, `packageManagerStrict`, and `packageManagerStrictVersion` settings, as well as the `COREPACK_ENABLE_STRICT` environment variable.
+
+Migration:
+
+| Removed setting                       | Replace with                   |
+| ------------------------------------- | ------------------------------ |
+| `managePackageManagerVersions: true`  | `pmOnFail: download` (default) |
+| `managePackageManagerVersions: false` | `pmOnFail: ignore`             |
+| `packageManagerStrict: false`         | `pmOnFail: warn`               |
+| `packageManagerStrictVersion: true`   | `pmOnFail: error`              |
+| `COREPACK_ENABLE_STRICT=0`            | `pmOnFail: warn`               |
+
+See also [`pnpm with`](./cli/with.md) for running pnpm at a specific version without changing this setting.
 
 ## Build Settings
 
@@ -1031,21 +1130,6 @@ dependencies.
 This flag does not prevent the execution of [.pnpmfile.mjs](./pnpmfile.md)
 
 :::
-
-### ignoreDepScripts
-
-* Default: **false**
-* Type: **Boolean**
-
-Do not execute any scripts of the installed packages. Scripts of the projects are executed.
-
-:::note
-
-Since v10, pnpm doesn't run the lifecycle scripts of dependencies unless they are listed in [`allowBuilds`].
-
-:::
-
-[`allowBuilds`]: settings.md#allowbuilds
 
 ### childConcurrency
 
@@ -1138,6 +1222,34 @@ allowBuilds:
 
 **Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and an error is printed (since [`strictDepBuilds`](#strictdepbuilds) is `true` by default). If `strictDepBuilds` is set to `false`, a warning is printed instead.
 
+During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](./cli/add.md) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
+
+:::info Migrating from older settings
+
+The following settings have been removed in v11 and replaced by `allowBuilds`: `onlyBuiltDependencies`, `onlyBuiltDependenciesFile`, `neverBuiltDependencies`, `ignoredBuiltDependencies`, and `ignoreDepScripts`.
+
+Before:
+
+```yaml
+onlyBuiltDependencies:
+  - electron
+neverBuiltDependencies:
+  - core-js
+ignoredBuiltDependencies:
+  - esbuild
+```
+
+After:
+
+```yaml
+allowBuilds:
+  electron: true
+  core-js: false
+  esbuild: false
+```
+
+:::
+
 ### dangerouslyAllowAllBuilds
 
 Added in: v10.9.0
@@ -1178,22 +1290,36 @@ engineStrict: true
 
 This way, even if someone is using Node.js v16, they will not be able to install a new dependency that doesn't support Node.js v12.22.0.
 
-### node-mirror
+### runtimeOnFail
 
-* Default: **`https://nodejs.org/download/<releaseDir>/`**
-* Type: **URL**
+Added in: v11.0.0
 
-Sets the base URL for downloading Node.js. The `<releaseDir>` portion of this setting can be any directory from [https://nodejs.org/download]: `release`, `rc`, `nightly`, `v8-canary`, etc.
+* Default: **undefined**
+* Type: **download**, **error**, **warn**, **ignore**
 
-Here is how pnpm may be configured to download Node.js from Node.js mirror in China:
+Overrides the `onFail` field of [`devEngines.runtime`](./package_json.md#devenginesruntime) (and `engines.runtime`) in the root project's `package.json`. This is useful when you want a different local behavior than what is written in the manifest — for instance, forcing pnpm to download the declared runtime even when the manifest sets `onFail: "warn"`:
 
-```
-node-mirror:release=https://npmmirror.com/mirrors/node/
-node-mirror:rc=https://npmmirror.com/mirrors/node-rc/
-node-mirror:nightly=https://npmmirror.com/mirrors/node-nightly/
+```yaml title="pnpm-workspace.yaml"
+runtimeOnFail: download
 ```
 
-[https://nodejs.org/download]: https://nodejs.org/download
+### nodeDownloadMirrors
+
+Added in: v11.0.0
+
+* Default: **undefined**
+* Type: **Record&lt;string, string&gt;**
+
+Configure custom Node.js download mirrors in `pnpm-workspace.yaml`. The keys are release channels (`release`, `rc`, `nightly`, `v8-canary`, etc.) and the values are base URLs.
+
+Here is how pnpm may be configured to download Node.js from a mirror in China:
+
+```yaml
+nodeDownloadMirrors:
+  release: https://npmmirror.com/mirrors/node/
+  rc: https://npmmirror.com/mirrors/node-rc/
+  nightly: https://npmmirror.com/mirrors/node-nightly/
+```
 
 ## Other Settings
 
@@ -1253,6 +1379,15 @@ Allows to set the target directory for the bin files of globally installed packa
 In pnpm v11, globally installed binaries are stored in a `bin` subdirectory of `PNPM_HOME` instead of directly in `PNPM_HOME`. This prevents internal directories like `global/` and `store/` from polluting shell autocompletion when `PNPM_HOME` is on PATH. After upgrading, run `pnpm setup` to update your shell configuration.
 
 :::
+
+### npmrcAuthFile
+
+Added in: v11.0.0
+
+* Default: **~/.npmrc**
+* Type: **path**
+
+The path to a file containing registry authentication tokens. By default, pnpm reads auth tokens from `~/.npmrc` as a fallback for registry authentication. Use this setting to point to a different file instead.
 
 ### stateDir
 

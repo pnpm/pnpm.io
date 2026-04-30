@@ -6,16 +6,10 @@ const getHighestNumber = (array) => {
   return Math.max.apply(null, flattened)
 }
 
-const NPM_COLOR = '#cd3731'
-const YARN_COLOR = '#248ebd'
-const YARN_PNP_COLOR = '#40a9ff'
-const PNPM_COLOR = '#fbae00'
-const PNPM11_COLOR = '#f69220'
-
 export default (resultArrays, pms, tests, formattedNow) => {
   let svgStr = ''
-  // colors taken from logos (where possible)
-  const colors = [ NPM_COLOR, PNPM_COLOR, PNPM11_COLOR, YARN_COLOR, YARN_PNP_COLOR ]
+  // colors taken from logos (where possible) — supplied via pm.color in commandsMap.js
+  const colors = pms.map((pm) => pm.color)
   // empty areas next to the graph
   const offset = {
     left: 40,
@@ -94,7 +88,7 @@ export default (resultArrays, pms, tests, formattedNow) => {
     svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${pm.legend}</text>` + '\n'
 
     // add version under name
-    const text = `v${pm.version}`
+    const text = `v${pm.displayVersion ?? pm.version}`
     textY += 4
     svgStr += `  <text x="${x}" y="${textY}" class="font s3" text-anchor="${anchor}">${text}</text>` + '\n'
   })
@@ -157,6 +151,12 @@ export default (resultArrays, pms, tests, formattedNow) => {
       const length = Math.round(result * ratio)
       const x = graph.x
       svgStr += `  <rect x="${x}" y="${y}" width="${length}" height="${thickness}" fill="${colors[indexR]}" rx="${roundedCorners}" ry="${roundedCorners}"></rect>` + '\n'
+      const mascot = pms[indexR].mascot
+      if (mascot && result > 0) {
+        const mascotX = x + length + 2
+        const mascotY = y + thickness / 2
+        svgStr += `  <text x="${mascotX}" y="${mascotY}" class="font" font-size="7" dominant-baseline="central">${mascot}</text>` + '\n'
+      }
     })
   })
 

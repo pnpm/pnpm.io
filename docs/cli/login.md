@@ -15,6 +15,8 @@ pnpm login [--registry <url>] [--scope <scope>]
 
 Supports web-based login with QR code as well as classic username/password authentication.
 
+Auth tokens are written to [`<pnpm config>/auth.ini`](../npmrc.md#auth-file-locations).
+
 ## Options
 
 ### --registry &lt;url\>

@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Mar 30, 2026, 5:54 PM_ (_daily_ updated).
+**Last benchmarked at**: _Apr 27, 2026, 1:51 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -20,16 +20,27 @@ Here's a quick explanation of how these tests could apply to the real world:
 
 The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchmarks/fixtures/alotta-files/package.json)
 
-| action  | cache | lockfile | node_modules| npm | pnpm | pnpm v11 | Yarn | Yarn PnP |
+| action  | cache | lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
-| install |   |   |   | 31.3s | 7.6s | 8.8s | 7.4s | 3.6s |
-| install | ✔ | ✔ | ✔ | 1.2s | 677ms | 546ms | 5s | n/a |
-| install | ✔ | ✔ |   | 7.5s | 2s | 1.9s | 5.2s | 1.3s |
-| install | ✔ |   |   | 12.1s | 5.4s | 5.4s | 7.3s | 3s |
-| install |   | ✔ |   | 10.6s | 4.9s | 5s | 5.3s | 1.3s |
-| install | ✔ |   | ✔ | 1.7s | 2.1s | 2.2s | 6.9s | n/a |
-| install |   | ✔ | ✔ | 1.3s | 652ms | 538ms | 5.1s | n/a |
-| install |   |   | ✔ | 1.7s | 5.1s | 8.2s | 6.9s | n/a |
-| update | n/a | n/a | n/a | 6.5s | 3.1s | 3.4s | 5.6s | 3.1s |
+| install |   |   |   | 34s | 8.2s | n/a | 8.2s | 3.4s |
+| install | ✔ | ✔ | ✔ | 1.3s | 583ms | n/a | 5.8s | n/a |
+| install | ✔ | ✔ |   | 9.3s | 2.3s | 872ms | 5.9s | 1.3s |
+| install | ✔ |   |   | 13.9s | 4s | n/a | 8.1s | 2.9s |
+| install |   | ✔ |   | 12.3s | 4.7s | 3.1s | 5.9s | 1.3s |
+| install | ✔ |   | ✔ | 1.8s | 2.3s | n/a | 8s | n/a |
+| install |   | ✔ | ✔ | 1.3s | 585ms | n/a | 5.8s | n/a |
+| install |   |   | ✔ | 1.8s | 7s | n/a | 8s | n/a |
+| update | n/a | n/a | n/a | 6.9s | 3.2s | n/a | 6.7s | 2.9s |
 
 <img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg" />
+
+### pnpm vs pnpm 🦀
+
+pnpm v12 will use a new installation engine for fetching and linking written in Rust. See [pacquet](https://github.com/pnpm/pacquet).
+
+| action  | cache | lockfile | node_modules| pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) |
+| ---     | ---   | ---      | ---         | --- | --- |
+| install | ✔ | ✔ |   | 2.3s | 872ms |
+| install |   | ✔ |   | 4.7s | 3.1s |
+
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg" />

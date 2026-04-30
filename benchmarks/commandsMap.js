@@ -2,6 +2,7 @@ export default {
   npm: {
     scenario: 'npm',
     legend: 'npm',
+    color: '#cd3731',
     name: 'npm',
     args: [
       'install',
@@ -15,9 +16,10 @@ export default {
       // '--install-strategy=linked',
     ]
   },
-  pnpm: {
-    scenario: 'pnpm',
+  pnpm11: {
+    scenario: 'pnpm11',
     legend: 'pnpm',
+    color: '#fbae00',
     name: 'pnpm',
     args: [
       'install',
@@ -30,24 +32,23 @@ export default {
       '--config.resolution-mode=highest',
     ]
   },
-  pnpm11: {
-    scenario: 'pnpm11',
-    legend: 'pnpm v11',
-    name: 'pnpm',
+  pnpm12: {
+    scenario: 'pnpm12',
+    legend: 'pnpm 🦀',
+    mdLegend: '[pnpm 🦀](https://github.com/pnpm/pacquet)',
+    color: '#fbae00',
+    displayVersion: '12',
+    mascot: '🦀',
+    name: 'pacquet',
     args: [
       'install',
-      '--ignore-scripts',
-      '--store-dir=cache/store',
-      '--cache-dir=cache/cache',
-      '--registry=https://registry.npmjs.org/',
-      '--no-strict-peer-dependencies',
-      '--config.auto-install-peers=false',
-      '--config.resolution-mode=highest',
+      '--frozen-lockfile',
     ]
   },
   yarn: {
     scenario: 'yarn',
     legend: 'Yarn',
+    color: '#248ebd',
     name: 'yarn',
     args: [
       'install'
@@ -56,6 +57,7 @@ export default {
   yarn_pnp: {
     scenario: 'yarn_pnp',
     legend: 'Yarn PnP',
+    color: '#40a9ff',
     name: 'yarn',
     args: [
       'install'

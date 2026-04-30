@@ -100,6 +100,9 @@ async function updateDependenciesInPackageJson (cwd) {
 }
 
 export default async function benchmark (pm, fixture, opts) {
+  if (pm.name === 'pacquet') {
+    return benchmarkPacquet(pm, fixture, opts)
+  }
   const env = createEnv(opts.managersDir)
   const cwd = path.join(TMP, pm.scenario, fixture)
   cpSync(path.join(FIXTURES_DIR, fixture), cwd, { recursive: true })
@@ -248,4 +251,45 @@ function spawnSyncOrThrow (cmd, opts) {
     throw new Error(`${cmd.name} failed with status code ${result.status}`)
   }
   return result;
+}
+
+async function benchmarkPacquet (pm, fixture, opts) {
+  const cwd = path.join(TMP, pm.scenario, fixture)
+  cpSync(path.join(FIXTURES_DIR, fixture), cwd, { recursive: true })
+
+  const prepPm = opts.prepPm
+  const prepEnv = createEnv(opts.prepManagersDir)
+  // Prep with pnpm to generate the lockfile and warm the store.
+  // pacquet shares pnpm's store layout at $PNPM_HOME/store, which lines up
+  // with pnpm's --store-dir=cache/store.
+  cleanLockfile(prepPm, cwd, prepEnv)
+  spawnSyncOrThrow(prepPm, { env: prepEnv, cwd, stdio: 'inherit' })
+  rimraf.sync(path.join(cwd, 'node_modules'))
+
+  const env = { ...createEnv(opts.managersDir), PNPM_HOME: path.join(cwd, 'cache') }
+
+  console.log('# with warm cache and lockfile')
+  const withWarmCacheAndLockfile = measureInstall(pm, cwd, env)
+
+  rimraf.sync(path.join(cwd, 'node_modules'))
+  rimraf.sync(path.join(cwd, 'cache'))
+
+  console.log('# with lockfile')
+  const withLockfile = measureInstall(pm, cwd, env)
+
+  const size = await getFolderSize(path.join(cwd, 'cache')).size
+
+  rimraf.sync(cwd)
+  return {
+    firstInstall: 0,
+    repeatInstall: 0,
+    withWarmCacheAndLockfile,
+    withWarmCache: 0,
+    withLockfile,
+    withWarmCacheAndModules: 0,
+    withWarmModulesAndLockfile: 0,
+    withWarmModules: 0,
+    updatedDependencies: 0,
+    size,
+  }
 }

@@ -10,6 +10,12 @@ pnpm [-r] publish [<tarball|folder>] [--tag <tag>]
      [--access <public|restricted>] [options]
 ```
 
+:::note
+
+Since v11, `pnpm publish` is implemented natively and no longer delegates to the `npm` CLI. If you rely on a feature that is now gone, please open an issue at [pnpm/pnpm](https://github.com/pnpm/pnpm/issues). As a workaround, you can still run `pnpm pack && npm publish *.tgz`.
+
+:::
+
 When publishing a package inside a [workspace](../workspaces.md), the LICENSE file
 from the root of the workspace is packed with the package (unless the package
 has a license of its own).

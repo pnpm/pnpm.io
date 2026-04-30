@@ -1,0 +1,47 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 83">
+  <style>
+    .font { font-family: sans-serif; }
+    .s3 { font-size: 3px; }
+    .s4 { font-size: 4px; }
+    .s5 { font-size: 5px; }
+    .line { stroke: #cacaca; }
+    .width { stroke-width: 0.5; }
+    .text { fill: #888; }
+  </style>
+  <rect x="0" y="0" width="300" height="83" fill="#fff"></rect>
+  <circle cx="44" cy="6" r="4" fill="#fbae00"></circle>
+  <text x="44" y="14" class="font s4" text-anchor="middle">pnpm</text>
+  <text x="44" y="18" class="font s3" text-anchor="middle">v11.0.0-rc.5</text>
+  <circle cx="60" cy="6" r="4" fill="#fbae00"></circle>
+  <text x="60" y="14" class="font s4" text-anchor="middle">pnpm 🦀</text>
+  <text x="60" y="18" class="font s3" text-anchor="middle">v12</text>
+  <text x="40" y="28" class="font s5 text" text-anchor="middle">0</text>
+  <text x="40" y="74" class="font s5 text" text-anchor="middle">0</text>
+  <line x1="90" y1="31" x2="90" y2="69" class="line width"></line>
+  <text x="90" y="28" class="font s5 text" text-anchor="middle">1</text>
+  <text x="90" y="74" class="font s5 text" text-anchor="middle">1</text>
+  <line x1="140" y1="31" x2="140" y2="69" class="line width"></line>
+  <text x="140" y="28" class="font s5 text" text-anchor="middle">2</text>
+  <text x="140" y="74" class="font s5 text" text-anchor="middle">2</text>
+  <line x1="190" y1="31" x2="190" y2="69" class="line width"></line>
+  <text x="190" y="28" class="font s5 text" text-anchor="middle">3</text>
+  <text x="190" y="74" class="font s5 text" text-anchor="middle">3</text>
+  <line x1="240" y1="31" x2="240" y2="69" class="line width"></line>
+  <text x="240" y="28" class="font s5 text" text-anchor="middle">4</text>
+  <text x="240" y="74" class="font s5 text" text-anchor="middle">4</text>
+  <line x1="290" y1="31" x2="290" y2="69" class="line width"></line>
+  <text x="290" y="28" class="font s5 text" text-anchor="middle">5</text>
+  <text x="290" y="74" class="font s5 text" text-anchor="middle">5</text>
+  <text x="290" y="20" class="font s4 text" font-style="italic" text-anchor="end">Installation time in seconds (lower is better)</text>
+  <rect x="40" y="35" width="115" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="41.5" width="45" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="87" y="44.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="52" width="240" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="58.5" width="160" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="202" y="61.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <line x1="40" y1="31" x2="40" y2="69" class="line"></line>
+  <text x="38" y="42.5" class="font s4" dominant-baseline="middle" text-anchor="end">with cache</text>
+  <text x="38" y="46.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
+  <text x="38" y="61.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
+  <text x="290" y="81" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.14.1 at: Apr 27, 2026, 1:51 PM</text>
+</svg>

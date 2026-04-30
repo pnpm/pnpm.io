@@ -11,6 +11,12 @@ In all the provided configuration files the store is cached. However, this is no
 
 :::
 
+:::tip Lockfile behavior in CI
+
+When pnpm detects that it is running in CI, it switches to frozen-lockfile mode automatically. Since v11, pnpm also fails on incompatible lockfiles in CI — if the lockfile was written by a newer pnpm major version, the install will error out instead of silently rewriting it. Upgrade your CI pnpm version to match the one used to generate the lockfile.
+
+:::
+
 ## AppVeyor
 
 On [AppVeyor], you can use pnpm for installing your dependencies by adding this
@@ -137,7 +143,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Install pnpm
-        uses: pnpm/action-setup@v5
+        uses: pnpm/action-setup@08c4be7e2e672a47d11bd04269e27e5f3e8529cb # v6.0.0
         with:
           version: 11
       - name: Use Node.js ${{ matrix.node-version }}

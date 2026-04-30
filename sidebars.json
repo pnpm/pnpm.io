@@ -52,7 +52,9 @@
           "cli/why",
           "cli/licenses",
           "cli/peers",
-          "cli/view"
+          "cli/view",
+          "cli/search",
+          "cli/docs"
         ]
       },
       {
@@ -92,10 +94,19 @@
         "label": "Misc.",
         "items": [
           "cli/login",
+          "cli/logout",
+          "cli/whoami",
           "cli/self-update",
+          "cli/with",
           "cli/version",
           "cli/publish",
           "cli/pack",
+          "cli/pack-app",
+          "cli/deprecate",
+          "cli/unpublish",
+          "cli/dist-tag",
+          "cli/star",
+          "cli/ping",
           "cli/recursive",
           "cli/store",
           "cli/root",
@@ -140,6 +151,7 @@
       "podman"
     ],
     "Advanced": [
+      "migration",
       "errors",
       "logos",
       "limitations",

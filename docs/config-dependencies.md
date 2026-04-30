@@ -7,17 +7,17 @@ Config dependencies allow you to share and centralize configuration files, setti
 
 Config dependencies help you keep all the hooks, settings, patches, overrides, catalogs, rules in a single place and use them across multiple repositories.
 
-If your config dependency is named following the `pnpm-plugin-*` or `@*/pnpm-plugin-*` pattern, pnpm will automatically load the `pnpmfile.cjs` from its root.
+If your config dependency is named following the `pnpm-plugin-*`, `@*/pnpm-plugin-*`, or `@pnpm/plugin-*` pattern, pnpm will automatically load its `pnpmfile.mjs` (falling back to `pnpmfile.cjs`) from the package root.
 
 ## How to Add a Config Dependency
 
-Config dependencies are defined in your `pnpm-workspace.yaml` and must be installed using an exact version and an integrity checksum.
+Config dependencies are defined in your `pnpm-workspace.yaml`. Their integrity checksums are stored in `pnpm-lock.yaml` (in a dedicated env lockfile document).
 
 For example, running `pnpm add --config my-configs` will add this entry to your `pnpm-workspace.yaml`:
 
 ```yaml title="pnpm-workspace.yaml"
 configDependencies:
-  my-configs: "1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="
+  my-configs: "1.0.0"
 ```
 
 **Important:**
@@ -94,7 +94,7 @@ Example:
 
 ```yaml title="pnpm-workspace.yaml"
 configDependencies:
-  my-patches: "1.0.0+sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw=="
+  my-patches: "1.0.0"
 patchedDependencies:
   react: "node_modules/.pnpm-config/my-patches/react.patch"
 ```

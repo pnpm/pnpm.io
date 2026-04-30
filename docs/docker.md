@@ -13,6 +13,66 @@ The next best thing you can do is using BuildKit cache mount to share cache betw
 
 [podman]: ./podman.md
 
+## Official pnpm base image
+
+An official pnpm base image is published to GitHub Container Registry as [`ghcr.io/pnpm/pnpm`](https://github.com/pnpm/pnpm/pkgs/container/pnpm). It is based on `debian:stable-slim` and contains only the pnpm [standalone binary] — Node.js is **not** bundled. This lets you pick the Node.js version yourself (inside your Dockerfile or at runtime) instead of being locked to whatever Node version a base image ships with.
+
+[standalone binary]: ./installation.md#using-a-standalone-script
+
+### Tags
+
+| Tag                   | Meaning                                                                 |
+| --------------------- | ----------------------------------------------------------------------- |
+| `<version>`           | Exact, immutable (e.g. `11.0.0`). Includes prereleases.                 |
+| `<major>`             | Tracks the latest stable release within that major (e.g. `11`).         |
+| `latest`              | Most recent stable pnpm release. Not updated for prereleases.           |
+
+Supported platforms: `linux/amd64`, `linux/arm64`.
+
+### Installing Node.js
+
+Use [`pnpm runtime set`](./cli/runtime.md) with the global flag so the `node` binary is discoverable on `PATH` in subsequent layers and at runtime:
+
+```dockerfile
+FROM ghcr.io/pnpm/pnpm:latest
+RUN pnpm runtime set node 22 -g
+WORKDIR /app
+COPY . .
+RUN pnpm install --frozen-lockfile
+CMD ["node", "index.js"]
+```
+
+Or let pnpm install Node.js automatically from [`devEngines.runtime`](./package_json.md#devenginesruntime) in your `package.json`:
+
+```json title="package.json"
+{
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "22.x",
+      "onFail": "download"
+    }
+  }
+}
+```
+
+```dockerfile
+FROM ghcr.io/pnpm/pnpm:latest
+WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+COPY . .
+CMD ["pnpm", "start"]
+```
+
+### When to use this image
+
+- You want the Node.js version to be pinned by your project (via `pnpm runtime set` or `devEngines.runtime`) rather than by the base image.
+- You want to upgrade pnpm and Node.js independently.
+- You prefer a minimal Debian base without the Node.js build toolchain.
+
+If you already have a preferred Node.js base image (e.g. `node:XX-slim`), the recipes further down this page remain a fine choice.
+
 ## Minimizing Docker image size and build time
 
 * Use a small image, e.g. `node:XX-slim`.

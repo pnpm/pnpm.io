@@ -15,7 +15,7 @@ You can prevent transitive dependencies from using exotic sources (like git repo
  
 ### Delay dependency updates
  
-Another way to reduce the risk of installing compromised packages is to delay updates to your dependencies. Since malware is usually detected quickly, delaying updates by 24 hours will most likely prevent you from installing a bad version. The [minimumReleaseAge] setting defines the minimum number of minutes that must pass after a version is published before pnpm will install it. For example, set it to `1440` to wait one day, or `10080` to wait one week before installing a new version.
+Another way to reduce the risk of installing compromised packages is to delay updates to your dependencies. Since malware is usually detected quickly, delaying updates by 24 hours will most likely prevent you from installing a bad version. The [minimumReleaseAge] setting defines the minimum number of minutes that must pass after a version is published before pnpm will install it. In pnpm v11, this defaults to `1440` (1 day), meaning newly published packages will not be resolved until they are at least 1 day old. To opt out, set `minimumReleaseAge: 0` in `pnpm-workspace.yaml`. You can also set it to `10080` to wait one week before installing a new version.
  
 ### Enforce trust with trustPolicy
  
