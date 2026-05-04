@@ -48,7 +48,7 @@ Tracking:
 * [nodejs/node#59553](https://github.com/nodejs/node/issues/59553) — long-running SEA test failures on macOS x64 with the same root cause
 * [nodejs/node#60250](https://github.com/nodejs/node/pull/60250) — Node.js skipping the SEA tests on x64 macOS rather than fixing them
 
-If you need to ship a CLI that runs on Intel Macs, build the `darwin-x64` artifact with a non-SEA tool such as [`@yao-pkg/pkg`](https://github.com/yao-pkg/pkg) (which appends to the binary tail rather than mutating Mach-O sections), or skip the target and direct users to the `darwin-arm64` build under Rosetta.
+If you need to ship a CLI that runs on Intel Macs, build the `darwin-x64` artifact with a non-SEA tool such as [`@yao-pkg/pkg`](https://github.com/yao-pkg/pkg) (which appends to the binary tail rather than mutating Mach-O sections). Note that Rosetta is *not* an escape hatch — it only translates x64 → arm64 (for Apple Silicon Macs running Intel binaries), not the other direction, so Intel Macs cannot run a `darwin-arm64` build.
 
 ## Examples
 
