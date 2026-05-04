@@ -38,7 +38,7 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 
 :::warning Not supported on Intel macOS
 
-The standalone script does not produce a working pnpm binary on Intel Macs (`darwin-x64`) — the script downloads `pnpm-darwin-x64.tar.gz` from the v11 release, but that artifact is no longer published due to an upstream Node.js SEA bug ([nodejs/node#62893](https://github.com/nodejs/node/issues/62893)) that the Node.js team has [opted not to fix](https://github.com/nodejs/node/pull/60250). Intel Mac users should install pnpm via [npm](#using-npm), [Corepack](#using-corepack), or [Homebrew](#using-homebrew) instead — those all use the JavaScript-only `pnpm` package, which runs against your system Node.js. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for the full context.
+The standalone script does not run on Intel Macs (`darwin-x64`). Use [npm](#using-npm), [Corepack](#using-corepack), or [Homebrew](#using-homebrew) instead. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for context.
 
 :::
 
