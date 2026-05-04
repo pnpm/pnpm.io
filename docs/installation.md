@@ -36,6 +36,12 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 
 ### On POSIX systems
 
+:::warning Not supported on Intel macOS
+
+The standalone script does not produce a working pnpm binary on Intel Macs (`darwin-x64`) — the script downloads `pnpm-darwin-x64.tar.gz` from the v11 release, but that artifact is no longer published due to an upstream Node.js SEA bug ([nodejs/node#62893](https://github.com/nodejs/node/issues/62893)) that the Node.js team has [opted not to fix](https://github.com/nodejs/node/pull/60250). Intel Mac users should install pnpm via [npm](#using-npm), [Corepack](#using-corepack), or [Homebrew](#using-homebrew) instead — those all use the JavaScript-only `pnpm` package, which runs against your system Node.js. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for the full context.
+
+:::
+
 ```sh
 curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.4 sh -
 ```
@@ -108,7 +114,7 @@ This will add a `"packageManager"` field in your local `package.json` which will
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
 - [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run. Since v11, pnpm is distributed as pure ESM.
-- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. The standalone Linux executable requires at least glibc 2.27.
+- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. The standalone Linux executable requires at least glibc 2.27. **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
 
 ```sh
 npx pnpm@next-11 dlx @pnpm/exe@next-11 setup
