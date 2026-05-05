@@ -37,7 +37,7 @@ The global `rc` file (for registry and auth settings only) is at:
 
 ## Environment variables
 
-Environment variables whose names start with `pnpm_config_` are loaded into configuration. These override settings from `pnpm-workspace.yaml` but not CLI arguments.
+Environment variables whose names start with `pnpm_config_` (or `PNPM_CONFIG_`) are loaded into configuration. These override settings from `pnpm-workspace.yaml` but not CLI arguments.
 
 :::warning
 
