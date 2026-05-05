@@ -283,6 +283,21 @@ When `true`, pnpm skips the [`minimumReleaseAge`](#minimumreleaseage) check for 
 minimumReleaseAgeIgnoreMissingTime: false
 ```
 
+### minimumReleaseAgeStrict
+
+Added in: v11.0.0
+
+* Default: **true** if [`minimumReleaseAge`](#minimumreleaseage) is explicitly configured, **false** otherwise
+* Type: **Boolean**
+
+Controls how pnpm behaves when no version of a dependency satisfies the [`minimumReleaseAge`](#minimumreleaseage) constraint within the requested range. When `false`, pnpm falls back to a version that doesn't meet the `minimumReleaseAge` constraint so installation can still succeed. When `true`, pnpm fails resolution instead.
+
+The default depends on whether you configured `minimumReleaseAge` yourself: if you set it explicitly (via `pnpm-workspace.yaml`, the CLI, or environment variables), strict mode is on by default so the setting is enforced. The built-in default of `minimumReleaseAge` (1440 minutes) is non-strict for backward compatibility.
+
+```yaml
+minimumReleaseAgeStrict: true
+```
+
 ### trustPolicy
 
 Added in: v10.21.0
@@ -930,7 +945,7 @@ In this case, we cannot dedupe `webpack` as `webpack` has `react` in its peer de
 
 ### dedupePeers
 
-Added in: v11.0.0
+Added in: v10.33.0
 
 * Default: **false**
 * Type: **Boolean**

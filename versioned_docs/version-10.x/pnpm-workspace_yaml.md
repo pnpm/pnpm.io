@@ -4,8 +4,8 @@ title: pnpm-workspace.yaml
 ---
 
 `pnpm-workspace.yaml` defines the root of the [workspace] and enables you to
-include / exclude directories from the workspace. By default, all packages of
-all subdirectories are included.
+include / exclude directories from the workspace. If the `packages` field is
+omitted, only the root package is included in the workspace.
 
 For example:
 

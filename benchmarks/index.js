@@ -1,4 +1,5 @@
 'use strict'
+import crypto from 'crypto'
 import fs from 'fs'
 import rimraf from 'rimraf'
 import commonTags from 'common-tags'
@@ -180,6 +181,8 @@ async function run () {
       return `| ${action} | ${cache} | ${lockfile} | ${nodeModules} | ${values} |`
     }).join('\n')
 
+    const mainSvg = generateSvg(resArray, pms.map(pm => cmdsMap[pm]), testDescriptions, formattedNow)
+    const mainSvgHash = hashContent(mainSvg)
     sections.push(stripIndents`
       ${fixture.mdDesc}
 
@@ -187,12 +190,12 @@ async function run () {
       | ---     | ---   | ---      | ---         | ${headerSep} |
       ${rows}
 
-      <img alt="Graph of the ${fixture.name} results" src="/img/benchmarks/${fixture.name}.svg" />
+      <img alt="Graph of the ${fixture.name} results" src="/img/benchmarks/${fixture.name}.svg?v=${mainSvgHash}" />
     `)
 
     svgs.push({
       path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
-      file: generateSvg(resArray, pms.map(pm => cmdsMap[pm]), testDescriptions, formattedNow)
+      file: mainSvg
     })
 
     // pnpm-only comparison: include only scenarios that every selected pnpm version supports.
@@ -224,6 +227,8 @@ async function run () {
     }).join('\n')
 
     const pnpmTitle = pnpmConfigs.map(({ key }) => cmdsMap[key].legend).join(' vs ')
+    const pnpmSvg = generateSvg(pnpmResArray, pnpmConfigs.map(({ key }) => cmdsMap[key]), pnpmTestDescriptions, formattedNow)
+    const pnpmSvgHash = hashContent(pnpmSvg)
     sections.push(stripIndents`
       ### ${pnpmTitle}
 
@@ -233,12 +238,12 @@ async function run () {
       | ---     | ---   | ---      | ---         | ${pnpmHeaderSep} |
       ${pnpmRows}
 
-      <img alt="Graph comparing pnpm versions on the ${fixture.name} fixture" src="/img/benchmarks/${fixture.name}-pnpm.svg" />
+      <img alt="Graph comparing pnpm versions on the ${fixture.name} fixture" src="/img/benchmarks/${fixture.name}-pnpm.svg?v=${pnpmSvgHash}" />
     `)
 
     svgs.push({
       path: path.join(BENCH_IMGS, `${fixture.name}-pnpm.svg`),
-      file: generateSvg(pnpmResArray, pnpmConfigs.map(({ key }) => cmdsMap[key]), pnpmTestDescriptions, formattedNow)
+      file: pnpmSvg
     })
   }
 
@@ -295,4 +300,8 @@ function min (benchmarkResults) {
 
 function sum (a, b) {
   return a + b
+}
+
+function hashContent (content) {
+  return crypto.createHash('sha256').update(content).digest('hex').slice(0, 8)
 }
