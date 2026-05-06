@@ -37,7 +37,6 @@ dist
 FROM node:24-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install --global corepack@latest
 RUN corepack enable
 COPY . /app
 WORKDIR /app
@@ -108,7 +107,6 @@ dist
 FROM node:24-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install --global corepack@latest
 RUN corepack enable
 
 FROM base AS build
@@ -150,7 +148,6 @@ FROM node:24-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install --global corepack@latest
 RUN corepack enable
 
 FROM base AS prod
