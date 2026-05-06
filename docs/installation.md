@@ -24,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION = "11.0.6"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION = "11.0.7"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -43,13 +43,13 @@ The standalone script does not run on Intel Macs (`darwin-x64`). Use [npm](#usin
 :::
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.6 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.7 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.6 sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.7 sh -
 ```
 
 :::tip
