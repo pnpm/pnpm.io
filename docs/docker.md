@@ -94,7 +94,7 @@ dist
 ```
 
 ```dockerfile title="Dockerfile"
-FROM node:20-slim AS base
+FROM node:24-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
@@ -164,7 +164,7 @@ dist
 ```
 
 ```dockerfile title="Dockerfile"
-FROM node:20-slim AS base
+FROM node:24-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
@@ -204,7 +204,7 @@ On CI or CD environments, the BuildKit cache mounts might not be available, beca
 So an alternative is to use a typical Dockerfile with layers that are built incrementally, for this scenario, `pnpm fetch` is the best option, as it only needs the `pnpm-lock.yaml` file and the layer cache will only be lost when you change the dependencies.
 
 ```dockerfile title="Dockerfile"
-FROM node:20-slim AS base
+FROM node:24-slim AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
