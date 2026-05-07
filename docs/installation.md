@@ -24,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION = "11.0.8"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -43,13 +43,13 @@ The standalone script does not run on Intel Macs (`darwin-x64`). Use [npm](#usin
 :::
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.8 sh -
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=11.0.8 sh -
+wget -qO- https://get.pnpm.io/install.sh | sh -
 ```
 
 :::tip
@@ -102,7 +102,7 @@ This will automatically install pnpm on your system.
 You can pin the version of pnpm used on your project using the following command:
 
 ```
-corepack use pnpm@next-11
+corepack use pnpm@latest-11
 ```
 
 This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
@@ -117,13 +117,13 @@ We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 - [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. The standalone Linux executable requires at least glibc 2.27. **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
 
 ```sh
-npx pnpm@next-11 dlx @pnpm/exe@next-11 setup
+npx pnpm@latest-11 dlx @pnpm/exe@latest-11 setup
 ```
 
 or
 
 ```sh
-npm install -g pnpm@next-11
+npm install -g pnpm@latest-11
 ```
 
 ### Using Homebrew

@@ -19,7 +19,7 @@ const LOCALE_FULL_CODE: Record<string, string> = {
 
 const PROJECT_NAME = 'pnpm.io'
 
-const lastDocsVersion = '10.x';
+const lastDocsVersion = '11.x';
 
 function makeEditUrl (locale: string, path1: string, path2: string): string {
   // Link to Crowdin for non-English docs

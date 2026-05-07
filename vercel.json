@@ -22,7 +22,7 @@
   ],
   "redirects": [
     {
-      "source": "/10.x/:splat*",
+      "source": "/11.x/:splat*",
       "destination": "/:splat*",
       "permanent": false
     },

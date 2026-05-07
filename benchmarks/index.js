@@ -124,7 +124,7 @@ async function run () {
     fs.writeFileSync(path.join(dir, 'package.json'), '{}', 'utf8')
   }
   spawn.sync('pnpm', ['add', 'npm@latest'], { cwd: managersDirs.npm, stdio: 'inherit' })
-  spawn.sync('pnpm', ['add', 'pnpm@next-11'], { cwd: managersDirs.pnpm11, stdio: 'inherit' })
+  spawn.sync('pnpm', ['add', 'pnpm@latest'], { cwd: managersDirs.pnpm11, stdio: 'inherit' })
   spawn.sync('pnpm', ['add', 'pacquet@latest'], { cwd: managersDirs.pnpm12, stdio: 'inherit' })
   spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDirs.yarn, stdio: 'inherit' })
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
