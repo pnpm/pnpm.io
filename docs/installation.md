@@ -52,6 +52,16 @@ If you don't have curl installed, you would like to use wget:
 wget -qO- https://get.pnpm.io/install.sh | sh -
 ```
 
+:::info Linux runtime requirements
+
+The Linux executable links against glibc (2.27 or newer) and `libatomic.so.1`. Both are present on most full distros but may be missing from minimal container images. If you see `error while loading shared libraries: libatomic.so.1`, install it with your distro's package manager:
+
+- Debian/Ubuntu: `apt-get install -y libatomic1`
+- Fedora/RHEL: `dnf install -y libatomic`
+- Alpine and other musl-based distros are not supported by this build — use the `pnpm` npm package with Node.js instead.
+
+:::
+
 :::tip
 
 You may use the [pnpm runtime] command then to install Node.js.
@@ -114,7 +124,7 @@ This will add a `"packageManager"` field in your local `package.json` which will
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
 - [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run. Since v11, pnpm is distributed as pure ESM.
-- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. The standalone Linux executable requires at least glibc 2.27. **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
+- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. The standalone Linux executable requires glibc 2.27 or newer and `libatomic.so.1` (see [Linux runtime requirements](#on-posix-systems) for details). **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
 
 ```sh
 npx pnpm@latest-11 dlx @pnpm/exe@latest-11 setup
