@@ -54,11 +54,10 @@ wget -qO- https://get.pnpm.io/install.sh | sh -
 
 :::info Linux runtime requirements
 
-The Linux executable links against glibc (2.27 or newer) and `libatomic.so.1`. Both are present on most full distros but may be missing from minimal container images. If you see `error while loading shared libraries: libatomic.so.1`, install it with your distro's package manager:
+The install script picks a glibc or musl build based on your system's libc, and a separate musl build is provided for Alpine and other musl-based distros. The glibc build requires glibc 2.27 or newer plus `libatomic.so.1` — both are present on most full distros but may be missing from minimal container images. If you see `error while loading shared libraries: libatomic.so.1`, install it with your distro's package manager:
 
 - Debian/Ubuntu: `apt-get install -y libatomic1`
 - Fedora/RHEL: `dnf install -y libatomic`
-- Alpine and other musl-based distros are not supported by this build — use the `pnpm` npm package with Node.js instead.
 
 :::
 
@@ -124,7 +123,7 @@ This will add a `"packageManager"` field in your local `package.json` which will
 We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 
 - [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run. Since v11, pnpm is distributed as pure ESM.
-- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. The standalone Linux executable requires glibc 2.27 or newer and `libatomic.so.1` (see [Linux runtime requirements](#on-posix-systems) for details). **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
+- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. On Linux, glibc and musl builds are both provided and the right one is selected automatically; the glibc build requires glibc 2.27 or newer and `libatomic.so.1` (see [Linux runtime requirements](#on-posix-systems) for details). **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
 
 ```sh
 npx pnpm@latest-11 dlx @pnpm/exe@latest-11 setup
