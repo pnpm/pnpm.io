@@ -1053,6 +1053,18 @@ Controls colors in the output.
 Any logs at or higher than the given level will be shown.
 You can instead pass `--silent` to turn off all output logs.
 
+### reporter
+
+* Default: **default**
+* Type: **silent**, **default**, **append-only**, **ndjson**
+
+Allows you to customize the output style of the logs.
+
+* **silent** - no output is logged to the console, not even fatal errors.
+* **default** - the default reporter when the stdout is a terminal or TTY.
+* **append-only** - the output is always appended to the end. No cursor manipulations are performed. This is useful in CI environments or when you want to see full log output.
+* **ndjson** - the most verbose reporter. Prints all logs in [ndjson](https://github.com/ndjson/ndjson-spec) format.
+
 ### useBetaCli
 
 * Default: **false**
