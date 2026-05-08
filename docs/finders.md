@@ -85,7 +85,7 @@ Output:
     license: MIT
 ```
 
-Othere example use cases:
+Other example use cases:
 * Find all packages with a specific license.
 * Detect packages requiring a minimum Node.js version.
 * List all dependencies that expose binaries.

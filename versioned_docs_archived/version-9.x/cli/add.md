@@ -152,7 +152,7 @@ pnpm add https://github.com/zkochan/is-negative.git#2.0.1
 
 #### Install from a Git repository using hosting providers shorthand
 
-You can use a protocol shorthand `[provier]:` for certain Git providers:
+You can use a protocol shorthand `[provider]:` for certain Git providers:
 
 ```
 pnpm add github:zkochan/is-negative
@@ -160,7 +160,7 @@ pnpm add bitbucket:pnpmjs/git-resolver
 pnpm add gitlab:pnpm/git-resolver
 ```
 
-If `[provider]:` is omited, it defaults to `github:`.
+If `[provider]:` is omitted, it defaults to `github:`.
 
 #### Install from a Git repository combining different parameters
 
