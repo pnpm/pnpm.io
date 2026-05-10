@@ -6,7 +6,9 @@
   --ifm-color-primary-dark: #F0850A;
   --ifm-color-primary-darker: #E37D09;
   --ifm-color-primary-darkest: #BB6708;
-  --ifm-font-family-base: ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  /* Respect https://github.com/pnpm/pnpm.io/pull/446 and don't use system-ui here, as this is not a part of WebView of desktop applications or widgets */
+  /* Refer to https://github.com/withastro/starlight/pull/3729/changes#diff-3e03f77157bcc4a066397ec53cae30394deec0bf418621d96a3bc93e4c0de390 */
+  --ifm-font-family-base: ui-sans-serif, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .header-github-link::before {
