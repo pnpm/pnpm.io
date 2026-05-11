@@ -366,6 +366,27 @@ registries:
   "@internal": https://nexus.corp.com/
 ```
 
+### namedRegistries
+
+Added in: v11.1.0
+
+* Default: **undefined**
+* Type: **Record&lt;string, string&gt;**
+
+Defines named registry aliases that can be used as a prefix when installing packages, in the style of [vlt's named-registry aliases](https://docs.vlt.sh/cli/registries). For example, with the following configuration:
+
+```yaml title="pnpm-workspace.yaml"
+namedRegistries:
+  gh: https://npm.pkg.github.example.com/
+  work: https://npm.work.example.com/
+```
+
+`pnpm add work:@corp/lib@^2.0.0` resolves `@corp/lib@^2.0.0` against `https://npm.work.example.com/`.
+
+The `gh:` alias is built in and points at the [GitHub Packages npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry) (`https://npm.pkg.github.com/`) by default. Override it under `namedRegistries` for GitHub Enterprise Server.
+
+Authentication is picked up from the existing per-URL `.npmrc` entries (e.g. `//npm.pkg.github.com/:_authToken=...`), so no separate auth mechanism is required.
+
 ## Dependency Hoisting Settings
 
 ### hoist

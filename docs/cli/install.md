@@ -55,6 +55,16 @@ were already installed.
 
 `optionalDependencies` are not installed.
 
+### --no-runtime
+
+Added in: v11.1.0
+
+Skip installing runtime entries (e.g. Node.js downloaded via [`devEngines.runtime`](../package_json.md#devenginesruntime)). The lockfile is left untouched, so frozen installs still validate; only the runtime fetch and bin-linking are skipped.
+
+This is useful in CI matrices where the runtime is provisioned externally (e.g. via `pnpm runtime -g set node <version>`) before `pnpm install` runs.
+
+This can also be set via the `runtime=false` config in `pnpm-workspace.yaml`.
+
 ## Options
 
 ### --force

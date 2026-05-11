@@ -173,6 +173,10 @@
             {
               "type": "doc",
               "id": "cli/docs"
+            },
+            {
+              "type": "doc",
+              "id": "cli/bugs"
             }
           ]
         },
@@ -316,6 +320,10 @@
             {
               "type": "doc",
               "id": "cli/dist-tag"
+            },
+            {
+              "type": "doc",
+              "id": "cli/owner"
             },
             {
               "type": "doc",

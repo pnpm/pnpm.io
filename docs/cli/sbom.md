@@ -33,6 +33,15 @@ The SBOM output format. This option is required. Supported values: `cyclonedx`, 
 
 The component type for the root package.
 
+### --sbom-spec-version &lt;version\>
+
+Added in: v11.1.0
+
+* Default: **1.7**
+* Type: **1.5**, **1.6**, **1.7**
+
+The CycloneDX specification version to emit. Only valid with `--sbom-format cyclonedx`.
+
 ### --lockfile-only
 
 Only use lockfile data (skip reading from the store).
