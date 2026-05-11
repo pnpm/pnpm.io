@@ -24,6 +24,20 @@ Since v11, `pnpm audit` queries the registry's `/-/npm/v1/security/advisories/bu
 [overrides]: ../settings.md#overrides
 [`auditConfig.ignoreGhsas`]: #auditconfigignoreghsas
 
+## Commands
+
+### signatures
+
+Added in: v11.1.0
+
+```sh
+pnpm audit signatures
+```
+
+Verifies the ECDSA registry signatures of installed packages against the public keys published by each registry at `/-/npm/v1/keys`. Scoped registries configured via [`registries`](../settings.md#registries) are respected; registries that don't publish signing keys are skipped.
+
+The command exits with code `1` if any package has an invalid signature, or if a registry advertises signing keys but a package was published without a signature. Combine with `--json` to get machine-readable output.
+
 ## Options
 
 ### --audit-level &lt;severity\>

@@ -54,7 +54,8 @@
           "cli/peers",
           "cli/view",
           "cli/search",
-          "cli/docs"
+          "cli/docs",
+          "cli/bugs"
         ]
       },
       {
@@ -105,6 +106,7 @@
           "cli/deprecate",
           "cli/unpublish",
           "cli/dist-tag",
+          "cli/owner",
           "cli/star",
           "cli/ping",
           "cli/recursive",
