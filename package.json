@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@algolia/client-search": "^4.23.2",
-    "@crowdin/cli": "4.11.0",
+    "@crowdin/cli": "4.14.2",
     "@docusaurus/core": "3.9.1",
     "@docusaurus/faster": "^3.9.1",
     "@docusaurus/plugin-client-redirects": "3.9.1",
@@ -49,7 +49,7 @@
     }
   },
   "devDependencies": {
-    "@crowdin/crowdin-api-client": "1.48.3",
+    "@crowdin/crowdin-api-client": "1.55.1",
     "@docusaurus/types": "^3.9.1",
     "@types/node": "^20.12.2",
     "sass": "^1.95.1",
