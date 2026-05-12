@@ -19,7 +19,7 @@ pnpm patch <pkg name>@<version>
 
 :::note
 
-To change a package's dependences, don't use `pnpm patch` to modify its `package.json`! To override dependencies, use [overrides] or a [package hook].
+To change a package's dependencies, don't use `pnpm patch` to modify its `package.json`! Use [overrides] or a [package hook] instead.
 
 :::
 
