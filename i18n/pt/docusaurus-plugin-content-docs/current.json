@@ -1,0 +1,62 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docs.category.Introduction": {
+    "message": "Introdução",
+    "description": "The label for category Introduction in sidebar docs"
+  },
+  "sidebar.docs.category.Usage": {
+    "message": "Uso",
+    "description": "The label for category Usage in sidebar docs"
+  },
+  "sidebar.docs.category.CLI commands": {
+    "message": "Comandos",
+    "description": "The label for category CLI commands in sidebar docs"
+  },
+  "sidebar.docs.category.Manage dependencies": {
+    "message": "Gerenciar dependências",
+    "description": "The label for category Manage dependencies in sidebar docs"
+  },
+  "sidebar.docs.category.Patch dependencies": {
+    "message": "Patch dependencies",
+    "description": "The label for category Patch dependencies in sidebar docs"
+  },
+  "sidebar.docs.category.Review dependencies": {
+    "message": "Revisar dependências",
+    "description": "The label for category Review dependencies in sidebar docs"
+  },
+  "sidebar.docs.category.Run scripts": {
+    "message": "Executar scripts",
+    "description": "The label for category Run scripts in sidebar docs"
+  },
+  "sidebar.docs.category.Manage environments": {
+    "message": "Gerenciar ambientes",
+    "description": "The label for category Manage environments in sidebar docs"
+  },
+  "sidebar.docs.category.Manage cache": {
+    "message": "Manage cache",
+    "description": "The label for category Manage cache in sidebar docs"
+  },
+  "sidebar.docs.category.Misc.": {
+    "message": "Outros",
+    "description": "The label for category Misc. in sidebar docs"
+  },
+  "sidebar.docs.category.Configuration": {
+    "message": "Configuração",
+    "description": "The label for category Configuration in sidebar docs"
+  },
+  "sidebar.docs.category.Features": {
+    "message": "Recursos",
+    "description": "The label for category Features in sidebar docs"
+  },
+  "sidebar.docs.category.Recipes": {
+    "message": "Receitas",
+    "description": "The label for category Recipes in sidebar docs"
+  },
+  "sidebar.docs.category.Advanced": {
+    "message": "Avançado",
+    "description": "The label for category Advanced in sidebar docs"
+  }
+}
