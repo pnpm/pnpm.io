@@ -1271,6 +1271,8 @@ During install, dependencies with ignored builds that are not yet listed in `all
 
 :::info Migrating from older settings
 
+To migrate these settings automatically, run `pnpx codemod run pnpm-v10-to-v11` from the [Migrating from v10 to v11](./migration.md) guide.
+
 The following settings have been removed in v11 and replaced by `allowBuilds`: `onlyBuiltDependencies`, `onlyBuiltDependenciesFile`, `neverBuiltDependencies`, `ignoredBuiltDependencies`, and `ignoreDepScripts`.
 
 Before:
