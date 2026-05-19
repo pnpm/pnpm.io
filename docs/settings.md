@@ -1263,7 +1263,6 @@ allowBuilds:
   esbuild: true
   core-js: false
   nx@21.6.4 || 21.6.5: true
-  nx@21.6.6: false
 ```
 
 **Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and an error is printed (since [`strictDepBuilds`](#strictdepbuilds) is `true` by default). If `strictDepBuilds` is set to `false`, a warning is printed instead.
