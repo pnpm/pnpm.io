@@ -24,8 +24,8 @@ For more on this subject:
 ## Does it work on Windows?
 
 Short answer: Yes.
-Long answer: Using symbolic linking on Windows is problematic to say the least,
-however, pnpm has a workaround. For Windows, we use [junctions] instead.
+Long answer: Using symbolic linking on Windows can sometimes be problematic,
+however, pnpm has a workaround. For Windows, if the [Developer Mode](https://learn.microsoft.com/windows/advanced-settings/developer-mode) is off, we use [junctions] instead.
 
 [junctions]: https://docs.microsoft.com/en-us/windows/win32/fileio/hard-links-and-junctions
 
