@@ -1262,10 +1262,13 @@ A map of package matchers to explicitly allow (`true`) or disallow (`false`) scr
 allowBuilds:
   esbuild: true
   core-js: false
+  # nx versions with build scripts not listed below will
+  # fail by default with ERR_PNPM_IGNORED_BUILDS
   nx@21.6.4 || 21.6.5: true
+  nx@21.6.0: false
 ```
 
-**Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and an error is printed (since [`strictDepBuilds`](#strictdepbuilds) is `true` by default). If `strictDepBuilds` is set to `false`, a warning is printed instead.
+**Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and are treated as unreviewed. By default, an error is printed ([`strictDepBuilds`](#strictdepbuilds) defaults to `true`). If `strictDepBuilds` is set to `false`, a warning is printed instead.
 
 During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](./cli/add.md) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
 
