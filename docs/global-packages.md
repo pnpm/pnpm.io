@@ -14,31 +14,53 @@ pnpm add -g <pkg>
 For example:
 
 ```sh
-pnpm add -g typescript prettier eslint
+pnpm add -g typescript
 ```
 
 ## Isolated installations
 
-Each globally installed package (or group of packages installed together) gets its own isolated installation directory with its own `package.json`, `node_modules/`, and lockfile. This prevents global packages from interfering with each other through peer dependency conflicts, hoisting changes, or version resolution shifts.
+Each globally installed package — or group of packages installed together — gets its own isolated installation directory with its own `package.json`, `node_modules/`, and lockfile. This prevents global packages from interfering with each other through peer dependency conflicts, hoisting changes, or version resolution shifts.
 
 Isolated installations are stored at `{pnpmHomeDir}/global/v11/{hash}/`, where the hash is derived from the set of packages installed together.
 
-For example, running the following two commands:
+### Space-separated arguments install independent globals
+
+By default, each space-separated argument to `pnpm add -g` is installed into its own isolated directory:
+
+```sh
+pnpm add -g typescript prettier
+```
+
+is equivalent to running:
 
 ```sh
 pnpm add -g typescript
 pnpm add -g prettier
 ```
 
-creates two separate isolated installations — `typescript` and `prettier` each get their own `node_modules` tree and cannot affect each other's dependency resolution.
+`typescript` and `prettier` each get their own `node_modules` tree, their own lockfile, and `pnpm remove -g typescript` leaves `prettier` untouched.
 
-Installing multiple packages in a single command groups them into one isolated install:
+### Comma-separated arguments share a single install
+
+To install multiple packages into a *single* isolated directory — so that they share a `node_modules` tree and lockfile and resolve peer dependencies against each other — separate them with commas (no spaces):
 
 ```sh
-pnpm add -g eslint prettier
+pnpm add -g eslint,eslint-plugin-import
 ```
 
-`eslint` and `prettier` share a `node_modules` tree and lockfile, so peer dependencies are resolved against each other. Removing either with `pnpm remove -g` removes the entire group.
+This is the right form when one package is a plugin or peer of another. The two packages share one install group; `pnpm remove -g` on either removes the entire group.
+
+You can combine both forms in a single command. The following installs `eslint` together with its plugin (one group), and `prettier` as a fully separate global (another group):
+
+```sh
+pnpm add -g eslint,eslint-plugin-import prettier
+```
+
+:::note
+
+Prior to pnpm v11.1, space-separated packages were bundled into a single install group. The default was inverted in v11.1 ([release notes](/blog/releases/11.1), [pnpm#11588](https://github.com/pnpm/pnpm/pull/11588)) so that bundling is opt-in via the comma syntax.
+
+:::
 
 ## Directory layout
 
@@ -88,7 +110,7 @@ If `--depth>0` is requested but the request can't be narrowed to a single instal
 | Command | Description |
 |---|---|
 | `pnpm add -g <pkg>` | Install a package globally |
-| `pnpm remove -g <pkg>` | Remove a globally installed package (removes the entire installation group) |
+| `pnpm remove -g <pkg>` | Remove a globally installed package. If `<pkg>` was installed as part of a comma-bundled group, the entire group is removed. |
 | `pnpm update -g [pkg]` | Update global packages (re-installs into new isolated directories) |
 | `pnpm list -g` | List all globally installed packages |
 
