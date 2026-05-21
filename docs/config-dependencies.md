@@ -22,8 +22,16 @@ configDependencies:
 
 **Important:**
 
-* Config dependencies **cannot** have their own dependencies.
+* Config dependencies **cannot** have their own regular `dependencies`. They **can** declare `optionalDependencies`, but only one level deep — `optionalDependencies` of `optionalDependencies` are ignored.
 * Config dependencies **cannot** define lifecycle scripts (like `preinstall`, `postinstall`, etc.).
+
+### Platform-specific binaries via `optionalDependencies`
+
+A config dependency may ship platform-specific binaries via `optionalDependencies`, the same pattern used by tools like esbuild and swc. Each platform-binary package declares its supported platform with `os`, `cpu`, and/or `libc` fields, and pnpm installs only the variant that matches the current host. The matching binary is symlinked next to the parent config dependency in the global virtual store, so `require('my-config-platform-arch')` from inside the config dependency resolves at runtime.
+
+The env lockfile records all platform variants regardless of host platform, so the lockfile stays portable across machines.
+
+Each entry in `optionalDependencies` must be declared with an **exact** version (e.g. `"1.2.3"`) — ranges (`"^1.0.0"`, `"~1.0.0"`) and tags (`"latest"`) are rejected. This keeps config-dep installs reproducible: the resolved subdep can't drift between machines for a parent that's pinned by integrity.
 
 ## Usage
 
