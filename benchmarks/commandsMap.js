@@ -42,7 +42,6 @@ export default {
     name: 'pacquet',
     args: [
       'install',
-      '--frozen-lockfile',
     ]
   },
   yarn: {

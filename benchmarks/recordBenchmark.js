@@ -22,9 +22,6 @@ export default async function (pm, fixture, opts) {
   const newResults = await benchmark(pm, fixture, {
     hasNodeModules: opts.hasNodeModules,
     managersDir: opts.managersDir,
-    supportedTests: opts.supportedTests,
-    prepPm: opts.prepPm,
-    prepManagersDir: opts.prepManagersDir,
   })
   const results = [...prevResults, newResults]
   await writeYamlFile(resultsFile, results)

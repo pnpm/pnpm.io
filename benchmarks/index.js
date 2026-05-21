@@ -131,14 +131,7 @@ async function run () {
   const pmConfigs = [
     { key: 'npm', managersDir: managersDirs.npm },
     { key: 'pnpm11', managersDir: managersDirs.pnpm11 },
-    {
-      key: 'pnpm12',
-      managersDir: managersDirs.pnpm12,
-      hasNodeModules: false,
-      supportedTests: ['withWarmCacheAndLockfile', 'withLockfile'],
-      prepPm: cmdsMap.pnpm11,
-      prepManagersDir: managersDirs.pnpm11,
-    },
+    { key: 'pnpm12', managersDir: managersDirs.pnpm12 },
     { key: 'yarn', managersDir: managersDirs.yarn },
     { key: 'yarn_pnp', managersDir: managersDirs.yarn, hasNodeModules: false },
   ]
@@ -158,14 +151,11 @@ async function run () {
   const svgs = []
   for (const fixture of fixtures) {
     const results = {}
-    for (const { key, managersDir, hasNodeModules, supportedTests, prepPm, prepManagersDir } of pmConfigs) {
+    for (const { key, managersDir, hasNodeModules } of pmConfigs) {
       results[key] = min(await benchmark(cmdsMap[key], fixture.name, {
         limitRuns: LIMIT_RUNS,
         hasNodeModules: hasNodeModules ?? true,
         managersDir,
-        supportedTests,
-        prepPm,
-        prepManagersDir,
       }))
     }
     const resArray = toArray(pms, results)
@@ -173,8 +163,7 @@ async function run () {
     const headerLegends = pms.map(pm => cmdsMap[pm].mdLegend ?? cmdsMap[pm].legend).join(' | ')
     const headerSep = pms.map(() => '---').join(' | ')
     const rows = tableRows.map(({ test, action, cache, lockfile, nodeModules, needsNodeModules }) => {
-      const values = pmConfigs.map(({ key, hasNodeModules: pmHasNodeModules, supportedTests }) => {
-        if (supportedTests && !supportedTests.includes(test)) return 'n/a'
+      const values = pmConfigs.map(({ key, hasNodeModules: pmHasNodeModules }) => {
         if (needsNodeModules && pmHasNodeModules === false) return 'n/a'
         return prettyMs(results[key][test])
       }).join(' | ')
@@ -203,7 +192,6 @@ async function run () {
     const pnpmKeys = pnpmConfigs.map(({ key }) => key)
     const sharedTestIndexes = tests
       .map((test, i) => ({ test, i }))
-      .filter(({ test }) => pnpmConfigs.every(({ supportedTests }) => !supportedTests || supportedTests.includes(test)))
       .filter(({ test }) => {
         const row = tableRows.find((r) => r.test === test)
         if (!row?.needsNodeModules) return true
