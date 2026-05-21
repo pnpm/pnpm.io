@@ -39,27 +39,27 @@
   <rect x="40" y="52" width="5" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="58.5" width="3" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <text x="45" y="61.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="69" width="23" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="75.5" width="7" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="49" y="78.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="86" width="41" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="92.5" width="222" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="264" y="95.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="69" width="18" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="75.5" width="5" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="47" y="78.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="86" width="36" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="92.5" width="212" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="254" y="95.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
   <rect x="40" y="103" width="69" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="109.5" width="28" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <text x="70" y="112.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
   <rect x="40" y="120" width="52" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="126.5" width="218" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="260" y="129.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="137" width="5" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="126.5" width="208" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="250" y="129.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="137" width="4" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="143.5" width="2" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <text x="44" y="146.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
   <rect x="40" y="154" width="78" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="160.5" width="235" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <text x="277" y="163.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="171" width="38" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="177.5" width="196" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="238" y="180.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="171" width="36" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="177.5" width="187" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="229" y="180.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
   <line x1="40" y1="31" x2="40" y2="188" class="line"></line>
   <text x="38" y="44.5" class="font s4" dominant-baseline="middle" text-anchor="end">clean install</text>
   <text x="38" y="57.5" class="font s4" dominant-baseline="middle" text-anchor="end">with cache</text>
@@ -75,5 +75,5 @@
   <text x="38" y="148.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
   <text x="38" y="163.5" class="font s4" dominant-baseline="middle" text-anchor="end">with node_modules</text>
   <text x="38" y="180.5" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="200" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.15.0 at: May 21, 2026, 6:29 PM</text>
+  <text x="290" y="200" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.15.0 at: May 21, 2026, 6:49 PM</text>
 </svg>
