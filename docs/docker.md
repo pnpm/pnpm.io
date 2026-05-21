@@ -96,7 +96,7 @@ dist
 ```dockerfile title="Dockerfile"
 FROM node:24-slim AS base
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN corepack enable
 COPY . /app
 WORKDIR /app
@@ -166,7 +166,7 @@ dist
 ```dockerfile title="Dockerfile"
 FROM node:24-slim AS base
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN corepack enable
 
 FROM base AS build
@@ -207,7 +207,7 @@ So an alternative is to use a typical Dockerfile with layers that are built incr
 FROM node:24-slim AS base
 
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN corepack enable
 
 FROM base AS prod
