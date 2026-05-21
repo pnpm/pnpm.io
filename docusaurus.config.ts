@@ -99,6 +99,7 @@ const docusaurusConfig = {
       }),
     ],
     'docusaurus-plugin-sass',
+    'docusaurus-plugin-copy-page-button',
   ],
   "themeConfig": {
     "colorMode": {
