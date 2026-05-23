@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _May 23, 2026, 12:43 PM_ (_daily_ updated).
+**Last benchmarked at**: _May 23, 2026, 12:57 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -22,17 +22,17 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchm
 
 | action  | cache | lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
-| install |   |   |   | 27.6s | 7.3s | 4.1s | 7.1s | 2.9s |
+| install |   |   |   | 27.6s | 7.2s | 4.1s | 7.1s | 2.9s |
 | install | ✔ | ✔ | ✔ | 1s | 373ms | 290ms | 4.5s | n/a |
-| install | ✔ | ✔ |   | 7.1s | 1.8s | 762ms | 5s | 1.1s |
+| install | ✔ | ✔ |   | 7.1s | 1.8s | 648ms | 5s | 1.1s |
 | install | ✔ |   |   | 10.9s | 3.3s | 3s | 6.8s | 2.4s |
-| install |   | ✔ |   | 9.8s | 6.6s | 4s | 5.1s | 1.1s |
-| install | ✔ |   | ✔ | 1.5s | 5s | 2.6s | 6.4s | n/a |
-| install |   | ✔ | ✔ | 1s | 374ms | 225ms | 4.5s | n/a |
-| install |   |   | ✔ | 1.5s | 7.3s | 4.1s | 6.4s | n/a |
-| update | n/a | n/a | n/a | 6.7s | 2.9s | 2.3s | 5.1s | 2.5s |
+| install |   | ✔ |   | 9.8s | 6.6s | 2.5s | 5.1s | 1.1s |
+| install | ✔ |   | ✔ | 1.5s | 4.9s | 2.6s | 6.4s | n/a |
+| install |   | ✔ | ✔ | 1s | 374ms | 201ms | 4.5s | n/a |
+| install |   |   | ✔ | 1.5s | 7.3s | 3.8s | 6.4s | n/a |
+| update | n/a | n/a | n/a | 6.5s | 2.9s | 2.3s | 5.1s | 2.5s |
 
-<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=bd137aff" />
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=76f4db57" />
 
 ### pnpm vs pnpm 🦀
 
@@ -40,14 +40,14 @@ pnpm v12 will use a new installation engine for fetching and linking written in 
 
 | action  | cache | lockfile | node_modules| pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) |
 | ---     | ---   | ---      | ---         | --- | --- |
-| install |   |   |   | 7.3s | 4.1s |
+| install |   |   |   | 7.2s | 4.1s |
 | install | ✔ | ✔ | ✔ | 373ms | 290ms |
-| install | ✔ | ✔ |   | 1.8s | 762ms |
+| install | ✔ | ✔ |   | 1.8s | 648ms |
 | install | ✔ |   |   | 3.3s | 3s |
-| install |   | ✔ |   | 6.6s | 4s |
-| install | ✔ |   | ✔ | 5s | 2.6s |
-| install |   | ✔ | ✔ | 374ms | 225ms |
-| install |   |   | ✔ | 7.3s | 4.1s |
+| install |   | ✔ |   | 6.6s | 2.5s |
+| install | ✔ |   | ✔ | 4.9s | 2.6s |
+| install |   | ✔ | ✔ | 374ms | 201ms |
+| install |   |   | ✔ | 7.3s | 3.8s |
 | update | n/a | n/a | n/a | 2.9s | 2.3s |
 
-<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=1063b1df" />
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=675d69b4" />
