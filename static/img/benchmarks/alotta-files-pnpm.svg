@@ -18,48 +18,48 @@
   <text x="40" y="28" class="font s5 text" text-anchor="middle">0</text>
   <text x="40" y="193" class="font s5 text" text-anchor="middle">0</text>
   <line x1="90" y1="31" x2="90" y2="188" class="line width"></line>
-  <text x="90" y="28" class="font s5 text" text-anchor="middle">6</text>
-  <text x="90" y="193" class="font s5 text" text-anchor="middle">6</text>
+  <text x="90" y="28" class="font s5 text" text-anchor="middle">2</text>
+  <text x="90" y="193" class="font s5 text" text-anchor="middle">2</text>
   <line x1="140" y1="31" x2="140" y2="188" class="line width"></line>
-  <text x="140" y="28" class="font s5 text" text-anchor="middle">12</text>
-  <text x="140" y="193" class="font s5 text" text-anchor="middle">12</text>
+  <text x="140" y="28" class="font s5 text" text-anchor="middle">4</text>
+  <text x="140" y="193" class="font s5 text" text-anchor="middle">4</text>
   <line x1="190" y1="31" x2="190" y2="188" class="line width"></line>
-  <text x="190" y="28" class="font s5 text" text-anchor="middle">18</text>
-  <text x="190" y="193" class="font s5 text" text-anchor="middle">18</text>
-  <line x1="240.00000000000003" y1="31" x2="240.00000000000003" y2="188" class="line width"></line>
-  <text x="240.00000000000003" y="28" class="font s5 text" text-anchor="middle">24</text>
-  <text x="240.00000000000003" y="193" class="font s5 text" text-anchor="middle">24</text>
+  <text x="190" y="28" class="font s5 text" text-anchor="middle">6</text>
+  <text x="190" y="193" class="font s5 text" text-anchor="middle">6</text>
+  <line x1="240" y1="31" x2="240" y2="188" class="line width"></line>
+  <text x="240" y="28" class="font s5 text" text-anchor="middle">8</text>
+  <text x="240" y="193" class="font s5 text" text-anchor="middle">8</text>
   <line x1="290" y1="31" x2="290" y2="188" class="line width"></line>
-  <text x="290" y="28" class="font s5 text" text-anchor="middle">30</text>
-  <text x="290" y="193" class="font s5 text" text-anchor="middle">30</text>
+  <text x="290" y="28" class="font s5 text" text-anchor="middle">10</text>
+  <text x="290" y="193" class="font s5 text" text-anchor="middle">10</text>
   <text x="290" y="20" class="font s4 text" font-style="italic" text-anchor="end">Installation time in seconds (lower is better)</text>
-  <rect x="40" y="35" width="62" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="41.5" width="76" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="118" y="44.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="52" width="4" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="58.5" width="3" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="45" y="61.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="69" width="15" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="75.5" width="6" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="48" y="78.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="86" width="30" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="92.5" width="203" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="245" y="95.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="103" width="55" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="109.5" width="22" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="64" y="112.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="120" width="42" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="126.5" width="193" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="235" y="129.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="137" width="3" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="143.5" width="2" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="44" y="146.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="154" width="62" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="160.5" width="218" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="260" y="163.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
-  <rect x="40" y="171" width="30" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="177.5" width="198" height="6" fill="#fbae00" rx="1" ry="1"></rect>
-  <text x="240" y="180.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="35" width="183" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="41.5" width="133" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="175" y="44.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="52" width="13" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="58.5" width="105" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="147" y="61.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="69" width="45" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="75.5" width="113" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="155" y="78.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="86" width="90" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="92.5" width="110" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="152" y="95.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="103" width="165" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="109.5" width="133" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="175" y="112.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="120" width="125" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="126.5" width="102" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="144" y="129.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="137" width="10" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="143.5" width="125" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="167" y="146.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="154" width="183" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="160.5" width="120" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="162" y="163.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
+  <rect x="40" y="171" width="90" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="177.5" width="95" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <text x="137" y="180.5" class="font" font-size="7" dominant-baseline="central">🦀</text>
   <line x1="40" y1="31" x2="40" y2="188" class="line"></line>
   <text x="38" y="44.5" class="font s4" dominant-baseline="middle" text-anchor="end">clean install</text>
   <text x="38" y="57.5" class="font s4" dominant-baseline="middle" text-anchor="end">with cache</text>
@@ -75,5 +75,5 @@
   <text x="38" y="148.5" class="font s4" dominant-baseline="middle" text-anchor="end">with lockfile</text>
   <text x="38" y="163.5" class="font s4" dominant-baseline="middle" text-anchor="end">with node_modules</text>
   <text x="38" y="180.5" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="200" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.15.0 at: May 22, 2026, 1:03 AM</text>
+  <text x="290" y="200" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.15.0 at: May 23, 2026, 10:31 AM</text>
 </svg>
