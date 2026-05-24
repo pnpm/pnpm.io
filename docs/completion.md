@@ -27,6 +27,13 @@ To setup autocompletion for Fish, run:
 pnpm completion fish > ~/.config/fish/completions/pnpm.fish
 ```
 
+To setup autocompletion for Zsh, run:
+
+```text
+pnpm completion zsh > ~/completion-for-pnpm.zsh
+echo 'source ~/completion-for-pnpm.zsh' >> ~/.zshrc
+```
+
 ## g-plane/pnpm-shell-completion
 
 [pnpm-shell-completion] is a shell plugin maintained by Pig Fang on Github.
