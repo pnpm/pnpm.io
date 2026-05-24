@@ -34,7 +34,7 @@ Supported platforms: `linux/amd64`, `linux/arm64`.
 Use [`pnpm runtime set`](./cli/runtime.md) with the global flag so the `node` binary is discoverable on `PATH` in subsequent layers and at runtime:
 
 ```dockerfile
-FROM ghcr.io/pnpm/pnpm:latest
+FROM ghcr.io/pnpm/pnpm:11
 RUN pnpm runtime set node 22 -g
 WORKDIR /app
 COPY . .
@@ -57,7 +57,7 @@ Or let pnpm install Node.js automatically from [`devEngines.runtime`](./package_
 ```
 
 ```dockerfile
-FROM ghcr.io/pnpm/pnpm:latest
+FROM ghcr.io/pnpm/pnpm:11
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
