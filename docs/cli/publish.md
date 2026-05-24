@@ -74,6 +74,12 @@ changes.
 Try to publish packages even if their current version is already found in the
 registry.
 
+### --skip-manifest-obfuscation
+
+Added in: v11.3.0
+
+Keep the original `packageManager` field and publish lifecycle scripts in the published manifest instead of stripping them. The pnpm-specific `pnpm` field is still omitted.
+
 ### --report-summary
 
 Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.

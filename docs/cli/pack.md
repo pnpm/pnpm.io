@@ -41,6 +41,12 @@ Added in: v10.26.0
 
 Does everything a normal run does, except actually packing the tarball. Useful for verifying the contents of the tarball.
 
+### --skip-manifest-obfuscation
+
+Added in: v11.3.0
+
+Keep the original `packageManager` field and publish lifecycle scripts in the packed manifest instead of stripping them. The pnpm-specific `pnpm` field is still omitted.
+
 ## Life Cycle Scripts
 
 * `prepack`

@@ -101,6 +101,7 @@
           "cli/with",
           "cli/version",
           "cli/publish",
+          "cli/stage",
           "cli/pack",
           "cli/pack-app",
           "cli/deprecate",
@@ -118,6 +119,9 @@
           "cli/deploy",
           "cli/doctor",
           "cli/pm",
+          "cli/pkg",
+          "cli/repo",
+          "cli/set-script",
           "cli/config",
           "cli/help"
         ]
