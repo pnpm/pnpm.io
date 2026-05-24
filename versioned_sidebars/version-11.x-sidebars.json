@@ -303,6 +303,10 @@
             },
             {
               "type": "doc",
+              "id": "cli/stage"
+            },
+            {
+              "type": "doc",
               "id": "cli/pack"
             },
             {
@@ -368,6 +372,18 @@
             {
               "type": "doc",
               "id": "cli/pm"
+            },
+            {
+              "type": "doc",
+              "id": "cli/pkg"
+            },
+            {
+              "type": "doc",
+              "id": "cli/repo"
+            },
+            {
+              "type": "doc",
+              "id": "cli/set-script"
             },
             {
               "type": "doc",
