@@ -100,7 +100,7 @@ COPY patches patches
 RUN pnpm fetch --prod
 
 
-ADD . ./
+COPY . ./
 RUN pnpm install -r --offline --prod
 
 
