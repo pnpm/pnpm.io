@@ -44,66 +44,56 @@ const fixtures = [
 
 const tests = [
   'firstInstall',
-  'repeatInstall',
-  'withWarmCacheAndLockfile',
-  'withWarmCache',
+  'withWarmModules',
   'withLockfile',
   'withWarmCacheAndModules',
+  'withWarmCache',
+  'withWarmCacheAndLockfile',
   'withWarmModulesAndLockfile',
-  'withWarmModules',
+  'repeatInstall',
   'updatedDependencies'
 ]
 
-const testDescriptions = [
-  [ // firstInstall
-    'clean install'
-  ],
-  [ // repeatInstall
-    'with cache',
-    'with lockfile',
-    'with node_modules'
-  ],
-  [ // withWarmCacheAndLockfile
-    'with cache',
-    'with lockfile'
-  ],
-  [ // withWarmCache
-    'with cache'
-  ],
-  [ // withLockfile
-    'with lockfile'
-  ],
-  [ // withWarmCacheAndModules
-    'with cache',
-    'with node_modules'
-  ],
-  [ // withWarmModulesAndLockfile
-    'with node_modules',
-    'with lockfile'
-  ],
-  [ // withWarmModules
-    'with node_modules'
-  ],
-  [ // updatedDependencies
-    'update'
-  ]
-]
-
-const toArray = (pms, resultsObj) => {
-  /**
-   * Make array of all similar installs grouped together:
-   * [
-   *   [ npm.firstInstall, yarn.firstInstall, pnpm.firstInstall ],
-   *   [ npm.repeatInstall, yarn.repeatInstall, pnpm.repeatInstall ],
-   *   ...
-   * ]
-   */
-  return tests
-    .map((test) => pms
-      .map((pm) => resultsObj[pm][test])
-      .map((time) => Math.round(time / 100) / 10) // round to `x.x` seconds
-    )
+const testDescriptions = {
+  firstInstall:               ['clean'],
+  withWarmModules:            ['node_modules'],
+  withLockfile:               ['lockfile'],
+  withWarmCacheAndModules:    ['cache', 'node_modules'],
+  withWarmCache:              ['cache'],
+  withWarmCacheAndLockfile:   ['cache', 'lockfile'],
+  withWarmModulesAndLockfile: ['lockfile', 'node_modules'],
+  repeatInstall:              ['cache', 'lockfile', 'node_modules'],
+  updatedDependencies:        ['update'],
 }
+
+const explanationByTest = {
+  firstInstall:               '`clean`: a brand-new clone — nothing cached, no lockfile, no `node_modules`.',
+  withWarmModules:            '`node_modules`: the cache and lockfile are deleted and install is run again.',
+  withLockfile:               '`lockfile`: a CI server doing its first install.',
+  withWarmCacheAndModules:    '`cache+node_modules`: the lockfile is deleted and install is run again.',
+  withWarmCache:              '`cache`: a developer reinstalling without a lockfile.',
+  withWarmCacheAndLockfile:   '`cache+lockfile`: a developer reinstalling a known project.',
+  withWarmModulesAndLockfile: '`lockfile+node_modules`: the cache is deleted and install is run again.',
+  repeatInstall:              '`cache+lockfile+node_modules`: re-running install when nothing has changed.',
+  updatedDependencies:        '`update`: dependency versions are bumped in `package.json` and install is run again.',
+}
+
+// Sort tests by descending time on the first PM (npm) — slowest first.
+// `updatedDependencies` is a different kind of action, so it gets pinned at the end.
+const sortTestsBySlowest = (testKeys, resultsObj, pmKeys) => {
+  const update = testKeys.filter(t => t === 'updatedDependencies')
+  const installs = testKeys.filter(t => t !== 'updatedDependencies')
+  const primary = pmKeys[0]
+  const timeFor = (t) => resultsObj[primary][t] || 0
+  installs.sort((a, b) => timeFor(b) - timeFor(a))
+  return [...installs, ...update]
+}
+
+const toArray = (testList, pms, resultsObj) => testList
+  .map((test) => pms
+    .map((pm) => resultsObj[pm][test])
+    .map((time) => Math.round(time / 100) / 10) // round to `x.x` seconds
+  )
 
 run()
   .then(() => console.log('done'))
@@ -137,18 +127,19 @@ async function run () {
   ]
   const pms = pmConfigs.map(({ key }) => key)
   const tableRows = [
-    { test: 'firstInstall',              action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: ' '   },
-    { test: 'repeatInstall',             action: 'install', cache: '✔',   lockfile: '✔',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'firstInstall',               action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: ' '   },
+    { test: 'withWarmModules',            action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'withLockfile',               action: 'install', cache: ' ',   lockfile: '✔',   nodeModules: ' '   },
+    { test: 'withWarmCacheAndModules',    action: 'install', cache: '✔',   lockfile: ' ',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'withWarmCache',              action: 'install', cache: '✔',   lockfile: ' ',   nodeModules: ' '   },
     { test: 'withWarmCacheAndLockfile',   action: 'install', cache: '✔',   lockfile: '✔',   nodeModules: ' '   },
-    { test: 'withWarmCache',             action: 'install', cache: '✔',   lockfile: ' ',   nodeModules: ' '   },
-    { test: 'withLockfile',              action: 'install', cache: ' ',   lockfile: '✔',   nodeModules: ' '   },
-    { test: 'withWarmCacheAndModules',   action: 'install', cache: '✔',   lockfile: ' ',   nodeModules: '✔',   needsNodeModules: true },
     { test: 'withWarmModulesAndLockfile', action: 'install', cache: ' ',   lockfile: '✔',   nodeModules: '✔',   needsNodeModules: true },
-    { test: 'withWarmModules',           action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: '✔',   needsNodeModules: true },
-    { test: 'updatedDependencies',       action: 'update',  cache: 'n/a', lockfile: 'n/a', nodeModules: 'n/a' },
+    { test: 'repeatInstall',              action: 'install', cache: '✔',   lockfile: '✔',   nodeModules: '✔',   needsNodeModules: true },
+    { test: 'updatedDependencies',        action: 'update',  cache: 'n/a', lockfile: 'n/a', nodeModules: 'n/a' },
   ]
   const sections = []
   const svgs = []
+  let sortedTests = tests
   for (const fixture of fixtures) {
     const results = {}
     for (const { key, managersDir, hasNodeModules } of pmConfigs) {
@@ -158,11 +149,14 @@ async function run () {
         managersDir,
       }))
     }
-    const resArray = toArray(pms, results)
+    sortedTests = sortTestsBySlowest(tests, results, pms)
+    const sortedDescriptions = sortedTests.map(t => testDescriptions[t])
+    const sortedTableRows = sortedTests.map(t => tableRows.find(r => r.test === t))
+    const resArray = toArray(sortedTests, pms, results)
 
     const headerLegends = pms.map(pm => cmdsMap[pm].mdLegend ?? cmdsMap[pm].legend).join(' | ')
     const headerSep = pms.map(() => '---').join(' | ')
-    const rows = tableRows.map(({ test, action, cache, lockfile, nodeModules, needsNodeModules }) => {
+    const rows = sortedTableRows.map(({ test, action, cache, lockfile, nodeModules, needsNodeModules }) => {
       const values = pmConfigs.map(({ key, hasNodeModules: pmHasNodeModules }) => {
         if (needsNodeModules && pmHasNodeModules === false) return 'n/a'
         return prettyMs(results[key][test])
@@ -170,7 +164,7 @@ async function run () {
       return `| ${action} | ${cache} | ${lockfile} | ${nodeModules} | ${values} |`
     }).join('\n')
 
-    const mainSvg = generateSvg(resArray, pms.map(pm => cmdsMap[pm]), testDescriptions, formattedNow)
+    const mainSvg = generateSvg(resArray, pms.map(pm => cmdsMap[pm]), sortedDescriptions, formattedNow)
     const mainSvgHash = hashContent(mainSvg)
     sections.push(stripIndents`
       ${fixture.mdDesc}
@@ -188,27 +182,24 @@ async function run () {
     })
 
     // pnpm-only comparison: include only scenarios that every selected pnpm version supports.
+    // Sorted independently of the main chart, keyed by pnpm 11 (the first pnpm config).
     const pnpmConfigs = pmConfigs.filter(({ key }) => key.startsWith('pnpm'))
     const pnpmKeys = pnpmConfigs.map(({ key }) => key)
-    const sharedTestIndexes = tests
-      .map((test, i) => ({ test, i }))
-      .filter(({ test }) => {
+    const pnpmSortedTests = sortTestsBySlowest(tests, results, pnpmKeys)
+      .filter((test) => {
         const row = tableRows.find((r) => r.test === test)
         if (!row?.needsNodeModules) return true
         return pnpmConfigs.every(({ hasNodeModules }) => hasNodeModules !== false)
       })
-      .map(({ i }) => i)
-
-    const pnpmTests = sharedTestIndexes.map((i) => tests[i])
-    const pnpmTestDescriptions = sharedTestIndexes.map((i) => testDescriptions[i])
-    const pnpmResArray = pnpmTests.map((test) =>
+    const pnpmTestDescriptions = pnpmSortedTests.map(t => testDescriptions[t])
+    const pnpmResArray = pnpmSortedTests.map((test) =>
       pnpmKeys
         .map((key) => results[key][test])
         .map((time) => Math.round(time / 100) / 10)
     )
     const pnpmHeaderLegends = pnpmKeys.map((key) => cmdsMap[key].mdLegend ?? cmdsMap[key].legend).join(' | ')
     const pnpmHeaderSep = pnpmKeys.map(() => '---').join(' | ')
-    const pnpmRows = pnpmTests.map((test) => {
+    const pnpmRows = pnpmSortedTests.map((test) => {
       const row = tableRows.find((r) => r.test === test)
       const values = pnpmKeys.map((key) => prettyMs(results[key][test])).join(' | ')
       return `| ${row.action} | ${row.cache} | ${row.lockfile} | ${row.nodeModules} | ${values} |`
@@ -243,18 +234,11 @@ async function run () {
   This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
   `
 
+  const explanationItems = sortedTests.map(t => `- ${explanationByTest[t]}`).join('\n  ')
   const explanation = stripIndents`
-  Here's a quick explanation of how these tests could apply to the real world:
+  Each row's label lists which of \`cache\`, \`lockfile\`, and \`node_modules\` are warm/present before install runs. Quick mapping to the real world (ordered from slowest to fastest scenario):
 
-  - \`clean install\`: How long it takes to run a totally fresh install: no lockfile present, no packages in the cache, no \`node_modules\` folder.
-  - \`with cache\`, \`with lockfile\`, \`with node_modules\`: After the first install is done, the install command is run again.
-  - \`with cache\`, \`with lockfile\`: When a repo is fetched by a developer and installation is first run.
-  - \`with cache\`: Same as the one above, but the package manager doesn't have a lockfile to work from.
-  - \`with lockfile\`: When an installation runs on a CI server.
-  - \`with cache\`, \`with node_modules\`: The lockfile is deleted and the install command is run again.
-  - \`with node_modules\`, \`with lockfile\`: The package cache is deleted and the install command is run again.
-  - \`with node_modules\`: The package cache and the lockfile is deleted and the install command is run again.
-  - \`update\`: Updating your dependencies by changing the version in the \`package.json\` and running the install command again.
+  ${explanationItems}
 `
 
   await Promise.all(

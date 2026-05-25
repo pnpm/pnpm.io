@@ -164,20 +164,20 @@ export default (resultArrays, pms, tests, formattedNow) => {
   svgStr += baseGraphLine
 
   // next to each bar group specify the properties of the test
+  const groupHeight = thickness * pms.length + spacing * (pms.length - 1)
+  const groupCenter = groupHeight / 2
+  const labelSpacing = 4
   tests.forEach((properties, indexT) => {
+    const labelBlockOffset = ((properties.length - 1) * labelSpacing) / 2
     properties.forEach((property, indexP) => {
       const baseline = 'middle'
       const anchor = 'end'
-      const ySpacing = 4
       const x = graph.x - 2
       const y = graph.y +
-        // get starting y position of bar group
         ((thickness + spacing) * pms.length + separation) * indexT +
-        // go to center of middle bar
-        thickness + spacing + thickness / 2 -
-        // get y position for property based on how many properties there are
-        ((properties.length - (indexP + 1)) / 2) * ySpacing +
-        ySpacing * indexP / 2
+        groupCenter -
+        labelBlockOffset +
+        indexP * labelSpacing
       svgStr += `  <text x="${x}" y="${y}" class="font s4" dominant-baseline="${baseline}" text-anchor="${anchor}">${property}</text>` + '\n'
     })
   })

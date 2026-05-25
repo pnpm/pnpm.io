@@ -4,17 +4,17 @@
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
-Here's a quick explanation of how these tests could apply to the real world:
+Each row's label lists which of `cache`, `lockfile`, and `node_modules` are warm/present before install runs. Quick mapping to the real world (ordered from slowest to fastest scenario):
 
-- `clean install`: How long it takes to run a totally fresh install: no lockfile present, no packages in the cache, no `node_modules` folder.
-- `with cache`, `with lockfile`, `with node_modules`: After the first install is done, the install command is run again.
-- `with cache`, `with lockfile`: When a repo is fetched by a developer and installation is first run.
-- `with cache`: Same as the one above, but the package manager doesn't have a lockfile to work from.
-- `with lockfile`: When an installation runs on a CI server.
-- `with cache`, `with node_modules`: The lockfile is deleted and the install command is run again.
-- `with node_modules`, `with lockfile`: The package cache is deleted and the install command is run again.
-- `with node_modules`: The package cache and the lockfile is deleted and the install command is run again.
-- `update`: Updating your dependencies by changing the version in the `package.json` and running the install command again.
+- `clean`: a brand-new clone — nothing cached, no lockfile, no `node_modules`.
+- `cache`: a developer reinstalling without a lockfile.
+- `lockfile`: a CI server doing its first install.
+- `cache+lockfile`: a developer reinstalling a known project.
+- `node_modules`: the cache and lockfile are deleted and install is run again.
+- `cache+node_modules`: the lockfile is deleted and install is run again.
+- `cache+lockfile+node_modules`: re-running install when nothing has changed.
+- `lockfile+node_modules`: the cache is deleted and install is run again.
+- `update`: dependency versions are bumped in `package.json` and install is run again.
 
 ## Lots of Files
 
@@ -23,16 +23,16 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchm
 | action  | cache | lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
 | install |   |   |   | 27.6s | 7.3s | 3.1s | 7.1s | 2.9s |
-| install | ✔ | ✔ | ✔ | 1s | 462ms | 95ms | 4.5s | n/a |
-| install | ✔ | ✔ |   | 7.1s | 2s | 561ms | 5s | 1.1s |
 | install | ✔ |   |   | 10.9s | 3.8s | 1.2s | 6.8s | 2.4s |
 | install |   | ✔ |   | 9.8s | 6.5s | 2.6s | 5.1s | 1.1s |
-| install | ✔ |   | ✔ | 1.5s | 5.1s | 953ms | 6.4s | n/a |
-| install |   | ✔ | ✔ | 1s | 467ms | 94ms | 4.5s | n/a |
+| install | ✔ | ✔ |   | 7.1s | 2s | 561ms | 5s | 1.1s |
 | install |   |   | ✔ | 1.5s | 7.1s | 3s | 6.4s | n/a |
+| install | ✔ |   | ✔ | 1.5s | 5.1s | 953ms | 6.4s | n/a |
+| install | ✔ | ✔ | ✔ | 1s | 462ms | 95ms | 4.5s | n/a |
+| install |   | ✔ | ✔ | 1s | 467ms | 94ms | 4.5s | n/a |
 | update | n/a | n/a | n/a | 6.5s | 3.6s | 1.1s | 5.1s | 2.5s |
 
-<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=f4a35497" />
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=323e0d02" />
 
 ### pnpm vs pnpm 🦀
 
@@ -41,13 +41,13 @@ pnpm v12 will use a new installation engine for fetching and linking written in 
 | action  | cache | lockfile | node_modules| pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) |
 | ---     | ---   | ---      | ---         | --- | --- |
 | install |   |   |   | 7.3s | 3.1s |
-| install | ✔ | ✔ | ✔ | 462ms | 95ms |
-| install | ✔ | ✔ |   | 2s | 561ms |
-| install | ✔ |   |   | 3.8s | 1.2s |
+| install |   |   | ✔ | 7.1s | 3s |
 | install |   | ✔ |   | 6.5s | 2.6s |
 | install | ✔ |   | ✔ | 5.1s | 953ms |
+| install | ✔ |   |   | 3.8s | 1.2s |
+| install | ✔ | ✔ |   | 2s | 561ms |
 | install |   | ✔ | ✔ | 467ms | 94ms |
-| install |   |   | ✔ | 7.1s | 3s |
+| install | ✔ | ✔ | ✔ | 462ms | 95ms |
 | update | n/a | n/a | n/a | 3.6s | 1.1s |
 
-<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=e75550fb" />
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=30cdb26b" />
