@@ -10,6 +10,7 @@ import crypto from 'crypto'
 import { fileURLToPath } from 'url'
 import cmdsMap from './commandsMap.js'
 import generateSvg from './generateSvg.js'
+import generateStackedSvg from './generateStackedSvg.js'
 
 let loadYamlFile
 try {
@@ -104,15 +105,39 @@ const allKeys = pmConfigs.map(c => c.key)
 const sortedTests = sortTestsBySlowest(tests, data, allKeys)
 const sortedDescriptions = sortedTests.map(t => testDescriptions[t])
 
-const allPmsForSvg = allKeys.map(k => ({ ...cmdsMap[k], version: data[k].version }))
-const mainSvg = generateSvg(toResArray(sortedTests, allKeys, data), allPmsForSvg, sortedDescriptions, formattedNow)
+// Main chart: pnpm 11 and pnpm 12 are merged into a single stacked bar.
+const mainBars = [
+  { ...cmdsMap.npm, key: 'npm', version: data.npm.version },
+  {
+    stacked: true,
+    color: cmdsMap.pnpm12.color,
+    legend: cmdsMap.pnpm12.legend,
+    displayVersion: cmdsMap.pnpm12.displayVersion,
+    extraColor: '#cccccc',
+    extraLegend: 'pnpm 11 extra',
+    primaryKey: 'pnpm12',
+    secondaryKey: 'pnpm11',
+  },
+  { ...cmdsMap.yarn, key: 'yarn', version: data.yarn.version },
+  { ...cmdsMap.yarn_pnp, key: 'yarn_pnp', version: data.yarn_pnp.version },
+]
+const mainResArray = sortedTests.map(test => mainBars.map(bar => bar.stacked
+  ? {
+      primary: Math.round(data[bar.primaryKey].results[test] / 100) / 10,
+      secondary: Math.round(data[bar.secondaryKey].results[test] / 100) / 10,
+    }
+  : Math.round(data[bar.key].results[test] / 100) / 10
+))
+const mainSvg = generateSvg(mainResArray, mainBars, sortedDescriptions, formattedNow)
 
-const pnpmConfigs = pmConfigs.filter(c => c.key.startsWith('pnpm'))
-const pnpmKeys = pnpmConfigs.map(c => c.key)
-const pnpmSortedTests = sortTestsBySlowest(tests, data, pnpmKeys)
+const pnpmSortedTests = sortTestsBySlowest(tests, data, ['pnpm11'])
 const pnpmSortedDescriptions = pnpmSortedTests.map(t => testDescriptions[t])
-const pnpmPmsForSvg = pnpmKeys.map(k => ({ ...cmdsMap[k], version: data[k].version }))
-const pnpmSvg = generateSvg(toResArray(pnpmSortedTests, pnpmKeys, data), pnpmPmsForSvg, pnpmSortedDescriptions, formattedNow)
+const stackedResults = pnpmSortedTests.map((test, i) => ({
+  label: pnpmSortedDescriptions[i],
+  v11: Math.round(data.pnpm11.results[test] / 100) / 10,
+  v12: Math.round(data.pnpm12.results[test] / 100) / 10,
+}))
+const pnpmSvg = generateStackedSvg(stackedResults, formattedNow)
 
 fs.mkdirSync(BENCH_IMGS, { recursive: true })
 const mainPath = path.join(BENCH_IMGS, 'alotta-files.svg')

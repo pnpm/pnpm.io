@@ -1,15 +1,32 @@
 
-const getHighestNumber = (array) => {
-  // flatten array of arrays of numbers into an array of numbers
-  const flattened = [].concat.apply([], array)
-  // return the highest number
-  return Math.max.apply(null, flattened)
+// Results are either a number (simple bar) or { primary, secondary } where
+// the secondary value is rendered behind the primary in a different color
+// (used for the pnpm 11/12 stacked bar).
+const getHighestNumber = (resultArrays) => {
+  let max = 0
+  for (const row of resultArrays) {
+    for (const val of row) {
+      if (typeof val === 'number') {
+        if (val > max) max = val
+      } else if (val) {
+        if (val.primary > max) max = val.primary
+        if (val.secondary > max) max = val.secondary
+      }
+    }
+  }
+  return max
 }
 
 export default (resultArrays, pms, tests, formattedNow) => {
   let svgStr = ''
-  // colors taken from logos (where possible) — supplied via pm.color in commandsMap.js
-  const colors = pms.map((pm) => pm.color)
+  // Expand stacked PM slots into two legend entries (primary + extra).
+  const legendEntries = pms.flatMap((pm) => pm.stacked
+    ? [
+        { color: pm.color, legend: pm.legend, version: pm.version, displayVersion: pm.displayVersion },
+        { color: pm.extraColor, legend: pm.extraLegend, noVersion: true },
+      ]
+    : [pm]
+  )
   // empty areas next to the graph
   const offset = {
     left: 40,
@@ -75,22 +92,23 @@ export default (resultArrays, pms, tests, formattedNow) => {
   // svgStr += `<rect x="${vb.x}" y="${vb.y}" width="${vb.w}" height="${vb.h}" fill="${'#eaeaea'}"></rect>` + '\n'
 
   // draw legend
-  pms.forEach((pm, index) => {
-    // draw colored circle
+  // Wider spacing when stacking adds long "extra" entries; default tight spacing for simple charts.
+  const legendStepX = legendEntries.length > pms.length ? 36 : 16
+  legendEntries.forEach((entry, index) => {
     const radius = 4
-    const x = graph.x + radius + (radius * 4) * index
+    const x = graph.x + radius + legendStepX * index
     const y = vb.y + radius + 2
-    svgStr += `  <circle cx="${x}" cy="${y}" r="${radius}" fill="${colors[index]}"></circle>` + '\n'
+    svgStr += `  <circle cx="${x}" cy="${y}" r="${radius}" fill="${entry.color}"></circle>` + '\n'
 
-    // add name under circle
     const anchor = 'middle'
     let textY = y + radius + 4
-    svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${pm.legend}</text>` + '\n'
+    svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${entry.legend}</text>` + '\n'
 
-    // add version under name
-    const text = `v${pm.displayVersion ?? pm.version}`
-    textY += 4
-    svgStr += `  <text x="${x}" y="${textY}" class="font s3" text-anchor="${anchor}">${text}</text>` + '\n'
+    if (!entry.noVersion) {
+      const text = `v${entry.displayVersion ?? entry.version}`
+      textY += 4
+      svgStr += `  <text x="${x}" y="${textY}" class="font s3" text-anchor="${anchor}">${text}</text>` + '\n'
+    }
   })
 
   const graphLines = [
@@ -144,18 +162,30 @@ export default (resultArrays, pms, tests, formattedNow) => {
   // draw results as bars
   resultArrays.forEach((results, indexA) => {
     results.forEach((result, indexR) => {
+      const pm = pms[indexR]
       const roundedCorners = 1
       const y = graph.y +
         ((thickness + spacing) * indexR) +
         (((thickness + spacing) * pms.length + separation) * indexA)
-      const length = Math.round(result * ratio)
       const x = graph.x
-      svgStr += `  <rect x="${x}" y="${y}" width="${length}" height="${thickness}" fill="${colors[indexR]}" rx="${roundedCorners}" ry="${roundedCorners}"></rect>` + '\n'
-      const mascot = pms[indexR].mascot
-      if (mascot && result > 0) {
-        const mascotX = x + length + 2
-        const mascotY = y + thickness / 2
-        svgStr += `  <text x="${mascotX}" y="${mascotY}" class="font" font-size="7" dominant-baseline="central">${mascot}</text>` + '\n'
+
+      if (pm.stacked) {
+        const sLen = Math.round((result.secondary ?? 0) * ratio)
+        const pLen = Math.round((result.primary ?? 0) * ratio)
+        if (sLen > 0) {
+          svgStr += `  <rect x="${x}" y="${y}" width="${sLen}" height="${thickness}" fill="${pm.extraColor}" rx="${roundedCorners}" ry="${roundedCorners}"></rect>` + '\n'
+        }
+        if (pLen > 0) {
+          svgStr += `  <rect x="${x}" y="${y}" width="${pLen}" height="${thickness}" fill="${pm.color}" rx="${roundedCorners}" ry="${roundedCorners}"></rect>` + '\n'
+        }
+      } else {
+        const length = Math.round(result * ratio)
+        svgStr += `  <rect x="${x}" y="${y}" width="${length}" height="${thickness}" fill="${pm.color}" rx="${roundedCorners}" ry="${roundedCorners}"></rect>` + '\n'
+        if (pm.mascot && result > 0) {
+          const mascotX = x + length + 2
+          const mascotY = y + thickness / 2
+          svgStr += `  <text x="${mascotX}" y="${mascotY}" class="font" font-size="7" dominant-baseline="central">${pm.mascot}</text>` + '\n'
+        }
       }
     })
   })

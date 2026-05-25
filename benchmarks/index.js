@@ -8,6 +8,7 @@ import tempy from 'tempy'
 import cmdsMap from './commandsMap.js'
 import benchmark from './recordBenchmark.js'
 import generateSvg from './generateSvg.js'
+import generateStackedSvg from './generateStackedSvg.js'
 import spawn from "cross-spawn"
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -152,7 +153,6 @@ async function run () {
     sortedTests = sortTestsBySlowest(tests, results, pms)
     const sortedDescriptions = sortedTests.map(t => testDescriptions[t])
     const sortedTableRows = sortedTests.map(t => tableRows.find(r => r.test === t))
-    const resArray = toArray(sortedTests, pms, results)
 
     const headerLegends = pms.map(pm => cmdsMap[pm].mdLegend ?? cmdsMap[pm].legend).join(' | ')
     const headerSep = pms.map(() => '---').join(' | ')
@@ -164,7 +164,31 @@ async function run () {
       return `| ${action} | ${cache} | ${lockfile} | ${nodeModules} | ${values} |`
     }).join('\n')
 
-    const mainSvg = generateSvg(resArray, pms.map(pm => cmdsMap[pm]), sortedDescriptions, formattedNow)
+    // Main chart: pnpm 11 and pnpm 12 are merged into a single stacked bar so
+    // pnpm 12's speedup over pnpm 11 is visible at a glance.
+    const mainBars = [
+      { ...cmdsMap.npm, key: 'npm' },
+      {
+        stacked: true,
+        color: cmdsMap.pnpm12.color,
+        legend: cmdsMap.pnpm12.legend,
+        displayVersion: cmdsMap.pnpm12.displayVersion,
+        extraColor: '#cccccc',
+        extraLegend: 'pnpm 11 extra',
+        primaryKey: 'pnpm12',
+        secondaryKey: 'pnpm11',
+      },
+      { ...cmdsMap.yarn, key: 'yarn' },
+      { ...cmdsMap.yarn_pnp, key: 'yarn_pnp' },
+    ]
+    const resArray = sortedTests.map(test => mainBars.map(bar => bar.stacked
+      ? {
+          primary: Math.round(results[bar.primaryKey][test] / 100) / 10,
+          secondary: Math.round(results[bar.secondaryKey][test] / 100) / 10,
+        }
+      : Math.round(results[bar.key][test] / 100) / 10
+    ))
+    const mainSvg = generateSvg(resArray, mainBars, sortedDescriptions, formattedNow)
     const mainSvgHash = hashContent(mainSvg)
     sections.push(stripIndents`
       ${fixture.mdDesc}
@@ -192,11 +216,6 @@ async function run () {
         return pnpmConfigs.every(({ hasNodeModules }) => hasNodeModules !== false)
       })
     const pnpmTestDescriptions = pnpmSortedTests.map(t => testDescriptions[t])
-    const pnpmResArray = pnpmSortedTests.map((test) =>
-      pnpmKeys
-        .map((key) => results[key][test])
-        .map((time) => Math.round(time / 100) / 10)
-    )
     const pnpmHeaderLegends = pnpmKeys.map((key) => cmdsMap[key].mdLegend ?? cmdsMap[key].legend).join(' | ')
     const pnpmHeaderSep = pnpmKeys.map(() => '---').join(' | ')
     const pnpmRows = pnpmSortedTests.map((test) => {
@@ -206,7 +225,12 @@ async function run () {
     }).join('\n')
 
     const pnpmTitle = pnpmConfigs.map(({ key }) => cmdsMap[key].legend).join(' vs ')
-    const pnpmSvg = generateSvg(pnpmResArray, pnpmConfigs.map(({ key }) => cmdsMap[key]), pnpmTestDescriptions, formattedNow)
+    const stackedResults = pnpmSortedTests.map((test, i) => ({
+      label: pnpmTestDescriptions[i],
+      v11: Math.round(results.pnpm11[test] / 100) / 10,
+      v12: Math.round(results.pnpm12[test] / 100) / 10,
+    }))
+    const pnpmSvg = generateStackedSvg(stackedResults, formattedNow)
     const pnpmSvgHash = hashContent(pnpmSvg)
     sections.push(stripIndents`
       ### ${pnpmTitle}
