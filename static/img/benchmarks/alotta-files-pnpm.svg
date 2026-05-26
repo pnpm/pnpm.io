@@ -32,11 +32,11 @@
   <text x="290" y="170" class="font s5 text" text-anchor="middle">10</text>
   <text x="290" y="20" class="font s4 text" font-style="italic" text-anchor="end">Installation time in seconds (lower is better)</text>
   <rect x="40" y="35" width="183" height="10" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="35" width="118" height="10" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="35" width="80" height="10" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="50" width="180" height="10" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="50" width="135" height="10" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="50" width="88" height="10" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="65" width="163" height="10" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="65" width="85" height="10" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="65" width="65" height="10" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="80" width="125" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="80" width="25" height="10" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="95" width="88" height="10" fill="#cccccc" rx="1" ry="1"></rect>
@@ -64,5 +64,5 @@
   <text x="38" y="143" class="font s4" dominant-baseline="middle" text-anchor="end">lockfile</text>
   <text x="38" y="147" class="font s4" dominant-baseline="middle" text-anchor="end">node_modules</text>
   <text x="38" y="160" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="178" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.15.0 at: May 26, 2026, 12:46 AM</text>
+  <text x="290" y="178" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.15.0 at: May 26, 2026, 8:41 AM</text>
 </svg>
