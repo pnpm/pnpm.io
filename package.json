@@ -32,6 +32,7 @@
     "@pnpm/website.pages.homepage": "1.0.1",
     "@types/react": "^19.1.9",
     "clsx": "^1.2.1",
+    "docusaurus-plugin-copy-page-button": "^0.6.1",
     "docusaurus-plugin-sass": "^0.2.6",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.1.1",
