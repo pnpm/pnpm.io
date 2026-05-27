@@ -102,6 +102,18 @@ When used, only updates `pnpm-lock.yaml` and `package.json`. Nothing gets writte
 
 Fix broken lockfile entries automatically.
 
+### --update-checksums
+
+Added in: v11.4.0
+
+Refresh the locked tarball integrity values from what the registry currently serves, when a downloaded tarball's hash doesn't match the integrity recorded in `pnpm-lock.yaml`.
+
+By default, since v11.4.0, an integrity mismatch is a hard failure: `pnpm install` exits with `ERR_PNPM_TARBALL_INTEGRITY` rather than silently re-resolving from the registry and overwriting the locked integrity. This protects projects that ship a committed lockfile from a compromised registry, proxy, or republished version substituting attacker-controlled content on a clean machine.
+
+`--update-checksums` is the narrowly-scoped opt-in for the legitimate case (e.g. a registry rewrote its tarballs and you've verified the new bytes are correct). A warning still prints when the bypass takes effect so the operation is auditable.
+
+`--force` and `pnpm update` deliberately do **not** bypass the integrity check. `--frozen-lockfile` is unchanged, and `--fix-lockfile` keeps its documented purpose (filling in missing lockfile entries) and is also not a bypass.
+
 ### --frozen-lockfile
 
 * Default:
