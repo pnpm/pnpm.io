@@ -490,6 +490,19 @@ With this layout, most of the packages in the ecosystem work with no issues.
 However, if some tooling only works when the hoisted dependencies are in the
 root of `node_modules`, you can set this to `true` to hoist them for you.
 
+### hoistingLimits
+
+Added in: v11.5.0
+
+* Default: **none**
+* Type: **none**, **workspaces**, **dependencies**
+
+Controls how far dependencies are hoisted when using `nodeLinker: hoisted`. This setting mirrors Yarn's `nmHoistingLimits`.
+
+* **none** - hoist as far as possible (the default).
+* **workspaces** - hoist only as far as each workspace package, preventing dependencies from being hoisted above the workspace package that depends on them.
+* **dependencies** - hoist only up to each workspace package's direct dependencies, preventing transitive dependencies from being hoisted into the workspace package's `node_modules`.
+
 ## Node-Modules Settings
 
 ### modulesDir
