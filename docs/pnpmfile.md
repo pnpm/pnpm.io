@@ -14,13 +14,16 @@ lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
 
 ### TL;DR
 
-| Hook Function                                         | Process                                                    | Uses                                               |
-|-------------------------------------------------------|------------------------------------------------------------|----------------------------------------------------|
-| `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json`. |
-| `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                 |
-| `hooks.beforePacking(pkg): pkg`                       | Called before creating a tarball during pack/publish       | Allows you to customize the published `package.json` |
-| `resolvers`                                           | Called during package resolution.                          | Allows you to register custom package resolvers.  |
-| `fetchers`                                            | Called during package fetching.                            | Allows you to register custom package fetchers.   |
+| Hook Function                                                   | Process                                                    | Uses                                                |
+|-----------------------------------------------------------------|------------------------------------------------------------|-----------------------------------------------------|
+| `hooks.readPackage(pkg, context): pkg`                          | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json`. |
+| `hooks.updateConfig(config): config`                            | Called before pnpm uses the resolved configuration.        | Allows you to mutate pnpm's settings.               |
+| `hooks.afterAllResolved(lockfile, context): lockfile`           | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                  |
+| `hooks.beforePacking(pkg): pkg`                                 | Called before creating a tarball during pack/publish       | Allows you to customize the published `package.json` |
+| `hooks.preResolution(options): Promise<void>`                   | Called after lockfiles are read and before resolution.     | Allows you to mutate lockfile objects.              |
+| `hooks.importPackage(destinationDir, options): Promise<string \| undefined>` | Called when packages are written to `node_modules`.        | Allows you to customize the package import method.  |
+| `resolvers`                                                     | Called during package resolution.                          | Allows you to register custom package resolvers.    |
+| `fetchers`                                                      | Called during package fetching.                            | Allows you to register custom package fetchers.     |
 
 ### `hooks.readPackage(pkg, context): pkg | Promise<pkg>`
 
