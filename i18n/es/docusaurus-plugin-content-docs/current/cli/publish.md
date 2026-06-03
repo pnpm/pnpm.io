@@ -1,0 +1,137 @@
+---
+id: publish
+title: pnpm publish
+---
+
+Publica un paquete al registro npm.
+
+```sh
+pnpm [-r] publish [<tarball|folder>] [--tag <tag>]
+     [--access <public|restricted>] [options]
+```
+
+:::note
+
+Since v11, `pnpm publish` is implemented natively and no longer delegates to the `npm` CLI. If you rely on a feature that is now gone, please open an issue at [pnpm/pnpm](https://github.com/pnpm/pnpm/issues). As a workaround, you can still run `pnpm pack && npm publish *.tgz`.
+
+:::
+
+Al publicar un paquete dentro de un [workspace](../workspaces.md), el archivo LICENSE de la raíz del workspace se empaqueta con el paquete (a menos que el paquete tenga una licencia propia).
+
+Puedes sobrescribir algunos campos antes de publicar, usando el campo [publishConfig][] en `package.json`. También puede usar el campo [`publishConfig.directory`](../package_json.md#publishconfigdirectory) para personalizar el subdirectorio publicado (usualmente utilizando herramientas de compilación de terceros).
+
+Cuando se ejecute este comando recursivamente (`pnpm -r publish`), pnpm publicará todos los paquetes que tengan versiones aún no publicadas en el registro.
+
+## Opciones
+
+### --recursive, -r
+
+Publica todos los paquetes desde el espacio de trabajo.
+
+### --json
+
+Show information in JSON format.
+
+### --tag &lt;tag\>
+
+Publica el paquete con la etiqueta dada. De forma predeterminada, `pnpm publish` actualiza la etiqueta `latest`.
+
+Por ejemplo:
+
+```sh
+# inside the foo package directory
+pnpm publish --tag next
+# in a project where you want to use the next version of foo
+pnpm add foo@next
+```
+
+### --access &lt;public|restricted\>
+
+Tells the registry whether the published package should be public or restricted.
+
+### --no-git-checks
+
+Don't check if current branch is your publish branch, clean, and up-to-date with remote.
+
+### --publish-branch &lt;branch\>
+
+* Default: **master** and **main**
+* Types: **String**
+
+The primary branch of the repository which is used for publishing the latest changes.
+
+### --force
+
+Try to publish packages even if their current version is already found in the registry.
+
+### --report-summary
+
+Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.
+
+An example of a `pnpm-publish-summary.json` file:
+
+```json
+{
+  "publishedPackages": [
+    {
+      "name": "foo",
+      "version": "1.0.0"
+    },
+    {
+      "name": "bar",
+      "version": "2.0.0"
+    }
+  ]
+}
+```
+
+### --dry-run
+
+Does everything a publish would do except actually publishing to the registry.
+
+### --otp
+
+When publishing packages that require two-factor authentication, this option can specify a one-time password.
+
+You can also provide the OTP via the `PNPM_CONFIG_OTP` environment variable:
+
+```sh
+export PNPM_CONFIG_OTP='<your OTP here>'
+pnpm publish --no-git-checks
+```
+
+If the registry requests OTP and you have not provided it via the environment variable or the `--otp` flag, pnpm will prompt you directly for an OTP code.
+
+If the registry requests web-based authentication, pnpm will print a scannable QR code along with the URL.
+
+### --provenance
+
+When publishing from a supported cloud CI/CD system, the package will be publicly linked to where it was built and published from.
+
+### --filter &lt;package_selector\>
+
+[Leer más acerca del filtrado.](../filtering.md)
+
+## Configuración
+
+You can also set `gitChecks`, `publishBranch` options in the `pnpm-workspace.yaml` file.
+
+Por ejemplo:
+
+```yaml title="pnpm-workspace.yaml"
+gitChecks: false
+publishBranch: production
+```
+
+## Ciclo de vida de los Scripts
+
+* `prepublishOnly`
+* `prepublish`
+* `prepack`
+* `prepare`
+* `postpack`
+* `publish`
+* `postpublish`
+
+[publishConfig]: ../package_json.md#publishconfig
+

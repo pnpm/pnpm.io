@@ -1,0 +1,25 @@
+### shellEmulator
+
+* 默认值： **false**
+* 类型：**Boolean**
+
+当为 `true` 时，pnpm 将使用 [类 bash shell][bash-like shell] 的 JavaScript 实现来
+执行脚本。
+
+该选项简化了跨平台运行脚本。 例如，默认情况下，下述脚本将在非 POSIX 标准兼容系统下运行失败：
+
+```json
+"scripts": {
+  "test": "NODE_ENV=test node test.js"
+}
+```
+
+但是，如果 `shellEmulator` 设置为 `true`，它将适用于所有平台。
+
+:::note
+
+Node.js 22 或更高版本支持在没有 pnpm 帮助的情况下运行脚本。 对于上面的例子，你可以使用“node --run test”运行“test”脚本。 但是，`shellEmulator` 选项对此没有影响。 依赖 POSIX 特性的脚本需要运行 `pnpm run` 而不是`node --run` 才能在不兼容 POSIX 的环境中工作。
+
+:::
+
+[类似 bash 的 shell]: https://www.npmjs.com/package/@yarnpkg/shell
