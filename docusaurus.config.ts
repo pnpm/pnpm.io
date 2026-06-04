@@ -89,15 +89,6 @@ const docusaurusConfig = {
     ]
   ],
   "plugins": [
-    [
-      "content-docs",
-      ({
-        "id": "community",
-        "path": "community",
-        "routeBasePath": "community",
-        "sidebarPath": path.join(__dirname, "sidebarsCommunity.json"),
-      }),
-    ],
     'docusaurus-plugin-sass',
     'docusaurus-plugin-copy-page-button',
   ],
@@ -141,11 +132,6 @@ const docusaurusConfig = {
           className: 'header-long-screen',
         },
         {
-          "to": "/community/articles",
-          "label": "Community",
-          "position": "left"
-        },
-        {
           type: 'dropdown',
           label: 'More',
           "position": "left",
@@ -158,10 +144,6 @@ const docusaurusConfig = {
             {
               "to": "/faq",
               "label": "FAQ",
-            },
-            {
-              "to": "/community/articles",
-              "label": "Community",              
             },
             {
               "to": "/benchmarks",
