@@ -32,13 +32,29 @@ pnpm add -g prettier
 
 creates two separate isolated installations — `typescript` and `prettier` each get their own `node_modules` tree and cannot affect each other's dependency resolution.
 
-Installing multiple packages in a single command groups them into one isolated install:
+Installing multiple **space-separated** packages in a single command also creates a separate isolated install for each one:
 
 ```sh
 pnpm add -g eslint prettier
 ```
 
-`eslint` and `prettier` share a `node_modules` tree and lockfile, so peer dependencies are resolved against each other. Removing either with `pnpm remove -g` removes the entire group.
+`eslint` and `prettier` each get their own `node_modules` tree and lockfile and can be removed independently — `pnpm remove -g eslint` leaves `prettier` untouched.
+
+To bundle multiple packages into the *same* isolated install — so they share a `node_modules` tree and lockfile, resolve peer dependencies against each other, and are removed together — pass them as a **comma-separated** list:
+
+```sh
+pnpm add -g eslint,prettier
+```
+
+Here `eslint` and `prettier` form a single install group. Removing either with `pnpm remove -g` removes the whole group.
+
+The two forms can be mixed. For example:
+
+```sh
+pnpm add -g eslint,prettier typescript
+```
+
+bundles `eslint` and `prettier` into one isolated install while installing `typescript` on its own.
 
 ## Directory layout
 
@@ -88,7 +104,7 @@ If `--depth>0` is requested but the request can't be narrowed to a single instal
 | Command | Description |
 |---|---|
 | `pnpm add -g <pkg>` | Install a package globally |
-| `pnpm remove -g <pkg>` | Remove a globally installed package (removes the entire installation group) |
+| `pnpm remove -g <pkg>` | Remove a globally installed package (if it was bundled into an install group, the whole group is removed) |
 | `pnpm update -g [pkg]` | Update global packages (re-installs into new isolated directories) |
 | `pnpm list -g` | List all globally installed packages |
 

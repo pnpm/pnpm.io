@@ -81,7 +81,9 @@ For instance, `pnpm add debug -w`.
 
 ### --global, -g
 
-Install a package globally.
+Install a package globally. See [Global Packages](../global-packages.md) for details.
+
+Each space-separated package is installed into its own isolated directory. To bundle several packages into a single isolated install (so they share dependencies and are removed together), pass them as a comma-separated list, e.g. `pnpm add -g eslint,prettier`.
 
 ### --workspace
 
