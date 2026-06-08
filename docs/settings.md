@@ -50,28 +50,17 @@ separating the package selector from the dependency selector with a ">", for
 example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
 any other dependencies.
 
-An override may be defined as a reference to a direct dependency's spec.
-This is achieved by prefixing the name of the dependency with a `$`:
-
-```json title="package.json"
-{
-  "dependencies": {
-    "foo": "^1.0.0"
-  }
-}
-```
+To keep an overridden version in sync with the version used elsewhere in your workspace, define the version in a [catalog](./catalogs.md) and reference it with the `catalog:` protocol. This way the version is maintained in a single place and referenced from both your dependencies and your overrides:
 
 ```yaml title="pnpm-workspace.yaml"
+catalog:
+  foo: "^1.0.0"
+
 overrides:
-  foo: "$foo"
+  foo: "catalog:"
 ```
 
-The referenced package does not need to match the overridden one:
-
-```yaml title="pnpm-workspace.yaml"
-overrides:
-  bar: "$foo"
-```
+You may also reference a named catalog with `catalog:<name>`. See [Catalogs](./catalogs.md) for more details.
 
 If you find that your use of a certain package doesn't require one of its dependencies, you may use `-` to remove it. For example, if package `foo@1.0.0` requires a large package named `bar` for a function that you don't use, removing it could reduce install time:
 
