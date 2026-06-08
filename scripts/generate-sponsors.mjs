@@ -14,6 +14,11 @@ const TIER_CONFIG = {
   silver: { columns: 3, heading: 'Silver Sponsors' },
 };
 
+const README_TIER_CONFIG = {
+  ...TIER_CONFIG,
+  platinum: { ...TIER_CONFIG.platinum, columns: 2 },
+};
+
 const ALT_EXTENSIONS = ['.svg', '.png', '.jpg', '.jpeg'];
 
 function addUTM(urlStr, medium) {
@@ -126,8 +131,8 @@ function renderSponsorCell(sponsor, utmMedium) {
   ].join('\n');
 }
 
-function renderTier(tierName, sponsors, utmMedium) {
-  const config = TIER_CONFIG[tierName];
+function renderTier(tierName, sponsors, utmMedium, tierConfig = TIER_CONFIG) {
+  const config = tierConfig[tierName];
   const lines = [];
 
   lines.push(`## ${config.heading}`);
@@ -150,11 +155,11 @@ function renderTier(tierName, sponsors, utmMedium) {
   return lines.join('\n');
 }
 
-function generateMarkdown(sponsors, { tiers = ['platinum', 'gold', 'silver'], utmMedium = 'readme' } = {}) {
+function generateMarkdown(sponsors, { tiers = ['platinum', 'gold', 'silver'], utmMedium = 'readme', tierConfig = TIER_CONFIG } = {}) {
   const sections = [];
   for (const tier of tiers) {
     if (sponsors[tier] && sponsors[tier].length > 0) {
-      sections.push(renderTier(tier, sponsors[tier], utmMedium));
+      sections.push(renderTier(tier, sponsors[tier], utmMedium, tierConfig));
     }
   }
   return sections.join('\n\n');
@@ -192,7 +197,7 @@ function generate() {
   const absPnpmRoot = path.resolve(pnpmRoot);
 
   // READMEs — all tiers
-  const readmeMarkdown = generateMarkdown(sponsors);
+  const readmeMarkdown = generateMarkdown(sponsors, { tierConfig: README_TIER_CONFIG });
   updateFileMarkers(path.join(absPnpmRoot, 'README.md'), readmeMarkdown);
   updateFileMarkers(path.join(absPnpmRoot, 'pnpm/README.md'), readmeMarkdown);
 
