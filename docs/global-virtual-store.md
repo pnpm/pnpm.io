@@ -56,6 +56,7 @@ It also speeds up installations across unrelated projects on the same machine, s
 ## Limitations
 
 - **CI environments**: In CI, caches are typically absent, so there's no warm global store to benefit from. The global virtual store is generally not useful in CI.
+- **Shared trust domain**: The global virtual store and the content-addressable store are shared writable state. Use them only for projects, users, and jobs that trust each other, and protect the store path with filesystem permissions.
 - **ESM hoisting**: pnpm uses the `NODE_PATH` environment variable to support hoisted dependencies with the global virtual store. However, Node.js does not respect `NODE_PATH` for ESM imports. If ESM dependencies try to import packages not declared in their own `package.json`, resolution will fail. You can work around this with [packageExtensions](./settings.md#packageextensions) or the [@pnpm/plugin-esm-node-path](https://github.com/pnpm/plugin-esm-node-path) config dependency.
 
 :::note

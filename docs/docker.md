@@ -8,6 +8,7 @@ title: Working with Docker
 It is impossible to create reflinks or hardlinks between a Docker container and the host filesystem during build time.
 The next best thing you can do is using BuildKit cache mount to share cache between builds. Alternatively, you may use
 [podman] because it can mount Btrfs volumes during build time.
+If you use BuildKit cache mounts, keep the pnpm store cache scoped to mutually trusted builds. A store cache that can be written by an untrusted build should not be reused by trusted builds.
 
 :::
 

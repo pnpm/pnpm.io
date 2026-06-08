@@ -34,6 +34,12 @@ With AI coding agents, worktrees go from convenient to essential. Each agent nee
 
 Worktrees solve the git side — every agent gets its own isolated checkout while sharing the underlying git objects. But each worktree still needs its own `node_modules`, which can be hundreds of megabytes. That's where pnpm's [global virtual store](./global-virtual-store.md) comes in: with it enabled, each worktree's `node_modules` contains only symlinks into a single content-addressable store on disk. This means adding a new agent is fast and costs almost no extra disk space.
 
+:::important
+
+This setup assumes the worktrees and agents share the same trust boundary. Do not use one writable pnpm store for mutually untrusted agents or users.
+
+:::
+
 ## Setting it up
 
 ### 1. Create a bare repository

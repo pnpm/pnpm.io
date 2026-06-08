@@ -679,12 +679,20 @@ It is possible to set a store from a different disk but in that case pnpm will
 copy packages from the store instead of hard-linking them, as hard links are
 only possible on the same filesystem.
 
+:::important
+
+The pnpm store is intended to be shared only between mutually trusted users, jobs, and processes. If you configure a shared `storeDir`, protect it with filesystem permissions so untrusted users cannot write to it. The store is part of pnpm's trust domain: packages may be hard linked from it, and the store index (`index.db`) records the hashes used to verify cached files.
+
+:::
+
 ### verifyStoreIntegrity
 
 * Default: **true**
 * Type: **Boolean**
 
 By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's `node_modules`. If `verifyStoreIntegrity` is set to `false`, files in the content-addressable store will not be checked during installation.
+
+This setting helps detect accidental store corruption. It does not make a store that is writable by untrusted users safe, because an attacker who can write to the store can alter both cached package contents and the metadata used to verify them.
 
 ### useRunningStoreServer
 
@@ -1474,7 +1482,9 @@ The directory where pnpm creates the `pnpm-state.json` file that is currently us
   * On Linux: **~/.cache/pnpm**
 * Type: **path**
 
-The location of the cache (package metadata and dlx).
+The location of the cache (package metadata, dlx cache, and some install verification results).
+
+Like the store, the cache directory is intended to be shared only between mutually trusted users, jobs, and processes. If you configure or restore a shared `cacheDir`, protect it with filesystem permissions so untrusted users cannot write to it.
 
 ### useStderr
 

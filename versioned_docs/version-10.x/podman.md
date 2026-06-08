@@ -15,6 +15,12 @@ Podman support copy-on-write filesystems like Btrfs. With Btrfs, container runti
 
 To share files between the host and the container, mount the store directory and the `node_modules` directory from the host to the container. This allows pnpm inside the container to naturally reuse the files from the host as reflinks.
 
+:::important
+
+Only mount a host pnpm store into containers you trust. A container with write access to the mounted store can affect later installs that reuse that store.
+
+:::
+
 Below is an example container setup for demonstration:
 
 ```dockerfile title="Dockerfile"
