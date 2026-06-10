@@ -21,6 +21,8 @@ Authorization-related settings are handled via [`.npmrc`](./npmrc.md).
 
 Values in the configuration files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string.
 
+Since v10.34.2, env variables are **not** expanded in the `registry` setting of `pnpm-workspace.yaml`; a value containing a `${...}` placeholder is ignored. See [Environment variables](./npmrc.md#environment-variables) for the rationale and migration options.
+
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
 ## Dependency Resolution

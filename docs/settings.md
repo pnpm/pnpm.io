@@ -22,6 +22,12 @@ Authorization-related settings are handled via [`.npmrc`](./npmrc.md).
 
 Values in the configuration files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string.
 
+:::warning
+
+Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace.yaml` that define registry URLs: `registry` and the URL values of [`registries`](#registries) and [`namedRegistries`](#namedregistries). Values containing a `${...}` placeholder in these settings are ignored. Because `pnpm-workspace.yaml` is committed to the repository, expanding env variables in registry URLs could be exploited by a malicious repository to leak secrets from the environment to an attacker-controlled registry. Configure dynamic registry URLs in a trusted location instead: the global configuration file or CLI options.
+
+:::
+
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
 ## Dependency Resolution

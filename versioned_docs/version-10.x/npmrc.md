@@ -9,6 +9,37 @@ For details on how `.npmrc` files are loaded, see the [`pnpm config`](./cli/conf
 
 For settings that can be configured in `pnpm-workspace.yaml`, see [Settings (pnpm-workspace.yaml)](./settings.md).
 
+## Environment variables
+
+Values in `.npmrc` files may reference environment variables using the `${NAME}` syntax.
+
+Since v10.34.2, environment variables are **not** expanded in the project and workspace `.npmrc` files (those checked out together with the repository) for the following settings:
+
+* registry and proxy URLs (`registry`, `@scope:registry`, `proxy`, `https-proxy`, `http-proxy`);
+* URL-scoped keys (keys starting with `//`);
+* credential values (`_authToken`, `_auth`, `_password`, `username`, `tokenHelper`, `cert`, `key`).
+
+A setting that contains a `${...}` placeholder in any of these positions is ignored, and pnpm prints a warning. Repository-controlled `.npmrc` files must not be able to expand environment variables into the URLs pnpm sends requests to, or into the credentials attached to those requests — otherwise a malicious repository could exfiltrate secrets from your environment (such as CI tokens) to an attacker-controlled registry during installation ([GHSA-3qhv-2rgh-x77r](https://github.com/pnpm/pnpm/security/advisories/GHSA-3qhv-2rgh-x77r)).
+
+If your project relied on a committed `.npmrc` containing a line like `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`, move the token to a trusted location instead:
+
+* Write the token to the global config file before installing (for example, in a CI step):
+
+  ```sh
+  pnpm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+  ```
+
+  `pnpm config set` writes to the global config file by default, not to the project `.npmrc`, so the token never ends up in the repository.
+
+* Or keep the `${NPM_TOKEN}` placeholder line, but put it in the user-level `~/.npmrc` instead of the repository — environment variables are still expanded there.
+* Or set the value via an environment variable directly, without any `.npmrc` entry:
+
+  ```sh
+  npm_config_//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  ```
+
+* In GitHub Actions, `actions/setup-node` with the `registry-url` input writes the auth setting to a user-level `.npmrc` (referenced by the `NPM_CONFIG_USERCONFIG` environment variable, which pnpm honors), so authentication via the `NODE_AUTH_TOKEN` environment variable continues to work.
+
 ## Registry Settings
 
 ### registry
@@ -53,6 +84,8 @@ You may also use an environment variable. For example:
 ```ini
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
+
+Since v10.34.2, environment variables are only expanded in trusted locations (the user `~/.npmrc`, the global config, CLI options, and `npm_config_*` environment variables), not in the project or workspace `.npmrc`. See [Environment variables](#environment-variables).
 
 Or you may just use an environment variable directly, without changing `.npmrc` at all:
 
