@@ -883,22 +883,22 @@ The exponential factor for retry backoff.
 * Default: **10000 (10 seconds)**
 * Type: **Number**
 
-The minimum (base) timeout for retrying requests.
+The lower bound (in milliseconds) of the retry exponential backoff.
 
 ### fetchRetryMaxtimeout
 
 * Default: **60000 (1 minute)**
 * Type: **Number**
 
-The maximum fallback timeout to ensure the retry factor does not make requests
-too long.
+The upper bound (in milliseconds) of the retry exponential backoff.
 
 ### fetchTimeout
 
 * Default: **60000 (1 minute)**
 * Type: **Number**
 
-The maximum amount of time to wait for HTTP requests to complete.
+The maximum amount of time to wait for HTTP requests to connect and complete.
+This time should be enough to download the largest package over a reasonable connection.
 
 ### fetchWarnTimeoutMs
 
