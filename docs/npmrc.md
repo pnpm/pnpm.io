@@ -48,6 +48,14 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
 
   `pnpm config set` writes to the global location by default (`<pnpm config>/auth.ini` for auth settings), not to the project `.npmrc`, so the token never ends up in the repository.
 
+* **Set the credential through an environment variable, with no `.npmrc` file at all** (since v11.6). pnpm reads URL-scoped registry settings from `pnpm_config_//…` environment variables:
+
+  ```sh
+  export "pnpm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN"
+  ```
+
+  This is the most direct, file-free replacement for a committed `//registry.npmjs.org/:_authToken=${NPM_TOKEN}` line. Because the registry the credential applies to is encoded in the (trusted) variable name, a malicious repository cannot redirect it to another host. Such an environment value overrides the project `.npmrc` but is itself overridden by a command-line option. The `tokenHelper` setting is intentionally not read from environment variables.
+
 * Or keep the `${NPM_TOKEN}` placeholder line, but put it in the user-level `~/.npmrc` (or the file referenced by [`npmrcAuthFile`](./settings.md#npmrcauthfile)) instead of the repository.
 * In GitHub Actions, `actions/setup-node` with the `registry-url` input writes the auth setting to a user-level `.npmrc` (referenced by the `NPM_CONFIG_USERCONFIG` environment variable, which pnpm honors), so authentication via the `NODE_AUTH_TOKEN` environment variable continues to work.
 * If you cannot easily modify each CI pipeline, you may declare the project `.npmrc` trusted by setting a single environment variable in the CI environment (for example, at the organization or workspace level):
