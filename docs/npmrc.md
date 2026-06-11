@@ -50,6 +50,19 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
 
 * Or keep the `${NPM_TOKEN}` placeholder line, but put it in the user-level `~/.npmrc` (or the file referenced by [`npmrcAuthFile`](./settings.md#npmrcauthfile)) instead of the repository.
 * In GitHub Actions, `actions/setup-node` with the `registry-url` input writes the auth setting to a user-level `.npmrc` (referenced by the `NPM_CONFIG_USERCONFIG` environment variable, which pnpm honors), so authentication via the `NODE_AUTH_TOKEN` environment variable continues to work.
+* If you cannot easily modify each CI pipeline, you may declare the project `.npmrc` trusted by setting a single environment variable in the CI environment (for example, at the organization or workspace level):
+
+  ```text
+  PNPM_CONFIG_NPMRC_AUTH_FILE=.npmrc
+  ```
+
+  This is the env form of the [`npmrcAuthFile`](./settings.md#npmrcauthfile) setting: it makes pnpm read the project's `.npmrc` as the user-level auth file (a relative path is resolved against the working directory), so environment variables in it are expanded as before. Because the trust declaration comes from the environment — not from the repository — a malicious repository cannot set it for you. The npm-style `NPM_CONFIG_USERCONFIG` variable is also honored as a fallback.
+
+  :::danger
+
+  Only use this in environments that exclusively build trusted repositories. It disables this protection entirely for the checked-out repository, including the restriction that `tokenHelper` may only be set in user-level config.
+
+  :::
 
 ## Authentication Settings
 
