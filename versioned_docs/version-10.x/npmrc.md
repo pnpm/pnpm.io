@@ -53,6 +53,8 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
 
   :::
 
+The same rule applies to **registry and proxy URLs** in a project or workspace `.npmrc` (`registry`, `@scope:registry`, `proxy`, `https-proxy`, `http-proxy`). If you used an environment variable to build a registry URL, move the setting to a trusted source — your user-level `~/.npmrc`, the global config (`pnpm config set "<key>" <value>`), a CLI option, or an environment variable. If the URL is not secret, you can also write the resolved value directly in the project `.npmrc`, since only `${...}` placeholders are ignored.
+
 ## Registry Settings
 
 ### registry
