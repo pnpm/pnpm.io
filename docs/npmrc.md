@@ -48,11 +48,9 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
 
   `pnpm config set` writes to the global location by default (`<pnpm config>/auth.ini` for auth settings), not to the project `.npmrc`, so the token never ends up in the repository.
 
-* **Set the credential through an environment variable, with no `.npmrc` file at all** (since v11.6). pnpm reads URL-scoped registry settings from `npm_config_//…` and `pnpm_config_//…` environment variables:
+* **Set the credential through an environment variable, with no `.npmrc` file at all** (since v11.6). pnpm reads URL-scoped registry settings from `pnpm_config_//…` environment variables:
 
   ```sh
-  export "npm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN"
-  # pnpm_config_ is also accepted and wins over npm_config_ for the same key:
   export "pnpm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN"
   ```
 
