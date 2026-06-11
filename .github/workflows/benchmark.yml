@@ -14,11 +14,11 @@ jobs:
     env:
       COREPACK_ENABLE_AUTO_PIN: 0
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
           node-version: 24
       - run: |
@@ -33,7 +33,7 @@ jobs:
       - run: pnpm --dir=benchmarks run benchmark
       - run: pnpm --dir=benchmarks run benchmark
       - name: Commit & Push changes
-        uses: actions-js/push@master
+        uses: actions-js/push@5a7cbd780d82c0c937b5977586e641b2fd94acc5 # v1.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           message: "chore: update benchmarks"
