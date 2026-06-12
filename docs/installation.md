@@ -24,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+irm https://get.pnpm.io/install.ps1 | iex
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
