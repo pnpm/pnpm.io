@@ -32,7 +32,7 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchm
 | install |   | ✔ | ✔ | 1.3s | 521ms | 40ms | 3.5s | n/a |
 | update | n/a | n/a | n/a | 6.3s | 7.8s | 1.8s | 4.2s | 2.1s |
 
-<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=019debe7" />
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=16591e76" />
 
 ### pnpm vs pnpm 🦀
 
@@ -50,4 +50,4 @@ pnpm v12 will use a new installation engine for fetching and linking written in 
 | install | ✔ | ✔ | ✔ | 509ms | 37ms |
 | update | n/a | n/a | n/a | 7.8s | 1.8s |
 
-<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=3e2d3f21" />
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=0c2f94fe" />

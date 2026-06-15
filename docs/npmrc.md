@@ -93,6 +93,28 @@ You may also use an environment variable. For example:
 
 Environment variables are only expanded in user-level auth files, not in the project-level `.npmrc`. See [Environment variables in auth settings](#environment-variables-in-auth-settings).
 
+#### Scope-specific auth tokens
+
+Added in: v11.7.0
+
+pnpm can use different auth tokens for different package scopes, even when those scopes point to the same registry URL. Add the package scope after the registry URL in the auth key:
+
+```ini
+@org-a:registry=https://npm.pkg.github.com/
+@org-b:registry=https://npm.pkg.github.com/
+
+//npm.pkg.github.com/:@org-a:_authToken=ORG_A_TOKEN
+//npm.pkg.github.com/:@org-b:_authToken=ORG_B_TOKEN
+
+//npm.pkg.github.com/:_authToken=FALLBACK_TOKEN
+```
+
+When installing or publishing `@org-a/*`, pnpm uses `ORG_A_TOKEN`; for `@org-b/*`, it uses `ORG_B_TOKEN`. Optionally, packages without a matching scope fall back to the registry-wide token (`FALLBACK_TOKEN` above), when provided.
+
+`pnpm login --registry=https://npm.pkg.github.com --scope=@org-a` writes the token to the same scope-specific auth key.
+
+This is useful for registries (such as GitHub Packages) that issue tokens per organization or per scope. Previously, auth was selected only by registry URL, so two scopes sharing a registry had to share a token.
+
 ### &lt;URL&gt;&#58;tokenHelper
 
 A token helper is an executable which outputs an auth token. This can be used in situations where the authToken is not a constant value but is something that refreshes regularly, where a script or other tool can use an existing refresh token to obtain a new access token.

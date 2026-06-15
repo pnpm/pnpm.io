@@ -721,6 +721,31 @@ installation will fail.
 
 Some registries allow the exact same content to be published under different package names and/or versions. This breaks the validity checks of packages in the store. To avoid errors when verifying the names and versions of such packages in the store, you may set the `strictStorePkgContentCheck` setting to `false`.
 
+### frozenStore
+
+Added in: v11.7.0
+
+* Default: **false**
+* Type: **Boolean**
+
+Lets `pnpm install` run against a package store that lives on a read-only filesystem — for example a [Nix](https://nixos.org/) store, a read-only bind mount, or an OCI image layer. When enabled, pnpm opens the store's SQLite `index.db` in immutable mode (bypassing the WAL/`-shm` sidecar files that otherwise can't be created on a read-only directory) and suppresses every code path that would write to the store.
+
+Pair it with `--offline` and `--frozen-lockfile` against a fully-populated store:
+
+```sh
+pnpm install --frozen-store --offline --frozen-lockfile
+```
+
+The store must already contain everything the install needs, including the build output of any package whose lifecycle scripts are approved (or that has a patch applied). Under the [global virtual store](#enableglobalvirtualstore), those package directories live inside the store, so if a required build is missing the install fails up front with `ERR_PNPM_FROZEN_STORE_NEEDS_BUILD` — seed the store with those builds first. If the store is missing its content directory entirely, the install fails fast with `ERR_PNPM_FROZEN_STORE_INCOMPLETE` rather than trying to initialize it.
+
+`frozenStore` is incompatible with `--force` and with a configured pnpr server, since both write into the store. The [side effects cache](#sideeffectscache) is not written either.
+
+:::note
+
+The read-only store open requires Node.js >=22.15.0, >=23.11.0, or >=24.0.0. On older runtimes, `--frozen-store` fails with `ERR_PNPM_FROZEN_STORE_UNSUPPORTED_NODE`.
+
+:::
+
 ## Network Settings
 
 ### httpsProxy

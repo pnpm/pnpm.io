@@ -62,6 +62,14 @@ pnpm config set "//registry.npmjs.org/:_authToken" "$NPM_TOKEN"
 
 `pnpm config set` writes to your user/global config by default, never to the project `.npmrc`, so the token stays out of the repository.
 
+**Or supply the credential entirely through an environment variable** — no `.npmrc` file at all (since v11.6). pnpm reads URL-scoped registry settings from `pnpm_config_//…` (and `npm_config_//…`) environment variables:
+
+```sh
+export "pnpm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN"
+```
+
+This is the most direct, file-free replacement for a committed `//registry.npmjs.org/:_authToken=${NPM_TOKEN}` line. Because the registry the credential applies to is encoded in the (trusted) variable name, a malicious repository can't redirect it to another host. The value overrides the project `.npmrc` but is itself overridden by a command-line option, and when the same key is set through both prefixes, `pnpm_config_` wins. (`tokenHelper` is intentionally never read from environment variables.)
+
 **Or keep the `${NPM_TOKEN}` line in your user-level `~/.npmrc`** instead of the repository — environment variables are still expanded there.
 
 **In GitHub Actions**, `actions/setup-node` with the `registry-url` input already writes a user-level `.npmrc`, so authenticating through `NODE_AUTH_TOKEN` keeps working with no further changes:
@@ -90,6 +98,20 @@ Because that trust declaration comes from the environment — not from the repos
 ## Dynamic registry URLs
 
 The same rule applies to registry and proxy URLs. If you used an environment variable to template a registry URL, move it to a trusted source (`pnpm config set`, your user `~/.npmrc`, a CLI option, or environment config). If the URL isn't secret, you can simply write the resolved value directly in the project `.npmrc` — only `${...}` placeholders are ignored, literal URLs are fine.
+
+## Different tokens per scope
+
+A common reason people reached for `${...}` placeholders was juggling several tokens for one registry host. As of **v11.7**, pnpm can select a different auth token per package **scope**, even when the scopes share the same registry URL — so you no longer need to template a single key with a variable. Put the scope after the registry URL in the auth key (in a trusted location, e.g. your user `~/.npmrc`):
+
+```ini
+@org-a:registry=https://npm.pkg.github.com/
+@org-b:registry=https://npm.pkg.github.com/
+
+//npm.pkg.github.com/:@org-a:_authToken=${ORG_A_TOKEN}
+//npm.pkg.github.com/:@org-b:_authToken=${ORG_B_TOKEN}
+```
+
+Installing or publishing `@org-a/*` uses `ORG_A_TOKEN`; `@org-b/*` uses `ORG_B_TOKEN`. See [scope-specific auth tokens](/npmrc#scope-specific-auth-tokens).
 
 ## Sorry about the breakage
 
