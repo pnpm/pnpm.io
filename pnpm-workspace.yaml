@@ -1,10 +1,8 @@
-ignoredBuiltDependencies:
-  - core-js
-  - core-js-pure
-
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - '@swc/core'
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  core-js: false
+  core-js-pure: false
 
 publicHoistPattern:
   - '@mdx-js/react'
