@@ -102,7 +102,7 @@ function renderSponsorCell(sponsor, utmMedium) {
   if (sponsor.emoji) {
     return [
       `      <td align="center" valign="middle">`,
-      `        <a href="${url}" target="_blank">${sponsor.emoji} ${sponsor.name}</a>`,
+      `        <a href="${url}" target="_blank" rel="noopener noreferrer">${sponsor.emoji} ${sponsor.name}</a>`,
       `      </td>`,
     ].join('\n');
   }
@@ -113,7 +113,7 @@ function renderSponsorCell(sponsor, utmMedium) {
   if (hasDarkVariant) {
     return [
       `      <td align="center" valign="middle">`,
-      `        <a href="${url}" target="_blank">`,
+      `        <a href="${url}" target="_blank" rel="noopener noreferrer">`,
       `          <picture>`,
       `            <source media="(prefers-color-scheme: light)" srcset="${BASE_URL}/${logos.light}" />`,
       `            <source media="(prefers-color-scheme: dark)" srcset="${BASE_URL}/${logos.dark}" />`,
@@ -126,7 +126,7 @@ function renderSponsorCell(sponsor, utmMedium) {
 
   return [
     `      <td align="center" valign="middle">`,
-    `        <a href="${url}" target="_blank"><img src="${BASE_URL}/${logos.light}" width="${width}" alt="${alt}"></a>`,
+    `        <a href="${url}" target="_blank" rel="noopener noreferrer"><img src="${BASE_URL}/${logos.light}" width="${width}" alt="${alt}"></a>`,
     `      </td>`,
   ].join('\n');
 }
