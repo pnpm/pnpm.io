@@ -89,6 +89,13 @@
       "readmeWidth": 160
     },
     {
+      "name": "Thesys",
+      "logo": "thesys.svg",
+      "alt": "Thesys",
+      "url": "https://www.thesys.dev/",
+      "width": 120
+    },
+    {
       "name": "Devowlio",
       "logo": "devowlio_min.svg",
       "alt": "devowl.io",

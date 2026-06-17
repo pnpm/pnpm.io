@@ -53,6 +53,11 @@ html[data-theme="dark"] .header-bit-cloud-link::before {
   filter: invert(1);
 }
 
+/* The Thesys sponsor logo is black; invert it to white in dark mode. */
+html[data-theme="dark"] img[src$="/img/users/thesys.svg"] {
+  filter: invert(1);
+}
+
 #carbonads * {
   margin: initial;
   padding: initial;
