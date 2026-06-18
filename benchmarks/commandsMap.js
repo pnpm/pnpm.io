@@ -42,6 +42,7 @@ export default {
     name: 'pacquet',
     args: [
       'install',
+      '--ignore-scripts',
     ]
   },
   yarn: {
