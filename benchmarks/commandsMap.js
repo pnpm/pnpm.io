@@ -45,6 +45,21 @@ export default {
       '--ignore-scripts',
     ]
   },
+  bun: {
+    scenario: 'bun',
+    legend: 'Bun',
+    color: '#f47216',
+    name: 'bun',
+    args: [
+      'install',
+      '--ignore-scripts',
+      '--cache-dir=cache',
+      '--registry=https://registry.npmjs.org/',
+      '--no-summary',
+      '--no-progress',
+      '--silent',
+    ]
+  },
   yarn: {
     scenario: 'yarn',
     legend: 'Yarn',

@@ -61,6 +61,7 @@ const pmConfigs = [
   { key: 'npm' },
   { key: 'pnpm11' },
   { key: 'pnpm12' },
+  { key: 'bun' },
   { key: 'yarn' },
   { key: 'yarn_pnp', hasNodeModules: false },
 ]
@@ -84,10 +85,6 @@ function minPerTest (entries) {
   const out = {}
   for (const t of tests) out[t] = Math.min(...entries.map(e => e[t]))
   return out
-}
-
-function toResArray (testList, keys, data) {
-  return testList.map(t => keys.map(k => data[k].results[t]).map(ms => Math.round(ms / 100) / 10))
 }
 
 const data = {}
@@ -118,6 +115,7 @@ const mainBars = [
     primaryKey: 'pnpm12',
     secondaryKey: 'pnpm11',
   },
+  { ...cmdsMap.bun, key: 'bun', version: data.bun.version },
   { ...cmdsMap.yarn, key: 'yarn', version: data.yarn.version },
   { ...cmdsMap.yarn_pnp, key: 'yarn_pnp', version: data.yarn_pnp.version },
 ]

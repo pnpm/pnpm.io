@@ -103,7 +103,7 @@ run()
 async function run () {
   const tmpDir = tempy.directory()
   const managersDirs = {}
-  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn']) {
+  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'bun', 'yarn']) {
     managersDirs[pm] = path.join(tmpDir, pm)
   }
   await Promise.allSettled([
@@ -123,6 +123,7 @@ async function run () {
     { key: 'npm', managersDir: managersDirs.npm },
     { key: 'pnpm11', managersDir: managersDirs.pnpm11 },
     { key: 'pnpm12', managersDir: managersDirs.pnpm12 },
+    { key: 'bun', managersDir: managersDirs.bun },
     { key: 'yarn', managersDir: managersDirs.yarn },
     { key: 'yarn_pnp', managersDir: managersDirs.yarn, hasNodeModules: false },
   ]
@@ -178,6 +179,7 @@ async function run () {
         primaryKey: 'pnpm12',
         secondaryKey: 'pnpm11',
       },
+      { ...cmdsMap.bun, key: 'bun' },
       { ...cmdsMap.yarn, key: 'yarn' },
       { ...cmdsMap.yarn_pnp, key: 'yarn_pnp' },
     ]
@@ -255,7 +257,7 @@ async function run () {
 
   **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
-  This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
+  This benchmark compares the performance of npm, pnpm, Bun, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
   `
 
   const explanationItems = sortedTests.map(t => `- ${explanationByTest[t]}`).join('\n  ')
