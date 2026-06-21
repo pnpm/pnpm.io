@@ -51,8 +51,10 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
 * **Set the credential through an environment variable, with no `.npmrc` file at all** (since v11.6). pnpm reads URL-scoped registry settings from `pnpm_config_//…` environment variables:
 
   ```sh
-  export "pnpm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN"
+  env "pnpm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN" pnpm install
   ```
+
+  The variable name contains `/`, `:`, and `.`, which `export` and the `NAME=value` shell assignment syntax reject as invalid identifiers. Use the `env` utility (as shown above) to pass it to a single command, or set it through a tool that accepts arbitrary variable names (for example, your CI provider's environment settings or Node's `process.env`).
 
   This is the most direct, file-free replacement for a committed `//registry.npmjs.org/:_authToken=${NPM_TOKEN}` line. Because the registry the credential applies to is encoded in the (trusted) variable name, a malicious repository cannot redirect it to another host. Such an environment value overrides the project `.npmrc` but is itself overridden by a command-line option. The `tokenHelper` setting is intentionally not read from environment variables.
 

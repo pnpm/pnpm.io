@@ -65,8 +65,10 @@ pnpm config set "//registry.npmjs.org/:_authToken" "$NPM_TOKEN"
 **Or supply the credential entirely through an environment variable** — no `.npmrc` file at all (since v11.6). pnpm reads URL-scoped registry settings from `pnpm_config_//…` (and `npm_config_//…`) environment variables:
 
 ```sh
-export "pnpm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN"
+env "pnpm_config_//registry.npmjs.org/:_authToken=$NPM_TOKEN" pnpm install
 ```
+
+The variable name contains `/`, `:`, and `.`, so `export` and the `NAME=value` shell assignment syntax reject it as an invalid identifier. Use the `env` utility (as shown above) to pass it to a single command, or set it through a tool that accepts arbitrary variable names (such as your CI provider's environment settings).
 
 This is the most direct, file-free replacement for a committed `//registry.npmjs.org/:_authToken=${NPM_TOKEN}` line. Because the registry the credential applies to is encoded in the (trusted) variable name, a malicious repository can't redirect it to another host. The value overrides the project `.npmrc` but is itself overridden by a command-line option, and when the same key is set through both prefixes, `pnpm_config_` wins. (`tokenHelper` is intentionally never read from environment variables.)
 
