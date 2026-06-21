@@ -91,6 +91,19 @@ const docusaurusConfig = {
   "plugins": [
     'docusaurus-plugin-sass',
     'docusaurus-plugin-copy-page-button',
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'pnpr',
+        path: './pnpr-docs',
+        routeBasePath: 'pnpr',
+        sidebarPath: path.join(__dirname, 'sidebars-pnpr.json'),
+        editUrl: ({ docPath }) =>
+          `https://github.com/pnpm/${PROJECT_NAME}/edit/main/pnpr-docs/${docPath}`,
+        showLastUpdateAuthor: true,
+        showLastUpdateTime: true,
+      },
+    ],
   ],
   "themeConfig": {
     "colorMode": {
@@ -112,6 +125,13 @@ const docusaurusConfig = {
           "to": "motivation",
           "label": "Docs",
           "position": "left"
+        },
+        {
+          type: 'docSidebar',
+          docsPluginId: 'pnpr',
+          sidebarId: 'pnpr',
+          label: 'pnpr',
+          position: 'left',
         },
         {
           "to": "blog",
@@ -218,6 +238,10 @@ const docusaurusConfig = {
             {
               label: 'Settings (pnpm-workspace.yaml)',
               to: 'settings',
+            },
+            {
+              label: 'pnpr (registry server)',
+              to: 'pnpr',
             },
           ]
         },
