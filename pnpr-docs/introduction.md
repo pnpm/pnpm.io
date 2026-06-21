@@ -13,6 +13,13 @@ role [verdaccio](https://verdaccio.org/) plays in the JavaScript ecosystem.
 pnpr lives in the [pnpm monorepo](https://github.com/pnpm/pnpm) under
 [`pnpr/`](https://github.com/pnpm/pnpm/tree/main/pnpr).
 
+:::caution Experimental
+
+pnpr is experimental and still in active development. Its behavior,
+configuration, and APIs may change between releases.
+
+:::
+
 ## What you can use it for
 
 - **A private registry** — host your organization's private packages, with

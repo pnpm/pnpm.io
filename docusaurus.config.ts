@@ -123,14 +123,14 @@ const docusaurusConfig = {
       "items": [
         {
           "to": "motivation",
-          "label": "Docs",
+          "label": "Client (pnpm)",
           "position": "left"
         },
         {
           type: 'docSidebar',
           docsPluginId: 'pnpr',
           sidebarId: 'pnpr',
-          label: 'pnpr',
+          label: 'Registry (pnpr)',
           position: 'left',
         },
         {
