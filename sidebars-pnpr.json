@@ -1,0 +1,19 @@
+{
+  "pnpr": [
+    "introduction",
+    "installation",
+    "quick-start",
+    "cli",
+    {
+      "type": "category",
+      "label": "Configuration",
+      "items": [
+        "configuration",
+        "storage",
+        "auth-backends"
+      ]
+    },
+    "install-acceleration",
+    "license"
+  ]
+}
