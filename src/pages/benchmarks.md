@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Jun 21, 2026, 3:56 AM_ (_daily_ updated).
+**Last benchmarked at**: _Jun 24, 2026, 2:20 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -10,10 +10,10 @@ Each row's label lists which of `cache`, `lockfile`, and `node_modules` are warm
 - `cache`: a developer reinstalling without a lockfile.
 - `lockfile`: a CI server doing its first install.
 - `cache+lockfile`: a developer reinstalling a known project.
-- `cache+node_modules`: the lockfile is deleted and install is run again.
 - `node_modules`: the cache and lockfile are deleted and install is run again.
-- `cache+lockfile+node_modules`: re-running install when nothing has changed.
+- `cache+node_modules`: the lockfile is deleted and install is run again.
 - `lockfile+node_modules`: the cache is deleted and install is run again.
+- `cache+lockfile+node_modules`: re-running install when nothing has changed.
 - `update`: dependency versions are bumped in `package.json` and install is run again.
 
 ## Lots of Files
@@ -22,17 +22,17 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchm
 
 | action  | cache | lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | Yarn | Yarn PnP |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
-| install |   |   |   | 28.6s | 7.7s | 2.1s | 8.2s | 3.4s |
-| install | ✔ |   |   | 13.1s | 4.5s | 1.3s | 8s | 2.9s |
-| install |   | ✔ |   | 11.6s | 6.3s | 1.9s | 6s | 1.3s |
-| install | ✔ | ✔ |   | 8.5s | 2.1s | 596ms | 5.8s | 1.3s |
-| install | ✔ |   | ✔ | 1.6s | 552ms | 1s | 7.8s | n/a |
-| install |   |   | ✔ | 1.6s | 556ms | 76ms | 7.7s | n/a |
-| install | ✔ | ✔ | ✔ | 1.2s | 493ms | 41ms | 5.6s | n/a |
-| install |   | ✔ | ✔ | 1.2s | 509ms | 42ms | 5.5s | n/a |
-| update | n/a | n/a | n/a | 6.3s | 7.9s | 1.9s | 6.3s | 2.9s |
+| install |   |   |   | 25.2s | 7.1s | 2.3s | 7s | 2.7s |
+| install | ✔ |   |   | 10.7s | 4.3s | 1.3s | 7s | 2.3s |
+| install |   | ✔ |   | 9.8s | 5.6s | 2.1s | 5s | 1s |
+| install | ✔ | ✔ |   | 7s | 2.4s | 800ms | 5.4s | 1.1s |
+| install |   |   | ✔ | 1.3s | 476ms | 66ms | 6.3s | n/a |
+| install | ✔ |   | ✔ | 1.3s | 432ms | 890ms | 6.3s | n/a |
+| install |   | ✔ | ✔ | 1s | 400ms | 36ms | 4.6s | n/a |
+| install | ✔ | ✔ | ✔ | 1s | 394ms | 36ms | 4.5s | n/a |
+| update | n/a | n/a | n/a | 5.5s | 6.7s | 2.3s | 5.1s | 2.3s |
 
-<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=e2a1b926" />
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=efdf1135" />
 
 ### pnpm vs pnpm 🦀
 
@@ -40,14 +40,14 @@ pnpm v12 will use a new installation engine for fetching and linking written in 
 
 | action  | cache | lockfile | node_modules| pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) |
 | ---     | ---   | ---      | ---         | --- | --- |
-| install |   |   |   | 7.7s | 2.1s |
-| install |   | ✔ |   | 6.3s | 1.9s |
-| install | ✔ |   |   | 4.5s | 1.3s |
-| install | ✔ | ✔ |   | 2.1s | 596ms |
-| install |   |   | ✔ | 556ms | 76ms |
-| install | ✔ |   | ✔ | 552ms | 1s |
-| install |   | ✔ | ✔ | 509ms | 42ms |
-| install | ✔ | ✔ | ✔ | 493ms | 41ms |
-| update | n/a | n/a | n/a | 7.9s | 1.9s |
+| install |   |   |   | 7.1s | 2.3s |
+| install |   | ✔ |   | 5.6s | 2.1s |
+| install | ✔ |   |   | 4.3s | 1.3s |
+| install | ✔ | ✔ |   | 2.4s | 800ms |
+| install |   |   | ✔ | 476ms | 66ms |
+| install | ✔ |   | ✔ | 432ms | 890ms |
+| install |   | ✔ | ✔ | 400ms | 36ms |
+| install | ✔ | ✔ | ✔ | 394ms | 36ms |
+| update | n/a | n/a | n/a | 6.7s | 2.3s |
 
-<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=9465c75a" />
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=fd9caaef" />
