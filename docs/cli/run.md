@@ -109,6 +109,10 @@ immediately in all matching packages with prefixed streaming output. This is the
 preferred flag for long-running processes over many packages, for instance, a
 lengthy build process.
 
+### --sequential
+
+Run the specified scripts one by one.
+
 ### --stream
 
 Stream output from child processes immediately, prefixed with the originating
