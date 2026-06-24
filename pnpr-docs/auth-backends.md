@@ -75,6 +75,8 @@ backend:
   postgres:
     url: ${PNPR_POSTGRES_URL}
     maxConnections: 16
+    timeout: 30s
+    startupTimeout: 5m
 ```
 
 ## MySQL
@@ -84,8 +86,19 @@ backend:
   mysql:
     url: ${PNPR_MYSQL_URL}
     maxConnections: 16
+    timeout: 30s
+    startupTimeout: 5m
 ```
+
+| Key | Required | Description |
+| --- | --- | --- |
+| `url` | yes | Driver connection URL, such as `postgres://user:pass@host/db` or `mysql://user:pass@host/db`. |
+| `maxConnections` | no | Maximum connections in the backend pool. Omit to use the driver's default. |
+| `timeout` | no | Request-path auth database deadline. Defaults to `30s`. |
+| `startupTimeout` | no | Startup connection and schema setup deadline. Defaults to `5m`. |
 
 When the `backend:` block is absent, auth stays on local disk and the
 `auth.htpasswd` / `auth.tokens` settings apply as before. The
-`auth.htpasswd.max_users` registration cap is honored either way.
+`auth.htpasswd.max_users` registration cap is honored either way. Omitted
+`max_users` and `max_users: -1` both disable self-registration; set a
+non-negative cap to let new users register.
