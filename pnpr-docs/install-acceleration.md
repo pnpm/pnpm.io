@@ -33,10 +33,9 @@ pnpr collapses that depth:
 
 Crucially, pnpr only does the resolution. The tarballs are still fetched by the
 client, **directly from the registries in parallel** — exactly like a normal
-install, which a single connection through the server could never match. That's
-why the accelerated path is never slower than a plain install: it removes the
-latency-bound resolution waterfall and changes nothing about the
-bandwidth-bound tarball download.
+install, which a single connection through the server could never match. The
+accelerated path removes the latency-bound resolution waterfall without turning
+tarball downloads into a single server-mediated stream.
 
 When the project already has an up-to-date lockfile, there's nothing to resolve,
 so this path doesn't apply — the speedup is for cold installs and dependency
@@ -44,25 +43,38 @@ changes.
 
 ## How it works
 
-1. pnpm sends `POST /v1/install` to the pnpr server with the project's
-   dependencies (and the existing lockfile, if any, for incremental
-   resolution).
-2. The server resolves against the client's registries, verifies the input
-   lockfile under the client's policy, and answers with one gzipped JSON object
-   carrying the resolved lockfile and stats.
-3. pnpm uses the resolved lockfile for its headless install, fetching tarballs
-   directly from the registries — like a normal install.
+1. pnpm checks `GET /-/pnpr` to verify that the server speaks a compatible pnpr
+   resolver protocol version.
+2. pnpm sends `POST /-/pnpr/v0/resolve` with the project's dependencies,
+   registry settings, forwarded upstream credentials, policy settings, and the
+   existing lockfile when one is available.
+3. The server resolves against the client's registries, verifies the input
+   lockfile under the client's policy, and streams an `application/x-ndjson`
+   response. `package` frames announce resolved tarballs as the tree walk
+   progresses, and a terminal `done` frame carries the resolved lockfile and
+   stats. A terminal `violations` or `error` frame aborts the install.
+4. pnpm writes the resolved lockfile and fetches tarballs directly from the
+   registries, like a normal install.
 
-pnpr acts as a stateless resolver here: it stores no tarballs and serves no file
-content. See [pnpm/pnpm#12230](https://github.com/pnpm/pnpm/issues/12230) for
-background.
+For frozen restores with an already-fresh lockfile, pnpm can use
+`POST /-/pnpr/v0/verify-lockfile` to get only the server-side trust verdict
+instead of resolving again.
+
+The resolver surface is stateless for package contents: it stores no tarballs
+and serves no file content. See
+[pnpm/pnpm#12230](https://github.com/pnpm/pnpm/issues/12230) and
+[pnpm/pnpm#12234](https://github.com/pnpm/pnpm/issues/12234) for background.
 
 ## Enabling it
 
 Set `pnprServer` in your `pnpm-workspace.yaml` to the URL of a pnpr server:
 
 ```yaml
-pnprServer: http://localhost:4000
+pnprServer: http://127.0.0.1:7677
 ```
 
-pnpm will offload resolution to that server during `pnpm install`.
+pnpm will offload resolution to that server during `pnpm install`. The resolver
+`POST` endpoints require a valid pnpr `Authorization` header. pnpm forwards the
+auth configured for the `pnprServer` URL; if the same pnpr server is also your
+registry, a normal `pnpm login --registry <server-url>` writes the token pnpm
+uses for both registry and resolver requests.

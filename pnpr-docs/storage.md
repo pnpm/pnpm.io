@@ -8,7 +8,8 @@ pnpr keeps two kinds of data:
 - **Hosted** — the source of truth: packages published to this server plus
   anything served in static mode. Lives under `storage`.
 - **Cache** — the disposable mirror of upstream registries plus the resolver
-  cache. Lives under `cache` (defaults to `<storage>/.pnpr-cache`).
+  cache, lockfile-verdict cache, and S3 upload staging scratch. Lives under
+  `cache` (defaults to `<storage>/.pnpr-cache`).
 
 By default both are local directories. Adding an `s3:` block moves the **hosted**
 store into an S3-compatible object store, so the durable data is replicated by
@@ -20,7 +21,8 @@ Because any S3-compatible endpoint works, this also covers **Cloudflare R2**,
 host.
 
 ```yaml
-storage: ./storage   # still backs the local cache + upload staging
+storage: ./storage
+# cache: ./cache     # local proxy cache + resolver cache + S3 upload staging
 
 s3:
   bucket: my-pnpr-packages
@@ -67,13 +69,14 @@ packages:
   '**':
     access: $all
     publish: $authenticated
+    unpublish: $authenticated
     proxy: npmjs
 ```
 
 ```sh
 export AWS_ACCESS_KEY_ID="<r2-access-key-id>"
 export AWS_SECRET_ACCESS_KEY="<r2-secret-access-key>"
-pnpr -c ./pnpr.yaml --listen 0.0.0.0:4873 --public-url https://registry.example.com
+pnpr -c ./pnpr.yaml --listen 0.0.0.0:7677 --public-url https://registry.example.com
 ```
 
 `--public-url` rewrites the `dist.tarball` URLs in served packuments, so clients

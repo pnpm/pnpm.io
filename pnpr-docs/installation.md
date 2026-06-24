@@ -4,7 +4,7 @@ title: Installation
 ---
 
 pnpr is distributed on npm as [`@pnpm/pnpr`](https://www.npmjs.com/package/@pnpm/pnpr).
-Install it globally:
+The npm wrapper requires Node.js 18 or newer. Install it globally:
 
 ```sh
 pnpm add -g @pnpm/pnpr

@@ -80,7 +80,7 @@ Added in: v11.7.0
 
 When publishing recursively (`pnpm -r publish`), send all selected packages to the registry in a single `PUT /-/pnpm/v1/publish` request instead of one request per package.
 
-The target registry has to implement the batch publish endpoint ([pnpr](https://github.com/pnpm/pnpr) does); registries that don't are reported with an `ERR_PNPM_BATCH_PUBLISH_UNSUPPORTED` error. The batch is processed all-or-nothing: if any package in the batch fails validation, none of the packages are published.
+The target registry has to implement the batch publish endpoint ([pnpr](https://github.com/pnpm/pnpm/tree/main/pnpr) does); registries that don't are reported with an `ERR_PNPM_BATCH_PUBLISH_UNSUPPORTED` error. The batch is processed all-or-nothing: if any package in the batch fails validation, none of the packages are published.
 
 ### --skip-manifest-obfuscation
 
@@ -156,4 +156,3 @@ publishBranch: production
 * `postpack`
 * `publish`
 * `postpublish`
-
