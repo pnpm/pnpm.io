@@ -528,6 +528,41 @@ your linker.
 [--preserve-symlinks]: https://nodejs.org/api/cli.html#cli_preserve_symlinks
 [`"bundledDependencies"`]: https://docs.npmjs.com/cli/v8/configuring-npm/package-json#bundleddependencies
 
+### nodeExperimentalPackageMap
+
+Added in: v11.8.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, pnpm injects the generated `node_modules/.package-map.json` into pnpm-managed Node.js script environments by adding Node's `--experimental-package-map` option to `NODE_OPTIONS`.
+
+The package map is generated during isolated and hoisted installs. This setting only controls whether pnpm passes the generated map to scripts.
+
+CLI and environment configuration use the kebab-case name `node-experimental-package-map`.
+
+```yaml
+nodeExperimentalPackageMap: true
+```
+
+### nodePackageMapType
+
+Added in: v11.8.0
+
+* Default: **standard**
+* Type: **standard**, **loose**
+
+Controls how `node_modules/.package-map.json` is generated.
+
+* **standard** - only declared dependencies are available through the package map.
+* **loose** - also maps packages that are reachable through the installed `node_modules` layout, which can allow undeclared hoisted dependencies to resolve.
+
+CLI and environment configuration use the kebab-case name `node-package-map-type`.
+
+```yaml
+nodePackageMapType: loose
+```
+
 ### symlink
 
 * Default: **true**

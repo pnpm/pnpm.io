@@ -102,6 +102,10 @@ You can use the `--if-present` flag to avoid exiting with a non-zero exit code
 when the script is undefined. This lets you run potentially undefined scripts
 without breaking the execution chain.
 
+### --no-bail
+
+Continue running the remaining matched scripts even if one of them fails. The command still exits with a non-zero exit code if any script failed.
+
 ### --parallel
 
 Completely disregard concurrency and topological sorting, running a given script

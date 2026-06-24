@@ -25,6 +25,7 @@ setting to `false`.
 | `pnpm i --offline`                | Install offline from the store only |
 | `pnpm i --frozen-lockfile`        | `pnpm-lock.yaml` is not updated     |
 | `pnpm i --lockfile-only`          | Only `pnpm-lock.yaml` is updated    |
+| `pnpm i --dry-run`                | Preview changes without writing     |
 
 ## Options for filtering dependencies
 
@@ -97,6 +98,16 @@ Don't read or generate a `pnpm-lock.yaml` file.
 * Type: **Boolean**
 
 When used, only updates `pnpm-lock.yaml` and `package.json`. Nothing gets written to the `node_modules` directory.
+
+### --dry-run
+
+Added in: v11.8.0
+
+Run a full dependency resolution and report what a real install would change, without writing anything to disk. No lockfile, manifest, or `node_modules` changes are saved.
+
+A completed dry run exits with code 0, even when it reports that a real install would update the lockfile.
+
+`--dry-run` cannot be used with a configured pnpr server, because that install path resolves and links through the server.
 
 ### --fix-lockfile
 
