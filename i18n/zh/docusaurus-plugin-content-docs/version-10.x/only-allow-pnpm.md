@@ -1,0 +1,19 @@
+---
+id: only-allow-pnpm
+title: 只允许 pnpm
+---
+
+当你在一个项目中使用 pnpm 时，你不希望他人意外运行 `npm install` 或者 `yarn`。 为了防止开发人员使用其他的包管理器，你可以将下面的这个 `preinstall` 脚本添加到你的 `package.json`：
+
+```json
+{
+	"scripts": {
+		"preinstall": "npx only-allow pnpm"
+	}
+}
+```
+
+现在，每当有人运行 `npm install` 或 `yarn` 时，他们都会收到
+错误，并且安装将无法继续。
+
+如果你使用 npm v7，请改用 `npx -y`。

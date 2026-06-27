@@ -1,0 +1,270 @@
+---
+id: workspaces
+title: 工作區
+---
+
+pnpm 內建了對 Monorepo (單一存放庫，又稱為多重套件存放庫、多重專案存放庫或整合型存放庫) 的支援。 您可以建立一個工作區來將多個專案結合在單個存放庫的內部。
+
+A workspace must have a [`pnpm-workspace.yaml`][] file in its root.
+
+:::tip
+
+If you are looking into monorepo management, you might also want to look into [Bit][]. Bit 實際上使用的是 pnpm，不過它會自動執行許多動作，目前在 pnpm/npm/Yarn 管理的傳統工作區中，這些動作則需要手動執行。 There's an article about `bit install` that talks about it: [Painless Monorepo Dependency Management with Bit][].
+
+:::
+
+## 工作區通訊協定 (workspace:)
+
+If [linkWorkspacePackages][] is set to `true`, pnpm will link packages from the workspace if the available packages match the declared ranges. 例如，若 `bar` 的相依性中具有 `"foo": "1.0.0"`，且 `foo@1.0.0` 位於工作區，則會在 `bar` 中建立 `foo@1.0.0` 的連結。 不過，若 `bar` 的相依性中具有 `"foo": "2.0.0"`，且 `foo@2.0.0` 不位於工作區，則將會從登錄檔中安裝 `foo@2.0.0`。 這個行為會導致一些不確定性。
+
+幸好，pnpm 支援 `workspace:` 通訊協定。 使用此通訊協定時，pnpm 會拒絕解析除本機工作區套件之外的任何內容。 因此，如果您設定 `"foo": "workspace:2.0.0"`，此次會安裝失敗，因為 `"foo@2.0.0"` 不在工作區中。
+
+This protocol is especially useful when the [linkWorkspacePackages][] option is set to `false`. 在這種情況下，若使用 `workspace:` 通訊協定，則 pnpm 僅會建立工作區中套件的連結。
+
+### 透過別名參考工作區套件
+
+假設您的工作區中有一個名為 `foo` 的套件。 通常，您會參考它作為 `"foo": "workspace:*"`。
+
+如果您想使用其他別名，以下語法也可以運作： `"bar": "workspace:foo@*"`。
+
+發佈前，別名會轉換為標準的別名相依性。 上述範例會變成：`"bar": "npm:foo@1.0.0"`。
+
+
+### 透過相對路徑參考工作區套件
+
+在具有 2 個套件的工作區中：
+
+```
++ packages
+    + foo
+    + bar
+```
+
+`bar` 可能在其相依性中具有 `foo`，宣告為 `"foo": "workspace:.../foo"`。 發布前，這些規格會轉換為所有套件管理器都支援的標準版本規格。
+
+### 發佈工作區套件
+
+當工作區套件封裝於封存檔中時 (不論是透過 `pnpm pack` 或是其中一個發佈命令如 `pnpm publish`)，我們會將所有的 `workspace:` 相依性替換為：
+
+* The corresponding version in the target workspace (if you use `workspace:`, `workspace:*`, `workspace:~`, or `workspace:^`)
+* 相關聯的 SemVer 範圍 (適用於其他任何範圍類型)
+
+A bare `workspace:` without a version range is treated as `workspace:*`.
+
+舉例來講，如果我們的工作區中具有 `foo`、`bar`、`qar`、`zoo`，且全都是 `1.5.0` 版本，則以下內容：
+
+```json
+{
+    "dependencies": {
+        "foo": "workspace:*",
+        "bar": "workspace:~",
+        "qar": "workspace:^",
+        "zoo": "workspace:^1.5.0"
+    }
+}
+```
+
+會轉換為：
+
+```json
+{
+    "dependencies": {
+        "foo": "1.5.0",
+        "bar": "~1.5.0",
+        "qar": "^1.5.0",
+        "zoo": "^1.5.0"
+    }
+}
+```
+
+這個功能允許您在相依於本機工作區的套件時，仍然能夠將產生的套件發佈至遠端登錄檔，而無須中繼的發佈步驟。您的消費者將能夠將發佈的工作區像其他任何套件一樣使用，仍然得益於 SemVer 提供的保證。
+
+## 釋出工作流程
+
+對工作區內的套件進行版本設定是一項複雜的工作，pnpm 目前不為此提供內建解決方案。 不過，有 2 個經過充分測試的工具可以處理版本設定且支援 pnpm：
+- [changesets](https://github.com/changesets/changesets)
+- [Rush](https://rushjs.io)
+
+For how to set up a repository using Rush, read [this page][rush-setup].
+
+For using Changesets with pnpm, read [this guide][changesets-guide].
+
+## 疑難排解
+
+工作區相依性之間有循環時，pnpm 將無法保證程式碼以拓撲順序執行。 如果 pnpm 在安裝期間偵測到相依性循環，則將會產生一個警告。 如果 pnpm 能夠找出導致循環的相依性，則也會將其顯示。
+
+如果您看到 `There are cyclic workspace dependencies` 的訊息，則請檢查在 `dependencies`、`optionalDependencies` 和 `devDependencies` 中宣告的工作區相依性。
+
+## 使用範例
+
+以下是使用 pnpm 工作區功能的幾個最熱門的開源專案：
+
+| 專案                                                                                | 星級                                                                               | 移轉日期       | 移轉認可                                                                                                                                                     |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Next.js](https://github.com/vercel/next.js)                                      | ![](https://img.shields.io/github/stars/vercel/next.js)                          | 2022-05-29 | [`f7b81316aea4fc9962e5e54981a6d559004231aa`](https://github.com/vercel/next.js/commit/f7b81316aea4fc9962e5e54981a6d559004231aa)                          |
+| [n8n](https://github.com/n8n-io/n8n)                                              | ![](https://img.shields.io/github/stars/n8n-io/n8n)                              | 2022-11-09 | [`736777385c54d5b20174c9c1fda38bb31fbf14b4`](https://github.com/n8n-io/n8n/commit/736777385c54d5b20174c9c1fda38bb31fbf14b4)                              |
+| [Material UI](https://github.com/mui/material-ui)                                 | ![](https://img.shields.io/github/stars/mui/material-ui)                         | 2024-01-03 | [`a1263e3e5ef8d840252b4857f85b33caa99f471d`](https://github.com/mui/material-ui/commit/a1263e3e5ef8d840252b4857f85b33caa99f471d)                         |
+| [Vite](https://github.com/vitejs/vite)                                            | ![](https://img.shields.io/github/stars/vitejs/vite)                             | 2021-09-26 | [`3e1cce01d01493d33e50966d0d0fd39a86d229f9`](https://github.com/vitejs/vite/commit/3e1cce01d01493d33e50966d0d0fd39a86d229f9)                             |
+| [Nuxt](https://github.com/nuxt/nuxt)                                              | ![](https://img.shields.io/github/stars/nuxt/nuxt)                               | 2022-10-17 | [`74a90c566c936164018c086030c7de65b26a5cb6`](https://github.com/nuxt/nuxt/commit/74a90c566c936164018c086030c7de65b26a5cb6)                               |
+| [Vue](https://github.com/vuejs/core)                                              | ![](https://img.shields.io/github/stars/vuejs/core)                              | 2021-10-09 | [`61c5fbd3e35152f5f32e95bf04d3ee083414cecb`](https://github.com/vuejs/core/commit/61c5fbd3e35152f5f32e95bf04d3ee083414cecb)                              |
+| [Astro](https://github.com/withastro/astro)                                       | ![](https://img.shields.io/github/stars/withastro/astro)                         | 2022-03-08 | [`240d88aefe66c7d73b9c713c5da42ae789c011ce`](https://github.com/withastro/astro/commit/240d88aefe66c7d73b9c713c5da42ae789c011ce)                         |
+| [Prisma](https://github.com/prisma/prisma)                                        | ![](https://img.shields.io/github/stars/prisma/prisma)                           | 2021-09-21 | [`c4c83e788aa16d61bae7a6d00adc8a58b3789a06`](https://github.com/prisma/prisma/commit/c4c83e788aa16d61bae7a6d00adc8a58b3789a06)                           |
+| [Novu](https://github.com/novuhq/novu)                                            | ![](https://img.shields.io/github/stars/novuhq/novu)                             | 2021-12-23 | [`f2ea61f7d7ac7e12db4c9e70767082841ed98b2b`](https://github.com/novuhq/novu/commit/f2ea61f7d7ac7e12db4c9e70767082841ed98b2b)                             |
+| [Slidev](https://github.com/slidevjs/slidev)                                      | ![](https://img.shields.io/github/stars/slidevjs/slidev)                         | 2021-04-12 | [`d6783323eb1ab1fc612577eb63579c8f7bc99c3a`](https://github.com/slidevjs/slidev/commit/d6783323eb1ab1fc612577eb63579c8f7bc99c3a)                         |
+| [Turborepo](https://github.com/vercel/turborepo)                                  | ![](https://img.shields.io/github/stars/vercel/turborepo)                        | 2022-03-02 | [`fd171519ec02a69c9afafc1bc5d9d1b481fba721`](https://github.com/vercel/turborepo/commit/fd171519ec02a69c9afafc1bc5d9d1b481fba721)                        |
+| [Quasar Framework](https://github.com/quasarframework/quasar)                     | ![](https://img.shields.io/github/stars/quasarframework/quasar)                  | 2024-03-13 | [`7f8e550bb7b6ab639ce423d02008e7f5e61cbf55`](https://github.com/quasarframework/quasar/commit/7f8e550bb7b6ab639ce423d02008e7f5e61cbf55)                  |
+| [Element Plus](https://github.com/element-plus/element-plus)                      | ![](https://img.shields.io/github/stars/element-plus/element-plus)               | 2021-09-23 | [`f9e192535ff74d1443f1d9e0c5394fad10428629`](https://github.com/element-plus/element-plus/commit/f9e192535ff74d1443f1d9e0c5394fad10428629)               |
+| [NextAuth.js](https://github.com/nextauthjs/next-auth)                            | ![](https://img.shields.io/github/stars/nextauthjs/next-auth)                    | 2022-05-03 | [`4f29d39521451e859dbdb83179756b372e3dd7aa`](https://github.com/nextauthjs/next-auth/commit/4f29d39521451e859dbdb83179756b372e3dd7aa)                    |
+| [Ember.js](https://github.com/emberjs/ember.js)                                   | ![](https://img.shields.io/github/stars/emberjs/ember.js)                        | 2023-10-18 | [`b6b05da662497183434136fb0148e1dec544db04`](https://github.com/emberjs/ember.js/commit/b6b05da662497183434136fb0148e1dec544db04)                        |
+| [Qwik](https://github.com/BuilderIO/qwik)                                         | ![](https://img.shields.io/github/stars/BuilderIO/qwik)                          | 2022-11-14 | [`021b12f58cca657e0a008119bc711405513e1ee9`](https://github.com/BuilderIO/qwik/commit/021b12f58cca657e0a008119bc711405513e1ee9)                          |
+| [VueUse](https://github.com/vueuse/vueuse)                                        | ![](https://img.shields.io/github/stars/vueuse/vueuse)                           | 2021-09-25 | [`826351ba1d9c514e34426c85f3d69fb9875c7dd9`](https://github.com/vueuse/vueuse/commit/826351ba1d9c514e34426c85f3d69fb9875c7dd9)                           |
+| [SvelteKit](https://github.com/sveltejs/kit)                                      | ![](https://img.shields.io/github/stars/sveltejs/kit)                            | 2021-09-26 | [`b164420ab26fa04fd0fbe0ac05431f36a89ef193`](https://github.com/sveltejs/kit/commit/b164420ab26fa04fd0fbe0ac05431f36a89ef193)                            |
+| [Verdaccio](https://github.com/verdaccio/verdaccio)                               | ![](https://img.shields.io/github/stars/verdaccio/verdaccio)                     | 2021-09-21 | [`9dbf73e955fcb70b0a623c5ab89649b95146c744`](https://github.com/verdaccio/verdaccio/commit/9dbf73e955fcb70b0a623c5ab89649b95146c744)                     |
+| [Vercel](https://github.com/vercel/vercel)                                        | ![](https://img.shields.io/github/stars/vercel/vercel)                           | 2023-01-12 | [`9c768b98b71cfc72e8638bf5172be88c39e8fa69`](https://github.com/vercel/vercel/commit/9c768b98b71cfc72e8638bf5172be88c39e8fa69)                           |
+| [Vitest](https://github.com/vitest-dev/vitest)                                    | ![](https://img.shields.io/github/stars/vitest-dev/vitest)                       | 2021-12-13 | [`d6ff0ccb819716713f5eab5c046861f4d8e4f988`](https://github.com/vitest-dev/vitest/commit/d6ff0ccb819716713f5eab5c046861f4d8e4f988)                       |
+| [Cycle.js](https://github.com/cyclejs/cyclejs)                                    | ![](https://img.shields.io/github/stars/cyclejs/cyclejs)                         | 2021-09-21 | [`f2187ab6688368edb904b649bd371a658f6a8637`](https://github.com/cyclejs/cyclejs/commit/f2187ab6688368edb904b649bd371a658f6a8637)                         |
+| [Milkdown](https://github.com/Saul-Mirone/milkdown)                               | ![](https://img.shields.io/github/stars/Saul-Mirone/milkdown)                    | 2021-09-26 | [`4b2e1dd6125bc2198fd1b851c4f00eda70e9b913`](https://github.com/Saul-Mirone/milkdown/commit/4b2e1dd6125bc2198fd1b851c4f00eda70e9b913)                    |
+| [Nhost](https://github.com/nhost/nhost)                                           | ![](https://img.shields.io/github/stars/nhost/nhost)                             | 2022-02-07 | [`10a1799a1fef2f558f737de3bb6cadda2b50e58f`](https://github.com/nhost/nhost/commit/10a1799a1fef2f558f737de3bb6cadda2b50e58f)                             |
+| [Logto](https://github.com/logto-io/logto)                                        | ![](https://img.shields.io/github/stars/logto-io/logto)                          | 2021-07-29 | [`0b002e07850c8e6d09b35d22fab56d3e99d77043`](https://github.com/logto-io/logto/commit/0b002e07850c8e6d09b35d22fab56d3e99d77043)                          |
+| [Rollup plugins](https://github.com/rollup/plugins)                               | ![](https://img.shields.io/github/stars/rollup/plugins)                          | 2021-09-21 | [`53fb18c0c2852598200c547a0b1d745d15b5b487`](https://github.com/rollup/plugins/commit/53fb18c0c2852598200c547a0b1d745d15b5b487)                          |
+| [icestark](https://github.com/ice-lab/icestark)                                   | ![](https://img.shields.io/github/stars/ice-lab/icestark)                        | 2021-12-16 | [`4862326a8de53d02f617e7b1986774fd7540fccd`](https://github.com/ice-lab/icestark/commit/4862326a8de53d02f617e7b1986774fd7540fccd)                        |
+| [ByteMD](https://github.com/bytedance/bytemd)                                     | ![](https://img.shields.io/github/stars/bytedance/bytemd)                        | 2021-02-18 | [`36ef25f1ea1cd0b08752df5f8c832302017bb7fb`](https://github.com/bytedance/bytemd/commit/36ef25f1ea1cd0b08752df5f8c832302017bb7fb)                        |
+| [Stimulus Components](https://github.com/stimulus-components/stimulus-components) | ![](https://img.shields.io/github/stars/stimulus-components/stimulus-components) | 2024-10-26 | [`8e100d5b2c02ad5bf0b965822880a60f543f5ec3`](https://github.com/stimulus-components/stimulus-components/commit/8e100d5b2c02ad5bf0b965822880a60f543f5ec3) |
+| [Serenity/JS](https://github.com/serenity-js/serenity-js)                         | ![](https://img.shields.io/github/stars/serenity-js/serenity-js)                 | 2025-01-01 | [`43dbe6f440d8dd81811da303e542381a17d06b4d`](https://github.com/serenity-js/serenity-js/commit/43dbe6f440d8dd81811da303e542381a17d06b4d)                 |
+| [kysely](https://github.com/kysely-org/kysely)                                    | ![](https://img.shields.io/github/stars/kysely-org/kysely)                       | 2025-07-29 | [`5ac19105ddb17af310c67e004c11fa3345454b66`](https://github.com/kysely-org/kysely/commit/5ac19105ddb17af310c67e004c11fa3345454b66)                       |
+
+## 設定
+
+### linkWorkspacePackages
+
+* 預設值：**false**
+* Type: **true**, **false**, **deep**
+
+If this is enabled, locally available packages are linked to `node_modules` instead of being downloaded from the registry. This is very convenient in a monorepo. If you need local packages to also be linked to subdependencies, you can use the `deep` setting.
+
+Else, packages are downloaded and installed from the registry. However, workspace packages can still be linked by using the `workspace:` range protocol.
+
+Packages are only linked if their versions satisfy the dependency ranges.
+
+### injectWorkspacePackages
+
+* 預設值：**false**
+* 類型：**Boolean**
+
+Enables hard-linking of all local workspace dependencies instead of symlinking them. Alternatively, this can be achieved using [`dependenciesMeta[].injected`](package_json.md#dependenciesmetainjected), which allows to selectively enable hard-linking for specific dependencies.
+
+:::note
+
+Even if this setting is enabled, pnpm will prefer to deduplicate injected dependencies using symlinks—unless multiple dependency graphs are required due to mismatched peer dependencies. This behaviour is controlled by the `dedupeInjectedDeps` setting.
+
+:::
+
+### dedupeInjectedDeps
+
+* 預設值：**true**
+* 類型：**Boolean**
+
+When this setting is enabled, [dependencies that are injected](package_json.md#dependenciesmetainjected) will be symlinked from the workspace whenever possible. If the dependent project and the injected dependency reference the same peer dependencies, then it is not necessary to physically copy the injected dependency into the dependent's `node_modules`; a symlink is sufficient.
+
+### syncInjectedDepsAfterScripts
+
+Added in: v10.5.0
+
+* Default: **undefined**
+* Type: **String[]**
+
+Injected workspace dependencies are collections of hardlinks, which don't add or remove the files when their sources change. This causes problems in packages that need to be built (such as in TypeScript projects).
+
+This setting is a list of script names. When any of these scripts are executed in a workspace package, the injected dependencies inside `node_modules` will also be synchronized.
+
+### preferWorkspacePackages
+
+* 預設值：**false**
+* 類型：**Boolean**
+
+If this is enabled, local packages from the workspace are preferred over packages from the registry, even if there is a newer version of the package in the registry.
+
+This setting is only useful if the workspace doesn't use `saveWorkspaceProtocol`.
+
+### sharedWorkspaceLockfile
+
+* 預設值：**true**
+* 類型：**Boolean**
+
+If this is enabled, pnpm creates a single `pnpm-lock.yaml` file in the root of the workspace. This also means that all dependencies of workspace packages will be in a single `node_modules` (and get symlinked to their package `node_modules` folder for Node's module resolution).
+
+Advantages of this option:
+* every dependency is a singleton
+* faster installations in a monorepo
+* fewer changes in code reviews as they are all in one file
+
+:::note
+
+Even though all the dependencies will be hard linked into the root `node_modules`, packages will have access only to those dependencies that are declared in their `package.json`, so pnpm's strictness is preserved. This is a result of the aforementioned symbolic linking.
+
+:::
+
+### saveWorkspaceProtocol
+
+* Default: **rolling**
+* Type: **true**, **false**, **rolling**
+
+This setting controls how dependencies that are linked from the workspace are added to `package.json`.
+
+If `foo@1.0.0` is in the workspace and you run `pnpm add foo` in another project of the workspace, below is how `foo` will be added to the dependencies field. The `savePrefix` setting also influences how the spec is created.
+
+| saveWorkspaceProtocol | savePrefix | spec               |
+| --------------------- | ---------- | ------------------ |
+| false                 | `''`       | `1.0.0`            |
+| false                 | `'~'`      | `~1.0.0`           |
+| false                 | `'^'`      | `^1.0.0`           |
+| true                  | `''`       | `workspace:1.0.0`  |
+| true                  | `'~'`      | `workspace:~1.0.0` |
+| true                  | `'^'`      | `workspace:^1.0.0` |
+| rolling               | `''`       | `workspace:*`      |
+| rolling               | `'~'`      | `workspace:~`      |
+| rolling               | `'^'`      | `workspace:^`      |
+
+### includeWorkspaceRoot
+
+* 預設值：**false**
+* 類型：**Boolean**
+
+When executing commands recursively in a workspace, execute them on the root workspace project as well.
+
+### ignoreWorkspaceCycles
+
+* 預設值：**false**
+* 類型：**Boolean**
+
+When set to `true`, no workspace cycle warnings will be printed.
+
+### disallowWorkspaceCycles
+
+* 預設值：**false**
+* 類型：**Boolean**
+
+When set to `true`, installation will fail if the workspace has cycles.
+
+### failIfNoMatch
+
+* 預設值：**false**
+* 類型：**Boolean**
+
+When set to `true`, the CLI will exit with a non-zero code if no packages match the provided filters.
+
+For example, the following command will exit with a non-zero code because `bad-pkg-name` is not present in the workspace:
+
+```sh
+pnpm --filter=bad-pkg-name test
+```
+
+[`pnpm-workspace.yaml`]: pnpm-workspace_yaml.md
+
+[Bit]: https://bit.dev/?utm_source=pnpm&utm_medium=workspace_page
+[Painless Monorepo Dependency Management with Bit]: https://bit.dev/blog/painless-monorepo-dependency-management-with-bit-l4f9fzyw?utm_source=pnpm&utm_medium=workspace_page
+
+[linkWorkspacePackages]: #linkworkspacepackages
+
+[rush-setup]: https://rushjs.io/pages/maintainer/setup_new_repo
+[changesets-guide]: using-changesets.md
