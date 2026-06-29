@@ -12,6 +12,12 @@ If you use BuildKit cache mounts, keep the pnpm store cache scoped to mutually t
 
 :::
 
+:::note
+
+If you are using node version newer than 25, you may replace `corepack enable` with `npm install -g pnpm@latest`.
+
+:::
+
 [podman]: ./podman.md
 
 ## Official pnpm base image
