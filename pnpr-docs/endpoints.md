@@ -20,6 +20,35 @@ Both surfaces are enabled by default. See
 | --- | --- | --- |
 | `GET` | `/-/ping` | Health check. Returns `{}`. |
 
+## Registry bases: `/` and `/~<mount>/`
+
+Every [registry mount](configuration.md#mounts-and-defaulttarget) is served as
+a full npm registry at `/~<mount>/` — packument and tarball reads, version
+manifests, dist-tags, search, publish, unpublish, and the login/whoami
+endpoints all work under a mount prefix. The `~` prefix keeps mount names out
+of the package-name namespace (a package name can never begin with `~`).
+
+The path-less base (`/`) aliases the mount named by `defaultTarget`; with no
+`defaultTarget` configured, the bare host serves no registry and only the
+`/~<mount>/` bases answer.
+
+Every request routes through the mount graph:
+
+- A request to a **router** mount is answered by the first route whose pattern
+  matches the package. A router that matches no route is a definitive `404` —
+  there is no fall-through to another origin. A matched source that is
+  unavailable is an error, never a `404`.
+- **Writes** (publish, dist-tags, unpublish) must resolve to a hosted mount; a
+  write that routes to an upstream mount is rejected.
+- The matching `packages:` rule's ACL is enforced on every mount-served read
+  and write.
+- Served `dist.tarball` URLs are rewritten onto the configured `public_url`
+  and stay canonical for the base the client addressed (path-less or
+  `/~<mount>/`), so lockfiles don't bake in a mount name.
+
+The endpoint tables below show path-less shapes; each is equally available
+under a `/~<mount>/` prefix.
+
 ## Resolver endpoints
 
 The resolver endpoints are mounted when `resolver.enabled` is true. The
@@ -33,11 +62,20 @@ The resolver endpoints are mounted when `resolver.enabled` is true. The
 
 `POST /-/pnpr/v0/resolve` accepts fields such as `projects`, `dependencies`,
 `devDependencies`, `optionalDependencies`, `registry`, `namedRegistries`,
-`authHeaders`, `overrides`, `lockfile`, `frozenLockfile`,
-`preferFrozenLockfile`, `ignoreManifestCheck`, `trustLockfile`,
-`minimumReleaseAge`, `minimumReleaseAgeExclude`,
-`minimumReleaseAgeIgnoreMissingTime`, `trustPolicy`, `trustPolicyExclude`, and
-`trustPolicyIgnoreAfter`.
+`overrides`, `lockfile`, `frozenLockfile`, `preferFrozenLockfile`,
+`ignoreManifestCheck`, `trustLockfile`, `minimumReleaseAge`,
+`minimumReleaseAgeExclude`, `minimumReleaseAgeIgnoreMissingTime`,
+`trustPolicy`, `trustPolicyExclude`, and `trustPolicyIgnoreAfter`.
+
+Every registry the request would make pnpr fetch from — the `registry` and
+`namedRegistries` origins, plus any direct `http(s)`/`git` URL in a dependency
+spec, an override, or an input-lockfile tarball — must be on the server's fetch
+allowlist (the configured mounts, declared public routes, the built-in npm
+registry, and pnpr's own origin). An off-allowlist origin is rejected up front,
+before any server-side fetch. Upstream credentials are never taken from the
+client: pnpr selects its own server-owned credential per route (see
+[Install acceleration](install-acceleration.md#private-registries)), and a URL
+carrying inline `user:pass@` credentials is rejected.
 
 The `resolve` response is an NDJSON stream:
 
@@ -62,12 +100,10 @@ checked against the matching package rule's `access` list.
 | `GET` | `/{name}/-/{filename}` | Unscoped tarball. |
 | `GET` | `/@scope/{name}/-/{filename}` | Scoped tarball. |
 | `GET` | `/-/package/{package}/dist-tags` | Package `dist-tags` object. Use a percent-encoded scoped package name, for example `@scope%2Fname`. |
-| `GET` | `/-/v1/search?text=<query>&size=<n>` | npm search v1 shape. Searches hosted packages by package-name substring and may add an exact upstream match. Results are filtered by access policy. |
+| `GET` | `/-/v1/search?text=<query>&size=<n>` | npm search v1 shape. Searches locally hosted packages by package-name substring; search is local-only and never proxied upstream. Results are filtered by access policy. |
 
-Packument responses rewrite `dist.tarball` URLs to the configured
-`public_url`. If the client sends
-`Accept: application/vnd.npm.install-v1+json`, pnpr returns npm's abbreviated
-install-v1 packument shape.
+If the client sends `Accept: application/vnd.npm.install-v1+json`, pnpr
+returns npm's abbreviated install-v1 packument shape.
 
 When OSV checks are enabled, vulnerable versions are removed from packuments
 and dist-tags. Version manifests and tarballs for vulnerable versions are
@@ -78,7 +114,8 @@ denied.
 These endpoints are mounted when `registry.enabled` is true. `PUT` and
 `DELETE` requests require credentials. A read-only bearer token cannot use
 write methods, and CIDR-restricted bearer tokens are checked against the peer
-socket address.
+socket address. Every write routes through the mount graph and must land on a
+hosted mount.
 
 | Method | Path | Description |
 | --- | --- | --- |
@@ -94,7 +131,9 @@ socket address.
 
 ## User and token endpoints
 
-These endpoints are mounted when `registry.enabled` is true.
+These endpoints are mounted when `registry.enabled` is true. They are global —
+served identically on the path-less base and under any `/~<mount>/` prefix, so
+`pnpm login` against a mount URL works.
 
 | Method | Path | Description |
 | --- | --- | --- |
