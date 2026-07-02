@@ -6,9 +6,14 @@ slug: /
 
 **pnpr** is a pnpm-compatible npm registry server, written in Rust. It speaks the
 npm registry protocol, so any npm-compatible client (pnpm, npm, yarn) can talk to
-it. It proxies packages from a configured upstream such as `registry.npmjs.org`
-and serves them with its own authentication and access controls — roughly the
-role [verdaccio](https://verdaccio.org/) plays in the JavaScript ecosystem.
+it. It hosts your own packages and proxies upstream registries such as
+`registry.npmjs.org`, with its own authentication and access controls — roughly
+the role [verdaccio](https://verdaccio.org/) plays in the JavaScript ecosystem.
+
+Every registry origin pnpr serves is declared as a
+[registry mount](configuration.md#mounts-and-defaulttarget), and a router maps
+each package name to exactly one origin — there is no cross-origin
+fall-through, which closes dependency-confusion attacks by construction.
 
 pnpr lives in the [pnpm monorepo](https://github.com/pnpm/pnpm) under
 [`pnpr/`](https://github.com/pnpm/pnpm/tree/main/pnpr).
@@ -26,6 +31,9 @@ configuration, and APIs may change between releases.
   per-package access and publish rules.
 - **A caching proxy** — mirror an upstream registry (e.g. npmjs.org) to speed up
   installs and stay resilient to upstream outages.
+- **A credential gateway** — hold one upstream registry token server-side and
+  fan it out to a whole team through pnpr's own authentication, so clients
+  never handle the upstream credential.
 - **An install accelerator** — resolve a project's dependency graph server-side
   and hand pnpm a ready-to-use lockfile. See
   [Install acceleration](install-acceleration.md).

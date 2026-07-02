@@ -46,8 +46,10 @@ changes.
 1. pnpm checks `GET /-/pnpr` to verify that the server speaks a compatible pnpr
    resolver protocol version.
 2. pnpm sends `POST /-/pnpr/v0/resolve` with the project's dependencies,
-   registry settings, forwarded upstream credentials, policy settings, and the
-   existing lockfile when one is available.
+   registry settings, policy settings, and the existing lockfile when one is
+   available. Client upstream credentials are never sent — private registries
+   are reached through the server's own credentials (see
+   [below](#private-registries)).
 3. The server resolves against the client's registries, verifies the input
    lockfile under the client's policy, and streams an `application/x-ndjson`
    response. `package` frames announce resolved tarballs as the tree walk
@@ -60,10 +62,52 @@ For frozen restores with an already-fresh lockfile, pnpm can use
 `POST /-/pnpr/v0/verify-lockfile` to get only the server-side trust verdict
 instead of resolving again.
 
-The resolver surface is stateless for package contents: it stores no tarballs
-and serves no file content. See
-[pnpm/pnpm#12230](https://github.com/pnpm/pnpm/issues/12230) and
+See [pnpm/pnpm#12230](https://github.com/pnpm/pnpm/issues/12230) and
 [pnpm/pnpm#12234](https://github.com/pnpm/pnpm/issues/12234) for background.
+
+## Which registries the server will touch {#allowlist}
+
+The resolver only fetches from origins the operator has configured — a
+**default-deny allowlist** made of the configured
+[mounts](configuration.md#mounts-and-defaulttarget), the declared
+[public routes](configuration.md#routes), the built-in official npm registry,
+and pnpr's own origin. A request whose `registry`/`namedRegistries` — or whose
+direct `http(s)`/`git` URL dependencies, overrides, or lockfile tarball URLs —
+point anywhere else is rejected before any server-side fetch, and every
+redirect hop is re-checked against the same allowlist. A caller can't use the
+resolver to make the server fetch from an arbitrary internal address.
+
+## Private registries {#private-registries}
+
+Clients never forward their upstream registry credentials to pnpr. Instead, a
+private registry is configured server-side as an
+[upstream mount](configuration.md#upstream-mounts) with a server-owned
+credential and an `access:` policy naming which pnpr users may resolve through
+it. The caller authenticates to pnpr with their own pnpr token; pnpr selects
+its own credential for each upstream fetch. One upstream token, held only by
+the server, serves a whole team.
+
+Tarball URLs in the resolved lockfile follow the same split:
+
+- A **public** package keeps its upstream URL — the client fetches it directly
+  from the registry or its CDN, never through pnpr.
+- A **private** package resolved through an access-bearing upstream mount is
+  emitted as that mount's `/~<mount>/` registry endpoint URL, so the client
+  fetches it back through pnpr (which enforces the mount's access policy and
+  serves it from a per-mount private cache).
+
+Because a mount endpoint URL is canonical for a client whose registry
+configuration points at it, lockfile entries stay integrity-only — the
+registry host lives in the client's `.npmrc`, not in the lockfile — and a
+project resolves to the same lockfile whether it installs through `/resolve`
+or directly against the registry.
+
+The resolution cache is **authorization-aware**: a resolution that touched
+only public routes is cached once and shared by every caller, while a
+resolution that touched private routes is keyed by the access it required and
+is only replayed for callers who still hold that access at the current
+upstream credential. Rotating an upstream credential automatically moves new
+resolutions to a fresh cache namespace.
 
 ## Enabling it
 

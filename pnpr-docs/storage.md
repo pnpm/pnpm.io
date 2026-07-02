@@ -61,16 +61,24 @@ s3:
   region: auto
   endpoint: https://abc123def456.r2.cloudflarestorage.com
 
-uplinks:
-  npmjs:
-    url: https://registry.npmjs.org/
+mounts:
+  local:
+    type: hosted
 
-packages:
-  '**':
-    access: $all
-    publish: $authenticated
-    unpublish: $authenticated
-    proxy: npmjs
+  npmjs:
+    type: upstream
+    url: https://registry.npmjs.org/
+    public: true
+
+  main:
+    type: router
+    routes:
+      - patterns: ['@mycompany/*']
+        source: local
+      - patterns: ['**']
+        source: npmjs
+
+defaultTarget: main
 ```
 
 ```sh
