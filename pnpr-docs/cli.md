@@ -11,7 +11,7 @@ pnpr [OPTIONS]
 
 | Flag | Description |
 | --- | --- |
-| `-c, --config <path>` | Path to a [verdaccio-shaped YAML config](configuration.md). When omitted, the global `config.yaml` in pnpr's config dir is used if it exists, otherwise the bundled default config. |
+| `-c, --config <path>` | Path to a [YAML config](configuration.md). When omitted, the global `config.yaml` in pnpr's config dir is used if it exists, otherwise the bundled default config. |
 | `--listen <addr>` | Address to bind to. Defaults to `127.0.0.1:7677`. |
 | `--storage <path>` | Override the [storage](configuration.md) directory from the loaded config — the source of truth for hosted packages. |
 | `--cache <path>` | Override the disposable proxy-cache directory (the mirror of upstream registries plus the resolver cache). Defaults to a `.pnpr-cache` subdirectory of the storage path. |
