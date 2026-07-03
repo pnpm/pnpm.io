@@ -69,7 +69,7 @@ See [pnpm/pnpm#12230](https://github.com/pnpm/pnpm/issues/12230) and
 
 The resolver only fetches from origins the operator has configured — a
 **default-deny allowlist** made of the configured
-[mounts](configuration.md#mounts-and-defaulttarget), the declared
+[registries](configuration.md#registries-and-defaultregistry), the declared
 [public routes](configuration.md#routes), the built-in official npm registry,
 and pnpr's own origin. A request whose `registry`/`namedRegistries` — or whose
 direct `http(s)`/`git` URL dependencies, overrides, or lockfile tarball URLs —
@@ -81,7 +81,7 @@ resolver to make the server fetch from an arbitrary internal address.
 
 Clients never forward their upstream registry credentials to pnpr. Instead, a
 private registry is configured server-side as an
-[upstream mount](configuration.md#upstream-mounts) with a server-owned
+[upstream registry](configuration.md#upstream-registries) with a server-owned
 credential and an `access:` policy naming which pnpr users may resolve through
 it. The caller authenticates to pnpr with their own pnpr token; pnpr selects
 its own credential for each upstream fetch. One upstream token, held only by
@@ -91,16 +91,16 @@ Tarball URLs in the resolved lockfile follow the same split:
 
 - A **public** package keeps its upstream URL — the client fetches it directly
   from the registry or its CDN, never through pnpr.
-- A **private** package resolved through an access-bearing upstream mount is
-  emitted as that mount's `/~<mount>/` registry endpoint URL, so the client
-  fetches it back through pnpr (which enforces the mount's access policy and
-  serves it from a per-mount private cache).
+- A **private** package resolved through an access-bearing upstream registry
+  is emitted as that registry's `/~<name>/` endpoint URL, so the client
+  fetches it back through pnpr (which enforces the registry's access policy
+  and serves it from a per-registry private cache).
 
-Because a mount endpoint URL is canonical for a client whose registry
+Because a registry endpoint URL is canonical for a client whose registry
 configuration points at it, lockfile entries stay integrity-only — the
 registry host lives in the client's `.npmrc`, not in the lockfile — and a
 project resolves to the same lockfile whether it installs through `/resolve`
-or directly against the registry.
+or directly against the registry endpoint.
 
 The resolution cache is **authorization-aware**: a resolution that touched
 only public routes is cached once and shared by every caller, while a
@@ -119,6 +119,8 @@ pnprServer: http://127.0.0.1:7677
 
 pnpm will offload resolution to that server during `pnpm install`. The resolver
 `POST` endpoints require a valid pnpr `Authorization` header. pnpm forwards the
-auth configured for the `pnprServer` URL; if the same pnpr server is also your
-registry, a normal `pnpm login --registry <server-url>` writes the token pnpm
-uses for both registry and resolver requests.
+auth configured for the `pnprServer` URL, and a normal
+`pnpm login --registry <server-url>` writes the token pnpm uses for both
+registry and resolver requests. The login and token endpoints are always
+served, so this works even against a resolver-only pnpr server that exposes no
+registry surface.
