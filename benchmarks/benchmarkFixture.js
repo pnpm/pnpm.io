@@ -17,6 +17,7 @@ const lockfileNameByPM = {
   npm: 'package-lock.json',
   pnpm: 'pnpm-lock.yaml',
   pacquet: 'pnpm-lock.yaml',
+  bun: 'bun.lock',
   yarn: 'yarn.lock'
 }
 
@@ -255,4 +256,3 @@ function spawnSyncOrThrow (cmd, opts) {
   }
   return result;
 }
-
