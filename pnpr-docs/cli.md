@@ -19,7 +19,7 @@ pnpr [OPTIONS]
 | `--packument-ttl-secs <n>` | Seconds before a cached packument is considered stale and refetched. When omitted, the loaded config's value wins. |
 | `--osv` | Enable local [OSV](https://osv.dev/) npm vulnerability checks. Requires a local OSV npm database zip at `--osv-db` or `<cache>/osv/npm/all.zip`. |
 | `--osv-db <path>` | Path to the local OSV npm database zip or extracted JSON directory. |
-| `--disable-registry` | Disable the npm registry surface: packument and tarball reads, publish, unpublish, dist-tags, search, and login/token endpoints. Overrides `registry.enabled`. |
+| `--disable-registry` | Disable the npm registry surface (packument and tarball reads, publish, unpublish, dist-tags, and search) that is otherwise served whenever the config declares at least one registry. The health and login/token endpoints stay available. |
 | `--disable-resolver` | Disable the install-accelerator surface: `GET /-/pnpr`, `POST /-/pnpr/v0/resolve`, and `POST /-/pnpr/v0/verify-lockfile`. Overrides `resolver.enabled`. |
 | `-h, --help` | Print help. |
 | `-V, --version` | Print version. |

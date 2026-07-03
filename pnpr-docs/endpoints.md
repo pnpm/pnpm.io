@@ -3,16 +3,18 @@ id: endpoints
 title: HTTP endpoints
 ---
 
-pnpr exposes one always-on health endpoint plus two configurable surfaces:
+pnpr exposes a set of always-on endpoints (health, user accounts, and tokens)
+plus two surfaces:
 
-- **Registry surface** (`registry.enabled`) - npm-compatible package, auth, and
-  publish endpoints.
+- **Registry surface** - npm-compatible package and publish endpoints. Served
+  exactly when at least one registry is declared under
+  [`registries:`](configuration.md#registries-and-defaultregistry);
+  `--disable-registry` turns it off for one process.
 - **Resolver surface** (`resolver.enabled`) - pnpr install-accelerator
   endpoints under `/-/pnpr`.
 
-Both surfaces are enabled by default. See
-[Configuration](configuration.md#registry-and-resolver) for the config keys and
-[CLI reference](cli.md) for the command-line overrides.
+See [Configuration](configuration.md#the-registry-surface-and-resolver) for
+the config keys and [CLI reference](cli.md) for the command-line overrides.
 
 ## Always available
 
@@ -20,34 +22,44 @@ Both surfaces are enabled by default. See
 | --- | --- | --- |
 | `GET` | `/-/ping` | Health check. Returns `{}`. |
 
-## Registry bases: `/` and `/~<mount>/`
+The [user and token endpoints](#user-and-token-endpoints) below are also
+always available, whichever surfaces are enabled.
 
-Every [registry mount](configuration.md#mounts-and-defaulttarget) is served as
-a full npm registry at `/~<mount>/` — packument and tarball reads, version
+## Registry bases: `/` and `/~<name>/`
+
+Every [registry](configuration.md#registries-and-defaultregistry) is served as
+a full npm registry at `/~<name>/` — packument and tarball reads, version
 manifests, dist-tags, search, publish, unpublish, and the login/whoami
-endpoints all work under a mount prefix. The `~` prefix keeps mount names out
-of the package-name namespace (a package name can never begin with `~`).
+endpoints all work under a registry prefix. The `~` prefix keeps registry
+names out of the package-name namespace (a package name can never begin with
+`~`).
 
-The path-less base (`/`) aliases the mount named by `defaultTarget`; with no
-`defaultTarget` configured, the bare host serves no registry and only the
-`/~<mount>/` bases answer.
+The path-less base (`/`) aliases the registry named by `defaultRegistry`; with
+no `defaultRegistry` configured, the bare host serves no registry and only the
+`/~<name>/` bases answer.
 
-Every request routes through the mount graph:
+Every request routes through the registry graph:
 
-- A request to a **router** mount is answered by the first route whose pattern
-  matches the package. A router that matches no route is a definitive `404` —
-  there is no fall-through to another origin. A matched source that is
-  unavailable is an error, never a `404`.
-- **Writes** (publish, dist-tags, unpublish) must resolve to a hosted mount; a
-  write that routes to an upstream mount is rejected.
-- The matching `packages:` rule's ACL is enforced on every mount-served read
+- A request to a **router** is answered by the first listed source whose
+  declared [`packages:`](configuration.md#the-packages-map) claim the name. A
+  name that no source claims is a definitive `404` — there is no fall-through
+  to another origin. A matched source that is unavailable is an error, never a
+  `404`.
+- A registry's declared namespace is enforced **on every path to it**: a read
+  of a name outside the namespace is a definitive `404` answered before
+  storage or the upstream is consulted — through a router, on the path-less
+  base, and at the registry's own `/~<name>/` URL alike — and an off-namespace
+  publish is rejected.
+- **Writes** (publish, dist-tags, unpublish) must resolve to a hosted
+  registry; a write that routes to an upstream is rejected.
+- The serving registry's matching `packages:` rule is enforced on every read
   and write.
 - Served `dist.tarball` URLs are rewritten onto the configured `public_url`
   and stay canonical for the base the client addressed (path-less or
-  `/~<mount>/`), so lockfiles don't bake in a mount name.
+  `/~<name>/`), so lockfiles don't bake in a registry name.
 
 The endpoint tables below show path-less shapes; each is equally available
-under a `/~<mount>/` prefix.
+under a `/~<name>/` prefix.
 
 ## Resolver endpoints
 
@@ -70,7 +82,7 @@ The resolver endpoints are mounted when `resolver.enabled` is true. The
 Every registry the request would make pnpr fetch from — the `registry` and
 `namedRegistries` origins, plus any direct `http(s)`/`git` URL in a dependency
 spec, an override, or an input-lockfile tarball — must be on the server's fetch
-allowlist (the configured mounts, declared public routes, the built-in npm
+allowlist (the configured registries, declared public routes, the built-in npm
 registry, and pnpr's own origin). An off-allowlist origin is rejected up front,
 before any server-side fetch. Upstream credentials are never taken from the
 client: pnpr selects its own server-owned credential per route (see
@@ -88,8 +100,9 @@ The `resolve` response is an NDJSON stream:
 
 ## Registry read endpoints
 
-These endpoints are mounted when `registry.enabled` is true. Package reads are
-checked against the matching package rule's `access` list.
+These endpoints are mounted when the registry surface is served. Package reads
+are checked against the serving registry's matching
+[`packages:`](configuration.md#the-packages-map) rule.
 
 | Method | Path | Description |
 | --- | --- | --- |
@@ -111,11 +124,11 @@ denied.
 
 ## Registry write endpoints
 
-These endpoints are mounted when `registry.enabled` is true. `PUT` and
+These endpoints are mounted when the registry surface is served. `PUT` and
 `DELETE` requests require credentials. A read-only bearer token cannot use
 write methods, and CIDR-restricted bearer tokens are checked against the peer
-socket address. Every write routes through the mount graph and must land on a
-hosted mount.
+socket address. Every write routes through the registry graph and must land on
+a hosted registry.
 
 | Method | Path | Description |
 | --- | --- | --- |
@@ -131,9 +144,10 @@ hosted mount.
 
 ## User and token endpoints
 
-These endpoints are mounted when `registry.enabled` is true. They are global —
-served identically on the path-less base and under any `/~<mount>/` prefix, so
-`pnpm login` against a mount URL works.
+These endpoints are **always mounted**, whichever surfaces are enabled, and
+they are global — served identically on the path-less base and under any
+`/~<name>/` prefix. `pnpm login` therefore works against any pnpr URL,
+including a resolver-only server that exposes no registry surface.
 
 | Method | Path | Description |
 | --- | --- | --- |

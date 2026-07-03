@@ -61,9 +61,12 @@ s3:
   region: auto
   endpoint: https://abc123def456.r2.cloudflarestorage.com
 
-mounts:
+registries:
   local:
     type: hosted
+    packages:
+      '@mycompany/*':
+        publish: $authenticated
 
   npmjs:
     type: upstream
@@ -72,13 +75,9 @@ mounts:
 
   main:
     type: router
-    routes:
-      - patterns: ['@mycompany/*']
-        source: local
-      - patterns: ['**']
-        source: npmjs
+    sources: [local, npmjs]
 
-defaultTarget: main
+defaultRegistry: main
 ```
 
 ```sh
