@@ -36,8 +36,9 @@ function getPMVersion (pmName, opts) {
   if (status !== 0) {
     throw new Error(`Couldn't detect version of ${pmName}. ${stderr?.toString()}`)
   }
-  // pacquet --version prints "pacquet <version>"; other PMs print just the version.
-  return stdout.toString().trim().replace(/^\S+\s+/, '')
+  // pnpm 12 currently prints "pnpm v<version>" (a fix is in progress); other PMs
+  // print just the version. Strip any leading non-digit prefix to normalize.
+  return stdout.toString().trim().replace(/^\D+/, '')
 }
 
 async function safeLoadYamlFile (filename) {

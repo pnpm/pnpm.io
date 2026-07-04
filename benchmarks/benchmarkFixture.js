@@ -16,7 +16,6 @@ const TMP = tempy.directory()
 const lockfileNameByPM = {
   npm: 'package-lock.json',
   pnpm: 'pnpm-lock.yaml',
-  pacquet: 'pnpm-lock.yaml',
   yarn: 'yarn.lock'
 }
 
@@ -103,9 +102,9 @@ async function updateDependenciesInPackageJson (cwd) {
 export default async function benchmark (pm, fixture, opts) {
   const cwd = path.join(TMP, pm.scenario, fixture)
   const env = createEnv(opts.managersDir)
-  if (pm.name === 'pacquet') {
-    // pacquet shares pnpm's store layout at $PNPM_HOME/store, which lines up
-    // with the cache/ directory the rest of the flow cleans between scenarios.
+  if (pm.scenario === 'pnpm12') {
+    // pnpm 12's Rust engine uses the store layout at $PNPM_HOME/store, which lines
+    // up with the cache/ directory the rest of the flow cleans between scenarios.
     env.PNPM_HOME = path.join(cwd, 'cache')
   }
   cpSync(path.join(FIXTURES_DIR, fixture), cwd, { recursive: true })

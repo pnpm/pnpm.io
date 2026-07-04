@@ -39,7 +39,7 @@ export default {
     color: '#fbae00',
     displayVersion: '12',
     mascot: '🦀',
-    name: 'pacquet',
+    name: 'pnpm',
     args: [
       'install',
       '--ignore-scripts',
