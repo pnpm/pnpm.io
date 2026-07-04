@@ -114,6 +114,7 @@
           "cli/store",
           "cli/root",
           "cli/bin",
+          "cli/prefix",
           "cli/setup",
           "cli/init",
           "cli/deploy",

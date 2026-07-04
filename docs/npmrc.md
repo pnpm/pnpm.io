@@ -135,6 +135,51 @@ Setting a token helper for the specified registry:
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 
+### _auth
+
+Added in: v11.10.0
+
+Configures registry authentication as a single structured value, keyed by registry URL. This is an alternative to the many `//host/:_authToken=…` entries and is designed for CI, where the URL-scoped form (whose variable name contains `/`, `:`, and `.`) cannot be passed through an environment variable on some runners.
+
+`_auth` is honored **only** from two trusted locations:
+
+* the **global** pnpm config (`config.yaml`);
+* the `pnpm_config__auth` environment variable (for CI).
+
+It is **ignored** in a project `pnpm-workspace.yaml` or `.npmrc`, so a checked-out repository can never supply registry auth.
+
+The value is keyed by registry URL, so each secret is explicitly bound to the host that may receive it. Registry URL keys must use `http` or `https` and must not include credentials, query strings, or fragments. Within each registry URL, `@` means registry-wide (default) credentials, and a package scope such as `@org` binds credentials to that scope on the same host. The only supported credential field is `authToken` (it maps to `_authToken` / bearer auth); the deprecated `basicAuth` / `username` + `password` forms and `tokenHelper` are not accepted here.
+
+In the global `config.yaml`:
+
+```yaml
+_auth:
+  https://registry.npmjs.org:
+    "@":
+      authToken: npm-token
+    "@org":
+      authToken: org-token
+```
+
+The equivalent environment variable (a JSON string):
+
+```sh
+export pnpm_config__auth='{"https://registry.npmjs.org":{"@":{"authToken":"npm-token"},"@org":{"authToken":"org-token"}}}'
+```
+
+Both `pnpm_config__auth` (lowercase) and `PNPM_CONFIG__AUTH` (all-caps, the convention some CI runners apply) are honored. If both are set, lowercase wins unless it is empty, in which case uppercase is used.
+
+Each entry also infers a trusted registry route: `@` routes the default registry (and `pnpm add <pkg>` resolves there), and `@org` routes that scope. Because the credential and its destination host arrive in one trusted value, repo-controlled config cannot redirect the token to a different host.
+
+Precedence, from highest to lowest:
+
+1. CLI flags (`--registry`, `--@scope:registry`)
+2. `pnpm_config__auth` / `PNPM_CONFIG__AUTH`
+3. global `config.yaml` `_auth`
+4. `pnpm-workspace.yaml`
+
+Parsing is strict: a malformed value (bad JSON, wrong shape, an invalid registry URL or scope, or an unsupported credential field) fails fast with an error rather than being silently dropped.
+
 ## Certificate Settings
 
 ### ca
