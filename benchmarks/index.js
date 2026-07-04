@@ -116,7 +116,9 @@ async function run () {
   }
   spawn.sync('pnpm', ['add', 'npm@latest'], { cwd: managersDirs.npm, stdio: 'inherit' })
   spawn.sync('pnpm', ['add', 'pnpm@latest'], { cwd: managersDirs.pnpm11, stdio: 'inherit' })
-  spawn.sync('pnpm', ['add', 'pnpm@next-12'], { cwd: managersDirs.pnpm12, stdio: 'inherit' })
+  // pnpm 12 ships its Rust binary via an install script, so the build must be
+  // allowed; otherwise the `pnpm` bin is left as a placeholder that errors out.
+  spawn.sync('pnpm', ['add', 'pnpm@next-12', '--allow-build=pnpm'], { cwd: managersDirs.pnpm12, stdio: 'inherit' })
   spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDirs.yarn, stdio: 'inherit' })
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pmConfigs = [
