@@ -31,24 +31,24 @@
   <text x="290" y="28" class="font s5 text" text-anchor="middle">10</text>
   <text x="290" y="170" class="font s5 text" text-anchor="middle">10</text>
   <text x="290" y="20" class="font s4 text" font-style="italic" text-anchor="end">Installation time in seconds (lower is better)</text>
-  <rect x="40" y="35" width="180" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="35" width="195" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="35" width="57" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="50" width="140" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="50" width="163" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="50" width="48" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="65" width="108" height="10" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="65" width="33" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="80" width="60" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="65" width="115" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="65" width="38" height="10" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="80" width="57" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="80" width="15" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="95" width="13" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="95" width="15" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="95" width="3" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="110" width="10" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="110" width="15" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="110" width="3" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="125" width="10" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="125" width="13" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="125" width="3" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="140" width="10" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="140" width="13" height="10" fill="#cccccc" rx="1" ry="1"></rect>
   <rect x="40" y="140" width="1" height="10" fill="#fbae00" rx="1" ry="1"></rect>
-  <rect x="40" y="155" width="170" height="10" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="155" width="53" height="10" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="155" width="190" height="10" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="155" width="55" height="10" fill="#fbae00" rx="1" ry="1"></rect>
   <line x1="40" y1="30" x2="40" y2="165" class="line"></line>
   <text x="38" y="40" class="font s4" dominant-baseline="middle" text-anchor="end">clean</text>
   <text x="38" y="55" class="font s4" dominant-baseline="middle" text-anchor="end">lockfile</text>
@@ -64,5 +64,5 @@
   <text x="38" y="145" class="font s4" dominant-baseline="middle" text-anchor="end">lockfile</text>
   <text x="38" y="149" class="font s4" dominant-baseline="middle" text-anchor="end">node_modules</text>
   <text x="38" y="160" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="178" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.17.0 at: Jun 28, 2026, 3:52 AM</text>
+  <text x="290" y="178" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.18.0 at: Jul 6, 2026, 8:58 AM</text>
 </svg>
