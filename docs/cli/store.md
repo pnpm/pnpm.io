@@ -47,7 +47,9 @@ briefly slowing down the installation process.
 
 After pruning, pnpm displays the total size of removed files.
 
-When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on the global virtual store's `links/` directory. Projects using the store are registered via symlinks in `{storeDir}/v11/projects/`, allowing pnpm to track active usage and safely remove unused packages from the global virtual store.
+When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on the global virtual store's `links/` directory. Projects using the store are registered via symlinks in `{storeDir}/v11/projects/`, allowing pnpm to track active usage and safely remove unused packages from the global virtual store. If no projects are registered, this step is skipped and nothing in `links/` is removed.
+
+The global virtual store is also where pnpm caches the alternate pnpm versions it downloads when switching to the version pinned in a project's `packageManager`/`devEngines.packageManager` field, or when running [`pnpm with`](./with.md). These cached versions live under `links/` and are never referenced from a project's `node_modules`. The mark-and-sweep therefore always treats them as unreferenced, so **`pnpm store prune` removes every cached pnpm version** from the global virtual store (if at least one project is registered). Any removed version is re-downloaded automatically the next time a project requests it.
 
 [global virtual store]: ../settings.md#enableglobalvirtualstore
 
