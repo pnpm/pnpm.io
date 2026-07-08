@@ -30,7 +30,7 @@ When the project's `package.json` has a `packageManager` field set to pnpm (or a
 
 If the project does not pin pnpm, or the pin is being ignored via [`pmOnFail: ignore`](../settings.md#pmonfail), `self-update` installs the resolved pnpm version globally and links it to `PNPM_HOME` so it becomes the active pnpm binary on your system.
 
-Running [`pnpm store prune`](./store.md#prune) removes previously installed versions (outside of a 5-minute safety window), keeping only the one currently in use.
+Running [`pnpm store prune`](./store.md#prune) removes previously installed global versions once they are no longer linked (after a newer install replaces them) while keeping the version currently in use. Install directories created within a 5-minute safety window are skipped.
 
 ## Installing pnpm v12 (the Rust port)
 
