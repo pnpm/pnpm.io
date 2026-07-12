@@ -118,7 +118,6 @@
           "cli/setup",
           "cli/init",
           "cli/deploy",
-          "cli/doctor",
           "cli/pm",
           "cli/pkg",
           "cli/repo",
