@@ -7,6 +7,12 @@ title: Installation
 
 If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v22) to be installed on your system.
 
+:::tip
+
+Prefer downloading a prebuilt binary directly? You can get the latest standalone executables from the [pnpm releases page](https://github.com/pnpm/pnpm/releases).
+
+:::
+
 ## Using a standalone script
 
 You may install pnpm even if you don't have Node.js installed, using the following scripts.
