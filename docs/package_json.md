@@ -203,6 +203,37 @@ With these changes, we say that `button` is an "injected dependency" of `card` a
 
 Because injected dependencies produce copies of their workspace source directory, these copies must be updated somehow whenever the code is modified; otherwise, the new state will not be reflected for consumers. When building multiple projects with a command such as `pnpm --recursive run build`, this update must occur after each injected package is rebuilt but before its consumers are rebuilt. For simple use cases, it can be accomplished by invoking `pnpm install` again, perhaps using a `package.json` lifecycle script such as `"prepare": "pnpm run build"` to rebuild that one project.  Third party tools such as [pnpm-sync](https://www.npmjs.com/package/pnpm-sync-lib) and [pnpm-sync-dependencies-meta-injected](https://www.npmjs.com/package/pnpm-sync-dependencies-meta-injected) provide a more robust and efficient solution for updating injected dependencies, as well as watch mode support.
 
+## peerDependencies
+
+Peer dependency values are normally semver ranges (`^1.0.0`), or a [`workspace:`](./workspaces.md#workspace-protocol-workspace) or [`catalog:`](./catalogs.md) specifier.
+
+Since v11.14.0, a peer dependency may also be declared with a specifier that carries a scheme:
+
+```json
+{
+  "peerDependencies": {
+    "lib-a": "work:5.x.x",
+    "lib-b": "npm:other-lib@^5",
+    "lib-c": "file:../lib-c",
+    "lib-d": "git+https://example.com/lib-d.git"
+  }
+}
+```
+
+Accepted forms are a [named-registry](./settings.md#namedregistries) spec (`<registry>:<version>`), an `npm:` alias, and a `file:`, git, or URL spec.
+
+Such a specifier is matched against the semver range it carries — `work:5.x.x` is checked as `5.x.x` and `npm:other-lib@^5` as `^5`. A specifier that carries no version, such as `file:../lib-c`, is matched against `*`, so any version satisfies it. Meanwhile the original specifier is what selects the package when [`autoInstallPeers`](./settings.md#autoinstallpeers) installs a missing peer, so the peer is fetched from the aliased name, registry, or source you named.
+
+Bare `name@version` values are still rejected with `ERR_PNPM_INVALID_PEER_DEPENDENCY_SPECIFICATION`, as they are almost always a mistake:
+
+```json
+{
+  "peerDependencies": {
+    "lib-a": "lib-a@1.2.3"
+  }
+}
+```
+
 ## peerDependenciesMeta
 
 This field lists some extra information related to the dependencies listed in

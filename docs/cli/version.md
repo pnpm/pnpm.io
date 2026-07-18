@@ -10,6 +10,7 @@ Bump the package version.
 ```sh
 pnpm version <newversion>
 pnpm version <major|minor|patch|premajor|preminor|prepatch|prerelease|from-git>
+pnpm version -r [--dry-run]
 ```
 
 `<newversion>` can be any of the bump types above or an explicit semver version (e.g. `1.2.3`). Workspaces and the `workspace:` protocol are supported, so cross-references between workspace packages are updated correctly.
@@ -25,6 +26,28 @@ pnpm version major
 pnpm version 2.0.0
 pnpm version prerelease --preid beta
 ```
+
+## Recursive releases
+
+Added in: v11.13.0
+
+Run with `-r` and **no version argument** to consume the pending change intents recorded by [`pnpm change`](./change.md):
+
+```sh
+pnpm version -r
+```
+
+This assembles a release plan from the `.changeset/*.md` intent files and applies it: every package named by an intent is bumped, and so is every package that depends on it through a `workspace:` range. It then writes changelogs and records the consumed intents in `.changeset/ledger.yaml`.
+
+Preview the plan without touching anything:
+
+```sh
+pnpm version -r --dry-run
+```
+
+Narrow it to part of the workspace with `--filter`. The selection is expanded until it settles, so fixed-group companions and dependents whose ranges the bump invalidates are pulled in automatically.
+
+The working tree must be clean unless `--dry-run` or `--no-git-checks` is passed. See [Release management](../versioning.md) for the full workflow.
 
 ## Options
 

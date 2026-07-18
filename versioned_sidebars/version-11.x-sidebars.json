@@ -220,6 +220,88 @@
           ]
         },
         {
+          "collapsed": true,
+          "type": "category",
+          "label": "Releasing",
+          "items": [
+            {
+              "type": "doc",
+              "id": "cli/change"
+            },
+            {
+              "type": "doc",
+              "id": "cli/lane"
+            },
+            {
+              "type": "doc",
+              "id": "cli/version"
+            },
+            {
+              "type": "doc",
+              "id": "cli/publish"
+            },
+            {
+              "type": "doc",
+              "id": "cli/stage"
+            },
+            {
+              "type": "doc",
+              "id": "cli/pack"
+            },
+            {
+              "type": "doc",
+              "id": "cli/dist-tag"
+            },
+            {
+              "type": "doc",
+              "id": "cli/deprecate"
+            },
+            {
+              "type": "doc",
+              "id": "cli/unpublish"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Registry",
+          "items": [
+            {
+              "type": "doc",
+              "id": "cli/login"
+            },
+            {
+              "type": "doc",
+              "id": "cli/logout"
+            },
+            {
+              "type": "doc",
+              "id": "cli/whoami"
+            },
+            {
+              "type": "doc",
+              "id": "cli/access"
+            },
+            {
+              "type": "doc",
+              "id": "cli/owner"
+            },
+            {
+              "type": "doc",
+              "id": "cli/team"
+            },
+            {
+              "type": "doc",
+              "id": "cli/star"
+            },
+            {
+              "type": "doc",
+              "id": "cli/ping"
+            }
+          ]
+        },
+        {
           "type": "category",
           "label": "Manage environments",
           "items": [
@@ -275,18 +357,6 @@
           "items": [
             {
               "type": "doc",
-              "id": "cli/login"
-            },
-            {
-              "type": "doc",
-              "id": "cli/logout"
-            },
-            {
-              "type": "doc",
-              "id": "cli/whoami"
-            },
-            {
-              "type": "doc",
               "id": "cli/self-update"
             },
             {
@@ -295,47 +365,7 @@
             },
             {
               "type": "doc",
-              "id": "cli/version"
-            },
-            {
-              "type": "doc",
-              "id": "cli/publish"
-            },
-            {
-              "type": "doc",
-              "id": "cli/stage"
-            },
-            {
-              "type": "doc",
-              "id": "cli/pack"
-            },
-            {
-              "type": "doc",
               "id": "cli/pack-app"
-            },
-            {
-              "type": "doc",
-              "id": "cli/deprecate"
-            },
-            {
-              "type": "doc",
-              "id": "cli/unpublish"
-            },
-            {
-              "type": "doc",
-              "id": "cli/dist-tag"
-            },
-            {
-              "type": "doc",
-              "id": "cli/owner"
-            },
-            {
-              "type": "doc",
-              "id": "cli/star"
-            },
-            {
-              "type": "doc",
-              "id": "cli/ping"
             },
             {
               "type": "doc",
@@ -352,6 +382,10 @@
             {
               "type": "doc",
               "id": "cli/bin"
+            },
+            {
+              "type": "doc",
+              "id": "cli/prefix"
             },
             {
               "type": "doc",
@@ -468,6 +502,10 @@
         {
           "type": "doc",
           "id": "global-virtual-store"
+        },
+        {
+          "type": "doc",
+          "id": "versioning"
         }
       ]
     },

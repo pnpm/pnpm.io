@@ -74,6 +74,35 @@
       },
       {
         "type": "category",
+        "label": "Releasing",
+        "items": [
+          "cli/change",
+          "cli/lane",
+          "cli/version",
+          "cli/publish",
+          "cli/stage",
+          "cli/pack",
+          "cli/dist-tag",
+          "cli/deprecate",
+          "cli/unpublish"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Registry",
+        "items": [
+          "cli/login",
+          "cli/logout",
+          "cli/whoami",
+          "cli/access",
+          "cli/owner",
+          "cli/team",
+          "cli/star",
+          "cli/ping"
+        ]
+      },
+      {
+        "type": "category",
         "label": "Manage environments",
         "items": [
           "cli/runtime",
@@ -94,22 +123,9 @@
         "type": "category",
         "label": "Misc.",
         "items": [
-          "cli/login",
-          "cli/logout",
-          "cli/whoami",
           "cli/self-update",
           "cli/with",
-          "cli/version",
-          "cli/publish",
-          "cli/stage",
-          "cli/pack",
           "cli/pack-app",
-          "cli/deprecate",
-          "cli/unpublish",
-          "cli/dist-tag",
-          "cli/owner",
-          "cli/star",
-          "cli/ping",
           "cli/recursive",
           "cli/store",
           "cli/root",
@@ -118,6 +134,7 @@
           "cli/setup",
           "cli/init",
           "cli/deploy",
+          "cli/doctor",
           "cli/pm",
           "cli/pkg",
           "cli/repo",
@@ -144,7 +161,8 @@
       "git_branch_lockfiles",
       "finders",
       "global-packages",
-      "global-virtual-store"
+      "global-virtual-store",
+      "versioning"
     ],
     "Recipes": [
       "using-changesets",

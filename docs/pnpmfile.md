@@ -344,7 +344,7 @@ Determines whether this fetcher can fetch a package with the given resolution.
 
 **Returns:** `true` if this fetcher can handle fetching this package, `false` otherwise.
 
-##### `fetch(cafs, resolution, opts, fetchers): FetchResult | Promise<FetchResult>`
+##### `fetch(cafs, resolution, opts, fetchers): FetchResult | CustomFetcherDelegation | Promise<FetchResult | CustomFetcherDelegation>`
 
 Fetches package files and returns metadata about the fetched package.
 
@@ -363,15 +363,43 @@ Fetches package files and returns metadata about the fetched package.
   - `directory` - Fetcher for local directories
   - `git` - Fetcher for git repositories
 
-**Returns:** Object with:
+**Returns:** either a fetch result, or a [delegation envelope](#delegating-to-the-built-in-fetchers).
+
+A fetch result is an object with:
 - `filesIndex` - Map of relative file paths to their physical locations. For remote packages, these are paths in pnpm's content-addressable store (CAFS). For local packages (when `local: true`), these are absolute paths to files on disk.
 - `manifest` - Optional. The package.json from the fetched package. If not provided, pnpm will read it from disk when needed. Providing it avoids an extra file I/O operation and is recommended when you have the manifest data readily available (e.g., already parsed during fetch).
 - `requiresBuild` - Boolean indicating whether the package has build scripts that need to be executed. Set to `true` if the package has `preinstall`, `install`, or `postinstall` scripts, or contains `binding.gyp` or `.hooks/` files. Standard fetchers determine this automatically using the manifest and file list.
 - `local` - Optional. Set to `true` to load the package directly from disk without copying to pnpm's store. When `true`, `filesIndex` should contain absolute paths to files on disk, and pnpm will hardlink them to `node_modules` instead of copying. This is how the directory fetcher handles local dependencies (e.g., `file:../my-package`).
 
-:::tip Delegating to Standard Fetchers
+#### Delegating to the built-in fetchers
 
-Custom fetchers can delegate to pnpm's built-in fetchers using the `fetchers` parameter.
+Added in: v11.12.0
+
+Rather than fetching the package itself, a custom fetcher may hand the work back to pnpm. There are two ways to do this.
+
+**Return a `{ delegate }` envelope.** Instead of a fetch result, return an object with a single `delegate` key holding the resolution pnpm should fetch instead. pnpm rewrites the package's resolution to that shape and runs its built-in fetch path on it:
+
+```js title=".pnpmfile.cjs"
+const customFetcher = {
+  canFetch: (pkgId, resolution) => resolution.type === 'custom:url',
+  fetch: (cafs, resolution) => ({
+    delegate: {
+      tarball: resolution.customUrl,
+      integrity: resolution.integrity,
+    },
+  }),
+}
+
+module.exports = { fetchers: [customFetcher] }
+```
+
+The delegated resolution must be a complete, fetchable shape (for example `{ tarball, integrity }`). Delegation is single-step: a `delegate` that is itself custom-typed is rejected.
+
+**Call `fetchers.*` directly.** The `fetchers` argument gives you pnpm's standard fetchers, so you can transform the resolution and invoke one yourself.
+
+:::tip Prefer the envelope for portability
+
+The `{ delegate }` envelope is the only delegation form that works in both pnpm and [pacquet](https://github.com/pnpm/pnpm/tree/main/pacquet) (the Rust port of pnpm). pacquet invokes pnpmfile fetchers over IPC, where `cafs` and `fetchers` cannot exist and both arrive as `null`. A fetcher that should run on either stack must return the envelope rather than calling `fetchers.*`.
 
 :::
 

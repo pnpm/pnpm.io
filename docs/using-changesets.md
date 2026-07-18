@@ -3,6 +3,12 @@ id: using-changesets
 title: Using Changesets with pnpm
 ---
 
+:::tip
+
+Since v11.13.0, pnpm can manage workspace releases natively, without the Changesets CLI. It reads and writes the same `.changeset/*.md` files. See [Release management](./versioning.md).
+
+:::
+
 :::note
 
 At the time of writing this documentation, the latest pnpm version was
