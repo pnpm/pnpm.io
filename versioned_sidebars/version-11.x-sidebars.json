@@ -295,7 +295,15 @@
             },
             {
               "type": "doc",
+              "id": "cli/change"
+            },
+            {
+              "type": "doc",
               "id": "cli/version"
+            },
+            {
+              "type": "doc",
+              "id": "cli/lane"
             },
             {
               "type": "doc",
@@ -328,6 +336,14 @@
             {
               "type": "doc",
               "id": "cli/owner"
+            },
+            {
+              "type": "doc",
+              "id": "cli/access"
+            },
+            {
+              "type": "doc",
+              "id": "cli/team"
             },
             {
               "type": "doc",
@@ -468,6 +484,10 @@
         {
           "type": "doc",
           "id": "global-virtual-store"
+        },
+        {
+          "type": "doc",
+          "id": "versioning"
         }
       ]
     },

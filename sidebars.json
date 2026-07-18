@@ -99,7 +99,9 @@
           "cli/whoami",
           "cli/self-update",
           "cli/with",
+          "cli/change",
           "cli/version",
+          "cli/lane",
           "cli/publish",
           "cli/stage",
           "cli/pack",
@@ -108,6 +110,8 @@
           "cli/unpublish",
           "cli/dist-tag",
           "cli/owner",
+          "cli/access",
+          "cli/team",
           "cli/star",
           "cli/ping",
           "cli/recursive",
@@ -118,6 +122,7 @@
           "cli/setup",
           "cli/init",
           "cli/deploy",
+          "cli/doctor",
           "cli/pm",
           "cli/pkg",
           "cli/repo",
@@ -144,7 +149,8 @@
       "git_branch_lockfiles",
       "finders",
       "global-packages",
-      "global-virtual-store"
+      "global-virtual-store",
+      "versioning"
     ],
     "Recipes": [
       "using-changesets",

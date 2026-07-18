@@ -77,6 +77,34 @@ overrides:
 
 This feature is especially useful with `optionalDependencies`, where most optional packages can be safely skipped.
 
+#### Convergence overrides
+
+Added in: v11.13.0
+
+A selector with an **empty range** — `"pkg@"` — is a convergence override. Unlike a regular override, which rewrites every matching edge unconditionally, a convergence override rewrites a dependency edge only when its version satisfies the range that edge declares:
+
+```yaml title="pnpm-workspace.yaml"
+overrides:
+  "form-data@": 4.0.6
+```
+
+With the above, a dependency that declares `form-data: "^4.0.5"` is pinned to `4.0.6`, while one that declares `^3.0.0` keeps its own resolution. This lets compatible consumers converge on a single version — now and for any dependent added in the future — without forcing an incompatible version on the rest of the graph.
+
+Rules:
+
+- The value must be an **exact version**. A range, a dist-tag, or a `-` removal fails with `ERR_PNPM_INVALID_CONVERGENCE_OVERRIDE`. A `catalog:` reference is allowed as long as the catalog entry resolves to an exact version.
+- Only plain semver edges participate. Edges declared with `workspace:`, `catalog:`, `npm:`, a dist-tag, or a git/URL specifier have no meaningful "satisfies" relation and are left untouched.
+- Convergence overrides cannot be combined with a parent selector: `"parent>pkg@"` is rejected.
+- A regular override always wins over a convergence override for the same edge.
+
+When a full resolution finds that every declared range also admits a newer version, pnpm warns that the override is stale and names the version to converge on instead.
+
+:::note
+
+Before v11.13.0, an empty range in an override selector was undocumented and behaved like a bare (unscoped) override.
+
+:::
+
 #### Overriding peer dependencies
 
 Overrides also apply to `peerDependencies`. The behavior depends on the type of version specifier used in the override:
@@ -374,6 +402,8 @@ registries:
   "@internal": https://nexus.corp.com/
 ```
 
+Since v11.11.0, this setting may also be defined in the [global configuration file](./cli/config.md) (`config.yaml`), which is useful for registries that should apply to every project on the machine rather than to a single repository.
+
 ### namedRegistries
 
 Added in: v11.1.0
@@ -394,6 +424,8 @@ namedRegistries:
 The `gh:` alias is built in and points at the [GitHub Packages npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry) (`https://npm.pkg.github.com/`) by default. Override it under `namedRegistries` for GitHub Enterprise Server.
 
 Authentication is picked up from the existing per-URL `.npmrc` entries (e.g. `//npm.pkg.github.com/:_authToken=...`), so no separate auth mechanism is required.
+
+Since v11.11.0, this setting may also be defined in the [global configuration file](./cli/config.md) (`config.yaml`), so an alias like `work:` can be shared across every project on the machine.
 
 ## Dependency Hoisting Settings
 
@@ -1357,6 +1389,20 @@ allowBuilds:
   nx@21.6.0: false
 ```
 
+**Git-hosted packages:** a package name on its own never approves builds for a git or tarball dependency — the name alone does not identify the artifact. Approve one either by its exact resolved path (including the commit) or, since v11.11.0, by its repository URL:
+
+```yaml
+allowBuilds:
+  # Approves any commit from this repository
+  'foo@git+ssh://git@example.com/org/foo.git': true
+  # Approves only this exact commit
+  'bar@git+https://github.com/org/bar.git#abc123': true
+```
+
+The repository form lets a trusted git dependency keep running its build scripts across branch updates without re-approving each new commit. The key is the package name, followed by `@` and the git URL, with no `#<ref>` suffix. Matching is exact, so `git+ssh://` and `git+https://` URLs for the same repository are separate keys.
+
+Denials by package name are not restricted this way: `foo: false` blocks `foo` whether it comes from the registry or from git.
+
 **Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and are treated as unreviewed. By default, an error is printed ([`strictDepBuilds`](#strictdepbuilds) defaults to `true`). If `strictDepBuilds` is set to `false`, a warning is printed instead.
 
 During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](./cli/add.md) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
@@ -1458,6 +1504,106 @@ nodeDownloadMirrors:
   release: https://npmmirror.com/mirrors/node/
   rc: https://npmmirror.com/mirrors/node-rc/
   nightly: https://npmmirror.com/mirrors/node-nightly/
+```
+
+## Versioning Settings
+
+Added in: v11.13.0
+
+These settings configure pnpm's native workspace release management, driven by [`pnpm change`](./cli/change.md) and the bare [`pnpm version -r`](./cli/version.md#recursive-releases). See [Release management](./versioning.md) for the workflow they belong to.
+
+Where two workspace projects publish the same name, a project may be referenced by its `./`-prefixed workspace-relative directory instead of its name in `versioning.fixed`, `versioning.ignore`, and the keys of `versioning.lanes`.
+
+### versioning.fixed
+
+* Default: **[]**
+* Type: **string[][]**
+
+Groups of packages that always release together at one shared version. The shared version is the highest current version in the group, bumped by the largest bump any member needs.
+
+```yaml title="pnpm-workspace.yaml"
+versioning:
+  fixed:
+    - ['@example/cli', '@example/napi']
+```
+
+A fixed group must move between lanes together, and must sit entirely inside or entirely outside an epic.
+
+### versioning.ignore
+
+* Default: **[]**
+* Type: **string[]**
+
+Packages permanently excluded from versioning and dependent propagation. A change intent that requests a real bump for an ignored package fails.
+
+```yaml title="pnpm-workspace.yaml"
+versioning:
+  ignore:
+    - '@example/internal'
+```
+
+### versioning.maxBump
+
+* Default: **undefined** (no cap)
+* Type: **'patch'**, **'minor'**, **'major'**
+
+Caps the bump a release from the current checkout may apply. It is enforced on the final assembled release plan, after dependent propagation and fixed-group resolution, so a patch-only maintenance branch cannot accidentally ship a minor.
+
+```yaml title="pnpm-workspace.yaml"
+versioning:
+  maxBump: patch
+```
+
+### versioning.lanes
+
+* Default: **{}**
+* Type: **Record&lt;string, string&gt;**
+
+Maps a package to the release lane it is on. A lane is a parallel release track that emits `X.Y.Z-<lane>.N` prereleases; every unlisted package is on the reserved default lane, `main`, and releases stable versions.
+
+```yaml title="pnpm-workspace.yaml"
+versioning:
+  lanes:
+    '@example/cli': alpha
+```
+
+Lane names may contain only alphanumerics and hyphens, and cannot be purely numeric. `main` is reserved and cannot be assigned — remove the entry instead, or use [`pnpm lane main --filter <pkg>`](./cli/lane.md).
+
+### versioning.epics
+
+* Default: **[]**
+* Type: **Array&lt;\{ lead: string, packages: string[] \}&gt;**
+
+Ties a group of member packages to a lead package, constraining every member's major version to a band derived from the lead's major: while the lead is on major `M`, members live in `M*100` … `M*100+99`.
+
+```yaml title="pnpm-workspace.yaml"
+versioning:
+  epics:
+    - lead: '@example/app'
+      packages:
+        - './packages/**'
+        - '!./packages/private-*'
+```
+
+`lead` is a package name or a `./`-prefixed workspace directory. `packages` is matched with pnpm's package selectors — name globs, `./`-prefixed directory globs, and `!`-prefixed negations — evaluated in order, last match wins. A package can belong to at most one epic.
+
+See [Epics](./versioning.md#epics) for how the band is enforced and re-based.
+
+### versioning.changelog.storage
+
+* Default: **'registry'**
+* Type: **'registry'**, **'repository'**
+
+Where release changelogs live.
+
+With `registry`, no `CHANGELOG.md` is committed: each release's section is composed at publish time and packed into the published tarball on top of the previously published version's changelog.
+
+With `repository`, a `CHANGELOG.md` is committed in every package.
+
+```yaml title="pnpm-workspace.yaml"
+versioning:
+  changelog:
+    storage: repository
 ```
 
 ## Other Settings
