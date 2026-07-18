@@ -145,21 +145,30 @@ a hosted registry.
 
 Publishing a version that already exists is a `409`. On the S3 backend, where
 several stateless replicas can write to one bucket, concurrent writers are
-resolved by conditional writes rather than last-write-wins: a packument update
-that loses its race is retried, and a write that repeatedly conflicts surfaces
-as a `409` instead of silently discarding another writer's update. See
+resolved by conditional writes rather than last-write-wins. A publish or
+partial unpublish computed from a packument that another replica has since
+changed is rejected with a `409`; a dist-tag write instead replays its mutation
+against the fresh packument, and reports `409` only if it keeps losing. Either
+way no writer's update is silently discarded. See
 [Storage backends](storage.md#concurrent-writers).
 
 ## Staged publishing endpoints
 
 These implement the server half of [`pnpm stage`](/cli/stage) — npm's
-[staged publishing](https://docs.npmjs.com/staged-publishing) workflow. A
-staged version is validated and authorized exactly like a direct publish, but
-held back instead of made visible: it isn't installable, and nothing is written
-under the package's name until it is approved. That lets CI upload a release
-without a human present and defer proof-of-presence (2FA) to whoever approves
-it later, and it doubles as a review gate — the held tarball can be downloaded
-and audited before it goes live.
+[staged publishing](https://docs.npmjs.com/staged-publishing) workflow, where a
+version is uploaded first and promoted later. A staged version is held back
+rather than made visible: it isn't installable, and nothing is written under
+the package's name until it is approved. That lets an unattended CI job upload
+a release for a human to promote, and it doubles as a review gate — the held
+tarball can be downloaded and audited before it goes live.
+
+The two phases check different things. **Staging** validates the publish
+document and requires the `publish` right on the package, exactly as a direct
+publish does, but does not check whether the version already exists.
+**Approval** re-checks the `publish` right against the rules as they stand
+then, and is where a version conflict is caught. pnpr raises no
+one-time-password challenge of its own at either point — the `--otp` flag on
+`pnpm stage approve` is for registries that do.
 
 A stage id is a v4 UUID drawn from the OS CSPRNG, so the id itself acts as an
 unguessable handle. Held records live under a reserved `.staged/` namespace in
@@ -179,11 +188,8 @@ visible through the same base it was created with — one staged through
 Each record carries `id`, `packageName`, `version`, `tag`, `createdAt`,
 `actor`, `actorType`, and `shasum`.
 
-Version conflicts are deliberately **not** checked at staging time — they're
-checked at approval, against the registry as it stands then. Approving a
-version that landed in the meantime returns `409` and **leaves the record in
-place**, so it can still be inspected or rejected. Access rules are likewise
-re-evaluated at approval, not frozen at staging time.
+Approving a version that landed meanwhile returns `409` and **leaves the record
+in place**, so it can still be inspected or rejected.
 
 `GET /-/stage` filters rather than refuses: it always answers `200`, listing
 only the records the caller could publish, so an anonymous caller sees an empty
