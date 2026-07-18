@@ -70,7 +70,6 @@ const docusaurusConfig = {
           "path": "./docs",
           "routeBasePath": "/",
           "sidebarPath": path.join(__dirname, "sidebars.json"),
-          includeCurrentVersion: false,
           lastVersion: lastDocsVersion,
         },
         "gtag": {
