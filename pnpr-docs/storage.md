@@ -6,7 +6,9 @@ title: Storage backends (S3 / R2)
 pnpr keeps two kinds of data:
 
 - **Hosted** — the source of truth: packages published to this server plus
-  anything served in static mode. Lives under `storage`.
+  anything served in static mode. Lives under `storage`. Packages awaiting
+  approval through [staged publishing](endpoints.md#staged-publishing-endpoints)
+  are held here too, under a reserved `.staged/` namespace.
 - **Cache** — the disposable mirror of upstream registries plus the resolver
   cache, lockfile-verdict cache, and S3 upload staging scratch. Lives under
   `cache` (defaults to `<storage>/.pnpr-cache`).
@@ -49,6 +51,29 @@ s3:
 | `secretAccessKey` | no | Secret key. Falls back to `AWS_SECRET_ACCESS_KEY` when unset. |
 | `forcePathStyle` | no | Use path-style addressing (`endpoint/bucket/key`) instead of virtual-hosted (`bucket.endpoint/key`). MinIO typically needs `true`; AWS and R2 work with the default. |
 | `allowHttp` | no | Allow plain-HTTP endpoints — needed for a local MinIO over `http://`. Defaults to HTTPS-only. |
+
+## Concurrent writers {#concurrent-writers}
+
+Several stateless pnpr replicas can share one bucket. Because a replica's
+in-process package lock only serializes that replica, writes to the hosted
+store are made safe across replicas at the object-store level rather than by
+locking:
+
+- **Packument updates** — publish, partial unpublish, and dist-tag writes read
+  the packument together with its object-store version and write back
+  conditionally, so an update computed from a stale copy is rejected instead of
+  overwriting a newer one. Dist-tag writes retry on conflict, since their
+  mutation can simply be replayed against the fresh packument. A write that
+  keeps losing surfaces as an HTTP `409` rather than silently discarding
+  another writer's update.
+- **Tarballs** — finalizing a tarball is compare-and-swap. A byte-identical
+  object is tolerated, but an object with different bytes left by a concurrent
+  publisher of the same `name@version` is never overwritten; the losing publish
+  gets a `409` before it writes any packument.
+
+This applies to the S3 backend. The local filesystem backend keeps its
+single-process behavior, since the shared-store race is specific to replicas
+sharing one object store.
 
 ## A complete Cloudflare R2 example
 

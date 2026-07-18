@@ -6,10 +6,11 @@ title: HTTP endpoints
 pnpr exposes a set of always-on endpoints (health, user accounts, and tokens)
 plus two surfaces:
 
-- **Registry surface** - npm-compatible package and publish endpoints. Served
-  exactly when at least one registry is declared under
+- **Registry surface** - npm-compatible package, publish, staged-publish, and
+  team endpoints. Served exactly when at least one registry is declared under
   [`registries:`](configuration.md#registries-and-defaultregistry);
-  `--disable-registry` turns it off for one process.
+  `--disable-registry` turns it off for one process. On a resolver-only server
+  these routes aren't mounted at all — they answer `404`, not `403`.
 - **Resolver surface** (`resolver.enabled`) - pnpr install-accelerator
   endpoints under `/-/pnpr`.
 
@@ -141,6 +142,80 @@ a hosted registry.
 | `DELETE` | `/@scope/{name}/-/{filename}/-rev/{rev}` | Remove a scoped tarball. Requires `unpublish`. |
 | `PUT` | `/-/package/{package}/dist-tags/{tag}` | Add or update a dist-tag. Body is a JSON string version, for example `"1.0.0"`. Requires `publish`. |
 | `DELETE` | `/-/package/{package}/dist-tags/{tag}` | Remove a dist-tag. Requires `publish`. |
+
+Publishing a version that already exists is a `409`. On the S3 backend, where
+several stateless replicas can write to one bucket, concurrent writers are
+resolved by conditional writes rather than last-write-wins: a packument update
+that loses its race is retried, and a write that repeatedly conflicts surfaces
+as a `409` instead of silently discarding another writer's update. See
+[Storage backends](storage.md#concurrent-writers).
+
+## Staged publishing endpoints
+
+These implement the server half of [`pnpm stage`](/cli/stage) — npm's
+[staged publishing](https://docs.npmjs.com/staged-publishing) workflow. A
+staged version is validated and authorized exactly like a direct publish, but
+held back instead of made visible: it isn't installable, and nothing is written
+under the package's name until it is approved. That lets CI upload a release
+without a human present and defer proof-of-presence (2FA) to whoever approves
+it later, and it doubles as a review gate — the held tarball can be downloaded
+and audited before it goes live.
+
+A stage id is a v4 UUID drawn from the OS CSPRNG, so the id itself acts as an
+unguessable handle. Held records live under a reserved `.staged/` namespace in
+the hosted store (both the filesystem and S3 backends), and a record is only
+visible through the same base it was created with — one staged through
+`/~<name>/` is not addressable on the path-less base, and vice versa.
+
+| Method | Path | Description |
+| --- | --- | --- |
+| `POST` | `/-/stage/package/{name}` | Stage a publish. Body is the same npm publish document a `PUT /{name}` publish carries, `_attachments` included. Use a percent-encoded scoped name, for example `@scope%2Fname`. Returns `201` with `{"ok":true,"stageId":"<uuid>"}`. Requires `publish`. |
+| `GET` | `/-/stage` | List held records, oldest first. Accepts `page` (zero-based, defaults to `0`), `perPage` (defaults to `100`, clamped to `1`–`100`), and `package` (exact name filter). Returns `{"items":[...],"page":...,"perPage":...,"total":...}`. |
+| `GET` | `/-/stage/{id}` | One held record. Requires `publish` on the record's package. |
+| `GET` | `/-/stage/{id}/tarball` | The held tarball as `application/octet-stream`, for inspection before approval. Requires `publish`. |
+| `POST` | `/-/stage/{id}/approve` | Publish the held document and drop the record. Empty body; returns `201` with `{"ok":true}`. Requires `publish`. |
+| `DELETE` | `/-/stage/{id}` | Reject: delete the record and its tarball without publishing. Returns `204`. Requires `publish`. |
+
+Each record carries `id`, `packageName`, `version`, `tag`, `createdAt`,
+`actor`, `actorType`, and `shasum`.
+
+Version conflicts are deliberately **not** checked at staging time — they're
+checked at approval, against the registry as it stands then. Approving a
+version that landed in the meantime returns `409` and **leaves the record in
+place**, so it can still be inspected or rejected. Access rules are likewise
+re-evaluated at approval, not frozen at staging time.
+
+`GET /-/stage` filters rather than refuses: it always answers `200`, listing
+only the records the caller could publish, so an anonymous caller sees an empty
+list instead of a `401`. Every other stage endpoint denies loudly — `401` for
+anonymous callers, `403` for authenticated ones — matching the publish
+endpoint rather than masking as a `404`.
+
+## Team endpoints
+
+pnpr serves npm's team-management read endpoints over the teams declared in
+its config, in the shape [`pnpm team`](/cli/team) consumes. Teams are
+[registry-scoped configuration](configuration.md#teams), so these are
+**read-only views**: the listings are served, and every mutation is refused.
+
+| Method | Path | Description |
+| --- | --- | --- |
+| `GET` | `/-/org/{scope}/team` | Teams declared by the registry that serves `@{scope}`. Returns a JSON array of `{"name": ...}`. The scope may be written with or without a leading `@`. |
+| `GET` | `/-/team/{scope}/{team}/user` | Members of one team, as a JSON array of `{"name": ...}`. |
+| `PUT` | `/-/org/{scope}/team` | Create a team — always `403`. |
+| `DELETE` | `/-/team/{scope}/{team}` | Destroy a team — always `403`. |
+| `PUT` | `/-/team/{scope}/{team}/user` | Add a member — always `403`. |
+| `DELETE` | `/-/team/{scope}/{team}/user` | Remove a member — always `403`. |
+
+A refused mutation carries the error code `teams_config_managed`: teams are
+declared in the pnpr configuration, so changing one means updating the config,
+not calling the API.
+
+Reads resolve `@{scope}` to a hosted registry the same way a package read in
+that scope would, then check that registry's default `access:` list. Unlike
+the stage endpoints, a denial here is **masked as `404`** — team and member
+names must not become an existence probe for a private registry. A registry
+that declares no teams returns an empty array.
 
 ## User and token endpoints
 
