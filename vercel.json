@@ -48,7 +48,12 @@
     },
     {
       "source": "/next/cli/dlx",
-      "destination": "/next/cli/pnx",
+      "destination": "/cli/pnx",
+      "permanent": true
+    },
+    {
+      "source": "/next/:splat*",
+      "destination": "/:splat*",
       "permanent": true
     }
   ]
