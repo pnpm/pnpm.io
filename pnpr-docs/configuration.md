@@ -118,11 +118,35 @@ per specificity tier can match a name, so the winning rule is unique and
 reordering the map (by a formatter, or a YAML round-trip) can never change
 which rule applies. A duplicate key is a config error.
 
-Each value can set `access`, `publish`, and `unpublish`. Common values are
-`$all` (anyone), `$authenticated` (logged-in users), and `$anonymous`; a list
-can also name users and [groups](#groups). When a field is omitted, `access`
-falls back to the registry-level `access:` default, `publish` defaults to
-`$authenticated`, and `unpublish` defaults to nobody.
+Each value can set `access`, `publish`, and `unpublish`. When a field is
+omitted, `access` falls back to the registry-level `access:` default, `publish`
+defaults to `$authenticated`, and `unpublish` defaults to nobody.
+
+Every one of those fields takes either a single access token or a YAML list of
+them, and the grammar is deliberately small:
+
+| Token | Admits |
+| --- | --- |
+| `$all` | Anyone, authenticated or not. |
+| `$authenticated` | Any logged-in user. |
+| `$anonymous` | Callers with no credentials. |
+| `team:<name>` | The members of a [team](#teams) declared on this registry. |
+| `alice` | Exactly that username. Any bare token is a username. |
+
+Tokens are validated at config load and every near-miss is rejected loudly,
+rather than being read as a username that happens to admit nobody:
+
+- `$` is reserved for the three built-ins — any other `$token` is an error.
+- `all`, `authenticated`, `anonymous`, and `@`-prefixed spellings like `@all`
+  are errors suggesting the `$` form.
+- `team:` is the only typed prefix; any other `<kind>:` prefix is an error.
+  (htpasswd forbids `:` in usernames, which is what frees the character.)
+- `team:<name>` must resolve to a team the **same registry** declares — an
+  undeclared name is a config error, so a typo can't silently grant to nobody.
+- One entry is one token: an entry containing whitespace is an error, so write
+  `[alice, bob]` rather than `alice bob`.
+- The empty string is an error. To admit nobody, write `[]`; to take the
+  default, omit the field.
 
 ### Hosted registries
 
@@ -145,7 +169,8 @@ registries:
 | Key | Description |
 | --- | --- |
 | `org` | Storage namespace for this registry's packages, so two hosted registries can hold the same `name@version` without colliding. Omitted means the flat `storage` root. Must be a single path-safe segment. |
-| `access` | The default read access for `packages:` entries that don't set their own. Defaults to `$all`. |
+| `access` | The default read access for `packages:` entries that don't set their own. Defaults to `$all`. This is the only access field settable registry-wide — `publish` and `unpublish` belong to `packages:` entries. |
+| `teams` | Named user sets for this registry, referenced from its access lists as `team:<name>` — see [Teams](#teams). |
 | `packages` | The registry's namespace and per-package rules — see [above](#the-packages-map). Only these names can be served from or published to this registry. |
 
 Two hosted registries cannot share an `org` namespace — that's rejected at
@@ -190,11 +215,12 @@ registries:
 | `auth` | Server-owned credential for a private origin. `type` is `bearer` or `basic`; provide `token`, or `token_env: true` to read `NPM_TOKEN`, or `token_env: NAME` to read a named environment variable. |
 | `headers` | Extra request headers to send upstream. If `headers.Authorization` is set, it overrides the `auth`-derived header. |
 | `access` | Which pnpr users may reach this registry at `/~<name>/` (and resolve through it). Required for a non-`public` upstream. |
+| `teams` | Named user sets for this registry, referenced from its access lists as `team:<name>` — see [Teams](#teams). |
 | `packages` | The names this upstream serves through pnpr — see [above](#the-packages-map). |
 | `maxage` | Per-registry packument freshness window. Overrides pnpr's global packument TTL / `--packument-ttl-secs` for this registry. |
 | `timeout` | Per-request upstream deadline. Defaults to `30s`. |
-| `max_fails` | Consecutive failures before the upstream circuit breaker opens. Defaults to `2`; `0` disables the breaker. |
-| `fail_timeout` | Cooldown before an open circuit is probed again. Defaults to `5m`. |
+| `maxFails` | Consecutive failures before the upstream circuit breaker opens. Defaults to `2`; `0` disables the breaker. |
+| `failTimeout` | Cooldown before an open circuit is probed again. Defaults to `5m`. |
 | `cache` | Whether tarballs fetched from this registry are cached locally. Defaults to `true`; `false` streams verified tarballs through a temporary file. |
 
 Interval values accept strings such as `30s`, `5m`, `1h30m`, or a bare number
@@ -255,17 +281,13 @@ start** (and fails a config reload) on an invalid router:
   must be hosted or upstream registries — no nesting, no cycles);
 - a router with no sources.
 
-## `groups`
+## Teams {#teams}
 
-Static group/team memberships. Every access list accepts group names anywhere
-it accepts usernames — the per-package `packages:` rules and the
-registry-level `access:` lists alike:
+A team is a named list of usernames, declared on the registry that uses it and
+referenced from that registry's access lists as `team:<name>` — in the
+registry-level `access:` default and the per-package `packages:` rules alike:
 
 ```yaml
-groups:
-  platform: alice bob
-  frontend: [carol, dave]
-
 registries:
   corp:
     type: upstream
@@ -273,8 +295,45 @@ registries:
     auth:
       type: bearer
       token_env: CORP_NPM_TOKEN
-    access: platform
+    teams:
+      platform: [alice, bob]
+      frontend: [carol, dave]
+    access: team:platform
+    packages:
+      '@corp/ui':
+        access: [team:platform, team:frontend]
 ```
+
+Teams are **registry-scoped**: a registry can only reference teams it declares
+itself, never another registry's. To share one roster between registries, use a
+YAML anchor:
+
+```yaml
+registries:
+  private:
+    type: hosted
+    teams: &corpTeams
+      platform: [alice, bob]
+    access: team:platform
+
+  corp:
+    type: upstream
+    url: https://npm.corp.example.com/
+    teams: *corpTeams
+    access: team:platform
+```
+
+A team's members are plain usernames. A team cannot contain another team — an
+entry with a `:` in it is a config error.
+
+A team is only ever reached through the `team:` prefix: a bare `platform` in an
+access list names the **user** `platform`, even when a team of that name
+exists. Keeping the two apart means someone who can register a username can
+never inherit a team's grants by choosing its name.
+
+Because teams live in the config, they are served read-only over npm's
+team endpoints, and any attempt to create or modify one through the API is
+refused — see [Team endpoints](endpoints.md#team-endpoints).
 
 ## `auth`
 
