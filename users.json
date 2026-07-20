@@ -381,5 +381,12 @@
     "infoLink": "https://nx.dev",
     "pinned": false,
     "width": 150
+  },
+  {
+    "caption": "Fluxer",
+    "image": "/img/users/fluxer.svg",
+    "infoLink": "https://fluxer.app",
+    "pinned": false,
+    "width": 150
   }
 ]
