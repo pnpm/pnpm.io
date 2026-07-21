@@ -38,4 +38,4 @@ The following changes are not automatable and need human attention:
 - **`pnpm server`** has been removed with no replacement.
 - **Script names shadow built-in commands**. If your `package.json` defines a script named `clean`, `setup`, `deploy`, or `rebuild`, `pnpm <name>` now runs the script instead of the built-in command. Use [`pnpm pm <name>`](./cli/pm.md) to force the built-in.
 
-For the full list of breaking changes, see the [v11 changelog](https://github.com/pnpm/pnpm/blob/main/pnpm/CHANGELOG.md).
+For the full list of breaking changes, see the [v11 changelog](https://github.com/pnpm/pnpm/blob/main/pnpm11/CHANGELOG.md).
