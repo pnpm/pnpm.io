@@ -1,0 +1,13 @@
+zkochan:
+  name: Zoltan Kochan
+  title: Lead maintainer of pnpm
+  url: https://x.com/ZoltanKochan
+  image_url: "https://pbs.twimg.com/profile_images/2005604765028245504/SudRBVMH_400x400.jpg"
+  socials:
+    x: zkochan
+    github: zkochan
+ryansobol:
+  name: Ryan Sobol
+  title: Principal Software Engineer at the Seattle Times
+  socials:
+    github: ryansobol

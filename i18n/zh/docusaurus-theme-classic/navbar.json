@@ -1,0 +1,46 @@
+{
+  "title": {
+    "message": "pnpm",
+    "description": "The title in the navbar"
+  },
+  "item.label.Docs": {
+    "message": "文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.FAQ": {
+    "message": "常见问答（FAQ）",
+    "description": "Navbar item with label FAQ"
+  },
+  "item.label.Benchmarks": {
+    "message": "基准测试",
+    "description": "Navbar item with label Benchmarks"
+  },
+  "item.label.Community": {
+    "message": "社区",
+    "description": "Navbar item with label Community"
+  },
+  "item.label.More": {
+    "message": "更多",
+    "description": "Navbar item with label More"
+  },
+  "item.label.🧡 Sponsor Us": {
+    "message": "🧡 赞助我们",
+    "description": "Navbar item with label 🧡 Sponsor Us"
+  },
+  "item.label.Open Collective": {
+    "message": "Open Collective",
+    "description": "Navbar item with label Open Collective"
+  },
+  "item.label.GitHub Sponsors": {
+    "message": "GitHub 赞助者",
+    "description": "Navbar item with label GitHub Sponsors"
+  },
+  "item.label.Crypto Donations": {
+    "message": "加密货币捐赠",
+    "description": "Navbar item with label Crypto Donations"
+  }
+}
