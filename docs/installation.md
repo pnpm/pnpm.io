@@ -126,7 +126,7 @@ We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`.
 - [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. On Linux, glibc and musl builds are both provided and the right one is selected automatically; the glibc build requires glibc 2.27 or newer and `libatomic.so.1` (see [Linux runtime requirements](#on-posix-systems) for details). **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
 
 ```sh
-npx pnpm@latest-11 dlx @pnpm/exe@latest-11 setup
+npx pnpm@latest-11 dlx --package=@pnpm/exe@latest-11 pnpm setup
 ```
 
 or
