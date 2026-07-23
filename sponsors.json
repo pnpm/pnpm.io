@@ -65,6 +65,12 @@
       "logo": "nx.svg",
       "url": "https://nx.dev/",
       "width": 50
+    },
+    {
+      "name": "Latitude",
+      "logo": "latitude_min.svg",
+      "url": "https://latitude.so/",
+      "width": 160
     }
   ],
   "silver": [
