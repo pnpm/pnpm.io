@@ -60,11 +60,20 @@ Or let pnpm install Node.js automatically from [`devEngines.runtime`](./package_
 ```dockerfile
 FROM ghcr.io/pnpm/pnpm:11
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
 CMD ["pnpm", "start"]
 ```
+
+:::note
+
+`pnpm-workspace.yaml` is the [per-project configuration file](./settings.md), so it
+must be copied in before `pnpm install` runs. Without it the install still succeeds,
+but silently ignores every setting it contains — `nodeLinker`, `hoistPattern`,
+`overrides`, `allowBuilds` and so on. Omit it if your project does not have one.
+
+:::
 
 ### When to use this image
 
