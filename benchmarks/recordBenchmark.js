@@ -20,6 +20,7 @@ export default async function (pm, fixture, opts) {
   if (prevResults.length >= limitRuns) return prevResults
 
   const newResults = await benchmark(pm, fixture, {
+    fixtureDir: opts.fixtureDir,
     hasNodeModules: opts.hasNodeModules,
     managersDir: opts.managersDir,
   })
