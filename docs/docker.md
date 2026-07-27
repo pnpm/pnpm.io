@@ -68,10 +68,12 @@ CMD ["pnpm", "start"]
 
 :::note
 
-`pnpm-workspace.yaml` is the [per-project configuration file](./settings.md), so it
-must be copied in before `pnpm install` runs. Without it the install still succeeds,
-but silently ignores every setting it contains — `nodeLinker`, `hoistPattern`,
-`overrides`, `allowBuilds` and so on. Omit it if your project does not have one.
+If your project has a `pnpm-workspace.yaml` — the
+[per-project configuration file](./settings.md) — copy it in before `pnpm install`
+runs. Without it the install still succeeds, but silently ignores every setting the
+file contains: `nodeLinker`, `hoistPattern`, `overrides`, `allowBuilds` and so on. In
+a workspace it also declares `packages`, so the install resolves the wrong set of
+projects. Drop it from the `COPY` line only if your project does not have one.
 
 :::
 
