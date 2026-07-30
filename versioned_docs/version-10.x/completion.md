@@ -29,7 +29,7 @@ pnpm completion fish > ~/.config/fish/completions/pnpm.fish
 
 ## g-plane/pnpm-shell-completion
 
-[pnpm-shell-completion] is a shell plugin maintained by Pig Fang on Github.
+[pnpm-shell-completion] is a shell plugin maintained by Pig Fang on GitHub.
 
 Features:
 

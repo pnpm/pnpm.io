@@ -192,7 +192,7 @@ This hook is executed after reading and parsing the lockfiles of the project, bu
 
 ### `hooks.importPackage(destinationDir, options): Promise<string | undefined>`
 
-This hook allows to change how packages are written to `node_modules`. The return value is optional and states what method was used for importing the dependency, e.g.: clone, hardlink.
+This hook allows changing how packages are written to `node_modules`. The return value is optional and states what method was used for importing the dependency, e.g.: clone, hardlink.
 
 #### Arguments
 
