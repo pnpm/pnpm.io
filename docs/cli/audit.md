@@ -118,7 +118,7 @@ Only print advisories with severity greater than or equal to this level. Same as
 
 ### audit.ignore
 
-A list of GHSA codes that will be ignored by the [`pnpm audit`] command.
+A list of GHSA codes that will be ignored by the `pnpm audit` command.
 
 ```yaml
 audit:
@@ -136,5 +136,3 @@ Before v11.16.0, these settings were named `auditLevel` and `auditConfig.ignoreG
 Before v11, `auditConfig.ignoreCves` was used to filter advisories by CVE identifier. That setting is no longer recognized.
 
 :::
-
-[`pnpm audit`]: #

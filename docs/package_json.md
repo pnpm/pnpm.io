@@ -286,6 +286,7 @@ The following fields may be overridden:
 * cpu
 * os
 * `engines` (Added in v10.22.0)
+* [`name`](#publishconfigname) (Added in v11.18.0)
 
 To override a field, add the publish version of the field to `publishConfig`.
 

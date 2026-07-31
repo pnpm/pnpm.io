@@ -225,7 +225,7 @@ Added in: v11.17.0
 * Default: the `GITHUB_SERVER_URL` environment variable, falling back to **https://github.com**
 * Type: **URL**
 
-The base URL of the GitHub server that hosts the repositories of the GitHub Actions referenced by the workflow files (for example, a GitHub Enterprise Server). The URL must use the `https://` or `http://` protocol.
+The base URL of the GitHub server that hosts the repositories of the GitHub Actions referenced by the workflow files (for example, a GitHub Enterprise Server). The URL must use the `https://` or `http://` protocol. Only use `http://` for a trusted server on a trusted network: the refs used to pin actions to commit hashes are fetched over this URL, and unencrypted traffic can be tampered with.
 
 :::info
 

@@ -45,7 +45,7 @@ pnpm update "@babel/*" "\!@babel/core"
 
 Added in: v11.16.0
 
-`pnpm update` and [`pnpm outdated`](./outdated.md) can also check and update the GitHub Actions referenced by the repository's workflow files. This is opt-in for every command: pass [`--include-github-actions`](#--include-github-actions), or set [`update.githubActions`](../settings.md#updategithubactions) to `true` in `pnpm-workspace.yaml` to enable it by default.
+[`pnpm outdated`](./outdated.md) can check the GitHub Actions referenced by the repository's workflow files for updates, and `pnpm update` can update them. This is opt-in for every command: pass [`--include-github-actions`](#--include-github-actions), or set [`update.githubActions`](../settings.md#updategithubactions) to `true` in `pnpm-workspace.yaml` to enable it by default.
 
 Updated actions are pinned to exact commit hashes, with their release tags preserved in comments:
 
@@ -53,7 +53,7 @@ Updated actions are pinned to exact commit hashes, with their release tags prese
 - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 ```
 
-Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings.md#updategithubactionsserver).
+Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings.md#updategithubactionsserver) (added in v11.17.0).
 
 ## Options
 
