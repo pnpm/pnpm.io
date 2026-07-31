@@ -34,9 +34,85 @@ Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace
 
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
+## packages
+
+Besides settings, `pnpm-workspace.yaml` defines the root of the [workspace] and
+enables you to include / exclude directories from the workspace. If the
+`packages` field is omitted, only the root package is included in the workspace.
+
+For example:
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  # specify a package in a direct subdir of the root
+  - 'my-app'
+  # all packages in direct subdirs of packages/
+  - 'packages/*'
+  # all packages in subdirs of components/
+  - 'components/**'
+  # exclude packages that are inside test directories
+  - '!**/test/**'
+```
+
+The root package is always included, even when custom location wildcards are
+used.
+
+Catalogs are also defined in the `pnpm-workspace.yaml` file. See [_Catalogs_](./catalogs.md) for details.
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - 'packages/*'
+
+catalog:
+  chalk: ^4.1.2
+
+catalogs:
+  react16:
+    react: ^16.7.0
+    react-dom: ^16.7.0
+  react17:
+    react: ^17.10.0
+    react-dom: ^17.10.0
+```
+
+[workspace]: ./workspaces.md
+
+## packageConfigs
+
+Added in: v11.0.0
+
+Allows setting project-specific configuration for individual workspace packages. This replaces workspace project-specific `.npmrc` files.
+
+`packageConfigs` can be specified as a map of package names to config objects:
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - "packages/project-1"
+  - "packages/project-2"
+packageConfigs:
+  "project-1":
+    saveExact: true
+  "project-2":
+    savePrefix: "~"
+```
+
+Or as an array of pattern-matched rules:
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - "packages/project-1"
+  - "packages/project-2"
+packageConfigs:
+  - match: ["project-1", "project-2"]
+    modulesDir: "node_modules"
+    saveExact: true
+```
+
+## Settings
+
 Every setting is listed below, grouped by topic. Follow a setting to read its documentation, or open the full reference of a group.
 
-## Dependency Resolution
+### Dependency Resolution
 
 [Full reference →](./settings/dependency-resolution.md)
 
@@ -64,7 +140,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [registries](./settings/dependency-resolution.md#registries)
 * [namedRegistries](./settings/dependency-resolution.md#namedregistries)
 
-## Dependency Hoisting Settings
+### Dependency Hoisting Settings
 
 [Full reference →](./settings/hoisting.md)
 
@@ -75,7 +151,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [shamefullyHoist](./settings/hoisting.md#shamefullyhoist)
 * [hoistingLimits](./settings/hoisting.md#hoistinglimits)
 
-## Node-Modules Settings
+### Node-Modules Settings
 
 [Full reference →](./settings/node-modules.md)
 
@@ -93,7 +169,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [dlxCacheMaxAge](./settings/node-modules.md#dlxcachemaxage)
 * [enableGlobalVirtualStore](./settings/node-modules.md#enableglobalvirtualstore)
 
-## Store Settings
+### Store Settings
 
 [Full reference →](./settings/store.md)
 
@@ -103,7 +179,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [strictStorePkgContentCheck](./settings/store.md#strictstorepkgcontentcheck)
 * [frozenStore](./settings/store.md#frozenstore)
 
-## Network Settings
+### Network Settings
 
 [Full reference →](./settings/network.md)
 
@@ -114,7 +190,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [maxsockets](./settings/network.md#maxsockets)
 * [strictSsl](./settings/network.md#strictssl)
 
-## Request Settings
+### Request Settings
 
 [Full reference →](./settings/network.md)
 
@@ -128,7 +204,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [fetchWarnTimeoutMs](./settings/network.md#fetchwarntimeoutms)
 * [fetchMinSpeedKiBps](./settings/network.md#fetchminspeedkibps)
 
-## Lockfile Settings
+### Lockfile Settings
 
 [Full reference →](./settings/lockfile.md)
 
@@ -139,7 +215,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [mergeGitBranchLockfilesBranchPattern](./settings/lockfile.md#mergegitbranchlockfilesbranchpattern)
 * [peersSuffixMaxLength](./settings/lockfile.md#peerssuffixmaxlength)
 
-## Peer Dependency Settings
+### Peer Dependency Settings
 
 [Full reference →](./settings/peer-dependencies.md)
 
@@ -155,7 +231,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
   * [peerDependencyRules.allowedVersions](./settings/peer-dependencies.md#peerdependencyrulesallowedversions)
   * [peerDependencyRules.allowAny](./settings/peer-dependencies.md#peerdependencyrulesallowany)
 
-## CLI Settings
+### CLI Settings
 
 [Full reference →](./settings/cli.md)
 
@@ -168,7 +244,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [pmOnFail](./settings/cli.md#pmonfail)
 * [ignoreWorkspaceRootCheck](./settings/cli.md#ignoreworkspacerootcheck)
 
-## Build Settings
+### Build Settings
 
 [Full reference →](./settings/build.md)
 
@@ -183,7 +259,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [allowBuilds](./settings/build.md#allowbuilds)
 * [dangerouslyAllowAllBuilds](./settings/build.md#dangerouslyallowallbuilds)
 
-## Node.js Settings
+### Node.js Settings
 
 [Full reference →](./settings/nodejs.md)
 
@@ -191,7 +267,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [runtimeOnFail](./settings/nodejs.md#runtimeonfail)
 * [nodeDownloadMirrors](./settings/nodejs.md#nodedownloadmirrors)
 
-## Versioning Settings
+### Versioning Settings
 
 [Full reference →](./settings/versioning.md)
 
@@ -202,7 +278,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [versioning.epics](./settings/versioning.md#versioningepics)
 * [versioning.changelog.storage](./settings/versioning.md#versioningchangelogstorage)
 
-## Other Settings
+### Other Settings
 
 [Full reference →](./settings/other.md)
 
@@ -232,3 +308,27 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [catalogMode](./settings/other.md#catalogmode)
 * [ci](./settings/other.md#ci)
 * [cleanupUnusedCatalogs](./settings/other.md#cleanupunusedcatalogs)
+
+### Workspace Settings
+
+These settings are configured in `pnpm-workspace.yaml` as well, but are documented together with the workspace feature they belong to.
+
+[Full reference →](./workspaces.md#configuration)
+
+* [linkWorkspacePackages](./workspaces.md#linkworkspacepackages)
+* [injectWorkspacePackages](./workspaces.md#injectworkspacepackages)
+* [dedupeInjectedDeps](./workspaces.md#dedupeinjecteddeps)
+* [syncInjectedDepsAfterScripts](./workspaces.md#syncinjecteddepsafterscripts)
+* [preferWorkspacePackages](./workspaces.md#preferworkspacepackages)
+* [sharedWorkspaceLockfile](./workspaces.md#sharedworkspacelockfile)
+* [saveWorkspaceProtocol](./workspaces.md#saveworkspaceprotocol)
+* [includeWorkspaceRoot](./workspaces.md#includeworkspaceroot)
+* [ignoreWorkspaceCycles](./workspaces.md#ignoreworkspacecycles)
+* [disallowWorkspaceCycles](./workspaces.md#disallowworkspacecycles)
+* [failIfNoMatch](./workspaces.md#failifnomatch)
+
+### Settings documented elsewhere
+
+* [patchedDependencies](./cli/patch.md#patcheddependencies)
+* [pnpmfile](./pnpmfile.md#pnpmfile), [globalPnpmfile](./pnpmfile.md#globalpnpmfile) and [ignorePnpmfile](./pnpmfile.md#ignorepnpmfile)
+* Authorization settings, which are read from [`.npmrc`](./npmrc.md)

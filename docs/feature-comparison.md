@@ -38,7 +38,7 @@ title: Feature Comparison
 [Listing licenses]: ./cli/licenses.md
 [Build script security]: ./settings/build.md#allowbuilds
 [Managing runtimes]: ./cli/runtime.md
-[Managing versions of itself]: ./settings.md#managepackagemanagerversions
+[Managing versions of itself]: ./settings/cli.md#pmonfail
 [Overrides support]: ./settings/dependency-resolution.md#overrides
 [Patching dependencies]: ./cli/patch.md
 [SBOM generation]: ./cli/sbom.md

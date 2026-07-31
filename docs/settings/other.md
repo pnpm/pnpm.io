@@ -196,7 +196,7 @@ You may set this to `false` if you are certain that none of the CLI tools in you
 project resolve modules from the working directory and you are not using a global
 virtual store. Disabling it produces slightly simpler command shims.
 
-[isolated `node_modules` layout]: ./symlinked-node-modules-structure.md
+[isolated `node_modules` layout]: ../symlinked-node-modules-structure.md
 [`import-local`]: https://github.com/sindresorhus/import-local
 [`hoistPattern`]: ./hoisting.md#hoistpattern
 [`enableGlobalVirtualStore`]: ./node-modules.md#enableglobalvirtualstore

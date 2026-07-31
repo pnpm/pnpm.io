@@ -51,7 +51,7 @@ Be advised that it is encouraged instead to use [`pnpm-workspace.yaml`] for this
 enforce the same behaviour in all environments. This option exists solely so you
 may override that if necessary.
 
-[`pnpm-workspace.yaml`]: ../settings.md#linkWorkspacePackages
+[`pnpm-workspace.yaml`]: ../workspaces.md#linkworkspacepackages
 
 ### --workspace-concurrency
 
@@ -107,4 +107,4 @@ pnpm -r --reverse run clean
 
 [Read more about filtering.](../filtering.md)
 
-[includeWorkspaceRoot]: ../settings.md#includeWorkspaceRoot
+[includeWorkspaceRoot]: ../workspaces.md#includeworkspaceroot

@@ -169,7 +169,6 @@
         ]
       },
       "npmrc",
-      "pnpm-workspace_yaml",
       "pnpmfile"
     ],
     "Features": [

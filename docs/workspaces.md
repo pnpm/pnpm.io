@@ -10,7 +10,7 @@ workspace to unite multiple projects inside a single repository.
 A workspace must have a [`pnpm-workspace.yaml`] file in its
 root.
 
-[`pnpm-workspace.yaml`]: pnpm-workspace_yaml.md
+[`pnpm-workspace.yaml`]: settings.md
 
 :::tip
 

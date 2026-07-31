@@ -50,7 +50,7 @@ will be installed from the configured sources, depending on whether or not
 [`workspace: range protocol`].
 
 [workspace]: ./workspaces.md
-[`linkWorkspacePackages`]: ./settings.md#linkworkspacepackages
+[`linkWorkspacePackages`]: ./workspaces.md#linkworkspacepackages
 [`workspace: range protocol`]: ./workspaces.md#workspace-protocol-workspace
 
 ### Local file system

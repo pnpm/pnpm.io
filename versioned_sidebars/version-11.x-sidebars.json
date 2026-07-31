@@ -504,10 +504,6 @@
         },
         {
           "type": "doc",
-          "id": "pnpm-workspace_yaml"
-        },
-        {
-          "type": "doc",
           "id": "pnpmfile"
         }
       ]
