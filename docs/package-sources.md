@@ -7,7 +7,7 @@ pnpm supports installing packages from various sources. These sources are divide
 
 Exotic sources (like Git repositories or direct tarball URLs) can introduce supply chain risks when used by transitive dependencies. You can prevent transitive dependencies from using exotic sources by setting [`blockExoticSubdeps`] to `true`.
 
-[`blockExoticSubdeps`]: ./settings.md#blockexoticsubdeps
+[`blockExoticSubdeps`]: ./settings/dependency-resolution.md#blockexoticsubdeps
 
 ## Trusted sources
 

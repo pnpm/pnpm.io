@@ -38,7 +38,7 @@ Unless the user has set the `engineStrict` config flag (see [settings]), this
 field is advisory only and will only produce warnings when your package is
 installed as a dependency.
 
-[settings]: ./settings.md#enginestrict
+[settings]: ./settings/cli.md#enginestrict
 
 ## engines.runtime
 
@@ -112,7 +112,7 @@ How it works:
 1. The exact version (and checksum) is saved in the lockfile.
 1. Scripts use the local runtime, ensuring consistency across environments.
 
-To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings.md#runtimeonfail) setting.
+To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings/nodejs.md#runtimeonfail) setting.
 
 ## devEngines.packageManager
 
@@ -138,7 +138,7 @@ When pnpm is declared via the legacy `packageManager` field (not `devEngines.pac
 
 :::
 
-To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings.md#pmonfail) setting.
+To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings/cli.md#pmonfail) setting.
 
 ## dependenciesMeta
 
@@ -220,9 +220,9 @@ Since v11.14.0, a peer dependency may also be declared with a specifier that car
 }
 ```
 
-Accepted forms are a [named-registry](./settings.md#namedregistries) spec (`<registry>:<version>`), an `npm:` alias, and a `file:`, git, or URL spec.
+Accepted forms are a [named-registry](./settings/dependency-resolution.md#namedregistries) spec (`<registry>:<version>`), an `npm:` alias, and a `file:`, git, or URL spec.
 
-Such a specifier is matched against the semver range it carries — `work:5.x.x` is checked as `5.x.x` and `npm:other-lib@^5` as `^5`. A specifier that carries no version, such as `file:../lib-c`, is matched against `*`, so any version satisfies it. Meanwhile the original specifier is what selects the package when [`autoInstallPeers`](./settings.md#autoinstallpeers) installs a missing peer, so the peer is fetched from the aliased name, registry, or source you named.
+Such a specifier is matched against the semver range it carries — `work:5.x.x` is checked as `5.x.x` and `npm:other-lib@^5` as `^5`. A specifier that carries no version, such as `file:../lib-c`, is matched against `*`, so any version satisfies it. Meanwhile the original specifier is what selects the package when [`autoInstallPeers`](./settings/peer-dependencies.md#autoinstallpeers) installs a missing peer, so the peer is fetched from the aliased name, registry, or source you named.
 
 Bare `name@version` values are still rejected with `ERR_PNPM_INVALID_PEER_DEPENDENCY_SPECIFICATION`, as they are almost always a mistake:
 

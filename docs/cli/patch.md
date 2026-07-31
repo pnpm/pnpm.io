@@ -23,7 +23,7 @@ If you want to change the dependencies of a package, don't use patching to modif
 
 :::
 
-[overrides]: ../settings.md#overrides
+[overrides]: ../settings/dependency-resolution.md#overrides
 [package hook]: ../pnpmfile#hooksreadpackagepkg-context-pkg--promisepkg
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0GjLqRGRbcY" title="The pnpm patch command demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>

@@ -43,7 +43,7 @@ A setting that contains a `${...}` placeholder in one of these positions is igno
 
 Environment variables are **still expanded** in config that doesn't come from the repository:
 
-- your user-level `~/.npmrc` (and the file pointed to by [`npmrcAuthFile`](/settings#npmrcauthfile));
+- your user-level `~/.npmrc` (and the file pointed to by [`npmrcAuthFile`](/settings/other#npmrcauthfile));
 - the global configuration;
 - command-line options;
 - environment config.

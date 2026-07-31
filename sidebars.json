@@ -146,7 +146,28 @@
     ],
     "Configuration": [
       "package_json",
-      "settings",
+      {
+        "type": "category",
+        "label": "Settings (pnpm-workspace.yaml)",
+        "link": {
+          "type": "doc",
+          "id": "settings"
+        },
+        "items": [
+          "settings/dependency-resolution",
+          "settings/hoisting",
+          "settings/node-modules",
+          "settings/store",
+          "settings/network",
+          "settings/lockfile",
+          "settings/peer-dependencies",
+          "settings/cli",
+          "settings/build",
+          "settings/nodejs",
+          "settings/versioning",
+          "settings/other"
+        ]
+      },
       "npmrc",
       "pnpm-workspace_yaml",
       "pnpmfile"

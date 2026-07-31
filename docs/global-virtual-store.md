@@ -3,7 +3,7 @@ id: global-virtual-store
 title: Global Virtual Store
 ---
 
-By default, pnpm creates a `.pnpm` directory inside each project's `node_modules` — this is the "virtual store". It contains hardlinks to files in the [content-addressable store](./settings.md#storedir). Every project gets its own projection of this virtual store — pnpm hardlinks files from the content-addressable store into the `.pnpm` directory structure. The actual file contents exist only once on disk, but the directory structure is recreated for each project so that Node.js's module resolution algorithm can find the right dependencies for each package.
+By default, pnpm creates a `.pnpm` directory inside each project's `node_modules` — this is the "virtual store". It contains hardlinks to files in the [content-addressable store](./settings/store.md#storedir). Every project gets its own projection of this virtual store — pnpm hardlinks files from the content-addressable store into the `.pnpm` directory structure. The actual file contents exist only once on disk, but the directory structure is recreated for each project so that Node.js's module resolution algorithm can find the right dependencies for each package.
 
 The **global virtual store** (`enableGlobalVirtualStore: true`) changes this. Instead of each project having its own `node_modules/.pnpm` directory, pnpm maintains a single shared virtual store (located at `<store-path>/links/`, run `pnpm store path` to find `<store-path>`). Each project's `node_modules` contains only symlinks pointing into this shared location.
 
@@ -57,7 +57,7 @@ It also speeds up installations across unrelated projects on the same machine, s
 
 - **CI environments**: In CI, caches are typically absent, so there's no warm global store to benefit from. The global virtual store is generally not useful in CI.
 - **Shared trust domain**: The global virtual store and the content-addressable store are shared writable state. Use them only for projects, users, and jobs that trust each other, and protect the store path with filesystem permissions.
-- **ESM hoisting**: pnpm uses the `NODE_PATH` environment variable to support hoisted dependencies with the global virtual store. However, Node.js does not respect `NODE_PATH` for ESM imports. If ESM dependencies try to import packages not declared in their own `package.json`, resolution will fail. You can work around this with [packageExtensions](./settings.md#packageextensions) or the [@pnpm/plugin-esm-node-path](https://github.com/pnpm/plugin-esm-node-path) config dependency.
+- **ESM hoisting**: pnpm uses the `NODE_PATH` environment variable to support hoisted dependencies with the global virtual store. However, Node.js does not respect `NODE_PATH` for ESM imports. If ESM dependencies try to import packages not declared in their own `package.json`, resolution will fail. You can work around this with [packageExtensions](./settings/dependency-resolution.md#packageextensions) or the [@pnpm/plugin-esm-node-path](https://github.com/pnpm/plugin-esm-node-path) config dependency.
 
 :::note
 
@@ -71,4 +71,4 @@ In pnpm v11, global installs (`pnpm add -g`) and `pnpm dlx` use the global virtu
 
 ## Configuration
 
-See the [`enableGlobalVirtualStore`](./settings.md#enableglobalvirtualstore) setting reference for all configuration details.
+See the [`enableGlobalVirtualStore`](./settings/node-modules.md#enableglobalvirtualstore) setting reference for all configuration details.

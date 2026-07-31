@@ -65,7 +65,7 @@ versioning:
     storage: repository
 ```
 
-Every key is described in [Versioning Settings](./settings.md#versioning-settings).
+Every key is described in [Versioning Settings](./settings/versioning.md).
 
 Where two workspace projects publish the same name, a project can be referenced by its workspace-relative directory instead of its name, with a `./` prefix (e.g. `"./packages/cli"`). This works in intent files and in `versioning.lanes`, `versioning.fixed`, and `versioning.ignore`.
 

@@ -80,7 +80,7 @@ Removing the `scripts` field from a dependency's manifest via `readPackage` will
 not prevent pnpm from building the dependency. When building a dependency, pnpm
 reads the `package.json` of the package from the package's archive, which is not
 affected by the hook. In order to ignore a package's build, use the
-[allowBuilds](settings.md#allowbuilds) field.
+[allowBuilds](settings/build.md#allowbuilds) field.
 
 ### `hooks.updateConfig(config): config | Promise<config>`
 

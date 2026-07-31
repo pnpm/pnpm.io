@@ -42,11 +42,11 @@ Checks that the directory pnpm links global executables into is on `PATH` and wr
 
 ### Cache directory
 
-Checks that the [cache directory](../settings.md#cachedir) is writable.
+Checks that the [cache directory](../settings/other.md#cachedir) is writable.
 
 ### Store directory
 
-Checks that the [store directory](../settings.md#storedir) is writable. Skipped when no store directory is configured.
+Checks that the [store directory](../settings/store.md#storedir) is writable. Skipped when no store directory is configured.
 
 ### Filesystem
 

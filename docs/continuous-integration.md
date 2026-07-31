@@ -13,7 +13,7 @@ In all the provided configuration files the store is cached. However, this is no
 
 :::important
 
-Only cache pnpm's store and cache directories in locations writable by trusted jobs. Do not let untrusted CI jobs write to a store or metadata cache that trusted jobs later restore. These directories are trusted caches; see the [`storeDir`](./settings.md#storedir) and [`cacheDir`](./settings.md#cachedir) settings for details.
+Only cache pnpm's store and cache directories in locations writable by trusted jobs. Do not let untrusted CI jobs write to a store or metadata cache that trusted jobs later restore. These directories are trusted caches; see the [`storeDir`](./settings/store.md#storedir) and [`cacheDir`](./settings/other.md#cachedir) settings for details.
 
 :::
 

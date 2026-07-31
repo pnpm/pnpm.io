@@ -174,7 +174,7 @@ the installation progress.
 
 If you want to change what type of information is printed, use the [loglevel] setting.
 
-[loglevel]: ../settings.md#loglevel
+[loglevel]: ../settings/cli.md#loglevel
 
 ### --shamefully-hoist
 

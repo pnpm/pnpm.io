@@ -33,11 +33,11 @@ It goes without saying that you should always lock your dependencies with a lock
 [Snyk]: https://snyk.io
 [Xygeni]: https://xygeni.io/
 [Aikido]: https://www.aikido.dev/
-[dangerouslyAllowAllBuilds]: settings.md#dangerouslyallowallbuilds
+[dangerouslyAllowAllBuilds]: settings/build.md#dangerouslyallowallbuilds
 [it might get compromised]: https://socket.dev/blog/nx-packages-compromised
-[minimumReleaseAge]: settings.md#minimumreleaseage
-[trustPolicy]: settings.md#trustpolicy
-[trustPolicyExclude]: settings.md#trustpolicyexclude
-[allowBuilds]: settings.md#allowbuilds
-[blockExoticSubdeps]: settings.md#blockexoticsubdeps
-[trustPolicyIgnoreAfter]: settings.md#trustpolicyignoreafter
+[minimumReleaseAge]: settings/dependency-resolution.md#minimumreleaseage
+[trustPolicy]: settings/dependency-resolution.md#trustpolicy
+[trustPolicyExclude]: settings/dependency-resolution.md#trustpolicyexclude
+[allowBuilds]: settings/build.md#allowbuilds
+[blockExoticSubdeps]: settings/dependency-resolution.md#blockexoticsubdeps
+[trustPolicyIgnoreAfter]: settings/dependency-resolution.md#trustpolicyignoreafter

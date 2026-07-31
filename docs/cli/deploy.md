@@ -13,7 +13,7 @@ By default, the deploy command only works with workspaces that have the `inject-
 
 :::note
 
-When the [`enableGlobalVirtualStore`](../settings.md#enableglobalvirtualstore) option is set, `pnpm deploy` ignores it and always creates a localized virtual store within the deploy directory. This keeps the deploy directory self-contained and portable.
+When the [`enableGlobalVirtualStore`](../settings/node-modules.md#enableglobalvirtualstore) option is set, `pnpm deploy` ignores it and always creates a localized virtual store within the deploy directory. This keeps the deploy directory self-contained and portable.
 
 :::
 

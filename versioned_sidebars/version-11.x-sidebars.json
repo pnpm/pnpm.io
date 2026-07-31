@@ -441,8 +441,62 @@
           "id": "package_json"
         },
         {
-          "type": "doc",
-          "id": "settings"
+          "type": "category",
+          "label": "Settings (pnpm-workspace.yaml)",
+          "link": {
+            "type": "doc",
+            "id": "settings"
+          },
+          "items": [
+            {
+              "type": "doc",
+              "id": "settings/dependency-resolution"
+            },
+            {
+              "type": "doc",
+              "id": "settings/hoisting"
+            },
+            {
+              "type": "doc",
+              "id": "settings/node-modules"
+            },
+            {
+              "type": "doc",
+              "id": "settings/store"
+            },
+            {
+              "type": "doc",
+              "id": "settings/network"
+            },
+            {
+              "type": "doc",
+              "id": "settings/lockfile"
+            },
+            {
+              "type": "doc",
+              "id": "settings/peer-dependencies"
+            },
+            {
+              "type": "doc",
+              "id": "settings/cli"
+            },
+            {
+              "type": "doc",
+              "id": "settings/build"
+            },
+            {
+              "type": "doc",
+              "id": "settings/nodejs"
+            },
+            {
+              "type": "doc",
+              "id": "settings/versioning"
+            },
+            {
+              "type": "doc",
+              "id": "settings/other"
+            }
+          ]
         },
         {
           "type": "doc",

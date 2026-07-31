@@ -1,0 +1,199 @@
+---
+id: node-modules
+title: "Node-Modules Settings"
+sidebar_label: "node_modules"
+---
+
+### modulesDir
+
+* Default: **node_modules**
+* Type: **path**
+
+The directory in which dependencies will be installed (instead of
+`node_modules`).
+
+### nodeLinker
+
+* Default: **isolated**
+* Type: **isolated**, **hoisted**, **pnp**
+
+Defines what linker should be used for installing Node packages.
+
+* **isolated** - dependencies are symlinked from a virtual store at `node_modules/.pnpm`.
+* **hoisted** - a flat `node_modules` without symlinks is created. Same as the `node_modules` created by npm or Yarn Classic. One of Yarn's libraries is used for hoisting, when this setting is used. Legitimate reasons to use this setting:
+  1. Your tooling doesn't work well with symlinks. A React Native project will most probably only work if you use a hoisted `node_modules`.
+  1. Your project is deployed to a serverless hosting provider. Some serverless providers (for instance, AWS Lambda) don't support symlinks. An alternative solution for this problem is to bundle your application before deployment.
+  1. If you want to publish your package with [`"bundledDependencies"`].
+  1. If you are running Node.js with the [--preserve-symlinks] flag.
+* **pnp** - no `node_modules`. Plug'n'Play is an innovative strategy for Node that is [used by Yarn Berry][pnp]. It is recommended to also set `symlink` setting to `false` when using `pnp` as
+your linker.
+
+[pnp]: https://yarnpkg.com/features/pnp
+[--preserve-symlinks]: https://nodejs.org/api/cli.html#cli_preserve_symlinks
+[`"bundledDependencies"`]: https://docs.npmjs.com/cli/v8/configuring-npm/package-json#bundleddependencies
+
+### nodeExperimentalPackageMap
+
+Added in: v11.8.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, pnpm injects the generated `node_modules/.package-map.json` into pnpm-managed Node.js script environments by adding Node's `--experimental-package-map` option to `NODE_OPTIONS`.
+
+The package map is generated during isolated and hoisted installs. This setting only controls whether pnpm passes the generated map to scripts.
+
+CLI and environment configuration use the kebab-case name `node-experimental-package-map`.
+
+```yaml
+nodeExperimentalPackageMap: true
+```
+
+### nodePackageMapType
+
+Added in: v11.8.0
+
+* Default: **standard**
+* Type: **standard**, **loose**
+
+Controls how `node_modules/.package-map.json` is generated.
+
+* **standard** - only declared dependencies are available through the package map.
+* **loose** - also maps packages that are reachable through the installed `node_modules` layout, which can allow undeclared hoisted dependencies to resolve.
+
+CLI and environment configuration use the kebab-case name `node-package-map-type`.
+
+```yaml
+nodePackageMapType: loose
+```
+
+### symlink
+
+* Default: **true**
+* Type: **Boolean**
+
+When `symlink` is set to `false`, pnpm creates a virtual store directory without
+any symlinks. It is a useful setting together with `nodeLinker=pnp`.
+
+### enableModulesDir
+
+* Default: **true**
+* Type: **Boolean**
+
+When `false`, pnpm will not write any files to the modules directory
+(`node_modules`). This is useful for when the modules directory is mounted with
+filesystem in userspace (FUSE). There is an experimental CLI that allows you to
+mount a modules directory with FUSE: [@pnpm/mount-modules].
+
+[@pnpm/mount-modules]: https://www.npmjs.com/package/@pnpm/mount-modules
+
+### virtualStoreDir
+
+* Default: **node_modules/.pnpm**
+* Types: **path**
+
+The directory with links to the store. All direct and indirect dependencies of
+the project are linked into this directory.
+
+This is a useful setting that can solve issues with long paths on Windows. If
+you have some dependencies with very long paths, you can select a virtual store
+in the root of your drive (for instance `C:\my-project-store`).
+
+Or you can set the virtual store to `.pnpm` and add it to `.gitignore`. This
+will make stacktraces cleaner as paths to dependencies will be one directory
+higher.
+
+**NOTE:** the virtual store cannot be shared between several projects. Every
+project should have its own virtual store (except for in workspaces where the
+root is shared).
+
+### virtualStoreDirMaxLength
+
+* Default:
+  * On Linux/macOS: **120**
+  * On Windows: **60**
+* Types: **number**
+
+Sets the maximum allowed length of directory names inside the virtual store directory (`node_modules/.pnpm`). You may set this to a lower number if you encounter long path issues on Windows.
+
+### virtualStoreOnly
+
+Added in: v11.0.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, pnpm populates the virtual store without creating importer symlinks, hoisting, bin links, or running lifecycle scripts. This is useful for pre-populating a store (e.g., in Nix builds) without creating unnecessary project-level artifacts. `pnpm fetch` uses this mode internally.
+
+### packageImportMethod
+
+* Default: **auto**
+* Type: **auto**, **hardlink**, **copy**, **clone**, **clone-or-copy**
+
+Controls the way packages are imported from the store (if you want to disable symlinks inside `node_modules`, then you need to change the [nodeLinker] setting, not this one).
+
+* **auto** - try to clone packages from the store. If cloning is not supported
+then hardlink packages from the store. If neither cloning nor linking is
+possible, fall back to copying
+* **hardlink** - hard link packages from the store
+* **clone-or-copy** - try to clone packages from the store. If cloning is not supported then fall back to copying
+* **copy** - copy packages from the store
+* **clone** - clone (AKA copy-on-write or reference link) packages from the store
+
+Cloning is the best way to write packages to node_modules. It is the fastest way and safest way. When cloning is used, you may edit files in your node_modules and they will not be modified in the central content-addressable store.
+
+Unfortunately, not all file systems support cloning. We recommend using a copy-on-write (CoW) file system (for instance, Btrfs instead of Ext4 on Linux) for the best experience with pnpm.
+
+[nodeLinker]: #nodelinker
+
+### modulesCacheMaxAge
+
+* Default: **10080** (7 days in minutes)
+* Type: **number**
+
+The time in minutes after which orphan packages from the modules directory should be removed.
+pnpm keeps a cache of packages in the modules directory. This boosts installation speed when
+switching branches or downgrading dependencies.
+
+### dlxCacheMaxAge
+
+* Default: **1440** (1 day in minutes)
+* Type: **number**
+
+The time in minutes after which dlx cache expires.
+After executing a dlx command, pnpm keeps a cache that omits the installation step for subsequent calls to the same dlx command.
+
+### enableGlobalVirtualStore
+
+Added in: v10.12.1
+
+* Default: **false**
+* Type: **Boolean**
+
+:::note
+
+In pnpm v11, global installs (`pnpm add -g`) and `pnpm dlx` use the global virtual store by default.
+
+:::
+
+When enabled, `node_modules` contains only symlinks to a central virtual store, rather than to `node_modules/.pnpm`. By default, this central store is located at `<store-path>/links` (use `pnpm store path` to find `<store-path>`).
+
+In the central virtual store, each package is hard linked into a directory whose name is the hash of its dependency graph. As a result, all projects on the system can symlink their dependencies from this shared location on disk. This approach is conceptually similar to how [NixOS manages packages], using dependency graph hashes to create isolated and shareable package directories in the Nix store.
+
+> This should not be confused with the global content-addressable store. The actual package files are still hard linked from the content-addressable store—but instead of being linked directly into `node_modules/.pnpm`, they are linked into the global virtual store.
+
+Using a global virtual store can significantly speed up installations when a warm cache is available. However, in CI environments (where caches are typically absent), it may slow down installation. If pnpm detects that it is running in CI, this setting is automatically disabled.
+
+:::important
+
+To support hoisted dependencies when using a global virtual store, pnpm relies on the `NODE_PATH` environment variable. This allows Node.js to resolve packages from the hoisted `node_modules` directory. However, **this workaround does not work with ESM modules**, because Node.js no longer respects `NODE_PATH` when using ESM.
+
+If your dependencies are ESM and they import packages **not declared in their own `package.json`** (which is considered bad practice), you’ll likely run into resolution errors. There are two ways to fix this:
+* Use [packageExtensions] to explicitly add the missing dependencies.
+* Add the [@pnpm/plugin-esm-node-path] config dependency to your project. This plugin registers a custom ESM loader that restores `NODE_PATH` support for ESM, allowing hoisted dependencies to be resolved correctly.
+
+:::
+
+[packageExtensions]: ./dependency-resolution.md#packageextensions
+[@pnpm/plugin-esm-node-path]: https://github.com/pnpm/plugin-esm-node-path
+[NixOS manages packages]: https://nixos.org/guides/how-nix-works/

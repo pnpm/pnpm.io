@@ -95,7 +95,7 @@ pnpm access revoke @myorg:developers @myorg/pkg
 
 ### --registry &lt;url\&gt;
 
-The base URL of the npm registry to use for the operation. Per-scope and named registries (configured via [`registries`](../settings.md#registries) and [`namedRegistries`](../settings.md#namedregistries)) are respected for the package being modified.
+The base URL of the npm registry to use for the operation. Per-scope and named registries (configured via [`registries`](../settings/dependency-resolution.md#registries) and [`namedRegistries`](../settings/dependency-resolution.md#namedregistries)) are respected for the package being modified.
 
 ### --json
 
