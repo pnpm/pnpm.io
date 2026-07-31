@@ -202,12 +202,16 @@ Patterns are also supported, so you may ignore any packages from a scope: `@babe
 
 #### update.changeset
 
+Added in: v11.16.0
+
 * Default: **false**
 * Type: **Boolean**
 
 When `true`, `pnpm update` writes a [change intent](./versioning.md) after updating workspace manifests, declaring a `patch` bump for every workspace package whose `dependencies` or `optionalDependencies` were changed by the update and a `major` bump when its `peerDependencies` changed. Same as passing [`--changeset`](./cli/update.md#--changeset); pass `--no-changeset` to override the setting for a single run.
 
 #### update.githubActions
+
+Added in: v11.16.0
 
 * Default: **false**
 * Type: **Boolean**
