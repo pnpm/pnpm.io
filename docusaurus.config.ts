@@ -72,6 +72,13 @@ const docusaurusConfig = {
           "sidebarPath": path.join(__dirname, "sidebars.json"),
           includeCurrentVersion: false,
           lastVersion: lastDocsVersion,
+          versions: {
+            // pnpm 12 is a Rust rewrite with no intentional breaking changes,
+            // so these docs describe both majors instead of getting a separate
+            // docs version. Only the displayed label changes; the version is
+            // still named 11.x on disk, in URLs, and in Crowdin.
+            [lastDocsVersion]: { label: '11 & 12' },
+          },
         },
         "gtag": {
           trackingID: "UA-91385296-1",
