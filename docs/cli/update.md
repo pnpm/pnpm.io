@@ -41,6 +41,20 @@ Patterns may also be combined, so the next command will update all `babel` packa
 pnpm update "@babel/*" "\!@babel/core"
 ```
 
+## Updating GitHub Actions
+
+Added in: v11.16.0
+
+`pnpm update` and [`pnpm outdated`](./outdated.md) can also check and update the GitHub Actions referenced by the repository's workflow files. This is opt-in for every command: pass [`--include-github-actions`](#--include-github-actions), or set [`update.githubActions`](../settings.md#updategithubactions) to `true` in `pnpm-workspace.yaml` to enable it by default.
+
+Updated actions are pinned to exact commit hashes, with their release tags preserved in comments:
+
+```yaml
+- uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+```
+
+Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings.md#updategithubactionsserver).
+
 ## Options
 
 ### --recursive, -r
@@ -98,6 +112,20 @@ Show outdated dependencies and select which ones to update.
 ### --no-save
 
 Don't update the ranges in `package.json`.
+
+### --changeset
+
+Added in: v11.16.0
+
+After the update completes, write a [change intent](../versioning.md) — a changesets-compatible `.changeset/*.md` file — declaring a `patch` bump for every workspace package whose `dependencies` or `optionalDependencies` were changed by the update, and a `major` bump when its `peerDependencies` changed. Packages that consume an updated catalog entry via the `catalog:` protocol are included. Private packages, packages without a name, and packages listed in the `ignore` array of `.changeset/config.json` are skipped. If `.changeset/config.json` does not exist, a warning is printed and no changeset is generated.
+
+Set [`update.changeset`](../settings.md#updatechangeset) to `true` in `pnpm-workspace.yaml` to enable this behavior by default, and use `--no-changeset` to override the setting for one update.
+
+### --include-github-actions
+
+Added in: v11.16.0
+
+Also update the GitHub Actions referenced by the repository's workflow files. See [Updating GitHub Actions](#updating-github-actions).
 
 ### --filter &lt;package_selector\>
 

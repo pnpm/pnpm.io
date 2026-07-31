@@ -17,12 +17,12 @@ overrides:
 
 Or alternatively, run `pnpm audit --fix`.
 
-If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`auditConfig.ignoreGhsas`] setting.
+If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`audit.ignore`] setting.
 
-Since v11, `pnpm audit` queries the registry's `/-/npm/v1/security/advisories/bulk` endpoint. The response does not include CVE identifiers, so advisories are filtered by GitHub advisory ID (GHSA) instead. If you previously listed CVEs under `auditConfig.ignoreCves`, replace each entry with the corresponding `GHSA-xxxx-xxxx-xxxx` value (shown in the `More info` column of `pnpm audit` output) under `auditConfig.ignoreGhsas`.
+Since v11, `pnpm audit` queries the registry's `/-/npm/v1/security/advisories/bulk` endpoint. The response does not include CVE identifiers, so advisories are filtered by GitHub advisory ID (GHSA) instead. If you previously listed CVEs under `auditConfig.ignoreCves`, replace each entry with the corresponding `GHSA-xxxx-xxxx-xxxx` value (shown in the `More info` column of `pnpm audit` output) under [`audit.ignore`].
 
 [overrides]: ../settings.md#overrides
-[`auditConfig.ignoreGhsas`]: #auditconfigignoreghsas
+[`audit.ignore`]: #auditignore
 
 ## Commands
 
@@ -47,7 +47,7 @@ The command exits with code `1` if any package has an invalid signature, or if a
 
 Only print advisories with severity greater than or equal to `<severity>`.
 
-This can also be set via `auditLevel` in `pnpm-workspace.yaml`.
+This can also be set via [`audit.level`](#auditlevel) in `pnpm-workspace.yaml`.
 
 ### --fix
 
@@ -100,21 +100,41 @@ Ignore a vulnerability by its GitHub advisory ID (GHSA). Before v11 this flag ac
 
 ## Configuration
 
-### auditConfig
+`pnpm audit` is configured in the `audit` section of `pnpm-workspace.yaml` (added in v11.16.0):
 
-#### auditConfig.ignoreGhsas
+```yaml
+audit:
+  level: high
+  ignore:
+    - GHSA-42xw-2xvc-qx8m
+```
+
+### audit.level
+
+* Default: **low**
+* Type: **low**, **moderate**, **high**, **critical**
+
+Only print advisories with severity greater than or equal to this level. Same as the [`--audit-level`](#--audit-level-severity) flag.
+
+### audit.ignore
 
 A list of GHSA codes that will be ignored by the [`pnpm audit`] command.
 
 ```yaml
-auditConfig:
-  ignoreGhsas:
+audit:
+  ignore:
     - GHSA-42xw-2xvc-qx8m
     - GHSA-4w2v-q235-vp99
     - GHSA-cph5-m8f7-6c5x
     - GHSA-vh95-rmgr-6w4m
 ```
 
+:::info
+
+Before v11.16.0, these settings were named `auditLevel` and `auditConfig.ignoreGhsas`. The deprecated names keep working until the next major version; when both are set, the `audit` section takes precedence and a warning is printed.
+
 Before v11, `auditConfig.ignoreCves` was used to filter advisories by CVE identifier. That setting is no longer recognized.
+
+:::
 
 [`pnpm audit`]: #

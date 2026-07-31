@@ -314,6 +314,24 @@ Will be published as:
 }
 ```
 
+### publishConfig.name
+
+Added in: v11.18.0
+
+Publishes the package under a different name than the one its manifest carries in the workspace. This is for a project whose published name is already taken by a sibling project, which otherwise has to be renamed by a build step just before publishing.
+
+```json
+{
+  "name": "foo-v2",
+  "version": "2.0.0",
+  "publishConfig": {
+    "name": "foo"
+  }
+}
+```
+
+Only the published artifact is renamed — dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
+
 ### publishConfig.executableFiles
 
 By default, for portability reasons, no files except those listed in the bin field will be marked as executable in the resulting package archive. The `executableFiles` field lets you declare additional files that must have the executable flag (+x) set even if they aren't directly accessible through the bin field.
