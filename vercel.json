@@ -27,6 +27,11 @@
       "permanent": false
     },
     {
+      "source": "/12.x/:splat*",
+      "destination": "/:splat*",
+      "permanent": false
+    },
+    {
       "source": "/9.x/:splat*",
       "destination": "/:splat*",
       "permanent": true
