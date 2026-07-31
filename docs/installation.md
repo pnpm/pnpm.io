@@ -42,7 +42,7 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 
 ### On POSIX systems
 
-:::warning Not supported on Intel macOS
+:::warning Not supported on Intel macOS in pnpm 11
 
 On pnpm 11, the standalone script does not run on Intel Macs (`darwin-x64`). Use [npm](#using-npm), [Corepack](#using-corepack), or [Homebrew](#using-homebrew) instead. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for context.
 
@@ -217,7 +217,7 @@ npm install -g --allow-scripts=pnpm pnpm@next-12
 
 :::info
 
-`--allow-scripts=pnpm` is required. The published package is a small wrapper whose `preinstall` script replaces it with the native binary for your platform, and recent versions of npm block install scripts by default. Without the flag, `pnpm` is left as a placeholder file that fails to run. For the same reason, don't install pnpm 12 with `--ignore-scripts` or `--no-optional`. If you install it with pnpm or Bun, allow the build scripts of the `pnpm` package.
+`--allow-scripts=pnpm` is required on npm 11.16 and newer, which blocks install scripts by default. The published package is a small wrapper whose `preinstall` script replaces it with the native binary for your platform, so without the flag `pnpm` is left as a placeholder file that fails to run. Older versions of npm run install scripts anyway and ignore the flag, so the command above works on any version. For the same reason, don't install pnpm 12 with `--ignore-scripts` or `--no-optional`. If you install it with pnpm or Bun, allow the build scripts of the `pnpm` package.
 
 :::
 
