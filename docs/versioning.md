@@ -44,6 +44,10 @@ This applies the release plan: every package named by an intent is bumped, and s
 
 Because a recursive run can bump many packages to different versions, no git commit or tag is created — there is no single version to tag. Commit the result yourself, then publish with `pnpm publish -r`.
 
+### First releases
+
+Since v11.16.0, the first release of a package publishes the version written in its manifest verbatim, instead of bumping off it. `pnpm version -r` and `pnpm change status` check the registry for each release's current version; when that version is not yet published, the package debuts at it and its pending change intents apply only from the next release. A newly added package seeded at `1100.0.0` with a `minor` intent is therefore published as `1100.0.0` rather than skipping straight to `1100.1.0`.
+
 ## Configuration
 
 Release behavior is configured under the `versioning` key of `pnpm-workspace.yaml`:

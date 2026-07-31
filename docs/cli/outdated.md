@@ -57,3 +57,9 @@ Doesn't check `optionalDependencies`.
 ### --sort-by
 
 Specifies the order in which the output results are sorted. Currently only the value `name` is accepted.
+
+### --include-github-actions
+
+Added in: v11.16.0
+
+Also check the GitHub Actions referenced by the repository's workflow files for updates. You can enable this by default by setting [`update.githubActions`](../settings.md#updategithubactions) to `true` in `pnpm-workspace.yaml`. See [Updating GitHub Actions](./update.md#updating-github-actions).

@@ -182,19 +182,56 @@ allowedDeprecatedVersions:
 
 With the above configuration pnpm will not print deprecation warnings about any version of `request` and about v1 of `express`.
 
-### updateConfig
+### update
 
-#### updateConfig.ignoreDependencies
+Added in: v11.16.0
 
-Sometimes you can't update a dependency. For instance, the latest version of the dependency started to use ESM but your project is not yet in ESM. Annoyingly, such a package will be always printed out by the `pnpm outdated` command and updated, when running `pnpm update --latest`. However, you may list packages that you don't want to upgrade in the `ignoreDependencies` field:
+Settings in this section tune the [`pnpm update`](./cli/update.md) and [`pnpm outdated`](./cli/outdated.md) commands.
+
+#### update.ignoreDeps
+
+Sometimes you can't update a dependency. For instance, the latest version of the dependency started to use ESM but your project is not yet in ESM. Annoyingly, such a package will be always printed out by the `pnpm outdated` command and updated, when running `pnpm update --latest`. However, you may list packages that you don't want to upgrade in the `ignoreDeps` field:
 
 ```yaml
-updateConfig:
-  ignoreDependencies:
+update:
+  ignoreDeps:
   - load-json-file
 ```
 
 Patterns are also supported, so you may ignore any packages from a scope: `@babel/*`.
+
+#### update.changeset
+
+Added in: v11.16.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, `pnpm update` writes a [change intent](./versioning.md) after updating workspace manifests, declaring a `patch` bump for every workspace package whose `dependencies` or `optionalDependencies` were changed by the update and a `major` bump when its `peerDependencies` changed. Same as passing [`--changeset`](./cli/update.md#--changeset); pass `--no-changeset` to override the setting for a single run.
+
+#### update.githubActions
+
+Added in: v11.16.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, `pnpm update` and `pnpm outdated` also check the GitHub Actions referenced by the repository's workflow files. Same as passing [`--include-github-actions`](./cli/update.md#--include-github-actions). See [Updating GitHub Actions](./cli/update.md#updating-github-actions).
+
+#### update.githubActionsServer
+
+Added in: v11.17.0
+
+* Default: the `GITHUB_SERVER_URL` environment variable, falling back to **https://github.com**
+* Type: **URL**
+
+The base URL of the GitHub server that hosts the repositories of the GitHub Actions referenced by the workflow files (for example, a GitHub Enterprise Server). The URL must use the `https://` or `http://` protocol. Only use `http://` for a trusted server on a trusted network: the refs used to pin actions to commit hashes are fetched over this URL, and unencrypted traffic can be tampered with.
+
+:::info
+
+Before v11.16.0, `update.ignoreDeps` was named `updateConfig.ignoreDependencies`. The deprecated `updateConfig` setting keeps working until the next major version; when both are set, the `update` section takes precedence and a warning is printed.
+
+:::
 
 ### supportedArchitectures
 
@@ -1401,6 +1438,8 @@ allowBuilds:
 
 The repository form lets a trusted git dependency keep running its build scripts across branch updates without re-approving each new commit. The key is the package name, followed by `@` and the git URL, with no `#<ref>` suffix. Matching is exact, so `git+ssh://` and `git+https://` URLs for the same repository are separate keys.
 
+Since v11.19.0, the repository form also approves git-hosted packages that pnpm downloads as a tarball rather than clones — such as `github:` dependencies, which are fetched from `codeload.github.com`. A `foo@git+https://github.com/org/foo.git` entry approves `foo` whether pnpm clones the repository or downloads a tarball. GitLab and Bitbucket tarball downloads are matched the same way. Approving or denying a specific resolved commit by its full tarball dep path continues to work.
+
 Denials by package name are not restricted this way: `foo: false` blocks `foo` whether it comes from the registry or from git.
 
 **Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and are treated as unreviewed. By default, an error is printed ([`strictDepBuilds`](#strictdepbuilds) defaults to `true`). If `strictDepBuilds` is set to `false`, a warning is printed instead.
@@ -1611,7 +1650,7 @@ versioning:
 ### savePrefix
 
 * Default: **'^'**
-* Type: **'^'**, **'~'**, **''**
+* Type: **'^'**, **'~'**, **''**, **'='**
 
 Configure how versions of packages installed to a `package.json` file get
 prefixed.
@@ -1620,6 +1659,10 @@ For example, if a package has version `1.2.3`, by default its version is set to
 `^1.2.3` which allows minor upgrades for that package, but after
 `pnpm config set save-prefix='~'` it would be set to `~1.2.3` which only allows
 patch upgrades.
+
+Since v11.19.0, `=` is also accepted: newly added dependencies are saved with an
+explicit `=` operator (`=1.2.3`), which pins the exact version. `pnpm update`
+keeps the `=` operator when it updates such a pin.
 
 This setting is ignored when the added package has a range specified. For
 instance, `pnpm add foo@2` will set the version of `foo` in `package.json` to

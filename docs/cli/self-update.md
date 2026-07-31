@@ -30,6 +30,15 @@ When the project's `package.json` has a `packageManager` field set to pnpm (or a
 
 If the project does not pin pnpm, or the pin is being ignored via [`pmOnFail: ignore`](../settings.md#pmonfail), `self-update` installs the resolved pnpm version globally and links it to `PNPM_HOME` so it becomes the active pnpm binary on your system.
 
+## Project settings are ignored
+
+Since v11.18.0, `pnpm self-update` takes no instruction from the project it is run in:
+
+* pnpm is fetched through the same trusted registry and auth configuration used when switching pnpm versions, so a project's `.npmrc` or `pnpm-workspace.yaml` cannot redirect the download or attach credentials to it, and the project's default `.pnpmfile.(c|m)js` is not loaded. Pnpmfiles from trusted sources (the [`pnpmfile`](../pnpmfile.md#pnpmfile) setting, the global pnpmfile, config dependencies) still apply.
+* The project's [`minimumReleaseAge`](../settings.md#minimumreleaseage), [`trustPolicy`](../settings.md#trustpolicy), and `ci` settings do not affect `self-update`. They still govern the project's own dependencies; for `self-update`, these values come from the built-in default, your global config, a `PNPM_CONFIG_*` environment variable, or a command-line flag. This stops a repository from either waiving the release-age cooldown or keeping you on an outdated pnpm by raising it, and from weakening the trust check that guards the pnpm download.
+
+When `self-update` refuses a version that is younger than the `minimumReleaseAge` cutoff, an interactive run offers to update anyway; non-interactive runs still fail. CI never prompts, even on a runner that attaches a TTY.
+
 ## Installing pnpm v12 (the Rust port)
 
 Since v11.10.0, `pnpm self-update` (and `packageManager` version-switching) can install and link **pnpm v12**, the Rust port. It is published under both the `pnpm` and `@pnpm/exe` names on the `next-12` dist-tag:
