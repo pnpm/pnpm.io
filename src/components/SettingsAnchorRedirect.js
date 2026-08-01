@@ -14,21 +14,29 @@ import { useEffect } from 'react'
  */
 export default function SettingsAnchorRedirect () {
   useEffect(() => {
-    const hash = window.location.hash.slice(1)
-    if (!hash) return
+    function redirect () {
+      const hash = window.location.hash.slice(1)
+      if (!hash) return
 
-    // Section anchors (`#store-settings`) still exist on this page. Let the
-    // browser scroll to them instead of redirecting.
-    if (document.getElementById(hash) != null) return
+      // Section anchors (`#store-settings`) still exist on this page. Let the
+      // browser scroll to them instead of redirecting.
+      if (document.getElementById(hash) != null) return
 
-    const escaped = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(hash) : hash
-    const links = document.querySelectorAll(`a[href$="#${escaped}"]`)
-    for (const link of links) {
-      if (link.pathname !== window.location.pathname) {
-        window.location.replace(link.href)
-        return
+      const escaped = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(hash) : hash
+      const links = document.querySelectorAll(`a[href$="#${escaped}"]`)
+      for (const link of links) {
+        if (link.pathname !== window.location.pathname) {
+          window.location.replace(link.href)
+          return
+        }
       }
     }
+
+    // The page stays mounted when only the fragment changes, so an old link
+    // followed from within the site needs the listener as well.
+    redirect()
+    window.addEventListener('hashchange', redirect)
+    return () => window.removeEventListener('hashchange', redirect)
   }, [])
 
   return null

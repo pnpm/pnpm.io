@@ -66,11 +66,11 @@ node_modules
     webpack@1.0.0_react@17.0.0
 project1
   node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0/node_modules/webpack
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_react@17.0.0/node_modules/webpack
     react (v17)
 project2
   node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
+    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_react@16.0.0_esbuild@1.0.0/node_modules/webpack
     esbuild
     react (v16)
 ```

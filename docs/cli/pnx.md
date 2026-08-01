@@ -79,7 +79,7 @@ Only the output of the executed command is printed.
 
 Since v11.0.0, `pnx` (and its `pnpm dlx` / `pnpx` aliases) honors the project-level security and trust policy settings when resolving and fetching the requested package:
 
-* [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage), [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude), [`minimumReleaseAgeStrict`](../settings/dependency-resolution.md#minimumreleaseage)
+* [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage), [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude), [`minimumReleaseAgeStrict`](../settings/dependency-resolution.md#minimumreleaseagestrict)
 * [`trustPolicy`](../settings/dependency-resolution.md#trustpolicy), [`trustPolicyExclude`](../settings/dependency-resolution.md#trustpolicyexclude), [`trustPolicyIgnoreAfter`](../settings/dependency-resolution.md#trustpolicyignoreafter)
 
 This means `pnx` will refuse to execute freshly published or insufficiently trusted packages the same way a regular `pnpm install` would.
