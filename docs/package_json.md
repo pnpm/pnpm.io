@@ -112,7 +112,7 @@ How it works:
 1. The exact version (and checksum) is saved in the lockfile.
 1. Scripts use the local runtime, ensuring consistency across environments.
 
-To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings/nodejs.md#runtimeonfail) setting.
+To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings/cli.md#runtimeonfail) setting.
 
 ## devEngines.packageManager
 

@@ -155,15 +155,12 @@
         },
         "items": [
           "settings/dependency-resolution",
-          "settings/hoisting",
           "settings/node-modules",
           "settings/store",
           "settings/network",
-          "settings/lockfile",
           "settings/peer-dependencies",
           "settings/cli",
           "settings/build",
-          "settings/nodejs",
           "settings/versioning",
           "settings/other"
         ]

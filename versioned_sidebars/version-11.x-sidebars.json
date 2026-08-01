@@ -454,10 +454,6 @@
             },
             {
               "type": "doc",
-              "id": "settings/hoisting"
-            },
-            {
-              "type": "doc",
               "id": "settings/node-modules"
             },
             {
@@ -470,10 +466,6 @@
             },
             {
               "type": "doc",
-              "id": "settings/lockfile"
-            },
-            {
-              "type": "doc",
               "id": "settings/peer-dependencies"
             },
             {
@@ -483,10 +475,6 @@
             {
               "type": "doc",
               "id": "settings/build"
-            },
-            {
-              "type": "doc",
-              "id": "settings/nodejs"
             },
             {
               "type": "doc",

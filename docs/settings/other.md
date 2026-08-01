@@ -198,7 +198,7 @@ virtual store. Disabling it produces slightly simpler command shims.
 
 [isolated `node_modules` layout]: ../symlinked-node-modules-structure.md
 [`import-local`]: https://github.com/sindresorhus/import-local
-[`hoistPattern`]: ./hoisting.md#hoistpattern
+[`hoistPattern`]: ./node-modules.md#hoistpattern
 [`enableGlobalVirtualStore`]: ./node-modules.md#enableglobalvirtualstore
 
 [`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts

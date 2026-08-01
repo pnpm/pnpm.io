@@ -140,20 +140,9 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [registries](./settings/dependency-resolution.md#registries)
 * [namedRegistries](./settings/dependency-resolution.md#namedregistries)
 
-### Dependency Hoisting Settings
-
-[Full reference →](./settings/hoisting.md)
-
-* [hoist](./settings/hoisting.md#hoist)
-* [hoistWorkspacePackages](./settings/hoisting.md#hoistworkspacepackages)
-* [hoistPattern](./settings/hoisting.md#hoistpattern)
-* [publicHoistPattern](./settings/hoisting.md#publichoistpattern)
-* [shamefullyHoist](./settings/hoisting.md#shamefullyhoist)
-* [hoistingLimits](./settings/hoisting.md#hoistinglimits)
-
 ### Node-Modules Settings
 
-[Full reference →](./settings/node-modules.md)
+[Full reference →](./settings/node-modules.md#node-modules-settings)
 
 * [modulesDir](./settings/node-modules.md#modulesdir)
 * [nodeLinker](./settings/node-modules.md#nodelinker)
@@ -169,9 +158,20 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [dlxCacheMaxAge](./settings/node-modules.md#dlxcachemaxage)
 * [enableGlobalVirtualStore](./settings/node-modules.md#enableglobalvirtualstore)
 
+### Dependency Hoisting Settings
+
+[Full reference →](./settings/node-modules.md#dependency-hoisting-settings)
+
+* [hoist](./settings/node-modules.md#hoist)
+* [hoistWorkspacePackages](./settings/node-modules.md#hoistworkspacepackages)
+* [hoistPattern](./settings/node-modules.md#hoistpattern)
+* [publicHoistPattern](./settings/node-modules.md#publichoistpattern)
+* [shamefullyHoist](./settings/node-modules.md#shamefullyhoist)
+* [hoistingLimits](./settings/node-modules.md#hoistinglimits)
+
 ### Store Settings
 
-[Full reference →](./settings/store.md)
+[Full reference →](./settings/store.md#store-settings)
 
 * [storeDir](./settings/store.md#storedir)
 * [verifyStoreIntegrity](./settings/store.md#verifystoreintegrity)
@@ -179,9 +179,20 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [strictStorePkgContentCheck](./settings/store.md#strictstorepkgcontentcheck)
 * [frozenStore](./settings/store.md#frozenstore)
 
+### Lockfile Settings
+
+[Full reference →](./settings/store.md#lockfile-settings)
+
+* [lockfile](./settings/store.md#lockfile)
+* [preferFrozenLockfile](./settings/store.md#preferfrozenlockfile)
+* [lockfileIncludeTarballUrl](./settings/store.md#lockfileincludetarballurl)
+* [gitBranchLockfile](./settings/store.md#gitbranchlockfile)
+* [mergeGitBranchLockfilesBranchPattern](./settings/store.md#mergegitbranchlockfilesbranchpattern)
+* [peersSuffixMaxLength](./settings/store.md#peerssuffixmaxlength)
+
 ### Network Settings
 
-[Full reference →](./settings/network.md)
+[Full reference →](./settings/network.md#network-settings)
 
 * [httpsProxy](./settings/network.md#httpsproxy)
 * [httpProxy](./settings/network.md#httpproxy)
@@ -192,7 +203,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 
 ### Request Settings
 
-[Full reference →](./settings/network.md)
+[Full reference →](./settings/network.md#request-settings)
 
 * [gitShallowHosts](./settings/network.md#gitshallowhosts)
 * [networkConcurrency](./settings/network.md#networkconcurrency)
@@ -203,17 +214,6 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [fetchTimeout](./settings/network.md#fetchtimeout)
 * [fetchWarnTimeoutMs](./settings/network.md#fetchwarntimeoutms)
 * [fetchMinSpeedKiBps](./settings/network.md#fetchminspeedkibps)
-
-### Lockfile Settings
-
-[Full reference →](./settings/lockfile.md)
-
-* [lockfile](./settings/lockfile.md#lockfile)
-* [preferFrozenLockfile](./settings/lockfile.md#preferfrozenlockfile)
-* [lockfileIncludeTarballUrl](./settings/lockfile.md#lockfileincludetarballurl)
-* [gitBranchLockfile](./settings/lockfile.md#gitbranchlockfile)
-* [mergeGitBranchLockfilesBranchPattern](./settings/lockfile.md#mergegitbranchlockfilesbranchpattern)
-* [peersSuffixMaxLength](./settings/lockfile.md#peerssuffixmaxlength)
 
 ### Peer Dependency Settings
 
@@ -233,7 +233,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 
 ### CLI Settings
 
-[Full reference →](./settings/cli.md)
+[Full reference →](./settings/cli.md#cli-settings)
 
 * [[no-]color](./settings/cli.md#no-color)
 * [loglevel](./settings/cli.md#loglevel)
@@ -243,6 +243,14 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [npmPath](./settings/cli.md#npmpath)
 * [pmOnFail](./settings/cli.md#pmonfail)
 * [ignoreWorkspaceRootCheck](./settings/cli.md#ignoreworkspacerootcheck)
+
+### Node.js Settings
+
+[Full reference →](./settings/cli.md#nodejs-settings)
+
+* [nodeVersion](./settings/cli.md#nodeversion)
+* [runtimeOnFail](./settings/cli.md#runtimeonfail)
+* [nodeDownloadMirrors](./settings/cli.md#nodedownloadmirrors)
 
 ### Build Settings
 
@@ -258,14 +266,6 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [strictDepBuilds](./settings/build.md#strictdepbuilds)
 * [allowBuilds](./settings/build.md#allowbuilds)
 * [dangerouslyAllowAllBuilds](./settings/build.md#dangerouslyallowallbuilds)
-
-### Node.js Settings
-
-[Full reference →](./settings/nodejs.md)
-
-* [nodeVersion](./settings/nodejs.md#nodeversion)
-* [runtimeOnFail](./settings/nodejs.md#runtimeonfail)
-* [nodeDownloadMirrors](./settings/nodejs.md#nodedownloadmirrors)
 
 ### Versioning Settings
 
