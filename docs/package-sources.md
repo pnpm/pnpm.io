@@ -7,7 +7,7 @@ pnpm supports installing packages from various sources. These sources are divide
 
 Exotic sources (like Git repositories or direct tarball URLs) can introduce supply chain risks when used by transitive dependencies. You can prevent transitive dependencies from using exotic sources by setting [`blockExoticSubdeps`] to `true`.
 
-[`blockExoticSubdeps`]: ./settings.md#blockexoticsubdeps
+[`blockExoticSubdeps`]: ./settings/dependency-resolution.md#blockexoticsubdeps
 
 ## Trusted sources
 
@@ -50,7 +50,7 @@ will be installed from the configured sources, depending on whether or not
 [`workspace: range protocol`].
 
 [workspace]: ./workspaces.md
-[`linkWorkspacePackages`]: ./settings.md#linkworkspacepackages
+[`linkWorkspacePackages`]: ./workspaces.md#linkworkspacepackages
 [`workspace: range protocol`]: ./workspaces.md#workspace-protocol-workspace
 
 ### Local file system

@@ -45,7 +45,7 @@ pnpm update "@babel/*" "\!@babel/core"
 
 Added in: v11.16.0
 
-[`pnpm outdated`](./outdated.md) can check the GitHub Actions referenced by the repository's workflow files for updates, and `pnpm update` can update them. This is opt-in for every command: pass [`--include-github-actions`](#--include-github-actions), or set [`update.githubActions`](../settings.md#updategithubactions) to `true` in `pnpm-workspace.yaml` to enable it by default.
+[`pnpm outdated`](./outdated.md) can check the GitHub Actions referenced by the repository's workflow files for updates, and `pnpm update` can update them. This is opt-in for every command: pass [`--include-github-actions`](#--include-github-actions), or set [`update.githubActions`](../settings/dependency-resolution.md#updategithubactions) to `true` in `pnpm-workspace.yaml` to enable it by default.
 
 Updated actions are pinned to exact commit hashes, with their release tags preserved in comments:
 
@@ -53,7 +53,7 @@ Updated actions are pinned to exact commit hashes, with their release tags prese
 - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 ```
 
-Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings.md#updategithubactionsserver) (added in v11.17.0).
+Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings/dependency-resolution.md#updategithubactionsserver) (added in v11.17.0).
 
 ## Options
 
@@ -119,7 +119,7 @@ Added in: v11.16.0
 
 After the update completes, write a [change intent](../versioning.md) — a changesets-compatible `.changeset/*.md` file — declaring a `patch` bump for every workspace package whose `dependencies` or `optionalDependencies` were changed by the update, and a `major` bump when its `peerDependencies` changed. Packages that consume an updated catalog entry via the `catalog:` protocol are included. Private packages, packages without a name, and packages listed in the `ignore` array of `.changeset/config.json` are skipped. If `.changeset/config.json` does not exist, a warning is printed and no changeset is generated.
 
-Set [`update.changeset`](../settings.md#updatechangeset) to `true` in `pnpm-workspace.yaml` to enable this behavior by default, and use `--no-changeset` to override the setting for one update.
+Set [`update.changeset`](../settings/dependency-resolution.md#updatechangeset) to `true` in `pnpm-workspace.yaml` to enable this behavior by default, and use `--no-changeset` to override the setting for one update.
 
 ### --include-github-actions
 

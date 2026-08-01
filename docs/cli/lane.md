@@ -13,7 +13,7 @@ pnpm lane <name> --filter <pattern>
 pnpm lane main --filter <pattern>
 ```
 
-Membership lives under the [`versioning.lanes`](../settings.md#versioninglanes) key of `pnpm-workspace.yaml`; this command is a convenience editor for that key.
+Membership lives under the [`versioning.lanes`](../settings/versioning.md#versioninglanes) key of `pnpm-workspace.yaml`; this command is a convenience editor for that key.
 
 ## Usage
 

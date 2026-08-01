@@ -66,7 +66,7 @@ Aliases: `list`. If no subcommand is given and the first argument looks like a s
 
 ### --registry &lt;url\&gt;
 
-The base URL of the npm registry to use for the operation. A registry configured for the organization's scope (via [`registries`](../settings.md#registries)) is respected.
+The base URL of the npm registry to use for the operation. A registry configured for the organization's scope (via [`registries`](../settings/dependency-resolution.md#registries)) is respected.
 
 ### --otp &lt;code\&gt;
 

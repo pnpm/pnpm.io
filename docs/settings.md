@@ -3,6 +3,10 @@ id: settings
 title: "Settings (pnpm-workspace.yaml)"
 ---
 
+import SettingsAnchorRedirect from '@site/src/components/SettingsAnchorRedirect'
+
+<SettingsAnchorRedirect />
+
 pnpm gets its configuration from the command line, environment variables, and `pnpm-workspace.yaml`.
 
 Only auth and registry settings are read from `.npmrc` files. All other settings (like `hoistPattern`, `nodeLinker`, `shamefullyHoist`, etc.) must be configured in `pnpm-workspace.yaml` or the global `~/.config/pnpm/config.yaml`.
@@ -24,1887 +28,307 @@ Values in the configuration files may contain env variables using the `${NAME}` 
 
 :::warning
 
-Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace.yaml` that define registry URLs: `registry` and the URL values of [`registries`](#registries) and [`namedRegistries`](#namedregistries). Values containing a `${...}` placeholder in these settings are ignored. Because `pnpm-workspace.yaml` is committed to the repository, expanding env variables in registry URLs could be exploited by a malicious repository to leak secrets from the environment to an attacker-controlled registry. Configure dynamic registry URLs in a trusted location instead: the global configuration file or CLI options.
+Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace.yaml` that define registry URLs: `registry` and the URL values of [`registries`](./settings/dependency-resolution.md#registries) and [`namedRegistries`](./settings/dependency-resolution.md#namedregistries). Values containing a `${...}` placeholder in these settings are ignored. Because `pnpm-workspace.yaml` is committed to the repository, expanding env variables in registry URLs could be exploited by a malicious repository to leak secrets from the environment to an attacker-controlled registry. Configure dynamic registry URLs in a trusted location instead: the global configuration file or CLI options.
 
 :::
 
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
-## Dependency Resolution
-
-### overrides
-
-This field allows you to instruct pnpm to override any dependency in the
-dependency graph, including peer dependencies. This is useful for enforcing all your packages to use a single
-version of a dependency, backporting a fix, replacing a dependency with a fork, or
-removing an unused dependency.
-
-Note that the overrides field can only be set at the root of the project.
-
-An example of the `overrides` field:
-
-```yaml
-overrides:
-  "foo": "^1.0.0"
-  "quux": "npm:@myorg/quux@^1.0.0"
-  "bar@^2.1.0": "3.0.0"
-  "qar@1>zoo": "2"
-```
-
-You may specify the package the overridden dependency belongs to by
-separating the package selector from the dependency selector with a ">", for
-example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
-any other dependencies.
-
-To keep an overridden version in sync with the version used elsewhere in your workspace, define the version in a [catalog](./catalogs.md) and reference it with the `catalog:` protocol. This way the version is maintained in a single place and referenced from both your dependencies and your overrides:
-
-```yaml title="pnpm-workspace.yaml"
-catalog:
-  foo: "^1.0.0"
-
-overrides:
-  foo: "catalog:"
-```
-
-You may also reference a named catalog with `catalog:<name>`. See [Catalogs](./catalogs.md) for more details.
-
-If you find that your use of a certain package doesn't require one of its dependencies, you may use `-` to remove it. For example, if package `foo@1.0.0` requires a large package named `bar` for a function that you don't use, removing it could reduce install time:
-
-```yaml
-overrides:
-  "foo@1.0.0>bar": "-"
-```
-
-This feature is especially useful with `optionalDependencies`, where most optional packages can be safely skipped.
-
-#### Convergence overrides
-
-Added in: v11.13.0
-
-A selector with an **empty range** — `"pkg@"` — is a convergence override. Unlike a regular override, which rewrites every matching edge unconditionally, a convergence override rewrites a dependency edge only when its version satisfies the range that edge declares:
-
-```yaml title="pnpm-workspace.yaml"
-overrides:
-  "form-data@": 4.0.6
-```
-
-With the above, a dependency that declares `form-data: "^4.0.5"` is pinned to `4.0.6`, while one that declares `^3.0.0` keeps its own resolution. This lets compatible consumers converge on a single version — now and for any dependent added in the future — without forcing an incompatible version on the rest of the graph.
-
-Rules:
-
-- The value must be an **exact version**. A range, a dist-tag, or a `-` removal fails with `ERR_PNPM_INVALID_CONVERGENCE_OVERRIDE`. A `catalog:` reference is allowed as long as the catalog entry resolves to an exact version.
-- Only plain semver edges participate. Edges declared with `workspace:`, `catalog:`, `npm:`, a dist-tag, or a git/URL specifier have no meaningful "satisfies" relation and are left untouched.
-- Convergence overrides cannot be combined with a parent selector: `"parent>pkg@"` is rejected.
-- A regular override always wins over a convergence override for the same edge.
-
-When a full resolution finds that every declared range also admits a newer version, pnpm warns that the override is stale and names the version to converge on instead.
-
-:::note
-
-Before v11.13.0, an empty range in an override selector was undocumented and behaved like a bare (unscoped) override.
-
-:::
-
-#### Overriding peer dependencies
-
-Overrides also apply to `peerDependencies`. The behavior depends on the type of version specifier used in the override:
-
-- **Semver ranges** (e.g., `^1.0.0`), **workspace**, and **catalog** protocols: the peer dependency is overridden and remains a peer dependency.
-- **Non-range specifiers** such as `link:` or `file:` protocols: the peer dependency is overridden and moved to `dependencies`, since these are not valid peer dependency ranges.
-- **Removal** (`-`): the peer dependency is removed entirely.
-
-For example, to override the `react` peer dependency of `react-dom`:
-
-```yaml title="pnpm-workspace.yaml"
-overrides:
-  "react-dom>react": "18.1.0"
-```
-
-### packageExtensions
-
-The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
-
-```yaml
-packageExtensions:
-  react-redux:
-    peerDependencies:
-      react-dom: "*"
-```
-
-The keys in `packageExtensions` are package names or package names and semver ranges, so it is possible to patch only some versions of a package:
-
-```yaml
-packageExtensions:
-  react-redux@1:
-    peerDependencies:
-      react-dom: "*"
-```
-
-The following fields may be extended using `packageExtensions`: `dependencies`, `optionalDependencies`, `peerDependencies`, and `peerDependenciesMeta`.
-
-A bigger example:
-
-```yaml
-packageExtensions:
-  express@1:
-    optionalDependencies:
-      typescript: "2"
-  fork-ts-checker-webpack-plugin:
-    dependencies:
-      "@babel/core": "1"
-    peerDependencies:
-      eslint: ">= 6"
-    peerDependenciesMeta:
-      eslint:
-        optional: true
-```
-
-:::tip
-
-Together with Yarn, we maintain a database of `packageExtensions` to patch broken packages in the ecosystem.
-If you use `packageExtensions`, consider sending a PR upstream and contributing your extension to the [`@yarnpkg/extensions`] database.
-
-:::
-
-[`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
-
-### allowedDeprecatedVersions
-
-This setting allows muting deprecation warnings of specific packages.
-
-Example:
-
-```yaml
-allowedDeprecatedVersions:
-  express: "1"
-  request: "*"
-```
-
-With the above configuration pnpm will not print deprecation warnings about any version of `request` and about v1 of `express`.
-
-### update
-
-Added in: v11.16.0
-
-Settings in this section tune the [`pnpm update`](./cli/update.md) and [`pnpm outdated`](./cli/outdated.md) commands.
-
-#### update.ignoreDeps
-
-Sometimes you can't update a dependency. For instance, the latest version of the dependency started to use ESM but your project is not yet in ESM. Annoyingly, such a package will be always printed out by the `pnpm outdated` command and updated, when running `pnpm update --latest`. However, you may list packages that you don't want to upgrade in the `ignoreDeps` field:
-
-```yaml
-update:
-  ignoreDeps:
-  - load-json-file
-```
-
-Patterns are also supported, so you may ignore any packages from a scope: `@babel/*`.
-
-#### update.changeset
-
-Added in: v11.16.0
-
-* Default: **false**
-* Type: **Boolean**
-
-When `true`, `pnpm update` writes a [change intent](./versioning.md) after updating workspace manifests, declaring a `patch` bump for every workspace package whose `dependencies` or `optionalDependencies` were changed by the update and a `major` bump when its `peerDependencies` changed. Same as passing [`--changeset`](./cli/update.md#--changeset); pass `--no-changeset` to override the setting for a single run.
-
-#### update.githubActions
-
-Added in: v11.16.0
-
-* Default: **false**
-* Type: **Boolean**
-
-When `true`, `pnpm update` and `pnpm outdated` also check the GitHub Actions referenced by the repository's workflow files. Same as passing [`--include-github-actions`](./cli/update.md#--include-github-actions). See [Updating GitHub Actions](./cli/update.md#updating-github-actions).
-
-#### update.githubActionsServer
-
-Added in: v11.17.0
-
-* Default: the `GITHUB_SERVER_URL` environment variable, falling back to **https://github.com**
-* Type: **URL**
-
-The base URL of the GitHub server that hosts the repositories of the GitHub Actions referenced by the workflow files (for example, a GitHub Enterprise Server). The URL must use the `https://` or `http://` protocol. Only use `http://` for a trusted server on a trusted network: the refs used to pin actions to commit hashes are fetched over this URL, and unencrypted traffic can be tampered with.
-
-:::info
-
-Before v11.16.0, `update.ignoreDeps` was named `updateConfig.ignoreDependencies`. The deprecated `updateConfig` setting keeps working until the next major version; when both are set, the `update` section takes precedence and a warning is printed.
-
-:::
-
-### supportedArchitectures
-
-You can specify architectures for which you'd like to install optional dependencies, even if they don't match the architecture of the system running the install.
-
-For example, the following configuration tells to install optional dependencies for Windows x64:
-
-```yaml
-supportedArchitectures:
-  os:
-  - win32
-  cpu:
-  - x64
-```
-
-Whereas this configuration will install optional dependencies for Windows, macOS, and the architecture of the system currently running the install. It includes artifacts for both x64 and arm64 CPUs:
-
-```yaml
-supportedArchitectures:
-  os:
-  - win32
-  - darwin
-  - current
-  cpu:
-  - x64
-  - arm64
-```
-
-Additionally, `supportedArchitectures` also supports specifying the `libc` of the system.
-
-### ignoredOptionalDependencies
-
-If an optional dependency has its name included in this array, it will be skipped. For example:
-
-```yaml
-ignoredOptionalDependencies:
-- fsevents
-- "@esbuild/*"
-```
-
-### minimumReleaseAge
-
-Added in: v10.16.0
-
-* Default: **1440** (since v11), **0** (before v11)
-* Type: **number (minutes)**
-
-To reduce the risk of installing compromised packages, you can delay the installation of newly published versions. In most cases, malicious releases are discovered and removed from the registry within an hour.
-
-`minimumReleaseAge` defines the minimum number of minutes that must pass after a version is published before pnpm will install it. This applies to **all dependencies**, including transitive ones.
-
-For example, the following setting ensures that only packages released at least one day ago can be installed:
-
-```yaml
-minimumReleaseAge: 1440
-```
-
-### minimumReleaseAgeExclude
-
-Added in: v10.16.0
-
-* Default: **undefined**
-* Type: **string[]**
-
-If you set `minimumReleaseAge` but need certain dependencies to always install the newest version immediately, you can list them under `minimumReleaseAgeExclude`. The exclusion works by **package name** and applies to all versions of that package.
-
-Example:
-
-```yaml
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-- webpack
-- react
-```
-
-In this case, all dependencies must be at least a day old, except `webpack` and `react`, which are installed immediately upon release.
-
-Added in: v10.17.0
-
-You may also use patterns. For instance, allow all packages from your org:
-
-```yaml
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-- '@myorg/*'
-```
-
-Added in: v10.19.0
-
-You may also exempt specific versions (or a list of specific versions using a disjunction with `||`). This allows pinning exceptions to mature-time rules:
-
-```yaml
-minimumReleaseAge: 1440
-minimumReleaseAgeExclude:
-- nx@21.6.5
-- webpack@4.47.0 || 5.102.1
-```
-
-### minimumReleaseAgeIgnoreMissingTime
-
-Added in: v11.0.0
-
-* Default: **true**
-* Type: **Boolean**
-
-When `true`, pnpm skips the [`minimumReleaseAge`](#minimumreleaseage) check for a package whose registry metadata does not include the `time` field (some private registries and mirrors omit it). Set to `false` to fail resolution in that case instead of installing the package.
-
-```yaml
-minimumReleaseAgeIgnoreMissingTime: false
-```
-
-### minimumReleaseAgeStrict
-
-Added in: v11.0.0
-
-* Default: **true** if [`minimumReleaseAge`](#minimumreleaseage) is explicitly configured, **false** otherwise
-* Type: **Boolean**
-
-Controls how pnpm behaves when no version of a dependency satisfies the [`minimumReleaseAge`](#minimumreleaseage) constraint within the requested range. When `false`, pnpm falls back to a version that doesn't meet the `minimumReleaseAge` constraint so installation can still succeed. When `true`, pnpm fails resolution instead.
-
-The default depends on whether you configured `minimumReleaseAge` yourself: if you set it explicitly (via `pnpm-workspace.yaml`, the CLI, or environment variables), strict mode is on by default so the setting is enforced. The built-in default of `minimumReleaseAge` (1440 minutes) is non-strict for backward compatibility.
-
-```yaml
-minimumReleaseAgeStrict: true
-```
-
-### trustPolicy
-
-Added in: v10.21.0
-
-* Default: **off**
-* Type: **no-downgrade** | **off**
-
-When set to `no-downgrade`, pnpm will fail if a package's trust level has decreased compared to previous releases. For example, if a package was previously published by a trusted publisher but now only has provenance or no trust evidence, installation will fail. This helps prevent installing potentially compromised versions. Trust checks are based solely on publish date, not semver. A package cannot be installed if any earlier-published version had stronger trust evidence. Starting in v10.24.0, prerelease versions are ignored when evaluating trust evidence for a non-prerelease install, so a trusted prerelease cannot block a stable release that lacks trust evidence.
-
-### trustPolicyExclude
-
-Added in: v10.22.0
-
-* Default: **[]**
-* Type: **string[]**
-
-A list of package selectors that should be excluded from the trust policy check. This allows you to install specific packages or versions even if they don't satisfy the `trustPolicy` requirement.
+## packages
+
+Besides settings, `pnpm-workspace.yaml` defines the root of the [workspace] and
+enables you to include / exclude directories from the workspace. If the
+`packages` field is omitted, only the root package is included in the workspace.
 
 For example:
 
-```yaml
-trustPolicy: no-downgrade
-trustPolicyExclude:
-  - 'chokidar@4.0.3'
-  - 'webpack@4.47.0 || 5.102.1'
-  - '@babel/core@7.28.5'
+```yaml title="pnpm-workspace.yaml"
+packages:
+  # specify a package in a direct subdir of the root
+  - 'my-app'
+  # all packages in direct subdirs of packages/
+  - 'packages/*'
+  # all packages in subdirs of components/
+  - 'components/**'
+  # exclude packages that are inside test directories
+  - '!**/test/**'
 ```
 
-### trustPolicyIgnoreAfter
+The root package is always included, even when custom location wildcards are
+used.
 
-Added in: v10.27.0
+Catalogs are also defined in the `pnpm-workspace.yaml` file. See [_Catalogs_](./catalogs.md) for details.
 
-* Default: **undefined**
-* Type: **number (minutes)**
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - 'packages/*'
 
-Allows ignoring the trust policy check for packages published more than the specified number of minutes ago. This is useful when enabling strict trust policies, as it allows older versions of packages (which may lack a process for publishing with signatures or provenance) to be installed without manual exclusion, assuming they are safe due to their age.
+catalog:
+  chalk: ^4.1.2
 
-### trustLockfile
+catalogs:
+  react16:
+    react: ^16.7.0
+    react-dom: ^16.7.0
+  react17:
+    react: ^17.10.0
+    react-dom: ^17.10.0
+```
 
-Added in: v11.3.0
+[workspace]: ./workspaces.md
 
-* Default: **false**
-* Type: **Boolean**
-
-When `true`, `pnpm install` skips the supply-chain verification pass that re-applies [`minimumReleaseAge`](#minimumreleaseage) and [`trustPolicy`](#trustpolicy) to every entry in the loaded lockfile. The install treats the lockfile as already trusted.
-
-Useful in environments where the lockfile is effectively part of the trusted base — closed-source projects where every commit comes from a trusted author. A poisoned lockfile (one a contributor authored under a weaker policy than CI enforces) can slip through, so leave this `false` whenever outside collaborators can edit the lockfile.
-
-On large workspaces the verification pass holds per-package registry metadata in memory for the duration of the install; disabling it cuts memory usage at the cost of the supply-chain check. Most projects with the default `frozenLockfile` CI workflow do not need to set this.
-
-### blockExoticSubdeps
-
-Added in: v10.26.0
-
-* Default: **true**
-* Type: **Boolean**
-
-When set to `true`, only direct dependencies (those listed in your root `package.json`) may use exotic sources (like git repositories or direct tarball URLs). All transitive dependencies must be resolved from a trusted source, such as the configured registry, local file paths, workspace links, or trusted GitHub repositories (node, bun, deno).
-
-This setting helps secure the dependency supply chain by preventing transitive dependencies from pulling in code from untrusted locations.
-
-Exotic sources include:
-* Git repositories (`git+ssh://...`)
-* Direct URL links to tarballs (`https://.../package.tgz`)
-
-### registries
+## packageConfigs
 
 Added in: v11.0.0
 
-* Default: **undefined**
-* Type: **Record&lt;string, string&gt;**
+Allows setting project-specific configuration for individual workspace packages. This replaces workspace project-specific `.npmrc` files.
 
-Configure registries for scoped packages in `pnpm-workspace.yaml`. The `default` key sets the main registry (equivalent to the `registry` `.npmrc` setting). Scoped keys configure registries for specific package scopes.
-
-```yaml
-registries:
-  default: https://registry.npmjs.org/
-  "@my-org": https://private.example.com/
-  "@internal": https://nexus.corp.com/
-```
-
-Since v11.11.0, this setting may also be defined in the [global configuration file](./cli/config.md) (`config.yaml`), which is useful for registries that should apply to every project on the machine rather than to a single repository.
-
-### namedRegistries
-
-Added in: v11.1.0
-
-* Default: **undefined**
-* Type: **Record&lt;string, string&gt;**
-
-Defines named registry aliases that can be used as a prefix when installing packages, in the style of [vlt's named-registry aliases](https://docs.vlt.sh/cli/registries). For example, with the following configuration:
+`packageConfigs` can be specified as a map of package names to config objects:
 
 ```yaml title="pnpm-workspace.yaml"
-namedRegistries:
-  gh: https://npm.pkg.github.example.com/
-  work: https://npm.work.example.com/
+packages:
+  - "packages/project-1"
+  - "packages/project-2"
+packageConfigs:
+  "project-1":
+    saveExact: true
+  "project-2":
+    savePrefix: "~"
 ```
 
-`pnpm add work:@corp/lib@^2.0.0` resolves `@corp/lib@^2.0.0` against `https://npm.work.example.com/`.
-
-The `gh:` alias is built in and points at the [GitHub Packages npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry) (`https://npm.pkg.github.com/`) by default. Override it under `namedRegistries` for GitHub Enterprise Server.
-
-Authentication is picked up from the existing per-URL `.npmrc` entries (e.g. `//npm.pkg.github.com/:_authToken=...`), so no separate auth mechanism is required.
-
-Since v11.11.0, this setting may also be defined in the [global configuration file](./cli/config.md) (`config.yaml`), so an alias like `work:` can be shared across every project on the machine.
-
-## Dependency Hoisting Settings
-
-### hoist
-
-* Default: **true**
-* Type: **boolean**
-
-When `true`, all dependencies are hoisted to `node_modules/.pnpm/node_modules`. This makes
-unlisted dependencies accessible to all packages inside `node_modules`.
-
-### hoistWorkspacePackages
-
-* Default: **true**
-* Type: **boolean**
-
-When `true`, packages from the workspaces are symlinked to either `<workspace_root>/node_modules/.pnpm/node_modules` or to `<workspace_root>/node_modules` depending on other hoisting settings (`hoistPattern` and `publicHoistPattern`).
-
-### hoistPattern
-
-* Default: **['\*']**
-* Type: **string[]**
-
-Tells pnpm which packages should be hoisted to `node_modules/.pnpm/node_modules`. By
-default, all packages are hoisted - however, if you know that only some flawed
-packages have phantom dependencies, you can use this option to exclusively hoist
-the phantom dependencies (recommended).
-
-For instance:
-
-```yaml
-hoistPattern:
-- "*eslint*"
-- "*babel*"
-```
-
-You may also exclude patterns from hoisting using `!`.
-
-For instance:
-
-```yaml
-hoistPattern:
-- "*types*"
-- "!@types/react"
-```
-
-### publicHoistPattern
-
-* Default: **[]**
-* Type: **string[]**
-
-Unlike `hoistPattern`, which hoists dependencies to a hidden modules directory
-inside the virtual store, `publicHoistPattern` hoists dependencies matching
-the pattern to the root modules directory. Hoisting to the root modules
-directory means that application code will have access to phantom dependencies,
-even if they modify the resolution strategy improperly.
-
-This setting is useful when dealing with some flawed pluggable tools that don't
-resolve dependencies properly.
-
-For instance:
-
-```yaml
-publicHoistPattern:
-- "*plugin*"
-```
-
-Note: Setting `shamefullyHoist` to `true` is the same as setting
-`publicHoistPattern` to `*`.
-
-You may also exclude patterns from hoisting using `!`.
-
-For instance:
-
-```yaml
-publicHoistPattern:
-- "*types*"
-- "!@types/react"
-```
-
-### shamefullyHoist
-
-* Default: **false**
-* Type: **Boolean**
-
-By default, pnpm creates a semistrict `node_modules`, meaning dependencies have
-access to undeclared dependencies but modules outside of `node_modules` do not.
-With this layout, most of the packages in the ecosystem work with no issues.
-However, if some tooling only works when the hoisted dependencies are in the
-root of `node_modules`, you can set this to `true` to hoist them for you.
-
-### hoistingLimits
-
-Added in: v11.5.0
-
-* Default: **none**
-* Type: **none**, **workspaces**, **dependencies**
-
-Controls how far dependencies are hoisted when using `nodeLinker: hoisted`. This setting mirrors Yarn's `nmHoistingLimits`.
-
-* **none** - hoist as far as possible (the default).
-* **workspaces** - hoist only as far as each workspace package, preventing dependencies from being hoisted above the workspace package that depends on them.
-* **dependencies** - hoist only up to each workspace package's direct dependencies, preventing transitive dependencies from being hoisted into the workspace package's `node_modules`.
-
-## Node-Modules Settings
-
-### modulesDir
-
-* Default: **node_modules**
-* Type: **path**
-
-The directory in which dependencies will be installed (instead of
-`node_modules`).
-
-### nodeLinker
-
-* Default: **isolated**
-* Type: **isolated**, **hoisted**, **pnp**
-
-Defines what linker should be used for installing Node packages.
-
-* **isolated** - dependencies are symlinked from a virtual store at `node_modules/.pnpm`.
-* **hoisted** - a flat `node_modules` without symlinks is created. Same as the `node_modules` created by npm or Yarn Classic. One of Yarn's libraries is used for hoisting, when this setting is used. Legitimate reasons to use this setting:
-  1. Your tooling doesn't work well with symlinks. A React Native project will most probably only work if you use a hoisted `node_modules`.
-  1. Your project is deployed to a serverless hosting provider. Some serverless providers (for instance, AWS Lambda) don't support symlinks. An alternative solution for this problem is to bundle your application before deployment.
-  1. If you want to publish your package with [`"bundledDependencies"`].
-  1. If you are running Node.js with the [--preserve-symlinks] flag.
-* **pnp** - no `node_modules`. Plug'n'Play is an innovative strategy for Node that is [used by Yarn Berry][pnp]. It is recommended to also set `symlink` setting to `false` when using `pnp` as
-your linker.
-
-[pnp]: https://yarnpkg.com/features/pnp
-[--preserve-symlinks]: https://nodejs.org/api/cli.html#cli_preserve_symlinks
-[`"bundledDependencies"`]: https://docs.npmjs.com/cli/v8/configuring-npm/package-json#bundleddependencies
-
-### nodeExperimentalPackageMap
-
-Added in: v11.8.0
-
-* Default: **false**
-* Type: **Boolean**
-
-When `true`, pnpm injects the generated `node_modules/.package-map.json` into pnpm-managed Node.js script environments by adding Node's `--experimental-package-map` option to `NODE_OPTIONS`.
-
-The package map is generated during isolated and hoisted installs. This setting only controls whether pnpm passes the generated map to scripts.
-
-CLI and environment configuration use the kebab-case name `node-experimental-package-map`.
-
-```yaml
-nodeExperimentalPackageMap: true
-```
-
-### nodePackageMapType
-
-Added in: v11.8.0
-
-* Default: **standard**
-* Type: **standard**, **loose**
-
-Controls how `node_modules/.package-map.json` is generated.
-
-* **standard** - only declared dependencies are available through the package map.
-* **loose** - also maps packages that are reachable through the installed `node_modules` layout, which can allow undeclared hoisted dependencies to resolve.
-
-CLI and environment configuration use the kebab-case name `node-package-map-type`.
-
-```yaml
-nodePackageMapType: loose
-```
-
-### symlink
-
-* Default: **true**
-* Type: **Boolean**
-
-When `symlink` is set to `false`, pnpm creates a virtual store directory without
-any symlinks. It is a useful setting together with `nodeLinker=pnp`.
-
-### enableModulesDir
-
-* Default: **true**
-* Type: **Boolean**
-
-When `false`, pnpm will not write any files to the modules directory
-(`node_modules`). This is useful for when the modules directory is mounted with
-filesystem in userspace (FUSE). There is an experimental CLI that allows you to
-mount a modules directory with FUSE: [@pnpm/mount-modules].
-
-[@pnpm/mount-modules]: https://www.npmjs.com/package/@pnpm/mount-modules
-
-### virtualStoreDir
-
-* Default: **node_modules/.pnpm**
-* Types: **path**
-
-The directory with links to the store. All direct and indirect dependencies of
-the project are linked into this directory.
-
-This is a useful setting that can solve issues with long paths on Windows. If
-you have some dependencies with very long paths, you can select a virtual store
-in the root of your drive (for instance `C:\my-project-store`).
-
-Or you can set the virtual store to `.pnpm` and add it to `.gitignore`. This
-will make stacktraces cleaner as paths to dependencies will be one directory
-higher.
-
-**NOTE:** the virtual store cannot be shared between several projects. Every
-project should have its own virtual store (except for in workspaces where the
-root is shared).
-
-### virtualStoreDirMaxLength
-
-* Default:
-  * On Linux/macOS: **120**
-  * On Windows: **60**
-* Types: **number**
-
-Sets the maximum allowed length of directory names inside the virtual store directory (`node_modules/.pnpm`). You may set this to a lower number if you encounter long path issues on Windows.
-
-### virtualStoreOnly
-
-Added in: v11.0.0
-
-* Default: **false**
-* Type: **Boolean**
-
-When set to `true`, pnpm populates the virtual store without creating importer symlinks, hoisting, bin links, or running lifecycle scripts. This is useful for pre-populating a store (e.g., in Nix builds) without creating unnecessary project-level artifacts. `pnpm fetch` uses this mode internally.
-
-### packageImportMethod
-
-* Default: **auto**
-* Type: **auto**, **hardlink**, **copy**, **clone**, **clone-or-copy**
-
-Controls the way packages are imported from the store (if you want to disable symlinks inside `node_modules`, then you need to change the [nodeLinker] setting, not this one).
-
-* **auto** - try to clone packages from the store. If cloning is not supported
-then hardlink packages from the store. If neither cloning nor linking is
-possible, fall back to copying
-* **hardlink** - hard link packages from the store
-* **clone-or-copy** - try to clone packages from the store. If cloning is not supported then fall back to copying
-* **copy** - copy packages from the store
-* **clone** - clone (AKA copy-on-write or reference link) packages from the store
-
-Cloning is the best way to write packages to node_modules. It is the fastest way and safest way. When cloning is used, you may edit files in your node_modules and they will not be modified in the central content-addressable store.
-
-Unfortunately, not all file systems support cloning. We recommend using a copy-on-write (CoW) file system (for instance, Btrfs instead of Ext4 on Linux) for the best experience with pnpm.
-
-[nodeLinker]: #nodeLinker
-
-### modulesCacheMaxAge
-
-* Default: **10080** (7 days in minutes)
-* Type: **number**
-
-The time in minutes after which orphan packages from the modules directory should be removed.
-pnpm keeps a cache of packages in the modules directory. This boosts installation speed when
-switching branches or downgrading dependencies.
-
-### dlxCacheMaxAge
-
-* Default: **1440** (1 day in minutes)
-* Type: **number**
-
-The time in minutes after which dlx cache expires.
-After executing a dlx command, pnpm keeps a cache that omits the installation step for subsequent calls to the same dlx command.
-
-### enableGlobalVirtualStore
-
-Added in: v10.12.1
-
-* Default: **false**
-* Type: **Boolean**
-
-:::note
-
-In pnpm v11, global installs (`pnpm add -g`) and `pnpm dlx` use the global virtual store by default.
-
-:::
-
-When enabled, `node_modules` contains only symlinks to a central virtual store, rather than to `node_modules/.pnpm`. By default, this central store is located at `<store-path>/links` (use `pnpm store path` to find `<store-path>`).
-
-In the central virtual store, each package is hard linked into a directory whose name is the hash of its dependency graph. As a result, all projects on the system can symlink their dependencies from this shared location on disk. This approach is conceptually similar to how [NixOS manages packages], using dependency graph hashes to create isolated and shareable package directories in the Nix store.
-
-> This should not be confused with the global content-addressable store. The actual package files are still hard linked from the content-addressable store—but instead of being linked directly into `node_modules/.pnpm`, they are linked into the global virtual store.
-
-Using a global virtual store can significantly speed up installations when a warm cache is available. However, in CI environments (where caches are typically absent), it may slow down installation. If pnpm detects that it is running in CI, this setting is automatically disabled.
-
-:::important
-
-To support hoisted dependencies when using a global virtual store, pnpm relies on the `NODE_PATH` environment variable. This allows Node.js to resolve packages from the hoisted `node_modules` directory. However, **this workaround does not work with ESM modules**, because Node.js no longer respects `NODE_PATH` when using ESM.
-
-If your dependencies are ESM and they import packages **not declared in their own `package.json`** (which is considered bad practice), you’ll likely run into resolution errors. There are two ways to fix this:
-* Use [packageExtensions] to explicitly add the missing dependencies.
-* Add the [@pnpm/plugin-esm-node-path] config dependency to your project. This plugin registers a custom ESM loader that restores `NODE_PATH` support for ESM, allowing hoisted dependencies to be resolved correctly.
-
-:::
-
-[packageExtensions]: #packageextensions
-[@pnpm/plugin-esm-node-path]: https://github.com/pnpm/plugin-esm-node-path
-[NixOS manages packages]: https://nixos.org/guides/how-nix-works/
-
-## Store Settings
-
-### storeDir
-
-* Default:
-  * If the **$PNPM_HOME** env variable is set, then **$PNPM_HOME/store**
-  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/store**
-  * On Windows: **~/AppData/Local/pnpm/store**
-  * On macOS: **~/Library/pnpm/store**
-  * On Linux: **~/.local/share/pnpm/store**
-* Type: **path**
-
-The location where all the packages are saved on the disk.
-
-The store should be always on the same disk on which installation is happening,
-so there will be one store per disk. If there is a home directory on the current
-disk, then the store is created inside it. If there is no home on the disk,
-then the store is created at the root of the filesystem. For
-example, if installation is happening on a filesystem mounted at `/mnt`,
-then the store will be created at `/mnt/.pnpm-store`. The same goes for Windows
-systems.
-
-It is possible to set a store from a different disk but in that case pnpm will
-copy packages from the store instead of hard-linking them, as hard links are
-only possible on the same filesystem.
-
-:::important
-
-The pnpm store is intended to be shared only between mutually trusted users, jobs, and processes. If you configure a shared `storeDir`, protect it with filesystem permissions so untrusted users cannot write to it. The store is part of pnpm's trust domain: packages may be hard linked from it, and the store index (`index.db`) records the hashes used to verify cached files.
-
-:::
-
-### verifyStoreIntegrity
-
-* Default: **true**
-* Type: **Boolean**
-
-By default, if a file in the store has been modified, the content of this file is checked before linking it to a project's `node_modules`. If `verifyStoreIntegrity` is set to `false`, files in the content-addressable store will not be checked during installation.
-
-This setting helps detect accidental store corruption. It does not make a store that is writable by untrusted users safe, because an attacker who can write to the store can alter both cached package contents and the metadata used to verify them.
-
-### useRunningStoreServer
-
-:::danger
-
-Deprecated feature
-
-:::
-
-* Default: **false**
-* Type: **Boolean**
-
-Only allows installation with a store server. If no store server is running,
-installation will fail.
-
-### strictStorePkgContentCheck
-
-* Default: **true**
-* Type: **Boolean**
-
-Some registries allow the exact same content to be published under different package names and/or versions. This breaks the validity checks of packages in the store. To avoid errors when verifying the names and versions of such packages in the store, you may set the `strictStorePkgContentCheck` setting to `false`.
-
-### frozenStore
-
-Added in: v11.7.0
-
-* Default: **false**
-* Type: **Boolean**
-
-Lets `pnpm install` run against a package store that lives on a read-only filesystem — for example a [Nix](https://nixos.org/) store, a read-only bind mount, or an OCI image layer. When enabled, pnpm opens the store's SQLite `index.db` in immutable mode (bypassing the WAL/`-shm` sidecar files that otherwise can't be created on a read-only directory) and suppresses every code path that would write to the store.
-
-Pair it with `--offline` and `--frozen-lockfile` against a fully-populated store:
-
-```sh
-pnpm install --frozen-store --offline --frozen-lockfile
-```
-
-The store must already contain everything the install needs, including the build output of any package whose lifecycle scripts are approved (or that has a patch applied). Under the [global virtual store](#enableglobalvirtualstore), those package directories live inside the store, so if a required build is missing the install fails up front with `ERR_PNPM_FROZEN_STORE_NEEDS_BUILD` — seed the store with those builds first. If the store is missing its content directory entirely, the install fails fast with `ERR_PNPM_FROZEN_STORE_INCOMPLETE` rather than trying to initialize it.
-
-`frozenStore` is incompatible with `--force` and with a configured pnpr server, since both write into the store. The [side effects cache](#sideeffectscache) is not written either.
-
-:::note
-
-The read-only store open requires Node.js >=22.15.0, >=23.11.0, or >=24.0.0. On older runtimes, `--frozen-store` fails with `ERR_PNPM_FROZEN_STORE_UNSUPPORTED_NODE`.
-
-:::
-
-## Network Settings
-
-### httpsProxy
-
-* Default: **null**
-* Type: **url**
-
-A proxy to use for outgoing HTTPS requests. If the `HTTPS_PROXY`, `https_proxy`,
-`HTTP_PROXY` or `http_proxy` environment variables are set, their values will be
-used instead.
-
-If your proxy URL contains a username and password, make sure to URL-encode them.
-For instance:
-
-```yaml
-httpsProxy: "https://use%21r:pas%2As@my.proxy:1234/foo"
-```
-
-Do not encode the colon (`:`) between the username and password.
-
-### httpProxy
-
-* Default: **null**
-* Type: **url**
-
-A proxy to use for outgoing HTTP requests. If the `HTTP_PROXY` or `http_proxy`
-environment variables are set, proxy settings will be honored by the underlying
-request library.
-
-### noProxy
-
-* Default: **null**
-* Type: **String**
-
-A comma-separated string of domain extensions that a proxy should not be used for.
-
-### localAddress
-
-* Default: **undefined**
-* Type: **IP Address**
-
-The IP address of the local interface to use when making connections to the npm
-registry.
-
-### maxsockets
-
-* Default: **networkConcurrency x 3**
-* Type: **Number**
-
-The maximum number of connections to use per origin (protocol/host/port combination).
-
-### strictSsl
-
-* Default: **true**
-* Type: **Boolean**
-
-Whether or not to do SSL key validation when making requests to the registry via
-HTTPS.
-
-## Lockfile Settings
-
-### lockfile
-
-* Default: **true**
-* Type: **Boolean**
-
-When set to `false`, pnpm won't read or generate a `pnpm-lock.yaml` file.
-
-### preferFrozenLockfile
-
-* Default: **true**
-* Type: **Boolean**
-
-When set to `true` and the available `pnpm-lock.yaml` satisfies the
-`package.json` dependencies directive, a headless installation is performed. A
-headless installation skips all dependency resolution as it does not need to
-modify the lockfile.
-
-### lockfileIncludeTarballUrl
-
-* Default: **false**
-* Type: **Boolean**
-
-Add the full URL to the package's tarball to every entry in `pnpm-lock.yaml`.
-
-### gitBranchLockfile
-
-* Default: **false**
-* Type: **Boolean**
-
-When set to `true`, the generated lockfile name after installation will be named 
-based on the current branch name to completely avoid merge conflicts. For example,
-if the current branch name is `feature-foo`, the corresponding lockfile name will
-be `pnpm-lock.feature-foo.yaml` instead of `pnpm-lock.yaml`. It is typically used 
-in conjunction with the command line argument `--merge-git-branch-lockfiles` or by
-setting `mergeGitBranchLockfilesBranchPattern` in the `pnpm-workspace.yaml` file.
-
-### mergeGitBranchLockfilesBranchPattern
-
-* Default: **null**
-* Type: **Array or null**
-
-This configuration matches the current branch name to determine whether to merge 
-all git branch lockfile files. By default, you need to manually pass the 
-`--merge-git-branch-lockfiles` command line parameter. This configuration allows 
-this process to be automatically completed.
-
-For instance:
-
-```yaml
-mergeGitBranchLockfilesBranchPattern:
-- main
-- release*
-```
-
-You may also exclude patterns using `!`.
-
-### peersSuffixMaxLength
-
-* Default: **1000**
-* Type: **number**
-
-Max length of the peer IDs suffix added to dependency keys in the lockfile. If the suffix is longer, it is replaced with a hash.
-
-
-## Request Settings
-
-### gitShallowHosts
-
-* Default: **['github.com', 'gist.github.com', 'gitlab.com', 'bitbucket.com', 'bitbucket.org']**
-* Type: **string[]**
-
-When fetching dependencies that are Git repositories, if the host is listed in this setting, pnpm will use shallow cloning to fetch only the needed commit, not all the history.
-
-### networkConcurrency
-
-* Default: **auto (workers × 3 clamped to 16-64)**
-* Type: **Number**
-
-Controls the maximum number of HTTP(S) requests to process simultaneously.
-
-As of v10.24.0, pnpm automatically selects a value between 16 and 64 based on the number of workers (networkConcurrency = clamp(workers × 3, 16, 64)). Set this value explicitly to override the automatic scaling.
-
-### fetchRetries
-
-* Default: **2**
-* Type: **Number**
-
-How many times to retry if pnpm fails to fetch from the registry.
-
-### fetchRetryFactor
-
-* Default: **10**
-* Type: **Number**
-
-The exponential factor for retry backoff.
-
-### fetchRetryMintimeout
-
-* Default: **10000 (10 seconds)**
-* Type: **Number**
-
-The lower bound (in milliseconds) of the retry exponential backoff.
-
-### fetchRetryMaxtimeout
-
-* Default: **60000 (1 minute)**
-* Type: **Number**
-
-The upper bound (in milliseconds) of the retry exponential backoff.
-
-### fetchTimeout
-
-* Default: **60000 (1 minute)**
-* Type: **Number**
-
-The maximum amount of time to wait for HTTP requests to connect and complete.
-This time should be enough to download the largest package over a reasonable connection.
-
-### fetchWarnTimeoutMs
-
-Added in: v10.18.0
-
-* Default: **10000 ms (10 seconds)**
-* Type: **Number**
-
-A warning message is displayed if a metadata request to the registry takes longer than the specified threshold (in milliseconds).
-
-### fetchMinSpeedKiBps
-
-Added in: v10.18.0
-
-* Default: **50 KiB/s**
-* Type: **Number**
-
-A warning message is displayed if the download speed of a tarball from the registry falls below the specified threshold (in KiB/s).
-
-## Peer Dependency Settings
-
-### autoInstallPeers
-
-* Default: **true**
-* Type: **Boolean**
-
-When `true`, any missing non-optional peer dependencies are automatically installed.
-
-#### Version Conflicts
-
-If there are conflicting version requirements for a peer dependency from different packages, pnpm will not install any version of the conflicting peer dependency automatically. Instead, a warning is printed. For example, if one dependency requires `react@^16.0.0` and another requires `react@^17.0.0`, these requirements conflict, and no automatic installation will occur.
-
-#### Conflict Resolution
-
-In case of a version conflict, you'll need to evaluate which version of the peer dependency to install yourself, or update the dependencies to align their peer dependency requirements.
-
-### dedupePeerDependents
-
-* Default: **true**
-* Type: **Boolean**
-
-When this setting is set to `true`, packages with peer dependencies will be deduplicated after peers resolution.
-
-For instance, let's say we have a workspace with two projects and both of them have `webpack` in their dependencies. `webpack` has `esbuild` in its optional peer dependencies, and one of the projects has `esbuild` in its dependencies. In this case, pnpm will link two instances of `webpack` to the `node_modules/.pnpm` directory: one with `esbuild` and another one without it:
-
-```
-node_modules
-  .pnpm
-    webpack@1.0.0_esbuild@1.0.0
-    webpack@1.0.0
-project1
-  node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0/node_modules/webpack
-project2
-  node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
-    esbuild
-```
-
-This makes sense because `webpack` is used in two projects, and one of the projects doesn't have `esbuild`, so the two projects cannot share the same instance of `webpack`. However, this is not what most developers expect, especially since in a hoisted `node_modules`, there would only be one instance of `webpack`. Therefore, you may now use the `dedupePeerDependents` setting to deduplicate `webpack` when it has no conflicting peer dependencies (explanation at the end). In this case, if we set `dedupePeerDependents` to `true`, both projects will use the same `webpack` instance, which is the one that has `esbuild` resolved:
-
-```
-node_modules
-  .pnpm
-    webpack@1.0.0_esbuild@1.0.0
-project1
-  node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
-project2
-  node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
-    esbuild
-```
-
-**What are conflicting peer dependencies?** By conflicting peer dependencies we mean a scenario like the following one:
-
-```
-node_modules
-  .pnpm
-    webpack@1.0.0_react@16.0.0_esbuild@1.0.0
-    webpack@1.0.0_react@17.0.0
-project1
-  node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0/node_modules/webpack
-    react (v17)
-project2
-  node_modules
-    webpack -> ../../node_modules/.pnpm/webpack@1.0.0_esbuild@1.0.0/node_modules/webpack
-    esbuild
-    react (v16)
-```
-
-In this case, we cannot dedupe `webpack` as `webpack` has `react` in its peer dependencies and `react` is resolved from two different versions in the context of the two projects.
-
-### dedupePeers
-
-Added in: v10.33.0
-
-* Default: **false**
-* Type: **Boolean**
-
-When enabled, peer dependency suffixes use version-only identifiers (`name@version`) instead of full dep paths, eliminating nested suffixes like `(foo@1.0.0(bar@2.0.0))`. This dramatically reduces the number of package instances in projects with many recursive peer dependencies.
-
-This is different from [`dedupePeerDependents`](#dedupepeerdependents), which deduplicates packages that have the same peer dependencies across different workspace projects. `dedupePeers` simplifies the peer dependency suffix format itself.
-
-### strictPeerDependencies
-
-* Default: **false**
-* Type: **Boolean**
-
-If this is enabled, commands will fail if there is a missing or invalid peer
-dependency in the tree.
-
-### resolvePeersFromWorkspaceRoot
-
-* Default: **true**
-* Type: **Boolean**
-
-When enabled, dependencies of the root workspace project are used to resolve peer dependencies of any projects in the workspace.
-It is a useful feature as you can install your peer dependencies only in the root of the workspace, and you can be sure that all projects in the workspace use the same versions of the peer dependencies.
-
-### peerDependencyRules
-
-#### peerDependencyRules.ignoreMissing
-
-pnpm will not print warnings about missing peer dependencies from this list.
-
-For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
-
-```yaml
-peerDependencyRules:
-  ignoreMissing:
-  - react
-```
-
-Package name patterns may also be used:
-
-```yaml
-peerDependencyRules:
-  ignoreMissing:
-  - "@babel/*"
-  - "@eslint/*"
-```
-
-#### peerDependencyRules.allowedVersions
-
-Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
-
-For instance, if you have some dependencies that need `react@16` but you know that they work fine with `react@17`, then you may use the following configuration:
-
-```yaml
-peerDependencyRules:
-  allowedVersions:
-    react: "17"
-```
-
-This will tell pnpm that any dependency that has react in its peer dependencies should allow `react` v17 to be installed.
-
-It is also possible to suppress the warnings only for peer dependencies of specific packages. For instance, with the following configuration `react` v17 will be only allowed when it is in the peer dependencies of the `button` v2 package or in the dependencies of any `card` package:
-
-```yaml
-peerDependencyRules:
-  allowedVersions:
-    "button@2>react": "17",
-    "card>react": "17"
-```
-
-#### peerDependencyRules.allowAny
-
-`allowAny` is an array of package name patterns, any peer dependency matching the pattern will be resolved from any version, regardless of the range specified in `peerDependencies`. For instance:
-
-```yaml
-peerDependencyRules:
-  allowAny:
-  - "@babel/*"
-  - "eslint"
-```
-
-The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
-
-## CLI Settings
-
-### [no-]color
-
-* Default: **auto**
-* Type: **auto**, **always**, **never**
-
-Controls colors in the output.
-
-* **auto** - output uses colors when the standard output is a terminal or TTY.
-* **always** - ignore the difference between terminals and pipes. You’ll rarely
-  want this; in most scenarios, if you want color codes in your redirected
-  output, you can instead pass a `--color` flag to the pnpm command to force it
-  to use color codes. The default setting is almost always what you’ll want.
-* **never** - turns off colors. This is the setting used by `--no-color`.
-
-### loglevel
-
-* Default: **info**
-* Type: **debug**, **info**, **warn**, **error**
-
-Any logs at or higher than the given level will be shown.
-You can instead pass `--silent` to turn off all output logs.
-
-### useBetaCli
-
-* Default: **false**
-* Type: **Boolean**
-
-Experimental option that enables beta features of the CLI. This means that you
-may get some changes to the CLI functionality that are breaking changes, or
-potentially bugs.
-
-### recursiveInstall
-
-* Default: **true**
-* Type: **Boolean**
-
-If this is enabled, the primary behaviour of `pnpm install` becomes that of
-`pnpm install -r`, meaning the install is performed on all workspace or
-subdirectory packages.
-
-Else, `pnpm install` will exclusively build the package in the current
-directory.
-
-### engineStrict
-
-* Default: **false**
-* Type: **Boolean**
-
-If this is enabled, pnpm will not install any package that claims to not be
-compatible with the current Node version.
-
-Regardless of this configuration, installation will always fail if a project
-(not a dependency) specifies an incompatible version in its `engines` field.
-
-### npmPath
-
-* Type: **path**
-
-The location of the npm binary that pnpm uses for some actions, like publishing.
-
-### pmOnFail
-
-Added in: v11.0.0
-
-* Default: **download**
-* Type: **download**, **error**, **warn**, **ignore**
-
-Overrides the `onFail` behavior of both the `packageManager` field and `devEngines.packageManager` when the running pnpm version does not match the declared one.
-
-* `download` — download and run the declared pnpm version (this is the default and matches the previous `managePackageManagerVersions: true` behavior).
-* `error` — fail the command (equivalent to the previous `packageManagerStrictVersion: true`).
-* `warn` — print a warning but continue (equivalent to the previous `packageManagerStrict: false` or `COREPACK_ENABLE_STRICT=0`).
-* `ignore` — skip the check entirely (equivalent to the previous `managePackageManagerVersions: false`). Useful when version management is handled by an external tool such as asdf, mise, or Volta.
-
-Can be set via CLI flag, environment variable, or `pnpm-workspace.yaml`:
-
-```sh
-pnpm install --pm-on-fail=ignore
-pnpm_config_pm_on_fail=ignore pnpm install
-```
+Or as an array of pattern-matched rules:
 
 ```yaml title="pnpm-workspace.yaml"
-pmOnFail: ignore
+packages:
+  - "packages/project-1"
+  - "packages/project-2"
+packageConfigs:
+  - match: ["project-1", "project-2"]
+    modulesDir: "node_modules"
+    saveExact: true
 ```
 
-This setting replaces the removed `managePackageManagerVersions`, `packageManagerStrict`, and `packageManagerStrictVersion` settings, as well as the `COREPACK_ENABLE_STRICT` environment variable.
-
-Migration:
-
-| Removed setting                       | Replace with                   |
-| ------------------------------------- | ------------------------------ |
-| `managePackageManagerVersions: true`  | `pmOnFail: download` (default) |
-| `managePackageManagerVersions: false` | `pmOnFail: ignore`             |
-| `packageManagerStrict: false`         | `pmOnFail: warn`               |
-| `packageManagerStrictVersion: true`   | `pmOnFail: error`              |
-| `COREPACK_ENABLE_STRICT=0`            | `pmOnFail: warn`               |
-
-See also [`pnpm with`](./cli/with.md) for running pnpm at a specific version without changing this setting.
-
-### ignoreWorkspaceRootCheck
-
-* Default: **false**
-* Type: **Boolean**
-
-If this is enabled, running `pnpm install`/`pnpm add` from the project's root 
-folder will no longer error when `-w`/`--ignore-workspace-root-check` is not 
-provided.
-
-## Build Settings
-
-### ignoreScripts
-
-* Default: **false**
-* Type: **Boolean**
-
-Do not execute any scripts defined in the project `package.json` and its
-dependencies.
-
-:::note
-
-This flag does not prevent the execution of [.pnpmfile.mjs](./pnpmfile.md)
-
-:::
-
-### childConcurrency
-
-* Default: **5**
-* Type: **Number**
-
-The maximum number of child processes to allocate simultaneously to build
-node_modules.
-
-### sideEffectsCache
-
-* Default: **true**
-* Type: **Boolean**
-
-Use and cache the results of (pre/post)install hooks.
-
-When a pre/post install script modify the contents of a package (e.g. build output), pnpm saves the modified package in the global store. On future installs on the same machine, pnpm reuses this cached, prebuilt version—making installs significantly faster.
-
-:::note
-
-You may want to disable this setting if:
-
-1. The install scripts modify files *outside* the package directory (pnpm cannot track or cache these changes).
-1. The scripts perform side effects that are unrelated to building the package.
-
-:::
-
-### sideEffectsCacheReadonly
-
-* Default: **false**
-* Type: **Boolean**
-
-Only use the side effects cache if present, do not create it for new packages.
-
-### unsafePerm
-
-* Default: **false** IF running as root, ELSE **true**
-* Type: **Boolean**
-
-Set to true to enable UID/GID switching when running package scripts.
-If set explicitly to false, then installing as a non-root user will fail.
-
-### nodeOptions
-
-* Default: **NULL**
-* Type: **String**
-
-Options to pass through to Node.js via the `NODE_OPTIONS` environment variable. This does not impact how pnpm itself is executed but it does impact how lifecycle scripts are called.
-
-To preserve existing `NODE_OPTIONS` you can reference the existing environment variable using `${NODE_OPTIONS}` in your configuration:
-
-```yaml
-nodeOptions: "${NODE_OPTIONS:- } --experimental-vm-modules"
-```
-
-### verifyDepsBeforeRun
-
-* Default: **install**
-* Type: **install**, **warn**, **error**, **prompt**, **false**
-
-This setting allows the checking of the state of dependencies before running scripts. The check runs on `pnpm run` and `pnpm exec` commands. The following values are supported:
-
-- `install` - Automatically runs install if `node_modules` is not up to date.
-- `warn` - Prints a warning if `node_modules` is not up to date.
-- `prompt` - Prompts the user for permission to run install if `node_modules` is not up to date.
-- `error` - Throws an error if `node_modules` is not up to date.
-- `false` - Disables dependency checks.
-
-### strictDepBuilds
-
-Added in: v10.3.0
-
-* Default: **true**
-* Type: **Boolean**
-
-When `strictDepBuilds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
-
-### allowBuilds
- 
-Added in: v10.26.0
- 
-A map of package matchers to explicitly allow (`true`) or disallow (`false`) script execution.
- 
-```yaml
-allowBuilds:
-  esbuild: true
-  core-js: false
-  # nx versions with build scripts not listed below will
-  # fail by default with ERR_PNPM_IGNORED_BUILDS
-  nx@21.6.4 || 21.6.5: true
-  nx@21.6.0: false
-```
-
-**Git-hosted packages:** a package name on its own never approves builds for a git or tarball dependency — the name alone does not identify the artifact. Approve one either by its exact resolved path (including the commit) or, since v11.11.0, by its repository URL:
-
-```yaml
-allowBuilds:
-  # Approves any commit from this repository
-  'foo@git+ssh://git@example.com/org/foo.git': true
-  # Approves only this exact commit
-  'bar@git+https://github.com/org/bar.git#abc123': true
-```
-
-The repository form lets a trusted git dependency keep running its build scripts across branch updates without re-approving each new commit. The key is the package name, followed by `@` and the git URL, with no `#<ref>` suffix. Matching is exact, so `git+ssh://` and `git+https://` URLs for the same repository are separate keys.
-
-Since v11.19.0, the repository form also approves git-hosted packages that pnpm downloads as a tarball rather than clones — such as `github:` dependencies, which are fetched from `codeload.github.com`. A `foo@git+https://github.com/org/foo.git` entry approves `foo` whether pnpm clones the repository or downloads a tarball. GitLab and Bitbucket tarball downloads are matched the same way. Approving or denying a specific resolved commit by its full tarball dep path continues to work.
-
-Denials by package name are not restricted this way: `foo: false` blocks `foo` whether it comes from the registry or from git.
-
-**Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and are treated as unreviewed. By default, an error is printed ([`strictDepBuilds`](#strictdepbuilds) defaults to `true`). If `strictDepBuilds` is set to `false`, a warning is printed instead.
-
-During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](./cli/add.md) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
-
-:::info Migrating from older settings
-
-To migrate these settings automatically, run `pnpx codemod run pnpm-v10-to-v11` from the [Migrating from v10 to v11](./migration.md) guide.
-
-The following settings have been removed in v11 and replaced by `allowBuilds`: `onlyBuiltDependencies`, `onlyBuiltDependenciesFile`, `neverBuiltDependencies`, `ignoredBuiltDependencies`, and `ignoreDepScripts`.
-
-Before:
-
-```yaml
-onlyBuiltDependencies:
-  - electron
-neverBuiltDependencies:
-  - core-js
-ignoredBuiltDependencies:
-  - esbuild
-```
-
-After:
-
-```yaml
-allowBuilds:
-  electron: true
-  core-js: false
-  esbuild: false
-```
-
-:::
-
-### dangerouslyAllowAllBuilds
-
-Added in: v10.9.0
-
-* Default: **false**
-* Type: **Boolean**
-
-If set to `true`, all build scripts (e.g. `preinstall`, `install`, `postinstall`) from dependencies will run automatically, without requiring approval.
-
-:::warning
-
-This setting allows all dependencies—including transitive ones—to run install scripts, both now and in the future.
-Even if your current dependency graph appears safe:
-
-* Future updates may introduce new, untrusted dependencies.
-* Existing packages may add scripts in later versions.
-* Packages can be hijacked or compromised and begin executing malicious code.
-
-For maximum safety, only enable this if you’re fully aware of the risks and trust the entire ecosystem you’re pulling from. It’s recommended to review and allow builds explicitly.
-
-:::
-
-## Node.js Settings
-
-### nodeVersion
-
-* Default: the value returned by **node -v**, without the v prefix
-* Type: **exact semver version (not a range)**
-
-The Node.js version to use when checking a package's `engines` setting.
-
-If you want to prevent contributors of your project from adding new incompatible dependencies, use `nodeVersion` and `engineStrict` in a `pnpm-workspace.yaml` file at the root of the project:
-
-```ini
-nodeVersion: 12.22.0
-engineStrict: true
-```
-
-This way, even if someone is using Node.js v16, they will not be able to install a new dependency that doesn't support Node.js v12.22.0.
-
-### runtimeOnFail
-
-Added in: v11.0.0
-
-* Default: **undefined**
-* Type: **download**, **error**, **warn**, **ignore**
-
-Overrides the `onFail` field of [`devEngines.runtime`](./package_json.md#devenginesruntime) (and `engines.runtime`) in the root project's `package.json`. This is useful when you want a different local behavior than what is written in the manifest — for instance, forcing pnpm to download the declared runtime even when the manifest sets `onFail: "warn"`:
-
-```yaml title="pnpm-workspace.yaml"
-runtimeOnFail: download
-```
-
-### nodeDownloadMirrors
-
-Added in: v11.0.0
-
-* Default: **undefined**
-* Type: **Record&lt;string, string&gt;**
-
-Configure custom Node.js download mirrors in `pnpm-workspace.yaml`. The keys are release channels (`release`, `rc`, `nightly`, `v8-canary`, etc.) and the values are base URLs.
-
-Here is how pnpm may be configured to download Node.js from a mirror in China:
-
-```yaml
-nodeDownloadMirrors:
-  release: https://npmmirror.com/mirrors/node/
-  rc: https://npmmirror.com/mirrors/node-rc/
-  nightly: https://npmmirror.com/mirrors/node-nightly/
-```
-
-## Versioning Settings
-
-Added in: v11.13.0
-
-These settings configure pnpm's native workspace release management, driven by [`pnpm change`](./cli/change.md) and the bare [`pnpm version -r`](./cli/version.md#recursive-releases). See [Release management](./versioning.md) for the workflow they belong to.
-
-Where two workspace projects publish the same name, a project may be referenced by its `./`-prefixed workspace-relative directory instead of its name in `versioning.fixed`, `versioning.ignore`, and the keys of `versioning.lanes`.
-
-### versioning.fixed
-
-* Default: **[]**
-* Type: **string[][]**
-
-Groups of packages that always release together at one shared version. The shared version is the highest current version in the group, bumped by the largest bump any member needs.
-
-```yaml title="pnpm-workspace.yaml"
-versioning:
-  fixed:
-    - ['@example/cli', '@example/napi']
-```
-
-A fixed group must move between lanes together, and must sit entirely inside or entirely outside an epic.
-
-### versioning.ignore
-
-* Default: **[]**
-* Type: **string[]**
-
-Packages permanently excluded from versioning and dependent propagation. A change intent that requests a real bump for an ignored package fails.
-
-```yaml title="pnpm-workspace.yaml"
-versioning:
-  ignore:
-    - '@example/internal'
-```
-
-### versioning.maxBump
-
-* Default: **undefined** (no cap)
-* Type: **'patch'**, **'minor'**, **'major'**
-
-Caps the bump a release from the current checkout may apply. It is enforced on the final assembled release plan, after dependent propagation and fixed-group resolution, so a patch-only maintenance branch cannot accidentally ship a minor.
-
-```yaml title="pnpm-workspace.yaml"
-versioning:
-  maxBump: patch
-```
-
-### versioning.lanes
-
-* Default: **{}**
-* Type: **Record&lt;string, string&gt;**
-
-Maps a package to the release lane it is on. A lane is a parallel release track that emits `X.Y.Z-<lane>.N` prereleases; every unlisted package is on the reserved default lane, `main`, and releases stable versions.
-
-```yaml title="pnpm-workspace.yaml"
-versioning:
-  lanes:
-    '@example/cli': alpha
-```
-
-Lane names may contain only alphanumerics and hyphens, and cannot be purely numeric. `main` is reserved and cannot be assigned — remove the entry instead, or use [`pnpm lane main --filter <pkg>`](./cli/lane.md).
-
-### versioning.epics
-
-* Default: **[]**
-* Type: **Array&lt;\{ lead: string, packages: string[] \}&gt;**
-
-Ties a group of member packages to a lead package, constraining every member's major version to a band derived from the lead's major: while the lead is on major `M`, members live in `M*100` … `M*100+99`.
-
-```yaml title="pnpm-workspace.yaml"
-versioning:
-  epics:
-    - lead: '@example/app'
-      packages:
-        - './packages/**'
-        - '!./packages/private-*'
-```
-
-`lead` is a package name or a `./`-prefixed workspace directory. `packages` is matched with pnpm's package selectors — name globs, `./`-prefixed directory globs, and `!`-prefixed negations — evaluated in order, last match wins. A package can belong to at most one epic.
-
-See [Epics](./versioning.md#epics) for how the band is enforced and re-based.
-
-### versioning.changelog.storage
-
-* Default: **'registry'**
-* Type: **'registry'**, **'repository'**
-
-Where release changelogs live.
-
-With `registry`, no `CHANGELOG.md` is committed: each release's section is composed at publish time and packed into the published tarball on top of the previously published version's changelog.
-
-With `repository`, a `CHANGELOG.md` is committed in every package.
-
-```yaml title="pnpm-workspace.yaml"
-versioning:
-  changelog:
-    storage: repository
-```
-
-## Other Settings
-
-### savePrefix
-
-* Default: **'^'**
-* Type: **'^'**, **'~'**, **''**, **'='**
-
-Configure how versions of packages installed to a `package.json` file get
-prefixed.
-
-For example, if a package has version `1.2.3`, by default its version is set to
-`^1.2.3` which allows minor upgrades for that package, but after
-`pnpm config set save-prefix='~'` it would be set to `~1.2.3` which only allows
-patch upgrades.
-
-Since v11.19.0, `=` is also accepted: newly added dependencies are saved with an
-explicit `=` operator (`=1.2.3`), which pins the exact version. `pnpm update`
-keeps the `=` operator when it updates such a pin.
-
-This setting is ignored when the added package has a range specified. For
-instance, `pnpm add foo@2` will set the version of `foo` in `package.json` to
-`2`, regardless of the value of `savePrefix`.
-
-### tag
-
-* Default: **latest**
-* Type: **String**
-
-If you `pnpm add` a package and you don't provide a specific version, then it
-will install the package at the version registered under the tag from this
-setting.
-
-This also sets the tag that is added to the `package@version` specified by the
-`pnpm tag` command if no explicit tag is given.
-
-### globalDir
-
-* Default:
-  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/global**
-  * On Windows: **~/AppData/Local/pnpm/global**
-  * On macOS: **~/Library/pnpm/global**
-  * On Linux: **~/.local/share/pnpm/global**
-* Type: **path**
-
-Specify a custom directory to store global packages.
-
-### globalBinDir
-
-* Default:
-  * If the **$XDG_DATA_HOME** env variable is set, then **$XDG_DATA_HOME/pnpm/bin**
-  * On Windows: **~/AppData/Local/pnpm/bin**
-  * On macOS: **~/Library/pnpm/bin**
-  * On Linux: **~/.local/share/pnpm/bin**
-* Type: **path**
-
-Allows to set the target directory for the bin files of globally installed packages.
-
-:::tip
-
-In pnpm v11, globally installed binaries are stored in a `bin` subdirectory of `PNPM_HOME` instead of directly in `PNPM_HOME`. This prevents internal directories like `global/` and `store/` from polluting shell autocompletion when `PNPM_HOME` is on PATH. After upgrading, run `pnpm setup` to update your shell configuration.
-
-:::
-
-### npmrcAuthFile
-
-Added in: v11.0.0
-
-* Default: **~/.npmrc**
-* Type: **path**
-
-The path to a file containing registry authentication tokens. By default, pnpm reads auth tokens from `~/.npmrc` as a fallback for registry authentication. Use this setting to point to a different file instead.
-
-This setting cannot be set in `pnpm-workspace.yaml` at the project level; set it in the global configuration file, via the `--npmrc-auth-file` CLI option, or via the `PNPM_CONFIG_NPMRC_AUTH_FILE` environment variable (the npm-style `NPM_CONFIG_USERCONFIG` is honored as a fallback). A relative path is resolved against the working directory.
-
-### stateDir
-
-* Default:
-  * If the **$XDG_STATE_HOME** env variable is set, then **$XDG_STATE_HOME/pnpm**
-  * On Windows: **~/AppData/Local/pnpm-state**
-  * On macOS: **~/.pnpm-state**
-  * On Linux: **~/.local/state/pnpm**
-* Type: **path**
-
-The directory where pnpm creates the `pnpm-state.json` file that is currently used only by the update checker.
-
-### cacheDir
-
-* Default:
-  * If the **$XDG_CACHE_HOME** env variable is set, then **$XDG_CACHE_HOME/pnpm**
-  * On Windows: **~/AppData/Local/pnpm-cache**
-  * On macOS: **~/Library/Caches/pnpm**
-  * On Linux: **~/.cache/pnpm**
-* Type: **path**
-
-The location of the cache (package metadata, dlx cache, and some install verification results).
-
-Like the store, the cache directory is intended to be shared only between mutually trusted users, jobs, and processes. If you configure or restore a shared `cacheDir`, protect it with filesystem permissions so untrusted users cannot write to it.
-
-### useStderr
-
-* Default: **false**
-* Type: **Boolean**
-
-When true, all the output is written to stderr.
-
-### updateNotifier
-
-* Default: **true**
-* Type: **Boolean**
-
-Set to `false` to suppress the update notification when using an older version of pnpm than the latest.
-
-### preferSymlinkedExecutables
-
-* Default: **true**, when **node-linker** is set to **hoisted** and the system is POSIX
-* Type: **Boolean**
-
-Create symlinks to executables in `node_modules/.bin` instead of command shims. This setting is ignored on Windows, where only command shims work.
-
-### ignoreCompatibilityDb
-
-* Default: **false**
-* Type: **Boolean**
-
-During installation the dependencies of some packages are automatically patched. If you want to disable this, set this config to `true`.
-
-The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
-
-### resolutionMode
-
-* Default: **highest** (was **lowest-direct** from v8.0.0 to v8.6.12)
-* Type: **highest**, **time-based**, **lowest-direct**
-
-When `resolutionMode` is set to `time-based`, dependencies will be resolved the following way:
-
-1. Direct dependencies will be resolved to their lowest versions. So if there is `foo@^1.1.0` in the dependencies, then `1.1.0` will be installed.
-1. Subdependencies will be resolved from versions that were published before the last direct dependency was published.
-
-With this resolution mode installations with warm cache are faster. It also reduces the chance of subdependency hijacking as subdependencies will be updated only if direct dependencies are updated.
-
-This resolution mode works only with npm's [full metadata]. So it is slower in some scenarios. However, if you use [Verdaccio] v5.15.1 or newer, you may set the `registrySupportsTimeField` setting to `true`, and it will be really fast.
-
-When `resolutionMode` is set to `lowest-direct`, direct dependencies will be resolved to their lowest versions.
-
-### registrySupportsTimeField
-
-* Default: **false**
-* Type: **Boolean**
-
-Set this to `true` if the registry that you are using returns the "time" field in the abbreviated metadata. As of now, only [Verdaccio] from v5.15.1 supports this.
-
-### extendNodePath
-
-* Default: **true**
-* Type: **Boolean**
-
-When `true`, pnpm sets the `NODE_PATH` environment variable in command shims
-(the wrapper scripts created in `node_modules/.bin`). When `false`, `NODE_PATH`
-is not set.
-
-#### Why this is needed
-
-pnpm's [isolated `node_modules` layout] means that a package can only access its
-own declared dependencies. However, when a CLI tool runs via a command shim, some
-libraries (notably [`import-local`], used by jest, eslint, and others) resolve
-modules from the **current working directory** rather than from the binary's own
-location. Since the working directory is the project root — not the package inside
-the virtual store — the standard `node_modules` resolution from the CWD won't
-find the binary's transitive dependencies.
-
-To bridge this gap, pnpm includes two types of paths in `NODE_PATH`:
-
-1. **The package's own dependencies directory** (e.g.,
-   `.pnpm/pkg@version/node_modules`) — this allows CWD-based resolution to find
-   the correct versions of the package's sibling dependencies.
-2. **The hoisted `node_modules` directory** (e.g., `.pnpm/node_modules`) — this
-   is the directory where hoisted packages are placed when [`hoistPattern`] is
-   set. Node.js cannot discover this directory through its standard resolution
-   algorithm, so it must be provided via `NODE_PATH`.
-
-`NODE_PATH` is also essential when [`enableGlobalVirtualStore`] is enabled.
-With a global virtual store, packages are symlinked from a central location
-outside the project, so Node.js's standard upward `node_modules` traversal from
-the binary's real path won't reach the project's own `node_modules` or its hoisted
-dependencies. In this case, `NODE_PATH` must include both the project's root
-`node_modules` and the hoisted directory at `node_modules/.pnpm/node_modules` to
-ensure correct resolution.
-
-#### When to disable
-
-You may set this to `false` if you are certain that none of the CLI tools in your
-project resolve modules from the working directory and you are not using a global
-virtual store. Disabling it produces slightly simpler command shims.
-
-[isolated `node_modules` layout]: ./symlinked-node-modules-structure.md
-[`import-local`]: https://github.com/sindresorhus/import-local
-[`hoistPattern`]: #hoistpattern
-[`enableGlobalVirtualStore`]: #enableglobalvirtualstore
-
-[`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts
-[full metadata]: https://github.com/npm/registry/blob/master/docs/responses/package-metadata.md#full-metadata-format
-[Verdaccio]: https://verdaccio.org/
-
-### deployAllFiles
-
-* Default: **false**
-* Type: **Boolean**
-
-When deploying a package or installing a local package, all files of the package are copied. By default, if the package has a `"files"` field in the `package.json`, then only the listed files and directories are copied.
-
-### dedupeDirectDeps
-
-* Default: **false**
-* Type: **Boolean**
-
-When set to `true`, dependencies that are already symlinked to the root `node_modules` directory of the workspace will not be symlinked to subproject `node_modules` directories.
-
-### optimisticRepeatInstall
-
-Added in: v10.1.0
-
-* Default: **true**
-* Type: **Boolean**
-
-When enabled, a fast check will be performed before proceeding to installation. This way a repeat install or an install on a project with everything up-to-date becomes a lot faster.
-
-### requiredScripts
-
-Scripts listed in this array will be required in each project of the workspace. Otherwise, `pnpm -r run <script name>` will fail.
-
-```yaml
-requiredScripts:
-- build
-```
-
-import EnablePrePostScripts from './settings/_enablePrePostScripts.mdx'
-
-<EnablePrePostScripts />
-
-import ScriptShell from './settings/_scriptShell.mdx'
-
-<ScriptShell />
-
-import ShellEmulator from './settings/_shellEmulator.mdx'
-
-<ShellEmulator />
-
-import CatalogMode from './settings/_catalogMode.mdx'
-
-<CatalogMode />
-
-### ci
-
-Added in: v10.12.1
-
-* Default: **true** (when the environment is detected as CI)
-* Type: **Boolean**
-
-This setting explicitly tells pnpm whether the current environment is a CI (Continuous Integration) environment.
-
-import CleanupUnusedCatalogs from './settings/_cleanupUnusedCatalogs.mdx'
-
-<CleanupUnusedCatalogs />
+## Settings
+
+Every setting is listed below, grouped by topic. Follow a setting to read its documentation, or open the full reference of a group.
+
+### Dependency Resolution
+
+[Full reference →](./settings/dependency-resolution.md)
+
+* [overrides](./settings/dependency-resolution.md#overrides)
+  * [Convergence overrides](./settings/dependency-resolution.md#convergence-overrides)
+  * [Overriding peer dependencies](./settings/dependency-resolution.md#overriding-peer-dependencies)
+* [packageExtensions](./settings/dependency-resolution.md#packageextensions)
+* [allowedDeprecatedVersions](./settings/dependency-resolution.md#alloweddeprecatedversions)
+* [update](./settings/dependency-resolution.md#update)
+  * [update.ignoreDeps](./settings/dependency-resolution.md#updateignoredeps)
+  * [update.changeset](./settings/dependency-resolution.md#updatechangeset)
+  * [update.githubActions](./settings/dependency-resolution.md#updategithubactions)
+  * [update.githubActionsServer](./settings/dependency-resolution.md#updategithubactionsserver)
+* [supportedArchitectures](./settings/dependency-resolution.md#supportedarchitectures)
+* [ignoredOptionalDependencies](./settings/dependency-resolution.md#ignoredoptionaldependencies)
+* [minimumReleaseAge](./settings/dependency-resolution.md#minimumreleaseage)
+* [minimumReleaseAgeExclude](./settings/dependency-resolution.md#minimumreleaseageexclude)
+* [minimumReleaseAgeIgnoreMissingTime](./settings/dependency-resolution.md#minimumreleaseageignoremissingtime)
+* [minimumReleaseAgeStrict](./settings/dependency-resolution.md#minimumreleaseagestrict)
+* [trustPolicy](./settings/dependency-resolution.md#trustpolicy)
+* [trustPolicyExclude](./settings/dependency-resolution.md#trustpolicyexclude)
+* [trustPolicyIgnoreAfter](./settings/dependency-resolution.md#trustpolicyignoreafter)
+* [trustLockfile](./settings/dependency-resolution.md#trustlockfile)
+* [blockExoticSubdeps](./settings/dependency-resolution.md#blockexoticsubdeps)
+* [registries](./settings/dependency-resolution.md#registries)
+* [namedRegistries](./settings/dependency-resolution.md#namedregistries)
+
+### Node-Modules Settings
+
+[Full reference →](./settings/node-modules.md#node-modules-settings)
+
+* [modulesDir](./settings/node-modules.md#modulesdir)
+* [nodeLinker](./settings/node-modules.md#nodelinker)
+* [nodeExperimentalPackageMap](./settings/node-modules.md#nodeexperimentalpackagemap)
+* [nodePackageMapType](./settings/node-modules.md#nodepackagemaptype)
+* [symlink](./settings/node-modules.md#symlink)
+* [enableModulesDir](./settings/node-modules.md#enablemodulesdir)
+* [virtualStoreDir](./settings/node-modules.md#virtualstoredir)
+* [virtualStoreDirMaxLength](./settings/node-modules.md#virtualstoredirmaxlength)
+* [virtualStoreOnly](./settings/node-modules.md#virtualstoreonly)
+* [packageImportMethod](./settings/node-modules.md#packageimportmethod)
+* [modulesCacheMaxAge](./settings/node-modules.md#modulescachemaxage)
+* [dlxCacheMaxAge](./settings/node-modules.md#dlxcachemaxage)
+* [enableGlobalVirtualStore](./settings/node-modules.md#enableglobalvirtualstore)
+
+### Dependency Hoisting Settings
+
+[Full reference →](./settings/node-modules.md#dependency-hoisting-settings)
+
+* [hoist](./settings/node-modules.md#hoist)
+* [hoistWorkspacePackages](./settings/node-modules.md#hoistworkspacepackages)
+* [hoistPattern](./settings/node-modules.md#hoistpattern)
+* [publicHoistPattern](./settings/node-modules.md#publichoistpattern)
+* [shamefullyHoist](./settings/node-modules.md#shamefullyhoist)
+* [hoistingLimits](./settings/node-modules.md#hoistinglimits)
+
+### Store Settings
+
+[Full reference →](./settings/store.md#store-settings)
+
+* [storeDir](./settings/store.md#storedir)
+* [verifyStoreIntegrity](./settings/store.md#verifystoreintegrity)
+* [useRunningStoreServer](./settings/store.md#userunningstoreserver)
+* [strictStorePkgContentCheck](./settings/store.md#strictstorepkgcontentcheck)
+* [frozenStore](./settings/store.md#frozenstore)
+
+### Lockfile Settings
+
+[Full reference →](./settings/store.md#lockfile-settings)
+
+* [lockfile](./settings/store.md#lockfile)
+* [preferFrozenLockfile](./settings/store.md#preferfrozenlockfile)
+* [lockfileIncludeTarballUrl](./settings/store.md#lockfileincludetarballurl)
+* [gitBranchLockfile](./settings/store.md#gitbranchlockfile)
+* [mergeGitBranchLockfilesBranchPattern](./settings/store.md#mergegitbranchlockfilesbranchpattern)
+* [peersSuffixMaxLength](./settings/store.md#peerssuffixmaxlength)
+
+### Network Settings
+
+[Full reference →](./settings/network.md#network-settings)
+
+* [httpsProxy](./settings/network.md#httpsproxy)
+* [httpProxy](./settings/network.md#httpproxy)
+* [noProxy](./settings/network.md#noproxy)
+* [localAddress](./settings/network.md#localaddress)
+* [maxsockets](./settings/network.md#maxsockets)
+* [strictSsl](./settings/network.md#strictssl)
+
+### Request Settings
+
+[Full reference →](./settings/network.md#request-settings)
+
+* [gitShallowHosts](./settings/network.md#gitshallowhosts)
+* [networkConcurrency](./settings/network.md#networkconcurrency)
+* [fetchRetries](./settings/network.md#fetchretries)
+* [fetchRetryFactor](./settings/network.md#fetchretryfactor)
+* [fetchRetryMintimeout](./settings/network.md#fetchretrymintimeout)
+* [fetchRetryMaxtimeout](./settings/network.md#fetchretrymaxtimeout)
+* [fetchTimeout](./settings/network.md#fetchtimeout)
+* [fetchWarnTimeoutMs](./settings/network.md#fetchwarntimeoutms)
+* [fetchMinSpeedKiBps](./settings/network.md#fetchminspeedkibps)
+
+### Peer Dependency Settings
+
+[Full reference →](./settings/peer-dependencies.md)
+
+* [autoInstallPeers](./settings/peer-dependencies.md#autoinstallpeers)
+  * [Version Conflicts](./settings/peer-dependencies.md#version-conflicts)
+  * [Conflict Resolution](./settings/peer-dependencies.md#conflict-resolution)
+* [dedupePeerDependents](./settings/peer-dependencies.md#dedupepeerdependents)
+* [dedupePeers](./settings/peer-dependencies.md#dedupepeers)
+* [strictPeerDependencies](./settings/peer-dependencies.md#strictpeerdependencies)
+* [resolvePeersFromWorkspaceRoot](./settings/peer-dependencies.md#resolvepeersfromworkspaceroot)
+* [peerDependencyRules](./settings/peer-dependencies.md#peerdependencyrules)
+  * [peerDependencyRules.ignoreMissing](./settings/peer-dependencies.md#peerdependencyrulesignoremissing)
+  * [peerDependencyRules.allowedVersions](./settings/peer-dependencies.md#peerdependencyrulesallowedversions)
+  * [peerDependencyRules.allowAny](./settings/peer-dependencies.md#peerdependencyrulesallowany)
+
+### CLI Settings
+
+[Full reference →](./settings/cli.md#cli-settings)
+
+* [[no-]color](./settings/cli.md#no-color)
+* [loglevel](./settings/cli.md#loglevel)
+* [useBetaCli](./settings/cli.md#usebetacli)
+* [recursiveInstall](./settings/cli.md#recursiveinstall)
+* [engineStrict](./settings/cli.md#enginestrict)
+* [npmPath](./settings/cli.md#npmpath)
+* [pmOnFail](./settings/cli.md#pmonfail)
+* [ignoreWorkspaceRootCheck](./settings/cli.md#ignoreworkspacerootcheck)
+
+### Node.js Settings
+
+[Full reference →](./settings/cli.md#nodejs-settings)
+
+* [nodeVersion](./settings/cli.md#nodeversion)
+* [runtimeOnFail](./settings/cli.md#runtimeonfail)
+* [nodeDownloadMirrors](./settings/cli.md#nodedownloadmirrors)
+
+### Build Settings
+
+[Full reference →](./settings/build.md)
+
+* [ignoreScripts](./settings/build.md#ignorescripts)
+* [childConcurrency](./settings/build.md#childconcurrency)
+* [sideEffectsCache](./settings/build.md#sideeffectscache)
+* [sideEffectsCacheReadonly](./settings/build.md#sideeffectscachereadonly)
+* [unsafePerm](./settings/build.md#unsafeperm)
+* [nodeOptions](./settings/build.md#nodeoptions)
+* [verifyDepsBeforeRun](./settings/build.md#verifydepsbeforerun)
+* [strictDepBuilds](./settings/build.md#strictdepbuilds)
+* [allowBuilds](./settings/build.md#allowbuilds)
+* [dangerouslyAllowAllBuilds](./settings/build.md#dangerouslyallowallbuilds)
+
+### Versioning Settings
+
+[Full reference →](./settings/versioning.md)
+
+* [versioning.fixed](./settings/versioning.md#versioningfixed)
+* [versioning.ignore](./settings/versioning.md#versioningignore)
+* [versioning.maxBump](./settings/versioning.md#versioningmaxbump)
+* [versioning.lanes](./settings/versioning.md#versioninglanes)
+* [versioning.epics](./settings/versioning.md#versioningepics)
+* [versioning.changelog.storage](./settings/versioning.md#versioningchangelogstorage)
+
+### Other Settings
+
+[Full reference →](./settings/other.md)
+
+* [savePrefix](./settings/other.md#saveprefix)
+* [tag](./settings/other.md#tag)
+* [globalDir](./settings/other.md#globaldir)
+* [globalBinDir](./settings/other.md#globalbindir)
+* [npmrcAuthFile](./settings/other.md#npmrcauthfile)
+* [stateDir](./settings/other.md#statedir)
+* [cacheDir](./settings/other.md#cachedir)
+* [useStderr](./settings/other.md#usestderr)
+* [updateNotifier](./settings/other.md#updatenotifier)
+* [preferSymlinkedExecutables](./settings/other.md#prefersymlinkedexecutables)
+* [ignoreCompatibilityDb](./settings/other.md#ignorecompatibilitydb)
+* [resolutionMode](./settings/other.md#resolutionmode)
+* [registrySupportsTimeField](./settings/other.md#registrysupportstimefield)
+* [extendNodePath](./settings/other.md#extendnodepath)
+  * [Why this is needed](./settings/other.md#why-this-is-needed)
+  * [When to disable](./settings/other.md#when-to-disable)
+* [deployAllFiles](./settings/other.md#deployallfiles)
+* [dedupeDirectDeps](./settings/other.md#dedupedirectdeps)
+* [optimisticRepeatInstall](./settings/other.md#optimisticrepeatinstall)
+* [requiredScripts](./settings/other.md#requiredscripts)
+* [enablePrePostScripts](./settings/other.md#enableprepostscripts)
+* [scriptShell](./settings/other.md#scriptshell)
+* [shellEmulator](./settings/other.md#shellemulator)
+* [catalogMode](./settings/other.md#catalogmode)
+* [ci](./settings/other.md#ci)
+* [cleanupUnusedCatalogs](./settings/other.md#cleanupunusedcatalogs)
+
+### Workspace Settings
+
+These settings are configured in `pnpm-workspace.yaml` as well, but are documented together with the workspace feature they belong to.
+
+[Full reference →](./workspaces.md#configuration)
+
+* [linkWorkspacePackages](./workspaces.md#linkworkspacepackages)
+* [injectWorkspacePackages](./workspaces.md#injectworkspacepackages)
+* [dedupeInjectedDeps](./workspaces.md#dedupeinjecteddeps)
+* [syncInjectedDepsAfterScripts](./workspaces.md#syncinjecteddepsafterscripts)
+* [preferWorkspacePackages](./workspaces.md#preferworkspacepackages)
+* [sharedWorkspaceLockfile](./workspaces.md#sharedworkspacelockfile)
+* [saveWorkspaceProtocol](./workspaces.md#saveworkspaceprotocol)
+* [includeWorkspaceRoot](./workspaces.md#includeworkspaceroot)
+* [ignoreWorkspaceCycles](./workspaces.md#ignoreworkspacecycles)
+* [disallowWorkspaceCycles](./workspaces.md#disallowworkspacecycles)
+* [failIfNoMatch](./workspaces.md#failifnomatch)
+
+### Settings documented elsewhere
+
+* [patchedDependencies](./cli/patch.md#patcheddependencies)
+* [pnpmfile](./pnpmfile.md#pnpmfile), [globalPnpmfile](./pnpmfile.md#globalpnpmfile) and [ignorePnpmfile](./pnpmfile.md#ignorepnpmfile)
+* Authorization settings, which are read from [`.npmrc`](./npmrc.md)

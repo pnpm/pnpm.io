@@ -21,4 +21,4 @@ pnpm patch-commit <path>
 
 The generated patch file will be saved to this directory. By default, patches are saved to the `patches` directory in the root of the project.
 
-[`patchedDependencies`]: ../settings.md#patcheddependencies
+[`patchedDependencies`]: ./patch.md#patcheddependencies

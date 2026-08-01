@@ -34,4 +34,4 @@ pnpm repo react react-dom
 
 ### --registry &lt;url\>
 
-The registry from which to fetch package metadata when an explicit package name is given. Per-scope and named registries (configured via [`registries`](../settings.md#registries) and [`namedRegistries`](../settings.md#namedregistries)) are respected.
+The registry from which to fetch package metadata when an explicit package name is given. Per-scope and named registries (configured via [`registries`](../settings/dependency-resolution.md#registries) and [`namedRegistries`](../settings/dependency-resolution.md#namedregistries)) are respected.

@@ -49,7 +49,7 @@ After pruning, pnpm displays the total size of removed files.
 
 When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on the global virtual store's `links/` directory. Projects using the store are registered via symlinks in `{storeDir}/v11/projects/`, allowing pnpm to track active usage and safely remove unused packages from the global virtual store.
 
-[global virtual store]: ../settings.md#enableglobalvirtualstore
+[global virtual store]: ../settings/node-modules.md#enableglobalvirtualstore
 
 ### path
 
