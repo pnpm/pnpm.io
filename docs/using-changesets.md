@@ -91,7 +91,7 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm and node.js
+      - name: Setup pnpm and Node.js
         uses: pnpm/setup@v2
         with:
           version: 11
