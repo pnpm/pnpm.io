@@ -151,7 +151,6 @@ jobs:
       - name: Install pnpm and Node.js
         uses: pnpm/setup@c9883cc79df532ad1a7b81bf9ab944ceb090d65c # v2.0.0
         with:
-          version: 11
           runtime: node@${{ matrix.node-version }}
           cache: true
 ```
@@ -160,6 +159,10 @@ jobs:
 runtime, so no separate `actions/setup-node` step is needed. It also runs `pnpm
 install` for you, and `cache: true` caches the pnpm store between runs. Set
 `install: false` if you would rather run the install yourself.
+
+The pnpm version comes from the `packageManager` or `devEngines.packageManager`
+field of your `package.json`, so the workflow never needs updating when you
+change it. Add a `version` input if your `package.json` declares neither.
 
 [pnpm-setup]: https://github.com/pnpm/setup
 
