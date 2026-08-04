@@ -148,18 +148,20 @@ jobs:
         node-version: [24]
     steps:
       - uses: actions/checkout@v6
-      - name: Install pnpm
-        uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d # v6.0.5
+      - name: Install pnpm and Node.js
+        uses: pnpm/setup@c9883cc79df532ad1a7b81bf9ab944ceb090d65c # v2.0.0
         with:
           version: 11
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v6
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
+          runtime: node@${{ matrix.node-version }}
+          cache: true
 ```
+
+[`pnpm/setup`][pnpm-setup] installs pnpm, then uses it to install the requested
+runtime, so no separate `actions/setup-node` step is needed. It also runs `pnpm
+install` for you, and `cache: true` caches the pnpm store between runs. Set
+`install: false` if you would rather run the install yourself.
+
+[pnpm-setup]: https://github.com/pnpm/setup
 
 ## GitLab CI
 
