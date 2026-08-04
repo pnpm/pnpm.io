@@ -430,8 +430,69 @@ namedRegistries:
 
 `pnpm add work:@corp/lib@^2.0.0` resolves `@corp/lib@^2.0.0` against `https://npm.work.example.com/`.
 
-The `gh:` alias is built in and points at the [GitHub Packages npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry) (`https://npm.pkg.github.com/`) by default. Override it under `namedRegistries` for GitHub Enterprise Server.
-
 Authentication is picked up from the existing per-URL `.npmrc` entries (e.g. `//npm.pkg.github.com/:_authToken=...`), so no separate auth mechanism is required.
 
 Since v11.11.0, this setting may also be defined in the [global configuration file](../cli/config.md) (`config.yaml`), so an alias like `work:` can be shared across every project on the machine.
+
+#### Built-in aliases
+
+Two aliases work without any configuration:
+
+| Alias    | Registry                      | Notes                                                                                                                                         |
+|----------|-------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `gh:`    | `https://npm.pkg.github.com/` | The [GitHub Packages npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry). |
+| `npmjs:` | `https://registry.npmjs.org/` | The public npm registry. Added in v11.20.0.                                                                                                   |
+
+Entries you define under `namedRegistries` are merged on top of these, so either one can be overridden — GitHub Enterprise Server users point `gh` at their own host, and an organization that mirrors or proxies npmjs should point `npmjs` at the mirror:
+
+```yaml title="pnpm-workspace.yaml"
+namedRegistries:
+  gh: https://npm.pkg.github.example.com/
+  npmjs: https://npm.internal.example.com/
+```
+
+`npmjs:` pins a dependency to the public registry even when the default [`registry`](#registries) points somewhere else, such as an internal proxy:
+
+```json title="package.json"
+{
+  "dependencies": {
+    "left-pad": "npmjs:^1.3.0"
+  }
+}
+```
+
+The `npm:` prefix cannot do this — it is the [alias protocol](../aliases.md) (`npm:<name>@<range>`) and resolves through whatever `registry` points at.
+
+The built-in URLs are also the prefixes that a tarball URL recorded in the lockfile is matched against when pnpm verifies a package. If you proxy npmjs and do not override the alias, an entry whose tarball URL is on `registry.npmjs.org` is verified against the public registry rather than against your mirror. This only affects lockfiles that record such a URL — a canonical URL for your configured registry is omitted from the lockfile — and only when a tarball-URL, [`minimumReleaseAge`](#minimumreleaseage), or [`trustPolicy`](#trustpolicy) check runs.
+
+#### Reserved alias names
+
+Since v11.20.0, an alias that shadows a reserved dependency specifier prefix (`file`, `link`, `workspace`, `runtime`, `npm`, `jsr`, `git`, `github`, `gitlab`, `bitbucket`, `catalog`, `custom`, `http`, `https`, `ssh`) is rejected with `ERR_PNPM_RESERVED_NAMED_REGISTRY_NAME`. Previously such an alias was silently shadowed by the corresponding resolver. An alias must also start with a letter and contain only letters, digits, `.`, `_`, and `-`.
+
+#### Named registries in the lockfile
+
+Since v11.20.0, a package resolved from a named registry is recorded in `pnpm-lock.yaml` under a registry-qualified key, `<name>@<registryName>:<version>`:
+
+```yaml title="pnpm-lock.yaml"
+packages:
+  foo@work:1.0.0:
+    resolution: {integrity: sha512-...}
+```
+
+Before v11.20.0, packages were keyed by `name@version` alone, so the same name and version served by two registries collapsed onto a single entry and whichever resolved first decided the tarball that every consumer got. That is a package-substitution risk: a package you expect from your private registry could be installed from another registry that publishes the same name and version, with nothing in the lockfile to reveal it. Registry-qualified keys give each registry its own entry and pin which one a dependency came from.
+
+The lockfile format version is unchanged, and qualified keys appear only for packages resolved from a named registry. A project that does not use `namedRegistries` sees no difference, and older pnpm versions keep reading the file.
+
+:::caution
+
+If you use named registries, your first non-frozen install on v11.20.0 or newer re-keys those entries, which shows up as a lockfile diff. Commit it — that diff is the fix being applied. Review it too: an entry that moves to a registry you did not expect is worth investigating.
+
+Have everyone working on the project move to v11.20.0 or newer first. An older pnpm reads the re-keyed lockfile fine, and frozen installs are unaffected, but it does not produce registry-qualified keys itself: any install that updates the lockfile writes those entries back to the old shape, and the next install on a current pnpm re-qualifies them. The lockfile then flips back and forth, and while it is in the old shape the project is exposed again. Because the lockfile format version is deliberately unchanged, pnpm cannot detect this and warn you.
+
+There is no setting to keep the old behavior — the old shape is the vulnerability.
+
+:::
+
+Every alias that the lockfile references must stay in `namedRegistries`. Reading an entry whose alias is gone fails with `ERR_PNPM_MISSING_NAMED_REGISTRY` rather than falling back to the default registry, since that would fetch a different package. Renaming an alias re-resolves the packages that used it.
+
+Tarball URLs that follow the standard registry layout are no longer written to the lockfile for named-registry packages; they are recomputed from `namedRegistries` on demand.

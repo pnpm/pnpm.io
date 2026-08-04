@@ -24,6 +24,8 @@ httpsProxy: "https://use%21r:pas%2As@my.proxy:1234/foo"
 
 Do not encode the colon (`:`) between the username and password.
 
+Since v11.20.0, an empty value reads as unset instead of failing the install with `ERR_PNPM_INVALID_PROXY`, so a shell that exports `HTTPS_PROXY=` simply disables the proxy. Setting the value to `false` or `null` in `pnpm-workspace.yaml` or the `.npmrc` also turns proxying off. On the command line, `false` and `null` are ordinary host names, since a flag carries its value verbatim.
+
 ### httpProxy
 
 * Default: **null**
@@ -33,12 +35,18 @@ A proxy to use for outgoing HTTP requests. If the `HTTP_PROXY` or `http_proxy`
 environment variables are set, proxy settings will be honored by the underlying
 request library.
 
+Empty, `false`, and `null` values behave as described for [`httpsProxy`](#httpsproxy).
+
+The `.npmrc` also supports npm's legacy `proxy` setting, which is used as the fallback for both `https-proxy` and `http-proxy`. Since v11.20.0, an empty `proxy=` reads as unset and therefore no longer suppresses the `HTTPS_PROXY` environment variable, and `proxy=false` (or `proxy: false` in `pnpm-workspace.yaml`) turns proxying off instead of being read as a proxy host named `false` ([#13533](https://github.com/pnpm/pnpm/issues/13533)).
+
 ### noProxy
 
 * Default: **null**
 * Type: **String**
 
 A comma-separated string of domain extensions that a proxy should not be used for.
+
+Empty, `false`, and `null` values behave as described for [`httpsProxy`](#httpsproxy).
 
 ### localAddress
 

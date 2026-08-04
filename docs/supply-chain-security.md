@@ -29,6 +29,10 @@ Additionally, the [trustPolicyIgnoreAfter] setting allows you to ignore trust ch
 
 It goes without saying that you should always lock your dependencies with a lockfile. Commit your lockfile to your repository to avoid unexpected updates.
 
+### Pin dependencies to the registry they come from
+
+If you install from more than one registry, use [namedRegistries] aliases for the packages that must come from a specific one. Since v11.20.0, pnpm records those packages in the lockfile under registry-qualified keys (`<name>@<registryName>:<version>`), so a package cannot be quietly substituted by another registry that publishes the same name and version. See [Named registries in the lockfile]. Packages installed without an alias are resolved through the default [registries] configuration as before.
+
 [Socket]: https://socket.dev/
 [Snyk]: https://snyk.io
 [Xygeni]: https://xygeni.io/
@@ -41,3 +45,6 @@ It goes without saying that you should always lock your dependencies with a lock
 [allowBuilds]: settings/build.md#allowbuilds
 [blockExoticSubdeps]: settings/dependency-resolution.md#blockexoticsubdeps
 [trustPolicyIgnoreAfter]: settings/dependency-resolution.md#trustpolicyignoreafter
+[namedRegistries]: settings/dependency-resolution.md#namedregistries
+[registries]: settings/dependency-resolution.md#registries
+[Named registries in the lockfile]: settings/dependency-resolution.md#named-registries-in-the-lockfile
