@@ -94,7 +94,6 @@ jobs:
       - name: Setup pnpm and Node.js
         uses: pnpm/setup@v2
         with:
-          version: 11
           runtime: node@20
           cache: true
       
