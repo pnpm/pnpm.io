@@ -91,17 +91,12 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup node.js
-        uses: actions/setup-node@v4
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v2
         with:
-          node-version: 20
-          cache: 'pnpm'
-      
-      - name: Install dependencies
-        run: pnpm install
+          version: 11
+          runtime: node@20
+          cache: true
       
       - name: Create and publish versions
         uses: changesets/action@v1
