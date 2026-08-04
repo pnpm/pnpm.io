@@ -42,6 +42,20 @@ pnpm add jsr:@hono/hono@latest
 
 This works just like installing from npm, but tells pnpm to resolve the package through JSR instead.
 
+### Named registries
+
+Added in: v11.1.0
+
+A [named registry](./settings/dependency-resolution.md#namedregistries) alias resolves a package against a specific registry, regardless of the default one:
+
+```sh
+pnpm add work:@corp/lib@^2.0.0
+pnpm add gh:@my-org/private-pkg
+pnpm add npmjs:left-pad
+```
+
+`gh:` (GitHub Packages) and, since v11.20.0, `npmjs:` (the public npm registry) work without configuration. Any other alias must be mapped under [`namedRegistries`](./settings/dependency-resolution.md#namedregistries) in `pnpm-workspace.yaml` or, since v11.11.0, in the [global configuration file](./cli/config.md) (`config.yaml`).
+
 ### Workspace
 
 Note that when adding dependencies and working within a [workspace], packages
