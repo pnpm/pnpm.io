@@ -1,0 +1,73 @@
+---
+id: pnpm-workspace_yaml
+title: pnpm-workspace.yaml
+---
+
+`pnpm-workspace.yaml` 定義了 [workspace][] 且能夠讓您設定工作區中包含/排除的目錄。 If the `packages` field is omitted, only the root package is included in the workspace.
+
+範例：
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  # specify a package in a direct subdir of the root
+  - 'my-app'
+  # all packages in direct subdirs of packages/
+  - 'packages/*'
+  # all packages in subdirs of components/
+  - 'components/**'
+  # exclude packages that are inside test directories
+  - '!**/test/**'
+```
+
+即使使用了萬用字源自定義位置，根目錄中的套件還是會被包含在內。
+
+Catalogs are also defined in the `pnpm-workspace.yaml` file. See [_Catalogs_](./catalogs.md) for details.
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - 'packages/*'
+
+catalog:
+  chalk: ^4.1.2
+
+catalogs:
+  react16:
+    react: ^16.7.0
+    react-dom: ^16.7.0
+  react17:
+    react: ^17.10.0
+    react-dom: ^17.10.0
+```
+
+## packageConfigs
+
+Added in: v11.0.0
+
+Allows setting project-specific configuration for individual workspace packages. This replaces workspace project-specific `.npmrc` files.
+
+`packageConfigs` can be specified as a map of package names to config objects:
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - "packages/project-1"
+  - "packages/project-2"
+packageConfigs:
+  "project-1":
+    saveExact: true
+  "project-2":
+    savePrefix: "~"
+```
+
+Or as an array of pattern-matched rules:
+
+```yaml title="pnpm-workspace.yaml"
+packages:
+  - "packages/project-1"
+  - "packages/project-2"
+packageConfigs:
+  - match: ["project-1", "project-2"]
+    modulesDir: "node_modules"
+    saveExact: true
+```
+
+[workspace]: workspaces.md

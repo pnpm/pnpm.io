@@ -1,0 +1,47 @@
+name: sync translations
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Weekly on Monday at 02:00 UTC
+    - cron: '0 2 * * 1'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    environment: deploy
+    env:
+      COREPACK_ENABLE_AUTO_PIN: 0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4.1.0
+        with:
+          standalone: true
+      - name: Install dependencies
+        run: pnpm install
+      - name: Sync translations from Crowdin
+        run: pnpm crowdin:sync
+        env:
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
+      - name: Build with all locales
+        run: pnpm build
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/sync-translations
+          commit-message: 'chore: sync translations from Crowdin'
+          title: 'chore: sync translations from Crowdin'
+          body: |
+            Automated translation sync from Crowdin.
+
+            Triggered by: `${{ github.event_name }}`
+          labels: translations
+          delete-branch: true
