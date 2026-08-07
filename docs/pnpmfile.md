@@ -212,7 +212,7 @@ Returns a fingerprint of any external state that the pnpmfile's behavior depends
 
 pnpm's up-to-date checks (used by [`verifyDepsBeforeRun`](./settings/build.md#verifydepsbeforerun) and [`optimisticRepeatInstall`](./settings/other.md#optimisticrepeatinstall)) normally look only at local files: manifests, the lockfile, patches, and the pnpmfiles themselves. A pnpmfile whose hooks read external state can be "logically changed" without any of those files changing. This hook closes that gap: the returned fingerprint is recorded in the workspace state file after each install, and if a later check sees a different value, `node_modules` is treated as outdated and a full install runs — including the [`shouldRefreshResolution`](#shouldrefreshresolutiondeppath-pkgsnapshot-boolean--promiseboolean) hooks of custom resolvers.
 
-The fingerprint is never written to the lockfile, so it does not need to be stable across machines.
+The fingerprint is never written to the lockfile, so it does not need to be stable across machines. It must, however, be deterministic on a given machine: return the same value for as long as the relevant external state is unchanged. Do not derive it from the current time, random values, or unordered iteration — a value that varies between calls invalidates `node_modules` on every check.
 
 :::note
 
@@ -225,11 +225,17 @@ The hook runs whenever pnpm checks whether `node_modules` is up to date: before 
 ```js
 // .pnpmfile.cjs
 const fs = require('fs')
+const path = require('path')
 
 function calculateFingerprint () {
   // Invalidate node_modules whenever the custom package source changes.
-  const stats = fs.statSync('/path/to/custom/package/source')
-  return String(stats.mtimeMs)
+  // Combine per-file mtimes: the directory's own mtime is not enough, as
+  // it does not change when an existing file is edited in place.
+  const sourceDir = '/path/to/custom/package/source'
+  return fs.readdirSync(sourceDir)
+    .sort()
+    .map((name) => `${name}:${fs.statSync(path.join(sourceDir, name)).mtimeMs}`)
+    .join(';')
 }
 
 module.exports = {
