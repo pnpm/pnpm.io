@@ -40,7 +40,7 @@ As a consequence, the Node.js module resolver algorithm will find the correct pe
 
 *If the resolved peer is a direct dependency of the project*, it is not grouped separately with the dependent package.
 This is done to make it easier to make predictable and fast named (`pnpm i foo`) and general (`pnpm i`) installations.
-So if the project dependends on `bar@1.0.0`, the dependencies from our example will be grouped like this:
+So if the project depends on `bar@1.0.0`, the dependencies from our example will be grouped like this:
 
 ![](/img/how-peers-are-resolved/3.png)
 

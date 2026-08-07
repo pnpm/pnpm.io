@@ -26,7 +26,7 @@ projects and dependencies, and you have a lot faster installations!
 
 ## Boosting installation speed
 
-pnpm perfoms installation in three stages:
+pnpm performs installation in three stages:
 
 1. Dependency resolution. All required dependencies are identified and fetched to the store.
 1. Directory structure calculation. The `node_modules` directory structure is calculated based on the dependencies.
