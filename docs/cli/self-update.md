@@ -39,6 +39,8 @@ Since v11.18.0, `pnpm self-update` takes no instruction from the project it is r
 
 When `self-update` refuses a version that is younger than the `minimumReleaseAge` cutoff, an interactive run offers to update anyway; non-interactive runs still fail. CI never prompts, even on a runner that attaches a TTY.
 
+Running [`pnpm store prune`](./store.md#prune) removes previously installed global versions once they are no longer linked (after a newer install replaces them) while keeping the version currently in use. Install directories created within a 5-minute safety window are skipped.
+
 ## Installing pnpm v12 (the Rust port)
 
 Since v11.10.0, `pnpm self-update` (and `packageManager` version-switching) can install and link **pnpm v12**, the Rust port. It is published under both the `pnpm` and `@pnpm/exe` names on the `next-12` dist-tag:
