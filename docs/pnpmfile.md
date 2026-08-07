@@ -19,6 +19,7 @@ lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
 | `hooks.readPackage(pkg, context): pkg`                | Called after pnpm parses the dependency's package manifest | Allows you to mutate a dependency's `package.json`. |
 | `hooks.afterAllResolved(lockfile, context): lockfile` | Called after the dependencies have been resolved.          | Allows you to mutate the lockfile.                 |
 | `hooks.beforePacking(pkg): pkg`                       | Called before creating a tarball during pack/publish       | Allows you to customize the published `package.json` |
+| `hooks.calculateFingerprint(): string`              | Called by the up-to-date checks before installs and script runs | Allows you to invalidate `node_modules` when external state changes. |
 | `resolvers`                                           | Called during package resolution.                          | Allows you to register custom package resolvers.  |
 | `fetchers`                                            | Called during package fetching.                            | Allows you to register custom package fetchers.   |
 
@@ -203,6 +204,47 @@ This hook allows to change how packages are written to `node_modules`. The retur
 * `options.resolvedFrom`
 * `options.keepModulesDir`
 
+### `hooks.calculateFingerprint(): string | Promise<string>`
+
+Added in: v11.15.0
+
+Returns a fingerprint of any external state that the pnpmfile's behavior depends on — for example, the state of a custom package source used by a [custom resolver](#custom-resolvers).
+
+pnpm's up-to-date checks (used by [`verifyDepsBeforeRun`](./settings/build.md#verifydepsbeforerun) and [`optimisticRepeatInstall`](./settings/other.md#optimisticrepeatinstall)) normally look only at local files: manifests, the lockfile, patches, and the pnpmfiles themselves. A pnpmfile whose hooks read external state can be "logically changed" without any of those files changing. This hook closes that gap: the returned fingerprint is recorded in the workspace state file after each install, and if a later check sees a different value, `node_modules` is treated as outdated and a full install runs — including the [`shouldRefreshResolution`](#shouldrefreshresolutiondeppath-pkgsnapshot-boolean--promiseboolean) hooks of custom resolvers.
+
+The fingerprint is never written to the lockfile, so it does not need to be stable across machines. It must, however, be deterministic on a given machine: return the same value for as long as the relevant external state is unchanged. Do not derive it from the current time, random values, or unordered iteration — a value that varies between calls invalidates `node_modules` on every check.
+
+:::note
+
+The hook runs whenever pnpm checks whether `node_modules` is up to date: before `pnpm run` and `pnpm exec` (when [`verifyDepsBeforeRun`](./settings/build.md#verifydepsbeforerun) is enabled, as it is by default), at the start of a repeat `pnpm install` (when [`optimisticRepeatInstall`](./settings/other.md#optimisticrepeatinstall) is enabled, as it is by default), and at the end of every install that updates `node_modules` to record the value. Under default settings that is before every script run and install, so the hook should be cheap to compute — derive it from file modification times or similar, rather than reading large files or hitting the network.
+
+:::
+
+#### Usage example
+
+```js
+// .pnpmfile.cjs
+const fs = require('fs')
+const path = require('path')
+
+function calculateFingerprint () {
+  // Invalidate node_modules whenever the custom package source changes.
+  // Combine per-file mtimes: the directory's own mtime is not enough, as
+  // it does not change when an existing file is edited in place.
+  const sourceDir = '/path/to/custom/package/source'
+  return fs.readdirSync(sourceDir)
+    .sort()
+    .map((name) => `${name}:${fs.statSync(path.join(sourceDir, name)).mtimeMs}`)
+    .join(';')
+}
+
+module.exports = {
+  hooks: {
+    calculateFingerprint,
+  },
+}
+```
+
 ### `hooks.fetchers`
 
 :::danger Removed in v11.0.0
@@ -322,7 +364,7 @@ Return `true` to trigger full resolution of all packages, skipping the "Lockfile
 
 :::note
 
-`shouldRefreshResolution` is skipped during frozen lockfile installs, as no resolution is allowed in that mode.
+`shouldRefreshResolution` is skipped during frozen lockfile installs, as no resolution is allowed in that mode. It is also skipped when [`optimisticRepeatInstall`](./settings/other.md#optimisticrepeatinstall) or [`verifyDepsBeforeRun`](./settings/build.md#verifydepsbeforerun) decides that `node_modules` is already up to date — those checks don't perform resolution at all. If your resolver's answers depend on external state, implement [`hooks.calculateFingerprint`](#hookscalculatefingerprint-string--promisestring) so that a change in that state invalidates the up-to-date checks and re-resolution runs.
 
 :::
 
