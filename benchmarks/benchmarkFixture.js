@@ -107,7 +107,7 @@ export default async function benchmark (pm, fixture, opts) {
     // up with the cache/ directory the rest of the flow cleans between scenarios.
     env.PNPM_HOME = path.join(cwd, 'cache')
   }
-  cpSync(path.join(FIXTURES_DIR, fixture), cwd, { recursive: true })
+  cpSync(opts.fixtureDir ?? path.join(FIXTURES_DIR, fixture), cwd, { recursive: true })
   const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
 
   cleanLockfile(pm, cwd, env)
@@ -254,4 +254,3 @@ function spawnSyncOrThrow (cmd, opts) {
   }
   return result;
 }
-
