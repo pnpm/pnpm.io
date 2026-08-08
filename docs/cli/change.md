@@ -70,11 +70,11 @@ The cause of each bump is one of `intent` (a change intent named the package), `
 
 ## Options
 
-### --bump &lt;type\&gt;
+### --bump &lt;type&gt;
 
 The bump type for the named packages: `none`, `patch`, `minor`, or `major`. `none` records an explicit decline — the change needs no release.
 
-### --summary &lt;text\&gt;
+### --summary &lt;text&gt;
 
 The summary for the changelog entry. Together with package names, this runs the command non-interactively.
 
