@@ -9,7 +9,7 @@ If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you 
 
 :::info
 
-Looking for pnpm 12? It is currently in beta and installed differently from pnpm 11. See [Installing the pnpm 12 beta](#installing-the-pnpm-12-beta).
+Looking for pnpm 12? It is currently in beta and installed differently from pnpm 11. See [Installing the pnpm 12 RC](#installing-the-pnpm-12-rc).
 
 :::
 
@@ -94,59 +94,12 @@ Prior to running the install script, you may optionally set an env variable `PNP
 curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 ```
 
-## Using Corepack
-
-Due to an issue with [outdated signatures in Corepack](https://github.com/nodejs/corepack/issues/612), Corepack should be updated to its latest version first:
-
-```
-npm install --global corepack@latest
-```
-
-Since v16.13, Node.js is shipping [Corepack](https://nodejs.org/api/corepack.html) for managing package managers. This is an experimental feature, so you need to enable it by running:
-
-:::info
-
-If you have installed Node.js with `pnpm runtime` Corepack won't be installed on your system, you will need to install it separately. See [#4029](https://github.com/pnpm/pnpm/issues/4029).
-
-:::
-
-```
-corepack enable pnpm
-```
-
-This will automatically install pnpm on your system.
-
-You can pin the version of pnpm used on your project using the following command:
-
-```
-corepack use pnpm@latest-11
-```
-
-This will add a `"packageManager"` field in your local `package.json` which will instruct Corepack to always use a specific version on that project. This can be useful if you want reproducability, as all developers who are using Corepack will use the same version as you. When a new version of pnpm is released, you can re-run the above command.
-
-:::warning
-
-Corepack cannot install pnpm 12 yet. It expects the pnpm package to contain a `bin/pnpm.mjs` file, which the native pnpm 12 package does not have. Use [`pnpm self-update`](#pnpm-12-using-pnpm), [npm](#pnpm-12-using-npm), or the [standalone script](#pnpm-12-using-a-standalone-script) to install the beta.
-
-:::
-
 ## Using other package managers
 
 ### Using npm
 
-We provide two packages of pnpm CLI, `pnpm` and `@pnpm/exe`. On pnpm 12 the two are identical, so there is no reason to prefer one over the other; the difference below applies to pnpm 11.
-
-- [`pnpm`](https://www.npmjs.com/package/pnpm) is an ordinary version of pnpm, which needs Node.js to run. Since v11, pnpm is distributed as pure ESM.
-- [`@pnpm/exe`](https://www.npmjs.com/package/@pnpm/exe) is packaged with Node.js into an executable, so it may be used on a system with no Node.js installed. On Linux, glibc and musl builds are both provided and the right one is selected automatically; the glibc build requires glibc 2.27 or newer and `libatomic.so.1` (see [Linux runtime requirements](#on-posix-systems) for details). **Not available for Intel macOS** (`darwin-x64`) — install `pnpm` instead, see [#11423](https://github.com/pnpm/pnpm/issues/11423).
-
 ```sh
-npx pnpm@latest-11 dlx @pnpm/exe@latest-11 setup
-```
-
-or
-
-```sh
-npm install -g pnpm@latest-11
+npx get-pnpm
 ```
 
 ### Using Homebrew
@@ -187,11 +140,11 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 :::
 
-## Installing the pnpm 12 beta
+## Installing the pnpm 12 RC
 
 :::warning
 
-pnpm 12 is a rewrite of pnpm in Rust and is currently in **beta**. It is not recommended for production use yet. Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
+pnpm 12 is a rewrite of pnpm in Rust and is currently in **beta**. Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
 
 :::
 
@@ -212,16 +165,10 @@ pnpm links the native binary directly, so nothing else is needed. Note that insi
 If you don't have pnpm installed yet:
 
 ```sh
-npm install -g --allow-scripts=pnpm pnpm@next-12
+npx get-pnpm next-12
 ```
 
-:::info
-
-`--allow-scripts=pnpm` is required on npm 11.16 and newer, which blocks install scripts by default. The published package is a small wrapper whose `preinstall` script replaces it with the native binary for your platform, so without the flag `pnpm` is left as a placeholder file that fails to run. Older versions of npm run install scripts anyway and ignore the flag, so the command above works on any version. For the same reason, don't install pnpm 12 with `--ignore-scripts` or `--no-optional`. If you install it with pnpm or Bun, allow the build scripts of the `pnpm` package.
-
-:::
-
-Node.js 18 or newer is needed to run that install script, but not to run pnpm afterwards — pnpm 12 is a native binary.
+Node.js 22.13 or newer is needed to run that install script, but not to run pnpm afterwards — pnpm 12 is a native binary.
 
 ### Using a standalone script {#pnpm-12-using-a-standalone-script}
 
@@ -230,13 +177,13 @@ Set `PNPM_VERSION` to the exact beta version (the POSIX script does not accept n
 On POSIX systems:
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=12.0.0-beta.2 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=12.0.0-rc.3 sh -
 ```
 
 On Windows, using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION="12.0.0-beta.2"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION="12.0.0-rc.3"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 This installs pnpm without requiring Node.js, and unlike pnpm 11 it also works on Intel macOS.
