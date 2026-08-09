@@ -30,9 +30,13 @@ show it for each one.
 
 :::note
 
-Earlier versions of this page used Corepack. Corepack cannot install pnpm 12: it
-expects the package to contain a `bin/pnpm.mjs`, which the native pnpm 12 package
-does not have.
+Earlier versions of this page used Corepack. Corepack installs a JavaScript shim
+in place of pnpm, so every `pnpm` call starts Node.js to run the shim before pnpm
+itself starts — a cost paid on each invocation, and CI jobs make many of them.
+Installing pnpm itself avoids that entirely.
+
+Corepack also cannot install pnpm 12: it expects the package to contain a
+`bin/pnpm.mjs`, which the native pnpm 12 package does not have.
 
 :::
 
