@@ -5,6 +5,37 @@ title: Continuous Integration
 
 pnpm can easily be used in various continuous integration systems.
 
+## Installing pnpm
+
+Outside of GitHub Actions, which has [its own action](#github-actions), install pnpm
+with the standalone script:
+
+```sh
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+Two things make this convenient in CI:
+
+- **It needs no Node.js.** pnpm is a self-contained executable, and it can install
+  the runtime for you afterwards with `pnpm runtime set node lts -g`, so a job
+  does not need a Node.js image to begin with.
+- **It picks its own version.** If your `package.json` has a `packageManager` or
+  `devEngines.packageManager` field, pnpm switches to that version on first use,
+  so the pipeline does not pin a version in two places.
+
+The script installs into `PNPM_HOME` and appends to a shell profile, which a CI
+job never reloads. Declare `PNPM_HOME` and put `$PNPM_HOME/bin` on `PATH`
+yourself, using whatever mechanism the platform provides — the examples below
+show it for each one.
+
+:::note
+
+Earlier versions of this page used Corepack. Corepack cannot install pnpm 12: it
+expects the package to contain a `bin/pnpm.mjs`, which the native pnpm 12 package
+does not have.
+
+:::
+
 :::note
 
 In all the provided configuration files the store is cached. However, this is not required, and it is not guaranteed that caching the store will make installation faster. So feel free to not cache the pnpm store in your job.
@@ -29,13 +60,17 @@ On [AppVeyor], you can use pnpm for installing your dependencies by adding this
 to your `appveyor.yml`:
 
 ```yaml title="appveyor.yml"
+environment:
+  PNPM_HOME: C:\pnpm
+
 install:
-  - ps: Install-Product node $env:nodejs_version
-  - npm install --global corepack@latest
-  - corepack enable
-  - corepack prepare pnpm@latest-11 --activate
-  - pnpm install
+  - ps: $env:PATH = "$env:PNPM_HOME;$env:PNPM_HOME\bin;$env:PATH"
+  - ps: Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+  - ps: pnpm install
 ```
+
+pnpm brings its own runtime, so `Install-Product node` is no longer needed. Add
+`pnpm runtime set node lts -g` if your build scripts call `node` directly.
 
 [AppVeyor]: https://www.appveyor.com
 
@@ -46,6 +81,7 @@ On Azure Pipelines, you can use pnpm for installing and caching your dependencie
 ```yaml title="azure-pipelines.yml"
 variables:
   pnpm_config_cache: $(Pipeline.Workspace)/.pnpm-store
+  PNPM_HOME: $(Pipeline.Workspace)/.pnpm
 
 steps:
   - task: Cache@2
@@ -55,10 +91,9 @@ steps:
     displayName: Cache pnpm
 
   - script: |
-      npm install --global corepack@latest
-      corepack enable
-      corepack prepare pnpm@latest-11 --activate
-      pnpm config set store-dir $(pnpm_config_cache)
+      curl -fsSL https://get.pnpm.io/install.sh | sh -
+      echo "##vso[task.prependpath]$(PNPM_HOME)/bin"
+      "$(PNPM_HOME)/bin/pnpm" config set store-dir $(pnpm_config_cache)
     displayName: "Setup pnpm"
 
   - script: |
@@ -66,6 +101,9 @@ steps:
       pnpm run build
     displayName: "pnpm install and build"
 ```
+
+`task.prependpath` puts pnpm on `PATH` for the steps that follow; within the step
+that installs it, call it by its full path.
 
 ## Bitbucket Pipelines
 
@@ -81,16 +119,23 @@ pipelines:
     "**":
       - step:
           name: Build and test
-          image: node:24.14.1
+          image: debian:stable-slim
           script:
-            - npm install --global corepack@latest
-            - corepack enable
-            - corepack prepare pnpm@latest-11 --activate
+            - apt-get update && apt-get install -y --no-install-recommends ca-certificates curl
+            - export PNPM_HOME="$HOME/.local/share/pnpm"
+            - export PATH="$PNPM_HOME/bin:$PATH"
+            - curl -fsSL https://get.pnpm.io/install.sh | sh -
+            - pnpm runtime set node lts -g
             - pnpm install
             - pnpm run build # Replace with your build/test…etc. commands
           caches:
             - pnpm
 ```
+
+All the lines of a step run in one shell, so `export` carries to the ones that
+follow. This example installs Node.js with pnpm rather than starting from a
+`node` image; keep your existing image and drop the `pnpm runtime set` line if
+you would rather not.
 
 ## CircleCI
 
@@ -102,9 +147,11 @@ version: 2.1
 jobs:
   build: # this can be any name you choose
     docker:
-      - image: node:18
+      - image: node:24
     resource_class: large
     parallelism: 10
+    environment:
+      PNPM_HOME: /root/.local/share/pnpm
 
     steps:
       - checkout
@@ -115,10 +162,9 @@ jobs:
       - run:
           name: Install pnpm package manager
           command: |
-            npm install --global corepack@latest
-            corepack enable
-            corepack prepare pnpm@latest-11 --activate
-            pnpm config set store-dir .pnpm-store
+            curl -fsSL https://get.pnpm.io/install.sh | sh -
+            echo 'export PATH="$PNPM_HOME/bin:$PATH"' >> "$BASH_ENV"
+            "$PNPM_HOME/bin/pnpm" config set store-dir .pnpm-store
       - run:
           name: Install Dependencies
           command: |
@@ -129,6 +175,9 @@ jobs:
           paths:
             - .pnpm-store
 ```
+
+CircleCI sources `$BASH_ENV` before every step, which is how pnpm reaches the
+steps that follow.
 
 ## GitHub Actions
 
@@ -178,10 +227,11 @@ stages:
 build:
   stage: build
   image: node:24.14.1
+  variables:
+    PNPM_HOME: "$CI_PROJECT_DIR/.pnpm"
   before_script:
-    - npm install --global corepack@latest
-    - corepack enable
-    - corepack prepare pnpm@latest-11 --activate
+    - export PATH="$PNPM_HOME/bin:$PATH"
+    - curl -fsSL https://get.pnpm.io/install.sh | sh -
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -201,22 +251,27 @@ You can use pnpm for installing and caching your dependencies:
 pipeline {
     agent {
         docker {
-            image 'node:lts-bullseye-slim'
+            image 'node:lts-bookworm-slim'
             args '-p 3000:3000'
         }
+    }
+    environment {
+        PNPM_HOME = "${WORKSPACE}/.pnpm"
+        PATH = "${PNPM_HOME}/bin:${PATH}"
     }
     stages {
         stage('Build') {
             steps {
-                sh 'npm install --global corepack@latest'
-                sh 'corepack enable'
-                sh 'corepack prepare pnpm@latest-11 --activate'
+                sh 'curl -fsSL https://get.pnpm.io/install.sh | sh -'
                 sh 'pnpm install'
             }
         }
     }
 }
 ```
+
+Each `sh` step runs in its own shell, so `PATH` is set in the pipeline's
+`environment` block rather than exported inside a step.
 
 ## Semaphore
 
@@ -233,12 +288,14 @@ agent:
 blocks:
   - name: Install dependencies
     task:
+      env_vars:
+        - name: PNPM_HOME
+          value: /home/semaphore/.local/share/pnpm
       jobs:
         - name: pnpm install
           commands:
-            - npm install --global corepack@latest
-            - corepack enable
-            - corepack prepare pnpm@latest-11 --activate
+            - export PATH="$PNPM_HOME/bin:$PATH"
+            - curl -fsSL https://get.pnpm.io/install.sh | sh -
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -257,10 +314,12 @@ cache:
   npm: false
   directories:
     - "~/.pnpm-store"
+env:
+  global:
+    - PNPM_HOME="$HOME/.local/share/pnpm"
+    - PATH="$PNPM_HOME/bin:$PATH"
 before_install:
-  - npm install --global corepack@latest
-  - corepack enable
-  - corepack prepare pnpm@latest-11 --activate
+  - curl -fsSL https://get.pnpm.io/install.sh | sh -
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install

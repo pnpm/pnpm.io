@@ -9,7 +9,7 @@ If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you 
 
 :::info
 
-Looking for pnpm 12? It is currently in beta and installed differently from pnpm 11. See [Installing the pnpm 12 RC](#installing-the-pnpm-12-rc).
+Looking for pnpm 12? It is currently a release candidate and installed differently from pnpm 11. See [Installing the pnpm 12 RC](#installing-the-pnpm-12-rc).
 
 :::
 
@@ -23,7 +23,7 @@ You may install pnpm even if you don't have Node.js installed, using the followi
 
 Sometimes, Windows Defender may block our executable if you install pnpm this way.
 
-Due to this issue, we currently recommend installing pnpm using [npm](#using-npm) or [Corepack](#using-corepack) on Windows.
+Due to this issue, we currently recommend installing pnpm using [npm](#using-npm) on Windows.
 
 :::
 
@@ -44,7 +44,7 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 
 :::warning Not supported on Intel macOS in pnpm 11
 
-On pnpm 11, the standalone script does not run on Intel Macs (`darwin-x64`). Use [npm](#using-npm), [Corepack](#using-corepack), or [Homebrew](#using-homebrew) instead. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for context.
+On pnpm 11, the standalone script does not run on Intel Macs (`darwin-x64`). Use [Homebrew](#using-homebrew), or install pnpm 12, which ships an Intel build. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for context.
 
 pnpm 12 ships an Intel macOS build again, so this limitation doesn't apply to it.
 
@@ -144,11 +144,11 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 :::warning
 
-pnpm 12 is a rewrite of pnpm in Rust and is currently in **beta**. Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
+pnpm 12 is a rewrite of pnpm in Rust and is currently a **release candidate**. Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
 
 :::
 
-pnpm 12 has no intentional breaking changes compared to pnpm 11, so the rest of this documentation applies to both versions. Only installation differs while v12 is in beta: it is published under the `next-12` tag on npm and as a prerelease on GitHub, so Homebrew, winget, Scoop and Chocolatey don't offer it yet.
+pnpm 12 has no intentional breaking changes compared to pnpm 11, so the rest of this documentation applies to both versions. Only installation differs while v12 is a release candidate: it is published under the `next-12` tag on npm and as a prerelease on GitHub, so Homebrew, winget, Scoop and Chocolatey don't offer it yet.
 
 ### Using pnpm {#pnpm-12-using-pnpm}
 
@@ -172,18 +172,18 @@ Node.js 22.13 or newer is needed to run that install script, but not to run pnpm
 
 ### Using a standalone script {#pnpm-12-using-a-standalone-script}
 
-Set `PNPM_VERSION` to the exact beta version (the POSIX script does not accept npm dist-tags).
+Set `PNPM_VERSION` to `next-12`, or to an exact version.
 
 On POSIX systems:
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=12.0.0-rc.3 sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=next-12 sh -
 ```
 
 On Windows, using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION="12.0.0-rc.3"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION="next-12"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 This installs pnpm without requiring Node.js, and unlike pnpm 11 it also works on Intel macOS.
