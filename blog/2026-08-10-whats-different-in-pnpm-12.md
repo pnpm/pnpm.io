@@ -16,7 +16,7 @@ Three things differ, and one of them — a removed flag — fails outright rathe
 
 A globally installed `node`, `deno`, or `bun` now follows the version the current project pins, instead of always running the globally installed one.
 
-If a project pins a runtime — through [`devEngines`](/settings/other#devengines), or by installing a runtime as a dependency — then running `node` inside that project uses the pinned version, while running it outside any project uses the global one. You no longer need a separate version manager to get that behavior.
+If a project pins a runtime — through [`devEngines.runtime`](/package_json#devenginesruntime), or by installing a runtime as a dependency — then running `node` inside that project uses the pinned version, while running it outside any project uses the global one. You no longer need a separate version manager to get that behavior.
 
 The setting that controls this is [`globalShims`](/settings/other#globalshims), and the full description is in [Project-aware global bins](/global-packages#project-aware-global-bins).
 
