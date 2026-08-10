@@ -126,6 +126,94 @@ You can check the current global bin directory with:
 pnpm bin -g
 ```
 
+## Project-aware global bins
+
+Added in: v12.0.0-rc.2 (pnpm v12 only)
+
+Global commands can follow the project you are standing in. When you run a global command from inside a project that asks for a different version of the same tool, pnpm runs the version the project asks for.
+
+The most useful case is Node.js itself. Given a project that pins its runtime:
+
+```json title="package.json"
+{
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^22.0.0",
+      "onFail": "download"
+    }
+  }
+}
+```
+
+a bare `node` inside that directory runs Node.js 22, even if your global Node.js is a different major:
+
+```sh
+cd ~/projects/legacy-app
+node --version   # v22.x.x — the version the project pins
+cd ~
+node --version   # your globally installed version
+```
+
+No shell hooks, `.bashrc` edits, or `use`-style commands are involved — the shims pnpm writes into the global bin directory do the dispatch themselves.
+
+### How a version is chosen
+
+pnpm walks up from the current working directory to the nearest project that provides the command, then:
+
+* For the **runtimes** (`node`, `deno`, `bun`), only the manifest pin counts — [`devEngines.runtime`](./package_json.md#devenginesruntime), then `engines.runtime`. The pinned version is downloaded into the [global virtual store](./global-virtual-store.md) on demand and executed directly. The project's `node_modules/.bin` is never consulted for a runtime, so a dependency cannot supply the `node` you run.
+* For **any other package**, the project's `node_modules/.bin/<name>` is used.
+
+Directories inside the pnpm home are skipped, since global installs are not projects.
+
+If the project provides nothing, or the lookup is declined, the globally installed version runs — commands never fail merely because dispatch did not apply.
+
+### Trust
+
+A project you `cd` into is not automatically allowed to run its own binaries in place of your global ones.
+
+* A **stable Node.js release** is verified against the Node.js release team's signatures before it runs, so it switches without asking. (On musl-based systems the matching builds are unsigned, so they fall under the prompt instead.)
+* **Everything else** — Deno, Bun, Node.js prereleases, and any ordinary package you enable — asks once, per project and per candidate:
+
+  ```text
+  The project at "/home/user/projects/app" provides its own "tsc", which will be used
+  instead of the globally installed one.
+  Do you trust this project? [y/N]
+  ```
+
+Answers are remembered in a machine-local registry, keyed to the project directory *and* to a fingerprint of the exact binary. If the binary or the providing package changes, pnpm asks again rather than reusing the old approval.
+
+In CI and any non-interactive session, the question cannot be asked, so the global version runs and nothing is recorded.
+
+There is one more guard that applies regardless of trust: the project's command must come from the **same package** as the global one. A project that ships a lookalike `tsc` from some other package does not match, and your global `tsc` runs.
+
+### Which packages participate
+
+Only the runtimes participate by default. Enable others with [`globalShims`](./settings/other.md#globalshims), keyed by the providing package's name:
+
+```yaml title="~/.config/pnpm/config.yaml"
+globalShims:
+  typescript: true
+```
+
+Because pnpm decides at install time which bins to give dispatching shims, a package that is already installed globally needs to be reinstalled after you enable it:
+
+```sh
+pnpm add -g typescript
+```
+
+Turning a package *off* needs no reinstall — the setting is re-read on every dispatch. The same setting disables dispatch per package, or entirely with `globalShims: false`. For a single command, set `PNPM_SHIM_BYPASS=1`:
+
+```sh
+PNPM_SHIM_BYPASS=1 node --version
+```
+
+:::note
+
+`globalShims` is deliberately not read from a project's `pnpm-workspace.yaml` — only from the global configuration file, the pnpm home directory's own `pnpm-workspace.yaml`, and the environment. See the [setting's documentation](./settings/other.md#globalshims) for details.
+
+:::
+
 ## Global virtual store
 
 Global installs use the [global virtual store](./global-virtual-store.md). Packages are stored at `{storeDir}/links` and shared across global installations. This avoids redundant fetches when multiple global packages depend on the same libraries.
