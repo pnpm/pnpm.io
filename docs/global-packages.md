@@ -172,6 +172,8 @@ If the project provides nothing, or the lookup is declined, the globally install
 
 A project you `cd` into is not automatically allowed to run its own binaries in place of your global ones.
 
+This section describes the default `auto` policy. Under `auto`:
+
 * A **stable Node.js release** is verified against the Node.js release team's signatures before it runs, so it switches without asking. (On musl-based systems the matching builds are unsigned, so they fall under the prompt instead.)
 * **Everything else** — Deno, Bun, Node.js prereleases, and any ordinary package you enable — asks once, per project and per candidate:
 
@@ -185,7 +187,9 @@ Answers are remembered in a machine-local registry, keyed to the project directo
 
 In CI and any non-interactive session, the question cannot be asked, so the global version runs and nothing is recorded.
 
-There is one more guard that applies regardless of trust: the project's command must come from the **same package** as the global one. A project that ships a lookalike `tsc` from some other package does not match, and your global `tsc` runs.
+The other two [policies](./settings/other.md#globalshims) change which candidates reach that question. `prompt` sends every candidate through it, including a signature-verified stable Node.js release; answers are still remembered, so it asks once per project and candidate rather than on every run. `always` skips the question entirely and switches straight away — which is also what makes it usable in CI, where a prompt would otherwise fall back to the global version.
+
+There is one more guard that applies regardless of policy: the project's command must come from the **same package** as the global one. A project that ships a lookalike `tsc` from some other package does not match, and your global `tsc` runs.
 
 ### Which packages participate
 

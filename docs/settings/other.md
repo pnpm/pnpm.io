@@ -88,8 +88,8 @@ The supported policies are:
 | Value | Behavior |
 |---|---|
 | `auto` (or `true`) | Switch automatically when the candidate is authenticated by a publisher signature; otherwise ask for confirmation once. |
-| `prompt` | Always ask for confirmation, even for signature-verified candidates. |
-| `always` | Always switch, never ask. |
+| `prompt` | Put every candidate through the confirmation gate, including signature-verified ones. Answers are still remembered, so this asks once per project and candidate, not on every run. |
+| `always` | Always switch, never ask. Usable in CI, where a prompt would fall back to the global version. |
 | `false` | Disable the project-aware shim for this package. |
 
 Layers merge key by key over the built-in defaults, so a single entry can change one package without restating the rest — `globalShims: { bun: false }` leaves `node` and `deno` at `auto`.
