@@ -148,7 +148,12 @@ pnpm 12 is a rewrite of pnpm in Rust and is currently a **release candidate**. P
 
 :::
 
-pnpm 12 has no intentional breaking changes compared to pnpm 11, so the rest of this documentation applies to both versions. Only installation differs while v12 is a release candidate: it is published under the `next-12` tag on npm and as a prerelease on GitHub, so Homebrew, winget, Scoop and Chocolatey don't offer it yet.
+pnpm 12 does not break the way you use pnpm 11, so the rest of this documentation applies to both versions. Only installation differs while v12 is a release candidate: it is published under the `next-12` tag on npm and as a prerelease on GitHub, so Homebrew, winget, Scoop and Chocolatey don't offer it yet.
+
+A few behaviors are new in or specific to v12:
+
+* [Project-aware global bins](./global-packages.md#project-aware-global-bins) — a global `node`, `deno`, or `bun` follows the version the current project pins. Configurable via [`globalShims`](./settings/other.md#globalshims).
+* [Git dependency resolution](./package-sources.md#how-git-dependencies-are-resolved) — specifiers for repositories on GitHub, GitLab, and Bitbucket resolve through the host's canonical HTTPS URL, and the lockfile no longer records an SSH URL for them.
 
 ### Using pnpm {#pnpm-12-using-pnpm}
 
