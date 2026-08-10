@@ -65,6 +65,63 @@ In pnpm v11, globally installed binaries are stored in a `bin` subdirectory of `
 
 :::
 
+### globalShims
+
+Added in: v12.0.0-rc.2
+
+* Default: **\{ node: auto, deno: auto, bun: auto \}**
+* Type: **Boolean**, **Object**
+
+Controls which globally installed packages get [project-aware shims](../global-packages.md#project-aware-global-bins) — global commands that run the version the current project asks for instead of the globally installed one.
+
+The setting is a map from **package name** to policy. The key is the name of the package that *provides* the command, not the command itself, so an entry for `typescript` covers its `tsc` bin.
+
+```yaml
+globalShims:
+  node: auto
+  deno: false
+  typescript: prompt
+```
+
+The supported policies are:
+
+| Value | Behavior |
+|---|---|
+| `auto` (or `true`) | Switch automatically when the candidate is authenticated by a publisher signature; otherwise ask for confirmation once. |
+| `prompt` | Put every candidate through the confirmation gate, including signature-verified ones. Answers are still remembered, so this asks once per project and candidate, not on every run. |
+| `always` | Always switch, never ask. Usable in CI, where a prompt would fall back to the global version. |
+| `false` | Disable the project-aware shim for this package. |
+
+Layers merge key by key over the built-in defaults, so a single entry can change one package without restating the rest — `globalShims: { bun: false }` leaves `node` and `deno` at `auto`.
+
+The scalar shorthands replace the whole map instead of merging: `globalShims: false` disables every project-aware shim, and `globalShims: true` resets to the defaults.
+
+:::warning
+
+This setting is only read from locations a project cannot write to: the [global configuration file](../cli/config.md), a `pnpm-workspace.yaml` in the pnpm home directory itself, and the `PNPM_CONFIG_GLOBAL_SHIMS` environment variable (a JSON value), applied in that order. A project's own `pnpm-workspace.yaml` is ignored — otherwise a repository could grant itself the right to run its own binaries in place of your global ones.
+
+:::
+
+Disabling a package, or changing its policy, takes effect on the very next command — the setting is re-read on each dispatch, so no reinstall is needed.
+
+Newly *enabling* a package is the exception. pnpm decides at install time which bins to write dispatching shims for, so a package that was already installed globally while it was disabled needs to be reinstalled to pick up the change:
+
+```sh
+pnpm add -g typescript
+```
+
+To bypass dispatch for a single invocation, set `PNPM_SHIM_BYPASS=1`:
+
+```sh
+PNPM_SHIM_BYPASS=1 node --version
+```
+
+:::note
+
+Project-aware shims are a pnpm v12 feature and are not available in v11.
+
+:::
+
 ### npmrcAuthFile
 
 Added in: v11.0.0

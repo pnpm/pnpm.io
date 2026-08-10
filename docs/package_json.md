@@ -114,6 +114,8 @@ How it works:
 
 To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings/cli.md#runtimeonfail) setting.
 
+Since v12.0.0-rc.2, a bare `node` (or `deno`/`bun`) run from inside the project also follows this pin, not just scripts. This can be turned off with the [`globalShims`](./settings/other.md#globalshims) setting, or skipped for a single command with `PNPM_SHIM_BYPASS=1`. See [project-aware global bins](./global-packages.md#project-aware-global-bins).
+
 ## devEngines.packageManager
 
 Added in: v11.0.0
