@@ -6,9 +6,9 @@ authors: zkochan
 tags: [release]
 ---
 
-pnpm 12 is a rewrite of pnpm in Rust, and it is currently a **release candidate**. It keeps the commands, flags, settings, and lockfile format of pnpm 11, so upgrading is not meant to be a migration — the [documentation](/installation) applies to both versions.
+pnpm 12 is a rewrite of pnpm in Rust, and it is currently a **release candidate**. Upgrading is not meant to be a migration: apart from the differences below, it keeps the commands, flags, settings, and lockfile format of pnpm 11, and the [documentation](/installation) applies to both versions.
 
-A short list of behaviors does differ. This post collects them in one place.
+Three things differ, and one of them — a removed flag — fails outright rather than behaving differently. This post collects them in one place.
 
 <!--truncate-->
 
