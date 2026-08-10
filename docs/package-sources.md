@@ -104,7 +104,7 @@ pnpm add https://github.com/indexzero/forever/tarball/v0.5.6
 pnpm add <git remote url>
 ```
 
-Installs the package from the hosted Git provider, cloning it with Git.
+Installs the package from the Git repository at the given URL. Depending on the repository, pnpm either downloads a source archive from the Git host or clones the repository with Git — see [how Git dependencies are resolved](#how-git-dependencies-are-resolved).
 
 You may install packages from Git by:
 
@@ -195,3 +195,43 @@ pnpm add RexSkz/test-git-subdir-fetch.git#beta\&path:/packages/simple-react-app
 ```
 
 Installs from the `beta` branch and only the subdirectory at `/packages/simple-react-app`.
+
+#### How Git dependencies are resolved
+
+Added in: v12.0.0 (pnpm v12 only)
+
+For repositories on GitHub, GitLab, and Bitbucket, the specifier is an **identity**, not a choice of transport. All of the following name the same dependency and resolve identically:
+
+```
+kevva/is-positive
+github:kevva/is-positive
+git+https://github.com/kevva/is-positive.git
+git+ssh://git@github.com/kevva/is-positive.git
+```
+
+Each resolves through the host's canonical HTTPS URL, and the lockfile records one of two shapes:
+
+* the **host's source archive**, a plain tarball download. This is recorded only when an anonymous request for that exact archive URL succeeds, so a recorded archive URL is fetchable by construction.
+* otherwise a **`git` resolution over the canonical HTTPS URL**, which every machine that has access to the repository can fetch.
+
+pnpm never records an SSH URL for these hosts. Which transport a given machine uses to reach the host is that machine's Git configuration, not a property of the project.
+
+##### Using SSH for private repositories
+
+Configure the rewrite in Git itself, on the machine:
+
+```sh
+git config --global url."git@github.com:".insteadOf https://github.com/
+```
+
+pnpm shells out to `git`, so the rewrite applies to all of pnpm's Git operations automatically. The same holds on CI: give the runner an SSH key and this rewrite, or an HTTPS credential helper — the lockfile is identical either way.
+
+##### Repositories on other hosts
+
+A URL that does not point at a known host (a self-hosted GitLab, Gitea, or any internal Git server) is kept exactly as written, transport included — for those, the URL *is* the identity. URLs with credentials embedded in them are also kept verbatim, and never resolve to a host archive.
+
+:::info
+
+In pnpm v11 and earlier, resolution probed the network to decide between HTTPS and SSH. That could record whichever transport happened to work on the machine that ran the install — most often an `ssh://` URL that then failed on CI runners without SSH keys. pnpm v12 removes the probing. Existing lockfile entries are left untouched; the rules above apply when an entry is added or re-resolved.
+
+:::
