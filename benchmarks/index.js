@@ -7,6 +7,7 @@ import prettyMs from 'pretty-ms'
 import tempy from 'tempy'
 import cmdsMap from './commandsMap.js'
 import benchmark from './recordBenchmark.js'
+import checkoutNextFixture from './checkoutNextFixture.js'
 import generateSvg from './generateSvg.js'
 import generateStackedSvg from './generateStackedSvg.js'
 import spawn from "cross-spawn"
@@ -40,6 +41,11 @@ const fixtures = [
   {
     name: 'alotta-files',
     mdDesc: '## Lots of Files\n\nThe app\'s `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchmarks/fixtures/alotta-files/package.json)'
+  },
+  {
+    name: 'nextjs',
+    mdDesc: '## Next.js Monorepo\n\nThis fixture uses [vercel/next.js at commit `31b78bb`](https://github.com/vercel/next.js/tree/31b78bbed91c538e6cf196faad0a37afdfae7e70), with its pnpm settings migrated to `pnpm-workspace.yaml`. It reproduces the workload from [pnpm/pnpm issue 13305](https://github.com/pnpm/pnpm/issues/13305) and compares the TypeScript and Rust pnpm engines on a large multi-project workspace with thousands of registry tarballs.',
+    pnpmOnly: true,
   }
 ]
 
@@ -102,6 +108,8 @@ run()
 
 async function run () {
   const tmpDir = tempy.directory()
+  const nextFixtureDir = path.join(tmpDir, 'fixtures', 'nextjs')
+  await checkoutNextFixture(nextFixtureDir)
   const managersDirs = {}
   for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn']) {
     managersDirs[pm] = path.join(tmpDir, pm)
@@ -128,7 +136,6 @@ async function run () {
     { key: 'yarn', managersDir: managersDirs.yarn },
     { key: 'yarn_pnp', managersDir: managersDirs.yarn, hasNodeModules: false },
   ]
-  const pms = pmConfigs.map(({ key }) => key)
   const tableRows = [
     { test: 'firstInstall',               action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: ' '   },
     { test: 'withWarmModules',            action: 'install', cache: ' ',   lockfile: ' ',   nodeModules: '✔',   needsNodeModules: true },
@@ -144,22 +151,27 @@ async function run () {
   const svgs = []
   let sortedTests = tests
   for (const fixture of fixtures) {
+    const fixturePmConfigs = fixture.pnpmOnly
+      ? pmConfigs.filter(({ key }) => key.startsWith('pnpm'))
+      : pmConfigs
+    const fixturePms = fixturePmConfigs.map(({ key }) => key)
     const results = {}
-    for (const { key, managersDir, hasNodeModules } of pmConfigs) {
+    for (const { key, managersDir, hasNodeModules } of fixturePmConfigs) {
       results[key] = min(await benchmark(cmdsMap[key], fixture.name, {
         limitRuns: LIMIT_RUNS,
         hasNodeModules: hasNodeModules ?? true,
         managersDir,
+        fixtureDir: fixture.name === 'nextjs' ? nextFixtureDir : undefined,
       }))
     }
-    sortedTests = sortTestsBySlowest(tests, results, pms)
+    sortedTests = sortTestsBySlowest(tests, results, fixturePms)
     const sortedDescriptions = sortedTests.map(t => testDescriptions[t])
     const sortedTableRows = sortedTests.map(t => tableRows.find(r => r.test === t))
 
-    const headerLegends = pms.map(pm => cmdsMap[pm].mdLegend ?? cmdsMap[pm].legend).join(' | ')
-    const headerSep = pms.map(() => '---').join(' | ')
+    const headerLegends = fixturePms.map(pm => cmdsMap[pm].mdLegend ?? cmdsMap[pm].legend).join(' | ')
+    const headerSep = fixturePms.map(() => '---').join(' | ')
     const rows = sortedTableRows.map(({ test, action, cache, lockfile, nodeModules, needsNodeModules }) => {
-      const values = pmConfigs.map(({ key, hasNodeModules: pmHasNodeModules }) => {
+      const values = fixturePmConfigs.map(({ key, hasNodeModules: pmHasNodeModules }) => {
         if (needsNodeModules && pmHasNodeModules === false) return 'n/a'
         return prettyMs(results[key][test])
       }).join(' | ')
@@ -168,48 +180,50 @@ async function run () {
 
     // Main chart: pnpm 11 and pnpm 12 are merged into a single stacked bar so
     // pnpm 12's speedup over pnpm 11 is visible at a glance.
-    const mainBars = [
-      { ...cmdsMap.npm, key: 'npm' },
-      {
-        stacked: true,
-        color: cmdsMap.pnpm12.color,
-        legend: cmdsMap.pnpm12.legend,
-        displayVersion: cmdsMap.pnpm12.displayVersion,
-        extraColor: '#cccccc',
-        extraLegend: 'pnpm 11 extra',
-        primaryKey: 'pnpm12',
-        secondaryKey: 'pnpm11',
-      },
-      { ...cmdsMap.yarn, key: 'yarn' },
-      { ...cmdsMap.yarn_pnp, key: 'yarn_pnp' },
-    ]
-    const resArray = sortedTests.map(test => mainBars.map(bar => bar.stacked
-      ? {
-          primary: Math.round(results[bar.primaryKey][test] / 100) / 10,
-          secondary: Math.round(results[bar.secondaryKey][test] / 100) / 10,
-        }
-      : Math.round(results[bar.key][test] / 100) / 10
-    ))
-    const mainSvg = generateSvg(resArray, mainBars, sortedDescriptions, formattedNow)
-    const mainSvgHash = hashContent(mainSvg)
-    sections.push(stripIndents`
-      ${fixture.mdDesc}
+    if (!fixture.pnpmOnly) {
+      const mainBars = [
+        { ...cmdsMap.npm, key: 'npm' },
+        {
+          stacked: true,
+          color: cmdsMap.pnpm12.color,
+          legend: cmdsMap.pnpm12.legend,
+          displayVersion: cmdsMap.pnpm12.displayVersion,
+          extraColor: '#cccccc',
+          extraLegend: 'pnpm 11 extra',
+          primaryKey: 'pnpm12',
+          secondaryKey: 'pnpm11',
+        },
+        { ...cmdsMap.yarn, key: 'yarn' },
+        { ...cmdsMap.yarn_pnp, key: 'yarn_pnp' },
+      ]
+      const resArray = sortedTests.map(test => mainBars.map(bar => bar.stacked
+        ? {
+            primary: Math.round(results[bar.primaryKey][test] / 100) / 10,
+            secondary: Math.round(results[bar.secondaryKey][test] / 100) / 10,
+          }
+        : Math.round(results[bar.key][test] / 100) / 10
+      ))
+      const mainSvg = generateSvg(resArray, mainBars, sortedDescriptions, formattedNow)
+      const mainSvgHash = hashContent(mainSvg)
+      sections.push(stripIndents`
+        ${fixture.mdDesc}
 
-      | action  | cache | lockfile | node_modules| ${headerLegends} |
-      | ---     | ---   | ---      | ---         | ${headerSep} |
-      ${rows}
+        | action  | cache | lockfile | node_modules| ${headerLegends} |
+        | ---     | ---   | ---      | ---         | ${headerSep} |
+        ${rows}
 
-      <img alt="Graph of the ${fixture.name} results" src="/img/benchmarks/${fixture.name}.svg?v=${mainSvgHash}" />
-    `)
+        <img alt="Graph of the ${fixture.name} results" src="/img/benchmarks/${fixture.name}.svg?v=${mainSvgHash}" />
+      `)
 
-    svgs.push({
-      path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
-      file: mainSvg
-    })
+      svgs.push({
+        path: path.join(BENCH_IMGS, `${fixture.name}.svg`),
+        file: mainSvg
+      })
+    }
 
     // pnpm-only comparison: include only scenarios that every selected pnpm version supports.
     // Sorted independently of the main chart, keyed by pnpm 11 (the first pnpm config).
-    const pnpmConfigs = pmConfigs.filter(({ key }) => key.startsWith('pnpm'))
+    const pnpmConfigs = fixturePmConfigs.filter(({ key }) => key.startsWith('pnpm'))
     const pnpmKeys = pnpmConfigs.map(({ key }) => key)
     const pnpmSortedTests = sortTestsBySlowest(tests, results, pnpmKeys)
       .filter((test) => {
