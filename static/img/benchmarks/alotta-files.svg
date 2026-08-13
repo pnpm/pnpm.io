@@ -99,5 +99,5 @@
   <text x="38" y="257.75" class="font s4" dominant-baseline="middle" text-anchor="end">lockfile</text>
   <text x="38" y="261.75" class="font s4" dominant-baseline="middle" text-anchor="end">node_modules</text>
   <text x="38" y="287.75" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.18.0 at: Aug 13, 2026, 6:51 PM</text>
+  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.19.0 at: Aug 13, 2026, 7:44 PM</text>
 </svg>

@@ -1,8 +1,8 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Aug 13, 2026, 6:51 PM_ (_daily_ updated).
+**Last benchmarked at**: _Aug 13, 2026, 7:44 PM_ (_daily_ updated).
 
-This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm and [fnm](https://github.com/Schniz/fnm) install and switch Node.js versions.
+This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
 
 Each row's label lists which of `cache`, `lockfile`, and `node_modules` are warm/present before install runs. Quick mapping to the real world (ordered from slowest to fastest scenario):
 
@@ -32,7 +32,7 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchm
 | install | ✔ | ✔ | ✔ | 1s | 385ms | 13ms | 4.6s | n/a |
 | update | n/a | n/a | n/a | 6.3s | 6.7s | 1s | 5.3s | 2.6s |
 
-<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=c64809af" />
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=5bf97150" />
 
 ### pnpm vs pnpm 🦀
 
@@ -50,25 +50,23 @@ pnpm v12 will use a new installation engine for fetching and linking written in 
 | install | ✔ | ✔ | ✔ | 385ms | 13ms |
 | update | n/a | n/a | n/a | 6.7s | 1s |
 
-<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=18ae1d40" />
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=d6f45224" />
 
 ## Node.js Version Management
 
-pnpm installs and switches Node.js versions itself, so a separate version manager is not needed. This section compares [`pnpm runtime set node`](/cli/runtime) with [fnm](https://github.com/Schniz/fnm).
+pnpm installs and switches Node.js versions itself, so a separate version manager is not needed. This section compares [`pnpm runtime set node`](/cli/runtime) with fnm and nvm.
 
-| scenario | pnpm 12 🦀 | [fnm](https://github.com/Schniz/fnm) |
-| ---      | --- | --- |
-| install Node.js 24 with nothing cached | 1s | 2.3s |
-| install Node.js 24 that was installed before | 321ms | 2.4s |
-| make an installed version the global default | 325ms | 2ms |
-| run `node` in a project pinned to Node.js 22 | 9ms | 5ms |
+| scenario | pnpm 12 | fnm | nvm |
+| ---      | --- | --- | --- |
+| install Node.js 24 with nothing cached | 1s | 2.3s | 3.1s |
+| install Node.js 24 that was installed before | 259ms | 2.4s | 2.8s |
+| run `node` in a project pinned to Node.js 22 | 9ms | 5ms | 101ms |
 
-<img alt="Graph comparing pnpm and fnm on installing Node.js" src="/img/benchmarks/node-versions.svg?v=0134bbfb" />
+<img alt="Graph comparing Node.js version managers on installing Node.js" src="/img/benchmarks/node-versions.svg?v=25aad00a" />
 
 A few things to keep in mind when reading these numbers:
 
-- pnpm keeps Node.js in its content-addressable store, so installing a version that was installed before is a relink with no download. fnm has no download cache, so it fetches Node.js again.
-- pnpm doesn't extract the `npm`, `npx`, and `corepack` binaries bundled with Node.js, so on a clean install it downloads and writes fewer files than fnm.
-- Changing the global default is not the same operation in both tools. pnpm links the runtime into its global bin directory, fnm flips a symlink that only takes effect in shells evaluating `fnm env`.
-- Per-project switching costs no command at all in pnpm: the `node` on your PATH is a shim that reads the [`devEngines.runtime`](/package_json#devenginesruntime) of the project and runs the matching version. With fnm, a `.node-version` file is picked up by its `--use-on-cd` shell hook, which is what the `fnm exec` in this row measures.
-- Both tools have to materialize the pinned version the first time a project asks for it: pnpm links it from its store, fnm downloads it. The row above measures the repeated runs after that.
+- pnpm keeps Node.js in its content-addressable store and nvm keeps the downloaded tarballs in `$NVM_DIR/.cache`, so for both of them installing a version that was installed before needs no download. fnm has no download cache and fetches Node.js again.
+- pnpm doesn't extract the `npm`, `npx`, and `corepack` binaries bundled with Node.js, so on a clean install it downloads and writes fewer files than the other two.
+- Per-project switching costs no command at all in pnpm: the `node` on your PATH is a shim that reads the [`devEngines.runtime`](/package_json#devenginesruntime) of the project and runs the matching version. fnm and nvm read a `.node-version` or `.nvmrc` file through a shell hook that fires on `cd`, which is what `fnm exec` and `nvm use` measure in that row. Loading nvm into the shell in the first place is not counted at all here, and it costs more than everything in that row.
+- All three have to materialize the pinned version the first time a project asks for it: pnpm links it from its store, fnm downloads it, nvm unpacks it. The row measures the repeated runs after that.
