@@ -146,10 +146,23 @@ const runners = {
 export function cloneNvm (managersDir) {
   const dir = nvmSourceDir(managersDir)
   rimraf.sync(dir)
-  const result = spawn.sync('git', ['clone', '--depth=1', NVM_REPOSITORY, dir], { stdio: 'inherit' })
+  // The benchmark sources the cloned `nvm.sh`, so it checks out the newest
+  // release rather than whatever the default branch happens to be, the same
+  // way the other tools are installed from their releases.
+  const tag = latestNvmTag()
+  const result = spawn.sync('git', ['clone', '--depth=1', `--branch=${tag}`, NVM_REPOSITORY, dir], { stdio: 'inherit' })
   if (result.status !== 0) {
-    throw new Error(`Failed to clone nvm from ${NVM_REPOSITORY}`)
+    throw new Error(`Failed to clone nvm ${tag} from ${NVM_REPOSITORY}`)
   }
+}
+
+function latestNvmTag () {
+  const result = spawn.sync('git', ['ls-remote', '--tags', '--refs', '--sort=-v:refname', NVM_REPOSITORY, 'v*'])
+  const tag = result.stdout?.toString().match(/refs\/tags\/(v[\d.]+)/)?.[1]
+  if (result.status !== 0 || !tag) {
+    throw new Error(`Couldn't detect the latest release of nvm. ${result.stderr?.toString() ?? ''}`)
+  }
+  return tag
 }
 
 /**
@@ -237,12 +250,13 @@ function assertVersion (actual, expectedMajor) {
  * the shell itself is counted.
  */
 function measure (runner, command, cwd, env, runs = 1) {
+  assertShellCanTime()
   const timingsFile = path.join(TMP, 'timings.txt')
   fs.writeFileSync(timingsFile, '')
   const script = [
     'set -e',
     runner.prelude,
-    `for _run in $(seq 1 ${runs}); do`,
+    `for ((_run = 0; _run < ${runs}; _run++)); do`,
     '  _start=$EPOCHREALTIME',
     `  ${command}`,
     '  _end=$EPOCHREALTIME',
@@ -256,10 +270,26 @@ function measure (runner, command, cwd, env, runs = 1) {
       const [start, end] = line.split(' ').map(Number)
       return (end - start) * 1000
     })
-  if (timings.length !== runs || timings.some((timing) => !(timing >= 0))) {
-    throw new Error(`Expected ${runs} timings for "${command}", got "${timings.join(', ')}"`)
+  // Starting a process cannot take zero time, so anything down there means the
+  // shell didn't report what it was asked for rather than that it was fast.
+  if (timings.length !== runs || timings.some((timing) => !Number.isFinite(timing) || timing <= 0)) {
+    throw new Error(`Expected ${runs} positive timings for "${command}", got "${timings.join(', ')}"`)
   }
   return Math.round(Math.min(...timings) * 100) / 100
+}
+
+let shellCanTime
+// $EPOCHREALTIME arrived in Bash 5. Older shells expand it to an empty string,
+// which would silently turn every measurement into zero. macOS still ships
+// Bash 3.2 as /bin/bash.
+function assertShellCanTime () {
+  if (shellCanTime === undefined) {
+    const result = spawn.sync('bash', ['-c', 'printf %s "${BASH_VERSINFO[0]}"'])
+    shellCanTime = Number(result.stdout?.toString()) >= 5
+  }
+  if (!shellCanTime) {
+    throw new Error('The Node.js version management benchmark needs Bash 5 or newer on PATH to measure with $EPOCHREALTIME.')
+  }
 }
 
 function run (runner, command, cwd, env) {
