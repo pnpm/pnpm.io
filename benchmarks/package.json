@@ -1,7 +1,8 @@
 {
     "type": "module",
     "scripts": {
-        "benchmark": "node ./index.js"
+        "benchmark": "node ./index.js",
+        "test": "node --test latencyProxy.test.mjs"
     },
     "dependencies": {
         "common-tags": "^1.8.2",
