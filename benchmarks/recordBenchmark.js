@@ -16,7 +16,9 @@ export default async function (pm, fixture, opts) {
   // instance) pass their own benchmark function but record results the same way.
   const runBenchmark = opts.benchmarkFn ?? benchmark
 
-  pm.version = getPMVersion(pm.name, opts)
+  // Tools without an executable to ask (nvm is a shell function) report their
+  // version through `opts.getVersion`.
+  pm.version = opts.getVersion?.(pm, opts) ?? getPMVersion(pm.name, opts)
   const resultsFile = path.join(RESULTS, pm.scenario, pm.version, `${fixture}.yaml`)
   const prevResults = await safeLoadYamlFile(resultsFile) || []
 
