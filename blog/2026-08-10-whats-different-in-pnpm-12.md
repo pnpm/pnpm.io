@@ -8,7 +8,7 @@ tags: [release]
 
 pnpm 12 is a rewrite of pnpm in Rust, and it is currently a **release candidate**. Upgrading is not meant to be a migration: apart from the differences below, it keeps the commands, flags, settings, and lockfile format of pnpm 11, and the [documentation](/motivation) applies to both versions.
 
-Three things differ, and one of them — a removed flag — fails outright rather than behaving differently. This post collects them in one place.
+Four things differ, and one of them — a removed flag — fails outright rather than behaving differently. This post collects them in one place.
 
 <!--truncate-->
 
@@ -42,6 +42,14 @@ git config --global url."git@github.com:".insteadOf https://github.com/
 ```
 
 pnpm shells out to `git`, so the rewrite applies to all of its Git operations automatically. Details, including how unknown hosts and credentialed URLs are handled, are in [How Git dependencies are resolved](/package-sources#how-git-dependencies-are-resolved).
+
+## Lockfiles of cyclic dependency graphs
+
+Since v12.0.0-rc.5, pnpm breaks dependency cycles at a fixed place instead of wherever the installation happens to walk into them: the packages in a cycle are ordered by package ID, and the edges that close the cycle are always cut at the same point.
+
+The effect is that the lockfile is a function of the dependency graph alone. Reordering the `packages` globs in `pnpm-workspace.yaml`, reordering entries in `package.json`, or simply installing twice all produce a byte-identical lockfile — in pnpm 11 they could produce different ones for a project with cyclic dependencies. Cycle-heavy workspaces also resolve peers 2–3× faster, use about 25% less memory, and get a substantially smaller lockfile, because a package inside a cycle no longer gets a separate peer variant per path that reaches it.
+
+Existing lockfiles keep working: `--frozen-lockfile` installs consume them unchanged, and an install that doesn't re-resolve leaves them untouched. The first install that does re-resolve re-keys the peer variants of cyclic packages once, so expect a one-time lockfile diff on such projects. The details are in [How peers are resolved](/how-peers-are-resolved#cyclic-dependencies).
 
 ## `pnpm install --resolution-only` is gone
 
