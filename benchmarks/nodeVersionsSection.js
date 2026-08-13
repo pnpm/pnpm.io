@@ -4,28 +4,26 @@ import commonTags from 'common-tags'
 import prettyMs from 'pretty-ms'
 import nodeManagersMap from './nodeManagersMap.js'
 import recordBenchmark from './recordBenchmark.js'
-import benchmarkNodeVersions, { PRIMARY_NODE_VERSION, SECONDARY_NODE_VERSION } from './benchmarkNodeVersions.js'
+import benchmarkNodeVersions, { PRIMARY_NODE_VERSION, SECONDARY_NODE_VERSION, readManagerVersion } from './benchmarkNodeVersions.js'
 import generateSvg from './generateSvg.js'
 
 const { stripIndents } = commonTags
 
-const managers = ['pnpm12', 'fnm']
+const managers = ['pnpm12', 'fnm', 'nvm']
 
 const tests = [
   'cleanInstall',
   'warmStoreInstall',
-  'setDefault',
   'runInProject',
 ]
 
-// Only the installs are charted. The other scenarios are milliseconds, so they
-// would render as invisible bars. The table below the chart reports them all.
+// Only the installs are charted. Running Node.js takes milliseconds, so it
+// would render as an invisible bar. The table below the chart reports it.
 const chartTests = ['cleanInstall', 'warmStoreInstall']
 
 const testDescriptions = {
   cleanInstall:     `install Node.js ${PRIMARY_NODE_VERSION} with nothing cached`,
   warmStoreInstall: `install Node.js ${PRIMARY_NODE_VERSION} that was installed before`,
-  setDefault:       'make an installed version the global default',
   runInProject:     `run \`node\` in a project pinned to Node.js ${SECONDARY_NODE_VERSION}`,
 }
 
@@ -35,8 +33,8 @@ const chartLabels = {
 }
 
 /**
- * Benchmarks pnpm against fnm on installing and switching Node.js versions and
- * returns the markdown section and the chart to write next to it.
+ * Benchmarks pnpm against the other Node.js version managers on installing and
+ * switching Node.js versions and returns the markdown section and the chart.
  */
 export default async function nodeVersionsSection ({ managersDirs, formattedNow, limitRuns, svgName }) {
   const results = {}
@@ -44,6 +42,7 @@ export default async function nodeVersionsSection ({ managersDirs, formattedNow,
     results[key] = min(await recordBenchmark(nodeManagersMap[key], 'node-versions', {
       limitRuns,
       managersDir: managersDirs[key],
+      getVersion: readManagerVersion,
       benchmarkFn: (pm, _fixture, opts) => benchmarkNodeVersions(pm, opts),
     }))
   }
@@ -63,21 +62,20 @@ export default async function nodeVersionsSection ({ managersDirs, formattedNow,
   const section = stripIndents`
     ## Node.js Version Management
 
-    pnpm installs and switches Node.js versions itself, so a separate version manager is not needed. This section compares [\`pnpm runtime set node\`](/cli/runtime) with [fnm](https://github.com/Schniz/fnm).
+    pnpm installs and switches Node.js versions itself, so a separate version manager is not needed. This section compares [\`pnpm runtime set node\`](/cli/runtime) with fnm and nvm.
 
     | scenario | ${headerLegends} |
     | ---      | ${headerSep} |
     ${rows}
 
-    <img alt="Graph comparing pnpm and fnm on installing Node.js" src="/img/benchmarks/${svgName}.svg?v=${svgHash}" />
+    <img alt="Graph comparing Node.js version managers on installing Node.js" src="/img/benchmarks/${svgName}.svg?v=${svgHash}" />
 
     A few things to keep in mind when reading these numbers:
 
-    - pnpm keeps Node.js in its content-addressable store, so installing a version that was installed before is a relink with no download. fnm has no download cache, so it fetches Node.js again.
-    - pnpm doesn't extract the \`npm\`, \`npx\`, and \`corepack\` binaries bundled with Node.js, so on a clean install it downloads and writes fewer files than fnm.
-    - Changing the global default is not the same operation in both tools. pnpm links the runtime into its global bin directory, fnm flips a symlink that only takes effect in shells evaluating \`fnm env\`.
-    - Per-project switching costs no command at all in pnpm: the \`node\` on your PATH is a shim that reads the [\`devEngines.runtime\`](/package_json#devenginesruntime) of the project and runs the matching version. With fnm, a \`.node-version\` file is picked up by its \`--use-on-cd\` shell hook, which is what the \`fnm exec\` in this row measures.
-    - Both tools have to materialize the pinned version the first time a project asks for it: pnpm links it from its store, fnm downloads it. The row above measures the repeated runs after that.
+    - pnpm keeps Node.js in its content-addressable store and nvm keeps the downloaded tarballs in \`$NVM_DIR/.cache\`, so for both of them installing a version that was installed before needs no download. fnm has no download cache and fetches Node.js again.
+    - pnpm doesn't extract the \`npm\`, \`npx\`, and \`corepack\` binaries bundled with Node.js, so on a clean install it downloads and writes fewer files than the other two.
+    - Per-project switching costs no command at all in pnpm: the \`node\` on your PATH is a shim that reads the [\`devEngines.runtime\`](/package_json#devenginesruntime) of the project and runs the matching version. fnm and nvm read a \`.node-version\` or \`.nvmrc\` file through a shell hook that fires on \`cd\`, which is what \`fnm exec\` and \`nvm use\` measure in that row. Loading nvm into the shell in the first place is not counted at all here, and it costs more than everything in that row.
+    - All three have to materialize the pinned version the first time a project asks for it: pnpm links it from its store, fnm downloads it, nvm unpacks it. The row measures the repeated runs after that.
   `
 
   return { section, svg }
