@@ -8,6 +8,7 @@ import tempy from 'tempy'
 import cmdsMap from './commandsMap.js'
 import benchmark from './recordBenchmark.js'
 import nodeVersionsSection from './nodeVersionsSection.js'
+import pnprSection from './pnprSection.js'
 import { cloneNvm } from './benchmarkNodeVersions.js'
 import { installYarn } from './installYarn.js'
 import generateSvg from './generateSvg.js'
@@ -23,6 +24,7 @@ const BENCH_IMGS = path.join(DIRNAME, '../static/img/benchmarks')
 const { stripIndents } = commonTags
 const LIMIT_RUNS = 30
 const NODE_VERSIONS_SVG = 'node-versions'
+const PNPR_SVG = 'pnpr-registry'
 
 const fixtures = [
   /*{
@@ -124,7 +126,7 @@ function addPackageManager (args, cwd) {
 async function run () {
   const tmpDir = tempy.directory()
   const managersDirs = {}
-  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn', 'bun', 'fnm', 'nvm']) {
+  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn', 'bun', 'fnm', 'nvm', 'pnpr']) {
     managersDirs[pm] = path.join(tmpDir, pm)
   }
   await Promise.allSettled([
@@ -278,6 +280,18 @@ async function run () {
     })
   }
 
+  const pnpr = await pnprSection({
+    managersDirs,
+    formattedNow,
+    limitRuns: LIMIT_RUNS,
+    svgName: PNPR_SVG,
+  })
+  sections.push(pnpr.section)
+  svgs.push({
+    path: path.join(BENCH_IMGS, `${PNPR_SVG}.svg`),
+    file: pnpr.svg
+  })
+
   const nodeVersions = await nodeVersionsSection({
     managersDirs: { pnpm12: managersDirs.pnpm12, fnm: managersDirs.fnm, nvm: managersDirs.nvm },
     formattedNow,
@@ -295,7 +309,7 @@ async function run () {
 
   **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
-  This benchmark compares the performance of npm, pnpm, Yarn, Yarn PnP, and Bun (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
+  This benchmark compares the performance of npm, pnpm, Yarn, Yarn PnP, and Bun (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It then runs the same comparison again with every package manager installing through a pnpr registry over an emulated network, where pnpm can offload dependency resolution to the server. It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
   `
 
   const explanationItems = sortedTests.map(t => `- ${explanationByTest[t]}`).join('\n  ')

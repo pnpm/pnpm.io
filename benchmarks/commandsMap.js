@@ -45,6 +45,26 @@ export default {
       '--ignore-scripts',
     ]
   },
+  // Only used by the pnpr section. The command is pnpm's, unchanged: what makes
+  // it different is the `pnprServer` the fixture is configured with, which moves
+  // dependency resolution onto the server.
+  pnpm_pnpr: {
+    scenario: 'pnpm_pnpr',
+    legend: 'pnpm + pnpr',
+    mdLegend: '[pnpm + pnpr](/pnpr/install-acceleration)',
+    color: '#2fa84f',
+    name: 'pnpm',
+    args: [
+      'install',
+      '--ignore-scripts',
+      '--store-dir=cache/store',
+      '--cache-dir=cache/cache',
+      '--registry=https://registry.npmjs.org/',
+      '--no-strict-peer-dependencies',
+      '--config.auto-install-peers=false',
+      '--config.resolution-mode=highest',
+    ]
+  },
   yarn: {
     scenario: 'yarn',
     legend: 'Yarn',
