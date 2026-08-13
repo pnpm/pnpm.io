@@ -25,9 +25,6 @@ jobs:
           npm install --global corepack
           corepack enable
           corepack prepare pnpm@next-10 --activate
-          corepack prepare yarn@stable --activate
-      - run: curl https://bun.sh/install | bash
-      - run: /home/runner/.bun/bin/bun -v
       # fnm is compared against pnpm in the Node.js version management section.
       - name: Install fnm
         run: |
