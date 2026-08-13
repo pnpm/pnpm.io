@@ -14,18 +14,16 @@ const managers = ['pnpm12', 'fnm', 'nvm']
 const tests = [
   'cleanInstall',
   'warmStoreInstall',
-  'setDefault',
   'runInProject',
 ]
 
-// Only the installs are charted. The other scenarios are milliseconds, so they
-// would render as invisible bars. The table below the chart reports them all.
+// Only the installs are charted. Running Node.js takes milliseconds, so it
+// would render as an invisible bar. The table below the chart reports it.
 const chartTests = ['cleanInstall', 'warmStoreInstall']
 
 const testDescriptions = {
   cleanInstall:     `install Node.js ${PRIMARY_NODE_VERSION} with nothing cached`,
   warmStoreInstall: `install Node.js ${PRIMARY_NODE_VERSION} that was installed before`,
-  setDefault:       'make an installed version the global default',
   runInProject:     `run \`node\` in a project pinned to Node.js ${SECONDARY_NODE_VERSION}`,
 }
 
@@ -76,7 +74,6 @@ export default async function nodeVersionsSection ({ managersDirs, formattedNow,
 
     - pnpm keeps Node.js in its content-addressable store and nvm keeps the downloaded tarballs in \`$NVM_DIR/.cache\`, so for both of them installing a version that was installed before needs no download. fnm has no download cache and fetches Node.js again.
     - pnpm doesn't extract the \`npm\`, \`npx\`, and \`corepack\` binaries bundled with Node.js, so on a clean install it downloads and writes fewer files than the other two.
-    - Changing the global default is a different operation in each tool. pnpm links the runtime into its global bin directory, fnm flips a symlink, nvm writes an alias file. The last two only take effect in shells that loaded them — \`eval "$(fnm env)"\` for fnm, \`source nvm.sh\` for nvm.
     - Per-project switching costs no command at all in pnpm: the \`node\` on your PATH is a shim that reads the [\`devEngines.runtime\`](/package_json#devenginesruntime) of the project and runs the matching version. fnm and nvm read a \`.node-version\` or \`.nvmrc\` file through a shell hook that fires on \`cd\`, which is what \`fnm exec\` and \`nvm use\` measure in that row. Loading nvm into the shell in the first place is not counted at all here, and it costs more than everything in that row.
     - All three have to materialize the pinned version the first time a project asks for it: pnpm links it from its store, fnm downloads it, nvm unpacks it. The row measures the repeated runs after that.
   `

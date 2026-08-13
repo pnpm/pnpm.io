@@ -197,20 +197,17 @@ export default async function benchmarkNodeVersions (pm, opts) {
 
   const warmStoreInstall = measure(runner, runner.install(PRIMARY_NODE_VERSION), dir, env)
 
-  console.log(`# installing Node.js ${SECONDARY_NODE_VERSION} to switch away from`)
+  console.log(`# installing Node.js ${SECONDARY_NODE_VERSION} for the project to pin`)
 
   run(runner, runner.install(SECONDARY_NODE_VERSION), dir, env)
-  // Both fnm and nvm keep the version they installed first as the default, so
-  // the version to switch away from is selected explicitly. All tools are then
-  // in the same state, which is what makes the timing below a switch and not a
-  // no-op.
+  // The tools disagree on what installing selects, so the version the project
+  // pins is read while it is the default, and the default is then set back to
+  // the other one. The project scenario below is only meaningful when the
+  // project asks for a version the global default isn't.
   run(runner, runner.setDefault(SECONDARY_NODE_VERSION), dir, env)
   const pinnedVersion = readDefaultVersion(runner, dir, env)
   assertVersion(pinnedVersion, SECONDARY_NODE_VERSION)
-
-  console.log('# making an installed version the global default')
-
-  const setDefault = measure(runner, runner.setDefault(PRIMARY_NODE_VERSION), dir, env)
+  run(runner, runner.setDefault(PRIMARY_NODE_VERSION), dir, env)
   assertVersion(readDefaultVersion(runner, dir, env), PRIMARY_NODE_VERSION)
 
   console.log(`# running Node.js in a project pinned to ${pinnedVersion}`)
@@ -227,7 +224,6 @@ export default async function benchmarkNodeVersions (pm, opts) {
   return {
     cleanInstall,
     warmStoreInstall,
-    setDefault,
     runInProject,
   }
 }
