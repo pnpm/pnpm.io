@@ -43,26 +43,27 @@
   <text x="290" y="20" class="font s4 text" font-style="italic" text-anchor="end">Installation time in seconds (lower is better)</text>
   <rect x="40" y="35" width="228" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="41.5" width="60" height="6" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="41.5" width="17" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="41.5" width="16" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="48" width="58" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="54.5" width="25" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="65" width="90" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="71.5" width="33" height="6" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="71.5" width="9" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="71.5" width="8" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="78" width="58" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="84.5" width="21" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="95" width="85" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="101.5" width="46" height="6" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="101.5" width="17" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="101.5" width="15" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="108" width="43" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="114.5" width="10" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="125" width="55" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="131.5" width="17" height="6" fill="#cccccc" rx="1" ry="1"></rect>
-  <rect x="40" y="131.5" width="6" height="6" fill="#fbae00" rx="1" ry="1"></rect>
+  <rect x="40" y="131.5" width="4" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="138" width="43" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="144.5" width="10" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="155" width="13" height="6" fill="#cd3731" rx="1" ry="1"></rect>
   <rect x="40" y="161.5" width="3" height="6" fill="#cccccc" rx="1" ry="1"></rect>
+  <rect x="40" y="161.5" width="1" height="6" fill="#fbae00" rx="1" ry="1"></rect>
   <rect x="40" y="168" width="54" height="6" fill="#248ebd" rx="1" ry="1"></rect>
   <rect x="40" y="174.5" width="0" height="6" fill="#40a9ff" rx="1" ry="1"></rect>
   <rect x="40" y="185" width="13" height="6" fill="#cd3731" rx="1" ry="1"></rect>
@@ -99,5 +100,5 @@
   <text x="38" y="257.75" class="font s4" dominant-baseline="middle" text-anchor="end">lockfile</text>
   <text x="38" y="261.75" class="font s4" dominant-baseline="middle" text-anchor="end">node_modules</text>
   <text x="38" y="287.75" class="font s4" dominant-baseline="middle" text-anchor="end">update</text>
-  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.19.0 at: Aug 12, 2026, 3:15 PM</text>
+  <text x="290" y="317" class="font s4 text" text-anchor="end">Tests were run using Node.js v24.18.0 at: Aug 13, 2026, 4:56 PM</text>
 </svg>
