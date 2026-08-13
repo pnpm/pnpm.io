@@ -9,6 +9,7 @@ import cmdsMap from './commandsMap.js'
 import benchmark from './recordBenchmark.js'
 import nodeVersionsSection from './nodeVersionsSection.js'
 import { cloneNvm } from './benchmarkNodeVersions.js'
+import { installYarn } from './installYarn.js'
 import generateSvg from './generateSvg.js'
 import generateStackedSvg from './generateStackedSvg.js'
 import spawn from "cross-spawn"
@@ -101,12 +102,29 @@ const toArray = (testList, pms, resultsObj) => testList
 
 run()
   .then(() => console.log('done'))
-  .catch(err => console.error(err))
+  .catch(err => {
+    console.error(err)
+    // Without this the benchmark reports success to CI no matter what failed.
+    process.exitCode = 1
+  })
+
+/**
+ * A package manager that fails to install is worse than a failed benchmark: the
+ * scenarios still find the machine's own `npm`/`pnpm`/`bun` further down PATH
+ * and quietly measure that version instead of the one being benchmarked.
+ */
+function addPackageManager (args, cwd) {
+  const result = spawn.sync('pnpm', ['add', ...args], { cwd, stdio: 'inherit' })
+  if (result.error) throw result.error
+  if (result.status !== 0) {
+    throw new Error(`\`pnpm add ${args.join(' ')}\` failed with status code ${result.status}`)
+  }
+}
 
 async function run () {
   const tmpDir = tempy.directory()
   const managersDirs = {}
-  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn', 'fnm', 'nvm']) {
+  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn', 'bun', 'fnm', 'nvm']) {
     managersDirs[pm] = path.join(tmpDir, pm)
   }
   await Promise.allSettled([
@@ -117,12 +135,14 @@ async function run () {
   for (const dir of Object.values(managersDirs)) {
     fs.writeFileSync(path.join(dir, 'package.json'), '{}', 'utf8')
   }
-  spawn.sync('pnpm', ['add', 'npm@latest'], { cwd: managersDirs.npm, stdio: 'inherit' })
-  spawn.sync('pnpm', ['add', 'pnpm@latest'], { cwd: managersDirs.pnpm11, stdio: 'inherit' })
+  addPackageManager(['npm@latest'], managersDirs.npm)
+  addPackageManager(['pnpm@latest'], managersDirs.pnpm11)
   // pnpm 12 ships its Rust binary via an install script, so the build must be
   // allowed; otherwise the `pnpm` bin is left as a placeholder that errors out.
-  spawn.sync('pnpm', ['add', 'pnpm@next-12', '--allow-build=pnpm'], { cwd: managersDirs.pnpm12, stdio: 'inherit' })
-  spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDirs.yarn, stdio: 'inherit' })
+  addPackageManager(['pnpm@next-12', '--allow-build=pnpm'], managersDirs.pnpm12)
+  await installYarn(managersDirs.yarn)
+  // Like pnpm 12, the bun package downloads its binary from a postinstall script.
+  addPackageManager(['bun@latest', '--allow-build=bun'], managersDirs.bun)
   cloneNvm(managersDirs.nvm)
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pmConfigs = [
@@ -131,6 +151,7 @@ async function run () {
     { key: 'pnpm12', managersDir: managersDirs.pnpm12 },
     { key: 'yarn', managersDir: managersDirs.yarn },
     { key: 'yarn_pnp', managersDir: managersDirs.yarn, hasNodeModules: false },
+    { key: 'bun', managersDir: managersDirs.bun },
   ]
   const pms = pmConfigs.map(({ key }) => key)
   const tableRows = [
@@ -186,6 +207,7 @@ async function run () {
       },
       { ...cmdsMap.yarn, key: 'yarn' },
       { ...cmdsMap.yarn_pnp, key: 'yarn_pnp' },
+      { ...cmdsMap.bun, key: 'bun' },
     ]
     const resArray = sortedTests.map(test => mainBars.map(bar => bar.stacked
       ? {
@@ -273,7 +295,7 @@ async function run () {
 
   **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
-  This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
+  This benchmark compares the performance of npm, pnpm, Yarn, Yarn PnP, and Bun (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
   `
 
   const explanationItems = sortedTests.map(t => `- ${explanationByTest[t]}`).join('\n  ')

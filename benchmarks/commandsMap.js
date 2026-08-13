@@ -62,5 +62,21 @@ export default {
     args: [
       'install'
     ]
+  },
+  bun: {
+    scenario: 'bun',
+    legend: 'Bun',
+    color: '#e0709a',
+    name: 'bun',
+    args: [
+      'install',
+      '--ignore-scripts',
+      '--cache-dir=cache',
+      '--registry=https://registry.npmjs.org/',
+      // Bun turns on --frozen-lockfile whenever CI is set, which breaks every
+      // scenario that starts without a lockfile. Yarn is opted out of the same
+      // behaviour through `enableImmutableInstalls: false`.
+      '--no-frozen-lockfile',
+    ]
   }
 }

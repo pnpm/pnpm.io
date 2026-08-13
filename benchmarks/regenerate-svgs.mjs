@@ -63,11 +63,18 @@ const pmConfigs = [
   { key: 'pnpm12' },
   { key: 'yarn' },
   { key: 'yarn_pnp', hasNodeModules: false },
+  { key: 'bun' },
 ]
 
 function latestVersionEntry (key) {
   const dir = path.join(RESULTS, key)
-  return fs.readdirSync(dir)
+  let versions
+  try {
+    versions = fs.readdirSync(dir)
+  } catch {
+    return null
+  }
+  return versions
     .map(v => {
       const file = path.join(dir, v, 'alotta-files.yaml')
       try {
@@ -77,7 +84,7 @@ function latestVersionEntry (key) {
       }
     })
     .filter(Boolean)
-    .sort((a, b) => b.mtime - a.mtime)[0]
+    .sort((a, b) => b.mtime - a.mtime)[0] ?? null
 }
 
 function minPerTest (entries) {
@@ -93,21 +100,29 @@ function toResArray (testList, keys, data) {
 const data = {}
 let latestYamlMtime = 0
 for (const { key } of pmConfigs) {
-  const { v, file, mtime } = latestVersionEntry(key)
-  const entries = await loadYamlFile(file)
-  data[key] = { version: v, results: minPerTest(entries) }
-  if (mtime > latestYamlMtime) latestYamlMtime = mtime
+  // A package manager that was added to the benchmark but hasn't been run by CI
+  // yet has no results to draw, so it is left out of the chart until it does.
+  const entry = latestVersionEntry(key)
+  if (!entry) continue
+  const entries = await loadYamlFile(entry.file)
+  data[key] = { version: entry.v, results: minPerTest(entries) }
+  if (entry.mtime > latestYamlMtime) latestYamlMtime = entry.mtime
+}
+
+if (!data.npm) {
+  console.warn('[regenerate-svgs] no benchmark results recorded yet; skipping')
+  process.exit(0)
 }
 
 const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(latestYamlMtime))
 
-const allKeys = pmConfigs.map(c => c.key)
+const allKeys = pmConfigs.map(c => c.key).filter(key => data[key])
 const sortedTests = sortTestsBySlowest(tests, data, allKeys)
 const sortedDescriptions = sortedTests.map(t => testDescriptions[t])
 
 // Main chart: pnpm 11 and pnpm 12 are merged into a single stacked bar.
 const mainBars = [
-  { ...cmdsMap.npm, key: 'npm', version: data.npm.version },
+  { ...cmdsMap.npm, key: 'npm' },
   {
     stacked: true,
     color: cmdsMap.pnpm12.color,
@@ -118,9 +133,14 @@ const mainBars = [
     primaryKey: 'pnpm12',
     secondaryKey: 'pnpm11',
   },
-  { ...cmdsMap.yarn, key: 'yarn', version: data.yarn.version },
-  { ...cmdsMap.yarn_pnp, key: 'yarn_pnp', version: data.yarn_pnp.version },
+  { ...cmdsMap.yarn, key: 'yarn' },
+  { ...cmdsMap.yarn_pnp, key: 'yarn_pnp' },
+  { ...cmdsMap.bun, key: 'bun' },
 ]
+  .filter(bar => bar.stacked
+    ? data[bar.primaryKey] && data[bar.secondaryKey]
+    : data[bar.key])
+  .map(bar => bar.stacked ? bar : { ...bar, version: data[bar.key].version })
 const mainResArray = sortedTests.map(test => mainBars.map(bar => bar.stacked
   ? {
       primary: Math.round(data[bar.primaryKey].results[test] / 100) / 10,

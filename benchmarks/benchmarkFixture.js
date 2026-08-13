@@ -16,7 +16,8 @@ const TMP = tempy.directory()
 const lockfileNameByPM = {
   npm: 'package-lock.json',
   pnpm: 'pnpm-lock.yaml',
-  yarn: 'yarn.lock'
+  yarn: 'yarn.lock',
+  bun: 'bun.lock'
 }
 
 export function createEnv (managersDir) {
@@ -113,11 +114,17 @@ export default async function benchmark (pm, fixture, opts) {
   cleanLockfile(pm, cwd, env)
 
   if (pm.name === 'yarn') {
-    // Disable global mirror that speeds up yarn berry install
+    // Every store Yarn keeps has to sit under `cache/`, the directory the
+    // scenarios below delete to go back to a cold cache. `enableMirror` alone
+    // stopped being enough once Yarn started caching globally by default:
+    // without `enableGlobalCache`, packages land in `globalFolder` instead and
+    // survive every scenario, so no run ever measures a cold cache.
     let yarnRc =
       'enableImmutableInstalls: false\n'
+    + 'enableGlobalCache: false\n'
     + 'enableMirror: false\n'
     + `cacheFolder: ${path.join(cwd, 'cache')}\n`
+    + `globalFolder: ${path.join(cwd, 'cache', 'global')}\n`
     + 'enableScripts: false\n'
     /**
      * @see https://yarnpkg.com/configuration/yarnrc#nodeLinker
