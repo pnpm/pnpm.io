@@ -188,11 +188,16 @@ export default async function benchmark (pm, fixture, opts) {
   //
   // It runs twice because an install without a lockfile and an install with one
   // are different questions, and a server that caches answers has to have been
-  // asked both. The first warm-up produces the lockfile the second one sends.
-  // Everything they leave behind is then removed, so the scenarios below still
-  // begin from the state each of them says it does.
+  // asked both. The first warm-up produces the lockfile the second one sends,
+  // and `node_modules` goes away in between: a package manager that already has
+  // the right tree installed skips resolving altogether, so leaving it in place
+  // means the second warm-up asks nothing and the question it exists to ask
+  // stays cold until a scenario that is being measured asks it.
   console.log('# warm-up (not measured)')
   measureInstall(pm, cwd, env)
+  if (modules) {
+    rimraf.sync(modules)
+  }
   measureInstall(pm, cwd, env)
   if (modules) {
     rimraf.sync(modules)
