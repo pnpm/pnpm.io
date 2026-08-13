@@ -7,6 +7,7 @@ import prettyMs from 'pretty-ms'
 import tempy from 'tempy'
 import cmdsMap from './commandsMap.js'
 import benchmark from './recordBenchmark.js'
+import nodeVersionsSection from './nodeVersionsSection.js'
 import generateSvg from './generateSvg.js'
 import generateStackedSvg from './generateStackedSvg.js'
 import spawn from "cross-spawn"
@@ -19,6 +20,7 @@ const BENCH_IMGS = path.join(DIRNAME, '../static/img/benchmarks')
 
 const { stripIndents } = commonTags
 const LIMIT_RUNS = 30
+const NODE_VERSIONS_SVG = 'node-versions'
 
 const fixtures = [
   /*{
@@ -103,7 +105,7 @@ run()
 async function run () {
   const tmpDir = tempy.directory()
   const managersDirs = {}
-  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn']) {
+  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn', 'fnm']) {
     managersDirs[pm] = path.join(tmpDir, pm)
   }
   await Promise.allSettled([
@@ -252,12 +254,24 @@ async function run () {
     })
   }
 
+  const nodeVersions = await nodeVersionsSection({
+    managersDirs: { pnpm12: managersDirs.pnpm12, fnm: managersDirs.fnm },
+    formattedNow,
+    limitRuns: LIMIT_RUNS,
+    svgName: NODE_VERSIONS_SVG,
+  })
+  sections.push(nodeVersions.section)
+  svgs.push({
+    path: path.join(BENCH_IMGS, `${NODE_VERSIONS_SVG}.svg`),
+    file: nodeVersions.svg
+  })
+
   const introduction = stripIndents`
   # Benchmarks of JavaScript Package Managers
 
   **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
-  This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
+  This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm and [fnm](https://github.com/Schniz/fnm) install and switch Node.js versions.
   `
 
   const explanationItems = sortedTests.map(t => `- ${explanationByTest[t]}`).join('\n  ')

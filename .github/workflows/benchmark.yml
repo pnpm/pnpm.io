@@ -28,6 +28,15 @@ jobs:
           corepack prepare yarn@stable --activate
       - run: curl https://bun.sh/install | bash
       - run: /home/runner/.bun/bin/bun -v
+      # fnm is compared against pnpm in the Node.js version management section.
+      - name: Install fnm
+        run: |
+          curl -fsSL https://github.com/Schniz/fnm/releases/latest/download/fnm-linux.zip -o /tmp/fnm.zip
+          unzip -o /tmp/fnm.zip -d /tmp/fnm
+          mkdir -p "$HOME/.local/bin"
+          install -m 755 /tmp/fnm/fnm "$HOME/.local/bin/fnm"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/fnm" --version
       - run: pnpm --dir=benchmarks install
       - run: pnpm --dir=benchmarks run benchmark
       - run: pnpm --dir=benchmarks run benchmark

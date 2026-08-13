@@ -12,6 +12,9 @@ const RESULTS = path.join(DIRNAME, 'results')
 export default async function (pm, fixture, opts) {
   opts = opts || {}
   const limitRuns = opts.limitRuns || Infinity
+  // Sections that don't install a fixture (the Node.js version managers, for
+  // instance) pass their own benchmark function but record results the same way.
+  const runBenchmark = opts.benchmarkFn ?? benchmark
 
   pm.version = getPMVersion(pm.name, opts)
   const resultsFile = path.join(RESULTS, pm.scenario, pm.version, `${fixture}.yaml`)
@@ -19,7 +22,7 @@ export default async function (pm, fixture, opts) {
 
   if (prevResults.length >= limitRuns) return prevResults
 
-  const newResults = await benchmark(pm, fixture, {
+  const newResults = await runBenchmark(pm, fixture, {
     hasNodeModules: opts.hasNodeModules,
     managersDir: opts.managersDir,
   })
