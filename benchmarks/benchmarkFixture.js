@@ -133,6 +133,20 @@ async function writeRegistryConfig (cwd, opts) {
   }
 }
 
+/**
+ * Undoes an install. Yarn PnP writes no `node_modules` at all, so removing only
+ * that would leave its whole installation in place and hand the scenario that
+ * follows a project that is already installed.
+ */
+function removeInstallOutput (cwd, modules) {
+  if (modules) {
+    rimraf.sync(modules)
+  }
+  for (const name of ['.pnp.cjs', '.pnp.loader.mjs', '.yarn']) {
+    rimraf.sync(path.join(cwd, name))
+  }
+}
+
 export default async function benchmark (pm, fixture, opts) {
   const cwd = path.join(TMP, pm.scenario, fixture)
   const env = createEnv(opts.managersDir)
@@ -195,13 +209,9 @@ export default async function benchmark (pm, fixture, opts) {
   // stays cold until a scenario that is being measured asks it.
   console.log('# warm-up (not measured)')
   measureInstall(pm, cwd, env)
-  if (modules) {
-    rimraf.sync(modules)
-  }
+  removeInstallOutput(cwd, modules)
   measureInstall(pm, cwd, env)
-  if (modules) {
-    rimraf.sync(modules)
-  }
+  removeInstallOutput(cwd, modules)
   rimraf.sync(path.join(cwd, 'cache'))
   cleanLockfile(pm, cwd, env)
 

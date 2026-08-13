@@ -128,6 +128,10 @@ export default async function pnprSection ({ managersDirs, formattedNow, limitRu
       dir,
       port: PNPR_PORT,
       publicUrl: registry,
+      // Logging every request is what lets the check below see whether pnpm
+      // really resolved on the server. It goes to a file, and every manager
+      // faces the same server, so it costs all of them the same.
+      logLevel: 'info',
     })
     const authToken = await mintToken(server.url)
 
@@ -151,6 +155,7 @@ export default async function pnprSection ({ managersDirs, formattedNow, limitRu
       authToken,
       pnprServer,
       fixtureDir,
+      serverLog: server.log,
     })
 
     const pmConfigs = [

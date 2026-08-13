@@ -177,7 +177,7 @@ export function populateCache ({ pm, managersDir, dir, registry, fixtureDir }) {
  * accelerated row into a copy of the plain pnpm row, so it is checked here
  * with one untimed install rather than during a measured one.
  */
-export function verifyResolverIsUsed ({ pm, managersDir, dir, registry, authToken, pnprServer, fixtureDir }) {
+export function verifyResolverIsUsed ({ pm, managersDir, dir, registry, authToken, pnprServer, fixtureDir, serverLog }) {
   const cwd = path.join(dir, 'verify')
   fs.rmSync(cwd, { recursive: true, force: true })
   fs.mkdirSync(cwd, { recursive: true })
@@ -189,6 +189,8 @@ export function verifyResolverIsUsed ({ pm, managersDir, dir, registry, authToke
   fs.writeFileSync(path.join(cwd, '.npmrc'), `registry=${registry}\n${auth}`)
   fs.writeFileSync(path.join(cwd, 'pnpm-workspace.yaml'), `packages:\n  - '.'\npnprServer: ${pnprServer}\n`)
 
+  const resolveCalls = () => (serverLog().match(/uri=\/-\/pnpr\/v0\/resolve/g) ?? []).length
+  const before = resolveCalls()
   const result = spawn.sync(pm.name, [...pm.args, '--no-frozen-lockfile'], {
     cwd,
     env: createEnv(managersDir),
@@ -198,10 +200,13 @@ export function verifyResolverIsUsed ({ pm, managersDir, dir, registry, authToke
   if (result.status !== 0) {
     throw new Error(`Verifying pnpr resolution failed with status code ${result.status}. ${output}`)
   }
-  if (!/pnpr server/i.test(output)) {
+  // The server's own request log is the evidence, rather than anything pnpm
+  // prints: what a package manager writes to its terminal is not a contract,
+  // and a reworded line should not be able to abort a benchmark that is working.
+  if (resolveCalls() === before) {
     throw new Error(
-      'pnpm resolved without the pnpr server, so the accelerated scenario ' +
-      `would measure a plain install. Its output was:\n${output}`
+      'pnpr recorded no resolution request, so pnpm resolved on its own and ' +
+      `the accelerated scenario would measure a plain install. Its output was:\n${output}`
     )
   }
 }

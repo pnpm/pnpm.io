@@ -59,6 +59,17 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
  */
 function pump (src, dst, profile) {
   const ramp = createSlowStart(profile)
+  // How many bytes may be on the link at once before the sender is made to
+  // wait. A real link carries a whole round trip's worth of data in flight, so
+  // the bound has to be at least that or the emulation collapses into
+  // stop-and-wait: one chunk crossing at a time, each paying the delay in turn,
+  // which caps throughput at a chunk per delay however fast the link is
+  // configured to be. Above that it only serves to bound memory.
+  const inFlightLimit = Math.max(
+    1024 * 1024,
+    (profile.rateLimit ?? 12_500_000) * (profile.oneWayMs * 2 / 1000) * 2
+  )
+  let queuedBytes = 0
   // The earliest moment the link is free to start the next chunk. It advances
   // by each chunk's serialization time so the cap is a sustained throughput
   // limit rather than a per-chunk one.
@@ -66,6 +77,13 @@ function pump (src, dst, profile) {
   let queue = Promise.resolve()
 
   src.on('data', (chunk) => {
+    // Make the sender wait once the link is carrying as much as it can hold.
+    // Without any bound the whole response is read straight into the queue, and
+    // the proxy ends up holding entire tarballs in memory.
+    queuedBytes += chunk.length
+    if (queuedBytes >= inFlightLimit) {
+      src.pause()
+    }
     const releaseAt = Date.now() + profile.oneWayMs
     queue = queue.then(async () => {
       if (dst.destroyed) return
@@ -96,11 +114,18 @@ function pump (src, dst, profile) {
           dst.once('error', done)
         })
       }
-    }).catch(() => {})
+    }).catch(() => {}).finally(() => {
+      queuedBytes -= chunk.length
+      if (queuedBytes < inFlightLimit && !src.destroyed) {
+        src.resume()
+      }
+    })
   })
 
   src.on('end', () => { queue = queue.then(() => { if (!dst.destroyed) dst.end() }).catch(() => {}) })
   src.on('error', () => dst.destroy())
+
+  return { flushed: () => queue }
 }
 
 function listen ({ upstreamPort, roundTripMs, rateLimit, slowStart }) {
@@ -114,14 +139,18 @@ function listen ({ upstreamPort, roundTripMs, rateLimit, slowStart }) {
     const upstream = net.connect({ host: '127.0.0.1', port: upstreamPort, allowHalfOpen: true })
     upstream.on('error', () => client.destroy())
     client.on('error', () => upstream.destroy())
-    // A peer that vanishes without a clean shutdown would otherwise leave its
-    // other half open forever. An install opens a lot of connections, and
-    // leaking one descriptor per abandoned connection eventually stops the
-    // proxy accepting new ones.
-    upstream.on('close', () => client.destroy())
-    client.on('close', () => upstream.destroy())
-    pump(client, upstream, profile)
-    pump(upstream, client, profile)
+    const toUpstream = pump(client, upstream, profile)
+    const toClient = pump(upstream, client, profile)
+    // A peer that goes away must not take its other half with it while chunks
+    // are still on the link. Ending a response is the ordinary case: the source
+    // socket closes as soon as it has handed over its last bytes, but those
+    // bytes are still waiting out their delay here, and destroying the
+    // destination now would truncate every response by whatever the link still
+    // held. Waiting for the direction to drain first keeps the destroy doing
+    // what it is for — releasing a connection nobody will finish — which
+    // matters because an install opens a great many of them.
+    upstream.on('close', () => { toClient.flushed().finally(() => client.destroy()) })
+    client.on('close', () => { toUpstream.flushed().finally(() => upstream.destroy()) })
   })
   server.on('error', (err) => { throw err })
   return server
@@ -162,6 +191,9 @@ export async function startLatencyProxy ({ upstreamPort, roundTripMs, rateLimit 
     }
     await sleep(100)
   }
+  // A proxy that is alive but never reported a port would otherwise outlive the
+  // run that gave up on it, and keep the benchmark from exiting.
+  proc.kill()
   throw new Error(`The latency proxy did not start. ${fs.readFileSync(logPath, 'utf8')}`)
 }
 
