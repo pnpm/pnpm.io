@@ -19,6 +19,16 @@ When used without arguments, updates all dependencies.
 |`pnpm up foo@2`       | Updates `foo` to the latest version on v2                                |
 |`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
 
+## What an update writes
+
+Besides moving `pnpm-lock.yaml` to the newly resolved versions, `pnpm update` writes the new range back to the place the dependency is declared:
+
+* In `package.json`, the range is moved onto the resolved version while the operator the dependency already declared is kept, so `^1.1.0` stays a caret range.
+* A dependency declared through the [`catalog:` protocol](../catalogs.md) is not rewritten in `package.json`. The catalog entry it points at is updated instead, in `pnpm-workspace.yaml`.
+* A dependency declared through a dist-tag, such as `"foo": "latest"`, keeps tracking the tag. The tag stays in `package.json` and only the lockfile moves to the version behind it — with `--latest` as well.
+
+Pass [`--no-save`](#--no-save) to update the lockfile only and leave the declared ranges alone.
+
 ## Selecting dependencies with patterns
 
 You can use patterns to update specific dependencies.

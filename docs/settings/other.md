@@ -203,6 +203,8 @@ This resolution mode works only with npm's [full metadata]. So it is slower in s
 
 When `resolutionMode` is set to `lowest-direct`, direct dependencies will be resolved to their lowest versions.
 
+Only the dependencies declared in `package.json` count as direct here. A peer dependency that [`autoInstallPeers`](./peer-dependencies.md#autoinstallpeers) adds is not something the project declared, so it is resolved like a subdependency: to the highest version satisfying the peer range, or under `time-based`, to the highest version within the publish-date cutoff.
+
 ### registrySupportsTimeField
 
 * Default: **false**
