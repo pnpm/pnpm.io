@@ -1,6 +1,6 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Aug 13, 2026, 4:56 PM_ (_daily_ updated).
+**Last benchmarked at**: _Aug 13, 2026, 5:04 PM_ (_daily_ updated).
 
 This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here).
 
@@ -32,7 +32,7 @@ The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchm
 | install | ✔ | ✔ | ✔ | 1s | 385ms | 14ms | 4.6s | n/a |
 | update | n/a | n/a | n/a | 6.3s | 6.7s | 1s | 5.3s | 2.6s |
 
-<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=659f2685" />
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=a69d2cba" />
 
 ### pnpm vs pnpm 🦀
 
@@ -50,4 +50,4 @@ pnpm v12 will use a new installation engine for fetching and linking written in 
 | install | ✔ | ✔ | ✔ | 385ms | 14ms |
 | update | n/a | n/a | n/a | 6.7s | 1s |
 
-<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=40492b35" />
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=7e0d2cb4" />
