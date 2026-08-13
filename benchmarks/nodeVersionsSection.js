@@ -4,7 +4,7 @@ import commonTags from 'common-tags'
 import prettyMs from 'pretty-ms'
 import nodeManagersMap from './nodeManagersMap.js'
 import recordBenchmark from './recordBenchmark.js'
-import benchmarkNodeVersions, { PRIMARY_NODE_VERSION } from './benchmarkNodeVersions.js'
+import benchmarkNodeVersions, { PRIMARY_NODE_VERSION, SECONDARY_NODE_VERSION } from './benchmarkNodeVersions.js'
 import generateSvg from './generateSvg.js'
 
 const { stripIndents } = commonTags
@@ -14,17 +14,19 @@ const managers = ['pnpm12', 'fnm']
 const tests = [
   'cleanInstall',
   'warmStoreInstall',
-  'switchVersion',
+  'setDefault',
+  'runInProject',
 ]
 
-// Switching is orders of magnitude faster than an install, so it would render
-// as an invisible bar. The table below the chart still reports it.
+// Only the installs are charted. The other scenarios are milliseconds, so they
+// would render as invisible bars. The table below the chart reports them all.
 const chartTests = ['cleanInstall', 'warmStoreInstall']
 
 const testDescriptions = {
   cleanInstall:     `install Node.js ${PRIMARY_NODE_VERSION} with nothing cached`,
   warmStoreInstall: `install Node.js ${PRIMARY_NODE_VERSION} that was installed before`,
-  switchVersion:    'switch to an already installed Node.js version',
+  setDefault:       'make an installed version the global default',
+  runInProject:     `run \`node\` in a project pinned to Node.js ${SECONDARY_NODE_VERSION}`,
 }
 
 const chartLabels = {
@@ -73,7 +75,9 @@ export default async function nodeVersionsSection ({ managersDirs, formattedNow,
 
     - pnpm keeps Node.js in its content-addressable store, so installing a version that was installed before is a relink with no download. fnm has no download cache, so it fetches Node.js again.
     - pnpm doesn't extract the \`npm\`, \`npx\`, and \`corepack\` binaries bundled with Node.js, so on a clean install it downloads and writes fewer files than fnm.
-    - Switching is not the same operation in both tools. pnpm links the runtime into its global bin directory, which works in any shell without setup. fnm flips a symlink, which is close to instant but only takes effect in shells that evaluate \`fnm env\`.
+    - Changing the global default is not the same operation in both tools. pnpm links the runtime into its global bin directory, fnm flips a symlink that only takes effect in shells evaluating \`fnm env\`.
+    - Per-project switching costs no command at all in pnpm: the \`node\` on your PATH is a shim that reads the [\`devEngines.runtime\`](/package_json#devenginesruntime) of the project and runs the matching version. With fnm, a \`.node-version\` file is picked up by its \`--use-on-cd\` shell hook, which is what the \`fnm exec\` in this row measures.
+    - Both tools have to materialize the pinned version the first time a project asks for it: pnpm links it from its store, fnm downloads it. The row above measures the repeated runs after that.
   `
 
   return { section, svg }

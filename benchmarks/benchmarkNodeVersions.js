@@ -9,19 +9,26 @@ import { createEnv } from './benchmarkFixture.js'
 
 const TMP = tempy.directory()
 
-// Every scenario measures the primary version. The secondary one is only
-// installed (unmeasured) so that the switch scenario has another version to
-// switch away from.
+// The install scenarios measure the primary version. The secondary one is what
+// the global default is switched away from and what the project is pinned to.
 export const PRIMARY_NODE_VERSION = '24'
-const SECONDARY_NODE_VERSION = '22'
+export const SECONDARY_NODE_VERSION = '22'
+
+// Running Node.js takes single digit milliseconds, which is the same order of
+// magnitude as the noise of spawning a process, so that scenario is measured
+// repeatedly and the fastest run is kept.
+const RUNS_PER_MEASUREMENT = 10
 
 // Each runner isolates its tool in `dir` so that scenarios never see the
 // machine's real Node.js installations:
-//   env()             environment that points the tool at `dir`
-//   prepare()         create whatever the tool expects to exist upfront
-//   install(version)  install a Node.js version and make it the active one
-//   activate(version) make an already installed version the active one
-//   dropInstalled()   remove the installed runtimes, keeping the tool's cache
+//   env()                     environment that points the tool at `dir`
+//   prepare()                 create whatever the tool expects to exist upfront
+//   install(version)          install a version and make it the global default
+//   setDefault(version)       make an installed version the global default
+//   dropInstalled()           remove installed runtimes, keeping the tool's cache
+//   resolveVersion(version)   the exact version an installed version spec is
+//   pinProject(dir, version)  pin a project directory to a version
+//   runInProject()            run Node.js in a pinned project directory
 const runners = {
   pnpm12: (dir) => {
     // pnpm keeps the linked runtime under PNPM_HOME and the fetched files in
@@ -36,6 +43,9 @@ const runners = {
     // pnpm refuses to install a global runtime when its global bin directory
     // is not in PATH, so the directory is created and exported upfront.
     const prepare = () => fs.mkdirSync(path.join(home, 'bin'), { recursive: true })
+    // The `node` on PATH is a shim that picks the runtime of the current
+    // project, so running Node.js needs no extra command.
+    const runInProject = () => ({ name: 'node', args: ['--version'] })
     return {
       env: (baseEnv) => {
         const pathEnv = pathKey()
@@ -46,17 +56,28 @@ const runners = {
       },
       prepare,
       install,
-      // pnpm has no dedicated command for switching: setting an already
-      // installed version links it into the global bin directory.
-      activate: install,
+      // pnpm has no dedicated command for this: setting an already installed
+      // version links it into the global bin directory.
+      setDefault: install,
       dropInstalled: () => {
         rimraf.sync(home)
         prepare()
       },
+      resolveVersion: runInProject,
+      pinProject: (projectDir, version) => {
+        fs.writeFileSync(path.join(projectDir, 'package.json'), JSON.stringify({
+          name: 'pinned-project',
+          devEngines: { runtime: { name: 'node', version, onFail: 'download' } },
+        }))
+      },
+      runInProject,
     }
   },
   fnm: (dir) => {
     const fnmDir = path.join(dir, 'fnm')
+    // `fnm exec` resolves the version of the current project and runs the
+    // command with it, which is what the `--use-on-cd` shell hook does on `cd`.
+    const runInProject = () => ({ name: 'fnm', args: ['exec', '--', 'node', '--version'] })
     return {
       env: (baseEnv) => {
         const env = Object.create(baseEnv)
@@ -65,7 +86,7 @@ const runners = {
       },
       prepare: () => {},
       install: (version) => ({ name: 'fnm', args: ['install', version] }),
-      activate: (version) => ({ name: 'fnm', args: ['default', version] }),
+      setDefault: (version) => ({ name: 'fnm', args: ['default', version] }),
       // fnm stores nothing besides the unpacked versions, so this leaves it
       // with a cold cache. That is the point of the scenario: fnm has to
       // download Node.js again, pnpm can link it from its store.
@@ -73,6 +94,11 @@ const runners = {
         rimraf.sync(path.join(fnmDir, 'node-versions'))
         rimraf.sync(path.join(fnmDir, 'aliases'))
       },
+      resolveVersion: (version) => ({ name: 'fnm', args: ['exec', `--using=${version}`, '--', 'node', '--version'] }),
+      pinProject: (projectDir, version) => {
+        fs.writeFileSync(path.join(projectDir, '.node-version'), `${version}\n`)
+      },
+      runInProject,
     }
   },
 }
@@ -99,23 +125,48 @@ export default async function benchmarkNodeVersions (pm, opts) {
   console.log(`# installing Node.js ${SECONDARY_NODE_VERSION} to switch away from`)
 
   run(runner.install(SECONDARY_NODE_VERSION), dir, env)
+  const pinnedVersion = capture(runner.resolveVersion(SECONDARY_NODE_VERSION), dir, env).trim().replace(/^v/, '')
+  assertVersion(pinnedVersion, SECONDARY_NODE_VERSION)
 
-  console.log('# switching to an already installed version')
+  console.log('# making an installed version the global default')
 
-  const switchVersion = measure(runner.activate(PRIMARY_NODE_VERSION), dir, env)
+  const setDefault = measure(runner.setDefault(PRIMARY_NODE_VERSION), dir, env)
+
+  console.log(`# running Node.js in a project pinned to ${pinnedVersion}`)
+
+  const projectDir = path.join(dir, 'project')
+  fs.mkdirSync(projectDir, { recursive: true })
+  runner.pinProject(projectDir, pinnedVersion)
+  // The first run materializes the pinned runtime, the benchmark measures the
+  // repeated runs that a project does afterwards.
+  const runsPinnedVersion = capture(runner.runInProject(), projectDir, env).trim()
+  assertVersion(runsPinnedVersion, SECONDARY_NODE_VERSION)
+  const runInProject = measure(runner.runInProject(), projectDir, env, RUNS_PER_MEASUREMENT)
 
   rimraf.sync(dir)
   return {
     cleanInstall,
     warmStoreInstall,
-    switchVersion,
+    setDefault,
+    runInProject,
   }
 }
 
-function measure (cmd, cwd, env) {
-  const startTime = Date.now()
-  run(cmd, cwd, env)
-  return Date.now() - startTime
+// Guards against measuring some other Node.js that happens to be on PATH.
+function assertVersion (actual, expectedMajor) {
+  if (!/^v?\d+\./.test(actual) || actual.replace(/^v/, '').split('.')[0] !== expectedMajor) {
+    throw new Error(`Expected Node.js ${expectedMajor} to be used, got "${actual}"`)
+  }
+}
+
+function measure (cmd, cwd, env, runs = 1) {
+  let best = Infinity
+  for (let i = 0; i < runs; i++) {
+    const startTime = Date.now()
+    run(cmd, cwd, env)
+    best = Math.min(best, Date.now() - startTime)
+  }
+  return best
 }
 
 function run (cmd, cwd, env) {
@@ -124,4 +175,12 @@ function run (cmd, cwd, env) {
   if (result.status !== 0) {
     throw new Error(`${cmd.name} failed with status code ${result.status}`)
   }
+}
+
+function capture (cmd, cwd, env) {
+  const result = spawn.sync(cmd.name, cmd.args, { env, cwd })
+  if (result.status !== 0) {
+    throw new Error(`${cmd.name} failed with status code ${result.status}. ${result.stderr?.toString()}`)
+  }
+  return result.stdout.toString()
 }
