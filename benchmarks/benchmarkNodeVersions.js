@@ -8,6 +8,8 @@ import tempy from 'tempy'
 import { createEnv } from './benchmarkFixture.js'
 
 const TMP = tempy.directory()
+const NVM_REPOSITORY = 'https://github.com/nvm-sh/nvm.git'
+const TIMINGS_ENV = 'BENCHMARK_TIMINGS_FILE'
 
 // The install scenarios measure the primary version. The secondary one is what
 // the global default is switched away from and what the project is pinned to.
@@ -15,20 +17,27 @@ export const PRIMARY_NODE_VERSION = '24'
 export const SECONDARY_NODE_VERSION = '22'
 
 // Running Node.js takes single digit milliseconds, which is the same order of
-// magnitude as the noise of spawning a process, so that scenario is measured
+// magnitude as the noise of starting a process, so that scenario is measured
 // repeatedly and the fastest run is kept.
 const RUNS_PER_MEASUREMENT = 10
 
+// Every command is a shell command, because nvm is a shell function rather than
+// an executable. What a shell has to load before the command can run at all
+// (`nvm.sh` for nvm, nothing for the others) is the runner's `prelude`, which is
+// evaluated once per measurement and never timed: a shell pays it on startup,
+// not on every command.
+//
 // Each runner isolates its tool in `dir` so that scenarios never see the
 // machine's real Node.js installations:
 //   env()                     environment that points the tool at `dir`
 //   prepare()                 create whatever the tool expects to exist upfront
+//   prelude                   shell code the tool's commands need
 //   install(version)          install a version and make it the global default
 //   setDefault(version)       make an installed version the global default
 //   dropInstalled()           remove installed runtimes, keeping the tool's cache
-//   defaultVersion()          run Node.js with whatever the global default is
+//   defaultVersion            print the version the global default resolves to
 //   pinProject(dir, version)  pin a project directory to a version
-//   runInProject()            run Node.js in a pinned project directory
+//   runInProject              run Node.js in a pinned project directory
 const runners = {
   pnpm12: (dir) => {
     // pnpm keeps the linked runtime under PNPM_HOME and the fetched files in
@@ -36,25 +45,20 @@ const runners = {
     // that dropping the installed runtime leaves the store warm.
     const home = path.join(dir, 'home')
     const store = path.join(dir, 'store')
-    const install = (version) => ({
-      name: 'pnpm',
-      args: ['runtime', 'set', 'node', version, '--global', `--store-dir=${store}`],
-    })
+    const install = (version) => `pnpm runtime set node ${version} --global --store-dir=${quote(store)}`
     // pnpm refuses to install a global runtime when its global bin directory
     // is not in PATH, so the directory is created and exported upfront.
     const prepare = () => fs.mkdirSync(path.join(home, 'bin'), { recursive: true })
-    // The `node` on PATH is a shim that picks the runtime of the current
-    // project, so running Node.js needs no extra command.
-    const runInProject = () => ({ name: 'node', args: ['--version'] })
     return {
       env: (baseEnv) => {
-        const pathEnv = pathKey()
         const env = Object.create(baseEnv)
+        const pathEnv = pathKey()
         env.PNPM_HOME = home
         env[pathEnv] = [path.join(home, 'bin'), baseEnv[pathEnv]].join(path.delimiter)
         return env
       },
       prepare,
+      prelude: '',
       install,
       // pnpm has no dedicated command for this: setting an already installed
       // version links it into the global bin directory.
@@ -63,22 +67,20 @@ const runners = {
         rimraf.sync(home)
         prepare()
       },
-      // Outside of a pinned project the shim runs the global default.
-      defaultVersion: runInProject,
+      // The `node` on PATH is a shim that runs the version of the current
+      // project, or the global default outside of a project.
+      defaultVersion: 'node --version',
       pinProject: (projectDir, version) => {
         fs.writeFileSync(path.join(projectDir, 'package.json'), JSON.stringify({
           name: 'pinned-project',
           devEngines: { runtime: { name: 'node', version, onFail: 'download' } },
         }))
       },
-      runInProject,
+      runInProject: 'node --version',
     }
   },
   fnm: (dir) => {
     const fnmDir = path.join(dir, 'fnm')
-    // `fnm exec` resolves the version of the current project and runs the
-    // command with it, which is what the `--use-on-cd` shell hook does on `cd`.
-    const runInProject = () => ({ name: 'fnm', args: ['exec', '--', 'node', '--version'] })
     return {
       env: (baseEnv) => {
         const env = Object.create(baseEnv)
@@ -86,22 +88,81 @@ const runners = {
         return env
       },
       prepare: () => {},
-      install: (version) => ({ name: 'fnm', args: ['install', version] }),
-      setDefault: (version) => ({ name: 'fnm', args: ['default', version] }),
+      prelude: '',
+      install: (version) => `fnm install ${version}`,
+      setDefault: (version) => `fnm default ${version}`,
       // fnm stores nothing besides the unpacked versions, so this leaves it
       // with a cold cache. That is the point of the scenario: fnm has to
-      // download Node.js again, pnpm can link it from its store.
+      // download Node.js again, pnpm and nvm can unpack what they kept.
       dropInstalled: () => {
         rimraf.sync(path.join(fnmDir, 'node-versions'))
         rimraf.sync(path.join(fnmDir, 'aliases'))
       },
-      defaultVersion: () => ({ name: 'fnm', args: ['exec', '--using=default', '--', 'node', '--version'] }),
+      defaultVersion: 'fnm exec --using=default -- node --version',
       pinProject: (projectDir, version) => {
         fs.writeFileSync(path.join(projectDir, '.node-version'), `${version}\n`)
       },
-      runInProject,
+      // `fnm exec` resolves the version of the current project and runs the
+      // command with it, which is what the `--use-on-cd` shell hook does.
+      runInProject: 'fnm exec -- node --version',
     }
   },
+  nvm: (dir, opts) => {
+    // nvm.sh lives inside NVM_DIR next to the versions it installs, so the
+    // clone is copied in rather than pointed at.
+    const nvmDir = path.join(dir, 'nvm')
+    return {
+      env: (baseEnv) => {
+        const env = Object.create(baseEnv)
+        env.NVM_DIR = nvmDir
+        return env
+      },
+      prepare: () => {
+        fs.cpSync(nvmSourceDir(opts.managersDir), nvmDir, { recursive: true })
+      },
+      prelude: 'source "$NVM_DIR/nvm.sh" --no-use',
+      install: (version) => `nvm install ${version}`,
+      setDefault: (version) => `nvm alias default ${version}`,
+      // nvm keeps the downloaded tarballs in `$NVM_DIR/.cache`, which stays.
+      dropInstalled: () => {
+        rimraf.sync(path.join(nvmDir, 'versions'))
+        rimraf.sync(path.join(nvmDir, 'alias'))
+      },
+      defaultVersion: 'nvm version default',
+      pinProject: (projectDir, version) => {
+        fs.writeFileSync(path.join(projectDir, '.nvmrc'), `${version}\n`)
+      },
+      // nvm switches the shell rather than the command: this is what a cd hook
+      // running `nvm use` costs, plus running the Node.js binary it selected.
+      runInProject: 'nvm use --silent && node --version',
+    }
+  },
+}
+
+/**
+ * Clones nvm into the directory the benchmark runs it from. Unlike the other
+ * tools, nvm is not an executable that can be put on PATH.
+ */
+export function cloneNvm (managersDir) {
+  const dir = nvmSourceDir(managersDir)
+  rimraf.sync(dir)
+  const result = spawn.sync('git', ['clone', '--depth=1', NVM_REPOSITORY, dir], { stdio: 'inherit' })
+  if (result.status !== 0) {
+    throw new Error(`Failed to clone nvm from ${NVM_REPOSITORY}`)
+  }
+}
+
+/**
+ * nvm has no executable to ask for a version, so its version is read the same
+ * way it reports it itself. Returns undefined for tools that `<tool> --version`
+ * already works for.
+ */
+export function readManagerVersion (pm, opts) {
+  if (pm.scenario !== 'nvm') return undefined
+  const env = Object.create(createEnv(opts.managersDir))
+  env.NVM_DIR = nvmSourceDir(opts.managersDir)
+  const runner = { prelude: 'source "$NVM_DIR/nvm.sh" --no-use' }
+  return captureShell(runner, 'nvm --version', opts.managersDir, env).trim()
 }
 
 export default async function benchmarkNodeVersions (pm, opts) {
@@ -109,33 +170,34 @@ export default async function benchmarkNodeVersions (pm, opts) {
   rimraf.sync(dir)
   fs.mkdirSync(dir, { recursive: true })
 
-  const runner = runners[pm.scenario](dir)
+  const runner = runners[pm.scenario](dir, opts)
   const env = runner.env(createEnv(opts.managersDir))
   runner.prepare()
 
   console.log('# clean install of Node.js')
 
-  const cleanInstall = measure(runner.install(PRIMARY_NODE_VERSION), dir, env)
+  const cleanInstall = measure(runner, runner.install(PRIMARY_NODE_VERSION), dir, env)
 
   runner.dropInstalled()
 
   console.log('# install of Node.js with a warm store')
 
-  const warmStoreInstall = measure(runner.install(PRIMARY_NODE_VERSION), dir, env)
+  const warmStoreInstall = measure(runner, runner.install(PRIMARY_NODE_VERSION), dir, env)
 
   console.log(`# installing Node.js ${SECONDARY_NODE_VERSION} to switch away from`)
 
-  run(runner.install(SECONDARY_NODE_VERSION), dir, env)
-  // fnm keeps the version it installed first as the default, so the version to
-  // switch away from is selected explicitly. Both tools are then in the same
-  // state, which is what makes the timing below a switch and not a no-op.
-  run(runner.setDefault(SECONDARY_NODE_VERSION), dir, env)
+  run(runner, runner.install(SECONDARY_NODE_VERSION), dir, env)
+  // Both fnm and nvm keep the version they installed first as the default, so
+  // the version to switch away from is selected explicitly. All tools are then
+  // in the same state, which is what makes the timing below a switch and not a
+  // no-op.
+  run(runner, runner.setDefault(SECONDARY_NODE_VERSION), dir, env)
   const pinnedVersion = readDefaultVersion(runner, dir, env)
   assertVersion(pinnedVersion, SECONDARY_NODE_VERSION)
 
   console.log('# making an installed version the global default')
 
-  const setDefault = measure(runner.setDefault(PRIMARY_NODE_VERSION), dir, env)
+  const setDefault = measure(runner, runner.setDefault(PRIMARY_NODE_VERSION), dir, env)
   assertVersion(readDefaultVersion(runner, dir, env), PRIMARY_NODE_VERSION)
 
   console.log(`# running Node.js in a project pinned to ${pinnedVersion}`)
@@ -145,9 +207,8 @@ export default async function benchmarkNodeVersions (pm, opts) {
   runner.pinProject(projectDir, pinnedVersion)
   // The first run materializes the pinned runtime, the benchmark measures the
   // repeated runs that a project does afterwards.
-  const runsPinnedVersion = capture(runner.runInProject(), projectDir, env).trim()
-  assertVersion(runsPinnedVersion, SECONDARY_NODE_VERSION)
-  const runInProject = measure(runner.runInProject(), projectDir, env, RUNS_PER_MEASUREMENT)
+  assertVersion(captureShell(runner, runner.runInProject, projectDir, env).trim(), SECONDARY_NODE_VERSION)
+  const runInProject = measure(runner, runner.runInProject, projectDir, env, RUNS_PER_MEASUREMENT)
 
   rimraf.sync(dir)
   return {
@@ -159,7 +220,7 @@ export default async function benchmarkNodeVersions (pm, opts) {
 }
 
 function readDefaultVersion (runner, cwd, env) {
-  return capture(runner.defaultVersion(), cwd, env).trim().replace(/^v/, '')
+  return captureShell(runner, runner.defaultVersion, cwd, env).trim().replace(/^v/, '')
 }
 
 // Guards against measuring some other Node.js that happens to be on PATH, and
@@ -170,30 +231,68 @@ function assertVersion (actual, expectedMajor) {
   }
 }
 
-function measure (cmd, cwd, env, runs = 1) {
-  let best = Infinity
-  for (let i = 0; i < runs; i++) {
-    // Some of these scenarios take single digit milliseconds, which the
-    // resolution of Date.now() would round beyond recognition.
-    const startTime = process.hrtime.bigint()
-    run(cmd, cwd, env)
-    best = Math.min(best, Number(process.hrtime.bigint() - startTime) / 1e6)
+/**
+ * Runs `command` `runs` times and returns the fastest run in milliseconds. The
+ * timing is taken inside the shell, so neither the prelude nor the startup of
+ * the shell itself is counted.
+ */
+function measure (runner, command, cwd, env, runs = 1) {
+  const timingsFile = path.join(TMP, 'timings.txt')
+  fs.writeFileSync(timingsFile, '')
+  const script = [
+    'set -e',
+    runner.prelude,
+    `for _run in $(seq 1 ${runs}); do`,
+    '  _start=$EPOCHREALTIME',
+    `  ${command}`,
+    '  _end=$EPOCHREALTIME',
+    `  printf '%s %s\\n' "$_start" "$_end" >> "$${TIMINGS_ENV}"`,
+    'done',
+  ].join('\n')
+  runShellScript(script, cwd, shellEnv(env, timingsFile), 'inherit')
+
+  const timings = fs.readFileSync(timingsFile, 'utf8').trim().split('\n')
+    .map((line) => {
+      const [start, end] = line.split(' ').map(Number)
+      return (end - start) * 1000
+    })
+  if (timings.length !== runs || timings.some((timing) => !(timing >= 0))) {
+    throw new Error(`Expected ${runs} timings for "${command}", got "${timings.join(', ')}"`)
   }
-  return Math.round(best * 100) / 100
+  return Math.round(Math.min(...timings) * 100) / 100
 }
 
-function run (cmd, cwd, env) {
-  console.log(`> ${cmd.name} ${cmd.args.join(' ')}`)
-  const result = spawn.sync(cmd.name, cmd.args, { env, cwd, stdio: 'inherit' })
-  if (result.status !== 0) {
-    throw new Error(`${cmd.name} failed with status code ${result.status}`)
-  }
+function run (runner, command, cwd, env) {
+  runShellScript(['set -e', runner.prelude, command].join('\n'), cwd, shellEnv(env), 'inherit')
 }
 
-function capture (cmd, cwd, env) {
-  const result = spawn.sync(cmd.name, cmd.args, { env, cwd })
+function captureShell (runner, command, cwd, env) {
+  return runShellScript(['set -e', runner.prelude, command].join('\n'), cwd, shellEnv(env), ['inherit', 'pipe', 'inherit'])
+}
+
+function runShellScript (script, cwd, env, stdio) {
+  console.log(`> ${script.split('\n').filter((line) => line && line !== 'set -e').join('; ')}`)
+  const result = spawn.sync('bash', ['-c', script], { cwd, env, stdio })
   if (result.status !== 0) {
-    throw new Error(`${cmd.name} failed with status code ${result.status}. ${result.stderr?.toString()}`)
+    throw new Error(`Command failed with status code ${result.status}: ${script}`)
   }
-  return result.stdout.toString()
+  return result.stdout?.toString() ?? ''
+}
+
+// `env` inherits from process.env through the prototype chain, so it is
+// extended rather than copied.
+function shellEnv (env, timingsFile) {
+  const shellEnv = Object.create(env)
+  // $EPOCHREALTIME is formatted with the decimal separator of the locale.
+  shellEnv.LC_ALL = 'C'
+  if (timingsFile) shellEnv[TIMINGS_ENV] = timingsFile
+  return shellEnv
+}
+
+function nvmSourceDir (managersDir) {
+  return path.join(managersDir, 'nvm')
+}
+
+function quote (value) {
+  return `'${value.replace(/'/g, `'\\''`)}'`
 }

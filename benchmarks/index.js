@@ -8,6 +8,7 @@ import tempy from 'tempy'
 import cmdsMap from './commandsMap.js'
 import benchmark from './recordBenchmark.js'
 import nodeVersionsSection from './nodeVersionsSection.js'
+import { cloneNvm } from './benchmarkNodeVersions.js'
 import generateSvg from './generateSvg.js'
 import generateStackedSvg from './generateStackedSvg.js'
 import spawn from "cross-spawn"
@@ -105,7 +106,7 @@ run()
 async function run () {
   const tmpDir = tempy.directory()
   const managersDirs = {}
-  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn', 'fnm']) {
+  for (const pm of ['npm', 'pnpm11', 'pnpm12', 'yarn', 'fnm', 'nvm']) {
     managersDirs[pm] = path.join(tmpDir, pm)
   }
   await Promise.allSettled([
@@ -122,6 +123,7 @@ async function run () {
   // allowed; otherwise the `pnpm` bin is left as a placeholder that errors out.
   spawn.sync('pnpm', ['add', 'pnpm@next-12', '--allow-build=pnpm'], { cwd: managersDirs.pnpm12, stdio: 'inherit' })
   spawn.sync('yarn', ['set', 'version', 'stable'], { cwd: managersDirs.yarn, stdio: 'inherit' })
+  cloneNvm(managersDirs.nvm)
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pmConfigs = [
     { key: 'npm', managersDir: managersDirs.npm },
@@ -255,7 +257,7 @@ async function run () {
   }
 
   const nodeVersions = await nodeVersionsSection({
-    managersDirs: { pnpm12: managersDirs.pnpm12, fnm: managersDirs.fnm },
+    managersDirs: { pnpm12: managersDirs.pnpm12, fnm: managersDirs.fnm, nvm: managersDirs.nvm },
     formattedNow,
     limitRuns: LIMIT_RUNS,
     svgName: NODE_VERSIONS_SVG,
@@ -271,7 +273,7 @@ async function run () {
 
   **Last benchmarked at**: _${formattedNow}_ (_daily_ updated).
 
-  This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm and [fnm](https://github.com/Schniz/fnm) install and switch Node.js versions.
+  This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
   `
 
   const explanationItems = sortedTests.map(t => `- ${explanationByTest[t]}`).join('\n  ')
