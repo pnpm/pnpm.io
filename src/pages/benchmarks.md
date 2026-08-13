@@ -1,8 +1,8 @@
 # Benchmarks of JavaScript Package Managers
 
-**Last benchmarked at**: _Aug 13, 2026, 7:44 PM_ (_daily_ updated).
+**Last benchmarked at**: _Aug 13, 2026, 8:57 PM_ (_daily_ updated).
 
-This benchmark compares the performance of npm, pnpm, Yarn Classic, and Yarn PnP (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
+This benchmark compares the performance of npm, pnpm, Yarn, Yarn PnP, and Bun (check [Yarn's benchmarks](https://yarnpkg.com/benchmarks) for any other Yarn modes that are not included here). It also compares how fast pnpm, fnm, and nvm install and switch Node.js versions.
 
 Each row's label lists which of `cache`, `lockfile`, and `node_modules` are warm/present before install runs. Quick mapping to the real world (ordered from slowest to fastest scenario):
 
@@ -20,19 +20,19 @@ Each row's label lists which of `cache`, `lockfile`, and `node_modules` are warm
 
 The app's `package.json` [here](https://github.com/pnpm/pnpm.io/blob/main/benchmarks/fixtures/alotta-files/package.json)
 
-| action  | cache | lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | Yarn | Yarn PnP |
-| ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- |
-| install |   |   |   | 27.3s | 7.1s | 1.9s | 6.9s | 2.9s |
-| install | ✔ |   |   | 10.8s | 3.9s | 997ms | 6.9s | 2.5s |
-| install |   | ✔ |   | 10.2s | 5.5s | 1.8s | 5.1s | 1.1s |
-| install | ✔ | ✔ |   | 6.6s | 1.9s | 499ms | 5.1s | 1.1s |
-| install | ✔ |   | ✔ | 1.4s | 429ms | 45ms | 6.4s | n/a |
-| install |   |   | ✔ | 1.4s | 460ms | 57ms | 6.5s | n/a |
-| install |   | ✔ | ✔ | 1s | 394ms | 56ms | 4.6s | n/a |
-| install | ✔ | ✔ | ✔ | 1s | 385ms | 13ms | 4.6s | n/a |
-| update | n/a | n/a | n/a | 6.3s | 6.7s | 1s | 5.3s | 2.6s |
+| action  | cache | lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | Yarn | Yarn PnP | Bun |
+| ---     | ---   | ---      | ---         | --- | --- | --- | --- | --- | --- |
+| install |   |   |   | 27.3s | 7.1s | 1.9s | 5.7s | 2.4s | 2.1s |
+| install | ✔ |   |   | 10.8s | 3.9s | 997ms | 2.7s | 960ms | 776ms |
+| install |   | ✔ |   | 10.2s | 5.5s | 1.8s | 4.5s | 1s | 1.3s |
+| install | ✔ | ✔ |   | 6.6s | 1.9s | 499ms | 2s | 149ms | 737ms |
+| install | ✔ |   | ✔ | 1.4s | 429ms | 45ms | 2.7s | n/a | 721ms |
+| install |   |   | ✔ | 1.4s | 460ms | 57ms | 6.1s | n/a | 1.7s |
+| install |   | ✔ | ✔ | 1s | 394ms | 56ms | 4.9s | n/a | 52ms |
+| install | ✔ | ✔ | ✔ | 1s | 385ms | 13ms | 1.3s | n/a | 47ms |
+| update | n/a | n/a | n/a | 6.3s | 6.7s | 1s | 1.8s | 1.5s | 468ms |
 
-<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=5bf97150" />
+<img alt="Graph of the alotta-files results" src="/img/benchmarks/alotta-files.svg?v=e895309a" />
 
 ### pnpm vs pnpm 🦀
 
@@ -50,7 +50,7 @@ pnpm v12 will use a new installation engine for fetching and linking written in 
 | install | ✔ | ✔ | ✔ | 385ms | 13ms |
 | update | n/a | n/a | n/a | 6.7s | 1s |
 
-<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=d6f45224" />
+<img alt="Graph comparing pnpm versions on the alotta-files fixture" src="/img/benchmarks/alotta-files-pnpm.svg?v=fe21ba0f" />
 
 ## Node.js Version Management
 
@@ -58,11 +58,11 @@ pnpm installs and switches Node.js versions itself, so a separate version manage
 
 | scenario | pnpm 12 | fnm | nvm |
 | ---      | --- | --- | --- |
-| install Node.js 24 with nothing cached | 1s | 2.3s | 3.1s |
-| install Node.js 24 that was installed before | 259ms | 2.4s | 2.8s |
-| run `node` in a project pinned to Node.js 22 | 9ms | 5ms | 101ms |
+| install Node.js 24 with nothing cached | 1s | 2.3s | 3s |
+| install Node.js 24 that was installed before | 207ms | 2.4s | 2.8s |
+| run `node` in a project pinned to Node.js 22 | 9ms | 5ms | 94ms |
 
-<img alt="Graph comparing Node.js version managers on installing Node.js" src="/img/benchmarks/node-versions.svg?v=25aad00a" />
+<img alt="Graph comparing Node.js version managers on installing Node.js" src="/img/benchmarks/node-versions.svg?v=dae79ac4" />
 
 A few things to keep in mind when reading these numbers:
 
