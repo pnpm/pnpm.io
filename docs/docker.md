@@ -72,13 +72,15 @@ CMD ["pnpm", "start"]
 - You want to upgrade pnpm and Node.js independently.
 - You prefer a minimal Debian base without the Node.js build toolchain.
 
-If you already have a preferred Node.js base image (e.g. `node:XX-slim`), the recipes further down this page remain a fine choice.
+The recipes further down this page start from this image and let pnpm install Node.js. If you prefer your own Node.js base image, keep the rest of each recipe and [install pnpm](./installation.md) into that image instead.
 
 ## Minimizing Docker image size and build time
 
-* Use a small image, e.g. `node:XX-slim`.
+* Use a small image, e.g. `ghcr.io/pnpm/pnpm` or `node:XX-slim`.
 * Leverage multi-stage if possible and makes sense.
 * Leverage BuildKit cache mounts.
+
+The recipes below use the official pnpm image, which already sets `PNPM_HOME=/pnpm` and puts `/pnpm/bin` on `PATH`, so the store the cache mounts target is at `/pnpm/store`.
 
 ### Example 1: Build a bundle in a Docker container
 
@@ -95,10 +97,8 @@ dist
 ```
 
 ```dockerfile title="Dockerfile"
-FROM node:24-slim AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME/bin:$PATH"
-RUN corepack enable
+FROM ghcr.io/pnpm/pnpm:11 AS base
+RUN pnpm runtime set node 24 -g
 COPY . /app
 WORKDIR /app
 
@@ -165,10 +165,8 @@ dist
 ```
 
 ```dockerfile title="Dockerfile"
-FROM node:24-slim AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME/bin:$PATH"
-RUN corepack enable
+FROM ghcr.io/pnpm/pnpm:11 AS base
+RUN pnpm runtime set node 24 -g
 
 FROM base AS build
 COPY . /usr/src/app
@@ -205,11 +203,9 @@ On CI or CD environments, the BuildKit cache mounts might not be available, beca
 So an alternative is to use a typical Dockerfile with layers that are built incrementally, for this scenario, `pnpm fetch` is the best option, as it only needs the `pnpm-lock.yaml` file and the layer cache will only be lost when you change the dependencies.
 
 ```dockerfile title="Dockerfile"
-FROM node:24-slim AS base
+FROM ghcr.io/pnpm/pnpm:11 AS base
 
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME/bin:$PATH"
-RUN corepack enable
+RUN pnpm runtime set node 24 -g
 
 FROM base AS prod
 
