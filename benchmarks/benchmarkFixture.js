@@ -100,6 +100,39 @@ async function updateDependenciesInPackageJson (cwd) {
   return originalAsString
 }
 
+/**
+ * Points a package manager at a registry other than the public one. Only the
+ * pnpr section uses this; the main benchmark installs straight from npmjs.
+ *
+ * Reads are anonymous, so no token is needed to fetch packages. The token is
+ * only for pnpr's resolver, which does require authentication, and it is
+ * written as `_authToken` rather than `_auth` because Basic credentials would
+ * cost a password hash on every request inside the measured loop.
+ */
+async function writeRegistryConfig (cwd, opts) {
+  let npmrc = `registry=${opts.registry}\n`
+  if (opts.authToken) {
+    // The resolver is reached on a link of its own, so it is a different host
+    // and port than the registry. pnpm sends whichever credential is
+    // configured for the URL it is talking to, and the resolver is the one
+    // that demands one, so both are declared.
+    const hosts = new Set([opts.registry, opts.pnprServer].filter(Boolean).map((url) => new URL(url).host))
+    for (const host of hosts) {
+      npmrc += `//${host}/:_authToken=${opts.authToken}\n`
+    }
+  }
+  await fs.writeFile(path.join(cwd, '.npmrc'), npmrc)
+
+  if (opts.pnprServer) {
+    // pnpm resolves the dependency graph on the server named here instead of
+    // walking it over the network itself.
+    await fs.writeFile(
+      path.join(cwd, 'pnpm-workspace.yaml'),
+      `packages:\n  - '.'\npnprServer: ${opts.pnprServer}\n`
+    )
+  }
+}
+
 export default async function benchmark (pm, fixture, opts) {
   const cwd = path.join(TMP, pm.scenario, fixture)
   const env = createEnv(opts.managersDir)
@@ -112,6 +145,10 @@ export default async function benchmark (pm, fixture, opts) {
   const modules = opts.hasNodeModules ? path.join(cwd, 'node_modules') : null
 
   cleanLockfile(pm, cwd, env)
+
+  if (opts.registry) {
+    await writeRegistryConfig(cwd, opts)
+  }
 
   if (pm.name === 'yarn') {
     // Every store Yarn keeps has to sit under `cache/`, the directory the
@@ -126,6 +163,8 @@ export default async function benchmark (pm, fixture, opts) {
     + `cacheFolder: ${path.join(cwd, 'cache')}\n`
     + `globalFolder: ${path.join(cwd, 'cache', 'global')}\n`
     + 'enableScripts: false\n'
+    // Yarn reads none of `.npmrc`, so its registry has to be set here.
+    + (opts.registry ? `npmRegistryServer: ${opts.registry}\nunsafeHttpWhitelist:\n  - 127.0.0.1\n` : '')
     /**
      * @see https://yarnpkg.com/configuration/yarnrc#nodeLinker
      */
@@ -141,6 +180,25 @@ export default async function benchmark (pm, fixture, opts) {
     }
     await fs.writeFile(path.join(cwd, '.yarnrc.yml'), yarnRc)
   }
+
+  // Installs that nothing is measured from, to keep whatever only the very
+  // first install of a run pays for out of the numbers: a registry answering a
+  // question it has never been asked, a package manager's own start-up, a
+  // filesystem that has not seen these paths yet.
+  //
+  // It runs twice because an install without a lockfile and an install with one
+  // are different questions, and a server that caches answers has to have been
+  // asked both. The first warm-up produces the lockfile the second one sends.
+  // Everything they leave behind is then removed, so the scenarios below still
+  // begin from the state each of them says it does.
+  console.log('# warm-up (not measured)')
+  measureInstall(pm, cwd, env)
+  measureInstall(pm, cwd, env)
+  if (modules) {
+    rimraf.sync(modules)
+  }
+  rimraf.sync(path.join(cwd, 'cache'))
+  cleanLockfile(pm, cwd, env)
 
   console.log(`# first install`)
 

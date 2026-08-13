@@ -19,7 +19,10 @@ export default async function (pm, fixture, opts) {
   // Tools without an executable to ask (nvm is a shell function) report their
   // version through `opts.getVersion`.
   pm.version = opts.getVersion?.(pm, opts) ?? getPMVersion(pm.name, opts)
-  const resultsFile = path.join(RESULTS, pm.scenario, pm.version, `${fixture}.yaml`)
+  // Results are normally filed under the fixture's own name. A section that
+  // measures the same fixture under different conditions files them elsewhere,
+  // so its runs are never pooled with the plain ones.
+  const resultsFile = path.join(RESULTS, pm.scenario, pm.version, `${opts.resultsName ?? fixture}.yaml`)
   const prevResults = await safeLoadYamlFile(resultsFile) || []
 
   if (prevResults.length >= limitRuns) return prevResults
@@ -27,6 +30,9 @@ export default async function (pm, fixture, opts) {
   const newResults = await runBenchmark(pm, fixture, {
     hasNodeModules: opts.hasNodeModules,
     managersDir: opts.managersDir,
+    registry: opts.registry,
+    authToken: opts.authToken,
+    pnprServer: opts.pnprServer,
   })
   const results = [...prevResults, newResults]
   await writeYamlFile(resultsFile, results)
