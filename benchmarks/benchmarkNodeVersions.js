@@ -26,7 +26,7 @@ const RUNS_PER_MEASUREMENT = 10
 //   install(version)          install a version and make it the global default
 //   setDefault(version)       make an installed version the global default
 //   dropInstalled()           remove installed runtimes, keeping the tool's cache
-//   resolveVersion(version)   the exact version an installed version spec is
+//   defaultVersion()          run Node.js with whatever the global default is
 //   pinProject(dir, version)  pin a project directory to a version
 //   runInProject()            run Node.js in a pinned project directory
 const runners = {
@@ -63,7 +63,8 @@ const runners = {
         rimraf.sync(home)
         prepare()
       },
-      resolveVersion: runInProject,
+      // Outside of a pinned project the shim runs the global default.
+      defaultVersion: runInProject,
       pinProject: (projectDir, version) => {
         fs.writeFileSync(path.join(projectDir, 'package.json'), JSON.stringify({
           name: 'pinned-project',
@@ -94,7 +95,7 @@ const runners = {
         rimraf.sync(path.join(fnmDir, 'node-versions'))
         rimraf.sync(path.join(fnmDir, 'aliases'))
       },
-      resolveVersion: (version) => ({ name: 'fnm', args: ['exec', `--using=${version}`, '--', 'node', '--version'] }),
+      defaultVersion: () => ({ name: 'fnm', args: ['exec', '--using=default', '--', 'node', '--version'] }),
       pinProject: (projectDir, version) => {
         fs.writeFileSync(path.join(projectDir, '.node-version'), `${version}\n`)
       },
@@ -125,12 +126,17 @@ export default async function benchmarkNodeVersions (pm, opts) {
   console.log(`# installing Node.js ${SECONDARY_NODE_VERSION} to switch away from`)
 
   run(runner.install(SECONDARY_NODE_VERSION), dir, env)
-  const pinnedVersion = capture(runner.resolveVersion(SECONDARY_NODE_VERSION), dir, env).trim().replace(/^v/, '')
+  // fnm keeps the version it installed first as the default, so the version to
+  // switch away from is selected explicitly. Both tools are then in the same
+  // state, which is what makes the timing below a switch and not a no-op.
+  run(runner.setDefault(SECONDARY_NODE_VERSION), dir, env)
+  const pinnedVersion = readDefaultVersion(runner, dir, env)
   assertVersion(pinnedVersion, SECONDARY_NODE_VERSION)
 
   console.log('# making an installed version the global default')
 
   const setDefault = measure(runner.setDefault(PRIMARY_NODE_VERSION), dir, env)
+  assertVersion(readDefaultVersion(runner, dir, env), PRIMARY_NODE_VERSION)
 
   console.log(`# running Node.js in a project pinned to ${pinnedVersion}`)
 
@@ -152,7 +158,12 @@ export default async function benchmarkNodeVersions (pm, opts) {
   }
 }
 
-// Guards against measuring some other Node.js that happens to be on PATH.
+function readDefaultVersion (runner, cwd, env) {
+  return capture(runner.defaultVersion(), cwd, env).trim().replace(/^v/, '')
+}
+
+// Guards against measuring some other Node.js that happens to be on PATH, and
+// against a scenario silently degrading into a no-op.
 function assertVersion (actual, expectedMajor) {
   if (!/^v?\d+\./.test(actual) || actual.replace(/^v/, '').split('.')[0] !== expectedMajor) {
     throw new Error(`Expected Node.js ${expectedMajor} to be used, got "${actual}"`)
@@ -162,11 +173,13 @@ function assertVersion (actual, expectedMajor) {
 function measure (cmd, cwd, env, runs = 1) {
   let best = Infinity
   for (let i = 0; i < runs; i++) {
-    const startTime = Date.now()
+    // Some of these scenarios take single digit milliseconds, which the
+    // resolution of Date.now() would round beyond recognition.
+    const startTime = process.hrtime.bigint()
     run(cmd, cwd, env)
-    best = Math.min(best, Date.now() - startTime)
+    best = Math.min(best, Number(process.hrtime.bigint() - startTime) / 1e6)
   }
-  return best
+  return Math.round(best * 100) / 100
 }
 
 function run (cmd, cwd, env) {
