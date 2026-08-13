@@ -6,9 +6,12 @@ import spawn from 'cross-spawn'
 
 const YARN_REPOSITORY = 'https://repo.yarnpkg.com'
 
+// Every target Yarn publishes. Notably there is no x86_64-apple-darwin build,
+// so the benchmark cannot run on an Intel Mac.
 const TARGETS = {
   'darwin arm64': 'aarch64-apple-darwin',
   'linux arm64': 'aarch64-unknown-linux-musl',
+  'linux ia32': 'i686-unknown-linux-musl',
   'linux x64': 'x86_64-unknown-linux-musl',
 }
 
@@ -19,7 +22,7 @@ const TARGETS = {
 export async function installYarn (managersDir) {
   const target = TARGETS[`${process.platform} ${process.arch}`]
   if (!target) {
-    throw new Error(`Yarn publishes no release for ${process.platform} ${process.arch}`)
+    throw new Error(`Yarn publishes no ${process.platform} ${process.arch} release, so it cannot be benchmarked on this machine`)
   }
   const version = await latestYarnVersion()
   const downloadDir = path.join(managersDir, '.download')

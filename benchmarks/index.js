@@ -102,7 +102,24 @@ const toArray = (testList, pms, resultsObj) => testList
 
 run()
   .then(() => console.log('done'))
-  .catch(err => console.error(err))
+  .catch(err => {
+    console.error(err)
+    // Without this the benchmark reports success to CI no matter what failed.
+    process.exitCode = 1
+  })
+
+/**
+ * A package manager that fails to install is worse than a failed benchmark: the
+ * scenarios still find the machine's own `npm`/`pnpm`/`bun` further down PATH
+ * and quietly measure that version instead of the one being benchmarked.
+ */
+function addPackageManager (args, cwd) {
+  const result = spawn.sync('pnpm', ['add', ...args], { cwd, stdio: 'inherit' })
+  if (result.error) throw result.error
+  if (result.status !== 0) {
+    throw new Error(`\`pnpm add ${args.join(' ')}\` failed with status code ${result.status}`)
+  }
+}
 
 async function run () {
   const tmpDir = tempy.directory()
@@ -118,14 +135,14 @@ async function run () {
   for (const dir of Object.values(managersDirs)) {
     fs.writeFileSync(path.join(dir, 'package.json'), '{}', 'utf8')
   }
-  spawn.sync('pnpm', ['add', 'npm@latest'], { cwd: managersDirs.npm, stdio: 'inherit' })
-  spawn.sync('pnpm', ['add', 'pnpm@latest'], { cwd: managersDirs.pnpm11, stdio: 'inherit' })
+  addPackageManager(['npm@latest'], managersDirs.npm)
+  addPackageManager(['pnpm@latest'], managersDirs.pnpm11)
   // pnpm 12 ships its Rust binary via an install script, so the build must be
   // allowed; otherwise the `pnpm` bin is left as a placeholder that errors out.
-  spawn.sync('pnpm', ['add', 'pnpm@next-12', '--allow-build=pnpm'], { cwd: managersDirs.pnpm12, stdio: 'inherit' })
+  addPackageManager(['pnpm@next-12', '--allow-build=pnpm'], managersDirs.pnpm12)
   await installYarn(managersDirs.yarn)
   // Like pnpm 12, the bun package downloads its binary from a postinstall script.
-  spawn.sync('pnpm', ['add', 'bun@latest', '--allow-build=bun'], { cwd: managersDirs.bun, stdio: 'inherit' })
+  addPackageManager(['bun@latest', '--allow-build=bun'], managersDirs.bun)
   cloneNvm(managersDirs.nvm)
   const formattedNow = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())
   const pmConfigs = [

@@ -49,7 +49,6 @@ export default {
     scenario: 'yarn',
     legend: 'Yarn',
     color: '#248ebd',
-    displayVersion: '6',
     name: 'yarn',
     args: [
       'install'
@@ -59,7 +58,6 @@ export default {
     scenario: 'yarn_pnp',
     legend: 'Yarn PnP',
     color: '#40a9ff',
-    displayVersion: '6',
     name: 'yarn',
     args: [
       'install'
