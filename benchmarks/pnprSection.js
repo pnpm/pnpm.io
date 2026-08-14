@@ -16,6 +16,7 @@ import {
   mintToken,
   populateCache,
   verifyResolverIsUsed,
+  reservePort,
 } from './pnprServer.js'
 
 const { stripIndents } = commonTags
@@ -27,8 +28,6 @@ const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
 // wins has to come from making fewer round trips rather than cheaper ones.
 const ROUND_TRIP_MS = 50
 const BANDWIDTH_MBPS = 200
-
-const PNPR_PORT = 7677
 
 // Results are recorded under their own fixture name. The numbers here are
 // measured against a different registry over an emulated link, so they must
@@ -103,8 +102,12 @@ export default async function pnprSection ({ managersDirs, formattedNow, limitRu
     // really use, so the tarball URLs it serves point across the emulated link
     // instead of around it.
     fs.mkdirSync(dir, { recursive: true })
+    // A port the system says is free, rather than a fixed one: a fixed port is
+    // still held by the pnpr of an earlier run in the same job, and that older
+    // server answers for it.
+    const pnprPort = await reservePort()
     const registryLink = await startLatencyProxy({
-      upstreamPort: PNPR_PORT,
+      upstreamPort: pnprPort,
       roundTripMs: ROUND_TRIP_MS,
       rateLimit: mbpsToBytesPerSec(BANDWIDTH_MBPS),
       logPath: path.join(dir, 'registry-link.log'),
@@ -116,7 +119,7 @@ export default async function pnprSection ({ managersDirs, formattedNow, limitRu
     // Only latency is emulated here: the resolve exchange is small, so what it
     // costs is round trips rather than throughput.
     const resolverLink = await startLatencyProxy({
-      upstreamPort: PNPR_PORT,
+      upstreamPort: pnprPort,
       roundTripMs: ROUND_TRIP_MS,
       logPath: path.join(dir, 'resolver-link.log'),
     })
@@ -126,7 +129,7 @@ export default async function pnprSection ({ managersDirs, formattedNow, limitRu
     server = await startPnpr({
       managersDir: managersDirs.pnpr,
       dir,
-      port: PNPR_PORT,
+      port: pnprPort,
       publicUrl: registry,
       // Logging every request is what lets the check below see whether pnpm
       // really resolved on the server. It goes to a file, and every manager
