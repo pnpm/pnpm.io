@@ -1,8 +1,29 @@
 'use strict'
 import fs from 'fs'
+import net from 'net'
 import path from 'path'
 import spawn from 'cross-spawn'
 import { createEnv } from './benchmarkFixture.js'
+
+/**
+ * Takes a port the operating system says is free.
+ *
+ * Starting pnpr on a fixed port meant colliding with one left behind by an
+ * earlier run of the benchmark in the same job, and the collision did not look
+ * like one: the new server failed to bind and exited, the old one answered the
+ * health check, and the run carried on against a registry whose tarball URLs
+ * pointed at a proxy that had been shut down with the run that created it.
+ */
+export function reservePort () {
+  return new Promise((resolve, reject) => {
+    const probe = net.createServer()
+    probe.on('error', reject)
+    probe.listen(0, '127.0.0.1', () => {
+      const { port } = probe.address()
+      probe.close(() => resolve(port))
+    })
+  })
+}
 
 const USERNAME = 'pnpm-io-benchmark'
 const PASSWORD = 'benchmark'
@@ -114,7 +135,15 @@ export async function startPnpr ({ managersDir, dir, port, publicUrl, logLevel =
         `pnpr exited (code ${exit.code}, signal ${exit.signal}). Its log:\n${readLog().slice(-4000)}`
       )
     },
-    stop: () => { proc.kill() },
+    // A registry that outlives its run is what made the second benchmark of a
+    // job fail: it held the port, answered the next run's health check, and
+    // served tarball URLs pointing at a proxy that no longer existed. Make sure
+    // it is gone rather than merely asked to leave.
+    stop: () => {
+      if (exit) return
+      proc.kill()
+      setTimeout(() => { if (!exit) proc.kill('SIGKILL') }, 2_000).unref()
+    },
   }
 }
 
@@ -126,8 +155,23 @@ async function waitForPnpr (url, proc, getStderr) {
     }
     try {
       const res = await fetch(`${url}/-/ping`)
-      if (res.ok) return
-    } catch {
+      if (res.ok) {
+        // Something answering is not the same as our server answering. A server
+        // left behind by an earlier run replies at once, well before the process
+        // started here has had time to discover it cannot have the port and
+        // exit, so the reply alone proves nothing — give it long enough to fail
+        // and then insist it is still running.
+        await new Promise((resolve) => setTimeout(resolve, 500))
+        if (proc.exitCode !== null) {
+          throw new Error(
+            `pnpr exited with code ${proc.exitCode} yet ${url} still answers, so another ` +
+            `server holds that port and the benchmark would run against it. ${getStderr()}`
+          )
+        }
+        return
+      }
+    } catch (err) {
+      if (err.message?.startsWith('pnpr exited')) throw err
       // Not listening yet.
     }
     await new Promise((resolve) => setTimeout(resolve, 200))
