@@ -44,9 +44,18 @@ export async function startBenchmarkRegistry ({ managersDirs, fixtureNames }) {
   const dir = path.join(managersDirs.pnpr, 'server')
   const proxies = []
   let server
+  // Every process gets its own attempt, and a failed one is reported rather
+  // than thrown: this runs in a `finally`, where a throw would replace whatever
+  // the benchmark failed with, and stopping at the first failure would leave
+  // the rest of the processes holding their ports for the next run.
   const stop = () => {
-    for (const proxy of proxies) proxy.close()
-    server?.stop()
+    for (const close of [...proxies.map((proxy) => () => proxy.close()), () => server?.stop()]) {
+      try {
+        close()
+      } catch (err) {
+        console.error(`Couldn't stop a benchmark registry process: ${err.stack ?? err}`)
+      }
+    }
   }
   try {
     // The links come up first: pnpr has to be told the address clients will
