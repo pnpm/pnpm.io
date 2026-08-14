@@ -9,7 +9,7 @@ const DIRNAME = path.dirname(fileURLToPath(import.meta.url))
 
 // A TCP proxy that puts an emulated network link in front of a local server.
 //
-// Every package manager in this section talks to a registry running on the same
+// Every package manager in the benchmark talks to a registry running on the same
 // machine, where a round trip is effectively free. That hides the cost the
 // benchmark is trying to show: resolving a dependency graph means walking it
 // level by level, and each level costs one round trip, so on a real network the
