@@ -66,6 +66,14 @@ const pmConfigs = [
   { key: 'bun' },
 ]
 
+// The name the benchmark files its runs under. It is not the fixture's own
+// name: every install is measured against the benchmark's pnpr registry over
+// an emulated link, and the runs recorded before that — against the public
+// registry, over whatever link the machine had — stay under `alotta-files`.
+// Drawing those here would put pre-pnpr numbers on the chart the benchmark
+// publishes.
+const RESULTS_NAME = 'alotta-files-pnpr.yaml'
+
 function latestVersionEntry (key) {
   const dir = path.join(RESULTS, key)
   let versions
@@ -76,7 +84,7 @@ function latestVersionEntry (key) {
   }
   return versions
     .map(v => {
-      const file = path.join(dir, v, 'alotta-files.yaml')
+      const file = path.join(dir, v, RESULTS_NAME)
       try {
         return { v, file, mtime: fs.statSync(file).mtimeMs }
       } catch {

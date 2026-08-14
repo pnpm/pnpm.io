@@ -29,7 +29,7 @@ const USERNAME = 'pnpm-io-benchmark'
 const PASSWORD = 'benchmark'
 
 /**
- * pnpr is a pnpm-compatible registry server. This section runs every package
+ * pnpr is a pnpm-compatible registry server. The benchmark runs every package
  * manager against it so they all face the same registry, and additionally lets
  * pnpm offload dependency resolution to it.
  */
@@ -58,7 +58,7 @@ export function pnprVersion (managersDir) {
 
 /**
  * Starts a pnpr that proxies the public registry. Its cache is kept for the
- * whole section so that every manager is measured against the same warm
+ * whole run so that every manager is measured against the same warm
  * registry rather than against however much of npmjs happened to be cached
  * when its turn came.
  */

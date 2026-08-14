@@ -45,9 +45,9 @@ export default {
       '--ignore-scripts',
     ]
   },
-  // Only used by the pnpr section. The command is pnpm's, unchanged: what makes
-  // it different is the `pnprServer` the fixture is configured with, which moves
-  // dependency resolution onto the server.
+  // The command is pnpm's, unchanged: what makes this column different from the
+  // plain pnpm one is the `pnprServer` the fixture is configured with, which
+  // moves dependency resolution onto the registry.
   pnpm_pnpr: {
     scenario: 'pnpm_pnpr',
     legend: 'pnpm + pnpr',

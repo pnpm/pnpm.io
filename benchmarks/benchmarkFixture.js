@@ -101,8 +101,8 @@ async function updateDependenciesInPackageJson (cwd) {
 }
 
 /**
- * Points a package manager at a registry other than the public one. Only the
- * pnpr section uses this; the main benchmark installs straight from npmjs.
+ * Points a package manager at a registry other than the public one: every
+ * install is measured against the benchmark's own pnpr.
  *
  * Reads are anonymous, so no token is needed to fetch packages. The token is
  * only for pnpr's resolver, which does require authentication, and it is

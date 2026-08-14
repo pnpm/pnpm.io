@@ -27,11 +27,14 @@ export default (resultArrays, pms, tests, formattedNow) => {
       ]
     : [pm]
   )
-  // empty areas next to the graph
+  // empty areas next to the graph. The top has to hold the legend, the axis
+  // explanation and the scale, each on a line of its own: the explanation is
+  // anchored to the right edge and was drawn through the version under the
+  // last legend entry.
   const offset = {
     left: 40,
     right: 10,
-    top: 35,
+    top: 43,
     bottom: 10
   }
   // thickness of bars

@@ -19,9 +19,9 @@ export default async function (pm, fixture, opts) {
   // Tools without an executable to ask (nvm is a shell function) report their
   // version through `opts.getVersion`.
   pm.version = opts.getVersion?.(pm, opts) ?? getPMVersion(pm.name, opts)
-  // Results are normally filed under the fixture's own name. A section that
+  // Results are normally filed under the fixture's own name. A caller that
   // measures the same fixture under different conditions files them elsewhere,
-  // so its runs are never pooled with the plain ones.
+  // so runs made under one set of conditions are never pooled with another's.
   const resultsFile = path.join(RESULTS, pm.scenario, pm.version, `${opts.resultsName ?? fixture}.yaml`)
   const prevResults = await safeLoadYamlFile(resultsFile) || []
 
