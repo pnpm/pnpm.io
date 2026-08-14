@@ -152,7 +152,16 @@ function listen ({ upstreamPort, roundTripMs, rateLimit, slowStart }) {
     upstream.on('close', () => { toClient.flushed().finally(() => client.destroy()) })
     client.on('close', () => { toUpstream.flushed().finally(() => upstream.destroy()) })
   })
-  server.on('error', (err) => { throw err })
+  // Accepting a connection can fail without the listener being finished — most
+  // of all by running out of file descriptors, which a proxy is twice as prone
+  // to as anything else because every connection through it needs two. Throwing
+  // from here would end the process, and a proxy that dies takes the run with
+  // it: every fetch after it fails, the package managers spend minutes retrying
+  // against a closed port, and nothing says why. Staying up and recording it
+  // leaves the benchmark able to finish or to fail with a reason.
+  server.on('error', (err) => {
+    console.error(`latency proxy: server error: ${err.stack ?? err}`)
+  })
   return server
 }
 
@@ -179,12 +188,32 @@ export async function startLatencyProxy ({ upstreamPort, roundTripMs, rateLimit 
   ], { stdio: ['ignore', logFd, logFd] })
   fs.closeSync(logFd)
 
+  let exit = null
+  proc.on('exit', (code, signal) => { exit = { code, signal } })
+
   const deadline = Date.now() + 15_000
   while (Date.now() < deadline) {
     const log = fs.readFileSync(logPath, 'utf8')
     const port = log.match(/^port=(\d+)$/m)?.[1]
     if (port) {
-      return { port: Number(port), close: () => { proc.kill() } }
+      return {
+        port: Number(port),
+        /**
+         * A proxy that dies mid-run doesn't stop the benchmark, it ruins it:
+         * every request after it is refused, package managers retry for minutes
+         * against a closed port, and whatever times come out are meaningless.
+         * Checking between scenarios turns that into an immediate failure that
+         * says what happened.
+         */
+        assertAlive: () => {
+          if (!exit) return
+          throw new Error(
+            `The latency proxy on port ${port} exited (code ${exit.code}, signal ${exit.signal}). ` +
+            `Everything measured after it would be meaningless. Its log:\n${fs.readFileSync(logPath, 'utf8').slice(-4000)}`
+          )
+        },
+        close: () => { proc.kill() },
+      }
     }
     if (proc.exitCode !== null) {
       throw new Error(`The latency proxy exited with code ${proc.exitCode}. ${log}`)
@@ -199,6 +228,16 @@ export async function startLatencyProxy ({ upstreamPort, roundTripMs, rateLimit 
 
 // Running this file directly is what `startLatencyProxy` spawns.
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  // Whatever goes wrong in here has to end up written down. The parent is
+  // blocked in a synchronous spawn and cannot be told, so a proxy that exits
+  // quietly leaves nothing behind but connection refusals in a package
+  // manager's output.
+  process.on('uncaughtException', (err) => {
+    console.error(`latency proxy: uncaught: ${err.stack ?? err}`)
+  })
+  process.on('unhandledRejection', (err) => {
+    console.error(`latency proxy: unhandled rejection: ${err?.stack ?? err}`)
+  })
   const arg = (name) => Number(process.argv.find((a) => a.startsWith(`--${name}=`))?.split('=')[1] ?? 0)
   const rateLimit = arg('rate-limit')
   const server = listen({

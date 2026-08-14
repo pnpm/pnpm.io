@@ -99,11 +99,21 @@ export async function startPnpr ({ managersDir, dir, port, publicUrl, logLevel =
     }
   }
 
+  let exit = null
+  proc.on('exit', (code, signal) => { exit = { code, signal } })
+
   const url = `http://127.0.0.1:${port}`
   await waitForPnpr(url, proc, readLog)
   return {
     url,
     log: readLog,
+    /** A registry that died mid-run makes everything measured after it worthless. */
+    assertAlive: () => {
+      if (!exit) return
+      throw new Error(
+        `pnpr exited (code ${exit.code}, signal ${exit.signal}). Its log:\n${readLog().slice(-4000)}`
+      )
+    },
     stop: () => { proc.kill() },
   }
 }

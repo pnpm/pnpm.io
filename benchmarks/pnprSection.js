@@ -147,6 +147,12 @@ export default async function pnprSection ({ managersDirs, formattedNow, limitRu
       fixtureDir,
     })
 
+    // Warming the cache is the first thing to put real load on the link, and a
+    // link that dies here would otherwise be discovered much later, after a
+    // package manager had spent minutes retrying against a closed port.
+    for (const proxy of proxies) proxy.assertAlive()
+    server.assertAlive()
+
     verifyResolverIsUsed({
       pm: withRegistry(cmdsMap.pnpm11, registry),
       managersDir: managersDirs.pnpm11,
@@ -183,6 +189,11 @@ export default async function pnprSection ({ managersDirs, formattedNow, limitRu
         registry,
         ...rest,
       }))
+      // Checked after every manager rather than only at the end, so a link or a
+      // registry that died is reported against the run that lost it instead of
+      // silently devaluing everything measured afterwards.
+      for (const proxy of proxies) proxy.assertAlive()
+      server.assertAlive()
     }
 
     return buildSection({ results, pmConfigs, version, formattedNow, svgName })
