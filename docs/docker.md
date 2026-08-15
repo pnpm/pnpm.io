@@ -38,8 +38,9 @@ Use [`pnpm runtime set`](./cli/runtime.md) with the global flag so the `node` bi
 FROM ghcr.io/pnpm/pnpm:11
 RUN pnpm runtime set node 22 -g
 WORKDIR /app
-COPY . .
+COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
+COPY . .
 CMD ["node", "index.js"]
 ```
 
@@ -57,13 +58,14 @@ Or let pnpm install Node.js automatically from [`devEngines.runtime`](./package_
 }
 ```
 
-```dockerfile
+```diff
 FROM ghcr.io/pnpm/pnpm:11
+-RUN pnpm runtime set node 22 -g
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
-CMD ["pnpm", "start"]
+CMD ["node", "index.js"]
 ```
 
 ### When to use this image
