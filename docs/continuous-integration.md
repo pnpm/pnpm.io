@@ -35,14 +35,22 @@ in place of pnpm, so every `pnpm` call starts Node.js to run the shim before pnp
 itself starts — a cost paid on each invocation, and CI jobs make many of them.
 Installing pnpm itself avoids that entirely.
 
-Corepack also cannot install pnpm 12: it expects the package to contain a
-`bin/pnpm.mjs`, which the native pnpm 12 package does not have.
-
 :::
 
 :::note
 
 In all the provided configuration files the store is cached. However, this is not required, and it is not guaranteed that caching the store will make installation faster. So feel free to not cache the pnpm store in your job.
+
+:::
+
+:::tip Cache the metadata cache too
+
+Since v11.22.0, [`pnpm cache path`](./cli/cache-path.md) prints the directory pnpm
+uses for its metadata cache, so a job can cache it without mirroring pnpm's own
+path resolution. That directory also holds the lockfile verification log, which
+lets a job skip re-checking an unchanged lockfile against the configured
+[supply-chain policies](./supply-chain-security.md) — the dominant cost of an
+install in CI once the store is warm.
 
 :::
 

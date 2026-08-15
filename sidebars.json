@@ -106,6 +106,7 @@
         "label": "Manage environments",
         "items": [
           "cli/runtime",
+          "cli/shim",
           "cli/env"
         ]
       },
@@ -116,7 +117,8 @@
           "cli/cache-list",
           "cli/cache-list-registries",
           "cli/cache-view",
-          "cli/cache-delete"
+          "cli/cache-delete",
+          "cli/cache-path"
         ]
       },
       {
@@ -179,6 +181,7 @@
       "finders",
       "global-packages",
       "global-virtual-store",
+      "package-managers",
       "versioning"
     ],
     "Recipes": [

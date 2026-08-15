@@ -140,6 +140,8 @@ When pnpm is declared via the legacy `packageManager` field (not `devEngines.pac
 
 :::
 
+Since v12.0.0-rc.6, the field can also name [another package manager](./package-managers.md) — `npm`, `yarn` or `bun` — which is what `pnpm add npm@11` writes. For those, nothing is recorded in `pnpm-lock.yaml`: `packageManagerDependencies` holds pnpm's own pin, and another package manager is pinned in an environment lockfile of its own under the pnpm home.
+
 To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings/cli.md#pmonfail) setting.
 
 ## dependenciesMeta

@@ -8,7 +8,7 @@ tags: [release]
 
 pnpm 12 is a rewrite of pnpm in Rust, and it is currently a **release candidate**. Upgrading is not meant to be a migration: apart from the differences below, it keeps the commands, flags, settings, and lockfile format of pnpm 11, and the [documentation](/motivation) applies to both versions.
 
-Four things differ, and one of them — a removed flag — fails outright rather than behaving differently. This post collects them in one place.
+Five things differ, and one of them — a removed flag — fails outright rather than behaving differently. This post collects them in one place.
 
 <!--truncate-->
 
@@ -42,6 +42,26 @@ git config --global url."git@github.com:".insteadOf https://github.com/
 ```
 
 pnpm shells out to `git`, so the rewrite applies to all of its Git operations automatically. Details, including how unknown hosts and credentialed URLs are handled, are in [How Git dependencies are resolved](/package-sources#how-git-dependencies-are-resolved).
+
+## Naming a package manager
+
+Since v12.0.0-rc.6, pnpm installs the other package managers too — npm, Yarn Classic, Yarn Berry, Yarn 6 (`yarnpkg/zpm`) and Bun — so naming one means the tool itself rather than the npm package that shares its name.
+
+The reason is that those npm packages are not the tool: `yarn` on npm stops at Classic, Yarn 4 is published as `@yarnpkg/cli-dist`, Yarn 6 is not on npm at all, and `node` / `deno` there are wrappers that download a build. So `pnx yarn@4 install` used to fail with a missing version, and `pnpm add -g yarn` gave you Yarn 1.
+
+| | pnpm 11 | pnpm 12 |
+|---|---|---|
+| `pnpm add yarn` | installs the npm package `yarn` | records the project's package manager in `packageManager` / `devEngines.packageManager` |
+| `pnpm add -g yarn` | installs Yarn Classic | installs the current Yarn line |
+| `pnpm add -g node` / `pnpm add -g deno` | installs a wrapper package | installs that Node.js or Deno release |
+| `pnx node@22` / `pnx deno` | runs the wrapper package | runs that release |
+| a globally installed package manager | always the global copy | defers to a project's pin where there is one |
+
+A specifier that locates a package rather than asking for a released version still installs what it names — `pnpm add yarn@npm:yarn@1.22.22`, `pnx yarn@yarnpkg/berry`.
+
+Two more things follow from it. A git-hosted dependency is prepared with the package manager *it* asks for, so a repository built with Yarn installs on a machine that has only pnpm. And [`pnpm shim add yarn`](/cli/shim) links a `yarn` command that runs whatever version the current project pins — a shim is never created as a side effect of `pnpm setup` or an install, since it shadows the rest of your `PATH`.
+
+The full description is in [Other package managers](/package-managers).
 
 ## Lockfiles of cyclic dependency graphs
 
