@@ -5,7 +5,7 @@ title: Other package managers
 
 Added in: v12.0.0-rc.6 (pnpm v12 only)
 
-pnpm installs the other package managers, not just itself: **npm**, **Yarn Classic**, **Yarn Berry**, **Yarn 6** (`yarnpkg/zpm`) and **Bun**. Each of them is resolved and fetched through the trusted package-manager registries, and an npm-published one is verified against npm's signature for its exact version before it is executed — the same standard that lets pnpm switch its own version without asking.
+pnpm installs the other package managers, not just itself: **npm**, **Yarn Classic**, **Yarn Berry**, **Yarn 6** (`yarnpkg/zpm`) and **Bun**. The npm-published ones are resolved and fetched through the trusted package-manager registries, and verified against npm's signature for the exact version before that version is executed — the same standard that lets pnpm switch its own version without asking. Yarn 6 and Bun ship as platform archives from their own projects instead, pinned by a publisher checksum.
 
 A JavaScript package manager on a machine without Node.js gets a managed LTS runtime to run on, so none of this requires a Node.js installation of your own.
 
@@ -39,7 +39,7 @@ pnpm add yarn@4
 
 The declaration goes where the package manager reads it:
 
-* **Yarn** is started from a project pin through the `packageManager` field, which accepts only an exact version. So the requested line is resolved before it is written: `pnpm add yarn@4` records `"packageManager": "yarn@4.18.0"`, carrying the `+sha512.…` integrity for the Yarn Classic line, whose pinned artifact is the npm tarball.
+* **Yarn** is started from a project pin through the `packageManager` field, which accepts only an exact version. So the requested line is resolved before it is written: `pnpm add yarn@4` records `"packageManager": "yarn@4.18.0"`. On the Yarn Classic line (`<2`), where the pinned artifact is the npm tarball, the value also carries that tarball's `+sha512.…` integrity — `"packageManager": "yarn@1.22.22+sha512.…"`.
 * **Every other package manager** is recorded in [`devEngines.packageManager`](./package_json.md#devenginespackagemanager), which holds a range.
 
 Only one of the two fields is ever left behind: they declare the same thing, and a project whose two declarations disagree is one the version switchers refuse to run.
@@ -67,9 +67,13 @@ pnpm add yarn@npm:yarn@1.22.22
 pnpm add yarn@yarnpkg/berry
 ```
 
+The resolved version of a package manager other than pnpm is not written to `pnpm-lock.yaml`: it is pinned in an environment lockfile of its own under the pnpm home. Only pnpm's own pin is recorded in the project's lockfile, under `packageManagerDependencies`.
+
 ### Runtimes
 
-`pnpm add` follows the same rule for the runtimes: naming `node`, `deno` or `bun` records it under `engines.runtime`, the way the explicit `node@runtime:22` spelling already did.
+`pnpm add` follows the same rule for the runtimes: naming `node` or `deno` records it under `engines.runtime`, the way the explicit `node@runtime:22` spelling already did.
+
+`bun` is both a runtime and a package manager, and the package manager answers first: `pnpm add bun` declares it as the project's package manager. To add it as a runtime, ask for one — `pnpm add bun@runtime:1.3.0`.
 
 ## Installing one globally
 

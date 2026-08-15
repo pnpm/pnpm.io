@@ -64,7 +64,7 @@ A shim resolves the project you are standing in, walking up from the current wor
 
 If nothing in the project provides the command, the globally installed version runs — a shim never makes a command fail merely because dispatch did not apply.
 
-The [trust rules](../global-packages.md#trust) of project-aware global bins apply here too: an npm-published package manager is verified against npm's signature for its exact version and switches without asking, while Bun and Yarn 6 arrive as checksum-pinned platform archives and go through the confirmation prompt once per project.
+The [trust rules](../global-packages.md#trust) of project-aware global bins apply here too: an npm-published package manager is verified against npm's signature for its exact version and switches without asking, while Bun and Yarn 6 arrive as checksum-pinned platform archives and go through the confirmation prompt. That answer is remembered per project *and* per binary, so moving the project's pin to another version asks again.
 
 ## Related
 
