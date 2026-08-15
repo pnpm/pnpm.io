@@ -162,6 +162,7 @@ No shell hooks, `.bashrc` edits, or `use`-style commands are involved — the sh
 pnpm walks up from the current working directory to the nearest project that provides the command, then:
 
 * For the **runtimes** (`node`, `deno`, `bun`), only the manifest pin counts — [`devEngines.runtime`](./package_json.md#devenginesruntime), then `engines.runtime`. The pinned version is downloaded into the [global virtual store](./global-virtual-store.md) on demand and executed directly. The project's `node_modules/.bin` is never consulted for a runtime, so a dependency cannot supply the `node` you run.
+* For the **[package managers](./package-managers.md)** (`npm`, `yarn`, `bun`), added in v12.0.0-rc.6, the project's `packageManager` or [`devEngines.packageManager`](./package_json.md#devenginespackagemanager) pin counts, and pnpm provisions that version on demand. The pin outranks a copy of that package manager installed globally, because it is the project's own statement of what installs it.
 * For **any other package**, the project's `node_modules/.bin/<name>` is used.
 
 Directories inside the pnpm home are skipped, since global installs are not projects.
@@ -193,7 +194,9 @@ There is one more guard that applies regardless of policy: the project's command
 
 ### Which packages participate
 
-Only the runtimes participate by default. Enable others with [`globalShims`](./settings/other.md#globalshims), keyed by the providing package's name:
+Only the runtimes participate by default. Since v12.0.0-rc.6, installing a package manager globally (`pnpm add -g yarn`) also adds an entry for it, so it follows a project's pin the way a globally installed Node.js already follows `devEngines.runtime`. An entry you set yourself, including `false`, is left as you set it.
+
+Enable others with [`globalShims`](./settings/other.md#globalshims), keyed by the providing package's name:
 
 ```yaml title="~/.config/pnpm/config.yaml"
 globalShims:
@@ -211,6 +214,8 @@ Turning a package *off* needs no reinstall — the setting is re-read on every d
 ```sh
 PNPM_SHIM_BYPASS=1 node --version
 ```
+
+A package that is not installed globally at all can still get a dispatching command, with [`pnpm shim add`](./cli/shim.md) — that is what makes `yarn` work inside a Yarn project on a machine that has only pnpm.
 
 :::note
 

@@ -29,6 +29,12 @@ Since v11.0.0, installing a Node.js runtime (via `pnpm runtime set node …` or 
 
 :::
 
+:::info
+
+Since v11.22.0, resolving a Node.js version (through [`devEngines.runtime`](../package_json.md#devenginesruntime) or a `runtime:` specifier) is much faster. The per-version release metadata is cached in the [cache directory](./cache-path.md) after its signature is verified, and an exact stable version such as `runtime:22.23.2` no longer downloads the Node.js release index. A pinned runtime whose metadata was fetched once resolves without any network access, which removes the delay on the first `node` invocation in a project pinning an already-downloaded runtime.
+
+:::
+
 #### Examples
 
 Install Node.js v22 globally:

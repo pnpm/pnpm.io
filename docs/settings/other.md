@@ -92,6 +92,8 @@ The supported policies are:
 | `always` | Always switch, never ask. Usable in CI, where a prompt would fall back to the global version. |
 | `false` | Disable the project-aware shim for this package. |
 
+Since v12.0.0-rc.6, two commands write entries here for you: [`pnpm shim add <pkg>`](../cli/shim.md) records the package it links a shim for, and installing a [package manager](../package-managers.md) globally (`pnpm add -g yarn`) records that package manager so it follows a project's pin. Neither overwrites an entry you set yourself — including `false`, and including a `globalShims: false` that turns every shim off.
+
 Layers merge key by key over the built-in defaults, so a single entry can change one package without restating the rest — `globalShims: { bun: false }` leaves `node` and `deno` at `auto`.
 
 The scalar shorthands replace the whole map instead of merging: `globalShims: false` disables every project-aware shim, and `globalShims: true` resets to the defaults.

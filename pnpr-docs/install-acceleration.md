@@ -62,6 +62,22 @@ For frozen restores with an already-fresh lockfile, pnpm can use
 `POST /-/pnpr/v0/verify-lockfile` to get only the server-side trust verdict
 instead of resolving again.
 
+## What a configured server does not cost
+
+Since pnpm v12.0.0-rc.6, an install skips the exchanges it doesn't need, so a
+configured `pnprServer` no longer makes an up-to-date project pay a round trip
+that a direct install would have answered locally:
+
+- The repeat-install "Already up to date" fast path runs with a pnpr server
+  configured. Changing the `trustPolicy*`, `minimumReleaseAgeStrict`, or
+  `minimumReleaseAgeExclude` settings still invalidates it.
+- An install whose `pnpm-lock.yaml` already satisfies every manifest skips the
+  resolve exchange and materializes `node_modules` from the on-disk lockfile.
+- The verification round trip is skipped when the local
+  `lockfile-verified.jsonl` cache already covers the lockfile under the current
+  policy. Server-verified and server-resolved lockfiles are recorded into that
+  cache, so the next install can use it.
+
 See [pnpm/pnpm#12230](https://github.com/pnpm/pnpm/issues/12230) and
 [pnpm/pnpm#12234](https://github.com/pnpm/pnpm/issues/12234) for background.
 

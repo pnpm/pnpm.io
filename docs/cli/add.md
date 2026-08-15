@@ -28,6 +28,22 @@ pnpm supports installing packages from various sources. See the [Supported packa
 - Remote tarballs
 - Git repositories (with semver, subdirectories, and more)
 
+## Adding a package manager or a runtime
+
+Added in: v12.0.0-rc.6 (pnpm v12 only)
+
+Naming a [package manager](../package-managers.md) — `npm`, `yarn` or `bun` — records which one the project uses instead of installing the npm package that shares the name:
+
+```sh
+pnpm add yarn@4
+```
+
+writes `"packageManager": "yarn@4.18.0"`, and every other package manager is recorded as a range in [`devEngines.packageManager`](../package_json.md#devenginespackagemanager). Naming a runtime (`node`, `deno`, `bun`) records it under `engines.runtime`, as the explicit `node@runtime:22` spelling already did.
+
+Globally, `pnpm add -g yarn` installs the current Yarn line rather than the Classic-only `yarn` package, and `pnpm add -g node@22` installs that Node.js release rather than a wrapper that downloads one.
+
+A specifier that locates a package rather than asking for a released version — `pnpm add yarn@npm:yarn@1.22.22`, `pnpm add yarn@yarnpkg/berry` — installs what it names, as an ordinary dependency.
+
 ## Options
 
 ### --save-prod, -P, -p
