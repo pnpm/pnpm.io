@@ -18,6 +18,21 @@ The relevant configuration files are:
 * Per-project configuration file: `/path/to/my/project/pnpm-workspace.yaml`
 * [Global configuration file](./cli/config.md)
 
+## Global config support
+
+The global `config.yaml` is intended for machine-wide preferences and defaults. It is not a second workspace manifest: settings that describe a project's dependency graph, linking strategy, workspace layout, or publish behavior must stay in the project's `pnpm-workspace.yaml`.
+
+If `config.yaml` contains a setting that cannot be set globally, pnpm ignores it and prints a warning. Move those settings to `pnpm-workspace.yaml`. To share project policy across multiple repositories, use [config dependencies](./config-dependencies.md).
+
+Examples of settings that can be set globally include:
+
+* network and registry defaults such as `registry`, `registries`, `namedRegistries`, `httpProxy`, `httpsProxy`, and `noproxy`
+* cache, store, and state locations such as `cacheDir`, `storeDir`, `stateDir`, `globalDir`, `globalBinDir`, `globalVirtualStoreDir`, and `virtualStoreDir`
+* install and supply-chain preferences such as `minimumReleaseAge`, `minimumReleaseAgeExclude`, `minimumReleaseAgeStrict`, `trustPolicy`, `trustPolicyExclude`, `trustLockfile`, `blockExoticSubdeps`, `verifyStoreIntegrity`, and `strictDepBuilds`
+* CLI and UX preferences such as `color`, `loglevel`, `reporter`, `scriptShell`, `shellEmulator`, `updateNotifier`, and `useStderr`
+
+Examples of workspace-only settings include `nodeLinker`, `hoist`, `hoistPattern`, `publicHoistPattern`, `linkWorkspacePackages`, `sharedWorkspaceLockfile`, `catalog`, `catalogs`, `packageExtensions`, `overrides`, and `configDependencies`.
+
 :::note
 
 Authorization-related settings are handled via [`.npmrc`](./npmrc.md).
