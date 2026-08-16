@@ -23,7 +23,7 @@ RUN pnpm runtime set node 22 -g
 WORKDIR /app
 
 # Files required by pnpm install
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .pnpmfile.mjs ./
 
 # If you patched any package, include patches before install too
 COPY patches patches
