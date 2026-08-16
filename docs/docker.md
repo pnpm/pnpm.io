@@ -80,7 +80,17 @@ The recipes further down this page start from this image and let pnpm install No
 * Leverage multi-stage if possible and makes sense.
 * Leverage BuildKit cache mounts.
 
-The recipes below use the official pnpm image, which already sets `PNPM_HOME=/pnpm` and puts `/pnpm/bin` on `PATH`, so the store the cache mounts target is at `/pnpm/store`.
+The recipes below use the official pnpm image, which already sets `PNPM_HOME=/pnpm` and puts `/pnpm/bin` on `PATH`. The default store is therefore `/pnpm/store`.
+
+:::warning
+
+Do **not** mount a BuildKit cache over `/pnpm/store` when the image also uses `pnpm runtime set … -g`.
+Managed Node is installed into that store (under `/pnpm/store/v11/links`), and a cache mount replaces the directory for the duration of the `RUN`, so `node` disappears mid-build.
+Projects with a strict [`devEngines.runtime`](./package_json.md#devenginesruntime) check fail with "Node.js was not found on the system".
+
+Point the cache mount and `--store-dir` at a **separate** path (for example `/var/cache/pnpm`) so the managed runtime stays visible.
+
+:::
 
 ### Example 1: Build a bundle in a Docker container
 
@@ -103,10 +113,12 @@ COPY . /app
 WORKDIR /app
 
 FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/var/cache/pnpm \
+    pnpm install --store-dir /var/cache/pnpm --prod --frozen-lockfile
 
 FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/var/cache/pnpm \
+    pnpm install --store-dir /var/cache/pnpm --frozen-lockfile
 RUN pnpm run build
 
 FROM base
@@ -171,7 +183,8 @@ RUN pnpm runtime set node 24 -g
 FROM base AS build
 COPY . /usr/src/app
 WORKDIR /usr/src/app
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/var/cache/pnpm \
+    pnpm install --store-dir /var/cache/pnpm --frozen-lockfile
 RUN pnpm run -r build
 RUN pnpm deploy --filter=app1 --prod /prod/app1
 RUN pnpm deploy --filter=app2 --prod /prod/app2
