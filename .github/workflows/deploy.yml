@@ -108,7 +108,7 @@ jobs:
           merge-multiple: true
           path: .site-artifacts
       - name: Install the Vercel CLI
-        run: npm install --global vercel@59
+        run: npm install --global vercel@59.1.4
       - name: Deploy to Vercel
         # `vercel build` doesn't rebuild the site: vercel.json points its build
         # command at scripts/assemble-site.mjs, which just moves the artifacts

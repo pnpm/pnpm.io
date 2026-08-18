@@ -25,9 +25,11 @@ Because of that, Vercel's own git integration is turned off (see
 these secrets in the `deploy` environment: `VERCEL_TOKEN`, `VERCEL_ORG_ID`,
 `VERCEL_PROJECT_ID`, and `CROWDIN_PERSONAL_TOKEN`.
 
-Pull requests get an English-only preview deployment, which keeps them as fast
-as they used to be. The Deploy workflow can also be started by hand, with the
-"Publish on pnpm.io" box unticked to get a preview URL instead of a release.
+Pull requests opened from this repository get an English-only preview
+deployment, which keeps them as fast as they used to be; the ones opened from a
+fork only get the build test, because their token cannot read the Vercel
+credentials. The Deploy workflow can also be started by hand, with the "Publish
+on pnpm.io" box unticked to get a preview URL instead of a release.
 
 The locales are listed in [locales.json](locales.json), together with the name
 Crowdin uses for each of them. Adding a locale there adds a build job for it.
