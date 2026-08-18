@@ -119,6 +119,8 @@ Don't update packages in `optionalDependencies`.
 
 Show outdated dependencies and select which ones to update.
 
+Since v11.21.0, combined with `--global`, each [isolated install group](../global-packages.md#isolated-installations) is presented as one selectable item: packages that share a global installation update together as a unit.
+
 ### --no-save
 
 Don't update the ranges in `package.json`.
