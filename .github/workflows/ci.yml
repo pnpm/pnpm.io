@@ -13,10 +13,6 @@ jobs:
       contents: read
       # For the comment linking to the preview.
       pull-requests: write
-    env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
@@ -39,12 +35,20 @@ jobs:
         run: pnpm build
         env:
           LOCALE_CI: en
+      # A step condition cannot read the secrets context, and putting the
+      # credentials in the job environment would hand them to the build above,
+      # which runs the pull request's own code.
+      - name: Look for Vercel credentials
+        id: credentials
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: test -z "$VERCEL_TOKEN" || echo 'available=true' >> "$GITHUB_OUTPUT"
       - name: Deploy a preview
         # Pull requests from forks get the build test above, but not a preview:
         # their token cannot read the Vercel credentials. Neither does anyone
         # while the credentials are missing altogether — the build test is
         # still worth reporting on its own.
-        if: env.VERCEL_TOKEN != '' && github.event.pull_request.head.repo.full_name == github.repository
+        if: steps.credentials.outputs.available == 'true' && github.event.pull_request.head.repo.full_name == github.repository
         id: preview
         run: |
           # esbuild, which the CLI depends on, has to run its install script.
@@ -56,6 +60,10 @@ jobs:
           url=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN" | tail -n1)
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "Preview (English only): $url" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
       - name: Link to the preview from the pull request
         if: steps.preview.outputs.url != ''
         continue-on-error: true
