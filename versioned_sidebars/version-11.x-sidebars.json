@@ -507,6 +507,10 @@
         },
         {
           "type": "doc",
+          "id": "registries"
+        },
+        {
+          "type": "doc",
           "id": "workspaces"
         },
         {
