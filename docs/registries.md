@@ -13,8 +13,9 @@ registries:
     serverType: artifactory
     scopes: ["@acme", "@corp-tools"]
     prefix: work
-  https://registry.npmjs.org/:
-    prefix: npmjs
+  https://verdaccio.corp.example.com/:
+    scopes: ["@"]
+    supportsTimeField: true
 ```
 
 The URL is the key because every fact in an entry is a fact about that server. If the tarball layout were keyed by scope instead, it would be bound to whoever the scope currently points at, and two developers whose scope resolves differently would write lockfiles that disagree about which URLs may be omitted.
