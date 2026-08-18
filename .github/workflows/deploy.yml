@@ -56,20 +56,53 @@ jobs:
         # Crowdin maps the translations of the latest docs version onto this
         # copy, so it has to exist before the download below.
         run: pnpm copy-docs
+      - id: window
+        run: echo "hour=$(date -u +%Y-%m-%dT%H)" >> "$GITHUB_OUTPUT"
+      - name: Reuse a recent download
+        # Every push to the default branch deploys, and asking Crowdin to
+        # export the project that often is what its rate limit is there to
+        # stop. One export an hour is plenty: the translations move at the
+        # pace of the translators, not of the commits.
+        id: reuse
+        uses: actions/cache/restore@v4
+        with:
+          path: i18n
+          key: translations-${{ steps.window.outputs.hour }}
+          restore-keys: translations-
       - name: Download the translations
-        # Once for the whole project: a download per locale runs into
-        # Crowdin's rate limits.
-        run: pnpm exec crowdin download --no-progress --no-colors
+        if: steps.reuse.outputs.cache-hit != 'true'
+        # Crowdin refuses an export that comes too soon after the last one,
+        # and answers 429 rather than waiting, so give it a few chances.
+        id: download
+        continue-on-error: true
+        run: |
+          for attempt in 1 2 3; do
+            if pnpm exec crowdin download --no-progress --no-colors; then exit 0; fi
+            echo "Crowdin refused the export (attempt $attempt of 3)"
+            test "$attempt" = 3 || sleep $((attempt * 120))
+          done
+          exit 1
         env:
           CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID || '302994' }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - name: Keep the download for the next deploys
+        if: steps.download.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: i18n
+          key: translations-${{ steps.window.outputs.hour }}
       - name: Check that every locale arrived
         # A locale missing here would build from the English sources and reach
         # the site as an untranslated page.
+        env:
+          DOWNLOAD: ${{ steps.download.outcome }}
         run: |
+          if [ "$DOWNLOAD" = 'failure' ]; then
+            echo '::warning::Crowdin would not export; deploying the translations of the last download.'
+          fi
           missing=$(jq -r '.[] | select(.crowdinLanguage) | .locale' locales.json |
             while read -r locale; do test -d "i18n/$locale" || echo "$locale"; done)
-          test -z "$missing" || { echo "Crowdin returned no translations for: $missing"; exit 1; }
+          test -z "$missing" || { echo "No translations for: $missing"; exit 1; }
       - uses: actions/upload-artifact@v4
         with:
           name: translations

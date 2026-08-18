@@ -17,7 +17,9 @@ Push to the default branch, the website will be deployed automatically by the
 Docusaurus builds one locale after another, and this site has 13 of them, so the
 workflow builds each locale in its own job instead. The translations are
 downloaded from Crowdin once, by a job of its own that shares them with the
-rest, and each locale job runs `docusaurus build --locale <locale>`. The
+rest, and each locale job runs `docusaurus build --locale <locale>`. That
+download is reused for an hour, because Crowdin rate limits how often it will
+export a project and the default branch is deployed more often than that. The
 resulting trees are stitched back together by `scripts/assemble-site.mjs` and
 shipped to Vercel with `vercel deploy --prebuilt`, as a single deployment.
 
