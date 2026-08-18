@@ -96,6 +96,9 @@ jobs:
     environment: deploy
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4.1.0
+        with:
+          standalone: true
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -107,13 +110,13 @@ jobs:
           # directory the site is served from.
           merge-multiple: true
           path: .site-artifacts
-      - name: Install the Vercel CLI
-        run: npm install --global vercel@59.1.4
       - name: Deploy to Vercel
         # `vercel build` doesn't rebuild the site: vercel.json points its build
         # command at scripts/assemble-site.mjs, which just moves the artifacts
         # into place. It is still needed to turn vercel.json into a deployment.
         run: |
+          # esbuild, which the CLI depends on, has to run its install script.
+          vercel () { pnpm dlx --allow-build=esbuild vercel@59.1.4 "$@"; }
           if [ "$PRODUCTION" = 'true' ]; then
             environment=production
             prod=--prod
@@ -123,7 +126,7 @@ jobs:
           fi
           vercel pull --yes --environment="$environment" --token="$VERCEL_TOKEN"
           vercel build $prod --token="$VERCEL_TOKEN"
-          url=$(vercel deploy --prebuilt $prod --token="$VERCEL_TOKEN")
+          url=$(vercel deploy --prebuilt $prod --token="$VERCEL_TOKEN" | tail -n1)
           echo "Deployed $url" >> "$GITHUB_STEP_SUMMARY"
         env:
           PRODUCTION: ${{ github.event_name != 'workflow_dispatch' || inputs.production }}
