@@ -22,6 +22,10 @@ concurrency:
   group: deploy
   cancel-in-progress: true
 
+# Nothing here writes to the repository; the deploy goes out through Vercel.
+permissions:
+  contents: read
+
 env:
   COREPACK_ENABLE_AUTO_PIN: 0
 
