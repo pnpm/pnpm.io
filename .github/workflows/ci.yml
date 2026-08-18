@@ -1,12 +1,17 @@
 name: Build Test
 
 on: [pull_request]
+
+permissions:
+  contents: read
+
+env:
+  COREPACK_ENABLE_AUTO_PIN: 0
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: deploy
-    env:
-      COREPACK_ENABLE_AUTO_PIN: 0
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
@@ -16,9 +21,16 @@ jobs:
         uses: pnpm/action-setup@v4.1.0
         with:
           standalone: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build
+        # English only: the translations are not part of a pull request, and
+        # building them would cost as much as a deploy.
         run: pnpm build
         env:
           LOCALE_CI: en

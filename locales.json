@@ -1,0 +1,15 @@
+[
+  { "locale": "en" },
+  { "locale": "it", "crowdinLanguage": "it" },
+  { "locale": "zh", "crowdinLanguage": "zh-CN" },
+  { "locale": "ja", "crowdinLanguage": "ja" },
+  { "locale": "ko", "crowdinLanguage": "ko" },
+  { "locale": "pt", "crowdinLanguage": "pt-BR" },
+  { "locale": "zh-TW", "crowdinLanguage": "zh-TW" },
+  { "locale": "ru", "crowdinLanguage": "ru" },
+  { "locale": "uk", "crowdinLanguage": "uk" },
+  { "locale": "fr", "crowdinLanguage": "fr" },
+  { "locale": "tr", "crowdinLanguage": "tr" },
+  { "locale": "es", "crowdinLanguage": "es-ES" },
+  { "locale": "id", "crowdinLanguage": "id" }
+]

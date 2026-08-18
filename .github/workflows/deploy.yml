@@ -1,0 +1,135 @@
+name: Deploy
+
+# The site used to be built by Vercel's git integration, in a single build that
+# walked the 13 locales one after another — Docusaurus has no parallel mode.
+# Here every locale is built by its own job instead, and only the finished
+# static files are handed to Vercel (`vercel deploy --prebuilt`), so the wall
+# clock is the slowest single locale rather than the sum of all of them.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      production:
+        description: Publish on pnpm.io. Turn this off to get a preview URL instead.
+        type: boolean
+        default: true
+
+# A deploy always ships the whole site, so an in-flight one is pointless as
+# soon as a newer commit lands.
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+# Nothing here writes to the repository; the deploy goes out through Vercel.
+permissions:
+  contents: read
+
+env:
+  COREPACK_ENABLE_AUTO_PIN: 0
+
+jobs:
+  locales:
+    runs-on: ubuntu-latest
+    outputs:
+      locales: ${{ steps.read.outputs.locales }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: read
+        run: echo "locales=$(jq -c '[.[].locale]' locales.json)" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: locales
+    runs-on: ubuntu-latest
+    environment: deploy
+    strategy:
+      # One broken locale shouldn't hide the state of the other twelve; the
+      # deploy job below refuses to ship an incomplete site anyway.
+      fail-fast: false
+      matrix:
+        locale: ${{ fromJSON(needs.locales.outputs.locales) }}
+    name: build (${{ matrix.locale }})
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # `showLastUpdateTime` reads the dates from the git history.
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4.1.0
+        with:
+          standalone: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install
+      - name: Copy the current docs into the latest version
+        # Crowdin maps the translations of the latest docs version onto this
+        # copy, so it has to exist before the download below.
+        run: pnpm copy-docs
+      - name: Download the translations
+        if: matrix.locale != 'en'
+        run: |
+          language=$(jq -r --arg locale "$LOCALE" '.[] | select(.locale == $locale) | .crowdinLanguage // empty' locales.json)
+          test -n "$language" # locales.json must name the language for Crowdin
+          pnpm exec crowdin download --language "$language" --no-progress --no-colors
+        env:
+          LOCALE: ${{ matrix.locale }}
+          CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID || '302994' }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - name: Build
+        run: node scripts/build-with-fallback.mjs --locale "$LOCALE"
+        env:
+          LOCALE: ${{ matrix.locale }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-${{ matrix.locale }}
+          path: build
+          retention-days: 1
+          # The files are already minified; compressing them again costs more
+          # time than it saves on the transfer.
+          compression-level: 0
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: deploy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4.1.0
+        with:
+          standalone: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Collect every locale
+        uses: actions/download-artifact@v4
+        with:
+          pattern: site-*
+          # Each locale occupies its own subtree, so they merge into the single
+          # directory the site is served from.
+          merge-multiple: true
+          path: .site-artifacts
+      - name: Deploy to Vercel
+        # `vercel build` doesn't rebuild the site: vercel.json points its build
+        # command at scripts/assemble-site.mjs, which just moves the artifacts
+        # into place. It is still needed to turn vercel.json into a deployment.
+        run: |
+          # esbuild, which the CLI depends on, has to run its install script.
+          vercel () { pnpm dlx --allow-build=esbuild vercel@59.1.4 "$@"; }
+          if [ "$PRODUCTION" = 'true' ]; then
+            environment=production
+            prod=--prod
+          else
+            environment=preview
+            prod=
+          fi
+          vercel pull --yes --environment="$environment" --token="$VERCEL_TOKEN"
+          vercel build $prod --token="$VERCEL_TOKEN"
+          url=$(vercel deploy --prebuilt $prod --token="$VERCEL_TOKEN" | tail -n1)
+          echo "Deployed $url" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          PRODUCTION: ${{ github.event_name != 'workflow_dispatch' || inputs.production }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
