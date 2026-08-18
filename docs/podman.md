@@ -23,12 +23,12 @@ Only mount a host pnpm store into containers you trust. A container with write a
 
 Below is an example container setup for demonstration:
 
-```dockerfile title="Dockerfile"
-FROM node:20-slim
+Declare Node.js in [`devEngines.runtime`](./package_json.md#devenginesruntime) in your `package.json`. The `pnpm install` command below will install the declared version automatically.
 
-# corepack is an experimental feature in Node.js v20 which allows
-# installing and managing versions of pnpm, npm, yarn
-RUN corepack enable
+```dockerfile title="Dockerfile"
+FROM ghcr.io/pnpm/pnpm:11
+
+WORKDIR /app
 
 VOLUME [ "/pnpm-store", "/app/node_modules" ]
 RUN pnpm config --global set store-dir /pnpm-store
@@ -36,7 +36,6 @@ RUN pnpm config --global set store-dir /pnpm-store
 # You may need to copy more files than just package.json in your code
 COPY package.json /app/package.json
 
-WORKDIR /app
 RUN pnpm install
 RUN pnpm run build
 ```
