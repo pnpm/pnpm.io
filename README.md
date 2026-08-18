@@ -15,8 +15,9 @@ Push to the default branch, the website will be deployed automatically by the
 [Deploy workflow](.github/workflows/deploy.yml).
 
 Docusaurus builds one locale after another, and this site has 13 of them, so the
-workflow builds each locale in its own job instead: every job downloads only its
-own translations from Crowdin and runs `docusaurus build --locale <locale>`. The
+workflow builds each locale in its own job instead. The translations are
+downloaded from Crowdin once, by a job of its own that shares them with the
+rest, and each locale job runs `docusaurus build --locale <locale>`. The
 resulting trees are stitched back together by `scripts/assemble-site.mjs` and
 shipped to Vercel with `vercel deploy --prebuilt`, as a single deployment.
 

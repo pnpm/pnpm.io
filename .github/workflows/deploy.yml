@@ -39,8 +39,45 @@ jobs:
       - id: read
         run: echo "locales=$(jq -c '[.[].locale]' locales.json)" >> "$GITHUB_OUTPUT"
 
+  translations:
+    runs-on: ubuntu-latest
+    environment: deploy
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4.1.0
+        with:
+          standalone: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install
+      - name: Copy the current docs into the latest version
+        # Crowdin maps the translations of the latest docs version onto this
+        # copy, so it has to exist before the download below.
+        run: pnpm copy-docs
+      - name: Download the translations
+        # Once for the whole project: a download per locale runs into
+        # Crowdin's rate limits.
+        run: pnpm exec crowdin download --no-progress --no-colors
+        env:
+          CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID || '302994' }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - name: Check that every locale arrived
+        # A locale missing here would build from the English sources and reach
+        # the site as an untranslated page.
+        run: |
+          missing=$(jq -r '.[] | select(.crowdinLanguage) | .locale' locales.json |
+            while read -r locale; do test -d "i18n/$locale" || echo "$locale"; done)
+          test -z "$missing" || { echo "Crowdin returned no translations for: $missing"; exit 1; }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: translations
+          path: i18n
+          retention-days: 1
+
   build:
-    needs: locales
+    needs: [locales, translations]
     runs-on: ubuntu-latest
     environment: deploy
     strategy:
@@ -63,20 +100,12 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install
-      - name: Copy the current docs into the latest version
-        # Crowdin maps the translations of the latest docs version onto this
-        # copy, so it has to exist before the download below.
-        run: pnpm copy-docs
-      - name: Download the translations
-        if: matrix.locale != 'en'
-        run: |
-          language=$(jq -r --arg locale "$LOCALE" '.[] | select(.locale == $locale) | .crowdinLanguage // empty' locales.json)
-          test -n "$language" # locales.json must name the language for Crowdin
-          pnpm exec crowdin download --language "$language" --no-progress --no-colors
-        env:
-          LOCALE: ${{ matrix.locale }}
-          CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID || '302994' }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+      - run: pnpm copy-docs
+      - name: Collect the translations
+        uses: actions/download-artifact@v4
+        with:
+          name: translations
+          path: i18n
       - name: Build
         run: node scripts/build-with-fallback.mjs --locale "$LOCALE"
         env:
