@@ -18,14 +18,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install pnpm
-        uses: pnpm/action-setup@v4.1.0
-        with:
-          standalone: true
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+        uses: pnpm/setup@v2
       - name: Install dependencies
         run: pnpm install
       - name: Copy the current docs into the latest version
