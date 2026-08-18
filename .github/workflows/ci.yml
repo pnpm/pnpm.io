@@ -1,12 +1,18 @@
 name: Build Test
 
 on: [pull_request]
+
+env:
+  COREPACK_ENABLE_AUTO_PIN: 0
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: deploy
-    env:
-      COREPACK_ENABLE_AUTO_PIN: 0
+    permissions:
+      contents: read
+      # For the comment linking to the preview.
+      pull-requests: write
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
@@ -16,9 +22,44 @@ jobs:
         uses: pnpm/action-setup@v4.1.0
         with:
           standalone: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
       - name: Install dependencies
         run: pnpm install
       - name: Build
+        # Previews are English-only: building the translations too would cost
+        # as much as a production deploy, and pull requests change the sources.
         run: pnpm build
         env:
           LOCALE_CI: en
+      - name: Deploy a preview
+        # Pull requests from forks get the build test above, but not a preview:
+        # their token cannot read the Vercel credentials.
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        id: preview
+        run: |
+          npm install --global vercel@59
+          vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
+          # This doesn't rebuild anything: the build command in vercel.json
+          # picks up the `build` directory that the step above produced.
+          vercel build --token="$VERCEL_TOKEN"
+          url=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Preview (English only): $url" >> "$GITHUB_STEP_SUMMARY"
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Link to the preview from the pull request
+        if: steps.preview.outputs.url != ''
+        continue-on-error: true
+        run: |
+          gh pr comment "$PR" --edit-last --create-if-none \
+            --body "Preview of this pull request (English only): $URL"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ github.event.pull_request.number }}
+          URL: ${{ steps.preview.outputs.url }}
