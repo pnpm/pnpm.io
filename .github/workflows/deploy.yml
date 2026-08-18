@@ -44,14 +44,7 @@ jobs:
     environment: deploy
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4.1.0
-        with:
-          standalone: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install
+      - uses: pnpm/setup@v2
       - name: Copy the current docs into the latest version
         # Crowdin maps the translations of the latest docs version onto this
         # copy, so it has to exist before the download below.
@@ -125,14 +118,7 @@ jobs:
         with:
           # `showLastUpdateTime` reads the dates from the git history.
           fetch-depth: 0
-      - uses: pnpm/action-setup@v4.1.0
-        with:
-          standalone: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install
+      - uses: pnpm/setup@v2
       - run: pnpm copy-docs
       - name: Collect the translations
         uses: actions/download-artifact@v4
@@ -140,7 +126,7 @@ jobs:
           name: translations
           path: i18n
       - name: Build
-        run: node scripts/build-with-fallback.mjs --locale "$LOCALE"
+        run: pn node scripts/build-with-fallback.mjs --locale "$LOCALE"
         env:
           LOCALE: ${{ matrix.locale }}
       - uses: actions/upload-artifact@v4
@@ -158,12 +144,7 @@ jobs:
     environment: deploy
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4.1.0
-        with:
-          standalone: true
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      - uses: pnpm/setup@v2
       - name: Collect every locale
         uses: actions/download-artifact@v4
         with:
@@ -178,7 +159,7 @@ jobs:
         # into place. It is still needed to turn vercel.json into a deployment.
         run: |
           # esbuild, which the CLI depends on, has to run its install script.
-          vercel () { pnpm dlx --allow-build=esbuild vercel@59.1.4 "$@"; }
+          vercel () { pnx --allow-build=esbuild vercel@59.1.4 "$@"; }
           if [ "$PRODUCTION" = 'true' ]; then
             environment=production
             prod=--prod
