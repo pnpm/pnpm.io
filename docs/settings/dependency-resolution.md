@@ -511,6 +511,6 @@ There is no setting to keep the old behavior — the old shape is the vulnerabil
 
 :::
 
-Every alias that the lockfile references must stay in `namedRegistries`. Reading an entry whose alias is gone fails with `ERR_PNPM_MISSING_NAMED_REGISTRY` rather than falling back to the default registry, since that would fetch a different package. Renaming an alias re-resolves the packages that used it.
+Every non-built-in alias that the lockfile references must stay declared — through `prefix` in [`registries`](#registries) or through `namedRegistries`. Reading an entry whose alias is gone fails with `ERR_PNPM_MISSING_NAMED_REGISTRY` rather than falling back to the default registry, since that would fetch a different package. Renaming an alias re-resolves the packages that used it.
 
-Tarball URLs that follow the standard registry layout are no longer written to the lockfile for named-registry packages; they are recomputed from `namedRegistries` on demand.
+Tarball URLs that follow the standard registry layout are no longer written to the lockfile for named-registry packages; they are recomputed from the alias's declared URL on demand.
