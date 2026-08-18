@@ -214,6 +214,8 @@ Only the dependencies declared in `package.json` count as direct here. A peer de
 
 Set this to `true` if the registry that you are using returns the "time" field in the abbreviated metadata. As of now, only [Verdaccio] from v5.15.1 supports this.
 
+Since v11.23.0, this can also be declared per registry, through the `supportsTimeField` field of a [registry declaration](../registries.md#supportstimefield). A registry's own declaration wins; this setting is the answer for every registry the project does not describe.
+
 ### extendNodePath
 
 * Default: **true**

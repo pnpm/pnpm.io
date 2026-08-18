@@ -172,6 +172,7 @@
     ],
     "Features": [
       "package-sources",
+      "registries",
       "workspaces",
       "catalogs",
       "config-dependencies",
