@@ -115,7 +115,9 @@ let removedFiles = []
 for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
   console.log(`\n🔨 Build attempt ${attempt}${BUILT_LOCALES.length > 0 ? ` for ${BUILT_LOCALES.join(', ')}` : ''}${removedFiles.length > 0 ? ` (${removedFiles.length} broken translation(s) removed so far)` : ''}...\n`)
   try {
-    execSync(['docusaurus', 'build', ...BUILD_ARGS].join(' '), {
+    // Through pnpm, so that the Docusaurus binary is found no matter whether
+    // this script was started by a package script or directly by node.
+    execSync(['pnpm', 'exec', 'docusaurus', 'build', ...BUILD_ARGS].join(' '), {
       stdio: ['inherit', 'inherit', 'pipe'],
       encoding: 'utf-8',
       maxBuffer: 50 * 1024 * 1024,
