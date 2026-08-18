@@ -2,6 +2,9 @@ name: Build Test
 
 on: [pull_request]
 
+permissions:
+  contents: read
+
 env:
   COREPACK_ENABLE_AUTO_PIN: 0
 
@@ -9,10 +12,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: deploy
-    permissions:
-      contents: read
-      # For the comment linking to the preview.
-      pull-requests: write
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
@@ -30,47 +29,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        # Previews are English-only: building the translations too would cost
-        # as much as a production deploy, and pull requests change the sources.
+        # English only: the translations are not part of a pull request, and
+        # building them would cost as much as a deploy.
         run: pnpm build
         env:
           LOCALE_CI: en
-      # A step condition cannot read the secrets context, and putting the
-      # credentials in the job environment would hand them to the build above,
-      # which runs the pull request's own code.
-      - name: Look for Vercel credentials
-        id: credentials
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: test -z "$VERCEL_TOKEN" || echo 'available=true' >> "$GITHUB_OUTPUT"
-      - name: Deploy a preview
-        # Pull requests from forks get the build test above, but not a preview:
-        # their token cannot read the Vercel credentials. Neither does anyone
-        # while the credentials are missing altogether — the build test is
-        # still worth reporting on its own.
-        if: steps.credentials.outputs.available == 'true' && github.event.pull_request.head.repo.full_name == github.repository
-        id: preview
-        run: |
-          # esbuild, which the CLI depends on, has to run its install script.
-          vercel () { pnpm dlx --allow-build=esbuild vercel@59.1.4 "$@"; }
-          vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
-          # This doesn't rebuild anything: the build command in vercel.json
-          # picks up the `build` directory that the step above produced.
-          vercel build --token="$VERCEL_TOKEN"
-          url=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN" | tail -n1)
-          echo "url=$url" >> "$GITHUB_OUTPUT"
-          echo "Preview (English only): $url" >> "$GITHUB_STEP_SUMMARY"
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-      - name: Link to the preview from the pull request
-        if: steps.preview.outputs.url != ''
-        continue-on-error: true
-        run: |
-          gh pr comment "$PR" --edit-last --create-if-none \
-            --body "Preview of this pull request (English only): $URL"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR: ${{ github.event.pull_request.number }}
-          URL: ${{ steps.preview.outputs.url }}

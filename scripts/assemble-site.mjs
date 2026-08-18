@@ -45,11 +45,8 @@ if (isPopulated(ARTIFACTS_DIR)) {
     fail(`These locales are missing from the assembled site: ${missing.join(', ')}.`)
   }
   console.log(`Assembled ${defaultLocale} and ${locales.length} translated locales.`)
-} else if (isPopulated(OUT_DIR)) {
-  // A single-locale preview build wrote straight into `build`.
-  console.log(`Deploying the site already present in ${path.relative(process.cwd(), OUT_DIR)}`)
 } else {
-  fail(`Nothing to deploy: neither ${ARTIFACTS_DIR} nor ${OUT_DIR} exists.
+  fail(`Nothing to deploy: ${path.relative(process.cwd(), ARTIFACTS_DIR)} is empty.
 
 The site is built by the "Deploy" GitHub Actions workflow, one job per locale,
 and shipped from there with \`vercel deploy --prebuilt\`. Re-run that workflow
