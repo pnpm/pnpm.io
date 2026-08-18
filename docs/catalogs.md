@@ -166,6 +166,6 @@ import CatalogMode from './settings/_catalogMode.mdx'
 
 <CatalogMode />
 
-import CleanupUnusedCatalogs from './settings/_cleanupUnusedCatalogs.mdx'
+import CatalogPrune from './settings/_catalogPrune.mdx'
 
-<CleanupUnusedCatalogs />
+<CatalogPrune />

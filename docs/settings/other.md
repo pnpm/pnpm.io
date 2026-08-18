@@ -325,6 +325,6 @@ Added in: v10.12.1
 
 This setting explicitly tells pnpm whether the current environment is a CI (Continuous Integration) environment.
 
-import CleanupUnusedCatalogs from './_cleanupUnusedCatalogs.mdx'
+import CatalogPrune from './_catalogPrune.mdx'
 
-<CleanupUnusedCatalogs />
+<CatalogPrune />

@@ -17,6 +17,12 @@ For example:
 pnpm add -g typescript prettier eslint
 ```
 
+:::caution
+
+Do not run these commands through `sudo`. pnpm keeps global packages and configuration in the invoking user's home directory, so under `sudo` they silently operate on the root user's home instead of yours. Since v11.21.0, `pnpm setup`, `pnpm self-update`, and every command that modifies the global installation print a warning when run as root, and pnpm v12 fails with `ERR_PNPM_SUDO_NOT_SUPPORTED`. Read-only commands such as `pnpm bin -g` are unaffected.
+
+:::
+
 ## Isolated installations
 
 Each globally installed package (or group of packages installed together) gets its own isolated installation directory with its own `package.json`, `node_modules/`, and lockfile. This prevents global packages from interfering with each other through peer dependency conflicts, hoisting changes, or version resolution shifts.

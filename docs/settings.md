@@ -32,6 +32,12 @@ Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace
 
 :::
 
+:::note
+
+Since v11.22.0, a project's `pnpm-workspace.yaml` cannot choose where pnpm keeps its credentials, its own installation, or other machine-level state: `bin`, `configDir`, `dir`, `globalBinDir`, `globalDir`, `npmrcAuthFile`, `pnpmHomeDir`, `stateDir`, `userconfig`, and `workspaceDir` are ignored there, with a warning. Set them in the [global configuration file](./cli/config.md), in `.npmrc`, or on the command line instead. `cacheDir` and `storeDir` are unaffected.
+
+:::
+
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
 ## packages
@@ -130,6 +136,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [ignoredOptionalDependencies](./settings/dependency-resolution.md#ignoredoptionaldependencies)
 * [minimumReleaseAge](./settings/dependency-resolution.md#minimumreleaseage)
 * [minimumReleaseAgeExclude](./settings/dependency-resolution.md#minimumreleaseageexclude)
+* [minimumReleaseAgeExcludePrune](./settings/dependency-resolution.md#minimumreleaseageexcludeprune)
 * [minimumReleaseAgeIgnoreMissingTime](./settings/dependency-resolution.md#minimumreleaseageignoremissingtime)
 * [minimumReleaseAgeStrict](./settings/dependency-resolution.md#minimumreleaseagestrict)
 * [trustPolicy](./settings/dependency-resolution.md#trustpolicy)
@@ -307,7 +314,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [shellEmulator](./settings/other.md#shellemulator)
 * [catalogMode](./settings/other.md#catalogmode)
 * [ci](./settings/other.md#ci)
-* [cleanupUnusedCatalogs](./settings/other.md#cleanupunusedcatalogs)
+* [catalogPrune](./settings/other.md#catalogprune)
 
 ### Workspace Settings
 

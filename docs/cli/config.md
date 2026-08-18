@@ -59,6 +59,8 @@ pnpm config set --location=project --json catalog '{ "react": "19" }'
 
 The `set` command does not accept a property path.
 
+Since v11.22.0, `pnpm config set` refuses to write a setting to a project's `pnpm-workspace.yaml` that pnpm does not read from there — `configDir`, `pnpmHomeDir`, `stateDir`, and the other settings that name machine-level state. The command fails with `ERR_PNPM_CONFIG_SET_NOT_A_PROJECT_SETTING`, naming where the setting belongs when it belongs somewhere. `pnpm config delete` still clears such a key from a file that already carries it.
+
 ### get &lt;key>
 
 Print the config value for the provided key.

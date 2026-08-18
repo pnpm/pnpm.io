@@ -302,6 +302,17 @@ minimumReleaseAgeExclude:
 - webpack@4.47.0 || 5.102.1
 ```
 
+### minimumReleaseAgeExcludePrune
+
+Added in: v11.22.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, `pnpm add`, `pnpm update`, and `pnpm remove` prune the entries of [`minimumReleaseAgeExclude`](#minimumreleaseageexclude) in `pnpm-workspace.yaml` that the freshly written lockfile no longer resolves: a version that is gone is dropped (an entry is removed once none of its versions remain), and an entry for a package that is no longer in the lockfile is removed too. Name patterns (`@myorg/*`) are always kept.
+
+The cleanup is skipped when the install's lockfile does not cover the whole workspace ([`sharedWorkspaceLockfile: false`](../workspaces.md#sharedworkspacelockfile)), since entries another project still needs would look stale.
+
 ### minimumReleaseAgeIgnoreMissingTime
 
 Added in: v11.0.0

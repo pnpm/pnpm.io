@@ -216,6 +216,8 @@ Each resolves through the host's canonical HTTPS URL, and the lockfile records o
 
 pnpm never records an SSH URL for these hosts. Which transport a given machine uses to reach the host is that machine's Git configuration, not a property of the project.
 
+pnpm 11 keeps the specifier's transport as part of the recorded URL, but since v11.21.0 it records an SSH URL only when the specifier itself asks for one (`git+ssh://` or `git@host:...`): a shorthand like `owner/repo` resolves and records over HTTPS, so a lockfile written on a machine with SSH keys still installs on a CI runner without them. An SSH URL recorded by an older pnpm can be re-recorded over HTTPS with `pnpm update <package>`.
+
 ##### Using SSH for private repositories
 
 Configure the rewrite in Git itself, on the machine:
