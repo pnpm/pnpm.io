@@ -32,19 +32,7 @@ Supported platforms: `linux/amd64`, `linux/arm64`.
 
 ### Installing Node.js
 
-Use [`pnpm runtime set`](./cli/runtime.md) with the global flag so the `node` binary is discoverable on `PATH` in subsequent layers and at runtime:
-
-```dockerfile
-FROM ghcr.io/pnpm/pnpm:11
-RUN pnpm runtime set node 22 -g
-WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
-COPY . .
-CMD ["node", "index.js"]
-```
-
-Or let pnpm install Node.js automatically from [`devEngines.runtime`](./package_json.md#devenginesruntime) in your `package.json`:
+Let pnpm install Node.js automatically from [`devEngines.runtime`](./package_json.md#devenginesruntime) in your `package.json`:
 
 ```json title="package.json"
 {
@@ -58,19 +46,18 @@ Or let pnpm install Node.js automatically from [`devEngines.runtime`](./package_
 }
 ```
 
-```diff
+```dockerfile
 FROM ghcr.io/pnpm/pnpm:11
--RUN pnpm runtime set node 22 -g
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
-CMD ["node", "index.js"]
+CMD ["pnpm", "start"]
 ```
 
 ### When to use this image
 
-- You want the Node.js version to be pinned by your project (via `pnpm runtime set` or `devEngines.runtime`) rather than by the base image.
+- You want the Node.js version to be pinned by your project via `devEngines.runtime` rather than by the base image.
 - You want to upgrade pnpm and Node.js independently.
 - You prefer a minimal Debian base without the Node.js build toolchain.
 

@@ -23,10 +23,10 @@ Only mount a host pnpm store into containers you trust. A container with write a
 
 Below is an example container setup for demonstration:
 
+Declare Node.js in [`devEngines.runtime`](./package_json.md#devenginesruntime) in your `package.json`. The `pnpm install` command below will install the declared version automatically.
+
 ```dockerfile title="Dockerfile"
 FROM ghcr.io/pnpm/pnpm:11
-
-RUN pnpm runtime set node 22 -g
 
 WORKDIR /app
 
