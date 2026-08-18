@@ -306,6 +306,10 @@
           "label": "Manage environments",
           "items": [
             "cli/runtime",
+            {
+              "type": "doc",
+              "id": "cli/shim"
+            },
             "cli/env"
           ]
         },
@@ -347,6 +351,10 @@
             {
               "type": "doc",
               "id": "cli/cache-delete"
+            },
+            {
+              "type": "doc",
+              "id": "cli/cache-path"
             }
           ]
         },
@@ -544,6 +552,10 @@
         {
           "type": "doc",
           "id": "global-virtual-store"
+        },
+        {
+          "type": "doc",
+          "id": "package-managers"
         },
         {
           "type": "doc",

@@ -112,6 +112,15 @@
       },
       {
         "type": "category",
+        "label": "Inspect the store",
+        "items": [
+          "cli/cat-file",
+          "cli/cat-index",
+          "cli/find-hash"
+        ]
+      },
+      {
+        "type": "category",
         "label": "Manage cache",
         "items": [
           "cli/cache-list",
