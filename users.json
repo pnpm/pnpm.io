@@ -381,5 +381,12 @@
     "infoLink": "https://nx.dev",
     "pinned": false,
     "width": 150
+  },
+  {
+    "caption": "Kadapt",
+    "image": "/img/users/kadapt.png",
+    "infoLink": "https://kadapt.com",
+    "pinned": false,
+    "width": 250
   }
 ]
