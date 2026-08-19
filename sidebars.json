@@ -74,10 +74,49 @@
       },
       {
         "type": "category",
+        "label": "Releasing",
+        "items": [
+          "cli/change",
+          "cli/lane",
+          "cli/version",
+          "cli/publish",
+          "cli/stage",
+          "cli/pack",
+          "cli/dist-tag",
+          "cli/deprecate",
+          "cli/unpublish"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Registry",
+        "items": [
+          "cli/login",
+          "cli/logout",
+          "cli/whoami",
+          "cli/access",
+          "cli/owner",
+          "cli/team",
+          "cli/star",
+          "cli/ping"
+        ]
+      },
+      {
+        "type": "category",
         "label": "Manage environments",
         "items": [
           "cli/runtime",
+          "cli/shim",
           "cli/env"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Inspect the store",
+        "items": [
+          "cli/cat-file",
+          "cli/cat-index",
+          "cli/find-hash"
         ]
       },
       {
@@ -87,33 +126,22 @@
           "cli/cache-list",
           "cli/cache-list-registries",
           "cli/cache-view",
-          "cli/cache-delete"
+          "cli/cache-delete",
+          "cli/cache-path"
         ]
       },
       {
         "type": "category",
         "label": "Misc.",
         "items": [
-          "cli/login",
-          "cli/logout",
-          "cli/whoami",
           "cli/self-update",
           "cli/with",
-          "cli/version",
-          "cli/publish",
-          "cli/stage",
-          "cli/pack",
           "cli/pack-app",
-          "cli/deprecate",
-          "cli/unpublish",
-          "cli/dist-tag",
-          "cli/owner",
-          "cli/star",
-          "cli/ping",
           "cli/recursive",
           "cli/store",
           "cli/root",
           "cli/bin",
+          "cli/prefix",
           "cli/setup",
           "cli/init",
           "cli/deploy",
@@ -129,13 +157,31 @@
     ],
     "Configuration": [
       "package_json",
-      "settings",
+      {
+        "type": "category",
+        "label": "Settings (pnpm-workspace.yaml)",
+        "link": {
+          "type": "doc",
+          "id": "settings"
+        },
+        "items": [
+          "settings/dependency-resolution",
+          "settings/node-modules",
+          "settings/store",
+          "settings/network",
+          "settings/peer-dependencies",
+          "settings/cli",
+          "settings/build",
+          "settings/versioning",
+          "settings/other"
+        ]
+      },
       "npmrc",
-      "pnpm-workspace_yaml",
       "pnpmfile"
     ],
     "Features": [
       "package-sources",
+      "registries",
       "workspaces",
       "catalogs",
       "config-dependencies",
@@ -144,7 +190,9 @@
       "git_branch_lockfiles",
       "finders",
       "global-packages",
-      "global-virtual-store"
+      "global-virtual-store",
+      "package-managers",
+      "versioning"
     ],
     "Recipes": [
       "using-changesets",

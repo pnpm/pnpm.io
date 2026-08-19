@@ -11,6 +11,10 @@ Opens a package's bug tracker URL in the browser.
 pnpm bugs [<pkg> ...]
 ```
 
+## Aliases
+
+`pnpm issues` (added in v11.10.0) is an alias of `pnpm bugs`.
+
 When run without arguments inside a package directory, it opens the bug tracker for the current project (using the `bugs` field from `package.json`).
 
 When one or more package names are passed, pnpm fetches each package's metadata from the registry and opens its bug tracker.

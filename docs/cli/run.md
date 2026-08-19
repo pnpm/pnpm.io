@@ -37,6 +37,14 @@ Run all scripts that start with `watch:`:
 pnpm run "/^watch:.*/"
 ```
 
+The selector must be written as a regular expression literal — that is, wrapped in slashes — and quoted, so the shell does not mangle it. A plain string is always treated as a literal script name, and a script whose name matches the argument exactly takes precedence over regex matching.
+
+Matching is not anchored, so `"/build:.*/"` also matches `prebuild:web`. Anchor the pattern with `^` and `$` when you need an exact prefix.
+
+Matched scripts run in lexicographical order, so the selection is deterministic regardless of the order the scripts appear in `package.json`. To run them strictly one at a time, add [`--sequential`](#--sequential--s).
+
+Regular expression flags are not supported: `pnpm run "/^build:.*/i"` fails with `ERR_PNPM_UNSUPPORTED_SCRIPT_COMMAND_FORMAT`.
+
 ## Details
 
 In addition to the shell’s pre-existing `PATH`, `pnpm run` includes
@@ -112,6 +120,24 @@ Completely disregard concurrency and topological sorting, running a given script
 immediately in all matching packages with prefixed streaming output. This is the
 preferred flag for long-running processes over many packages, for instance, a
 lengthy build process.
+
+### --sequential, -s
+
+Added in: v11.14.0
+
+Run the selected scripts one by one. This forces [`--workspace-concurrency`](./recursive.md#--workspace-concurrency) to `1`, so scripts matched by a [regex selector](#running-multiple-scripts) never overlap — neither across workspace packages nor within a single package.
+
+```sh
+pnpm run --sequential "/^build:.*/"
+```
+
+In a recursive run this serializes scripts across workspace projects as well as within each one. `--sequential` takes precedence over `--parallel`: concurrency is pinned to `1` whenever it is set, regardless of the order the two flags appear in.
+
+:::note
+
+For `pnpm run`, `-s` is the shorthand for `--sequential`. Everywhere else in the CLI, `-s` remains the shorthand for `--reporter=silent`. The long form `--silent` is unaffected in all commands.
+
+:::
 
 ### --stream
 

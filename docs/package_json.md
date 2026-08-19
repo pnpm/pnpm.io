@@ -38,7 +38,7 @@ Unless the user has set the `engineStrict` config flag (see [settings]), this
 field is advisory only and will only produce warnings when your package is
 installed as a dependency.
 
-[settings]: ./settings.md#enginestrict
+[settings]: ./settings/cli.md#enginestrict
 
 ## engines.runtime
 
@@ -112,7 +112,9 @@ How it works:
 1. The exact version (and checksum) is saved in the lockfile.
 1. Scripts use the local runtime, ensuring consistency across environments.
 
-To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings.md#runtimeonfail) setting.
+To override the declared `onFail` behavior without editing the manifest, use the [`runtimeOnFail`](./settings/cli.md#runtimeonfail) setting.
+
+Since v12.0.0-rc.2, a bare `node` (or `deno`/`bun`) run from inside the project also follows this pin, not just scripts. This can be turned off with the [`globalShims`](./settings/other.md#globalshims) setting, or skipped for a single command with `PNPM_SHIM_BYPASS=1`. See [project-aware global bins](./global-packages.md#project-aware-global-bins).
 
 ## devEngines.packageManager
 
@@ -138,7 +140,9 @@ When pnpm is declared via the legacy `packageManager` field (not `devEngines.pac
 
 :::
 
-To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings.md#pmonfail) setting.
+Since v12.0.0-rc.6, the field can also name [another package manager](./package-managers.md) — `npm`, `yarn` or `bun` — which is what `pnpm add npm@11` writes. For those, nothing is recorded in `pnpm-lock.yaml`: `packageManagerDependencies` holds pnpm's own pin, and another package manager is pinned in an environment lockfile of its own under the pnpm home.
+
+To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings/cli.md#pmonfail) setting.
 
 ## dependenciesMeta
 
@@ -203,6 +207,37 @@ With these changes, we say that `button` is an "injected dependency" of `card` a
 
 Because injected dependencies produce copies of their workspace source directory, these copies must be updated somehow whenever the code is modified; otherwise, the new state will not be reflected for consumers. When building multiple projects with a command such as `pnpm --recursive run build`, this update must occur after each injected package is rebuilt but before its consumers are rebuilt. For simple use cases, it can be accomplished by invoking `pnpm install` again, perhaps using a `package.json` lifecycle script such as `"prepare": "pnpm run build"` to rebuild that one project.  Third party tools such as [pnpm-sync](https://www.npmjs.com/package/pnpm-sync-lib) and [pnpm-sync-dependencies-meta-injected](https://www.npmjs.com/package/pnpm-sync-dependencies-meta-injected) provide a more robust and efficient solution for updating injected dependencies, as well as watch mode support.
 
+## peerDependencies
+
+Peer dependency values are normally semver ranges (`^1.0.0`), or a [`workspace:`](./workspaces.md#workspace-protocol-workspace) or [`catalog:`](./catalogs.md) specifier.
+
+Since v11.14.0, a peer dependency may also be declared with a specifier that carries a scheme:
+
+```json
+{
+  "peerDependencies": {
+    "lib-a": "work:5.x.x",
+    "lib-b": "npm:other-lib@^5",
+    "lib-c": "file:../lib-c",
+    "lib-d": "git+https://example.com/lib-d.git"
+  }
+}
+```
+
+Accepted forms are a [named-registry](./settings/dependency-resolution.md#namedregistries) spec (`<registry>:<version>`), an `npm:` alias, and a `file:`, git, or URL spec.
+
+Such a specifier is matched against the semver range it carries — `work:5.x.x` is checked as `5.x.x` and `npm:other-lib@^5` as `^5`. A specifier that carries no version, such as `file:../lib-c`, is matched against `*`, so any version satisfies it. Meanwhile the original specifier is what selects the package when [`autoInstallPeers`](./settings/peer-dependencies.md#autoinstallpeers) installs a missing peer, so the peer is fetched from the aliased name, registry, or source you named.
+
+Bare `name@version` values are still rejected with `ERR_PNPM_INVALID_PEER_DEPENDENCY_SPECIFICATION`, as they are almost always a mistake:
+
+```json
+{
+  "peerDependencies": {
+    "lib-a": "lib-a@1.2.3"
+  }
+}
+```
+
 ## peerDependenciesMeta
 
 This field lists some extra information related to the dependencies listed in
@@ -255,6 +290,7 @@ The following fields may be overridden:
 * cpu
 * os
 * `engines` (Added in v10.22.0)
+* [`name`](#publishconfigname) (Added in v11.18.0)
 
 To override a field, add the publish version of the field to `publishConfig`.
 
@@ -282,6 +318,24 @@ Will be published as:
     "typings": "lib/index.d.ts"
 }
 ```
+
+### publishConfig.name
+
+Added in: v11.18.0
+
+Publishes the package under a different name than the one its manifest carries in the workspace. This is for a project whose published name is already taken by a sibling project, which otherwise has to be renamed by a build step just before publishing.
+
+```json
+{
+  "name": "foo-v2",
+  "version": "2.0.0",
+  "publishConfig": {
+    "name": "foo"
+  }
+}
+```
+
+Only the published artifact is renamed — dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
 
 ### publishConfig.executableFiles
 

@@ -11,6 +11,8 @@ Aliases: `ls`
 
 List licenses for installed packages.
 
+Since v11.20.0, a package resolved from a [named registry](../settings/dependency-resolution.md#namedregistries) is reported separately from a package of the same name and version that came from another registry. The registry alias is shown next to the package name in the table output and is exposed as the `registryName` field with `--json`.
+
 ## Options
 
 ### --dev, -D

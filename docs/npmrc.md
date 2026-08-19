@@ -13,7 +13,7 @@ pnpm reads authentication settings from the following files, in order of priorit
 
 1. **`<workspace root>/.npmrc`** — project-level auth. This file should be listed in `.gitignore`.
 2. **`<pnpm config>/auth.ini`** — the primary user-level auth file. `pnpm login` writes tokens here.
-3. **`~/.npmrc`** — read as a fallback for easier migration from npm. Use the [`npmrcAuthFile`](./settings.md#npmrcauthfile) setting to point to a different file.
+3. **`~/.npmrc`** — read as a fallback for easier migration from npm. Use the [`npmrcAuthFile`](./settings/other.md#npmrcauthfile) setting to point to a different file.
 
 The `<pnpm config>` directory is:
 
@@ -58,7 +58,7 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
 
   This is the most direct, file-free replacement for a committed `//registry.npmjs.org/:_authToken=${NPM_TOKEN}` line. Because the registry the credential applies to is encoded in the (trusted) variable name, a malicious repository cannot redirect it to another host. Such an environment value overrides the project `.npmrc` but is itself overridden by a command-line option. The `tokenHelper` setting is intentionally not read from environment variables.
 
-* Or keep the `${NPM_TOKEN}` placeholder line, but put it in the user-level `~/.npmrc` (or the file referenced by [`npmrcAuthFile`](./settings.md#npmrcauthfile)) instead of the repository.
+* Or keep the `${NPM_TOKEN}` placeholder line, but put it in the user-level `~/.npmrc` (or the file referenced by [`npmrcAuthFile`](./settings/other.md#npmrcauthfile)) instead of the repository.
 * In GitHub Actions, `actions/setup-node` with the `registry-url` input writes the auth setting to a user-level `.npmrc` (referenced by the `NPM_CONFIG_USERCONFIG` environment variable, which pnpm honors), so authentication via the `NODE_AUTH_TOKEN` environment variable continues to work.
 * If you cannot easily modify each CI pipeline, you may declare the project `.npmrc` trusted by setting a single environment variable in the CI environment (for example, at the organization or workspace level):
 
@@ -66,7 +66,7 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
   PNPM_CONFIG_NPMRC_AUTH_FILE=.npmrc
   ```
 
-  This is the env form of the [`npmrcAuthFile`](./settings.md#npmrcauthfile) setting: it makes pnpm read the project's `.npmrc` as the user-level auth file (a relative path is resolved against the working directory), so environment variables in it are expanded as before. Because the trust declaration comes from the environment — not from the repository — a malicious repository cannot set it for you. The npm-style `NPM_CONFIG_USERCONFIG` variable is also honored as a fallback.
+  This is the env form of the [`npmrcAuthFile`](./settings/other.md#npmrcauthfile) setting: it makes pnpm read the project's `.npmrc` as the user-level auth file (a relative path is resolved against the working directory), so environment variables in it are expanded as before. Because the trust declaration comes from the environment — not from the repository — a malicious repository cannot set it for you. The npm-style `NPM_CONFIG_USERCONFIG` variable is also honored as a fallback.
 
   :::danger
 
@@ -74,7 +74,7 @@ If your project relied on a committed `.npmrc` containing a line like `//registr
 
   :::
 
-The same rule applies to **registry and proxy URLs** in a project `.npmrc` (`registry`, `@scope:registry`, `proxy`, `https-proxy`, `http-proxy`). If you used an environment variable to build a registry URL, move the setting to a trusted source — your user-level `~/.npmrc`, or `pnpm config set "<key>" <value>`. If the URL is not secret, you can also write the resolved value directly in the project `.npmrc`, since only `${...}` placeholders are ignored. For registry settings in `pnpm-workspace.yaml`, see [Settings](./settings.md#registries).
+The same rule applies to **registry and proxy URLs** in a project `.npmrc` (`registry`, `@scope:registry`, `proxy`, `https-proxy`, `http-proxy`). If you used an environment variable to build a registry URL, move the setting to a trusted source — your user-level `~/.npmrc`, or `pnpm config set "<key>" <value>`. If the URL is not secret, you can also write the resolved value directly in the project `.npmrc`, since only `${...}` placeholders are ignored. For registry settings in `pnpm-workspace.yaml`, see [Settings](./settings/dependency-resolution.md#registries).
 
 ## Authentication Settings
 
@@ -135,6 +135,51 @@ Setting a token helper for the specified registry:
 //registry.corp.com:tokenHelper=/home/ivan/token-generator
 ```
 
+### _auth
+
+Added in: v11.10.0
+
+Configures registry authentication as a single structured value, keyed by registry URL. This is an alternative to the many `//host/:_authToken=…` entries and is designed for CI, where the URL-scoped form (whose variable name contains `/`, `:`, and `.`) cannot be passed through an environment variable on some runners.
+
+`_auth` is honored **only** from two trusted locations:
+
+* the **global** pnpm config (`config.yaml`);
+* the `pnpm_config__auth` environment variable (for CI).
+
+It is **ignored** in a project `pnpm-workspace.yaml` or `.npmrc`, so a checked-out repository can never supply registry auth.
+
+The value is keyed by registry URL, so each secret is explicitly bound to the host that may receive it. Registry URL keys must use `http` or `https` and must not include credentials, query strings, or fragments. Within each registry URL, `@` means registry-wide (default) credentials, and a package scope such as `@org` binds credentials to that scope on the same host. The only supported credential field is `authToken` (it maps to `_authToken` / bearer auth); the deprecated `basicAuth` / `username` + `password` forms and `tokenHelper` are not accepted here.
+
+In the global `config.yaml`:
+
+```yaml
+_auth:
+  https://registry.npmjs.org:
+    "@":
+      authToken: npm-token
+    "@org":
+      authToken: org-token
+```
+
+The equivalent environment variable (a JSON string):
+
+```sh
+export pnpm_config__auth='{"https://registry.npmjs.org":{"@":{"authToken":"npm-token"},"@org":{"authToken":"org-token"}}}'
+```
+
+Both `pnpm_config__auth` (lowercase) and `PNPM_CONFIG__AUTH` (all-caps, the convention some CI runners apply) are honored. If both are set, lowercase wins unless it is empty, in which case uppercase is used.
+
+Each entry also infers a trusted registry route: `@` routes the default registry (and `pnpm add <pkg>` resolves there), and `@org` routes that scope. Because the credential and its destination host arrive in one trusted value, repo-controlled config cannot redirect the token to a different host.
+
+Precedence, from highest to lowest:
+
+1. CLI flags (`--registry`, `--@scope:registry`)
+2. `pnpm_config__auth` / `PNPM_CONFIG__AUTH`
+3. global `config.yaml` `_auth`
+4. `pnpm-workspace.yaml`
+
+Parsing is strict: a malformed value (bad JSON, wrong shape, an invalid registry URL or scope, or an unsupported credential field) fails fast with an error rather than being silently dropped.
+
 ## Certificate Settings
 
 ### ca
@@ -160,7 +205,7 @@ ca[]="..."
 ca[]="..."
 ```
 
-See also the [`strictSsl`](./settings.md#strictssl) setting.
+See also the [`strictSsl`](./settings/network.md#strictssl) setting.
 
 ### cafile
 

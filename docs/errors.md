@@ -37,8 +37,8 @@ To fix this error, all dependencies that use the [workspace protocol] should be 
 
 You may also selectively ignore these errors using the [peerDependencyRules.ignoreMissing] and [peerDependencyRules.allowedVersions] settings.
 
-[peerDependencyRules.ignoreMissing]: settings#peerdependencyrulesignoremissing
-[peerDependencyRules.allowedVersions]: settings#peerdependencyrulesallowedversions
+[peerDependencyRules.ignoreMissing]: settings/peer-dependencies.md#peerdependencyrulesignoremissing
+[peerDependencyRules.allowedVersions]: settings/peer-dependencies.md#peerdependencyrulesallowedversions
 
 ## ERR_PNPM_OUTDATED_LOCKFILE
 

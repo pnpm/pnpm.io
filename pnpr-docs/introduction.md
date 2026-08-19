@@ -10,10 +10,11 @@ it. It hosts your own packages and proxies upstream registries such as
 `registry.npmjs.org`, with its own authentication and access controls — roughly
 the role [verdaccio](https://verdaccio.org/) plays in the JavaScript ecosystem.
 
-Every registry origin pnpr serves is declared as a
-[registry mount](configuration.md#mounts-and-defaulttarget), and a router maps
-each package name to exactly one origin — there is no cross-origin
-fall-through, which closes dependency-confusion attacks by construction.
+Every registry origin pnpr serves is a declared
+[registry](configuration.md#registries-and-defaultregistry) that claims the
+package names it serves, and a router resolves each package name to exactly
+one origin — there is no cross-origin fall-through, which closes
+dependency-confusion attacks by construction.
 
 pnpr lives in the [pnpm monorepo](https://github.com/pnpm/pnpm) under
 [`pnpr/`](https://github.com/pnpm/pnpm/tree/main/pnpr).

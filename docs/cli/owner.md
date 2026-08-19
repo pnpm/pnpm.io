@@ -41,7 +41,7 @@ Remove a user from the list of owners of a package. Requires authentication.
 
 ### --registry &lt;url\>
 
-The base URL of the npm registry to use for the operation. Per-scope and named registries (configured via [`registries`](../settings.md#registries) and [`namedRegistries`](../settings.md#namedregistries)) are respected for the package being modified.
+The base URL of the npm registry to use for the operation. Per-scope and named registries (configured via [`registries`](../settings/dependency-resolution.md#registries) and [`namedRegistries`](../settings/dependency-resolution.md#namedregistries)) are respected for the package being modified.
 
 ### --otp &lt;otp\>
 

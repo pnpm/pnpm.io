@@ -3,6 +3,14 @@ id: using-changesets
 title: Using Changesets with pnpm
 ---
 
+:::tip
+
+Since v11.13.0, pnpm can manage workspace releases natively, without the Changesets CLI. It reads and writes the same `.changeset/*.md` files. See [Release management](./versioning.md).
+
+Since v11.16.0, [`pnpm update --changeset`](./cli/update.md#--changeset) can also write a changeset for the dependency bumps an update makes.
+
+:::
+
 :::note
 
 At the time of writing this documentation, the latest pnpm version was
@@ -83,17 +91,11 @@ jobs:
       - name: Checkout code repository
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Setup node.js
-        uses: actions/setup-node@v4
+      - name: Setup pnpm and Node.js
+        uses: pnpm/setup@v2
         with:
-          node-version: 20
-          cache: 'pnpm'
-      
-      - name: Install dependencies
-        run: pnpm install
+          runtime: node@20
+          cache: true
       
       - name: Create and publish versions
         uses: changesets/action@v1

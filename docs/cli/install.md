@@ -174,7 +174,7 @@ the installation progress.
 
 If you want to change what type of information is printed, use the [loglevel] setting.
 
-[loglevel]: ../settings.md#loglevel
+[loglevel]: ../settings/cli.md#loglevel
 
 ### --shamefully-hoist
 
@@ -199,6 +199,14 @@ dependencies.
 ### --resolution-only
 
 Re-runs resolution: useful for printing out peer dependency issues.
+
+:::info
+
+This flag exists in pnpm 11 only. pnpm 12 does not implement it and rejects it with `error: unexpected argument '--resolution-only' found`.
+
+To list peer dependency issues on either version, run [`pnpm peers check`](./peers.md#check) instead. It reads them from the lockfile, so it needs neither a re-resolution nor an install.
+
+:::
 
 import CpuFlag from '../settings/_cpuFlag.mdx'
 

@@ -13,7 +13,7 @@ By default, the deploy command only works with workspaces that have the `inject-
 
 :::note
 
-When the [`enableGlobalVirtualStore`](../settings.md#enableglobalvirtualstore) option is set, `pnpm deploy` ignores it and always creates a localized virtual store within the deploy directory. This keeps the deploy directory self-contained and portable.
+When the [`enableGlobalVirtualStore`](../settings/node-modules.md#enableglobalvirtualstore) option is set, `pnpm deploy` ignores it and always creates a localized virtual store within the deploy directory. This keeps the deploy directory self-contained and portable.
 
 :::
 
@@ -37,7 +37,7 @@ Usage in a docker image. After building everything in your monorepo, do this in 
 FROM workspace as pruned
 RUN pnpm --filter <your package name> --prod deploy pruned
 
-FROM node:18-alpine
+FROM node:22-alpine
 WORKDIR /app
 
 ENV NODE_ENV=production

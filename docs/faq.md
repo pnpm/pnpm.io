@@ -115,7 +115,7 @@ workarounds to make the buggy packages work.
 In case there are issues, you can use the [`nodeLinker: hoisted`] setting.
 This creates a flat `node_modules` structure similar to the one created by `npm`.
 
-[`nodeLinker: hoisted`]: settings#nodeLinker
+[`nodeLinker: hoisted`]: settings/node-modules.md#nodelinker
 
 ### Solution 2
 

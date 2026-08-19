@@ -17,7 +17,7 @@ pnpm dist-tag ls [<pkg>]
 
 ### add &lt;pkg\>@&lt;version\> [&lt;tag\>]
 
-Tag the specified version of a package with a dist-tag. If `<tag>` is omitted, the value of the [`tag`](../settings.md#tag) setting is used (defaults to `latest`).
+Tag the specified version of a package with a dist-tag. If `<tag>` is omitted, the value of the [`tag`](../settings/other.md#tag) setting is used (defaults to `latest`).
 
 ```sh
 pnpm dist-tag add foo@1.2.0 next

@@ -1,4 +1,11 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "node scripts/assemble-site.mjs",
+  "installCommand": "echo 'No dependencies needed: the site is built by the Deploy workflow'",
+  "outputDirectory": "build",
+  "git": {
+    "deploymentEnabled": false
+  },
   "headers": [
     {
       "source": "/(.*)",
@@ -27,6 +34,11 @@
       "permanent": false
     },
     {
+      "source": "/12.x/:splat*",
+      "destination": "/:splat*",
+      "permanent": false
+    },
+    {
       "source": "/9.x/:splat*",
       "destination": "/:splat*",
       "permanent": true
@@ -48,7 +60,17 @@
     },
     {
       "source": "/next/cli/dlx",
-      "destination": "/next/cli/pnx",
+      "destination": "/cli/pnx",
+      "permanent": true
+    },
+    {
+      "source": "/next/:splat*",
+      "destination": "/:splat*",
+      "permanent": true
+    },
+    {
+      "source": "/pnpm-workspace_yaml",
+      "destination": "/settings",
       "permanent": true
     }
   ]

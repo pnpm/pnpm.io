@@ -28,21 +28,21 @@ title: Feature Comparison
 | [SBOM generation]                |:white_check_mark:|:x:               |:white_check_mark:| `pnpm sbom`, `npm sbom`. |
 | [Listing licenses]               |:white_check_mark:|:white_check_mark:|:x:               | pnpm supports it via `pnpm licenses list`. Yarn has a plugin for it. |
 
-[Auto-install before script run]: ./settings.md#verifydepsbeforerun
-[Autoinstalling peers]: ./settings.md#autoinstallpeers
+[Auto-install before script run]: ./settings/build.md#verifydepsbeforerun
+[Autoinstalling peers]: ./settings/peer-dependencies.md#autoinstallpeers
 [Catalogs]: ./catalogs.md
 [Config dependencies]: ./config-dependencies.md
 [Dynamic package execution]: ./cli/pnx.md
-[Hoisted `node_modules`]: ./settings.md#nodelinker
+[Hoisted `node_modules`]: ./settings/node-modules.md#nodelinker
 [JSR registry support]: ./cli/add.md#install-from-the-jsr-registry
 [Listing licenses]: ./cli/licenses.md
-[Build script security]: ./settings.md#allowbuilds
+[Build script security]: ./settings/build.md#allowbuilds
 [Managing runtimes]: ./cli/runtime.md
-[Managing versions of itself]: ./settings.md#managepackagemanagerversions
-[Overrides support]: ./settings.md#overrides
+[Managing versions of itself]: ./settings/cli.md#pmonfail
+[Overrides support]: ./settings/dependency-resolution.md#overrides
 [Patching dependencies]: ./cli/patch.md
 [SBOM generation]: ./cli/sbom.md
-[Side-effects cache]: ./settings.md#sideeffectscache
+[Side-effects cache]: ./settings/build.md#sideeffectscache
 [Workspace support]: ./workspaces.md
 [hooks]: ./pnpmfile.md
 

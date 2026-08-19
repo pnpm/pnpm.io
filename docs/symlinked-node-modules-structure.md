@@ -119,6 +119,6 @@ see "[pnpm's strictness helps to avoid silly bugs][bugs]"
 
 Unfortunately, many packages in the ecosystem are broken — they use dependencies that are not listed in their `package.json`. To minimize the number of issues new users encounter, pnpm hoists all dependencies by default into `node_modules/.pnpm/node_modules`. To disable this hoisting, set [hoist] to `false`.
 
-[hoist]: settings.md#hoist
+[hoist]: settings/node-modules.md#hoist
 
 [bugs]: https://www.kochan.io/nodejs/pnpms-strictness-helps-to-avoid-silly-bugs.html
