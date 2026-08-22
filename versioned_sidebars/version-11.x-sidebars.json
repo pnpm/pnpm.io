@@ -633,6 +633,10 @@
         },
         {
           "type": "doc",
+          "id": "lockfile"
+        },
+        {
+          "type": "doc",
           "id": "uninstall"
         },
         {
