@@ -9,7 +9,7 @@ or two:
 
 | Document | Contents |
 | --- | --- |
-| The **env lockfile** (first, when present) | [Config dependencies] and the pnpm version resolved for the project, under `configDependencies` and `packageManagerDependencies`, with the `packages` and `snapshots` entries those need |
+| The **env lockfile** (first, when present) | [Config dependencies] and the pnpm version resolved for the project, under `configDependencies` and `packageManagerDependencies`, with the `packages` and `snapshots` entries they need |
 | The **project lockfile** (last, always present) | The project's own dependency graph: `importers` with their `dependencies`, and the matching `packages` and `snapshots` |
 
 Both documents declare the same `lockfileVersion`. That field describes the
@@ -59,24 +59,53 @@ snapshots:
   # ...
 ```
 
-## Take the last document
+## Which document you need
 
-Read all documents and use the last one:
+That depends on what your tool is for:
+
+- **The project's dependency graph** — dependency update bots, graph builders,
+  anything that asks "what does this project depend on": the **last** document.
+- **Everything the lockfile installs** — vulnerability scanners and SBOM
+  generators: **every** document. Config dependencies are real npm packages,
+  installed into `node_modules/.pnpm-config`, and they appear only in the env
+  document.
+
+Either way, load the file with a multi-document API. A single-document one
+(`load()` in js-yaml, `yaml.safe_load` in Python, `yaml.Unmarshal` into one
+value in Go) either raises an error or silently gives you the first document —
+which, in a two-document lockfile, is the env document.
+
+### The project's dependency graph
+
+Take the last document:
 
 ```js
+import { readFile } from 'node:fs/promises'
 import { loadAll } from 'js-yaml'
 
 const lockfile = loadAll(await readFile('pnpm-lock.yaml', 'utf8')).at(-1)
 ```
 
 This is correct for both shapes, and for every `pnpm-lock.yaml` pnpm has ever
-written. Loading the file with a single-document API instead (`load()` in
-js-yaml, `yaml.safe_load` in Python, `yaml.Unmarshal` into one value in Go)
-either raises an error or silently returns only the first document.
+written.
 
-If you need to detect the layout rather than always taking the last document, a
+If you would rather detect the layout than always take the last document, a
 file whose first line is `---` has an env document. pnpm writes that leading
 marker only when it writes two documents.
+
+### Everything the lockfile installs
+
+Read every document and union what you find in each:
+
+```js
+const documents = loadAll(await readFile('pnpm-lock.yaml', 'utf8'))
+const installed = documents.flatMap((doc) => Object.keys(doc.packages ?? {}))
+```
+
+Take each document as an inventory of its own rather than merging the documents
+into a single object first. Both use the `.` importer key, and each carries its
+own `packages` and `snapshots` maps, so merging them overwrites one side's
+importer and loses whichever graph it held.
 
 ## Why the env document comes first
 
@@ -116,10 +145,9 @@ built on it passes.
 
 If you scan pnpm projects:
 
-- **Read both documents and union them.** Config dependencies are real npm
-  packages, installed into `node_modules/.pnpm-config`. A tool that reads only
-  the project document misses them; a tool that reads only the env document
-  misses everything else.
+- **Read every document**, as described above. A tool that reads only the
+  project document misses the config dependencies; a tool that reads only the
+  env document misses everything else.
 - **Verify your scanner against a two-document lockfile before you trust its
   output.** "It reported something" is not a sufficient check here: the env
   document does contain packages, so a broken reader emits a plausible-looking
