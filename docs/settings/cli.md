@@ -28,6 +28,37 @@ Controls colors in the output.
 Any logs at or higher than the given level will be shown.
 You can instead pass `--silent` to turn off all output logs.
 
+### progress
+
+* Default: **true**
+* Type: **Boolean**
+
+Controls dependency and download progress in the default reporter. Set this to
+`false` to hide progress while keeping warnings, lifecycle output, and command
+summaries. This setting does not affect the `ndjson` reporter.
+
+Disable progress for one command with `--no-progress`:
+
+```sh
+pnpm install --no-progress
+```
+
+To disable progress for every project on the machine, update the global config:
+
+```sh
+pnpm config set --global progress false
+```
+
+It can also be set with `PNPM_CONFIG_PROGRESS` or in `pnpm-workspace.yaml`:
+
+```sh
+PNPM_CONFIG_PROGRESS=false pnpm install
+```
+
+```yaml title="pnpm-workspace.yaml"
+progress: false
+```
+
 ### useBetaCli
 
 * Default: **false**
