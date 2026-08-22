@@ -33,9 +33,14 @@ You can instead pass `--silent` to turn off all output logs.
 * Default: **true**
 * Type: **Boolean**
 
-Controls dependency and download progress in the default reporter. Set this to
-`false` to hide progress while keeping warnings, lifecycle output, and command
-summaries. This setting does not affect the `ndjson` reporter.
+Controls dependency and download progress, including output such as:
+
+```text
+Progress: resolved 12, reused 10, downloaded 2, added 12
+```
+
+Set this to `false` to hide progress without hiding warnings, lifecycle script
+output, or command summaries.
 
 Disable progress for one command with `--no-progress`:
 
@@ -43,20 +48,10 @@ Disable progress for one command with `--no-progress`:
 pnpm install --no-progress
 ```
 
-To disable progress for every project on the machine, update the global config:
+To disable progress globally:
 
 ```sh
 pnpm config set --global progress false
-```
-
-It can also be set with `PNPM_CONFIG_PROGRESS` or in `pnpm-workspace.yaml`:
-
-```sh
-PNPM_CONFIG_PROGRESS=false pnpm install
-```
-
-```yaml title="pnpm-workspace.yaml"
-progress: false
 ```
 
 ### useBetaCli
