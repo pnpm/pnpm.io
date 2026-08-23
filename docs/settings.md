@@ -38,14 +38,6 @@ Since v11.22.0, a project's `pnpm-workspace.yaml` cannot choose where pnpm keeps
 
 :::
 
-:::note
-
-Since v11.23.0, a setting that this version of pnpm does not recognize is reported as such, in the global configuration file and in a project's `pnpm-workspace.yaml` alike — the latter used to be ignored silently, along with keys that are not camelCase. The warning names the pnpm version that does read the setting when there is one (`globalShims`, for instance, is a pnpm v12 setting), and suggests the closest real setting name when the key looks like a typo.
-
-`pnpm config get <key>` and `pnpm get <key>` do not print these warnings, so a script capturing the value gets the value alone.
-
-:::
-
 [INI-formatted]: https://en.wikipedia.org/wiki/INI_file
 
 ## packages

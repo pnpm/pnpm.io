@@ -14,7 +14,7 @@ pnpm pkg delete <key> [<key> ...]
 pnpm pkg fix
 ```
 
-Nested fields are addressed with dot-separated paths (e.g. `scripts.test`, `repository.url`). Since v11.23.0, a dot-separated segment may contain hyphens, so `pnpm pkg get dependencies.some-package-name` reads the key instead of failing with `ERR_PNPM_UNEXPECTED_TOKEN_IN_PROPERTY_PATH`; the bracketed and quoted forms already worked and are unchanged.
+Nested fields are addressed with dot-separated paths (e.g. `scripts.test`, `repository.url`).
 
 ## Commands
 

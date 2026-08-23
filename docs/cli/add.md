@@ -120,8 +120,6 @@ pnpm --allow-build=esbuild add my-bundler
 
 This will run `esbuild`'s postinstall script and also add it to the `allowBuilds` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
 
-Since v11.23.0, the named packages are added to the `allowBuilds` entries already in `pnpm-workspace.yaml` instead of replacing them ([#13872](https://github.com/pnpm/pnpm/issues/13872)).
-
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)

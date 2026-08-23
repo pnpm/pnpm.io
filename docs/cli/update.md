@@ -31,11 +31,7 @@ Pass [`--no-save`](#--no-save) to update the lockfile only and leave the declare
 
 ## Updating to a specific version
 
-`pnpm update <name>@<version>` moves a dependency to an exact version. Since v11.23.0:
-
-* The update is scoped to the packages you named. Unrelated dependencies keep their locked resolution, and in a recursive run an exact pinned update stays on the requested version line — copies of the same package on another major line, or for a `0.x` request another minor line, are left alone.
-* A selector that renames the package it installs — `pnpm update <alias>@npm:<pkg>@<version>`, or the `jsr:` equivalent — targets the package the alias installs rather than the alias.
-* If the package is not a direct dependency of any selected project, the command fails with `ERR_PNPM_UPDATE_VERSION_ON_INDIRECT_DEP` instead of quietly updating it to whatever a fresh install would resolve. There is nowhere to record the version in that case; the error points at the [`overrides`](../settings/dependency-resolution.md#overrides) entry that does pin a transitive dependency. Ranges and tags are unaffected, and a package that any selected project declares directly still takes its version as before.
+Since v11.23.0, `pnpm update <name>@<version>` fails with `ERR_PNPM_UPDATE_VERSION_ON_INDIRECT_DEP` when the package is not a direct dependency of any selected project. There is nowhere to record the version in that case; pin a transitive dependency through [`overrides`](../settings/dependency-resolution.md#overrides) instead. Ranges and tags are unaffected.
 
 ## Selecting dependencies with patterns
 
