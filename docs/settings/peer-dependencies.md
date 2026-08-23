@@ -129,6 +129,8 @@ peerDependencyRules:
   - "@eslint/*"
 ```
 
+`ignoreMissing` only suppresses warnings for a peer that is entirely absent. If the peer *is* installed but at a version outside the range some dependency requested, use [`allowedVersions`](#peerdependencyrulesallowedversions) or [`allowAny`](#peerdependencyrulesallowany) instead. Patterns here are also matched against the peer's own package name only — they don't support the `parent>peer` selector syntax that `allowedVersions` accepts below.
+
 #### peerDependencyRules.allowedVersions
 
 Unmet peer dependency warnings will not be printed for peer dependencies of the specified range.
@@ -164,3 +166,5 @@ peerDependencyRules:
 ```
 
 The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
+
+Like `ignoreMissing`, `allowAny` patterns match against the peer's own package name only, not the `parent>peer` selector syntax `allowedVersions` accepts above.
