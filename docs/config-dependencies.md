@@ -11,7 +11,7 @@ If your config dependency is named following the `pnpm-plugin-*`, `@*/pnpm-plugi
 
 ## How to Add a Config Dependency
 
-Config dependencies are defined in your `pnpm-workspace.yaml`. Their integrity checksums are stored in `pnpm-lock.yaml` (in a dedicated env lockfile document).
+Config dependencies are defined in your `pnpm-workspace.yaml`. Their integrity checksums are stored in `pnpm-lock.yaml` (in a dedicated [env lockfile document](./lockfile.md)).
 
 For example, running `pnpm add --config my-configs` will add this entry to your `pnpm-workspace.yaml`:
 
