@@ -217,7 +217,7 @@ To support hoisted dependencies when using a global virtual store, pnpm relies o
 
 Since v11.23.0, every process pnpm spawns for the project — `pnpm run`, `pnpm exec`, lifecycle scripts, and the tools `pnpm dlx` runs — receives both `NODE_PATH` and a `NODE_OPTIONS` `--import` flag that registers a resolve hook restoring `NODE_PATH` lookups for ESM. Such imports now resolve for CommonJS and ESM alike, without the `@pnpm/plugin-esm-node-path` config dependency that used to be needed ([#9618](https://github.com/pnpm/pnpm/issues/9618)).
 
-A `node` process you start yourself, outside pnpm, does not get that environment. Use [packageExtensions] to declare the missing dependencies if you need them to resolve there too.
+Two things fall outside that: a `node` process you start yourself rather than through pnpm, and a project that sets [`extendNodePath`](./other.md#extendnodepath) to `false`, which turns the whole `NODE_PATH` mechanism off and takes the resolve hook with it. Use [packageExtensions] to declare the missing dependencies if you need them to resolve in either case.
 
 :::
 
