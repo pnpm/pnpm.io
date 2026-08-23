@@ -14,16 +14,14 @@ const TIER_CONFIG = {
   silver: { columns: 3, heading: 'Silver Sponsors' },
 };
 
-// Paths in the pnpm/pnpm repo carrying <!-- sponsors --> markers.
 const README_TARGETS = [
   'README.md',
   'pnpm/npm/pnpm/README.md',
   'pnpm11/pnpm/README.md',
 ];
 
-// Both release paths read this one fragment: v11's make-release-description
-// appends it, and the v12 workflow cats it onto RELEASE.md. pnpr builds its
-// description the same way but does not carry sponsors.
+// Both release paths read this one fragment. pnpr builds its description the
+// same way but deliberately carries no sponsors.
 const RELEASE_TARGETS = [
   '.github/release-sponsors.md',
 ];
