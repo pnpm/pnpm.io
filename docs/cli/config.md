@@ -98,6 +98,15 @@ Show all the config settings. Output is a JSON object.
 
 Auth-related settings are hidden from the output; use `pnpm config get <key>` to read them explicitly.
 
+## What `get` and `list` report
+
+Since v11.23.0, `pnpm config get` and `pnpm config list` show the settings pnpm acts on, under their documented names, rather than the raw values a particular file happens to carry:
+
+* [`registries`](../registries.md) shows the registries pnpm resolves from, merged across every source (`.npmrc`, `pnpm-workspace.yaml`, the global config, CLI flags), in the shape the setting is written in: keyed by registry URL, with the default registry declared as the bare `@` scope. The built-in routes are included — the `@jsr` scope and the `npmjs` and `gh` prefixes — unless the project points them elsewhere. Previously `pnpm config get registries` printed `undefined`.
+* `registry` and `@scope:registry` show the merged routes rather than raw `.npmrc` values, so they always agree with the `registries` view.
+* `update` and `audit` show the effective sections, whichever spelling set them. The deprecated internal spellings (`updateConfig`, `auditConfig`, `auditLevel`) are no longer listed.
+* [`catalogs`](../catalogs.md) shows the complete resolved catalog set — the singular `catalog` block is its `default` entry — whichever spelling declared it.
+
 :::note
 
 Since v11, `pnpm config get` (without `--json`) no longer prints INI-formatted text. It prints JSON for objects and arrays, and raw strings for strings, numbers, booleans, and nulls. `pnpm config get --json` prints all values as JSON. `pnpm config list` always prints a JSON object.

@@ -21,6 +21,8 @@ If you want to tolerate some vulnerabilities as they don't affect your project, 
 
 Since v11, `pnpm audit` queries the registry's `/-/npm/v1/security/advisories/bulk` endpoint. The response does not include CVE identifiers, so advisories are filtered by GitHub advisory ID (GHSA) instead. If you previously listed CVEs under `auditConfig.ignoreCves`, replace each entry with the corresponding `GHSA-xxxx-xxxx-xxxx` value (shown in the `More info` column of `pnpm audit` output) under [`audit.ignore`].
 
+Since v11.23.0, the patched version an advisory reports is checked against the registry packument, so `pnpm audit` no longer points at a version that was never published or is deprecated. A range the advisory implies (`>=4.17.24` from `<=4.17.23`, say) is corrected to the lowest non-deprecated published version satisfying it, and when no published version does, the report shows `Patched versions: None` ([#13824](https://github.com/pnpm/pnpm/issues/13824)).
+
 [overrides]: ../settings/dependency-resolution.md#overrides
 [`audit.ignore`]: #auditignore
 
@@ -57,6 +59,8 @@ Use `--fix=update` (added in v11.0.0) to fix vulnerabilities by updating package
 
 When [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) is set, `--fix` also adds the minimum patched version of each advisory to [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) in `pnpm-workspace.yaml`, so the security fix can be installed without waiting for the release age window.
 
+Since v11.23.0, neither an override nor a `minimumReleaseAgeExclude` entry is written for a patched version the packument shows was never published. Such an entry would have let a later publish of that version bypass the release-age gate ([#11563](https://github.com/pnpm/pnpm/issues/11563)).
+
 ### --interactive, -i
 
 Added in: v11.0.0
@@ -66,6 +70,8 @@ Review the advisories selected by `--fix` and pick which ones to apply. Only usa
 ### --json
 
 Output audit report in JSON format.
+
+Since v11.23.0, `patched_versions` is `null` for an advisory whose inferred patch is not available — never published, skipped, yanked, or deprecated — so tooling can tell "no fix available" from "fix available at version X".
 
 ### --dev, -D
 

@@ -28,6 +28,8 @@ Inside a workspace, `pnpm sbom` supports filtering. When a single workspace pack
 
 Since v11.20.0, a component resolved from a [named registry](../settings/dependency-resolution.md#namedregistries) carries the purl `repository_url` qualifier (for example `pkg:npm/foo@1.0.0?repository_url=https%3A%2F%2Fnpm.work.example.com%2F`), so the same name and version served by two registries does not collapse onto one component. Credentials that a `namedRegistries` URL may embed — userinfo or a query string — are stripped from the qualifier, while the origin and path are kept, since two registries can differ only by path.
 
+Since v11.23.0, `pnpm sbom` fails with `ERR_PNPM_SBOM_MISSING_IMPORTERS` when `pnpm-lock.yaml` has no entry for a selected project, rather than writing an SBOM that under-reports that project's dependencies. Run `pnpm install` to bring the lockfile up to date.
+
 CycloneDX output marks components reachable only through `devDependencies` with `scope: "excluded"` and the `cdx:npm:package:development` property. Runtime components, including installed optional dependencies, use the default required scope.
 
 ## Options

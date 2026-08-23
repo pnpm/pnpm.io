@@ -23,6 +23,8 @@ Prefix a package name with `!` to deny it. Only mentioned packages are affected;
 
 During install, packages with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`.
 
+Since v11.23.0, writing `allowBuilds` also removes `onlyBuiltDependencies`, `onlyBuiltDependenciesFile`, `neverBuiltDependencies`, and `ignoredBuiltDependencies` from `pnpm-workspace.yaml`. `allowBuilds` replaced those settings in pnpm 11 and they have been ignored since, so a workspace migrated from pnpm 10 kept them around looking active.
+
 ## Options
 
 ### --all
