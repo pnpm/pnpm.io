@@ -163,6 +163,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [packageImportMethod](./settings/node-modules.md#packageimportmethod)
 * [modulesCacheMaxAge](./settings/node-modules.md#modulescachemaxage)
 * [dlxCacheMaxAge](./settings/node-modules.md#dlxcachemaxage)
+* [virtualStoreType](./settings/node-modules.md#virtualstoretype)
 * [enableGlobalVirtualStore](./settings/node-modules.md#enableglobalvirtualstore)
 
 ### Dependency Hoisting Settings

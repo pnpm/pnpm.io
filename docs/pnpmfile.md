@@ -192,6 +192,12 @@ This hook is executed after reading and parsing the lockfiles of the project, bu
 
 ### `hooks.importPackage(destinationDir, options): Promise<string | undefined>`
 
+:::warning Deprecated in v11.23.0
+
+`importPackage` is deprecated and will be removed in the next major version. pnpm warns when a pnpmfile defines it, and defining it opts the installation out of the parallel package importer, making installation slower. If you rely on this hook, comment on [#14101](https://github.com/pnpm/pnpm/issues/14101).
+
+:::
+
 This hook allows to change how packages are written to `node_modules`. The return value is optional and states what method was used for importing the dependency, e.g.: clone, hardlink.
 
 #### Arguments

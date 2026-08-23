@@ -131,6 +131,13 @@ Two-document lockfiles have existed since config dependencies were introduced.
 They became common in pnpm 12, which records the resolved package manager
 version by default.
 
+Since v11.23.0, a frozen install no longer rewrites this block. When the pinned
+pnpm version is missing from the lockfile or no longer matches it,
+`pnpm install --frozen-lockfile` fails with
+`ERR_PNPM_FROZEN_LOCKFILE_WITH_OUTDATED_LOCKFILE`, so a manifest whose pin was
+bumped without regenerating the lockfile no longer passes CI. Run
+`pnpm install` without `--frozen-lockfile` and commit the result.
+
 ## Scanning for vulnerabilities
 
 :::caution

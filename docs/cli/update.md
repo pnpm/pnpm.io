@@ -29,6 +29,10 @@ Besides moving `pnpm-lock.yaml` to the newly resolved versions, `pnpm update` wr
 
 Pass [`--no-save`](#--no-save) to update the lockfile only and leave the declared ranges alone.
 
+## Updating to a specific version
+
+Since v11.23.0, `pnpm update <name>@<version>` fails with `ERR_PNPM_UPDATE_VERSION_ON_INDIRECT_DEP` when the package is not a direct dependency of any selected project. There is nowhere to record the version in that case; pin a transitive dependency through [`overrides`](../settings/dependency-resolution.md#overrides) instead. Ranges and tags are unaffected.
+
 ## Selecting dependencies with patterns
 
 You can use patterns to update specific dependencies.

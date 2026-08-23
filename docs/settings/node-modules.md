@@ -165,12 +165,37 @@ switching branches or downgrading dependencies.
 The time in minutes after which dlx cache expires.
 After executing a dlx command, pnpm keeps a cache that omits the installation step for subsequent calls to the same dlx command.
 
+### virtualStoreType
+
+Added in: v11.23.0
+
+* Default: **project**
+* Type: **project**, **global**
+
+Names where the virtual store lives — one store per project, or one store per machine.
+
+```yaml
+virtualStoreType: global
+```
+
+`project` is the default layout: every project gets its own virtual store inside `node_modules/.pnpm`. `global` is the [global virtual store](../global-virtual-store.md): a single store shared by every project on the machine, with each project's `node_modules` holding only symlinks into it.
+
+This is the canonical spelling of [`enableGlobalVirtualStore`](#enableglobalvirtualstore), which keeps working; when a project sets both, `virtualStoreType` wins. It can also be set through the `PNPM_CONFIG_VIRTUAL_STORE_TYPE` env variable and read back with `pnpm config get virtualStoreType`.
+
+The setting is independent of [`nodeLinker`](#nodelinker): `isolated` and `pnp` both work with either store type, and `hoisted` writes no virtual store at all, so it is unaffected.
+
 ### enableGlobalVirtualStore
 
 Added in: v10.12.1
 
 * Default: **false**
 * Type: **Boolean**
+
+:::note
+
+Since v11.23.0, [`virtualStoreType`](#virtualstoretype) is the canonical spelling of this setting: `enableGlobalVirtualStore: true` is `virtualStoreType: global`. Both work, and `virtualStoreType` wins when a project sets both.
+
+:::
 
 :::note
 
@@ -188,16 +213,15 @@ Using a global virtual store can significantly speed up installations when a war
 
 :::important
 
-To support hoisted dependencies when using a global virtual store, pnpm relies on the `NODE_PATH` environment variable. This allows Node.js to resolve packages from the hoisted `node_modules` directory. However, **this workaround does not work with ESM modules**, because Node.js no longer respects `NODE_PATH` when using ESM.
+To support hoisted dependencies when using a global virtual store, pnpm relies on the `NODE_PATH` environment variable. This allows Node.js to resolve packages from the hoisted `node_modules` directory. Node.js does not respect `NODE_PATH` for ESM imports, though, so before v11.23.0 a dependency that imports a package **not declared in its own `package.json`** (which is considered bad practice) failed to resolve under ESM.
 
-If your dependencies are ESM and they import packages **not declared in their own `package.json`** (which is considered bad practice), you’ll likely run into resolution errors. There are two ways to fix this:
-* Use [packageExtensions] to explicitly add the missing dependencies.
-* Add the [@pnpm/plugin-esm-node-path] config dependency to your project. This plugin registers a custom ESM loader that restores `NODE_PATH` support for ESM, allowing hoisted dependencies to be resolved correctly.
+Since v11.23.0, every process pnpm spawns for the project — `pnpm run`, `pnpm exec`, lifecycle scripts, and the tools `pnpm dlx` runs — receives both `NODE_PATH` and a `NODE_OPTIONS` `--import` flag that registers a resolve hook restoring `NODE_PATH` lookups for ESM. Such imports now resolve for CommonJS and ESM alike, without the `@pnpm/plugin-esm-node-path` config dependency that used to be needed ([#9618](https://github.com/pnpm/pnpm/issues/9618)).
+
+Two things fall outside that: a `node` process you start yourself rather than through pnpm, and a project that sets [`extendNodePath`](./other.md#extendnodepath) to `false`, which turns the whole `NODE_PATH` mechanism off and takes the resolve hook with it. Use [packageExtensions] to declare the missing dependencies if you need them to resolve in either case.
 
 :::
 
 [packageExtensions]: ./dependency-resolution.md#packageextensions
-[@pnpm/plugin-esm-node-path]: https://github.com/pnpm/plugin-esm-node-path
 [NixOS manages packages]: https://nixos.org/guides/how-nix-works/
 
 ## Dependency Hoisting Settings

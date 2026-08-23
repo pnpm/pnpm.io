@@ -326,6 +326,10 @@ When `true`, pnpm skips the [`minimumReleaseAge`](#minimumreleaseage) check for 
 minimumReleaseAgeIgnoreMissingTime: false
 ```
 
+Since v11.23.0, the setting also governs [`trustPolicy`](#trustpolicy), which reads the same publish dates: `trustPolicy: no-downgrade` skips a package the registry cannot date, with a warning, rather than failing the install with `ERR_PNPM_MISSING_TIME`.
+
+The opt-in covers a registry that cannot date its releases, not a package a registry says it never published: during [lockfile verification](../supply-chain-security.md), a lockfile entry missing from a packument that does date every version it lists remains a hard failure.
+
 ### minimumReleaseAgeStrict
 
 Added in: v11.0.0

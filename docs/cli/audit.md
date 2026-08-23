@@ -67,6 +67,8 @@ Review the advisories selected by `--fix` and pick which ones to apply. Only usa
 
 Output audit report in JSON format.
 
+`patched_versions` is `null` for an advisory with no published fix, so tooling can tell "no fix available" from "fix available at version X".
+
 ### --dev, -D
 
 Only audit dev dependencies.
