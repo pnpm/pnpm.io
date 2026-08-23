@@ -9,14 +9,9 @@ const SPONSORS_FILE = path.join(PROJECT_ROOT, 'sponsors.json');
 const BASE_URL = 'https://pnpm.io/img/users';
 
 const TIER_CONFIG = {
-  platinum: { columns: 1, heading: 'Platinum Sponsors' },
+  platinum: { columns: 3, heading: 'Platinum Sponsors' },
   gold: { columns: 3, heading: 'Gold Sponsors' },
   silver: { columns: 3, heading: 'Silver Sponsors' },
-};
-
-const README_TIER_CONFIG = {
-  ...TIER_CONFIG,
-  platinum: { ...TIER_CONFIG.platinum, columns: 2 },
 };
 
 const ALT_EXTENSIONS = ['.svg', '.png', '.jpg', '.jpeg'];
@@ -197,7 +192,7 @@ function generate() {
   const absPnpmRoot = path.resolve(pnpmRoot);
 
   // READMEs — all tiers
-  const readmeMarkdown = generateMarkdown(sponsors, { tierConfig: README_TIER_CONFIG });
+  const readmeMarkdown = generateMarkdown(sponsors);
   updateFileMarkers(path.join(absPnpmRoot, 'README.md'), readmeMarkdown);
   updateFileMarkers(path.join(absPnpmRoot, 'pnpm/README.md'), readmeMarkdown);
 
