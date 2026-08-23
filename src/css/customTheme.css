@@ -53,6 +53,28 @@ html[data-theme="dark"] .header-bit-cloud-link::before {
   filter: invert(1);
 }
 
+/* The platinum tier stacks one logo per line by default. Shrink the logos and
+   let them wrap so two fit side by side. The inner class names come from the
+   CSS module in @pnpm/website.sections.sponsors, so match them by prefix. */
+.sponsors-section [class*="sponsorContent"] {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-large);
+}
+
+.sponsors-section [class*="platinumLogo"] {
+  width: 150px;
+  height: 150px;
+  padding: var(--spacing-large);
+}
+
+/* The platinum column is flex:1 with a zero basis, so on mid-sized screens it
+   shrinks below two logos. Give it just enough room for a pair. */
+.sponsors-section [class*="platinumColumn"] {
+  min-width: min(340px, 100%);
+}
+
 /* The Thesys sponsor logo is black; invert it to white in dark mode. */
 html[data-theme="dark"] img[src$="/img/users/thesys.svg"] {
   filter: invert(1);

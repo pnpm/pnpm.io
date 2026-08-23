@@ -12,6 +12,12 @@
       "logo": "openai.svg",
       "url": "https://openai.com/",
       "width": 160
+    },
+    {
+      "name": "Notion",
+      "logo": "notion.svg",
+      "url": "https://notion.com/",
+      "width": 80
     }
   ],
   "gold": [

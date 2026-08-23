@@ -99,6 +99,7 @@ function mapSponsor(s) {
 }
 
 const sponsors = {
+  className: "sponsors-section",
   title: <Translate>These are the sponsors</Translate>,
   platinumLabel: <Translate>PLATINUM SPONSORS</Translate>,
   goldLabel: <Translate>GOLD SPONSORS</Translate>,
