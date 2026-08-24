@@ -110,7 +110,7 @@ It is a useful feature as you can install your peer dependencies only in the roo
 
 #### peerDependencyRules.ignoreMissing
 
-pnpm will not print warnings about missing peer dependencies from this list.
+pnpm will not print warnings about missing peer dependencies from this list. A peer dependency is only considered missing if it cannot be resolved anywhere in the dependency graph, whether directly or transitively through another dependency.
 
 For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
 
@@ -129,7 +129,7 @@ peerDependencyRules:
   - "@eslint/*"
 ```
 
-`ignoreMissing` only suppresses warnings for a peer that is entirely absent. If the peer *is* installed but at a version outside the range some dependency requested, use [`allowedVersions`](#peerdependencyrulesallowedversions) or [`allowAny`](#peerdependencyrulesallowany) instead. Patterns here are also matched against the peer's own package name only — they don't support the `parent>peer` or `parent@range>peer` selector syntax that `allowedVersions` accepts below.
+The `parent>peer` and `parent@range>peer` selector syntax that [`allowedVersions`](#peerdependencyrulesallowedversions) accepts is not accepted here and silently ignored.
 
 #### peerDependencyRules.allowedVersions
 
@@ -167,4 +167,4 @@ peerDependencyRules:
 
 The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
 
-Like `ignoreMissing`, `allowAny` patterns match against the peer's own package name only, not the `parent>peer` or `parent@range>peer` selector syntax `allowedVersions` accepts above.
+The `parent>peer` and `parent@range>peer` selector syntax that [`allowedVersions`](#peerdependencyrulesallowedversions) accepts is not accepted here and silently ignored.
