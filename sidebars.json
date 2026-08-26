@@ -182,6 +182,7 @@
     "Features": [
       "package-sources",
       "registries",
+      "registry-revisions",
       "workspaces",
       "catalogs",
       "config-dependencies",

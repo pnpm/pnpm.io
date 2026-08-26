@@ -29,6 +29,13 @@ Besides moving `pnpm-lock.yaml` to the newly resolved versions, `pnpm update` wr
 
 Pass [`--no-save`](#--no-save) to update the lockfile only and leave the declared ranges alone.
 
+Since v11.25.0 and v12.0.0, [`--patches`](#--patches) does something different
+from all of this: it changes no version and no declared range, refreshing only
+which registry artifact each locked version resolves to. That still rewrites
+lockfile metadata — the `integrity`, the `revision`, and the package snapshot
+around them — because artifact revisions may declare different dependencies. See
+[Registry revisions](../registry-revisions.md).
+
 ## Updating to a specific version
 
 Since v11.23.0, `pnpm update <name>@<version>` fails with `ERR_PNPM_UPDATE_VERSION_ON_INDIRECT_DEP` when the package is not a direct dependency of any selected project. There is nowhere to record the version in that case; pin a transitive dependency through [`overrides`](../settings/dependency-resolution.md#overrides) instead. Ranges and tags are unaffected.
@@ -89,6 +96,30 @@ pnpm --recursive update typescript@latest
 ### --latest, -L
 
 Update the dependencies to their latest stable version as determined by their `latest` tags (potentially upgrading the packages across major versions) as long as the version range specified in `package.json` is lower than the `latest` tag (i.e. it will not downgrade prereleases).
+
+### --patches
+
+Added in: v11.25.0 and v12.0.0
+
+Refresh [registry revisions](../registry-revisions.md) without changing any
+package version: for every locked registry package, pnpm resolves current
+metadata for the same `name@version`, and adopts the artifact the registry
+selects now if that changed. Versions and declared ranges are left alone, but the
+lockfile entry is rewritten as a whole — `integrity`, `revision`, and the package
+snapshot around them — since revisions may declare different dependencies.
+
+Cannot be combined with package selectors, `--latest`, `--interactive`, or
+`--global` (`ERR_PNPM_PATCHES_WITH_SELECTOR`). Each of those narrows or redirects
+what an update targets — a subset of packages, the newest versions, an
+interactive choice, the global installation — and `--patches` is defined as
+covering every locked package of the current project at its current version.
+
+### --pnpr-server &lt;url\>
+
+Added in: v11.25.0 and v12.0.0
+
+Offload the resolution of a `--patches` refresh to a [pnpr](/pnpr) server, the
+way [`pnprServer`](/pnpr/install-acceleration) does for an install.
 
 ### --global, -g
 

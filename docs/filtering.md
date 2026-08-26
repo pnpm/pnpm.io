@@ -118,6 +118,36 @@ pnpm --filter "@babel/*{components/**}[origin/master]" <cmd>
 pnpm --filter "...@babel/*{components/**}[origin/master]" <cmd>
 ```
 
+#### legacyDirFiltering
+
+* Default: **false**
+* Type: **Boolean**
+
+`{<dir>}` is matched as a glob pattern: `{packages/*}` selects the projects one
+level below `packages/`, and it takes a `**` to reach deeper. Set
+`legacyDirFiltering` to `true` in `pnpm-workspace.yaml` to restore the older
+behavior, where the selector named a directory and matched **every** project in
+the subtree below it:
+
+```yaml title="pnpm-workspace.yaml"
+legacyDirFiltering: true
+```
+
+The setting only applies to the selectors you write. The workspace-root
+selectors pnpm generates for itself — the `!{<workspace-root>}` a recursive
+`run` / `exec` / `add` / `test` appends, and the `{<workspace-root>}` that
+`--workspace-root` appends — are always matched as globs, since v11.24.0. Read
+as subtree matches they named every project below the root, so a recursive
+command under this setting selected nothing at all, and `--workspace-root`
+pulled in the whole workspace instead of the root alone
+([#14101](https://github.com/pnpm/pnpm/issues/14101)).
+
+:::note
+
+pnpm 11 reads this setting; the Rust CLI recognized but ignored it until v12.0.0.
+
+:::
+
 ### --filter "[&lt;since>]"
 
 Selects all the packages changed since the specified commit/branch. May be

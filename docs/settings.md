@@ -268,6 +268,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [childConcurrency](./settings/build.md#childconcurrency)
 * [sideEffectsCache](./settings/build.md#sideeffectscache)
 * [sideEffectsCacheReadonly](./settings/build.md#sideeffectscachereadonly)
+* [remoteSideEffectsCache](./settings/build.md#remotesideeffectscache)
 * [unsafePerm](./settings/build.md#unsafeperm)
 * [nodeOptions](./settings/build.md#nodeoptions)
 * [verifyDepsBeforeRun](./settings/build.md#verifydepsbeforerun)
@@ -299,6 +300,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [cacheDir](./settings/other.md#cachedir)
 * [useStderr](./settings/other.md#usestderr)
 * [updateNotifier](./settings/other.md#updatenotifier)
+* [globalShims](./settings/other.md#globalshims)
 * [preferSymlinkedExecutables](./settings/other.md#prefersymlinkedexecutables)
 * [ignoreCompatibilityDb](./settings/other.md#ignorecompatibilitydb)
 * [resolutionMode](./settings/other.md#resolutionmode)
@@ -339,4 +341,7 @@ These settings are configured in `pnpm-workspace.yaml` as well, but are document
 
 * [patchedDependencies](./cli/patch.md#patcheddependencies)
 * [pnpmfile](./pnpmfile.md#pnpmfile), [globalPnpmfile](./pnpmfile.md#globalpnpmfile) and [ignorePnpmfile](./pnpmfile.md#ignorepnpmfile)
+* [audit.level](./cli/audit.md#auditlevel), [audit.ignore](./cli/audit.md#auditignore) and [audit.ignorePrune](./cli/audit.md#auditignoreprune)
+* [initVersion](./cli/init.md#initversion), [initLicense](./cli/init.md#initlicense) and [initAuthorName / initAuthorEmail / initAuthorUrl](./cli/init.md#initauthorname-initauthoremail-initauthorurl)
+* [legacyDirFiltering](./filtering.md#legacydirfiltering)
 * Authorization settings, which are read from [`.npmrc`](./npmrc.md)

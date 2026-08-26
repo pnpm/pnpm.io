@@ -33,11 +33,25 @@ Added in: v10.32.0
 
 Approve all pending builds without interactive prompts.
 
-### ~~--global, -g~~
+### --global, -g
 
-:::warning Removed in v11.0.0
+Approve builds for [globally installed packages](../global-packages.md).
 
-`pnpm approve-builds -g` is no longer supported with isolated global packages. Instead, use `--allow-build` when installing globally (e.g., `pnpm add -g --allow-build=esbuild esbuild`), or approve builds via the interactive prompt that pnpm shows during global install.
+pnpm gathers the packages awaiting approval across **every** [isolated install
+group](../global-packages.md#isolated-installations), asks about them once, and
+writes a single policy into the `pnpm-workspace.yaml` of the global packages
+directory. Only the groups that actually contain an approved package are then
+rebuilt.
+
+:::info Removed in v11.0.0, back in v11.24.0
+
+Isolated global installs gave every install group its own manifest, and
+`pnpm approve-builds -g` was removed rather than made to guess which one to
+write to. Since v11.24.0 it writes one policy for all of them, so it works
+again. In between — and still, if you would rather decide at install time — use
+`--allow-build` when installing globally (e.g.
+`pnpm add -g --allow-build=esbuild esbuild`), or answer the prompt pnpm shows
+during a global install.
 
 :::
 

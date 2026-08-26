@@ -51,6 +51,54 @@ You may want to disable this setting if:
 
 Only use the side effects cache if present, do not create it for new packages.
 
+### remoteSideEffectsCache
+
+Added in: v11.25.0 and v12.0.0
+
+* Default: **undefined**
+* Type: **Object**
+
+Opt in to reusing a dependency's build output across machines, by restoring
+signed, organization-scoped artifacts through a [pnpr](/pnpr) server instead of
+running the package's lifecycle scripts locally. This is a proof of concept: it
+is off unless configured, it needs a pnpr server started with
+`resolver.artifacts: true`, and it only restores artifacts on Linux/glibc x64
+and arm64.
+
+A repository declares eligibility and nothing else:
+
+```yaml title="pnpm-workspace.yaml"
+pnprServer: http://127.0.0.1:7677
+allowBuilds:
+  native-addon: true
+remoteSideEffectsCache:
+  organization: acme
+  packages:
+    - native-addon
+```
+
+`packages` is an eligibility list, not a permission: a package is only a
+candidate when it also passes [`allowBuilds`](#allowbuilds), has
+`requiresBuild: true`, and has a verified source integrity. Listing a package
+here does not review its build scripts for you — under the default
+[`strictDepBuilds`](#strictdepbuilds) an install still fails with
+`ERR_PNPM_IGNORED_BUILDS` when it reaches a build nobody has ruled on, and a
+package denied with `allowBuilds: false` is never built, from the cache or
+otherwise.
+
+Everything describing the *act of signing* — `publish`, `keyId`, `builderId`,
+`imageDigest`, `architectureBaseline`, `buildEnv`, `trustedKeys` and
+`privateKey` — is refused in `pnpm-workspace.yaml` with
+`ERR_PNPM_WORKSPACE_REMOTE_SIDE_EFFECTS_TRUST`, and is read from the [global
+configuration file](../cli/config.md) or the environment instead. A cloned
+repository is not a trust root, and must not be able to turn the machine's
+signing key into a signing oracle.
+
+Any cache failure — an unreachable server, an unverifiable signature, an
+incompatible platform, a bad blob — falls back to the ordinary local build. See
+[Shared side-effects cache](/pnpr/shared-side-effects-cache) for the full setup,
+including the server flag, the trust material, and how an artifact is published.
+
 ### unsafePerm
 
 * Default: **false** IF running as root, ELSE **true**

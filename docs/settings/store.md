@@ -30,6 +30,14 @@ It is possible to set a store from a different disk but in that case pnpm will
 copy packages from the store instead of hard-linking them, as hard links are
 only possible on the same filesystem.
 
+If no directory above the project accepts a hard link at all — an agent sandbox
+that grants write access only to the project, or a container with just the
+project bind-mounted writable — the store is created inside the project instead:
+at `node_modules/.pnpm-store` since v12.0.0, and at `.pnpm-store` in pnpm 11.
+Putting it in the home directory there would either fail on a read-only home or
+land on another volume, which copies every package instead of hard-linking it
+([#13525](https://github.com/pnpm/pnpm/issues/13525)).
+
 :::important
 
 The pnpm store is intended to be shared only between mutually trusted users, jobs, and processes. If you configure a shared `storeDir`, protect it with filesystem permissions so untrusted users cannot write to it. The store is part of pnpm's trust domain: packages may be hard linked from it, and the store index (`index.db`) records the hashes used to verify cached files.

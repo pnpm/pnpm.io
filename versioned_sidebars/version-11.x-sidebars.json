@@ -519,6 +519,10 @@
         },
         {
           "type": "doc",
+          "id": "registry-revisions"
+        },
+        {
+          "type": "doc",
           "id": "workspaces"
         },
         {

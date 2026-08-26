@@ -131,6 +131,22 @@ audit:
     - GHSA-vh95-rmgr-6w4m
 ```
 
+### audit.ignorePrune
+
+Added in: v11.25.0 and v12.0.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, `pnpm audit --fix` removes the [`audit.ignore`](#auditignore)
+entries whose GHSA no longer appears in the audit report, so a list of tolerated
+advisories doesn't accumulate entries for dependencies that are long gone.
+
+```yaml
+audit:
+  ignorePrune: true
+```
+
 :::info
 
 Before v11.16.0, these settings were named `auditLevel` and `auditConfig.ignoreGhsas`. The deprecated names keep working until the next major version; when both are set, the `audit` section takes precedence and a warning is printed.

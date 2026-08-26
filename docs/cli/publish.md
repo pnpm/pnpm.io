@@ -82,6 +82,13 @@ When publishing recursively (`pnpm -r publish`), send all selected packages to t
 
 The target registry has to implement the batch publish endpoint ([pnpr](https://github.com/pnpm/pnpm/tree/main/pnpr) does); registries that don't are reported with an `ERR_PNPM_BATCH_PUBLISH_UNSUPPORTED` error. The batch is processed all-or-nothing: if any package in the batch fails validation, none of the packages are published.
 
+Since v11.24.0, the selected packages are grouped by the registry each one
+publishes to, and one request is sent per group. Every package in a group must
+authenticate with the same credential — a scope-specific token shared across the
+group is fine, and mismatched credentials for one registry are rejected *before*
+anything is published, rather than after part of the release went out. The
+`publish` and `postpublish` scripts run after each completed group.
+
 ### --skip-manifest-obfuscation
 
 Added in: v11.3.0
