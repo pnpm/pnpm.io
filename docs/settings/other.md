@@ -195,9 +195,9 @@ The patches are applied from Yarn's [`@yarnpkg/extensions`] package, plus pnpm's
 own curated entries.
 
 Since v12.0.0, the database no longer carries entries that were derived from
-static analysis of published packages. Those named packages that a dependent only
-imports for its *types*, so adding them was at best unnecessary and at worst
-broke the dependent — `@typescript-eslint/types` gained a `typescript` dependency
+static analysis of published packages. Those entries named packages a dependent
+imported only for its *types*. Adding them was at best unnecessary and at worst
+broke the dependent: `@typescript-eslint/types` gained a `typescript` dependency
 resolved to the newest release, which put TypeScript 7 under older
 `@typescript-eslint` versions and made ESLint fail with `Cannot read properties
 of undefined (reading 'Intrinsic')`.

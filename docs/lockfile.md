@@ -109,8 +109,8 @@ importer and loses whichever graph it held.
 
 ## Resolutions that carry a revision
 
-Since v12.0.0, a `packages:` entry may carry a `revision` field beside its
-integrity:
+Since v11.25.0 and v12.0.0, a `packages:` entry may carry a `revision` field
+beside its integrity:
 
 ```yaml
 packages:

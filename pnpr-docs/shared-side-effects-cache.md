@@ -3,7 +3,7 @@ id: shared-side-effects-cache
 title: Shared side-effects cache
 ---
 
-Added in: pnpr v0.1.0-alpha.8, pnpm v12.0.0
+Added in: pnpr v0.1.0-alpha.8, pnpm v11.25.0 and v12.0.0
 
 :::caution Proof of concept
 
@@ -135,6 +135,13 @@ post-build diff, signs it, and stores it with
 `PUT /-/pnpr/v0/artifacts`. `imageDigest`, `architectureBaseline` and `buildEnv`
 are optional provenance recorded in the signed payload. Never commit the private
 key.
+
+Publication does not switch restoring off: a builder still looks the artifact up
+first, and a hit skips the build the same way it does anywhere else — which
+leaves nothing new to sign, since only an actual local build produces a diff to
+publish. So a builder republishes exactly when it had to build, and to force one,
+give it something the cache cannot answer (a package or platform with no stored
+variant), rather than expecting `publish` to bypass the lookup.
 
 Generate a key pair with Node.js:
 

@@ -255,7 +255,7 @@ pnpm add -g --allow-build=esbuild esbuild
 ```
 
 Since v11.24.0, [`pnpm approve-builds --global`](./cli/approve-builds.md#--global--g)
-decides afterwards instead. It collects the packages awaiting approval from every
+lets you decide after the fact instead. It collects the packages awaiting approval from every
 install group, asks about them once, and writes one `allowBuilds` policy into the
 `pnpm-workspace.yaml` of the global packages directory — then rebuilds only the
 groups that contain something you approved:

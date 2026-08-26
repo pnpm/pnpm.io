@@ -133,7 +133,7 @@ audit:
 
 ### audit.ignorePrune
 
-Added in: v12.0.0
+Added in: v11.25.0 and v12.0.0
 
 * Default: **false**
 * Type: **Boolean**

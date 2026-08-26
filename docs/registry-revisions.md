@@ -3,7 +3,7 @@ id: registry-revisions
 title: Registry Revisions
 ---
 
-Added in: v12.0.0
+Added in: v11.25.0 and v12.0.0
 
 Some registries can serve a **replacement artifact** for a version that is
 already published — a rebuild with a vulnerability patched out, for example —
@@ -155,7 +155,11 @@ For every locked registry package, pnpm resolves current metadata for the same
 exact `name@version`. When the selected artifact changed, it updates the
 integrity, the `revision` field, and the whole package snapshot together —
 dependency metadata may differ between revisions, so changing only the checksum
-would be wrong. Packages whose revision an override pins are skipped.
+would be wrong.
+
+A package whose revision is pinned explicitly is skipped, and the pin holds: that
+covers an override with a `+rN` target and a dependency declared as one, so
+`"ejs": "2.7.4+r1"` stays on revision 1 across every refresh.
 
 `--patches` cannot be combined with package selectors, `--latest`,
 `--interactive`, or `--global` (`ERR_PNPM_PATCHES_WITH_SELECTOR`).

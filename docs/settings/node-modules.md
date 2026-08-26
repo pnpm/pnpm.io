@@ -134,10 +134,10 @@ When set to `true`, pnpm populates the virtual store without creating importer s
 
 Controls the way packages are imported from the store (if you want to disable symlinks inside `node_modules`, then you need to change the [nodeLinker] setting, not this one).
 
-* **auto** - try to clone packages from the store. If cloning is not supported
-then hardlink packages from the store. If neither cloning nor linking is
-possible, fall back to copying. Since v12.0.0, `auto` tries a hardlink *before*
-a clone on Linux — see [What `auto` tries first](#what-auto-tries-first)
+* **auto** - try the platform's cheap link tiers in order, falling back to
+copying when none of them is possible. Which tier comes first depends on the
+platform and on the pnpm major — see [What `auto` tries
+first](#what-auto-tries-first)
 * **hardlink** - hard link packages from the store
 * **clone-or-copy** - try to clone packages from the store. If cloning is not supported then fall back to copying
 * **copy** - copy packages from the store

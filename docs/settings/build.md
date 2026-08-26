@@ -53,7 +53,7 @@ Only use the side effects cache if present, do not create it for new packages.
 
 ### remoteSideEffectsCache
 
-Added in: v12.0.0
+Added in: v11.25.0 and v12.0.0
 
 * Default: **undefined**
 * Type: **Object**
@@ -69,11 +69,19 @@ A repository declares eligibility and nothing else:
 
 ```yaml title="pnpm-workspace.yaml"
 pnprServer: http://127.0.0.1:7677
+allowBuilds:
+  native-addon: true
 remoteSideEffectsCache:
   organization: acme
   packages:
     - native-addon
 ```
+
+`packages` is an eligibility list, not a permission: a package is only a
+candidate when it also passes [`allowBuilds`](#allowbuilds), has
+`requiresBuild: true`, and has a verified source integrity. A package the
+workspace never allowed to build falls back to no build at all, cache or no
+cache.
 
 Everything describing the *act of signing* — `publish`, `keyId`, `builderId`,
 `imageDigest`, `architectureBaseline`, `buildEnv`, `trustedKeys` and

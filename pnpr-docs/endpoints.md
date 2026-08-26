@@ -69,7 +69,7 @@ The resolver endpoints are mounted when `resolver.enabled` is true. The
 
 | Method | Path | Description |
 | --- | --- | --- |
-| `GET` | `/-/pnpr` | Capability handshake. Returns supported protocol versions, currently `{"pnpr":{"versions":[0]}}`. A 404 means the server has no compatible resolver surface. |
+| `GET` | `/-/pnpr` | Capability handshake. Returns supported protocol versions, currently `{"pnpr":{"versions":[0],"artifacts":[0]}}`. `artifacts` lists the shared-artifact protocol versions the server speaks, and is `[]` when [`resolver.artifacts`](configuration.md#the-registry-surface-and-resolver) is off. A 404 means the server has no compatible resolver surface. |
 | `POST` | `/-/pnpr/v0/resolve` | Resolves one project or workspace against the registries and policy sent by the client. Returns `application/x-ndjson` frames. |
 | `POST` | `/-/pnpr/v0/verify-lockfile` | Verifies an existing lockfile under the client's registry and policy settings without resolving again. Returns `application/x-ndjson` frames. |
 
