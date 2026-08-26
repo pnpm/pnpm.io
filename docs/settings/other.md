@@ -173,6 +173,10 @@ When true, all the output is written to stderr.
 
 Set to `false` to suppress the update notification when using an older version of pnpm than the latest.
 
+`pnpm install` and `pnpm add` check at most once a day, and print how to get the
+newer version. pnpm 12 recognized but ignored this setting until v12.0.0, where
+it started checking too.
+
 ### preferSymlinkedExecutables
 
 * Default: **true**, when **node-linker** is set to **hoisted** and the system is POSIX
@@ -187,7 +191,16 @@ Create symlinks to executables in `node_modules/.bin` instead of command shims. 
 
 During installation the dependencies of some packages are automatically patched. If you want to disable this, set this config to `true`.
 
-The patches are applied from Yarn's [`@yarnpkg/extensions`] package.
+The patches are applied from Yarn's [`@yarnpkg/extensions`] package, plus pnpm's
+own curated entries.
+
+Since v12.0.0, the database no longer carries entries that were derived from
+static analysis of published packages. Those named packages that a dependent only
+imports for its *types*, so adding them was at best unnecessary and at worst
+broke the dependent — `@typescript-eslint/types` gained a `typescript` dependency
+resolved to the newest release, which put TypeScript 7 under older
+`@typescript-eslint` versions and made ESLint fail with `Cannot read properties
+of undefined (reading 'Intrinsic')`.
 
 ### resolutionMode
 

@@ -6,9 +6,9 @@ authors: zkochan
 tags: [release]
 ---
 
-pnpm 12 is a rewrite of pnpm in Rust, and it is currently a **release candidate**. Upgrading is not meant to be a migration: apart from the differences below, it keeps the commands, flags, settings, and lockfile format of pnpm 11, and the [documentation](/motivation) applies to both versions.
+pnpm 12 is a rewrite of pnpm in Rust, **stable since v12.0.0**. Upgrading is not meant to be a migration: apart from the differences below, it keeps the commands, flags, settings, and lockfile format of pnpm 11, and the [documentation](/motivation) applies to both versions.
 
-Five things differ, and one of them — a removed flag — fails outright rather than behaving differently. This post collects them in one place.
+Seven things differ, and one of them — a removed flag — fails outright rather than behaving differently. This post collects them in one place.
 
 <!--truncate-->
 
@@ -71,6 +71,20 @@ The effect is that the lockfile is a function of the dependency graph alone. Reo
 
 Existing lockfiles keep working: `--frozen-lockfile` installs consume them unchanged, and an install that doesn't re-resolve leaves them untouched. The first install that does re-resolve re-keys the peer variants of cyclic packages once, so expect a one-time lockfile diff on such projects. The details are in [How peers are resolved](/how-peers-are-resolved#cyclic-dependencies).
 
+## `packageImportMethod: auto` hardlinks first on Linux
+
+On Linux, the default [`packageImportMethod: auto`](/settings/node-modules#packageimportmethod) now tries a hardlink before a reflink. A reflink materializes a new inode and copies extent bookkeeping inside the filesystem's metadata trees, where a hardlink is one directory entry — on btrfs this roughly halves the time an install spends materializing `node_modules` from a warm store.
+
+Nothing changes on ext4, where cloning was never supported and `auto` already hardlinked, and macOS keeps clone-first, because APFS `clonefile` is that platform's cheap primitive. Cloning is still the fallback when the store refuses a hardlink, and `packageImportMethod: clone` still asks for it explicitly — which is what you want if you edit files inside `node_modules`, since a hardlinked file is the store's file.
+
+pnpm 11 keeps clone-first on Linux: changing what the default materializes on disk is not a point-release change.
+
+## `engineStrict` and optional subtrees
+
+Under [`engineStrict`](/settings/cli#enginestrict), an install now fails when an incompatible package is reached through a regular `dependencies` edge of a package that is itself being installed — even when that whole subtree hangs off an `optionalDependencies` entry. pnpm 11 installs the package and emits an install-check warning instead.
+
+What is skipped rather than checked is unchanged in both versions: a package reachable only through optional edges, or through a package that was itself skipped, is still skipped ([#13286](https://github.com/pnpm/pnpm/issues/13286)).
+
 ## `pnpm install --resolution-only` is gone
 
 pnpm 12 does not implement this flag and rejects it:
@@ -89,6 +103,6 @@ If you call `--resolution-only` from a CI script, this is the one change here th
 
 ## Trying it
 
-pnpm 12 is published under the `next-12` tag on npm and as a prerelease on GitHub. Homebrew, winget, Scoop, and Chocolatey don't offer it yet. See [Installing the pnpm 12 RC](/installation#installing-the-pnpm-12-rc) for the ways to install it.
+`latest` on npm still points at the pnpm 11 line, so pnpm 12 is installed from the `next-12` tag. Homebrew, winget, Scoop, and Chocolatey don't offer it yet. See [Installing pnpm 12](/installation#installing-pnpm-12) for the ways to install it.
 
 Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.

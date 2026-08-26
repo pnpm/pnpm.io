@@ -136,7 +136,8 @@ Controls the way packages are imported from the store (if you want to disable sy
 
 * **auto** - try to clone packages from the store. If cloning is not supported
 then hardlink packages from the store. If neither cloning nor linking is
-possible, fall back to copying
+possible, fall back to copying. Since v12.0.0, `auto` tries a hardlink *before*
+a clone on Linux — see [What `auto` tries first](#what-auto-tries-first)
 * **hardlink** - hard link packages from the store
 * **clone-or-copy** - try to clone packages from the store. If cloning is not supported then fall back to copying
 * **copy** - copy packages from the store
@@ -145,6 +146,29 @@ possible, fall back to copying
 Cloning is the best way to write packages to node_modules. It is the fastest way and safest way. When cloning is used, you may edit files in your node_modules and they will not be modified in the central content-addressable store.
 
 Unfortunately, not all file systems support cloning. We recommend using a copy-on-write (CoW) file system (for instance, Btrfs instead of Ext4 on Linux) for the best experience with pnpm.
+
+#### What `auto` tries first
+
+`auto` is a per-platform order, not a fixed one:
+
+| Platform | Order |
+|---|---|
+| Linux, since pnpm v12.0.0 | hardlink → clone → copy |
+| Linux, pnpm v11 and older | clone → hardlink → copy |
+| macOS | clone → hardlink → copy |
+| Windows | clone → hardlink → copy |
+
+A reflink materializes a new inode and copies extent bookkeeping inside the
+filesystem's metadata trees, where a hardlink is one directory entry. On btrfs
+that difference roughly halves the time an install spends materializing
+`node_modules` from a warm store, which is why pnpm 12 reaches for the hardlink
+first there. ext4 is unaffected — it never supported cloning, so `auto` already
+hardlinked — and macOS keeps clone-first, since APFS `clonefile` is that
+platform's cheap primitive.
+
+If you edit files inside `node_modules`, ask for `clone` explicitly. Under a
+hardlink, the file in `node_modules` *is* the file in the store, so editing it
+changes every project that links the same package.
 
 [nodeLinker]: #nodelinker
 

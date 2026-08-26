@@ -9,7 +9,7 @@ If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you 
 
 :::info
 
-Looking for pnpm 12? It is currently a release candidate and installed differently from pnpm 11. See [Installing the pnpm 12 RC](#installing-the-pnpm-12-rc).
+Looking for pnpm 12? It is released, but `latest` on npm is still pnpm 11, so it is installed differently. See [Installing pnpm 12](#installing-pnpm-12).
 
 :::
 
@@ -140,15 +140,11 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 :::
 
-## Installing the pnpm 12 RC
+## Installing pnpm 12
 
-:::warning
+pnpm 12, the Rust rewrite, is stable since v12.0.0 (August 26, 2026). Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
 
-pnpm 12 is a rewrite of pnpm in Rust and is currently a **release candidate**. Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
-
-:::
-
-Apart from a short list of differences, pnpm 12 does not change the way you use pnpm 11, so the rest of this documentation applies to both versions — see [What's different in pnpm 12](/blog/whats-different-in-pnpm-12). Only installation differs while v12 is a release candidate: it is published under the `next-12` tag on npm and as a prerelease on GitHub, so Homebrew, winget, Scoop and Chocolatey don't offer it yet.
+Apart from a short list of differences, pnpm 12 does not change the way you use pnpm 11, so the rest of this documentation applies to both versions — see [What's different in pnpm 12](/blog/whats-different-in-pnpm-12). Only installation differs: `latest` on npm still points at the pnpm 11 line, so pnpm 12 is installed from the `next-12` tag, and Homebrew, winget, Scoop and Chocolatey don't offer it yet.
 
 ### Using pnpm {#pnpm-12-using-pnpm}
 

@@ -99,6 +99,22 @@ The `resolve` response is an NDJSON stream:
 | `violations` | Terminal policy failure frame. Carries rendered lockfile or OSV violations. |
 | `error` | Terminal server-side resolution or verification error. |
 
+### Shared-artifact endpoints
+
+Added in: v0.1.0-alpha.8
+
+These three are mounted only when `resolver.artifacts` is also true. They serve
+the [shared side-effects cache](shared-side-effects-cache.md) proof of concept
+and, like the other `POST` resolver endpoints, require a pnpr `Authorization`
+header. Artifacts are owner-scoped, and in this proof of concept an
+organization's name must equal the authenticated username.
+
+| Method | Path | Description |
+| --- | --- | --- |
+| `PUT` | `/-/pnpr/v0/artifacts` | Stores one opaque signed envelope and its inline content-addressed blobs in the authenticated organization's namespace. At most eight variants per input key. |
+| `POST` | `/-/pnpr/v0/artifacts/resolve` | One batched lookup for candidate input keys. Returns at most eight signed variants per key; scanned envelope bytes plus the serialized response share one 16 MiB budget. |
+| `POST` | `/-/pnpr/v0/artifacts/blob` | Reads one owner-scoped blob by its SHA-512 integrity. |
+
 ## Registry read endpoints
 
 These endpoints are mounted when the registry surface is served. Package reads
@@ -115,6 +131,7 @@ are checked against the serving registry's matching
 | `GET` | `/@scope/{name}/-/{filename}` | Scoped tarball. |
 | `GET` | `/-/package/{package}/dist-tags` | Package `dist-tags` object. Use a percent-encoded scoped package name, for example `@scope%2Fname`. |
 | `GET` | `/-/v1/search?text=<query>&size=<n>` | npm search v1 shape. Searches locally hosted packages by package-name substring; search is local-only and never proxied upstream. Results are filtered by access policy. |
+| `GET` | `/-/tarballs/sha512/{digest}` | Immutable artifact by its base64url SHA-512 digest, added in v0.1.0-alpha.8. See [Registry revisions](/registry-revisions). |
 
 If the client sends `Accept: application/vnd.npm.install-v1+json`, pnpr
 returns npm's abbreviated install-v1 packument shape.
@@ -122,6 +139,17 @@ returns npm's abbreviated install-v1 packument shape.
 When OSV checks are enabled, vulnerable versions are removed from packuments
 and dist-tags. Version manifests and tarballs for vulnerable versions are
 denied.
+
+Since v0.1.0-alpha.8, the digest route answers integrity-addressed
+[registry revisions](/registry-revisions). For a proxied upstream registry, pnpr
+forwards the request with its own credentials, verifies the integrity, and
+caches the object; for a hosted registry, every publish seals a durable
+package/version reference under the artifact's SHA-512 digest, so a digest is
+resolved with one bounded index read rather than a scan over packuments. Before
+the bytes are served, pnpr revalidates the current packument, the revision
+history, the caller's access, registry routing, and OSV policy — so a digest URL
+is not a way around any of them. Every 3xx fails a digest fetch on the client
+side, same-origin included.
 
 ## Registry write endpoints
 

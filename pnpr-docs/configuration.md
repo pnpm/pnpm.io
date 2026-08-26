@@ -389,10 +389,17 @@ pnpr exposes two HTTP surfaces:
 ```yaml
 resolver:
   enabled: true
+  artifacts: false
 ```
 
 The resolver is enabled by default; the CLI flag `--disable-resolver`
 overrides the setting.
+
+`artifacts` mounts the three organization-scoped endpoints of the
+[shared side-effects cache](shared-side-effects-cache.md) proof of concept. It
+is `false` by default, and `--disable-resolver` turns it off with the rest of
+the surface. With it off, those routes are not mounted at all and the handshake
+does not advertise them.
 
 Something must be served: a config with no registries (or the registry
 surface disabled by flag) and the resolver disabled is a startup error.

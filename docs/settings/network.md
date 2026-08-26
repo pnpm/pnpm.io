@@ -63,6 +63,11 @@ registry.
 
 The maximum number of connections to use per origin (protocol/host/port combination).
 
+`maxSockets` is accepted as an alias. Both spellings are read from
+`pnpm-workspace.yaml`, the global configuration file, the environment, and the
+command line, in that increasing order of precedence — so a value passed on the
+command line wins even when the two sides spelled the setting differently.
+
 ### strictSsl
 
 * Default: **true**

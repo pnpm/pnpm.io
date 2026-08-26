@@ -60,6 +60,15 @@ compatible with the current Node version.
 Regardless of this configuration, installation will always fail if a project
 (not a dependency) specifies an incompatible version in its `engines` field.
 
+Optional dependencies are exempt, because a package that pnpm may skip is not
+required to be compatible. Since v12.0.0 the exemption follows the edge rather
+than the subtree: an incompatible package reached through a regular
+`dependencies` edge of a package that is being installed fails the install, even
+when the subtree it sits in hangs off an `optionalDependencies` entry. pnpm 11
+installs it and prints an install-check warning instead. A package reachable
+only through optional edges, or through a package that was itself skipped, is
+still skipped in both versions ([#13286](https://github.com/pnpm/pnpm/issues/13286)).
+
 ### npmPath
 
 * Type: **path**

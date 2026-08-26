@@ -46,8 +46,23 @@ pnpm stage view <stage-id>
 Approve a staged version, promoting it to the live registry. This is the step that consumes the one-time password.
 
 ```sh
-pnpm stage approve <stage-id> [--otp <otp>]
+pnpm stage approve [<stage-id>...] [--otp <otp>]
 ```
+
+Since v12.0.0, several stage ids may be approved at once, and running `approve`
+with none opens an interactive picker over the staged versions:
+
+```sh
+pnpm stage approve                     # pick interactively
+pnpm stage approve <stage-id> <stage-id>
+```
+
+The whole batch is approved with a **single** one-time password; pnpm asks for a
+new one only once the registry stops accepting the current one.
+
+Inside a workspace the selected packages are approved in dependency order, and a
+package whose workspace dependency could not be approved is skipped rather than
+published against a dependency that never reached the registry.
 
 ### reject
 

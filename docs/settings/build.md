@@ -51,6 +51,43 @@ You may want to disable this setting if:
 
 Only use the side effects cache if present, do not create it for new packages.
 
+### remoteSideEffectsCache
+
+Added in: v12.0.0
+
+* Default: **undefined**
+* Type: **Object**
+
+Opt in to reusing a dependency's build output across machines, by restoring
+signed, organization-scoped artifacts through a [pnpr](/pnpr) server instead of
+running the package's lifecycle scripts locally. This is a proof of concept: it
+is off unless configured, it needs a pnpr server started with
+`resolver.artifacts: true`, and it only restores artifacts on Linux/glibc x64
+and arm64.
+
+A repository declares eligibility and nothing else:
+
+```yaml title="pnpm-workspace.yaml"
+pnprServer: http://127.0.0.1:7677
+remoteSideEffectsCache:
+  organization: acme
+  packages:
+    - native-addon
+```
+
+Everything describing the *act of signing* — `publish`, `keyId`, `builderId`,
+`imageDigest`, `architectureBaseline`, `buildEnv`, `trustedKeys` and
+`privateKey` — is refused in `pnpm-workspace.yaml` with
+`ERR_PNPM_WORKSPACE_REMOTE_SIDE_EFFECTS_TRUST`, and is read from the [global
+configuration file](../cli/config.md) or the environment instead. A cloned
+repository is not a trust root, and must not be able to turn the machine's
+signing key into a signing oracle.
+
+Any cache failure — an unreachable server, an unverifiable signature, an
+incompatible platform, a bad blob — falls back to the ordinary local build. See
+[Shared side-effects cache](/pnpr/shared-side-effects-cache) for the full setup,
+including the server flag, the trust material, and how an artifact is published.
+
 ### unsafePerm
 
 * Default: **false** IF running as root, ELSE **true**

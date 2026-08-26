@@ -253,3 +253,13 @@ You can also pre-approve builds using the `--allow-build` flag:
 ```sh
 pnpm add -g --allow-build=esbuild esbuild
 ```
+
+Since v11.24.0, [`pnpm approve-builds --global`](./cli/approve-builds.md#--global--g)
+decides afterwards instead. It collects the packages awaiting approval from every
+install group, asks about them once, and writes one `allowBuilds` policy into the
+`pnpm-workspace.yaml` of the global packages directory — then rebuilds only the
+groups that contain something you approved:
+
+```sh
+pnpm approve-builds -g
+```

@@ -209,6 +209,17 @@ This hook allows to change how packages are written to `node_modules`. The retur
 * `options.resolvedFrom`
 * `options.keepModulesDir`
 
+### `hooks.filterLog(log): boolean` {#hooksfilterlog}
+
+:::warning Deprecated in v12.0.0
+
+`filterLog` returns `false` for a log entry to keep it out of pnpm's reporter
+output. pnpm 12 ignores the hook and warns when a pnpmfile defines it, so remove
+it rather than relying on it. Use [`loglevel`](./settings/cli.md#loglevel) to
+choose how much pnpm reports.
+
+:::
+
 ### `hooks.fetchers`
 
 :::danger Removed in v11.0.0
