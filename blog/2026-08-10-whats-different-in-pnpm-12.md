@@ -75,7 +75,7 @@ Existing lockfiles keep working: `--frozen-lockfile` installs consume them uncha
 
 On Linux, the default [`packageImportMethod: auto`](/settings/node-modules#packageimportmethod) now tries a hardlink before a reflink. A reflink materializes a new inode and copies extent bookkeeping inside the filesystem's metadata trees, where a hardlink is one directory entry — on btrfs this roughly halves the time an install spends materializing `node_modules` from a warm store.
 
-Nothing changes on ext4, where cloning was never supported and `auto` already hardlinked, and macOS keeps clone-first, because APFS `clonefile` is that platform's cheap primitive. On Linux, cloning becomes the second rung rather than the first, so a store that refuses a hardlink still gets one. And `packageImportMethod: clone` still asks for a clone explicitly — which is what you want if you edit files inside `node_modules`, since a hardlinked file *is* the store's file.
+Nothing changes on ext4, where cloning was never supported and `auto` already hardlinked, and macOS keeps clone-first, because APFS `clonefile` is that platform's cheap primitive. On Linux, cloning becomes the second rung rather than the first: a store that refuses a hardlink is cloned from instead, and copied from if it refuses that too. And `packageImportMethod: clone` still asks for a clone explicitly — which is what you want if you edit files inside `node_modules`, since a hardlinked file *is* the store's file.
 
 pnpm 11 keeps clone-first on Linux: changing what the default materializes on disk is not a point-release change.
 

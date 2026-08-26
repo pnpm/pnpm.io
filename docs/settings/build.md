@@ -79,9 +79,12 @@ remoteSideEffectsCache:
 
 `packages` is an eligibility list, not a permission: a package is only a
 candidate when it also passes [`allowBuilds`](#allowbuilds), has
-`requiresBuild: true`, and has a verified source integrity. A package the
-workspace never allowed to build falls back to no build at all, cache or no
-cache.
+`requiresBuild: true`, and has a verified source integrity. Listing a package
+here does not review its build scripts for you — under the default
+[`strictDepBuilds`](#strictdepbuilds) an install still fails with
+`ERR_PNPM_IGNORED_BUILDS` when it reaches a build nobody has ruled on, and a
+package denied with `allowBuilds: false` is never built, from the cache or
+otherwise.
 
 Everything describing the *act of signing* — `publish`, `keyId`, `builderId`,
 `imageDigest`, `architectureBaseline`, `buildEnv`, `trustedKeys` and
