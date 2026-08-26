@@ -216,6 +216,8 @@ Each resolves through the host's canonical HTTPS URL, and the lockfile records o
 
 pnpm never records an SSH URL for these hosts. Which transport a given machine uses to reach the host is that machine's Git configuration, not a property of the project.
 
+pnpm 11 keeps the specifier's transport as part of the recorded URL, but since v11.21.0 it records an SSH URL only when the specifier itself asks for one (`git+ssh://` or `git@host:...`): a shorthand like `owner/repo` resolves and records over HTTPS, so a lockfile written on a machine with SSH keys still installs on a CI runner without them. An SSH URL recorded by an older pnpm can be re-recorded over HTTPS with `pnpm update <package>`.
+
 ##### Using SSH for private repositories
 
 Configure the rewrite in Git itself, on the machine:
@@ -235,3 +237,14 @@ A URL that does not point at a known host (a self-hosted GitLab, Gitea, or any i
 In pnpm v11 and earlier, resolution probed the network to decide between HTTPS and SSH. That could record whichever transport happened to work on the machine that ran the install — most often an `ssh://` URL that then failed on CI runners without SSH keys. pnpm v12 removes the probing. Existing lockfile entries are left untouched; the rules above apply when an entry is added or re-resolved.
 
 :::
+
+#### How a Git dependency is built
+
+Added in: v12.0.0-rc.6 (pnpm v12 only)
+
+A Git-hosted dependency that ships sources rather than a built package has to be prepared — its dependencies installed and its build script run — before it can be installed. pnpm prepares it with the package manager the dependency itself asks for, instead of assuming the host has the right one:
+
+* the dependency's own `packageManager` / [`devEngines.packageManager`](./package_json.md#devenginespackagemanager) pin wins — that is what its authors test against;
+* failing a pin, the lockfile it ships names the package manager. A `yarn.lock` also names *which* Yarn line: Yarn Berry stamps `__metadata:` into every lockfile it writes and neither line can read the other's, so a Classic lockfile is no longer installed by Berry.
+
+pnpm [provides that package manager](./package-managers.md) when the dependency pinned a version, or when the host cannot satisfy what the dependency needs. A repository built with Yarn therefore installs on a machine that has only pnpm, while a host that already has a suitable package manager — under every name the build may invoke — keeps using its own.

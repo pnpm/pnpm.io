@@ -106,7 +106,17 @@
         "label": "Manage environments",
         "items": [
           "cli/runtime",
+          "cli/shim",
           "cli/env"
+        ]
+      },
+      {
+        "type": "category",
+        "label": "Inspect the store",
+        "items": [
+          "cli/cat-file",
+          "cli/cat-index",
+          "cli/find-hash"
         ]
       },
       {
@@ -116,7 +126,8 @@
           "cli/cache-list",
           "cli/cache-list-registries",
           "cli/cache-view",
-          "cli/cache-delete"
+          "cli/cache-delete",
+          "cli/cache-path"
         ]
       },
       {
@@ -170,6 +181,7 @@
     ],
     "Features": [
       "package-sources",
+      "registries",
       "workspaces",
       "catalogs",
       "config-dependencies",
@@ -179,6 +191,7 @@
       "finders",
       "global-packages",
       "global-virtual-store",
+      "package-managers",
       "versioning"
     ],
     "Recipes": [
@@ -198,6 +211,7 @@
       "limitations",
       "symlinked-node-modules-structure",
       "how-peers-are-resolved",
+      "lockfile",
       "uninstall",
       "pnpm-vs-npm"
     ]

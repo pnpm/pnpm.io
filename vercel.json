@@ -1,4 +1,11 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "node scripts/assemble-site.mjs",
+  "installCommand": "echo 'No dependencies needed: the site is built by the Deploy workflow'",
+  "outputDirectory": "build",
+  "git": {
+    "deploymentEnabled": false
+  },
   "headers": [
     {
       "source": "/(.*)",

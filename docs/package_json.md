@@ -136,9 +136,11 @@ Allows specifying the pnpm version via `devEngines.packageManager` in `package.j
 
 :::note
 
-When pnpm is declared via the legacy `packageManager` field (not `devEngines.packageManager`), its resolution info is **not** written to `pnpm-lock.yaml` — unless the pinned pnpm version is v12 or newer. This keeps the lockfile stable when upgrading from pnpm v10 to v11 without forcing projects off the legacy field.
+When pnpm is declared via the legacy `packageManager` field (not `devEngines.packageManager`), its resolution info is **not** written to `pnpm-lock.yaml` — unless the pinned pnpm version is v12 or newer and [`pmOnFail`](./settings/cli.md#pmonfail) is not set to `ignore`. This keeps the lockfile stable when upgrading from pnpm v10 to v11 without forcing projects off the legacy field. When the resolution is recorded, `pnpm-lock.yaml` gains a leading [env lockfile document](./lockfile.md).
 
 :::
+
+Since v12.0.0-rc.6, the field can also name [another package manager](./package-managers.md) — `npm`, `yarn` or `bun` — which is what `pnpm add npm@11` writes. For those, nothing is recorded in `pnpm-lock.yaml`: `packageManagerDependencies` holds pnpm's own pin, and another package manager is pinned in an environment lockfile of its own under the pnpm home.
 
 To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings/cli.md#pmonfail) setting.
 

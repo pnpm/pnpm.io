@@ -9,15 +9,22 @@ const SPONSORS_FILE = path.join(PROJECT_ROOT, 'sponsors.json');
 const BASE_URL = 'https://pnpm.io/img/users';
 
 const TIER_CONFIG = {
-  platinum: { columns: 1, heading: 'Platinum Sponsors' },
+  platinum: { columns: 3, heading: 'Platinum Sponsors' },
   gold: { columns: 3, heading: 'Gold Sponsors' },
   silver: { columns: 3, heading: 'Silver Sponsors' },
 };
 
-const README_TIER_CONFIG = {
-  ...TIER_CONFIG,
-  platinum: { ...TIER_CONFIG.platinum, columns: 2 },
-};
+const README_TARGETS = [
+  'README.md',
+  'pnpm/npm/pnpm/README.md',
+  'pnpm11/pnpm/README.md',
+];
+
+// Both release paths read this one fragment. pnpr builds its description the
+// same way but deliberately carries no sponsors.
+const RELEASE_TARGETS = [
+  '.github/release-sponsors.md',
+];
 
 const ALT_EXTENSIONS = ['.svg', '.png', '.jpg', '.jpeg'];
 
@@ -197,17 +204,19 @@ function generate() {
   const absPnpmRoot = path.resolve(pnpmRoot);
 
   // READMEs — all tiers
-  const readmeMarkdown = generateMarkdown(sponsors, { tierConfig: README_TIER_CONFIG });
-  updateFileMarkers(path.join(absPnpmRoot, 'README.md'), readmeMarkdown);
-  updateFileMarkers(path.join(absPnpmRoot, 'pnpm/README.md'), readmeMarkdown);
+  const readmeMarkdown = generateMarkdown(sponsors);
+  for (const rel of README_TARGETS) {
+    updateFileMarkers(path.join(absPnpmRoot, rel), readmeMarkdown);
+  }
 
-  // Release text generator — platinum + gold only
-  const releaseTextPath = path.join(absPnpmRoot, '__utils__/get-release-text/src/main.ts');
+  // Release descriptions — platinum + gold only
   const releaseMarkdown = generateMarkdown(sponsors, {
     tiers: ['platinum', 'gold'],
     utmMedium: 'release_notes',
   });
-  updateFileMarkers(releaseTextPath, releaseMarkdown);
+  for (const rel of RELEASE_TARGETS) {
+    updateFileMarkers(path.join(absPnpmRoot, rel), releaseMarkdown);
+  }
 }
 
 generate();

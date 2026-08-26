@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { themes } from 'prism-react-renderer';
 import progress from "./scripts/progress_lang.json" with { type: "json" };
+import locales from "./locales.json" with { type: "json" };
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
@@ -11,10 +12,29 @@ const TRANSLATE_URL = "https://translate.pnpm.io";
 const CRYPTO_DONATIONS_HREF = '/crypto-donations';
 const LOCALE_CI = process.env.LOCALE_CI;
 const DEFAULT_LOCALE = 'en';
-const LOCALE_FULL_CODE: Record<string, string> = {
-  zh: 'zh-CN',
-  pt: 'pt-BR',
-  es: 'es-ES',
+// The locales live in locales.json because the deploy workflow builds one
+// locale per job and needs to read the same list.
+const LOCALES_CONFIG: { locale: string, crowdinLanguage?: string }[] = locales;
+const LOCALES = LOCALES_CONFIG.map(({ locale }) => locale);
+// Crowdin names some languages differently from Docusaurus (`zh-CN` vs `zh`).
+const LOCALE_FULL_CODE: Record<string, string> = Object.fromEntries(
+  LOCALES_CONFIG.flatMap(({ locale, crowdinLanguage }) =>
+    crowdinLanguage ? [[locale, crowdinLanguage]] : [])
+);
+
+// Docusaurus infers `/<locale>/` as the base URL of a localized site, but only
+// when a build covers several locales at once. A build narrowed down to one
+// locale with `--locale` drops the segment, which suits multi-domain
+// deployments but not this site: every locale is built by its own CI job and
+// the results are stitched back together under one domain. Pinning the base
+// URL keeps both build shapes identical.
+function withLocaleBaseUrls<T extends Record<string, object>> (localeConfigs: T): T {
+  return Object.fromEntries(
+    Object.entries(localeConfigs).map(([locale, localeConfig]) => [
+      locale,
+      locale === DEFAULT_LOCALE ? localeConfig : { baseUrl: `/${locale}/`, ...localeConfig },
+    ])
+  ) as T;
 }
 
 const PROJECT_NAME = 'pnpm.io'
@@ -51,9 +71,13 @@ const docusaurusConfig = {
     "translationRecruitingLink": TRANSLATE_URL,
   },
   "onBrokenLinks": "log",
-  "onBrokenMarkdownLinks": "log",
+  "markdown": {
+    "hooks": {
+      "onBrokenMarkdownLinks": "log",
+    },
+  },
   "future": {
-    "experimental_faster": true,
+    "faster": true,
     "v4": {
       "removeLegacyPostBuildHeadAttribute": true,
       "useCssCascadeLayers": false, // FIXME Primary color will be changed to blue if this is enabled
@@ -336,8 +360,8 @@ const docusaurusConfig = {
   } satisfies Preset.ThemeConfig,
   i18n: {
     defaultLocale: DEFAULT_LOCALE,
-    locales: LOCALE_CI ? [LOCALE_CI] : ['en', 'it', 'zh', 'ja', 'ko', 'pt', 'zh-TW', 'ru', 'uk', 'fr', 'tr', 'es', 'id'],
-    localeConfigs: {
+    locales: LOCALE_CI ? [LOCALE_CI] : LOCALES,
+    localeConfigs: withLocaleBaseUrls({
       en: { label: "English" },
       it: { label: `Italiano (${progress["it"].translationProgress}%)` },
       zh: { label: `简体中文 (${progress["zh-CN"].translationProgress}%)` },
@@ -360,7 +384,7 @@ const docusaurusConfig = {
       // hu: { label: `Magyar (${progress["hu"].translationProgress}%)` },
       // pl: { label: `Polski (${progress["pl"].translationProgress}%)` },
       // de: { label: `Deutsch (${progress["de"].translationProgress}%)` },
-    },
+    }),
   },
 } satisfies Config;
 

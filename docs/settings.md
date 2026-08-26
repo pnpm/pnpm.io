@@ -28,7 +28,13 @@ Values in the configuration files may contain env variables using the `${NAME}` 
 
 :::warning
 
-Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace.yaml` that define registry URLs: `registry` and the URL values of [`registries`](./settings/dependency-resolution.md#registries) and [`namedRegistries`](./settings/dependency-resolution.md#namedregistries). Values containing a `${...}` placeholder in these settings are ignored. Because `pnpm-workspace.yaml` is committed to the repository, expanding env variables in registry URLs could be exploited by a malicious repository to leak secrets from the environment to an attacker-controlled registry. Configure dynamic registry URLs in a trusted location instead: the global configuration file or CLI options.
+Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace.yaml` that define registry URLs: `registry` and the URL values of [`registries`](./settings/dependency-resolution.md#registries) and [`namedRegistries`](./settings/dependency-resolution.md#namedregistries). Values containing a `${...}` placeholder in these settings are ignored. In the [registry declaration shape](./registries.md) of `registries` (since v11.23.0), the URL is the key rather than the value, and the same rule applies to the keys. Because `pnpm-workspace.yaml` is committed to the repository, expanding env variables in registry URLs could be exploited by a malicious repository to leak secrets from the environment to an attacker-controlled registry. Configure dynamic registry URLs in a trusted location instead: the global configuration file or CLI options.
+
+:::
+
+:::note
+
+Since v11.22.0, a project's `pnpm-workspace.yaml` cannot choose where pnpm keeps its credentials, its own installation, or other machine-level state: `bin`, `configDir`, `dir`, `globalBinDir`, `globalDir`, `npmrcAuthFile`, `pnpmHomeDir`, `stateDir`, `userconfig`, and `workspaceDir` are ignored there, with a warning. Set them in the [global configuration file](./cli/config.md) or on the command line instead. `cacheDir` and `storeDir` are unaffected.
 
 :::
 
@@ -130,6 +136,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [ignoredOptionalDependencies](./settings/dependency-resolution.md#ignoredoptionaldependencies)
 * [minimumReleaseAge](./settings/dependency-resolution.md#minimumreleaseage)
 * [minimumReleaseAgeExclude](./settings/dependency-resolution.md#minimumreleaseageexclude)
+* [minimumReleaseAgeExcludePrune](./settings/dependency-resolution.md#minimumreleaseageexcludeprune)
 * [minimumReleaseAgeIgnoreMissingTime](./settings/dependency-resolution.md#minimumreleaseageignoremissingtime)
 * [minimumReleaseAgeStrict](./settings/dependency-resolution.md#minimumreleaseagestrict)
 * [trustPolicy](./settings/dependency-resolution.md#trustpolicy)
@@ -156,6 +163,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [packageImportMethod](./settings/node-modules.md#packageimportmethod)
 * [modulesCacheMaxAge](./settings/node-modules.md#modulescachemaxage)
 * [dlxCacheMaxAge](./settings/node-modules.md#dlxcachemaxage)
+* [virtualStoreType](./settings/node-modules.md#virtualstoretype)
 * [enableGlobalVirtualStore](./settings/node-modules.md#enableglobalvirtualstore)
 
 ### Dependency Hoisting Settings
@@ -307,7 +315,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [shellEmulator](./settings/other.md#shellemulator)
 * [catalogMode](./settings/other.md#catalogmode)
 * [ci](./settings/other.md#ci)
-* [cleanupUnusedCatalogs](./settings/other.md#cleanupunusedcatalogs)
+* [catalogPrune](./settings/other.md#catalogprune)
 
 ### Workspace Settings
 

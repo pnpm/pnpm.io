@@ -8,3 +8,4 @@ Commands:
 * [cache list-registries](/cli/cache-list-registries.md)
 * [cache delete](/cli/cache-delete.md)
 * [cache view](/cli/cache-view.md)
+* [cache path](/cli/cache-path.md)

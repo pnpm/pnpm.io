@@ -302,6 +302,17 @@ minimumReleaseAgeExclude:
 - webpack@4.47.0 || 5.102.1
 ```
 
+### minimumReleaseAgeExcludePrune
+
+Added in: v11.22.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, `pnpm add`, `pnpm update`, and `pnpm remove` prune the entries of [`minimumReleaseAgeExclude`](#minimumreleaseageexclude) in `pnpm-workspace.yaml` that the freshly written lockfile no longer resolves: a version that is gone is dropped (an entry is removed once none of its versions remain), and an entry for a package that is no longer in the lockfile is removed too. Name patterns (`@myorg/*`) are always kept.
+
+The cleanup is skipped when the install's lockfile does not cover the whole workspace ([`sharedWorkspaceLockfile: false`](../workspaces.md#sharedworkspacelockfile)), since entries another project still needs would look stale.
+
 ### minimumReleaseAgeIgnoreMissingTime
 
 Added in: v11.0.0
@@ -314,6 +325,10 @@ When `true`, pnpm skips the [`minimumReleaseAge`](#minimumreleaseage) check for 
 ```yaml
 minimumReleaseAgeIgnoreMissingTime: false
 ```
+
+Since v11.23.0, the setting also governs [`trustPolicy`](#trustpolicy), which reads the same publish dates: `trustPolicy: no-downgrade` skips a package the registry cannot date, with a warning, rather than failing the install with `ERR_PNPM_MISSING_TIME`.
+
+The opt-in covers a registry that cannot date its releases, not a package a registry says it never published: during [lockfile verification](../supply-chain-security.md), a lockfile entry missing from a packument that does date every version it lists remains a hard failure.
 
 ### minimumReleaseAgeStrict
 
@@ -400,9 +415,19 @@ Exotic sources include:
 Added in: v11.0.0
 
 * Default: **undefined**
-* Type: **Record&lt;string, string&gt;**
+* Type: **Record&lt;string, RegistryDeclaration&gt;** or **Record&lt;string, string&gt;**
 
-Configure registries for scoped packages in `pnpm-workspace.yaml`. The `default` key sets the main registry (equivalent to the `registry` `.npmrc` setting). Scoped keys configure registries for specific package scopes.
+Declares the registries the project installs from. Since v11.23.0, each registry is declared once, keyed by its URL, with everything pnpm knows about it in the entry: the `scopes` routed to it, the bare-specifier `prefix` it answers to, and how the server lays out tarball URLs (`serverType`, `supportsTimeField`). The full description of each field is on the dedicated [Registries](../registries.md) page.
+
+```yaml
+registries:
+  https://npm.corp.example.com/:
+    serverType: artifactory
+    scopes: ["@my-org", "@internal"]
+    prefix: work
+```
+
+The older shape, mapping scopes to URLs, is still accepted. The `default` key sets the main registry (equivalent to the `registry` `.npmrc` setting), and scoped keys configure registries for specific package scopes:
 
 ```yaml
 registries:
@@ -411,7 +436,9 @@ registries:
   "@internal": https://nexus.corp.com/
 ```
 
-Since v11.11.0, this setting may also be defined in the [global configuration file](../cli/config.md) (`config.yaml`), which is useful for registries that should apply to every project on the machine rather than to a single repository.
+The two shapes cannot be mixed in one map.
+
+Since v11.11.0, this setting may also be defined in the [global configuration file](../cli/config.md) (`config.yaml`), which is useful for registries that should apply to every project on the machine rather than to a single repository. Only the routes (`scopes` and `prefix`) are read from there; `serverType` and `supportsTimeField` shape the lockfile, so they are read only from `pnpm-workspace.yaml` — see [where the setting may live](../registries.md#where-the-setting-may-live).
 
 ### namedRegistries
 
@@ -419,6 +446,12 @@ Added in: v11.1.0
 
 * Default: **undefined**
 * Type: **Record&lt;string, string&gt;**
+
+:::note
+
+Deprecated since v11.23.0: declare a `prefix` in [`registries`](#registries) instead — see the [Registries](../registries.md) page. `namedRegistries` is still read, but only for prefixes that `registries` does not declare; when both settings declare prefixes, pnpm warns. Everything below about aliases — the built-in ones, reserved names, and the lockfile keys — applies to `prefix`-declared aliases the same way.
+
+:::
 
 Defines named registry aliases that can be used as a prefix when installing packages, in the style of [vlt's named-registry aliases](https://docs.vlt.sh/cli/registries). For example, with the following configuration:
 
@@ -493,6 +526,6 @@ There is no setting to keep the old behavior — the old shape is the vulnerabil
 
 :::
 
-Every alias that the lockfile references must stay in `namedRegistries`. Reading an entry whose alias is gone fails with `ERR_PNPM_MISSING_NAMED_REGISTRY` rather than falling back to the default registry, since that would fetch a different package. Renaming an alias re-resolves the packages that used it.
+Every non-built-in alias that the lockfile references must stay declared — through `prefix` in [`registries`](#registries) or through `namedRegistries`. Reading an entry whose alias is gone fails with `ERR_PNPM_MISSING_NAMED_REGISTRY` rather than falling back to the default registry, since that would fetch a different package. Renaming an alias re-resolves the packages that used it.
 
-Tarball URLs that follow the standard registry layout are no longer written to the lockfile for named-registry packages; they are recomputed from `namedRegistries` on demand.
+Tarball URLs that follow the standard registry layout are no longer written to the lockfile for named-registry packages; they are recomputed from the alias's declared URL on demand.

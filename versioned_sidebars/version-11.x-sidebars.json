@@ -306,6 +306,10 @@
           "label": "Manage environments",
           "items": [
             "cli/runtime",
+            {
+              "type": "doc",
+              "id": "cli/shim"
+            },
             "cli/env"
           ]
         },
@@ -347,6 +351,10 @@
             {
               "type": "doc",
               "id": "cli/cache-delete"
+            },
+            {
+              "type": "doc",
+              "id": "cli/cache-path"
             }
           ]
         },
@@ -507,6 +515,10 @@
         },
         {
           "type": "doc",
+          "id": "registries"
+        },
+        {
+          "type": "doc",
           "id": "workspaces"
         },
         {
@@ -540,6 +552,10 @@
         {
           "type": "doc",
           "id": "global-virtual-store"
+        },
+        {
+          "type": "doc",
+          "id": "package-managers"
         },
         {
           "type": "doc",
@@ -614,6 +630,10 @@
         {
           "type": "doc",
           "id": "how-peers-are-resolved"
+        },
+        {
+          "type": "doc",
+          "id": "lockfile"
         },
         {
           "type": "doc",

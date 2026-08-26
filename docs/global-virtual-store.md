@@ -5,7 +5,7 @@ title: Global Virtual Store
 
 By default, pnpm creates a `.pnpm` directory inside each project's `node_modules` — this is the "virtual store". It contains hardlinks to files in the [content-addressable store](./settings/store.md#storedir). Every project gets its own projection of this virtual store — pnpm hardlinks files from the content-addressable store into the `.pnpm` directory structure. The actual file contents exist only once on disk, but the directory structure is recreated for each project so that Node.js's module resolution algorithm can find the right dependencies for each package.
 
-The **global virtual store** (`enableGlobalVirtualStore: true`) changes this. Instead of each project having its own `node_modules/.pnpm` directory, pnpm maintains a single shared virtual store (located at `<store-path>/links/`, run `pnpm store path` to find `<store-path>`). Each project's `node_modules` contains only symlinks pointing into this shared location.
+The **global virtual store** (`virtualStoreType: global`, spelled `enableGlobalVirtualStore: true` before v11.23.0) changes this. Instead of each project having its own `node_modules/.pnpm` directory, pnpm maintains a single shared virtual store (located at `<store-path>/links/`, run `pnpm store path` to find `<store-path>`). Each project's `node_modules` contains only symlinks pointing into this shared location.
 
 ## Default behavior vs global virtual store
 
@@ -57,11 +57,11 @@ It also speeds up installations across unrelated projects on the same machine, s
 
 - **CI environments**: In CI, caches are typically absent, so there's no warm global store to benefit from. The global virtual store is generally not useful in CI.
 - **Shared trust domain**: The global virtual store and the content-addressable store are shared writable state. Use them only for projects, users, and jobs that trust each other, and protect the store path with filesystem permissions.
-- **ESM hoisting**: pnpm uses the `NODE_PATH` environment variable to support hoisted dependencies with the global virtual store. However, Node.js does not respect `NODE_PATH` for ESM imports. If ESM dependencies try to import packages not declared in their own `package.json`, resolution will fail. You can work around this with [packageExtensions](./settings/dependency-resolution.md#packageextensions) or the [@pnpm/plugin-esm-node-path](https://github.com/pnpm/plugin-esm-node-path) config dependency.
+- **ESM hoisting**: pnpm uses the `NODE_PATH` environment variable to support hoisted dependencies with the global virtual store, and Node.js does not respect `NODE_PATH` for ESM imports. Since v11.23.0, every process pnpm spawns for the project — `pnpm run`, `pnpm exec`, lifecycle scripts, and the tools `pnpm dlx` runs — also gets a `NODE_OPTIONS` `--import` flag registering a resolve hook that restores those lookups, so a dependency importing a package it does not declare resolves under ESM too ([#9618](https://github.com/pnpm/pnpm/issues/9618)). A `node` process started outside pnpm does not get that environment, and setting [`extendNodePath`](./settings/other.md#extendnodepath) to `false` turns the whole `NODE_PATH` mechanism off, resolve hook included; declare the missing dependencies with [packageExtensions](./settings/dependency-resolution.md#packageextensions) if you need them to resolve in either case.
 
 :::note
 
-The global virtual store is currently disabled by default for project installs and marked as experimental, as some tools may not work correctly with symlinked `node_modules`. You need to explicitly set `enableGlobalVirtualStore: true` in `pnpm-workspace.yaml` to use it for project installs. In pnpm v11, the global virtual store is enabled by default for packages installed via `pnpm dlx` (`pnpx`) and globally installed packages. The goal is to enable it by default for all installations in a future version.
+The global virtual store is currently disabled by default for project installs and marked as experimental, as some tools may not work correctly with symlinked `node_modules`. You need to explicitly set `virtualStoreType: global` in `pnpm-workspace.yaml` to use it for project installs. In pnpm v11, the global virtual store is enabled by default for packages installed via `pnpm dlx` (`pnpx`) and globally installed packages. The goal is to enable it by default for all installations in a future version.
 
 :::
 
@@ -71,4 +71,4 @@ In pnpm v11, global installs (`pnpm add -g`) and `pnpm dlx` use the global virtu
 
 ## Configuration
 
-See the [`enableGlobalVirtualStore`](./settings/node-modules.md#enableglobalvirtualstore) setting reference for all configuration details.
+See the [`virtualStoreType`](./settings/node-modules.md#virtualstoretype) setting reference for all configuration details. `virtualStoreType` was added in v11.23.0 as the canonical spelling of [`enableGlobalVirtualStore`](./settings/node-modules.md#enableglobalvirtualstore), which keeps working.

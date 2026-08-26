@@ -66,13 +66,13 @@ Each worktree is a full checkout with its own files, but they all share the same
 
 ### 3. Enable the global virtual store
 
-Add `enableGlobalVirtualStore: true` to the `pnpm-workspace.yaml` in your repository:
+Add `virtualStoreType: global` to the `pnpm-workspace.yaml` in your repository (before v11.23.0 this setting was spelled `enableGlobalVirtualStore: true`):
 
 ```yaml
 packages:
   - 'packages/*'
 
-enableGlobalVirtualStore: true
+virtualStoreType: global
 ```
 
 ### 4. Install dependencies in each worktree
@@ -87,7 +87,7 @@ The first `pnpm install` downloads packages into the global store. Subsequent in
 
 ## How it works
 
-Without the global virtual store, each worktree would have its own `.pnpm` virtual store inside `node_modules`, with hardlinks or copies of every package. With `enableGlobalVirtualStore: true`, pnpm keeps all package contents in a single shared directory (the global store, which you can find by running `pnpm store path`), and each worktree's `node_modules` contains symlinks pointing there:
+Without the global virtual store, each worktree would have its own `.pnpm` virtual store inside `node_modules`, with hardlinks or copies of every package. With `virtualStoreType: global`, pnpm keeps all package contents in a single shared directory (the global store, which you can find by running `pnpm store path`), and each worktree's `node_modules` contains symlinks pointing there:
 
 ```
 your-monorepo/                      (bare git repo)
@@ -113,7 +113,7 @@ This means:
 
 ## Example: the pnpm monorepo itself
 
-The [pnpm repository](https://github.com/pnpm/pnpm) uses this exact setup with a bare git repo and `enableGlobalVirtualStore: true`. It includes helper scripts to make worktree management easier:
+The [pnpm repository](https://github.com/pnpm/pnpm) uses this exact setup with a bare git repo and a global virtual store. It includes helper scripts to make worktree management easier:
 
 **`pnpm worktree:new <branch-name|pr-number>`** — creates a new worktree and sets it up:
 

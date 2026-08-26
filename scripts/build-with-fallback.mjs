@@ -5,6 +5,15 @@ import path from 'node:path'
 const MAX_RETRIES = 50
 const I18N_DIR = path.resolve('i18n')
 
+// Extra arguments are handed to `docusaurus build` untouched, so that CI can
+// build one locale per job with `--locale <locale>`.
+const BUILD_ARGS = process.argv.slice(2)
+// When a single locale is built, only that locale's translations can be at
+// fault, so the scan for broken files below is narrowed down to it.
+const BUILT_LOCALES = BUILD_ARGS.flatMap((arg, i) =>
+  arg === '--locale' || arg === '-l' ? [BUILD_ARGS[i + 1]] : []
+).filter(Boolean)
+
 function extractBrokenI18nFile (output) {
   // Match file paths inside the i18n directory from the build error output.
   // Docusaurus / MDX / webpack errors typically include the full file path.
@@ -30,7 +39,8 @@ function extractBrokenI18nFile (output) {
 function extractMismatchedI18nIdFile (output) {
   if (!output.includes('Invalid sidebar file')) return null
   if (!existsSync(I18N_DIR)) return null
-  for (const locale of safeReaddir(I18N_DIR)) {
+  const locales = BUILT_LOCALES.length > 0 ? BUILT_LOCALES : safeReaddir(I18N_DIR)
+  for (const locale of locales) {
     const localeDocsRoot = path.join(I18N_DIR, locale, 'docusaurus-plugin-content-docs')
     if (!existsSync(localeDocsRoot)) continue
     for (const versionDir of safeReaddir(localeDocsRoot)) {
@@ -103,9 +113,11 @@ function escapeRegExp (string) {
 let removedFiles = []
 
 for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-  console.log(`\n🔨 Build attempt ${attempt}${removedFiles.length > 0 ? ` (${removedFiles.length} broken translation(s) removed so far)` : ''}...\n`)
+  console.log(`\n🔨 Build attempt ${attempt}${BUILT_LOCALES.length > 0 ? ` for ${BUILT_LOCALES.join(', ')}` : ''}${removedFiles.length > 0 ? ` (${removedFiles.length} broken translation(s) removed so far)` : ''}...\n`)
   try {
-    execSync('docusaurus build', {
+    // Through pnpm, so that the Docusaurus binary is found no matter whether
+    // this script was started by a package script or directly by node.
+    execSync(['pnpm', 'exec', 'docusaurus', 'build', ...BUILD_ARGS].join(' '), {
       stdio: ['inherit', 'inherit', 'pipe'],
       encoding: 'utf-8',
       maxBuffer: 50 * 1024 * 1024,

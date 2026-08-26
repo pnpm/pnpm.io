@@ -19,6 +19,20 @@ When used without arguments, updates all dependencies.
 |`pnpm up foo@2`       | Updates `foo` to the latest version on v2                                |
 |`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
 
+## What an update writes
+
+Besides moving `pnpm-lock.yaml` to the newly resolved versions, `pnpm update` writes the new range back to the place the dependency is declared:
+
+* In `package.json`, the range is moved onto the resolved version while the operator the dependency already declared is kept, so `^1.1.0` stays a caret range.
+* A dependency declared through the [`catalog:` protocol](../catalogs.md) is not rewritten in `package.json`. The catalog entry it points at is updated instead, in `pnpm-workspace.yaml`.
+* A dependency declared through a dist-tag, such as `"foo": "latest"`, keeps tracking the tag. The tag stays in `package.json` and only the lockfile moves to the version behind it — with `--latest` as well.
+
+Pass [`--no-save`](#--no-save) to update the lockfile only and leave the declared ranges alone.
+
+## Updating to a specific version
+
+Since v11.23.0, `pnpm update <name>@<version>` fails with `ERR_PNPM_UPDATE_VERSION_ON_INDIRECT_DEP` when the package is not a direct dependency of any selected project. There is nowhere to record the version in that case; pin a transitive dependency through [`overrides`](../settings/dependency-resolution.md#overrides) instead. Ranges and tags are unaffected.
+
 ## Selecting dependencies with patterns
 
 You can use patterns to update specific dependencies.
@@ -108,6 +122,8 @@ Don't update packages in `optionalDependencies`.
 ### --interactive, -i
 
 Show outdated dependencies and select which ones to update.
+
+Since v11.21.0, combined with `--global`, each [isolated install group](../global-packages.md#isolated-installations) is presented as one selectable item: packages that share a global installation update together as a unit.
 
 ### --no-save
 

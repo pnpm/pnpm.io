@@ -1,24 +1,31 @@
 name: Build Test
 
 on: [pull_request]
+
+permissions:
+  contents: read
+
+env:
+  COREPACK_ENABLE_AUTO_PIN: 0
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: deploy
-    env:
-      COREPACK_ENABLE_AUTO_PIN: 0
     steps:
       - name: Checkout Commit
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Install pnpm
-        uses: pnpm/action-setup@v4.1.0
-        with:
-          standalone: true
+        uses: pnpm/setup@v2
       - name: Install dependencies
         run: pnpm install
+      - name: Copy the current docs into the latest version
+        run: pnpm copy-docs
       - name: Build
-        run: pnpm build
-        env:
-          LOCALE_CI: en
+        # English only: the translations are not part of a pull request, and
+        # building them would cost as much as a deploy. Invoked the way
+        # .github/workflows/deploy.yml invokes it, so that this test covers
+        # the command that ships the site.
+        run: node scripts/build-with-fallback.mjs --locale en

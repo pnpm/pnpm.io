@@ -92,6 +92,8 @@ The supported policies are:
 | `always` | Always switch, never ask. Usable in CI, where a prompt would fall back to the global version. |
 | `false` | Disable the project-aware shim for this package. |
 
+Since v12.0.0-rc.6, two commands write entries here for you: [`pnpm shim add <pkg>`](../cli/shim.md) records the package it links a shim for, and installing a [package manager](../package-managers.md) globally (`pnpm add -g yarn`) records that package manager so it follows a project's pin. Neither overwrites an entry you set yourself — including `false`, and including a `globalShims: false` that turns every shim off.
+
 Layers merge key by key over the built-in defaults, so a single entry can change one package without restating the rest — `globalShims: { bun: false }` leaves `node` and `deno` at `auto`.
 
 The scalar shorthands replace the whole map instead of merging: `globalShims: false` disables every project-aware shim, and `globalShims: true` resets to the defaults.
@@ -203,12 +205,16 @@ This resolution mode works only with npm's [full metadata]. So it is slower in s
 
 When `resolutionMode` is set to `lowest-direct`, direct dependencies will be resolved to their lowest versions.
 
+Only the dependencies declared in `package.json` count as direct here. A peer dependency that [`autoInstallPeers`](./peer-dependencies.md#autoinstallpeers) adds is not something the project declared, so it is resolved like a subdependency: to the highest version satisfying the peer range, or under `time-based`, to the highest version within the publish-date cutoff.
+
 ### registrySupportsTimeField
 
 * Default: **false**
 * Type: **Boolean**
 
-Set this to `true` if the registry that you are using returns the "time" field in the abbreviated metadata. As of now, only [Verdaccio] from v5.15.1 supports this.
+Set this to `true` if the registry that you are using returns the "time" field in the abbreviated metadata. [Verdaccio] supports this from v5.15.1, as do some registry proxies.
+
+Since v11.23.0, this can also be declared per registry, through the `supportsTimeField` field of a [registry declaration](../registries.md#supportstimefield). A registry's own declaration wins; this setting is the answer for every registry the project does not describe.
 
 ### extendNodePath
 
@@ -319,6 +325,6 @@ Added in: v10.12.1
 
 This setting explicitly tells pnpm whether the current environment is a CI (Continuous Integration) environment.
 
-import CleanupUnusedCatalogs from './_cleanupUnusedCatalogs.mdx'
+import CatalogPrune from './_catalogPrune.mdx'
 
-<CleanupUnusedCatalogs />
+<CatalogPrune />

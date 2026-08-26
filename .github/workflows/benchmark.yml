@@ -1,39 +1,34 @@
-name: Benchmark runner
+name: Benchmark sync
+
+# The benchmarks are measured in https://github.com/pnpm/benchmarks, on its own
+# schedule. This job only copies the page and charts it publishes into the site,
+# and is run by hand when those numbers should be picked up.
 
 on:
-  push:
-    branches:
-      - test-bun
-  schedule:
-    - cron: '30 2 * * 0'
   workflow_dispatch:
 
 jobs:
-  build:
+  sync:
     runs-on: ubuntu-latest
-    env:
-      COREPACK_ENABLE_AUTO_PIN: 0
+    # For the commit at the end of the job.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 24
-      - run: |
-          npm install --global corepack
-          corepack enable
-          corepack prepare pnpm@next-10 --activate
-          corepack prepare yarn@stable --activate
-      - run: curl https://bun.sh/install | bash
-      - run: /home/runner/.bun/bin/bun -v
-      - run: pnpm --dir=benchmarks install
-      - run: pnpm --dir=benchmarks run benchmark
-      - run: pnpm --dir=benchmarks run benchmark
-      - run: pnpm --dir=benchmarks run benchmark
+          node-version: 22
+      # Node's built-ins are all the script needs, so the site's dependencies
+      # are not installed here.
+      - run: node scripts/update-benchmarks.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit & Push changes
-        uses: actions-js/push@master
+        # Pinned: this step is handed a token that can write to the repo, so
+        # what runs in it shouldn't be able to change without a commit here.
+        uses: actions-js/push@968f4695ca558093eadb24ad83cc5891f47e0cdc # v1.6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           message: "chore: update benchmarks"
