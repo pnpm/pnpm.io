@@ -184,6 +184,7 @@
       "registries",
       "registry-revisions",
       "workspaces",
+      "workspace-task-orchestration",
       "catalogs",
       "config-dependencies",
       "aliases",

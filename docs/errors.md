@@ -3,6 +3,17 @@ id: errors
 title: Error Codes
 ---
 
+## ERR_PNPM_TASK_CYCLE
+
+A recursive run's task graph contains a dependency cycle. The error lists the
+participating tasks as `<project>#<script>` identifiers.
+
+Remove or change the cycle under [`tasks`](./workspace-task-orchestration.md).
+If it is deliberate, set
+[`ignoreWorkspaceCycles`](./workspaces.md#ignoreworkspacecycles) to `true` to
+downgrade the error to a warning and run the cycle's tasks without a guaranteed
+order.
+
 ## ERR_PNPM_UNEXPECTED_STORE
 
 A modules directory is present and is linked to a different store directory.

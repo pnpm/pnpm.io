@@ -104,6 +104,9 @@ This runs an arbitrary command from each package's "scripts" object.
 If a package doesn't have the command, it is skipped.
 If none of the packages have the command, the command fails.
 
+Recursive runs use a dependency-aware task graph. Configure relationships
+between scripts with the [`tasks` setting](../workspace-task-orchestration.md).
+
 ### --if-present
 
 You can use the `--if-present` flag to avoid exiting with a non-zero exit code
@@ -150,7 +153,28 @@ Aggregate output from child processes that are run in parallel, and only print o
 
 ### --resume-from &lt;package_name\>
 
-Resume execution from a particular project. This can be useful if you are working with a large workspace and you want to restart a build at a particular project without running through all of the projects that precede it in the build order.
+Resume at the named package's requested task. Pnpm omits that task's transitive
+dependencies, treating them as already completed, but still runs the task
+itself, its dependents, and unrelated tasks in the selected graph. See
+[Workspace task orchestration](../workspace-task-orchestration.md#--resume-from-package_name).
+
+### --dry-run
+
+Resolve a recursive run's task graph without running scripts. The plain output
+is one stable topological ordering, not a prediction of the order in which
+independent tasks will be dispatched.
+
+```sh
+pnpm -r run --dry-run build
+```
+
+`--dry-run` is only supported for recursive runs.
+
+### --json
+
+With `--dry-run`, print the resolved tasks and their dependency edges as JSON.
+See [Inspect the task graph](../workspace-task-orchestration.md#inspect-the-task-graph)
+for the schema and an example.
 
 ### --report-summary
 
@@ -183,6 +207,9 @@ Hide workspace prefix from output from child processes that are run in parallel,
 [Read more about filtering.](../filtering.md)
 
 ## pnpm-workspace.yaml settings
+
+The [`tasks` setting](../workspace-task-orchestration.md) configures dependency
+relationships and per-task concurrency limits for recursive runs.
 
 import EnablePrePostScripts from '../settings/_enablePrePostScripts.mdx'
 
