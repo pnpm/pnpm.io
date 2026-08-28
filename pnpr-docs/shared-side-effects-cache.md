@@ -113,17 +113,20 @@ over both files — the shape a CI runner wants for material it must not commit:
 
 | Environment variable | Setting |
 | --- | --- |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_TRUSTED_KEYS` | `trustedKeys` (JSON object) |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_PRIVATE_KEY` | `privateKey` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_PUBLISH` | `publish` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_KEY_ID` | `keyId` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_BUILDER_ID` | `builderId` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_IMAGE_DIGEST` | `imageDigest` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_ARCHITECTURE_BASELINE` | `architectureBaseline` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_BUILD_ENV` | `buildEnv` (JSON object) |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_TRUSTED_KEYS` | `trustedKeys` (JSON object) |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_PRIVATE_KEY` | `privateKey` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_PUBLISH` | `publish` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_KEY_ID` | `keyId` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_BUILDER_ID` | `builderId` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_IMAGE_DIGEST` | `imageDigest` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_ARCHITECTURE_BASELINE` | `architectureBaseline` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_BUILD_ENV` | `buildEnv` (JSON object) |
+
+The `PNPM_REMOTE_SIDE_EFFECTS_CACHE_*` names still work, and the ones above win
+when both are set.
 
 The repository and the machine each contribute the half they own: a workspace
-naming `organization` and `packages` keeps whatever trust material the global
+naming `org` and `packages` keeps whatever trust material the global
 file or the environment supplied.
 
 ## Publishing from a builder
@@ -132,10 +135,10 @@ Publication is off unless a build explicitly turns it on, so only a trusted
 builder uploads the diff its own build produced:
 
 ```sh
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_PUBLISH=true
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_KEY_ID=acme-2026
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_PRIVATE_KEY='<base64 P-256 PKCS#8 DER private key>'
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_BUILDER_ID='ci/main/42'
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_PUBLISH=true
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_KEY_ID=acme-2026
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_PRIVATE_KEY='<base64 P-256 PKCS#8 DER private key>'
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_BUILDER_ID='ci/main/42'
 ```
 
 `pnpm install` then runs the lifecycle scripts as usual, captures the actual
