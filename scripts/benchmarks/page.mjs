@@ -163,7 +163,7 @@ ${mainTable}
 <img alt="Graph of the ${fixture.name} results" src="${mainSrc}" />`,
     `### ${pnpmColumns.map((column) => column.legend).join(' vs ')}
 
-pnpm v12 will use a new installation engine for fetching and linking written in Rust. See [pacquet](https://github.com/pnpm/pacquet).
+pnpm v12 will use a new installation engine for fetching and linking written in Rust. See [pacquet](/blog/releases/12.0).
 
 ${pnpmTable}
 
