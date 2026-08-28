@@ -1,8 +1,10 @@
 name: Benchmark sync
 
 # The benchmarks are measured in https://github.com/pnpm/benchmarks, on its own
-# schedule. This job only copies the page and charts it publishes into the site,
-# and is run by hand when those numbers should be picked up.
+# schedule. That repository publishes the numbers and nothing else; this job
+# renders the page and its charts from them (`scripts/benchmarks/`), and is run
+# by hand when the latest numbers should be picked up. Editing what the page
+# says needs no run of this at all — it is a commit to this repository.
 
 on:
   workflow_dispatch:
@@ -23,8 +25,6 @@ jobs:
       # Node's built-ins are all the script needs, so the site's dependencies
       # are not installed here.
       - run: node scripts/update-benchmarks.mjs
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit & Push changes
         # Pinned: this step is handed a token that can write to the repo, so
         # what runs in it shouldn't be able to change without a commit here.
