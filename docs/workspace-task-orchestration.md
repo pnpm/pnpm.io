@@ -134,12 +134,12 @@ pnpm -r run --dry-run --json test
 
 ## Cycles
 
-Pnpm checks the graph after project selection and task expansion. A cycle fails
+pnpm checks the graph after project selection and task expansion. A cycle fails
 before any script starts with `ERR_PNPM_TASK_CYCLE`, and the error names the
 participating tasks.
 
 Set [`ignoreWorkspaceCycles`](./workspaces.md#ignoreworkspacecycles) to `true`
-only when the cycle is deliberate. Pnpm then warns, removes the ordering among
+only when the cycle is deliberate. pnpm then warns, removes the ordering among
 the cycle's members, and may run them in any order relative to each other.
 
 ## Recursive run options
@@ -148,7 +148,7 @@ the cycle's members, and may run them in any order relative to each other.
 
 The named package's requested task is the resume point.
 
-Pnpm records which tasks pass as a recursive run proceeds. When that record
+pnpm records which tasks pass as a recursive run proceeds. When that record
 belongs to the same invocation — the same selected projects, script bodies,
 command arguments, and script-affecting settings — `--resume-from` skips
 exactly the tasks the record says passed, wherever they sit in the graph, and
@@ -164,7 +164,7 @@ and not after a cancelled one, where a dependency may never have started.
 
 ### `--reverse`
 
-Pnpm reverses every edge in the resolved task graph, including relationships
+pnpm reverses every edge in the resolved task graph, including relationships
 declared with `dependsOn`. Tasks that normally depend on another task run before
 it.
 
@@ -183,7 +183,7 @@ reported.
 
 ### Output
 
-Pnpm inherits a script's output directly when at most one script can be running
+pnpm inherits a script's output directly when at most one script can be running
 at any time, either because workspace concurrency is `1` or because the graph
 forms one serial chain. When scripts can overlap, pnpm pipes their output so it
 can prefix or aggregate it. Use [`--stream`](./cli/run.md#--stream) for immediate

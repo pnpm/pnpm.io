@@ -156,7 +156,7 @@ Aggregate output from child processes that are run in parallel, and only print o
 
 ### --resume-from &lt;package_name\>
 
-Resume at the named package's requested task. Pnpm skips the tasks a matching
+Resume at the named package's requested task. pnpm skips the tasks a matching
 record of the previous run says already passed; without such a record it omits
 the task's transitive dependencies instead, treating them as completed. Either
 way it still runs the task itself, its dependents, and unrelated tasks in the
