@@ -104,8 +104,11 @@ This runs an arbitrary command from each package's "scripts" object.
 If a package doesn't have the command, it is skipped.
 If none of the packages have the command, the command fails.
 
-Recursive runs use a dependency-aware task graph. Configure relationships
-between scripts with the [`tasks` setting](../workspace-task-orchestration.md).
+By default, recursive runs use a dependency-aware task graph. Configure
+relationships between scripts with the
+[`tasks` setting](../workspace-task-orchestration.md). `--no-sort`, and
+`--parallel` which implies it, remove that ordering and ignore the `tasks`
+declarations along with it.
 
 ### --if-present
 
