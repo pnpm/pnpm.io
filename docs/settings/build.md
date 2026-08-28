@@ -44,8 +44,8 @@ You may want to disable this setting if:
 
 :::
 
-An object says the same thing in more detail, and is the only way to reach the
-remote tier:
+An object says the same thing in more detail, and is the canonical way to
+declare the remote tier:
 
 ```yaml title="pnpm-workspace.yaml"
 sideEffectsCache:
@@ -128,11 +128,14 @@ including the server flag, the trust material, and how an artifact is published.
 
 :::note
 
-`remoteSideEffectsCache` is the older spelling of this setting, and `organization`
-of its `org` field; both still work.
-Where both are set, `sideEffectsCache.remote` wins, and the two compose rather
-than replace — a repository may declare the organization under one while the
-machine supplies the signing key under the other.
+`remoteSideEffectsCache` is the older spelling of this setting, and
+`organization` of its `org` field; both still work.
+
+The two spellings are merged, not chosen between: a field set under both takes
+its value from `sideEffectsCache.remote`, and a field set under only one is kept
+either way. That is what lets a repository declare the org in
+`pnpm-workspace.yaml` while the machine supplies the signing key from the global
+config under whichever spelling it already used.
 
 :::
 
