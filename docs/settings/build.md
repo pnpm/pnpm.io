@@ -52,7 +52,7 @@ sideEffectsCache:
   read: true
   write: true
   remote:
-    organization: acme
+    org: acme
     packages:
       - native-addon
 ```
@@ -96,7 +96,7 @@ allowBuilds:
   native-addon: true
 sideEffectsCache:
   remote:
-    organization: acme
+    org: acme
     packages:
       - native-addon
 ```
@@ -128,7 +128,8 @@ including the server flag, the trust material, and how an artifact is published.
 
 :::note
 
-`remoteSideEffectsCache` is the older spelling of this setting and still works.
+`remoteSideEffectsCache` is the older spelling of this setting, and `organization`
+of its `org` field; both still work.
 Where both are set, `sideEffectsCache.remote` wins, and the two compose rather
 than replace — a repository may declare the organization under one while the
 machine supplies the signing key under the other.

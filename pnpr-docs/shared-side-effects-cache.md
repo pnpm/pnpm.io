@@ -78,7 +78,7 @@ allowBuilds:
   native-addon: true
 sideEffectsCache:
   remote:
-    organization: acme
+    org: acme
     packages:
       - native-addon
 ```
@@ -104,8 +104,9 @@ sideEffectsCache:
 
 The repository and the machine each declare one half of the same section, and
 they compose: neither file drops what the other set. `remoteSideEffectsCache` is
-the older spelling of `sideEffectsCache.remote` and still works, so a machine
-configured before the rename keeps its trust material.
+the older spelling of `sideEffectsCache.remote`, and `organization` of `org`;
+both still work, so a machine configured before the rename keeps its trust
+material.
 
 Every field of the section is also settable from the environment, which wins
 over both files — the shape a CI runner wants for material it must not commit:
