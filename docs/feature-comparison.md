@@ -16,7 +16,7 @@ title: Feature Comparison
 | Has a lockfile                   |:white_check_mark:|:white_check_mark:| `pnpm-lock.yaml`, `package-lock.json`. |
 | [Overrides support]              |:white_check_mark:|:white_check_mark:|
 | Content-addressable storage      |:white_check_mark:|:x:               |
-| [Dynamic package execution]      |:white_check_mark:|:white_check_mark:| `pnpm dlx`, `npx`. |
+| [Dynamic package execution]      |:white_check_mark:|:white_check_mark:| `pnx`, `npx`. |
 | [Side-effects cache]             |:white_check_mark:|:x:               |
 | [Catalogs]                       |:white_check_mark:|:x:               |
 | [Config dependencies]            |:white_check_mark:|:x:               |
