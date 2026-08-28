@@ -31,7 +31,7 @@ export const packageManagerColumns = [
   {
     key: 'pnpm12',
     legend: 'pnpm 🦀',
-    mdLegend: '[pnpm 🦀](https://github.com/pnpm/pacquet)',
+    mdLegend: '[pnpm 🦀](/blog/releases/12.0)',
     color: '#fbae00',
     displayVersion: '12',
     mascot: '🦀',

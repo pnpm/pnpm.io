@@ -30,7 +30,7 @@ Each row's label lists which of `cache`, `trusted lockfile`, and `node_modules` 
 
 The app's [`alotta-files` package.json](https://github.com/pnpm/benchmarks/blob/main/fixtures/alotta-files/package.json)
 
-| action  | cache | trusted lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | [pnpm + pnpr](/pnpr/install-acceleration) |
+| action  | cache | trusted lockfile | node_modules| npm | pnpm | [pnpm 🦀](/blog/releases/12.0) | [pnpm + pnpr](/pnpr/install-acceleration) |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
 | install |   |   |   | 45.9s | 8.2s | 5s | 3.3s |
 | install |   | ✔ |   | 11.5s | 4.7s | 3.2s | 3.2s |
@@ -46,9 +46,9 @@ The app's [`alotta-files` package.json](https://github.com/pnpm/benchmarks/blob/
 
 ### pnpm vs pnpm 🦀
 
-pnpm v12 will use a new installation engine for fetching and linking written in Rust. See [pacquet](https://github.com/pnpm/pacquet).
+pnpm v12 will use a new installation engine for fetching and linking written in Rust. See [pacquet](/blog/releases/12.0).
 
-| action  | cache | trusted lockfile | node_modules| pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) |
+| action  | cache | trusted lockfile | node_modules| pnpm | [pnpm 🦀](/blog/releases/12.0) |
 | ---     | ---   | ---      | ---         | --- | --- |
 | install |   |   |   | 8.2s | 5s |
 | install |   | ✔ |   | 4.7s | 3.2s |
