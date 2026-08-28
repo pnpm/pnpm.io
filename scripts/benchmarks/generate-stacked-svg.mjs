@@ -2,7 +2,10 @@
 // the gray extension is the additional time pnpm 11 takes. Total bar length
 // equals pnpm 11's time, so you can see at a glance how much faster v12 is.
 
-const getMax = (results) => Math.max(...results.map((r) => r.v11))
+// Both releases, not just pnpm 11: the gray bar is normally the longer of the
+// two, but nothing guarantees it. Scaling to v11 alone would send a scenario
+// where pnpm 12 came out slower straight off the right edge of the graph.
+const getMax = (results) => Math.max(...results.flatMap(({ v11, v12 }) => [v11, v12]))
 
 // `nodeVersion`, `formattedNow`: see the note in `generate-svg.mjs`.
 export default (results, formattedNow, nodeVersion) => {

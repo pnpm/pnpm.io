@@ -200,6 +200,6 @@ export const nodeVersionScenarios = {
 export const fixtureHeadings = {
   'alotta-files': {
     title: 'Lots of Files',
-    intro: "The app's `package.json` [here](https://github.com/pnpm/benchmarks/blob/main/fixtures/alotta-files/package.json)",
+    intro: "The app's [`alotta-files` package.json](https://github.com/pnpm/benchmarks/blob/main/fixtures/alotta-files/package.json)",
   },
 }

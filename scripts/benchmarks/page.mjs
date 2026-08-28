@@ -265,8 +265,14 @@ function formatMeasuredAt (iso) {
 
 /**
  * The manifest crosses a repository boundary, so what it is missing is worth
- * saying plainly. A column with no numbers behind it would otherwise surface as
- * `undefined` somewhere in the middle of a table.
+ * saying plainly — and worth catching before anything is written rather than
+ * after.
+ *
+ * Every scenario is checked down to the number, not just to the object holding
+ * it. A missing or unmeasurable timing is not an error anywhere downstream: it
+ * formats as `NaN` in a table cell and renders as a `NaN`-wide bar, which is an
+ * SVG that draws nothing and a page that publishes a hole. Failing the render
+ * is the only way that becomes visible.
  */
 function assertManifest (manifest) {
   for (const field of ['measuredAt', 'node', 'pnpr', 'network', 'fixtures', 'nodeVersions']) {
@@ -276,18 +282,35 @@ function assertManifest (manifest) {
   }
   for (const fixture of manifest.fixtures) {
     for (const { key } of packageManagerColumns) {
-      if (!fixture.packageManagers?.[key]?.results) {
+      const results = fixture.packageManagers?.[key]?.results
+      if (!results) {
         throw new Error(
           `The benchmark manifest has no results for ${key} on the ${fixture.name} fixture. ` +
           'Either the benchmark stopped measuring it, or the column outlived the measurement — ' +
           'drop it from `columns.mjs`.'
         )
       }
+      assertTimings(results, Object.keys(installScenarios), `${key} on the ${fixture.name} fixture`)
     }
   }
   for (const { key } of nodeVersionManagerColumns) {
-    if (!manifest.nodeVersions.managers?.[key]?.results) {
+    const results = manifest.nodeVersions.managers?.[key]?.results
+    if (!results) {
       throw new Error(`The benchmark manifest has no Node.js version management results for ${key}.`)
+    }
+    assertTimings(results, Object.keys(nodeVersionScenarios), `${key} in the Node.js section`)
+  }
+}
+
+/** Every scenario the page draws has to be a duration, and durations are finite and not negative. */
+function assertTimings (results, scenarios, subject) {
+  for (const scenario of scenarios) {
+    const value = results[scenario]
+    if (!Number.isFinite(value) || value < 0) {
+      throw new Error(
+        `The benchmark manifest reports \`${scenario}\` for ${subject} as ${JSON.stringify(value)}, ` +
+        'which is not a duration the page can draw.'
+      )
     }
   }
 }

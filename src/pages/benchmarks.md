@@ -28,7 +28,7 @@ Each row's label lists which of `cache`, `trusted lockfile`, and `node_modules` 
 
 ## Lots of Files
 
-The app's `package.json` [here](https://github.com/pnpm/benchmarks/blob/main/fixtures/alotta-files/package.json)
+The app's [`alotta-files` package.json](https://github.com/pnpm/benchmarks/blob/main/fixtures/alotta-files/package.json)
 
 | action  | cache | trusted lockfile | node_modules| npm | pnpm | [pnpm 🦀](https://github.com/pnpm/pacquet) | [pnpm + pnpr](/pnpr/install-acceleration) |
 | ---     | ---   | ---      | ---         | --- | --- | --- | --- |
