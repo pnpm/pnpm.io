@@ -76,10 +76,11 @@ The repository declares eligibility, and nothing else:
 pnprServer: http://127.0.0.1:7677
 allowBuilds:
   native-addon: true
-remoteSideEffectsCache:
-  organization: acme
-  packages:
-    - native-addon
+sideEffectsCache:
+  remote:
+    organization: acme
+    packages:
+      - native-addon
 ```
 
 `packages` is an independent allowlist: a package is only a candidate when it is
@@ -95,10 +96,16 @@ turn the machine's key into a signing oracle. Those fields come from the [global
 configuration file](/cli/config) instead, which travels with the machine:
 
 ```yaml title="~/.config/pnpm/config.yaml"
-remoteSideEffectsCache:
-  trustedKeys:
-    acme-2026: '<base64 P-256 SubjectPublicKeyInfo DER public key>'
+sideEffectsCache:
+  remote:
+    trustedKeys:
+      acme-2026: '<base64 P-256 SubjectPublicKeyInfo DER public key>'
 ```
+
+The repository and the machine each declare one half of the same section, and
+they compose: neither file drops what the other set. `remoteSideEffectsCache` is
+the older spelling of `sideEffectsCache.remote` and still works, so a machine
+configured before the rename keeps its trust material.
 
 Every field of the section is also settable from the environment, which wins
 over both files — the shape a CI runner wants for material it must not commit:
