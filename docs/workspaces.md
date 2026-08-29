@@ -287,7 +287,10 @@ When executing commands recursively in a workspace, execute them on the root wor
 * Default: **false**
 * Type: **Boolean**
 
-When set to `true`, no workspace cycle warnings will be printed.
+When set to `true`, no workspace dependency cycle warnings will be printed.
+It also downgrades an `ERR_PNPM_TASK_CYCLE` from a recursive run to a warning.
+The tasks in that cycle then have no guaranteed order relative to each other.
+See [Workspace task orchestration](./workspace-task-orchestration.md#cycles).
 
 ### disallowWorkspaceCycles
 

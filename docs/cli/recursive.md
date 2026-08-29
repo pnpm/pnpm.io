@@ -84,8 +84,10 @@ pnpm -r --no-bail test
 * Default: **true**
 * Type: **Boolean**
 
-When `true`, packages are sorted topologically (dependencies before dependents).
-Pass `--no-sort` to disable.
+When `true`, commands follow the workspace dependency graph. Recursive `run`
+also applies relationships from the [`tasks` setting]. Pass `--no-sort` to
+remove graph ordering. This also makes `tasks`, `--reverse`, and `--resume-from`
+inapplicable.
 
 Example:
 ```sh
@@ -97,7 +99,8 @@ pnpm -r --no-sort test
 * Default: **false**
 * Type: **boolean**
 
-When `true`, the order of packages is reversed.
+When `true`, dependency edges are reversed. For recursive `run`, this reverses
+the resolved task graph, including relationships declared with `dependsOn`.
 
 ```
 pnpm -r --reverse run clean
@@ -108,3 +111,4 @@ pnpm -r --reverse run clean
 [Read more about filtering.](../filtering.md)
 
 [includeWorkspaceRoot]: ../workspaces.md#includeworkspaceroot
+[`tasks` setting]: ../workspace-task-orchestration.md
