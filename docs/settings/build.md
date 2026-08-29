@@ -29,7 +29,7 @@ node_modules.
 ### sideEffectsCache
 
 * Default: **true**
-* Type: **Boolean**
+* Type: **Boolean or Object**
 
 Use and cache the results of (pre/post)install hooks.
 
@@ -44,14 +44,37 @@ You may want to disable this setting if:
 
 :::
 
+An object says the same thing in more detail, and is the canonical way to
+declare the remote tier:
+
+```yaml title="pnpm-workspace.yaml"
+sideEffectsCache:
+  read: true
+  write: true
+  remote:
+    org: acme
+    packages:
+      - native-addon
+```
+
+* `read` — restore a build from the cache when one is present. Default **true**.
+* `write` — save a package's build output to the cache. Default **true**.
+* `remote` — reuse builds across machines; see below.
+
+`sideEffectsCache: true` is the shorthand for reading and writing, and is what
+the setting meant before it grew a remote tier. Writing without reading
+(`read: false, write: true`) populates a cache the run never consumes, which is
+what a job that warms one for others wants.
+
 ### sideEffectsCacheReadonly
 
 * Default: **false**
 * Type: **Boolean**
 
 Only use the side effects cache if present, do not create it for new packages.
+The older spelling of `sideEffectsCache: { read: true, write: false }`.
 
-### remoteSideEffectsCache
+### sideEffectsCache.remote
 
 Added in: v11.25.0 and v12.0.0
 
@@ -71,11 +94,15 @@ A repository declares eligibility and nothing else:
 pnprServer: http://127.0.0.1:7677
 allowBuilds:
   native-addon: true
-remoteSideEffectsCache:
-  organization: acme
-  packages:
-    - native-addon
+sideEffectsCache:
+  remote:
+    org: acme
+    packages:
+      - native-addon
 ```
+
+Declaring only `remote` leaves `read` and `write` at their defaults, so the
+local cache keeps working as it did.
 
 `packages` is an eligibility list, not a permission: a package is only a
 candidate when it also passes [`allowBuilds`](#allowbuilds), has
@@ -98,6 +125,19 @@ Any cache failure — an unreachable server, an unverifiable signature, an
 incompatible platform, a bad blob — falls back to the ordinary local build. See
 [Shared side-effects cache](/pnpr/shared-side-effects-cache) for the full setup,
 including the server flag, the trust material, and how an artifact is published.
+
+:::note
+
+`remoteSideEffectsCache` is the older spelling of this setting, and
+`organization` of its `org` field; both still work.
+
+The two spellings are merged, not chosen between: a field set under both takes
+its value from `sideEffectsCache.remote`, and a field set under only one is kept
+either way. That is what lets a repository declare the org in
+`pnpm-workspace.yaml` while the machine supplies the signing key from the global
+config under whichever spelling it already used.
+
+:::
 
 ### unsafePerm
 

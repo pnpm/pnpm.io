@@ -268,7 +268,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [childConcurrency](./settings/build.md#childconcurrency)
 * [sideEffectsCache](./settings/build.md#sideeffectscache)
 * [sideEffectsCacheReadonly](./settings/build.md#sideeffectscachereadonly)
-* [remoteSideEffectsCache](./settings/build.md#remotesideeffectscache)
+* [sideEffectsCache.remote](./settings/build.md#sideeffectscacheremote)
 * [unsafePerm](./settings/build.md#unsafeperm)
 * [nodeOptions](./settings/build.md#nodeoptions)
 * [verifyDepsBeforeRun](./settings/build.md#verifydepsbeforerun)

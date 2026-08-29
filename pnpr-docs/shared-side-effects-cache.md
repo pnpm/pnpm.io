@@ -76,10 +76,11 @@ The repository declares eligibility, and nothing else:
 pnprServer: http://127.0.0.1:7677
 allowBuilds:
   native-addon: true
-remoteSideEffectsCache:
-  organization: acme
-  packages:
-    - native-addon
+sideEffectsCache:
+  remote:
+    org: acme
+    packages:
+      - native-addon
 ```
 
 `packages` is an independent allowlist: a package is only a candidate when it is
@@ -95,27 +96,37 @@ turn the machine's key into a signing oracle. Those fields come from the [global
 configuration file](/cli/config) instead, which travels with the machine:
 
 ```yaml title="~/.config/pnpm/config.yaml"
-remoteSideEffectsCache:
-  trustedKeys:
-    acme-2026: '<base64 P-256 SubjectPublicKeyInfo DER public key>'
+sideEffectsCache:
+  remote:
+    trustedKeys:
+      acme-2026: '<base64 P-256 SubjectPublicKeyInfo DER public key>'
 ```
+
+The repository and the machine each declare one half of the same section, and
+they compose: neither file drops what the other set. `remoteSideEffectsCache` is
+the older spelling of `sideEffectsCache.remote`, and `organization` of `org`;
+both still work, so a machine configured before the rename keeps its trust
+material.
 
 Every field of the section is also settable from the environment, which wins
 over both files — the shape a CI runner wants for material it must not commit:
 
 | Environment variable | Setting |
 | --- | --- |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_TRUSTED_KEYS` | `trustedKeys` (JSON object) |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_PRIVATE_KEY` | `privateKey` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_PUBLISH` | `publish` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_KEY_ID` | `keyId` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_BUILDER_ID` | `builderId` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_IMAGE_DIGEST` | `imageDigest` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_ARCHITECTURE_BASELINE` | `architectureBaseline` |
-| `PNPM_REMOTE_SIDE_EFFECTS_CACHE_BUILD_ENV` | `buildEnv` (JSON object) |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_TRUSTED_KEYS` | `trustedKeys` (JSON object) |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_PRIVATE_KEY` | `privateKey` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_PUBLISH` | `publish` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_KEY_ID` | `keyId` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_BUILDER_ID` | `builderId` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_IMAGE_DIGEST` | `imageDigest` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_ARCHITECTURE_BASELINE` | `architectureBaseline` |
+| `PNPM_SIDE_EFFECTS_CACHE_REMOTE_BUILD_ENV` | `buildEnv` (JSON object) |
+
+The `PNPM_REMOTE_SIDE_EFFECTS_CACHE_*` names still work, and the ones above win
+when both are set.
 
 The repository and the machine each contribute the half they own: a workspace
-naming `organization` and `packages` keeps whatever trust material the global
+naming `org` and `packages` keeps whatever trust material the global
 file or the environment supplied.
 
 ## Publishing from a builder
@@ -124,10 +135,10 @@ Publication is off unless a build explicitly turns it on, so only a trusted
 builder uploads the diff its own build produced:
 
 ```sh
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_PUBLISH=true
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_KEY_ID=acme-2026
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_PRIVATE_KEY='<base64 P-256 PKCS#8 DER private key>'
-export PNPM_REMOTE_SIDE_EFFECTS_CACHE_BUILDER_ID='ci/main/42'
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_PUBLISH=true
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_KEY_ID=acme-2026
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_PRIVATE_KEY='<base64 P-256 PKCS#8 DER private key>'
+export PNPM_SIDE_EFFECTS_CACHE_REMOTE_BUILDER_ID='ci/main/42'
 ```
 
 `pnpm install` then runs the lifecycle scripts as usual, captures the actual
@@ -135,6 +146,14 @@ post-build diff, signs it, and stores it with
 `PUT /-/pnpr/v0/artifacts`. `imageDigest`, `architectureBaseline` and `buildEnv`
 are optional provenance recorded in the signed payload. Never commit the private
 key.
+
+A published artifact is immutable, the way a published `name@version` is. One
+input key and one set of compatibility constraints admit one artifact, so
+publishing a different build over an existing one answers `409 Conflict` while
+republishing the identical one succeeds unchanged. A consumer that resolved an
+artifact once is therefore never handed different bytes for it later, and no
+publishing credential can replace one — releasing a claimed slot is an operator
+action against the server's storage.
 
 Publication does not switch restoring off: a builder still looks the artifact up
 first, and a hit skips the build the same way it does anywhere else — which
