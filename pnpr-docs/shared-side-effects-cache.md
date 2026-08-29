@@ -147,6 +147,14 @@ post-build diff, signs it, and stores it with
 are optional provenance recorded in the signed payload. Never commit the private
 key.
 
+A published artifact is immutable, the way a published `name@version` is. One
+input key and one set of compatibility constraints admit one artifact, so
+publishing a different build over an existing one answers `409 Conflict` while
+republishing the identical one succeeds unchanged. A consumer that resolved an
+artifact once is therefore never handed different bytes for it later, and no
+publishing credential can replace one — releasing a claimed slot is an operator
+action against the server's storage.
+
 Publication does not switch restoring off: a builder still looks the artifact up
 first, and a hit skips the build the same way it does anywhere else — which
 leaves nothing new to sign, since only an actual local build produces a diff to
