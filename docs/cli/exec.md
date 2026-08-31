@@ -65,7 +65,12 @@ Do not hide prefix when running commands in parallel.
 
 ### --resume-from &lt;package_name\>
 
-Resume execution from a particular project. This can be useful if you are working with a large workspace and you want to restart a build at a particular project without running through all of the projects that precede it in the build order.
+Resume execution at a particular project. pnpm skips the projects a matching
+record of the previous recursive `exec` says already passed. Without such a
+record, it omits the named project's transitive dependencies, but still runs
+the named project, its dependents, and unrelated projects in the selected
+graph. See [Workspace task
+orchestration](../workspace-task-orchestration.md#--resume-from-package_name).
 
 ### --parallel
 

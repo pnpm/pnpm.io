@@ -13,7 +13,12 @@ pnpm logout [--registry <url>] [--scope <scope>]
 
 If a scope is provided, the registry associated with that scope is used.
 
-The token is removed from [`<pnpm config>/auth.ini`](../npmrc.md#auth-file-locations).
+pnpm 12.1 and newer removes a token written by `pnpm login` from the global
+[`config.yaml`](./config.md), and also checks
+[`<pnpm config>/auth.ini`](../npmrc.md#auth-file-locations) for a token written
+by an earlier version. A token supplied by `.npmrc`, another config file, or the
+environment is revoked at the registry but must be removed from that source
+manually.
 
 ## Options
 

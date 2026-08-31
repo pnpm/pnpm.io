@@ -10,13 +10,20 @@ pnpr keeps two kinds of data:
   approval through [staged publishing](endpoints.md#staged-publishing-endpoints)
   are held here too, under a reserved `.staged/` namespace.
 - **Cache** — the disposable mirror of upstream registries plus the resolver
-  cache, lockfile-verdict cache, and S3 upload staging scratch. Lives under
-  `cache` (defaults to `<storage>/.pnpr-cache`).
+  cache, lockfile-verdict cache, local shared-artifact store, and S3 upload
+  staging scratch. Lives under `cache` (defaults to
+  `<storage>/.pnpr-cache`).
 
-By default both are local directories. Adding an `s3:` block moves the **hosted**
-store into an S3-compatible object store, so the durable data is replicated by
-the provider and can be shared by several stateless pnpr replicas. The cache
-always stays on local disk — only the hosted package store is pluggable.
+By default both are local directories. Adding an `s3:` block moves the
+**hosted** store and the enabled **shared-artifact** store into an S3-compatible
+object store, so they can be shared by several stateless pnpr replicas. The
+ordinary upstream and resolver cache stays on local disk.
+
+Shared artifacts use a reserved `.pnpr-artifacts/v0/` namespace under the
+configured prefix; hosted package objects keep their normal namespace. Without
+S3, artifacts live under `<cache>/shared-artifacts/v0`. They are rebuildable
+cache data rather than authoritative packages, but publication slots are
+immutable while they exist.
 
 Because any S3-compatible endpoint works, this also covers **Cloudflare R2**,
 **MinIO**, **Backblaze B2**, **Wasabi**, etc. — point `endpoint` at the right
@@ -43,7 +50,7 @@ s3:
 
 | Key | Required | Description |
 | --- | --- | --- |
-| `bucket` | yes | Bucket the hosted packages are stored in. |
+| `bucket` | yes | Bucket the hosted packages and enabled shared artifacts are stored in. |
 | `region` | no | AWS S3 needs a real region (e.g. `us-east-1`); Cloudflare R2 uses `auto`. |
 | `endpoint` | no | Custom endpoint for S3-compatible providers. Omit for AWS S3; for R2 it's `https://<account-id>.r2.cloudflarestorage.com`; for MinIO it's e.g. `http://127.0.0.1:9000`. |
 | `prefix` | no | Key prefix every object is stored under. |
@@ -70,6 +77,12 @@ locking:
   object is tolerated, but an object with different bytes left by a concurrent
   publisher of the same `name@version` is never overwritten; the losing publish
   gets a `409` before it writes any packument.
+- **Shared artifacts** — immutable artifact objects use create-only writes, and
+  the quota counter uses conditional updates across replicas. A publication
+  whose compatibility set overlaps an existing artifact for the same input key
+  gets a `409`; a byte-identical retry succeeds. After an ambiguous object-store
+  write failure, pnpr reclaims blobs referenced by no stored envelope and
+  rebuilds quota once active publications drain.
 
 This applies to the S3 backend. The local filesystem backend keeps its
 single-process behavior, since the shared-store race is specific to replicas
@@ -103,6 +116,9 @@ registries:
     sources: [local, npmjs]
 
 defaultRegistry: main
+
+artifacts:
+  enabled: true
 ```
 
 ```sh
