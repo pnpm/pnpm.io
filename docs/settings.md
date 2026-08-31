@@ -157,6 +157,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [nodePackageMapType](./settings/node-modules.md#nodepackagemaptype)
 * [symlink](./settings/node-modules.md#symlink)
 * [enableModulesDir](./settings/node-modules.md#enablemodulesdir)
+* [confirmModulesPurge](./settings/node-modules.md#confirmmodulespurge)
 * [virtualStoreDir](./settings/node-modules.md#virtualstoredir)
 * [virtualStoreDirMaxLength](./settings/node-modules.md#virtualstoredirmaxlength)
 * [virtualStoreOnly](./settings/node-modules.md#virtualstoreonly)

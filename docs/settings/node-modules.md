@@ -89,6 +89,27 @@ mount a modules directory with FUSE: [@pnpm/mount-modules].
 
 [@pnpm/mount-modules]: https://www.npmjs.com/package/@pnpm/mount-modules
 
+### confirmModulesPurge
+
+* Default: **true** (confirmation is disabled in CI)
+* Type: **Boolean**
+
+When pnpm has to recreate a `node_modules` directory because its existing
+layout is incompatible with the current install settings, this setting controls
+whether pnpm asks for confirmation first. Set it to `false` to let pnpm remove
+and reinstall the directory without prompting.
+
+```yaml title="pnpm-workspace.yaml"
+confirmModulesPurge: false
+```
+
+:::note
+
+This setting is supported by pnpm v11. pnpm v12 does not implement it and warns
+that it belongs to pnpm v11.
+
+:::
+
 ### virtualStoreDir
 
 * Default: **node_modules/.pnpm**
