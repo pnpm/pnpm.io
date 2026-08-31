@@ -148,12 +148,12 @@ the cycle's members, and may run them in any order relative to each other.
 
 The named package's requested task is the resume point.
 
-pnpm records which tasks pass as a recursive run proceeds. When that record
-belongs to the same invocation — the same selected projects, script bodies,
-command arguments, and script-affecting settings — `--resume-from` skips
-exactly the tasks the record says passed, wherever they sit in the graph, and
-runs everything else. A record left by a different invocation is ignored rather
-than trusted.
+pnpm records which tasks pass as a recursive `run` or `exec` proceeds. When that
+record belongs to the same invocation — the same selected projects, command,
+arguments, and execution-affecting settings (including script bodies for
+`run`) — `--resume-from` skips exactly the tasks the record says passed,
+wherever they sit in the graph, and runs everything else. A record left by a
+different invocation is ignored rather than trusted.
 
 Without a usable record — a first run, a run interrupted before any task
 passed, or a `node_modules` directory pnpm cannot write to — pnpm falls back to
@@ -194,8 +194,17 @@ print each task's output together after it finishes.
 
 The `tasks` declarations configure recursive `run`. Recursive `exec` follows
 workspace project dependencies but has no script task name, so it does not join
-declared `dependsOn` relationships.
+declared `dependsOn` relationships. It still uses the dependency-aware
+scheduler and the persisted `--resume-from` state described above.
 
 `--no-sort` removes graph ordering, and `--parallel` implies `--no-sort`.
 Consequently, both options ignore `tasks` declarations; `--reverse` and
 `--resume-from` also have no ordering edges to transform.
+
+## Other dependency-aware workspace commands
+
+Workspace install, rebuild, pack, publish, stage, and lifecycle work uses the
+same ready-queue scheduling principle: work for a project starts as soon as its
+workspace dependencies finish. These commands follow the workspace package
+graph, not the script relationships under `tasks`, and no longer wait for an
+unrelated topological group to finish first.

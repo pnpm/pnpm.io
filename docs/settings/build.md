@@ -85,8 +85,9 @@ Opt in to reusing a dependency's build output across machines, by restoring
 signed, organization-scoped artifacts through a [pnpr](/pnpr) server instead of
 running the package's lifecycle scripts locally. This is a proof of concept: it
 is off unless configured, it needs a pnpr server started with
-`resolver.artifacts: true`, and it only restores artifacts on Linux/glibc x64
-and arm64.
+`artifacts.enabled: true`, and it restores artifacts on Linux/glibc, macOS, and
+Windows, on x64 and arm64. Other operating systems and libc families build
+locally.
 
 A repository declares eligibility and nothing else:
 
@@ -125,6 +126,12 @@ Any cache failure — an unreachable server, an unverifiable signature, an
 incompatible platform, a bad blob — falls back to the ordinary local build. See
 [Shared side-effects cache](/pnpr/shared-side-effects-cache) for the full setup,
 including the server flag, the trust material, and how an artifact is published.
+
+Since v11.25.0 and v12.1.0, a restored artifact is saved in the shared store
+together with its signed origin. Before a later install reuses it, pnpm checks
+the signature again against the machine's current keys and revalidates its
+owner, package and source identity, platform, policy, and stored files. A bad
+remote variant is quarantined for that pnpr server and is not selected again.
 
 :::note
 

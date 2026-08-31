@@ -3,17 +3,25 @@ id: npmrc
 title: "Authentication Settings"
 ---
 
-The settings on this page contain sensitive credentials and are stored in INI-formatted files. Do not commit these files to your repository.
+The settings on this page contain sensitive credentials. Most use
+npm-compatible INI files; the structured [`_auth`](#_auth) setting lives in the
+global YAML config. Do not commit credential files to your repository.
 
 For non-sensitive settings (proxy, SSL, registries, etc.), see [Settings (pnpm-workspace.yaml)](./settings.md).
 
 ## Auth file locations
 
-pnpm reads authentication settings from the following files, in order of priority (highest first):
+pnpm reads npm-compatible INI authentication settings from the following
+files, in order of priority (highest first):
 
 1. **`<workspace root>/.npmrc`** — project-level auth. This file should be listed in `.gitignore`.
-2. **`<pnpm config>/auth.ini`** — the primary user-level auth file. `pnpm login` writes tokens here.
+2. **`<pnpm config>/auth.ini`** — the legacy user-level auth file. pnpm 11
+   writes login tokens here; pnpm 12.1 and newer writes structured `_auth` to
+   the global `config.yaml` instead, but continues to read this file.
 3. **`~/.npmrc`** — read as a fallback for easier migration from npm. Use the [`npmrcAuthFile`](./settings/other.md#npmrcauthfile) setting to point to a different file.
+
+The global `config.yaml` may additionally carry pnpm's structured
+[`_auth`](#_auth) setting. pnpm 12.1 and newer writes login tokens there.
 
 The `<pnpm config>` directory is:
 
@@ -113,7 +121,10 @@ pnpm can use different auth tokens for different package scopes, even when those
 
 When installing or publishing `@org-a/*`, pnpm uses `ORG_A_TOKEN`; for `@org-b/*`, it uses `ORG_B_TOKEN`. Optionally, packages without a matching scope fall back to the registry-wide token (`FALLBACK_TOKEN` above), when provided.
 
-`pnpm login --registry=https://npm.pkg.github.com --scope=@org-a` writes the token to the same scope-specific auth key.
+On pnpm 11, `pnpm login --registry=https://npm.pkg.github.com --scope=@org-a`
+writes the token to the same scope-specific auth key. pnpm 12.1 and newer writes
+the equivalent scoped entry under `_auth` in the global `config.yaml` and adds
+the scope to that registry's global `registries` declaration.
 
 This is useful for registries (such as GitHub Packages) that issue tokens per organization or per scope. Previously, auth was selected only by registry URL, so two scopes sharing a registry had to share a token.
 
@@ -171,12 +182,21 @@ Both `pnpm_config__auth` (lowercase) and `PNPM_CONFIG__AUTH` (all-caps, the conv
 
 Each entry also infers a trusted registry route: `@` routes the default registry (and `pnpm add <pkg>` resolves there), and `@org` routes that scope. Because the credential and its destination host arrive in one trusted value, repo-controlled config cannot redirect the token to a different host.
 
-Precedence, from highest to lowest:
+Since v12.1.0, `pnpm login` writes the token in this shape. An unscoped login
+adds an `@` credential without changing the machine's default registry. A
+scoped login adds that scope to the same URL under the global `registries`
+setting; logging the scope into another registry moves both its credential and
+its route. `pnpm logout` removes credentials pnpm wrote from `config.yaml` and
+from the legacy `auth.ini`, while leaving registry routes in place.
 
-1. CLI flags (`--registry`, `--@scope:registry`)
-2. `pnpm_config__auth` / `PNPM_CONFIG__AUTH`
-3. global `config.yaml` `_auth`
-4. `pnpm-workspace.yaml`
+The `pnpm_config__auth` / `PNPM_CONFIG__AUTH` environment value may deliberately
+route a scope or the default registry and overrides repository configuration,
+which lets CI mandate a proxy. A route inferred from `_auth` stored in the
+global `config.yaml` is only a fallback: an explicit `registry` or `registries`
+declaration in `pnpm-workspace.yaml` or the global config wins. The stored
+credential still authenticates requests to its URL; it simply does not redirect
+packages away from an explicitly selected registry. CLI registry flags remain
+the highest-priority route.
 
 Parsing is strict: a malformed value (bad JSON, wrong shape, an invalid registry URL or scope, or an unsupported credential field) fails fast with an error rather than being silently dropped.
 

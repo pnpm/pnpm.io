@@ -4,7 +4,7 @@ title: HTTP endpoints
 ---
 
 pnpr exposes a set of always-on endpoints (health, user accounts, and tokens)
-plus two surfaces:
+plus three surfaces:
 
 - **Registry surface** - npm-compatible package, publish, staged-publish, and
   team endpoints. Served exactly when at least one registry is declared under
@@ -13,8 +13,10 @@ plus two surfaces:
   these routes aren't mounted at all — they answer `404`, not `403`.
 - **Resolver surface** (`resolver.enabled`) - pnpr install-accelerator
   endpoints under `/-/pnpr`.
+- **Shared-artifact surface** (`artifacts.enabled`) - signed artifact publish,
+  lookup, and blob endpoints under `/-/pnpr`. It may run without the resolver.
 
-See [Configuration](configuration.md#the-registry-surface-and-resolver) for
+See [Configuration](configuration.md#registry-resolver-and-artifact-surfaces) for
 the config keys and [CLI reference](cli.md) for the command-line overrides.
 
 ## Always available
@@ -62,14 +64,16 @@ Every request routes through the registry graph:
 The endpoint tables below show path-less shapes; each is equally available
 under a `/~<name>/` prefix.
 
-## Resolver endpoints
+## pnpr protocol endpoints
 
-The resolver endpoints are mounted when `resolver.enabled` is true. The
+The capability handshake is mounted when either `resolver.enabled` or
+`artifacts.enabled` is true. Each protocol advertises its versions
+independently, so resolver-only and artifact-only tiers are both valid. The
 `POST` endpoints require a valid pnpr `Authorization` header.
 
 | Method | Path | Description |
 | --- | --- | --- |
-| `GET` | `/-/pnpr` | Capability handshake. Returns supported protocol versions, currently `{"pnpr":{"versions":[0],"artifacts":[0]}}`. `artifacts` lists the shared-artifact protocol versions the server speaks, and is `[]` when [`resolver.artifacts`](configuration.md#the-registry-surface-and-resolver) is off. A 404 means the server has no compatible resolver surface. |
+| `GET` | `/-/pnpr` | Capability handshake. Returns `versions` for resolver protocols, `fixLockfile` for resolver versions that support lockfile repair, and `artifacts` for shared-artifact protocols. Each is currently `[0]` when its surface is enabled and `[]` otherwise. A 404 means both protocol surfaces are off. |
 | `POST` | `/-/pnpr/v0/resolve` | Resolves one project or workspace against the registries and policy sent by the client. Returns `application/x-ndjson` frames. |
 | `POST` | `/-/pnpr/v0/verify-lockfile` | Verifies an existing lockfile under the client's registry and policy settings without resolving again. Returns `application/x-ndjson` frames. |
 
@@ -78,7 +82,10 @@ The resolver endpoints are mounted when `resolver.enabled` is true. The
 `overrides`, `lockfile`, `frozenLockfile`, `preferFrozenLockfile`,
 `ignoreManifestCheck`, `trustLockfile`, `minimumReleaseAge`,
 `minimumReleaseAgeExclude`, `minimumReleaseAgeIgnoreMissingTime`,
-`trustPolicy`, `trustPolicyExclude`, and `trustPolicyIgnoreAfter`.
+`trustPolicy`, `trustPolicyExclude`, `trustPolicyIgnoreAfter`, and
+`fixLockfile`. Since v0.1.0-alpha.9, a repair request regenerates broken
+lockfile metadata while retaining compatible locked versions, including for a
+filtered install.
 
 Every registry the request would make pnpr fetch from — the `registry` and
 `namedRegistries` origins, plus any direct `http(s)`/`git` URL in a dependency
@@ -103,7 +110,8 @@ The `resolve` response is an NDJSON stream:
 
 Added in: v0.1.0-alpha.8
 
-These three are mounted only when `resolver.artifacts` is also true. They serve
+These three are mounted when top-level `artifacts.enabled` is true, independently
+of `resolver.enabled`. They serve
 the [shared side-effects cache](shared-side-effects-cache.md) proof of concept
 and, like the other `POST` resolver endpoints, require a pnpr `Authorization`
 header. Artifacts are owner-scoped, and in this proof of concept an
@@ -111,7 +119,7 @@ organization's name must equal the authenticated username.
 
 | Method | Path | Description |
 | --- | --- | --- |
-| `PUT` | `/-/pnpr/v0/artifacts` | Stores one opaque signed envelope and its inline content-addressed blobs in the authenticated organization's namespace. At most eight variants per input key. |
+| `PUT` | `/-/pnpr/v0/artifacts` | Stores one immutable opaque signed envelope and its inline content-addressed blobs in the authenticated organization's namespace. At most eight variants per input key; a different artifact whose compatible consumers overlap an existing variant gets `409 Conflict`. |
 | `POST` | `/-/pnpr/v0/artifacts/resolve` | One batched lookup for candidate input keys. Returns at most eight signed variants per key; scanned envelope bytes plus the serialized response share one 16 MiB budget. |
 | `POST` | `/-/pnpr/v0/artifacts/blob` | Reads one owner-scoped blob by its SHA-512 integrity. |
 

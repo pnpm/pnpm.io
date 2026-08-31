@@ -9,8 +9,8 @@ Added in: pnpr v0.1.0-alpha.8, pnpm v11.25.0 and v12.0.0
 
 This is a proof of concept for
 [pnpm/rfcs#20](https://github.com/pnpm/rfcs/pull/20). It is off on both sides
-unless you turn it on, it restores artifacts on Linux/glibc only, and its
-protocol may change without notice. Lockfile pinning, persistent quarantine,
+unless you turn it on, and its protocol may change without notice. It supports
+Linux/glibc, macOS, and Windows on x64 and arm64. Lockfile pinning,
 publisher-owned artifacts, and key lifecycle policy are deliberately left out.
 
 :::
@@ -38,8 +38,17 @@ tarball, and which platform it belongs to.
 4. It downloads that variant's blobs with `POST /-/pnpr/v0/artifacts/blob`, one
    request per unique SHA-512, recomputing the digest before accepting the
    bytes, and hydrates them into the store.
-5. The restored side-effects map is selected before lifecycle scripts run, so
-   the package's scripts are not executed.
+5. The restored side-effects map and its signed origin are persisted in the
+   shared store, then selected before lifecycle scripts run, so the package's
+   scripts are not executed.
+
+On a later install, pnpm does not trust the persisted mapping merely because it
+is local. It verifies the envelope again against the current public key and
+checks its channel, owner, package and source identity, builder profile,
+platform, manifest, policy, and stored files. An invalid remote envelope is
+removed from consideration and quarantined for that pnpr server. The quarantine
+is persisted in the store, so the same bad variant is not retried on every
+install; another server remains an independent channel.
 
 Any failure along that path — an unreachable server, an unverifiable signature,
 an incompatible platform, a digest mismatch — falls back to the ordinary local
@@ -47,26 +56,34 @@ build. The feature can make an install faster; it can never make it fail.
 
 ## Enabling it on the server
 
-The artifact endpoints are part of the resolver surface and are off by default:
+The artifact surface is off by default and is independent of the resolver:
 
 ```yaml title="config.yaml"
-resolver:
+artifacts:
   enabled: true
-  artifacts: true
 ```
 
-With `artifacts: false` (the default) the three routes are not mounted at all,
-and the handshake at `GET /-/pnpr` does not advertise them.
+With `artifacts.enabled: false` (the default) the three routes are not mounted
+at all, and the handshake at `GET /-/pnpr` does not advertise them. Since pnpr
+v0.1.0-alpha.9, an artifact-only tier may set `resolver.enabled: false`, declare
+no registries, and enable only `artifacts`; pnpm 12.1 can connect to that tier.
+
+By default artifacts live at `<cache>/shared-artifacts/v0`. When the pnpr config
+has an [`s3:` block](storage.md), they live under the reserved
+`.pnpr-artifacts/v0/` namespace in that bucket instead. The S3 layout and
+conditional quota updates let several stateless pnpr replicas share one
+artifact tier.
 
 Artifacts are stored per owner. In this proof of concept an `organization`
 owner's name must equal the authenticated pnpr username, so the login name a
 client uses is the organization it may read and write. Publisher-owned artifacts
 are rejected until publisher discovery is defined.
 
-pnpr enforces its own storage bounds: at most eight variants per input key
-(serialized with a cross-process lock, so replicas sharing one cache agree),
-1 GiB per owner, and 10 GiB across the server's artifact cache. A lookup's
-scanned envelope bytes plus its serialized response share one 16 MiB budget.
+pnpr enforces its own storage bounds: at most eight variants per input key,
+1 GiB per owner, and 10 GiB across the server's artifact cache. Local storage
+serializes updates with an advisory lock; S3 replicas coordinate the quota
+counter with conditional object writes. A lookup's scanned envelope bytes plus
+its serialized response share one 16 MiB budget.
 
 ## Configuring a consumer
 
@@ -155,6 +172,14 @@ artifact once is therefore never handed different bytes for it later, and no
 publishing credential can replace one — releasing a claimed slot is an operator
 action against the server's storage.
 
+Immutability covers every consumer a variant can reach, not only an exactly
+equal compatibility tag. pnpr rejects a new variant when its compatibility set
+overlaps an existing variant for the same input key. A later `universal` build,
+a broader build, or a higher-floor build therefore cannot take precedence for a
+machine already served by an earlier artifact. Disjoint platform builds still
+coexist: different operating systems, architectures, or Node.js majors have no
+consumer in common.
+
 Publication does not switch restoring off: a builder still looks the artifact up
 first, and a hit skips the build the same way it does anywhere else — which
 leaves nothing new to sign, since only an actual local build produces a diff to
@@ -178,19 +203,26 @@ every machine that installs, under the same key id.
 An artifact says which platforms it is valid for, and the proof of concept
 defines one narrow vocabulary rather than interpreting claims it does not
 understand. `universal` is the positive claim for platform-independent output.
-The only tagged form is:
+The tagged forms are:
 
 ```text
 pnpm:v1:linux-<architecture>-node<major>-glibc<major>.<minor>
+pnpm:v1:darwin-<architecture>-node<major>-macos<major>.<minor>
+pnpm:v1:win32-<architecture>-node<major>-windows<major>.<minor>.<build>
 ```
 
 `architecture` is `x64` or `arm64`, and every numeric component is a canonical
 unsigned decimal. A consumer generates the tags for its own glibc version down
 to minor zero, most recent floor first — glibc 2.3 advertises `glibc2.3`,
 `glibc2.2`, `glibc2.1`, `glibc2.0` — and matching is exact against that ordered
-set, so an artifact built against a 2.1 floor serves a 2.3 consumer. A tagged
-match beats `universal`, and equal-rank variants are ordered by ascending signed
-envelope digest.
+set, so an artifact built against a 2.1 floor serves a 2.3 consumer.
+
+A macOS consumer advertises its product-version major and minor, and a Windows
+consumer advertises its NT kernel major, minor, and build. For both, the
+operating system, architecture, and Node.js major must match exactly, while the
+consumer's OS version must be at least the artifact's declared floor. The
+greatest compatible floor wins. A tagged match beats `universal`, and equal-rank
+variants are ordered by ascending signed-envelope digest.
 
 An unknown schema, platform, or dimension, and any malformed tag, is a miss. No
 other platform or libc family is treated as compatible by guessing.
@@ -215,8 +247,18 @@ decoded payload\0
 decoded DER signature
 ```
 
-Input keys begin with `dependency-side-effects:v1:` and carry no host platform
-identity; compatibility tags live in the signed payload instead. The signed
-package name and version, the source tarball integrity, and the owner must all
-match the candidate being installed, and organization eligibility is supplied by
-the caller and checked before lookup.
+Since pnpr v0.1.0-alpha.9, every candidate and signed payload carries a
+discriminated subject. Dependency side effects use
+`{ kind: 'dependency-side-effects', package, sourceIntegrity }` and an input key
+beginning with `dependency-side-effects:v1:`. The protocol also defines
+`{ kind: 'workspace-task', project, task }` with a `workspace-task:v1:` input
+key, so workspace-task artifacts cannot be confused with dependency builds.
+The current pnpm integration publishes and restores dependency side effects;
+the workspace-task subject reserves the protocol identity for task artifacts.
+
+Input keys carry no host platform identity; compatibility tags live in the
+signed payload instead. The artifact kind and input-key prefix must match the
+subject, and its input key, subject, and owner must match the candidate. For a
+dependency, that binds the signed package name and version and source tarball
+integrity to the package being installed. Organization eligibility is supplied
+independently by the caller and checked before lookup.

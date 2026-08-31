@@ -62,6 +62,12 @@ For frozen restores with an already-fresh lockfile, pnpm can use
 `POST /-/pnpr/v0/verify-lockfile` to get only the server-side trust verdict
 instead of resolving again.
 
+Since pnpr v0.1.0-alpha.9, `pnpm install --fix-lockfile` is forwarded as a
+repair request, including during filtered installs. The server regenerates
+broken lockfile metadata while retaining locked versions that remain
+compatible. The `fixLockfile` list in `GET /-/pnpr` tells the client which
+resolver protocol versions support that request.
+
 ## What a configured server does not cost
 
 Since pnpm v12.0.0-rc.6, an install skips the exchanges it doesn't need, so a

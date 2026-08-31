@@ -48,7 +48,8 @@ pnpr keeps two kinds of data:
 - **`storage`** — the source of truth: packages published to this server plus
   anything served in static mode. Back this up and keep it on a durable volume.
 - **`cache`** — the disposable mirror of upstream registries plus the resolver
-  store, resolver cache, lockfile-verdict cache, and S3 upload staging scratch.
+  store, resolver cache, lockfile-verdict cache, local shared-artifact store,
+  and S3 upload staging scratch.
   Safe to wipe at any time. Defaults to a `.pnpr-cache` subdirectory of
   `storage`; point it at a separate, ephemeral volume to keep cached upstream
   content off the durable disk.
@@ -373,9 +374,9 @@ least 16 bytes. When omitted, a fresh random secret is generated per process,
 which means private cache entries only survive for that process's lifetime —
 set an explicit secret to keep private caches warm across restarts.
 
-## The registry surface and `resolver`
+## Registry, resolver, and artifact surfaces
 
-pnpr exposes two HTTP surfaces:
+pnpr exposes three independently deployable HTTP surfaces:
 
 - The **npm registry surface** — packument and tarball reads, publish,
   unpublish, dist-tags, and search, on the path-less base and on every
@@ -384,29 +385,36 @@ pnpr exposes two HTTP surfaces:
   `--disable-registry` turns it off for one process.
 - The **resolver surface** — the pnpr install-accelerator routes
   (`GET /-/pnpr`, `POST /-/pnpr/v0/resolve`, and
-  `POST /-/pnpr/v0/verify-lockfile`):
+  `POST /-/pnpr/v0/verify-lockfile`). It is enabled by default; the CLI flag
+  `--disable-resolver` overrides the setting:
 
 ```yaml
 resolver:
   enabled: true
-  artifacts: false
 ```
 
-The resolver is enabled by default; the CLI flag `--disable-resolver`
-overrides the setting.
+- The **shared-artifact surface** — the three organization-scoped endpoints of
+  the [shared side-effects cache](shared-side-effects-cache.md) proof of
+  concept. It is off by default and is a top-level peer of `resolver`, so an
+  I/O-bound artifact tier can scale independently of a compute-bound resolver:
 
-`artifacts` mounts the three organization-scoped endpoints of the
-[shared side-effects cache](shared-side-effects-cache.md) proof of concept. It
-is `false` by default, and `--disable-resolver` turns it off with the rest of
-the surface. With it off, those routes are not mounted at all and the handshake
-does not advertise them.
+```yaml
+artifacts:
+  enabled: true
+```
+
+The CLI flag `--disable-artifacts` overrides this setting. With artifacts off,
+its routes are not mounted and the `GET /-/pnpr` handshake advertises an empty
+artifact-version list. The handshake itself is served when either the resolver
+or artifact surface is enabled, so an artifact-only tier is discoverable.
 
 Something must be served: a config with no registries (or the registry
-surface disabled by flag) and the resolver disabled is a startup error.
+surface disabled by flag), the resolver disabled, and artifacts disabled is a
+startup error.
 
 The health endpoint (`/-/ping`) and the account endpoints (login, whoami, and
 token management) are always served, whichever surfaces are enabled — so
-`pnpm login` works even against a resolver-only server. See
+`pnpm login` works even against a resolver-only or artifact-only server. See
 [HTTP endpoints](endpoints.md).
 
 ## `routes`
@@ -463,6 +471,7 @@ parsing, so secrets can be kept out of the file:
 
 ```yaml
 s3:
+  bucket: my-pnpr-packages
   accessKeyId: ${PNPR_S3_ACCESS_KEY_ID}
   secretAccessKey: ${PNPR_S3_SECRET_ACCESS_KEY}
 ```
