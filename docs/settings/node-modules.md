@@ -97,7 +97,8 @@ mount a modules directory with FUSE: [@pnpm/mount-modules].
 When pnpm has to recreate a `node_modules` directory because its existing
 layout is incompatible with the current install settings, this setting controls
 whether pnpm asks for confirmation first. Set it to `false` to let pnpm remove
-and reinstall the directory without prompting.
+and reinstall the directory without prompting. When confirmation is enabled
+but no TTY is available and CI is not detected, pnpm aborts the install instead.
 
 ```yaml title="pnpm-workspace.yaml"
 confirmModulesPurge: false
