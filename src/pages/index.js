@@ -16,6 +16,16 @@ import {
   DepotIcon,
   CerbosIcon,
 } from "@pnpm/website.pages.homepage";
+import {
+  BoltIcon,
+  DiskIcon,
+  WorkspaceIcon,
+  CatalogIcon,
+  ShieldIcon,
+  CacheIcon,
+  PatchIcon,
+  RuntimeIcon,
+} from "@pnpm/website.sections.features";
 import sponsorData from '../../sponsors.json';
 import { useDocusaurusTheme, getThemeMode } from "../utils/use-docusaurus-theme";
 // import styles from './styles.module.css';
@@ -44,32 +54,57 @@ const hero = {
 };
 
 const features = {
-  autoSlide: true,
-  slideDuration: 10000,
+  title: <Translate>Everything you expect, and the things you didn’t know to ask for</Translate>,
+  subtitle: <Translate>pnpm is a drop-in replacement for npm — and then keeps going, with the features large repos actually need.</Translate>,
   features: [
     {
-      title: <Translate>Fast</Translate>,
-      description: <Translate>pnpm is optimized for installation speed. We believe waiting for dependencies to install is a waste of time. Your time is valuable, and so is ours.</Translate>,
-      image: "/img/features/fast-pumpkin.png",
-      alt: "Illustration of pnpm Fast feature.",
+      title: <Translate>Blazing fast installs</Translate>,
+      description: <Translate>Resolution, fetching and linking happen in parallel instead of one stage at a time. On a warm store, an install is mostly just creating links.</Translate>,
+      icon: <BoltIcon />,
+      href: "/benchmarks",
+      linkLabel: "See the benchmarks",
     },
     {
-      title: <Translate>Saving Disk Space</Translate>,
-      description: <Translate>Files inside node_modules are linked from a single content-addressable storage.</Translate>,
-      image: "/img/features/saving-disk-space-pumpkin.png",
-      alt: "Illustration of pnpm Saving Disk Space feature.",
+      title: <Translate>Saving disk space</Translate>,
+      description: <Translate>Files inside node_modules are hard-linked from a single content-addressable store. A hundred projects on the same version cost you one copy on disk.</Translate>,
+      icon: <DiskIcon />,
+      href: "/motivation",
     },
     {
-      title: <Translate>Workspace Support</Translate>,
-      description: <Translate>Built-in support for monorepos with strict hoisting and workspace protocols.</Translate>,
-      image: "/img/features/workspace-support-pumpkin.png",
-      alt: "Illustration of pnpm Workspace Support feature.",
+      title: <Translate>Workspace support</Translate>,
+      description: <Translate>First-class monorepos: the workspace protocol for local packages, filtering to run tasks on just the projects you touched, and a single lockfile for everything.</Translate>,
+      icon: <WorkspaceIcon />,
+      href: "/workspaces",
     },
     {
-      title: <Translate>Managing Runtimes</Translate>,
-      description: <Translate>Manage Node.js versions automatically without external tools.</Translate>,
-      image: "/img/features/managing-runtimes-pumpkin.png",
-      alt: "Illustration of pnpm Managing Runtimes feature.",
+      title: <Translate>Catalogs</Translate>,
+      description: <Translate>Define a dependency version once in pnpm-workspace.yaml and reference it as "catalog:" everywhere. One line to upgrade, and no more version-drift merge conflicts.</Translate>,
+      icon: <CatalogIcon />,
+      href: "/catalogs",
+    },
+    {
+      title: <Translate>Strict by default</Translate>,
+      description: <Translate>Only your declared dependencies land in the root of node_modules, so your code can never quietly import a package you never installed.</Translate>,
+      icon: <ShieldIcon />,
+      href: "/symlinked-node-modules-structure",
+    },
+    {
+      title: <Translate>Safer builds</Translate>,
+      description: <Translate>Install scripts don’t run for arbitrary dependencies. You approve which packages may execute build scripts — supply-chain safety without extra tooling.</Translate>,
+      icon: <CacheIcon />,
+      href: "/supply-chain-security",
+    },
+    {
+      title: <Translate>Patch dependencies</Translate>,
+      description: <Translate>Fix a bug in a package without waiting for upstream — "pn patch" writes a persistent patch that is reapplied on every install.</Translate>,
+      icon: <PatchIcon />,
+      href: "/cli/patch",
+    },
+    {
+      title: <Translate>Managing runtimes</Translate>,
+      description: <Translate>Install and pin Node.js per project straight from pnpm — no nvm, no shell hooks, no “works on my machine” version mismatches.</Translate>,
+      icon: <RuntimeIcon />,
+      href: "/cli/runtime",
     },
   ],
 };
@@ -302,7 +337,11 @@ function Homepage() {
     setThemeMode(themeMode);
   }, [themeMode]);
 
-  return <BaseHome {...content} />;
+  return (
+    <div className="pnpm-homepage">
+      <BaseHome {...content} />
+    </div>
+  );
 }
 
 function Home() {
