@@ -281,3 +281,22 @@ html[data-theme="dark"] img[src$="/img/users/thesys.svg"] {
 	text-transform: uppercase;
 	white-space: nowrap;
 }
+
+.pnpm-homepage {
+  --ifm-pre-background: transparent;
+  --ifm-pre-padding: 0;
+  --ifm-pre-border-radius: 0;
+  --ifm-table-background: transparent;
+  --ifm-table-stripe-background: transparent;
+  --ifm-table-head-background: transparent;
+  --ifm-table-border-width: 0;
+}
+
+.pnpm-homepage table {
+  display: table;
+  margin-bottom: 0;
+}
+
+.pnpm-homepage table thead tr {
+  border-bottom: 0;
+}
