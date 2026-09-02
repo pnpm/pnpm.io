@@ -2,9 +2,10 @@ name: Benchmark sync
 
 # The benchmarks are measured in https://github.com/pnpm/benchmarks, on its own
 # schedule. That repository publishes the numbers and nothing else; this job
-# renders the page and its charts from them (`scripts/benchmarks/`), and is run
-# by hand when the latest numbers should be picked up. Editing what the page
-# says needs no run of this at all — it is a commit to this repository.
+# redraws the charts under static/img/benchmarks/ from them
+# (`scripts/benchmarks/`), and is run by hand when the latest numbers should be
+# picked up. The charts are embedded by the README of pnpm/pnpm; the page at
+# /benchmarks reads the same repository at build time and needs no run of this.
 
 on:
   workflow_dispatch:

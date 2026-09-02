@@ -1,27 +1,30 @@
-// Rebuilds the benchmark page from the numbers the repo that measures them
-// publishes, https://github.com/pnpm/benchmarks. Nothing is measured here:
-// running the benchmarks takes hours and needs a machine that is not doing
-// anything else, which a site build is not.
+// Redraws the benchmark charts under static/img/benchmarks/ from the numbers
+// the repo that measures them publishes, https://github.com/pnpm/benchmarks.
+// Nothing is measured here: running the benchmarks takes hours and needs a
+// machine that is not doing anything else, which a site build is not.
 //
 // That repo publishes one file — `benchmarks.json`, the numbers together with
-// the versions and the conditions they were measured under. What the page says
-// about them, which columns it carries and what the charts look like are all
-// decided in `scripts/benchmarks/`, so changing the wording of the page is an
-// edit in this repository rather than a benchmark run in the other one.
+// the versions and the conditions they were measured under. What the charts
+// look like is decided in `scripts/benchmarks/`.
+//
+// The page at /benchmarks is not rendered here. It is
+// `@pnpm/website.pages.benchmarks-page`, fed at build time by
+// `src/plugins/benchmark-data.js` from the same repository's results. The
+// charts outlive it because the README of https://github.com/pnpm/pnpm embeds
+// them from pnpm.io.
 
 import fs from 'node:fs';
 import path from 'node:path';
-import renderBenchmarksPage from './benchmarks/page.mjs';
+import renderBenchmarkCharts from './benchmarks/charts.mjs';
 
 const REPO = process.env.BENCHMARKS_REPO ?? 'pnpm/benchmarks';
 const REF = process.env.BENCHMARKS_REF ?? 'main';
 // A local checkout to read instead of the published one, for trying out a
-// change to the page against numbers that aren't merged yet.
+// change to the charts against numbers that aren't merged yet.
 const LOCAL_MANIFEST = process.env.BENCHMARKS_MANIFEST;
 
 const SCRIPT_DIR = path.dirname(new URL(import.meta.url).pathname);
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '..');
-const PAGE_FILE = path.join(PROJECT_ROOT, 'src', 'pages', 'benchmarks.md');
 const IMGS_DIR = path.join(PROJECT_ROOT, 'static', 'img', 'benchmarks');
 
 const MANIFEST_FILE = 'benchmarks.json';
@@ -50,7 +53,7 @@ function writeIfChanged(file, content) {
 
 async function update() {
   const manifest = await readManifest();
-  const { markdown, charts } = renderBenchmarksPage(manifest);
+  const charts = renderBenchmarkCharts(manifest);
 
   fs.mkdirSync(IMGS_DIR, { recursive: true });
   const written = [];
@@ -58,16 +61,13 @@ async function update() {
     if (writeIfChanged(path.join(IMGS_DIR, `${name}.svg`), svg)) written.push(name);
   }
 
-  // A chart the page stopped drawing would otherwise be served forever.
+  // A chart that stopped being drawn would otherwise be served forever.
   const drawn = new Set(charts.map(({ name }) => `${name}.svg`));
   const stale = fs.readdirSync(IMGS_DIR).filter((name) => !drawn.has(name));
   for (const name of stale) fs.rmSync(path.join(IMGS_DIR, name));
 
-  const pageChanged = writeIfChanged(PAGE_FILE, markdown);
-
   if (stale.length) console.log(`Removed unreferenced: ${stale.join(', ')}`);
-  if (written.length) console.log(`Updated charts: ${written.join(', ')}`);
-  console.log(pageChanged ? `Updated ${path.relative(PROJECT_ROOT, PAGE_FILE)}` : 'Page already up to date');
+  console.log(written.length ? `Updated charts: ${written.join(', ')}` : 'Charts already up to date');
 }
 
 update().catch((err) => {

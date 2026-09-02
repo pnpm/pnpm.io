@@ -129,6 +129,12 @@ jobs:
         run: pn node scripts/build-with-fallback.mjs --locale "$LOCALE"
         env:
           LOCALE: ${{ matrix.locale }}
+          # The /benchmarks page reads pnpm/benchmarks through the GitHub API
+          # at build time. Unauthenticated, the API allows 60 requests an hour
+          # per address, which the locale builds running side by side on
+          # shared runners can exhaust — and then the page silently falls back
+          # to a bundled snapshot.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
           name: site-${{ matrix.locale }}
