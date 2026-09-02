@@ -7,96 +7,96 @@ importers:
     configDependencies: {}
     packageManagerDependencies:
       pnpm:
-        specifier: 12.1.0
-        version: 12.1.0
+        specifier: 12.3.0
+        version: 12.3.0
 
 packages:
 
-  '@pnpm/exe.darwin-arm64@12.1.0':
-    resolution: {integrity: sha512-9K+uSnTsJe9zD/YCMPiQDiwU8IiQRp+ZEE9IyVSr0Ppzfg5/xC0pwet2R320ifDIMroT3WYLkCEolV6XxtSS/g==}
+  '@pnpm/exe.darwin-arm64@12.3.0':
+    resolution: {integrity: sha512-4J0iSmjp028AMHeUiGkug5Rzo5mqvKo9QUxedYcRgPTLwmuuKZ/lMMnU9EBRrdFEJyWHlUMeGZRXXiqxQSU/2w==}
     cpu: [arm64]
     os: [darwin]
 
-  '@pnpm/exe.darwin-x64@12.1.0':
-    resolution: {integrity: sha512-JcOc77W/KLg5ZZXr7q0WN8UDKirxQTuoaTkqRfMNkGyUHc/4bfNxLwjoZBilRQV6xmhJvU79ZUg++eYohzJhog==}
+  '@pnpm/exe.darwin-x64@12.3.0':
+    resolution: {integrity: sha512-3G8KveX3PTdZH3hSsaQRIlmrF6N8SK1Puce3cFg4Wx304z+SGssCVoATeUf6DKNZ2OorbmfXmTJtbu01r9uvnw==}
     cpu: [x64]
     os: [darwin]
 
-  '@pnpm/exe.linux-arm64-musl@12.1.0':
-    resolution: {integrity: sha512-RVJlfI4T2l6XXA5s/Wv9HHEq4ztIq79fiZXDVHyHaKEbp+11ZM5k61z0gaGzXCEGUp5anW2Uc3UgQpmjAR+IPw==}
+  '@pnpm/exe.linux-arm64-musl@12.3.0':
+    resolution: {integrity: sha512-dYGXDx/9RSjMuZfo9MFpCsUVsg1NzCmYTh5+NTPA5/QacK6s9jgjnL74gneYbTsrX5Hz8a8JFkbGsW4JESdRzA==}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@pnpm/exe.linux-arm64@12.1.0':
-    resolution: {integrity: sha512-iLEE0ykaRZ3/OBhIjwe/Zo96ac0c7pY7toyf6+jUN8gOsIIwJTS+AqSyOy+U1Zyhuuec8nJiRQ4URl60nRxTwA==}
+  '@pnpm/exe.linux-arm64@12.3.0':
+    resolution: {integrity: sha512-GhgIr7mRJ3XT+YxelC1XcDW35RWGj2JNR5kEMxsV88SOUYdOgf1JNi6aC8Mg7S7oQsEOV5FCEKVolhUgmnyaPw==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@pnpm/exe.linux-x64-musl@12.1.0':
-    resolution: {integrity: sha512-k+NUTRbz2CR9DBvGyAdtXU5HHPXytxi9MQ79uQRYNLF8nr/l1qHo++TvZ0OUuEpRxhg9B3n84Itv6MAHJR7TQQ==}
+  '@pnpm/exe.linux-x64-musl@12.3.0':
+    resolution: {integrity: sha512-mKatlNZyEGcUtYgVmJmVshkhq+In6PpdcSQ0aNw0lVn7Yob7Ifezmc7r4bf9nPo09B6GnF/ly5/Gx96fmFjVOw==}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@pnpm/exe.linux-x64@12.1.0':
-    resolution: {integrity: sha512-GTi1DEM8vwIWpgC8P+xhw3Y2Ko2V88WtKAjbNwdeJAzMpzmcBeE4f0c2QKmeKpvi8/eYarxSIvBhYkTjA1BAcQ==}
+  '@pnpm/exe.linux-x64@12.3.0':
+    resolution: {integrity: sha512-cF1R+g/ixeFVqktpiGV5YHHdCvkqSMxRCcI4I0ujx2cE5EZQZAjgNN/q23DwjTz5sH8bRGbvns4Y/Gf/6nUkAg==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@pnpm/exe.win32-arm64@12.1.0':
-    resolution: {integrity: sha512-cK6kklZY8rs3d9gg8akGUgjDenFy65ZSAANXojs98d7Ne7gbzZYzU2joHRRilfpzCfawgG+lpPsh46a4xu55jQ==}
+  '@pnpm/exe.win32-arm64@12.3.0':
+    resolution: {integrity: sha512-TF2Shk5Cke2bMsW2H7muW22V4dJnoY+zY87YJLY31OcEyWXwHLIVP06jS1Zy1Si8Qf/VwNJFOlCc7O69viZvjQ==}
     cpu: [arm64]
     os: [win32]
 
-  '@pnpm/exe.win32-x64@12.1.0':
-    resolution: {integrity: sha512-Pk7Lvq3E5PWQFRJLLnLgW2qJAphtgPYCaaODB+FZRRvKksn8IPnF8Aj+/AT4+52GmckiANTbKwCsL18naJhohw==}
+  '@pnpm/exe.win32-x64@12.3.0':
+    resolution: {integrity: sha512-JjcFPT2jiynbo0TPQ+WZlV/u0U0PKTcJFQI49H5teEYyqvn0XxgDdiVFTwzJi+6T15tKbiAH4wZmG+LyJdcy3A==}
     cpu: [x64]
     os: [win32]
 
-  pnpm@12.1.0:
-    resolution: {integrity: sha512-2bgnbZf27IbkmBWHf5Hun2PO5h8gY7ME5Dttq4+gfOipr9RtL6zTn5Ieap0Gs8dagTSce4iMLSKIa64CKZAQNw==}
+  pnpm@12.3.0:
+    resolution: {integrity: sha512-1705pIgTHeIAruwdvJyli4kEN/CbH5JbG/gg/cRj3wGjKeNpnD2Ke7GG1c8/dctozoIMadayyYNSW8CCHeTFKQ==}
     engines: {node: '>=18.*'}
     hasBin: true
 
 snapshots:
 
-  '@pnpm/exe.darwin-arm64@12.1.0':
+  '@pnpm/exe.darwin-arm64@12.3.0':
     optional: true
 
-  '@pnpm/exe.darwin-x64@12.1.0':
+  '@pnpm/exe.darwin-x64@12.3.0':
     optional: true
 
-  '@pnpm/exe.linux-arm64-musl@12.1.0':
+  '@pnpm/exe.linux-arm64-musl@12.3.0':
     optional: true
 
-  '@pnpm/exe.linux-arm64@12.1.0':
+  '@pnpm/exe.linux-arm64@12.3.0':
     optional: true
 
-  '@pnpm/exe.linux-x64-musl@12.1.0':
+  '@pnpm/exe.linux-x64-musl@12.3.0':
     optional: true
 
-  '@pnpm/exe.linux-x64@12.1.0':
+  '@pnpm/exe.linux-x64@12.3.0':
     optional: true
 
-  '@pnpm/exe.win32-arm64@12.1.0':
+  '@pnpm/exe.win32-arm64@12.3.0':
     optional: true
 
-  '@pnpm/exe.win32-x64@12.1.0':
+  '@pnpm/exe.win32-x64@12.3.0':
     optional: true
 
-  pnpm@12.1.0:
+  pnpm@12.3.0:
     optionalDependencies:
-      '@pnpm/exe.darwin-arm64': 12.1.0
-      '@pnpm/exe.darwin-x64': 12.1.0
-      '@pnpm/exe.linux-arm64': 12.1.0
-      '@pnpm/exe.linux-arm64-musl': 12.1.0
-      '@pnpm/exe.linux-x64': 12.1.0
-      '@pnpm/exe.linux-x64-musl': 12.1.0
-      '@pnpm/exe.win32-arm64': 12.1.0
-      '@pnpm/exe.win32-x64': 12.1.0
+      '@pnpm/exe.darwin-arm64': 12.3.0
+      '@pnpm/exe.darwin-x64': 12.3.0
+      '@pnpm/exe.linux-arm64': 12.3.0
+      '@pnpm/exe.linux-arm64-musl': 12.3.0
+      '@pnpm/exe.linux-x64': 12.3.0
+      '@pnpm/exe.linux-x64-musl': 12.3.0
+      '@pnpm/exe.win32-arm64': 12.3.0
+      '@pnpm/exe.win32-x64': 12.3.0
 
 ---
 lockfileVersion: '9.0'
@@ -105,7 +105,7 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-pnpmfileChecksum: sha256-EVoK8SvKkLGQiihVg3ukp2vGhz3fOpCRIUiFhPgEXaw=
+packageExtensionsChecksum: sha256-5fyRuQdBZvf45aT/6kD9HE0Drc0vMiegrKhvra/Sz/o=
 
 importers:
 
@@ -135,6 +135,12 @@ importers:
       '@pnpm/design.pnpm-theme':
         specifier: 1.0.0
         version: 1.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.benchmarks.benchmark-data':
+        specifier: 0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87
+        version: 0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87
+      '@pnpm/website.pages.benchmarks-page':
+        specifier: 0.0.0-4c2aa4d317d3c620d8c8c7b29ddc074c3a6116fb
+        version: 0.0.0-4c2aa4d317d3c620d8c8c7b29ddc074c3a6116fb(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.pages.homepage':
         specifier: 1.0.2
         version: 1.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
@@ -1884,6 +1890,45 @@ packages:
   '@pnpm/npm-conf@3.0.3':
     resolution: {integrity: sha512-//0sR/cow/s4ICQaYoAobOl4aU8cjU6x/V24V7XkKotb9+O+3zySIYp146vpaobYHnxa4pZX8NkV54Z5AwbDKA==, tarball: https://node-registry.bit.cloud/@pnpm/npm-conf/-/npm-conf-3.0.3.tgz}
     engines: {node: '>=12'}
+
+  '@pnpm/website.benchmarks.benchmark-chart@0.0.0-cc975faca548d0b4397591714d2d223d6894f7d2':
+    resolution: {integrity: sha512-KWMqxm2y0bYQiK+/zOivLx+S+qr5WA9BgWvKOwS0BBwunSqkhPdfXqLarbutcWBjZIu5DyFzJPDrELnWP20yvw==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-chart/-/website.benchmarks.benchmark-chart-0.0.0-cc975faca548d0b4397591714d2d223d6894f7d2.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@pnpm/website.benchmarks.benchmark-data@0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87':
+    resolution: {integrity: sha512-lq/T0+DJxAtZnwykRvweOyGFHvKcDgHPUMqP1PQmEGWJ0T1fdD5dvDs4C8U3ch0tgoOplNqXtaxAOJEZo4UjAQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-data/-/website.benchmarks.benchmark-data-0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87.tgz}
+
+  '@pnpm/website.benchmarks.benchmark-section@0.0.0-20995cd7336326ae5679a7628c70018ee8231ae9':
+    resolution: {integrity: sha512-4vJc1vj/ry5tvPF7KYMgo7i3iZZcb7B6mCqtfUllVqRLFLUcUWCitQj9fR4BDt9gBRJClSZFyjn6S5UmMWLIRQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-section/-/website.benchmarks.benchmark-section-0.0.0-20995cd7336326ae5679a7628c70018ee8231ae9.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@pnpm/website.benchmarks.benchmark-table@0.0.0-af671e927ca4eeb32fe5dbc8ff2126dc4cc9a94e':
+    resolution: {integrity: sha512-PDAP9uDC1ZWVJizlV1HVpgBCr0k+qZ9GECAjkFjUMCrrSaEv6gHubV7izxMJJB/BtHWo2dUb/w2ulS+1rAxdIQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-table/-/website.benchmarks.benchmark-table-0.0.0-af671e927ca4eeb32fe5dbc8ff2126dc4cc9a94e.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@pnpm/website.benchmarks.benchmark-totals@0.0.0-9f76fdc21879ea32bc01f5e3fddb1dce129747b1':
+    resolution: {integrity: sha512-BqmLtuPuEU6WLMeukvT2kr4LNDb27F7YP8FNWIVvdFr0XjcfAsLzsW3Amr9Cl6BskffteBFbSWWdq9Mx0Q1Png==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-totals/-/website.benchmarks.benchmark-totals-0.0.0-9f76fdc21879ea32bc01f5e3fddb1dce129747b1.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@pnpm/website.benchmarks.benchmarks-hero@0.0.0-425ba949f382b9975b7a3e052b793db6ba4a667a':
+    resolution: {integrity: sha512-GQqxnnaOTS8YGuZDVTuBIxEmtRr55nPudF7HDJshJDam7qQ9dagb9k1SduN5HnL3HCMZSUH3fLuHUhImYSTcBw==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmarks-hero/-/website.benchmarks.benchmarks-hero-0.0.0-425ba949f382b9975b7a3e052b793db6ba4a667a.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@pnpm/website.pages.benchmarks-page@0.0.0-4c2aa4d317d3c620d8c8c7b29ddc074c3a6116fb':
+    resolution: {integrity: sha512-IWXvkxhnB2u/CVx4xhqNxvabqNCXs5Z6fXdjMapSSRQWKXYW5WvwiG0HtWr6AtIqojOmjOOJ7DkxHGy/7zf9gw==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.benchmarks-page/-/website.pages.benchmarks-page-0.0.0-4c2aa4d317d3c620d8c8c7b29ddc074c3a6116fb.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@pnpm/website.pages.homepage@1.0.2':
     resolution: {integrity: sha512-KkO1sOytsKRDro1ANcSnrS8shlCwhGXVm+1sjUAbdeMNJW2tPUOAD8E0+SmV7JF8TlJOKUtumP/IQ0dWroXC4Q==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.homepage/-/website.pages.homepage-1.0.2.tgz}
@@ -9168,6 +9213,53 @@ snapshots:
       '@pnpm/config.env-replace': 1.1.0
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
+
+  '@pnpm/website.benchmarks.benchmark-chart@0.0.0-cc975faca548d0b4397591714d2d223d6894f7d2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@pnpm/website.benchmarks.benchmark-data': 0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+
+  '@pnpm/website.benchmarks.benchmark-data@0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87': {}
+
+  '@pnpm/website.benchmarks.benchmark-section@0.0.0-20995cd7336326ae5679a7628c70018ee8231ae9(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.benchmarks.benchmark-chart': 0.0.0-cc975faca548d0b4397591714d2d223d6894f7d2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.benchmarks.benchmark-data': 0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87
+      '@pnpm/website.benchmarks.benchmark-table': 0.0.0-af671e927ca4eeb32fe5dbc8ff2126dc4cc9a94e(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.benchmarks.benchmark-totals': 0.0.0-9f76fdc21879ea32bc01f5e3fddb1dce129747b1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+    transitivePeerDependencies:
+      - react-router-dom
+
+  '@pnpm/website.benchmarks.benchmark-table@0.0.0-af671e927ca4eeb32fe5dbc8ff2126dc4cc9a94e(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@pnpm/website.benchmarks.benchmark-data': 0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+
+  '@pnpm/website.benchmarks.benchmark-totals@0.0.0-9f76fdc21879ea32bc01f5e3fddb1dce129747b1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@pnpm/website.benchmarks.benchmark-data': 0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+
+  '@pnpm/website.benchmarks.benchmarks-hero@0.0.0-425ba949f382b9975b7a3e052b793db6ba4a667a(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+
+  '@pnpm/website.pages.benchmarks-page@0.0.0-4c2aa4d317d3c620d8c8c7b29ddc074c3a6116fb(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@pnpm/website.benchmarks.benchmark-data': 0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87
+      '@pnpm/website.benchmarks.benchmark-section': 0.0.0-20995cd7336326ae5679a7628c70018ee8231ae9(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.benchmarks.benchmarks-hero': 0.0.0-425ba949f382b9975b7a3e052b793db6ba4a667a(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react: 19.2.8
+    transitivePeerDependencies:
+      - react-router-dom
 
   '@pnpm/website.pages.homepage@1.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:

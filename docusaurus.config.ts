@@ -123,6 +123,8 @@ const docusaurusConfig = {
   "plugins": [
     'docusaurus-plugin-sass',
     'docusaurus-plugin-copy-page-button',
+    // The numbers behind /benchmarks, fetched once per build.
+    './src/plugins/benchmark-data.js',
     [
       '@docusaurus/plugin-content-docs',
       {

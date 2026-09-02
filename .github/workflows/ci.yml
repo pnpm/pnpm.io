@@ -29,3 +29,6 @@ jobs:
         # .github/workflows/deploy.yml invokes it, so that this test covers
         # the command that ships the site.
         run: node scripts/build-with-fallback.mjs --locale en
+        env:
+          # See .github/workflows/deploy.yml.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

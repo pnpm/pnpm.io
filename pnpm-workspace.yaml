@@ -17,3 +17,8 @@ registries:
       - '@bitdesign'
       - '@teambit'
     serverType: npm
+
+packageExtensions:
+  '@docusaurus/core':
+    dependencies:
+      prism-react-renderer: '*'

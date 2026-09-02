@@ -1,5 +1,5 @@
 {
-  "packageManager": "pnpm@12.1.0",
+  "packageManager": "pnpm@12.3.0",
   "scripts": {
     "examples": "docusaurus-examples",
     "copy-docs": "shx rm -rf versioned_docs/version-11.x && shx cp -r docs versioned_docs/version-11.x",
@@ -30,6 +30,8 @@
     "@docusaurus/plugin-content-docs": "3.10.2",
     "@docusaurus/preset-classic": "3.10.2",
     "@pnpm/design.pnpm-theme": "1.0.0",
+    "@pnpm/website.benchmarks.benchmark-data": "0.0.0-b2a48a8ee43fa3f0faea39dd790ef0bd4bba6c87",
+    "@pnpm/website.pages.benchmarks-page": "0.0.0-4c2aa4d317d3c620d8c8c7b29ddc074c3a6116fb",
     "@pnpm/website.pages.homepage": "1.0.2",
     "@types/react": "^19.1.9",
     "clsx": "^1.2.1",
