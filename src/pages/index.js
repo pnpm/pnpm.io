@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Translate from "@docusaurus/Translate";
-import useBaseUrl from '@docusaurus/useBaseUrl';
+import useBaseUrl, { useBaseUrlUtils } from '@docusaurus/useBaseUrl';
 import { PnpmTheme, useThemeController } from "@pnpm/design.pnpm-theme";
 import {
   Homepage as BaseHome,
@@ -62,7 +62,7 @@ const features = {
       description: <Translate>Resolution, fetching and linking happen in parallel instead of one stage at a time. On a warm store, an install is mostly just creating links.</Translate>,
       icon: <BoltIcon />,
       href: "/benchmarks",
-      linkLabel: "See the benchmarks",
+      linkLabel: <Translate>See the benchmarks</Translate>,
     },
     {
       title: <Translate>Saving disk space</Translate>,
@@ -329,9 +329,17 @@ function Homepage() {
   const themeMode = useDocusaurusTheme();
   const { setThemeMode } = useThemeController();
   const ctaHref = useBaseUrl("installation");
+  const { withBaseUrl } = useBaseUrlUtils();
   const starsCount = useGithubStarsCount();
   const updatedHero = { ...hero, ctaHref, starsCount };
-  const content = { ...homepageContent, hero: updatedHero };
+  const updatedFeatures = {
+    ...features,
+    features: features.features.map((feature) => ({
+      ...feature,
+      href: withBaseUrl(feature.href),
+    })),
+  };
+  const content = { ...homepageContent, hero: updatedHero, features: updatedFeatures };
 
   useEffect(() => {
     setThemeMode(themeMode);
