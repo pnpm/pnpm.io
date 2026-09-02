@@ -86,11 +86,23 @@ test('manifest strings are escaped before they become SVG text', () => {
   const hostile = manifest()
   hostile.node = 'v24 <script>&</script>'
   hostile.fixtures[0].packageManagers[packageManagerColumns[0].key].version = '1.0.0-<b>'
-  for (const { name, svg } of renderBenchmarkCharts(hostile)) {
+  const charts = renderBenchmarkCharts(hostile)
+  for (const { name, svg } of charts) {
     assert.ok(!svg.includes('<script>'), `${name}.svg carries the raw Node.js version`)
     assert.ok(!svg.includes('<b>'), `${name}.svg carries the raw package manager version`)
     assert.ok(svg.includes('v24 &lt;script&gt;&amp;&lt;/script&gt;'), `${name}.svg lost the escaped Node.js version`)
   }
+  // Only the main chart prints that column's version under its legend.
+  const main = charts.find(({ name }) => name === chartedFixtures[0]).svg
+  assert.ok(main.includes('v1.0.0-&lt;b&gt;'), 'the main chart lost the escaped package manager version')
+})
+
+test('a manifest string XML cannot carry at all is refused', () => {
+  // A control character has no entity, so there is nothing to escape it to;
+  // the SVG would be malformed and every renderer would show a blank.
+  const broken = manifest()
+  broken.node = 'v24\u0000'
+  assert.throws(() => renderBenchmarkCharts(broken), /U\+0000, which XML text cannot carry/)
 })
 
 test('a manifest missing a column is refused', () => {
