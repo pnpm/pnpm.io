@@ -4,6 +4,16 @@ allowBuilds:
   core-js: false
   core-js-pure: false
 
+minimumReleaseAge: 0
+
 publicHoistPattern:
   - '@mdx-js/react'
   - url-loader
+
+registries:
+  https://node-registry.bit.cloud:
+    scopes:
+      - '@pnpm'
+      - '@bitdesign'
+      - '@teambit'
+    serverType: npm
