@@ -61,10 +61,7 @@ test('the charts are dated from the manifest, not from the clock', () => {
   }
 })
 
-test('the charts the README embeds are still drawn', () => {
-  // https://github.com/pnpm/pnpm/blob/main/README.md shows
-  // https://pnpm.io/img/benchmarks/alotta-files.svg. Renaming that chart would
-  // break the README without any failure here.
+test('the chart the pnpm/pnpm README embeds is still drawn', () => {
   const names = renderBenchmarkCharts(manifest()).map(({ name }) => name)
   assert.ok(names.includes('alotta-files'), `alotta-files.svg is not drawn; drawn: ${names.join(', ')}`)
 })

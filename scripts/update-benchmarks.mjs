@@ -1,17 +1,11 @@
-// Redraws the benchmark charts under static/img/benchmarks/ from the numbers
-// the repo that measures them publishes, https://github.com/pnpm/benchmarks.
-// Nothing is measured here: running the benchmarks takes hours and needs a
-// machine that is not doing anything else, which a site build is not.
+// Redraws the charts under static/img/benchmarks/ from the numbers the repo
+// that measures them publishes, https://github.com/pnpm/benchmarks. Nothing is
+// measured here: running the benchmarks takes hours and needs a machine that
+// is not doing anything else, which a site build is not.
 //
 // That repo publishes one file — `benchmarks.json`, the numbers together with
 // the versions and the conditions they were measured under. What the charts
-// look like is decided in `scripts/benchmarks/`.
-//
-// The page at /benchmarks is not rendered here. It is
-// `@pnpm/website.pages.benchmarks-page`, fed at build time by
-// `src/plugins/benchmark-data.js` from the same repository's results. The
-// charts outlive it because the README of https://github.com/pnpm/pnpm embeds
-// them from pnpm.io.
+// look like, and why they are still drawn, is `scripts/benchmarks/charts.mjs`.
 
 import fs from 'node:fs';
 import path from 'node:path';

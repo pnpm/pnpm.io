@@ -2,12 +2,9 @@
 // charts served under /img/benchmarks/. Everything a reader sees is decided
 // here or in `columns.mjs`; the manifest this reads is only measurements.
 //
-// The page at /benchmarks doesn't use these charts any more — it is rendered
-// by `@pnpm/website.pages.benchmarks-page`, straight from the results the same
-// repository publishes. The charts are kept, and kept fresh, because the
-// README of https://github.com/pnpm/pnpm embeds
-// https://pnpm.io/img/benchmarks/alotta-files.svg, and a picture that stops
-// being redrawn would go on showing last year's numbers.
+// The page at /benchmarks no longer uses these charts. They are still drawn
+// because the README of https://github.com/pnpm/pnpm embeds
+// https://pnpm.io/img/benchmarks/alotta-files.svg.
 
 import generateSvg from './generate-svg.mjs'
 import generateStackedSvg from './generate-stacked-svg.mjs'
