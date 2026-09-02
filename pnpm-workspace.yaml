@@ -3,7 +3,7 @@ allowBuilds:
   '@swc/core': true
   core-js: false
   core-js-pure: false
-  esbuild: true
+  esbuild: set this to true or false
 
 minimumReleaseAge: 0
 
@@ -15,7 +15,6 @@ registries:
   https://node-registry.bit.cloud:
     scopes:
       - '@pnpm'
-      - '@bitdev'
       - '@bitdesign'
       - '@teambit'
     serverType: npm

@@ -282,11 +282,6 @@ html[data-theme="dark"] img[src$="/img/users/thesys.svg"] {
 	white-space: nowrap;
 }
 
-/* The homepage sections come from Bit components that ship their own styles.
-   Docusaurus (Infima) applies global element styles to pre, code and table
-   that bleed into those components: a light background on the terminal-style
-   code block, and display:block plus striping and cell borders on the
-   comparison table. Neutralize them inside the homepage only. */
 .pnpm-homepage {
   --ifm-pre-background: transparent;
   --ifm-pre-padding: 0;
