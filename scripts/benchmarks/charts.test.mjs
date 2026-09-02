@@ -79,6 +79,20 @@ test('every configured bar reaches its chart', () => {
   }
 })
 
+test('manifest strings are escaped before they become SVG text', () => {
+  // The versions and the Node.js version are the only manifest strings the
+  // charts print. Nothing checks them upstream, and an `&` or `<` in one
+  // would be markup rather than text in every chart the sync commits.
+  const hostile = manifest()
+  hostile.node = 'v24 <script>&</script>'
+  hostile.fixtures[0].packageManagers[packageManagerColumns[0].key].version = '1.0.0-<b>'
+  for (const { name, svg } of renderBenchmarkCharts(hostile)) {
+    assert.ok(!svg.includes('<script>'), `${name}.svg carries the raw Node.js version`)
+    assert.ok(!svg.includes('<b>'), `${name}.svg carries the raw package manager version`)
+    assert.ok(svg.includes('v24 &lt;script&gt;&amp;&lt;/script&gt;'), `${name}.svg lost the escaped Node.js version`)
+  }
+})
+
 test('a manifest missing a column is refused', () => {
   const broken = manifest()
   delete broken.fixtures[0].packageManagers[packageManagerColumns.at(-1).key]

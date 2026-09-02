@@ -5,6 +5,8 @@
 // Both releases, not just pnpm 11: the gray bar is normally the longer of the
 // two, but nothing guarantees it. Scaling to v11 alone would send a scenario
 // where pnpm 12 came out slower straight off the right edge of the graph.
+import escapeXml from './escape-xml.mjs'
+
 const getMax = (results) => Math.max(...results.flatMap(({ v11, v12 }) => [v11, v12]))
 
 // `nodeVersion`, `formattedNow`: see the note in `generate-svg.mjs`.
@@ -64,7 +66,7 @@ export default (results, formattedNow, nodeVersion) => {
     const x = graph.x + radius + i * 80
     const y = vb.y + radius + 2
     svgStr += `  <circle cx="${x}" cy="${y}" r="${radius}" fill="${leg.color}"></circle>\n`
-    svgStr += `  <text x="${x + radius + 2}" y="${y + 1}" class="font s4" dominant-baseline="middle" text-anchor="start">${leg.label}</text>\n`
+    svgStr += `  <text x="${x + radius + 2}" y="${y + 1}" class="font s4" dominant-baseline="middle" text-anchor="start">${escapeXml(leg.label)}</text>\n`
   })
 
   const graphLines = [0, 0.2, 0.4, 0.6, 0.8, 1].map((f) => graph.x + limit * ratio * f)
@@ -102,11 +104,11 @@ export default (results, formattedNow, nodeVersion) => {
     const labelBlockOffset = ((r.label.length - 1) * labelSpacing) / 2
     r.label.forEach((line, indexP) => {
       const y = graph.y + (thickness + separation) * indexT + thickness / 2 - labelBlockOffset + indexP * labelSpacing
-      svgStr += `  <text x="${graph.x - 2}" y="${y}" class="font s4" dominant-baseline="middle" text-anchor="end">${line}</text>\n`
+      svgStr += `  <text x="${graph.x - 2}" y="${y}" class="font s4" dominant-baseline="middle" text-anchor="end">${escapeXml(line)}</text>\n`
     })
   })
 
-  svgStr += `  <text x="${graph.x + graph.w}" y="${vb.h - 2}" class="font s4 text" text-anchor="end">Tests were run using Node.js ${nodeVersion} at: ${formattedNow}</text>\n`
+  svgStr += `  <text x="${graph.x + graph.w}" y="${vb.h - 2}" class="font s4 text" text-anchor="end">${escapeXml(`Tests were run using Node.js ${nodeVersion} at: ${formattedNow}`)}</text>\n`
 
   svgStr += '</svg>\n'
   return svgStr

@@ -6,6 +6,8 @@
 // Results are either a number (simple bar) or { primary, secondary } where
 // the secondary value is rendered behind the primary in a different color
 // (used for the pnpm 11/12 stacked bar).
+import escapeXml from './escape-xml.mjs'
+
 const getHighestNumber = (resultArrays) => {
   let max = 0
   for (const row of resultArrays) {
@@ -112,10 +114,10 @@ export default (resultArrays, pms, tests, formattedNow, nodeVersion) => {
 
     const anchor = 'middle'
     let textY = y + radius + 4
-    svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${entry.legend}</text>` + '\n'
+    svgStr += `  <text x="${x}" y="${textY}" class="font s4" text-anchor="${anchor}">${escapeXml(entry.legend)}</text>` + '\n'
 
     if (!entry.noVersion) {
-      const text = `v${entry.displayVersion ?? entry.version}`
+      const text = escapeXml(`v${entry.displayVersion ?? entry.version}`)
       textY += 4
       svgStr += `  <text x="${x}" y="${textY}" class="font s3" text-anchor="${anchor}">${text}</text>` + '\n'
     }
@@ -194,7 +196,7 @@ export default (resultArrays, pms, tests, formattedNow, nodeVersion) => {
         if (pm.mascot && result > 0) {
           const mascotX = x + length + 2
           const mascotY = y + thickness / 2
-          svgStr += `  <text x="${mascotX}" y="${mascotY}" class="font" font-size="7" dominant-baseline="central">${pm.mascot}</text>` + '\n'
+          svgStr += `  <text x="${mascotX}" y="${mascotY}" class="font" font-size="7" dominant-baseline="central">${escapeXml(pm.mascot)}</text>` + '\n'
         }
       }
     })
@@ -218,13 +220,13 @@ export default (resultArrays, pms, tests, formattedNow, nodeVersion) => {
         groupCenter -
         labelBlockOffset +
         indexP * labelSpacing
-      svgStr += `  <text x="${x}" y="${y}" class="font s4" dominant-baseline="${baseline}" text-anchor="${anchor}">${property}</text>` + '\n'
+      svgStr += `  <text x="${x}" y="${y}" class="font s4" dominant-baseline="${baseline}" text-anchor="${anchor}">${escapeXml(property)}</text>` + '\n'
     })
   })
 
   // add node version
   ;(() => {
-    const text = `Tests were run using Node.js ${nodeVersion} at: ${formattedNow}`
+    const text = escapeXml(`Tests were run using Node.js ${nodeVersion} at: ${formattedNow}`)
     const anchor = 'end'
     const x = graph.x + graph.w
     const y = vb.h - 2
