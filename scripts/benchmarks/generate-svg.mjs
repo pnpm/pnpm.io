@@ -3,10 +3,11 @@
 // what a bar is called and what colour it is drawn in is this site's business,
 // and it changes far more often than the measurement does.
 
+import escapeXml from './escape-xml.mjs'
+
 // Results are either a number (simple bar) or { primary, secondary } where
 // the secondary value is rendered behind the primary in a different color
 // (used for the pnpm 11/12 stacked bar).
-import escapeXml from './escape-xml.mjs'
 
 const getHighestNumber = (resultArrays) => {
   let max = 0

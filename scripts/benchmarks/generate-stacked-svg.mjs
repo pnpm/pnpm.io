@@ -2,10 +2,11 @@
 // the gray extension is the additional time pnpm 11 takes. Total bar length
 // equals pnpm 11's time, so you can see at a glance how much faster v12 is.
 
+import escapeXml from './escape-xml.mjs'
+
 // Both releases, not just pnpm 11: the gray bar is normally the longer of the
 // two, but nothing guarantees it. Scaling to v11 alone would send a scenario
 // where pnpm 12 came out slower straight off the right edge of the graph.
-import escapeXml from './escape-xml.mjs'
 
 const getMax = (results) => Math.max(...results.flatMap(({ v11, v12 }) => [v11, v12]))
 
