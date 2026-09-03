@@ -220,9 +220,10 @@ failure to step down on.
 The same "succeeds, but slowly" shape appears when the store and
 `node_modules` sit on the same filesystem and that filesystem services every
 metadata operation over a round trip — a network share (NFS, SMB, Amazon EFS)
-or a directory passed into a VM (virtiofs, gRPC-FUSE, 9p). Cloning, where the
-platform tries it first, fails there and steps down; hardlinking then
-succeeds, so `auto` stays on it and the install pays a round trip per file.
+or a directory shared from a host into a VM or container (virtiofs,
+gRPC-FUSE, 9p). Cloning, where the platform tries it first, fails there and
+steps down; hardlinking then succeeds, so `auto` stays on it and the install
+pays a round trip per file.
 Copying reads and writes whole files instead of performing per-file metadata
 operations the filesystem has to service remotely.
 
