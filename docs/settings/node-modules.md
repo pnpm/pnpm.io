@@ -170,32 +170,56 @@ If you edit files inside `node_modules`, ask for `clone` explicitly. Under a
 hardlink, the file in `node_modules` *is* the file in the store, so editing it
 changes every project that links the same package.
 
-#### Network and virtualized filesystems
+#### When a link succeeds but costs more than a copy
 
 `auto` steps down a tier only when a link *fails*, never when one succeeds
-slowly. That distinction matters when the store and `node_modules` sit on the
-same filesystem and that filesystem services every metadata operation over a
-round trip — a network share (NFS, SMB, Amazon EFS) or a directory passed into
-a VM or container (virtiofs, gRPC-FUSE, 9p). Cloning, where the platform tries
-it first, fails there and steps down; hardlinking then *succeeds*, so `auto`
-stays on it and the install pays a round trip per file.
-
-(This only arises when both live on that filesystem. A store on a different
-filesystem from `node_modules` cannot be hardlinked from at all — the attempt
-fails with `EXDEV` — so `auto` already falls back to copying on its own.)
-
-Setting `packageImportMethod` to `copy` in that situation can be considerably
-faster, because copying reads and writes whole files instead of performing
-per-file metadata operations the filesystem has to service remotely. One
-project installing on a remote server measured:
-
-| `packageImportMethod` | Install time |
-| --- | --- |
-| `auto` (hardlinking) | 38s |
-| `copy` | 16s |
+slowly. Two setups produce links that succeed and are expensive, and on both
+`packageImportMethod: copy` can be considerably faster.
 
 It is not a general recommendation: on a local disk, copying is the slowest
 option and uses the most space. Measure both on the machine in question.
+
+#### A store baked into a container image layer
+
+Container runtimes assemble an image from stacked layers, usually with
+overlayfs. A hardlink to a file that lives in a lower layer *succeeds* there,
+but the file is copied into the writable upper layer first. An image that
+ships a pre-populated pnpm store leaves that store in a lower layer, so every
+hardlink into `node_modules` copies a file up — and pnpm's "Packages are hard
+linked from the content-addressable store" line stays accurate while the
+install pays a copy per file anyway.
+
+Measured on a 13-project workspace, 2074 packages, store fully pre-populated
+so nothing was downloaded, timing only the phase that writes `node_modules`:
+
+| `packageImportMethod` | Link phase | System time | Written |
+| --- | --- | --- | --- |
+| `auto` (hardlinking) | 2.1s | 8.0s | 36.7k files copied up, 366 MB |
+| `copy` | 1.5s | 5.6s | 874 MB, nothing copied up |
+
+That was on btrfs, where a copy-up is cheap. On ext4 it is a full data copy,
+and the gap widens: one project's CI, running this shape on ext4, went from
+38s to 16s by switching to `copy`.
+
+Note that the `EXDEV` fallback below does not help here. A cross-layer
+hardlink does not fail — it copies up and reports success — so `auto` has no
+failure to step down on.
+
+#### Network and virtualized filesystems
+
+The same "succeeds, but slowly" shape appears when the store and
+`node_modules` sit on the same filesystem and that filesystem services every
+metadata operation over a round trip — a network share (NFS, SMB, Amazon EFS)
+or a directory passed into a VM (virtiofs, gRPC-FUSE, 9p). Cloning, where the
+platform tries it first, fails there and steps down; hardlinking then
+succeeds, so `auto` stays on it and the install pays a round trip per file.
+Copying reads and writes whole files instead of performing per-file metadata
+operations the filesystem has to service remotely.
+
+This only arises when both live on that filesystem. A store on a genuinely
+different filesystem from `node_modules` cannot be hardlinked from at all —
+the attempt fails with `EXDEV` — so `auto` already falls back to copying on
+its own.
 
 [nodeLinker]: #nodelinker
 
