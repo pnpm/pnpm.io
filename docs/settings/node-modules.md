@@ -170,6 +170,29 @@ If you edit files inside `node_modules`, ask for `clone` explicitly. Under a
 hardlink, the file in `node_modules` *is* the file in the store, so editing it
 changes every project that links the same package.
 
+#### Network and virtualized filesystems
+
+`auto` steps down a tier only when a link *fails*, never when one is merely
+slow. On a filesystem where hardlinking works but every operation carries a
+round trip — a network share (NFS, SMB, Amazon EFS) or a directory passed into
+a VM or container (virtiofs, gRPC-FUSE, 9p) — `auto` therefore keeps
+hardlinking, and the install pays that round trip once per file.
+
+Setting `packageImportMethod` to `copy` there can be considerably faster,
+because copying reads and writes whole files instead of performing per-file
+metadata operations the filesystem has to service remotely. One project
+installing on a remote server measured:
+
+| `packageImportMethod` | Install time |
+| --- | --- |
+| `auto` (hardlinking) | 38s |
+| `copy` | 16s |
+
+This is worth trying whenever an install is slow on a machine whose
+`node_modules` or store lives on such a filesystem. It is not a general
+recommendation: on a local disk, copying is the slowest option and uses the
+most space. Measure both on the machine in question.
+
 [nodeLinker]: #nodelinker
 
 ### modulesCacheMaxAge
