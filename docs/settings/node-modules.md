@@ -176,30 +176,40 @@ changes every project that links the same package.
 slowly. Two setups produce links that succeed and are expensive, and on both
 `packageImportMethod: copy` can be considerably faster.
 
-It is not a general recommendation: on a local disk, copying is the slowest
-option and uses the most space. Measure both on the machine in question.
+Neither is a reason to reach for `copy` generally. On an ordinary install —
+store and `node_modules` on the same everyday filesystem, no image layer in
+between — copying is the slowest option and the one that uses the most space.
+Measure both on the machine in question.
 
 #### A store baked into a container image layer
 
 Container runtimes assemble an image from stacked layers, usually with
 overlayfs. A hardlink to a file that lives in a lower layer *succeeds* there,
 but the file is copied into the writable upper layer first. An image that
-ships a pre-populated pnpm store leaves that store in a lower layer, so every
-hardlink into `node_modules` copies a file up — and pnpm's "Packages are hard
-linked from the content-addressable store" line stays accurate while the
-install pays a copy per file anyway.
+ships a pre-populated pnpm store leaves that store in a lower layer, so the
+first link to any store file copies that file up — and pnpm's "Packages are
+hard linked from the content-addressable store" line stays accurate while the
+install copies most of the store out anyway.
 
-Measured on a 13-project workspace, 2074 packages, store fully pre-populated
-so nothing was downloaded, timing only the phase that writes `node_modules`:
+The cost is per file, not per link: a package linked into several projects is
+copied up once and linked cheaply after that. It still lands on most of the
+store, because an install links nearly every file it needs at least once. The
+run below made 69k links and copied up 36.7k distinct files.
+
+Measured with pnpm 12 (through `@pnpm/napi` 12.1.0) on a 13-project workspace,
+2074 packages, store fully pre-populated so nothing was downloaded, timing
+only the phase that writes `node_modules`. Rootless podman on the kernel
+`overlay` storage driver with `metacopy` off, backed by btrfs, `--cpus=8`:
 
 | `packageImportMethod` | Link phase | System time | Written |
 | --- | --- | --- | --- |
 | `auto` (hardlinking) | 2.1s | 8.0s | 36.7k files copied up, 366 MB |
 | `copy` | 1.5s | 5.6s | 874 MB, nothing copied up |
 
-That was on btrfs, where a copy-up is cheap. On ext4 it is a full data copy,
-and the gap widens: one project's CI, running this shape on ext4, went from
-38s to 16s by switching to `copy`.
+Backing that overlay with btrfs is what keeps the gap small: a copy-up there
+can share extents rather than duplicate them. On ext4 every copy-up is a full
+data copy, and the gap widens — one project's CI, running this shape on an
+ext4 boot disk, went from 38s to 16s by switching to `copy`.
 
 Note that the `EXDEV` fallback below does not help here. A cross-layer
 hardlink does not fail — it copies up and reports success — so `auto` has no
