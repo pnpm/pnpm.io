@@ -13,6 +13,8 @@ pnpm with <version|current> <args...>
 
 The downloaded pnpm is installed using the same mechanism as [`pnpm self-update`](./self-update.md) and cached in the global virtual store for reuse on subsequent runs.
 
+These cached versions live in the store's `links/` directory and are not referenced by any project, so [`pnpm store prune`](./store.md#prune) removes them. Any removed version is re-downloaded automatically the next time a project requests it.
+
 ## Examples
 
 Run the globally installed pnpm, ignoring the version pinned in the manifest:
