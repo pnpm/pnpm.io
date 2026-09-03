@@ -3,8 +3,6 @@ allowBuilds:
   '@swc/core': true
   core-js: false
   core-js-pure: false
-  esbuild: set this to true or false
-
 minimumReleaseAge: 0
 
 publicHoistPattern:
