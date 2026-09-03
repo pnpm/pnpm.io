@@ -5,6 +5,8 @@ title: pnpm store
 
 Managing the package store.
 
+Concurrent operations on the store are supported, so it's safe to mount the store from a shared drive into multiple builds at the same time.
+
 ## Commands
 
 ### status
