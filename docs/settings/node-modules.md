@@ -172,26 +172,30 @@ changes every project that links the same package.
 
 #### Network and virtualized filesystems
 
-`auto` steps down a tier only when a link *fails*, never when one is merely
-slow. On a filesystem where hardlinking works but every operation carries a
+`auto` steps down a tier only when a link *fails*, never when one succeeds
+slowly. That distinction matters when the store and `node_modules` sit on the
+same filesystem and that filesystem services every metadata operation over a
 round trip — a network share (NFS, SMB, Amazon EFS) or a directory passed into
-a VM or container (virtiofs, gRPC-FUSE, 9p) — `auto` therefore keeps
-hardlinking, and the install pays that round trip once per file.
+a VM or container (virtiofs, gRPC-FUSE, 9p). Cloning, where the platform tries
+it first, fails there and steps down; hardlinking then *succeeds*, so `auto`
+stays on it and the install pays a round trip per file.
 
-Setting `packageImportMethod` to `copy` there can be considerably faster,
-because copying reads and writes whole files instead of performing per-file
-metadata operations the filesystem has to service remotely. One project
-installing on a remote server measured:
+(This only arises when both live on that filesystem. A store on a different
+filesystem from `node_modules` cannot be hardlinked from at all — the attempt
+fails with `EXDEV` — so `auto` already falls back to copying on its own.)
+
+Setting `packageImportMethod` to `copy` in that situation can be considerably
+faster, because copying reads and writes whole files instead of performing
+per-file metadata operations the filesystem has to service remotely. One
+project installing on a remote server measured:
 
 | `packageImportMethod` | Install time |
 | --- | --- |
 | `auto` (hardlinking) | 38s |
 | `copy` | 16s |
 
-This is worth trying whenever an install is slow on a machine whose
-`node_modules` or store lives on such a filesystem. It is not a general
-recommendation: on a local disk, copying is the slowest option and uses the
-most space. Measure both on the machine in question.
+It is not a general recommendation: on a local disk, copying is the slowest
+option and uses the most space. Measure both on the machine in question.
 
 [nodeLinker]: #nodelinker
 
