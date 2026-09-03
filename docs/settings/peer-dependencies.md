@@ -110,7 +110,7 @@ It is a useful feature as you can install your peer dependencies only in the roo
 
 #### peerDependencyRules.ignoreMissing
 
-pnpm will not print warnings about missing peer dependencies from this list.
+pnpm will not print warnings about missing peer dependencies from this list. A peer dependency is only considered missing if it cannot be resolved anywhere in the dependency graph, whether directly or transitively through another dependency.
 
 For instance, with the following configuration, pnpm will not print warnings if a dependency needs `react` but `react` is not installed:
 
@@ -128,6 +128,8 @@ peerDependencyRules:
   - "@babel/*"
   - "@eslint/*"
 ```
+
+The `parent>peer` and `parent@range>peer` selector syntax that [`allowedVersions`](#peerdependencyrulesallowedversions) accepts is not accepted here and silently ignored.
 
 #### peerDependencyRules.allowedVersions
 
@@ -164,3 +166,5 @@ peerDependencyRules:
 ```
 
 The above setting will mute any warnings about peer dependency version mismatches related to `@babel/` packages or `eslint`.
+
+The `parent>peer` and `parent@range>peer` selector syntax that [`allowedVersions`](#peerdependencyrulesallowedversions) accepts is not accepted here and silently ignored.
