@@ -34,7 +34,7 @@ pnpm run "/<regex>/"
 Run all scripts that start with `watch:`:
 
 ```sh
-pnpm run "/^watch:.*/"
+pnpm run "/^watch:/"
 ```
 
 The selector must be written as a regular expression literal — that is, wrapped in slashes — and quoted, so the shell does not mangle it. A plain string is always treated as a literal script name, and a script whose name matches the argument exactly takes precedence over regex matching.
