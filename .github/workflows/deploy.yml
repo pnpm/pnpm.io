@@ -175,7 +175,9 @@ jobs:
           fi
           vercel pull --yes --environment="$environment" --token="$VERCEL_TOKEN"
           vercel build $prod --token="$VERCEL_TOKEN"
-          url=$(vercel deploy --prebuilt $prod --token="$VERCEL_TOKEN" | tail -n1)
+          # The assembled site has more files than Vercel's 15,000-file API
+          # limit, so upload it as one archive instead of individual files.
+          url=$(vercel deploy --prebuilt --archive=tgz $prod --token="$VERCEL_TOKEN" | tail -n1)
           echo "Deployed $url" >> "$GITHUB_STEP_SUMMARY"
         env:
           PRODUCTION: ${{ github.event_name != 'workflow_dispatch' || inputs.production }}
