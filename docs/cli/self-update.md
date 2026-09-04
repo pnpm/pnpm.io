@@ -39,12 +39,12 @@ Since v11.18.0, `pnpm self-update` takes no instruction from the project it is r
 
 When `self-update` refuses a version that is younger than the `minimumReleaseAge` cutoff, an interactive run offers to update anyway; non-interactive runs still fail. CI never prompts, even on a runner that attaches a TTY.
 
-## Installing pnpm v12 (the Rust port)
+## Installing pnpm v12
 
-Since v11.10.0, `pnpm self-update` (and `packageManager` version-switching) can install and link **pnpm v12**, the Rust port. It is published under both the `pnpm` and `@pnpm/exe` names on the `next-12` dist-tag:
+pnpm 12 is published under both the `pnpm` and `@pnpm/exe` names on the `latest-12` dist-tag:
 
 ```
-pnpm self-update next-12
+pnpm self-update latest-12
 ```
 
 v12 ships native binaries as `@pnpm/exe.<platform>-<arch>` packages, which pnpm's built-in installer links directly. There is no Node.js launcher, so the command pays no Node.js startup cost. From v12 onward the install converges on the unscoped `pnpm` package (the Rust executable), even when updating from the SEA `@pnpm/exe` build.

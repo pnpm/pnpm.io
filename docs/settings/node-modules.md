@@ -135,9 +135,8 @@ When set to `true`, pnpm populates the virtual store without creating importer s
 Controls the way packages are imported from the store (if you want to disable symlinks inside `node_modules`, then you need to change the [nodeLinker] setting, not this one).
 
 * **auto** - try the platform's cheap link tiers in order, falling back to
-copying when none of them is possible. Which tier comes first depends on the
-platform and on the pnpm major — see [What `auto` tries
-first](#what-auto-tries-first)
+copying when none of them is possible. On Linux it tries hardlinking before
+cloning; on macOS and Windows it tries cloning before hardlinking.
 * **hardlink** - hard link packages from the store
 * **clone-or-copy** - try to clone packages from the store. If cloning is not supported then fall back to copying
 * **copy** - copy packages from the store
@@ -149,19 +148,18 @@ Unfortunately, not all file systems support cloning. We recommend using a copy-o
 
 #### What `auto` tries first
 
-`auto` is a per-platform order, not a fixed one:
+`auto` is a per-platform order:
 
 | Platform | Order |
 |---|---|
-| Linux, since pnpm v12.0.0 | hardlink → clone → copy |
-| Linux, pnpm v11 and older | clone → hardlink → copy |
+| Linux | hardlink → clone → copy |
 | macOS | clone → hardlink → copy |
 | Windows | clone → hardlink → copy |
 
 A reflink materializes a new inode and copies extent bookkeeping inside the
 filesystem's metadata trees, where a hardlink is one directory entry. On btrfs
 that difference roughly halves the time an install spends materializing
-`node_modules` from a warm store, which is why pnpm 12 reaches for the hardlink
+`node_modules` from a warm store, which is why pnpm reaches for the hardlink
 first there. ext4 is unaffected — it never supported cloning, so `auto` already
 hardlinked — and macOS keeps clone-first, since APFS `clonefile` is that
 platform's cheap primitive.
@@ -285,7 +283,7 @@ Since v11.23.0, [`virtualStoreType`](#virtualstoretype) is the canonical spellin
 
 :::note
 
-In pnpm v11, global installs (`pnpm add -g`) and `pnpm dlx` use the global virtual store by default.
+Global installs (`pnpm add -g`) and `pnpm dlx` use the global virtual store by default.
 
 :::
 

@@ -24,7 +24,7 @@ pnpm with current install
 Run a specific version:
 
 ```sh
-pnpm with 11.0.0-rc.1 install
+pnpm with 12.3.4 install
 ```
 
 Use a dist-tag:

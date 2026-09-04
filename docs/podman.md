@@ -26,7 +26,7 @@ Below is an example container setup for demonstration:
 Declare Node.js in [`devEngines.runtime`](./package_json.md#devenginesruntime) in your `package.json`. The `pnpm install` command below will install the declared version automatically.
 
 ```dockerfile title="Dockerfile"
-FROM ghcr.io/pnpm/pnpm:11
+FROM ghcr.io/pnpm/pnpm:12
 
 WORKDIR /app
 

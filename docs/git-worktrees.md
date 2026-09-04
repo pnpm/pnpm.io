@@ -26,7 +26,7 @@ git worktree add ./feature feat/something
 
 ## Why worktrees?
 
-Even before AI agents, worktrees are useful for maintaining multiple major versions of a project. On my dev machine, I use a pnpm repository with at least two worktrees: one on `main` for pnpm v11, and another on the `v10` branch for backports and maintenance releases. This way, I can fix a bug on v10 without stashing my in-progress v11 work — both versions are always checked out and ready to go. In the past, 2 or 3 worktrees were usually enough for me in the pnpm repository. However, since I started using AI agents extensively, I need a lot more worktrees to let my agents work on many tasks in parallel.
+Even before AI agents, worktrees are useful for maintaining multiple major versions of a project. On my dev machine, I use a pnpm repository with at least two worktrees: one on `main` for pnpm v12, and another on the `v11` branch for backports and maintenance releases. This way, I can fix a bug on v11 without stashing my in-progress v12 work — both versions are always checked out and ready to go. In the past, 2 or 3 worktrees were usually enough for me in the pnpm repository. However, since I started using AI agents extensively, I need a lot more worktrees to let my agents work on many tasks in parallel.
 
 ## Why this matters even more with AI agents
 
