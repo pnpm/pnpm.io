@@ -35,7 +35,7 @@ The registry to authenticate with. Defaults to the configured default registry.
 
 Associate the credentials with the specified scope. The registry for that scope will be used.
 
-Since v11.25.0 and v12.1.0, a `scope` setting in a project's
+Since v12.1.0, a `scope` setting in a project's
 `pnpm-workspace.yaml` is ignored with a warning. A repository must not be able
 to choose the machine-wide route a later login writes. Pass `--scope`, set
 `PNPM_CONFIG_SCOPE`, or set the machine's default with:

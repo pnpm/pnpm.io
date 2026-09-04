@@ -142,12 +142,6 @@ command under this setting selected nothing at all, and `--workspace-root`
 pulled in the whole workspace instead of the root alone
 ([#14101](https://github.com/pnpm/pnpm/issues/14101)).
 
-:::note
-
-pnpm 11 reads this setting; the Rust CLI recognized but ignored it until v12.0.0.
-
-:::
-
 ### --filter "[&lt;since>]"
 
 Selects all the packages changed since the specified commit/branch. May be

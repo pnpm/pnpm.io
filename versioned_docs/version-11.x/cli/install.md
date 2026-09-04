@@ -202,9 +202,7 @@ Re-runs resolution: useful for printing out peer dependency issues.
 
 :::info
 
-This flag exists in pnpm 11 only. pnpm 12 does not implement it and rejects it with `error: unexpected argument '--resolution-only' found`.
-
-To list peer dependency issues on either version, run [`pnpm peers check`](./peers.md#check) instead. It reads them from the lockfile, so it needs neither a re-resolution nor an install.
+To list peer dependency issues without re-running resolution, use [`pnpm peers check`](./peers.md#check). It reads them from the lockfile.
 
 :::
 

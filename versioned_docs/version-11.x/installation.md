@@ -7,12 +7,6 @@ title: Installation
 
 If you don't use the standalone script or `@pnpm/exe` to install pnpm, then you need to have Node.js (at least v22) to be installed on your system.
 
-:::info
-
-Looking for pnpm 12? It is released, but `latest` on npm is still pnpm 11, so it is installed differently. See [Installing pnpm 12](#installing-pnpm-12).
-
-:::
-
 ## Using a standalone script
 
 You may install pnpm even if you don't have Node.js installed, using the following scripts.
@@ -30,7 +24,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+$env:PNPM_VERSION="latest-11"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -42,22 +36,20 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 
 ### On POSIX systems
 
-:::warning Not supported on Intel macOS in pnpm 11
+:::warning Not supported on Intel macOS
 
-On pnpm 11, the standalone script does not run on Intel Macs (`darwin-x64`). Use [Homebrew](#using-homebrew), or install pnpm 12, which ships an Intel build. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for context.
-
-pnpm 12 ships an Intel macOS build again, so this limitation doesn't apply to it.
+The standalone script does not run on Intel Macs (`darwin-x64`). Install pnpm through [npm](#using-npm) instead. See [#11423](https://github.com/pnpm/pnpm/issues/11423) for context.
 
 :::
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
 ```
 
 :::info Linux runtime requirements
@@ -79,11 +71,11 @@ You may use the [pnpm runtime] command then to install Node.js.
 
 ```sh
 # bash
-wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 # sh
-wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 # dash
-wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
+wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
 ```
 
 ### Installing a specific version
@@ -94,44 +86,10 @@ Prior to running the install script, you may optionally set an env variable `PNP
 curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 ```
 
-## Using other package managers
-
-### Using npm
+## Using npm
 
 ```sh
-npx get-pnpm
-```
-
-### Using Homebrew
-
-If you have the package manager installed, you can install pnpm using the following command:
-
-```
-brew install pnpm
-```
-
-### Using winget
-
-If you have winget installed, you can install pnpm using the following command:
-
-```
-winget install -e --id pnpm.pnpm
-```
-
-### Using Scoop
-
-If you have Scoop installed, you can install pnpm using the following command:
-
-```
-scoop install nodejs-lts pnpm
-```
-
-### Using Choco
-
-If you have Chocolatey installed, you can install pnpm using the following command:
-
-```
-choco install pnpm
+npx get-pnpm latest-11
 ```
 
 :::tip
@@ -140,65 +98,19 @@ Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-
 
 :::
 
-## Installing pnpm 12
-
-pnpm 12, the Rust rewrite, is stable since v12.0.0 (August 26, 2026). Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
-
-Apart from a short list of differences, pnpm 12 does not change the way you use pnpm 11, so the rest of this documentation applies to both versions — see [What's different in pnpm 12](/blog/whats-different-in-pnpm-12). Only installation differs: `latest` on npm still points at the pnpm 11 line, so pnpm 12 is installed from the `next-12` tag, and Homebrew, winget, Scoop and Chocolatey don't offer it yet.
-
-### Using pnpm {#pnpm-12-using-pnpm}
-
-If you already have pnpm v11.10.0 or newer, this is the easiest way to switch:
-
-```
-pnpm self-update next-12
-```
-
-pnpm links the native binary directly, so nothing else is needed. Note that inside a project that pins pnpm through the `packageManager` field, [`self-update`] only updates that pin instead of installing pnpm globally.
-
-### Using npm {#pnpm-12-using-npm}
-
-If you don't have pnpm installed yet:
-
-```sh
-npx get-pnpm next-12
-```
-
-Node.js 22.13 or newer is needed to run that install script, but not to run pnpm afterwards — pnpm 12 is a native binary.
-
-### Using a standalone script {#pnpm-12-using-a-standalone-script}
-
-Set `PNPM_VERSION` to `next-12`, or to an exact version.
-
-On POSIX systems:
-
-```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=next-12 sh -
-```
-
-On Windows, using PowerShell:
-
-```powershell
-$env:PNPM_VERSION="next-12"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
-```
-
-This installs pnpm without requiring Node.js, and unlike pnpm 11 it also works on Intel macOS.
-
 ## Compatibility
 
 Here is a list of past pnpm versions with respective Node.js version support.
 
-| Node.js    | pnpm 8 | pnpm 9 | pnpm 10 | pnpm 11 | pnpm 12 |
-|------------|--------|--------|---------|---------|---------|
-| Node.js 14 | ❌     | ❌     | ❌      | ❌      | ❌      |
-| Node.js 16 | ✔️      | ❌     | ❌      | ❌      | ❌      |
-| Node.js 18 | ✔️      | ✔️      | ✔️       | ❌      | ✔️       |
-| Node.js 20 | ✔️      | ✔️      | ✔️       | ❌      | ✔️       |
-| Node.js 22 | ✔️      | ✔️      | ✔️       | ✔️       | ✔️       |
-| Node.js 24 | ✔️      | ✔️      | ✔️       | ✔️       | ✔️       |
-| Node.js 26 | ✔️      | ✔️      | ✔️       | ✔️       | ✔️       |
-
-pnpm 12 only needs Node.js when it is installed from npm; the version installed by the standalone script runs without Node.js.
+| Node.js    | pnpm 8 | pnpm 9 | pnpm 10 | pnpm 11 |
+|------------|--------|--------|---------|---------|
+| Node.js 14 | ❌     | ❌     | ❌      | ❌      |
+| Node.js 16 | ✔️      | ❌     | ❌      | ❌      |
+| Node.js 18 | ✔️      | ✔️      | ✔️       | ❌      |
+| Node.js 20 | ✔️      | ✔️      | ✔️       | ❌      |
+| Node.js 22 | ✔️      | ✔️      | ✔️       | ✔️       |
+| Node.js 24 | ✔️      | ✔️      | ✔️       | ✔️       |
+| Node.js 26 | ✔️      | ✔️      | ✔️       | ✔️       |
 
 ## Troubleshooting
 

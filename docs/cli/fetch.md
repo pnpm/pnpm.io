@@ -16,7 +16,7 @@ From that guide, we learn to write an optimized Dockerfile for projects using
 pnpm, which looks like
 
 ```Dockerfile
-FROM ghcr.io/pnpm/pnpm:11
+FROM ghcr.io/pnpm/pnpm:12
 
 RUN pnpm runtime set node 22 -g
 
@@ -51,7 +51,7 @@ It's also hard to maintain a Dockerfile that builds a monorepo project, it may
 look like
 
 ```Dockerfile
-FROM ghcr.io/pnpm/pnpm:11
+FROM ghcr.io/pnpm/pnpm:12
 
 RUN pnpm runtime set node 22 -g
 
@@ -85,7 +85,7 @@ sub-packages.
 to load packages into the virtual store using only information from a lockfile and a configuration file (`pnpm-workspace.yaml`).
 
 ```Dockerfile
-FROM ghcr.io/pnpm/pnpm:11
+FROM ghcr.io/pnpm/pnpm:12
 
 RUN pnpm runtime set node 22 -g
 

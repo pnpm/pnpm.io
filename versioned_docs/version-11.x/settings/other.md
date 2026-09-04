@@ -65,65 +65,6 @@ In pnpm v11, globally installed binaries are stored in a `bin` subdirectory of `
 
 :::
 
-### globalShims
-
-Added in: v12.0.0-rc.2
-
-* Default: **\{ node: auto, deno: auto, bun: auto \}**
-* Type: **Boolean**, **Object**
-
-Controls which globally installed packages get [project-aware shims](../global-packages.md#project-aware-global-bins) — global commands that run the version the current project asks for instead of the globally installed one.
-
-The setting is a map from **package name** to policy. The key is the name of the package that *provides* the command, not the command itself, so an entry for `typescript` covers its `tsc` bin.
-
-```yaml
-globalShims:
-  node: auto
-  deno: false
-  typescript: prompt
-```
-
-The supported policies are:
-
-| Value | Behavior |
-|---|---|
-| `auto` (or `true`) | Switch automatically when the candidate is authenticated by a publisher signature; otherwise ask for confirmation once. |
-| `prompt` | Put every candidate through the confirmation gate, including signature-verified ones. Answers are still remembered, so this asks once per project and candidate, not on every run. |
-| `always` | Always switch, never ask. Usable in CI, where a prompt would fall back to the global version. |
-| `false` | Disable the project-aware shim for this package. |
-
-Since v12.0.0-rc.6, two commands write entries here for you: [`pnpm shim add <pkg>`](../cli/shim.md) records the package it links a shim for, and installing a [package manager](../package-managers.md) globally (`pnpm add -g yarn`) records that package manager so it follows a project's pin. Neither overwrites an entry you set yourself — including `false`, and including a `globalShims: false` that turns every shim off.
-
-Layers merge key by key over the built-in defaults, so a single entry can change one package without restating the rest — `globalShims: { bun: false }` leaves `node` and `deno` at `auto`.
-
-The scalar shorthands replace the whole map instead of merging: `globalShims: false` disables every project-aware shim, and `globalShims: true` resets to the defaults.
-
-:::warning
-
-This setting is only read from locations a project cannot write to: the [global configuration file](../cli/config.md), a `pnpm-workspace.yaml` in the pnpm home directory itself, and the `PNPM_CONFIG_GLOBAL_SHIMS` environment variable (a JSON value), applied in that order. A project's own `pnpm-workspace.yaml` is ignored — otherwise a repository could grant itself the right to run its own binaries in place of your global ones.
-
-:::
-
-Disabling a package, or changing its policy, takes effect on the very next command — the setting is re-read on each dispatch, so no reinstall is needed.
-
-Newly *enabling* a package is the exception. pnpm decides at install time which bins to write dispatching shims for, so a package that was already installed globally while it was disabled needs to be reinstalled to pick up the change:
-
-```sh
-pnpm add -g typescript
-```
-
-To bypass dispatch for a single invocation, set `PNPM_SHIM_BYPASS=1`:
-
-```sh
-PNPM_SHIM_BYPASS=1 node --version
-```
-
-:::note
-
-Project-aware shims are a pnpm v12 feature and are not available in v11.
-
-:::
-
 ### npmrcAuthFile
 
 Added in: v11.0.0
@@ -173,10 +114,6 @@ When true, all the output is written to stderr.
 
 Set to `false` to suppress the update notification when using an older version of pnpm than the latest.
 
-`pnpm install` and `pnpm add` check at most once a day, and print how to get the
-newer version. pnpm 12 recognized but ignored this setting until v12.0.0, where
-it started checking too.
-
 ### preferSymlinkedExecutables
 
 * Default: **true**, when **node-linker** is set to **hoisted** and the system is POSIX
@@ -194,14 +131,6 @@ During installation the dependencies of some packages are automatically patched.
 The patches are applied from Yarn's [`@yarnpkg/extensions`] package, plus pnpm's
 own curated entries.
 
-Since v12.0.0, the database no longer carries entries that were derived from
-static analysis of published packages. Those entries named packages a dependent
-imported only for its *types*. Adding them was at best unnecessary and at worst
-broke the dependent: `@typescript-eslint/types` gained a `typescript` dependency
-resolved to the newest release, which put TypeScript 7 under older
-`@typescript-eslint` versions and made ESLint fail with `Cannot read properties
-of undefined (reading 'Intrinsic')`.
-
 ### resolutionMode
 
 * Default: **highest** (was **lowest-direct** from v8.0.0 to v8.6.12)
@@ -217,8 +146,6 @@ With this resolution mode installations with warm cache are faster. It also redu
 This resolution mode works only with npm's [full metadata]. So it is slower in some scenarios. However, if you use [Verdaccio] v5.15.1 or newer, you may set the `registrySupportsTimeField` setting to `true`, and it will be really fast.
 
 When `resolutionMode` is set to `lowest-direct`, direct dependencies will be resolved to their lowest versions.
-
-Only the dependencies declared in `package.json` count as direct here. A peer dependency that [`autoInstallPeers`](./peer-dependencies.md#autoinstallpeers) adds is not something the project declared, so it is resolved like a subdependency: to the highest version satisfying the peer range, or under `time-based`, to the highest version within the publish-date cutoff.
 
 ### registrySupportsTimeField
 

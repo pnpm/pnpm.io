@@ -300,7 +300,6 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [cacheDir](./settings/other.md#cachedir)
 * [useStderr](./settings/other.md#usestderr)
 * [updateNotifier](./settings/other.md#updatenotifier)
-* [globalShims](./settings/other.md#globalshims)
 * [preferSymlinkedExecutables](./settings/other.md#prefersymlinkedexecutables)
 * [ignoreCompatibilityDb](./settings/other.md#ignorecompatibilitydb)
 * [resolutionMode](./settings/other.md#resolutionmode)

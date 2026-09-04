@@ -32,8 +32,8 @@ importers:
     configDependencies: {}
     packageManagerDependencies:
       pnpm:
-        specifier: 12.0.0-rc.7
-        version: 12.0.0-rc.7
+        specifier: 12.3.4
+        version: 12.3.4
 
 packages:
   # pnpm and its platform binaries
@@ -109,7 +109,7 @@ importer and loses whichever graph it held.
 
 ## Resolutions that carry a revision
 
-Since v11.25.0 and v12.0.0, a `packages:` entry may carry a `revision` field
+Since v12.0.0, a `packages:` entry may carry a `revision` field
 beside its integrity:
 
 ```yaml

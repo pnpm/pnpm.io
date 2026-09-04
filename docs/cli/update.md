@@ -29,7 +29,7 @@ Besides moving `pnpm-lock.yaml` to the newly resolved versions, `pnpm update` wr
 
 Pass [`--no-save`](#--no-save) to update the lockfile only and leave the declared ranges alone.
 
-Since v11.25.0 and v12.0.0, [`--patches`](#--patches) does something different
+Since v12.0.0, [`--patches`](#--patches) does something different
 from all of this: it changes no version and no declared range, refreshing only
 which registry artifact each locked version resolves to. That still rewrites
 lockfile metadata — the `integrity`, the `revision`, and the package snapshot
@@ -99,7 +99,7 @@ Update the dependencies to their latest stable version as determined by their `l
 
 ### --patches
 
-Added in: v11.25.0 and v12.0.0
+Added in: v12.0.0
 
 Refresh [registry revisions](../registry-revisions.md) without changing any
 package version: for every locked registry package, pnpm resolves current
@@ -116,7 +116,7 @@ covering every locked package of the current project at its current version.
 
 ### --pnpr-server &lt;url\>
 
-Added in: v11.25.0 and v12.0.0
+Added in: v12.0.0
 
 Offload the resolution of a `--patches` refresh to a [pnpr](/pnpr) server, the
 way [`pnprServer`](/pnpr/install-acceleration) does for an install.

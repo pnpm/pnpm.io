@@ -71,12 +71,6 @@ The recipes further down this page start from this image and let pnpm install No
 
 The recipes below use the official pnpm image, which already sets `PNPM_HOME=/pnpm` and puts `/pnpm/bin` on `PATH`, so the store the cache mounts target is at `/pnpm/store`.
 
-:::caution
-
-Baking a warm store into an image layer — running an install during the build so later containers have nothing to download — does not make linking free. A hardlink to a file in a lower image layer succeeds, but overlayfs copies that file into the container's writable layer first, so an install copies most of the store out of the image while reporting that it hardlinked. [`packageImportMethod: copy`](./settings/node-modules.md#a-store-baked-into-a-container-image-layer) is usually faster in that setup, and measurably so on ext4. A BuildKit cache mount does not have this problem, because the store is a mount rather than a layer.
-
-:::
-
 ### Example 1: Build a bundle in a Docker container
 
 Since `devDependencies` is only necessary for building the bundle, `pnpm install --prod` will be a separate stage

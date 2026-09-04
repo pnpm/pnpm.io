@@ -11,8 +11,6 @@ sidebar_label: "Peer dependencies"
 
 When `true`, any missing non-optional peer dependencies are automatically installed.
 
-The version picked is the highest one satisfying the peer range. Since an automatically installed peer is not a dependency the project declares, [`resolutionMode`](./other.md#resolutionmode) treats it as a subdependency rather than a direct one, so `lowest-direct` does not lower it.
-
 #### Version Conflicts
 
 If there are conflicting version requirements for a peer dependency from different packages, pnpm will not install any version of the conflicting peer dependency automatically. Instead, a warning is printed. For example, if one dependency requires `react@^16.0.0` and another requires `react@^17.0.0`, these requirements conflict, and no automatic installation will occur.

@@ -28,34 +28,6 @@ The `catalog:` protocol is also supported, allowing you to use versions defined 
 pnx shx@catalog:
 ```
 
-## Running a package manager or a runtime
-
-Added in: v12.0.0-rc.6 (pnpm v12 only)
-
-Naming one of the [package managers pnpm provisions](../package-managers.md) (`npm`, `yarn`, `bun`), or a runtime (`node`, `deno`, `bun`), provisions the real thing instead of installing the npm package that shares its name:
-
-```
-pnx yarn@4 install
-pnx npm@11 ci
-pnx bun@1.3.0 install
-pnx node@22 --version
-```
-
-Those npm packages are either a different line of the tool or a wrapper that downloads it, so this is what naming them was always meant to do: `pnx yarn@4` used to fail with a missing version, since Yarn 4 is published as `@yarnpkg/cli-dist`, and `pnx node@22` used to run a wrapper that downloads a Node.js build rather than that release itself.
-
-A specifier that locates a package rather than asking for a released version installs what it names, unchanged:
-
-```
-pnx yarn@npm:yarn@1.22.22
-pnx yarn@yarnpkg/berry
-```
-
-`--package` naming a package manager picks which of its commands to run:
-
-```
-pnx --package npm@11 npx create-something
-```
-
 ## Options
 
 ### --package &lt;name\>

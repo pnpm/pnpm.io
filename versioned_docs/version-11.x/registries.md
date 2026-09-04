@@ -124,11 +124,6 @@ The setting belongs in `pnpm-workspace.yaml` rather than `.npmrc` or the global 
 
 The [global configuration file](./cli/config.md) (`config.yaml`) may declare the *routes* — `scopes` and `prefix` — so that a scope or an alias like `work:` applies to every project on the machine. The server descriptions (`serverType` and `supportsTimeField`) are read only from `pnpm-workspace.yaml`, for the reason above.
 
-Since v12.1.0, [`pnpm login --scope <scope>`](./cli/login.md#--scope-scope)
-adds that machine-wide scope route to the global `registries` setting while it
-records the credential under `_auth`. A later login for the same scope moves the
-route rather than declaring it at two registries.
-
 An entry that declares no routes describes a registry configured elsewhere — for example, the default registry set in `.npmrc`. Such an entry only takes effect when its URL is one the project actually resolves from; pnpm warns about entries that match no configured registry, since they would otherwise sit there inert (a stale URL, a scope that moved).
 
 Environment variables are **not** expanded in the URL keys of this setting, for the same reason they are not expanded in other [registry URLs in `pnpm-workspace.yaml`](./settings.md): the file is committed, and expanding env variables into a request destination could leak secrets to an attacker-controlled host. A key containing a `${...}` placeholder is ignored.

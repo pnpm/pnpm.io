@@ -211,14 +211,9 @@ This hook allows to change how packages are written to `node_modules`. The retur
 
 ### `hooks.filterLog(log): boolean` {#hooksfilterlog}
 
-:::warning Deprecated in v12.0.0
-
 `filterLog` returns `false` for a log entry to keep it out of pnpm's reporter
-output. pnpm 12 ignores the hook and warns when a pnpmfile defines it, so remove
-it rather than relying on it. Use [`loglevel`](./settings/cli.md#loglevel) to
-choose how much pnpm reports.
-
-:::
+output. Use [`loglevel`](./settings/cli.md#loglevel) to choose the reporter's
+overall verbosity.
 
 ### `hooks.fetchers`
 
@@ -628,4 +623,3 @@ if you use pnpm on projects that don't use pnpm as the primary package manager.
 :::
 
 [`pnpm patch`]: ./cli/patch.md
-

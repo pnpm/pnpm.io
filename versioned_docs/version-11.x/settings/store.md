@@ -32,11 +32,10 @@ only possible on the same filesystem.
 
 If no directory above the project accepts a hard link at all — an agent sandbox
 that grants write access only to the project, or a container with just the
-project bind-mounted writable — the store is created inside the project instead:
-at `node_modules/.pnpm-store` since v12.0.0, and at `.pnpm-store` in pnpm 11.
-Putting it in the home directory there would either fail on a read-only home or
-land on another volume, which copies every package instead of hard-linking it
-([#13525](https://github.com/pnpm/pnpm/issues/13525)).
+project bind-mounted writable — the store is created at `.pnpm-store` inside the
+project. Putting it in the home directory there would either fail on a read-only
+home or land on another volume, which copies every package instead of hard-linking
+it ([#13525](https://github.com/pnpm/pnpm/issues/13525)).
 
 :::important
 

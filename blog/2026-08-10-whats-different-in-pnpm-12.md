@@ -103,6 +103,6 @@ If a CI script calls `--resolution-only`, this is the one change on this page th
 
 ## Trying it
 
-`latest` on npm still points at the pnpm 11 line, so install pnpm 12 from the `next-12` tag. Homebrew, winget, Scoop, and Chocolatey don't offer it yet. [Installing pnpm 12](/installation#installing-pnpm-12) lists the ways to install it.
+`latest` on npm still points at the pnpm 11 line, so install pnpm 12 from the `latest-12` tag. Homebrew, winget, Scoop, and Chocolatey don't offer it yet. [Installing pnpm 12](/installation) lists the ways to install it.
 
 Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.

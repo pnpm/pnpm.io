@@ -3,7 +3,7 @@ id: registry-revisions
 title: Registry Revisions
 ---
 
-Added in: v11.25.0 and v12.0.0
+Added in: v11.25.0
 
 Some registries can serve a **replacement artifact** for a version that is
 already published — a rebuild with a vulnerability patched out, for example —

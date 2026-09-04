@@ -24,8 +24,8 @@ An official pnpm base image is published to GitHub Container Registry as [`ghcr.
 
 | Tag                   | Meaning                                                                 |
 | --------------------- | ----------------------------------------------------------------------- |
-| `<version>`           | Exact, immutable (e.g. `11.0.0`). Includes prereleases.                 |
-| `<major>`             | Tracks the latest stable release within that major (e.g. `11`).         |
+| `<version>`           | Exact, immutable (e.g. `12.0.0`). Includes prereleases.                 |
+| `<major>`             | Tracks the latest stable release within that major (e.g. `12`).         |
 | `latest`              | Most recent stable pnpm release. Not updated for prereleases.           |
 
 Supported platforms: `linux/amd64`, `linux/arm64`.
@@ -47,7 +47,7 @@ Let pnpm install Node.js automatically from [`devEngines.runtime`](./package_jso
 ```
 
 ```dockerfile
-FROM ghcr.io/pnpm/pnpm:11
+FROM ghcr.io/pnpm/pnpm:12
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
@@ -92,7 +92,7 @@ dist
 ```
 
 ```dockerfile title="Dockerfile"
-FROM ghcr.io/pnpm/pnpm:11 AS base
+FROM ghcr.io/pnpm/pnpm:12 AS base
 RUN pnpm runtime set node 24 -g
 COPY . /app
 WORKDIR /app
@@ -160,7 +160,7 @@ dist
 ```
 
 ```dockerfile title="Dockerfile"
-FROM ghcr.io/pnpm/pnpm:11 AS base
+FROM ghcr.io/pnpm/pnpm:12 AS base
 RUN pnpm runtime set node 24 -g
 
 FROM base AS build
@@ -198,7 +198,7 @@ On CI or CD environments, the BuildKit cache mounts might not be available, beca
 So an alternative is to use a typical Dockerfile with layers that are built incrementally, for this scenario, `pnpm fetch` is the best option, as it only needs the `pnpm-lock.yaml` file and the layer cache will only be lost when you change the dependencies.
 
 ```dockerfile title="Dockerfile"
-FROM ghcr.io/pnpm/pnpm:11 AS base
+FROM ghcr.io/pnpm/pnpm:12 AS base
 
 RUN pnpm runtime set node 24 -g
 

@@ -49,7 +49,7 @@ Approve a staged version, promoting it to the live registry. This is the step th
 pnpm stage approve [<stage-id>...] [--otp <otp>]
 ```
 
-Since v11.25.0 and v12.0.0, several stage ids may be approved at once, and running `approve`
+Since v11.25.0, several stage ids may be approved at once, and running `approve`
 with none opens an interactive picker over the staged versions:
 
 ```sh

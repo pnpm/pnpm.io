@@ -19,7 +19,7 @@ pnpm add -g typescript prettier eslint
 
 :::caution
 
-Do not run these commands through `sudo`. pnpm keeps global packages and configuration in the invoking user's home directory, so under `sudo` they silently operate on the root user's home instead of yours. Since v11.21.0, `pnpm setup`, `pnpm self-update`, and every command that modifies the global installation print a warning when run as root, and pnpm v12 fails with `ERR_PNPM_SUDO_NOT_SUPPORTED`. Read-only commands such as `pnpm bin -g` are unaffected.
+Do not run these commands through `sudo`. pnpm keeps global packages and configuration in the invoking user's home directory. Commands that modify the global installation fail under `sudo` with `ERR_PNPM_SUDO_NOT_SUPPORTED`; read-only commands such as `pnpm bin -g` are unaffected.
 
 :::
 

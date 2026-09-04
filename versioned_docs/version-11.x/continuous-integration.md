@@ -11,7 +11,7 @@ Outside of GitHub Actions, which has [its own action](#github-actions), install 
 with the standalone script:
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | sh -
+curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
 ```
 
 Two things make this convenient in CI:
@@ -77,7 +77,7 @@ environment:
 
 install:
   - ps: $env:PATH = "$env:PNPM_HOME;$env:PNPM_HOME\bin;$env:PATH"
-  - ps: Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+  - ps: $env:PNPM_VERSION = "latest-11"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
   - ps: pnpm install
 ```
 
@@ -103,7 +103,7 @@ steps:
     displayName: Cache pnpm
 
   - script: |
-      curl -fsSL https://get.pnpm.io/install.sh | sh -
+      curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
       echo "##vso[task.prependpath]$(PNPM_HOME)/bin"
       "$(PNPM_HOME)/bin/pnpm" config set store-dir $(pnpm_config_cache)
     displayName: "Setup pnpm"
@@ -136,7 +136,7 @@ pipelines:
             - apt-get update && apt-get install -y --no-install-recommends ca-certificates curl libatomic1 libstdc++6
             - export PNPM_HOME="$HOME/.local/share/pnpm"
             - export PATH="$PNPM_HOME/bin:$PATH"
-            - curl -fsSL https://get.pnpm.io/install.sh | sh -
+            - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
             - pnpm config set store-dir "$BITBUCKET_CLONE_DIR/.pnpm-store"
             - pnpm runtime set node lts -g
             - pnpm install
@@ -151,9 +151,7 @@ follow, and `store-dir` is pointed at the directory the cache saves.
 This example starts from a plain image and lets pnpm install Node.js. A minimal
 image needs the libraries the pnpm 11 executable links against — `libatomic1`
 and `libstdc++6` — which images like `node:24` already carry; see [Linux runtime
-requirements](./installation.md#on-posix-systems). pnpm 12 is statically linked
-and needs neither. Keep your existing `node` image and drop the `apt-get` and
-`pnpm runtime set` lines if you would rather not change it.
+requirements](./installation.md#on-posix-systems).
 
 ## CircleCI
 
@@ -180,7 +178,7 @@ jobs:
       - run:
           name: Install pnpm package manager
           command: |
-            curl -fsSL https://get.pnpm.io/install.sh | sh -
+            curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
             echo 'export PATH="$PNPM_HOME/bin:$PATH"' >> "$BASH_ENV"
             "$PNPM_HOME/bin/pnpm" config set store-dir .pnpm-store
       - run:
@@ -249,7 +247,7 @@ build:
     PNPM_HOME: "$CI_PROJECT_DIR/.pnpm"
   before_script:
     - export PATH="$PNPM_HOME/bin:$PATH"
-    - curl -fsSL https://get.pnpm.io/install.sh | sh -
+    - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -280,7 +278,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'curl -fsSL https://get.pnpm.io/install.sh | sh -'
+                sh 'curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -'
                 sh 'pnpm install'
             }
         }
@@ -313,7 +311,7 @@ blocks:
         - name: pnpm install
           commands:
             - export PATH="$PNPM_HOME/bin:$PATH"
-            - curl -fsSL https://get.pnpm.io/install.sh | sh -
+            - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -337,7 +335,7 @@ env:
     - PNPM_HOME="$HOME/.local/share/pnpm"
     - PATH="$PNPM_HOME/bin:$PATH"
 before_install:
-  - curl -fsSL https://get.pnpm.io/install.sh | sh -
+  - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-11 sh -
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install

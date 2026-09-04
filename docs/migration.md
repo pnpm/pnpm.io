@@ -1,9 +1,9 @@
 ---
 id: migration
-title: Migrating from v10 to v11
+title: Migrating from v10
 ---
 
-pnpm v11 introduces several breaking changes to how configuration is read and which settings are available. Most config changes are mechanical and can be applied by a codemod; the remainder require human attention. pnpm prints a pointer to this page when `pnpm self-update 11` is run from a v10 install.
+pnpm v11 introduced several breaking changes to how configuration is read and which settings are available, and pnpm v12 retains those changes. Most config changes are mechanical and can be applied by a codemod; the remainder require human attention. Apply them when moving from pnpm v10 to either newer major.
 
 ## Run the codemod
 
@@ -23,7 +23,7 @@ The codemod applies the following automatically:
 - **Replaces the package-manager strictness settings with `pmOnFail`**. `managePackageManagerVersions`, `packageManagerStrict`, and `packageManagerStrictVersion` are collapsed into one `pmOnFail: download | ignore | warn | error` setting.
 - **Renames** `allowNonAppliedPatches` → `allowUnusedPatches`, and `auditConfig.ignoreCves` → `auditConfig.ignoreGhsas` (the key is renamed; CVE IDs still need to be converted to GHSA IDs manually — see below).
 - **Converts `useNodeVersion`** into a `devEngines.runtime` entry on the root `package.json`.
-- **Bumps `packageManager`** in `package.json` to the target pnpm v11 version.
+- **Bumps `packageManager`** in `package.json` to the target pnpm version.
 
 ## Manual follow-ups
 

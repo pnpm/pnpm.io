@@ -76,7 +76,7 @@ The older spelling of `sideEffectsCache: { read: true, write: false }`.
 
 ### sideEffectsCache.remote
 
-Added in: v11.25.0 and v12.0.0
+Added in: v11.25.0
 
 * Default: **undefined**
 * Type: **Object**
@@ -127,7 +127,7 @@ incompatible platform, a bad blob — falls back to the ordinary local build. Se
 [Shared side-effects cache](/pnpr/shared-side-effects-cache) for the full setup,
 including the server flag, the trust material, and how an artifact is published.
 
-Since v11.25.0 and v12.1.0, a restored artifact is saved in the shared store
+Since v11.25.0, a restored artifact is saved in the shared store
 together with its signed origin. Before a later install reuses it, pnpm checks
 the signature again against the machine's current keys and revalidates its
 owner, package and source identity, platform, policy, and stored files. A bad

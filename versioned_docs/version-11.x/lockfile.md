@@ -32,8 +32,8 @@ importers:
     configDependencies: {}
     packageManagerDependencies:
       pnpm:
-        specifier: 12.0.0-rc.7
-        version: 12.0.0-rc.7
+        specifier: 11.25.0
+        version: 11.25.0
 
 packages:
   # pnpm and its platform binaries
@@ -109,7 +109,7 @@ importer and loses whichever graph it held.
 
 ## Resolutions that carry a revision
 
-Since v11.25.0 and v12.0.0, a `packages:` entry may carry a `revision` field
+Since v11.25.0, a `packages:` entry may carry a `revision` field
 beside its integrity:
 
 ```yaml
@@ -146,14 +146,11 @@ The env document is written when either of these applies:
 - The project has [config dependencies]. Their integrity checksums are project
   content and are always recorded.
 - pnpm records the pnpm version it resolved for the project, under
-  `packageManagerDependencies`. This happens when the project declares
-  [`devEngines.packageManager`], or pins pnpm 12 or newer through the legacy
-  `packageManager` field. Setting [`pmOnFail`] to `ignore` turns it off — pnpm
-  then doesn't enforce the pinned version, so it has nothing to record.
+  `packageManagerDependencies`, when the project declares
+  [`devEngines.packageManager`]. Setting [`pmOnFail`] to `ignore` turns it off —
+  pnpm then doesn't enforce the pinned version, so it has nothing to record.
 
 Two-document lockfiles have existed since config dependencies were introduced.
-They became common in pnpm 12, which records the resolved package manager
-version by default.
 
 Since v11.23.0, a frozen install no longer rewrites this block. When the pinned
 pnpm version is missing from the lockfile or no longer matches it,

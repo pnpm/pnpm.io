@@ -127,7 +127,7 @@ Allows specifying the pnpm version via `devEngines.packageManager` in `package.j
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": ">=11.0.0 <12.0.0",
+      "version": ">=12.0.0 <13.0.0",
       "onFail": "download"
     }
   }
@@ -136,7 +136,7 @@ Allows specifying the pnpm version via `devEngines.packageManager` in `package.j
 
 :::note
 
-When pnpm is declared via the legacy `packageManager` field (not `devEngines.packageManager`), its resolution info is **not** written to `pnpm-lock.yaml` — unless the pinned pnpm version is v12 or newer and [`pmOnFail`](./settings/cli.md#pmonfail) is not set to `ignore`. This keeps the lockfile stable when upgrading from pnpm v10 to v11 without forcing projects off the legacy field. When the resolution is recorded, `pnpm-lock.yaml` gains a leading [env lockfile document](./lockfile.md).
+When pnpm 12 is declared via the legacy `packageManager` field and [`pmOnFail`](./settings/cli.md#pmonfail) is not set to `ignore`, its resolution info is written to `pnpm-lock.yaml`. The lockfile then gains a leading [env lockfile document](./lockfile.md).
 
 :::
 
