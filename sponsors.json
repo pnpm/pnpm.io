@@ -18,6 +18,13 @@
       "logo": "notion.svg",
       "url": "https://notion.com/",
       "width": 80
+    },
+    {
+      "name": "Code Rabbit",
+      "logo": "coderabbit_min.svg",
+      "alt": "CodeRabbit",
+      "url": "https://coderabbit.ai/",
+      "width": 220
     }
   ],
   "gold": [
@@ -45,13 +52,6 @@
       "logo": "serpapi.svg",
       "url": "https://serpapi.com/",
       "width": 160
-    },
-    {
-      "name": "Code Rabbit",
-      "logo": "coderabbit_min.svg",
-      "alt": "CodeRabbit",
-      "url": "https://coderabbit.ai/",
-      "width": 220
     },
     {
       "name": "StackBlitz",
