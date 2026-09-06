@@ -149,11 +149,15 @@ Once done, install pnpm again and it should work as expected.
 
 ## Updating pnpm
 
-To update pnpm, run the [`self-update`] command:
+To update to the newest pnpm 11, run the [`self-update`] command with the major:
 
 ```
-pnpm self-update
+pnpm self-update 11
 ```
+
+A bare `pnpm self-update` follows npm's `latest` tag, which now points at pnpm
+12. See [Installing pnpm v12](./cli/self-update.md#installing-pnpm-v12-the-rust-port) if that
+is what you want.
 
 [`self-update`]: ./cli/self-update.md
 
