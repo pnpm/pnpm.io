@@ -7,14 +7,14 @@ title: Installation
 
 pnpm 12 is a native executable and does not require Node.js after it is installed. Installing it through npm requires Node.js 22.13 or newer.
 
-The unqualified `latest` tag on npm still points to pnpm 11. Use the `latest-12` tag when installing pnpm 12.
+pnpm 12 is the current release line — the `latest` tag on npm points at it, so the commands below install pnpm 12 without naming a version.
 
 ## Using pnpm
 
 If you already have pnpm v11.10.0 or newer, update directly to pnpm 12:
 
 ```sh
-pnpm self-update latest-12
+pnpm self-update
 ```
 
 Inside a project that pins pnpm through the `packageManager` field, [`self-update`] only updates that pin instead of installing pnpm globally.
@@ -36,7 +36,7 @@ Due to this issue, we currently recommend installing pnpm using [npm](#using-npm
 Using PowerShell:
 
 ```powershell
-$env:PNPM_VERSION="latest-12"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
 On Windows, Microsoft Defender can significantly slow down installation of packages. You can add pnpm to Microsoft Defender's list
@@ -49,13 +49,13 @@ Add-MpPreference -ExclusionPath $(pnpm store path)
 ### On POSIX systems
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
 If you don't have curl installed, you would like to use wget:
 
 ```sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+wget -qO- https://get.pnpm.io/install.sh | sh -
 ```
 
 :::tip
@@ -68,11 +68,11 @@ You may use the [pnpm runtime] command then to install Node.js.
 
 ```sh
 # bash
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+wget -qO- https://get.pnpm.io/install.sh | env ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
 # sh
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+wget -qO- https://get.pnpm.io/install.sh | env ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 # dash
-wget -qO- https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
+wget -qO- https://get.pnpm.io/install.sh | env ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
 ```
 
 ### Installing a specific version
@@ -86,7 +86,7 @@ curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=<version> sh -
 ## Using npm
 
 ```sh
-npx get-pnpm latest-12
+npx get-pnpm
 ```
 
 Node.js 22.13 or newer is needed to run this installer, but not to run pnpm afterwards.

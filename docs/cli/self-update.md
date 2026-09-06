@@ -41,10 +41,10 @@ When `self-update` refuses a version that is younger than the `minimumReleaseAge
 
 ## Installing pnpm v12
 
-pnpm 12 is published under both the `pnpm` and `@pnpm/exe` names on the `latest-12` dist-tag:
+pnpm 12 is the current release line, so a bare `self-update` installs it:
 
 ```
-pnpm self-update latest-12
+pnpm self-update
 ```
 
 v12 ships native binaries as `@pnpm/exe.<platform>-<arch>` packages, which pnpm's built-in installer links directly. There is no Node.js launcher, so the command pays no Node.js startup cost. From v12 onward the install converges on the unscoped `pnpm` package (the Rust executable), even when updating from the SEA `@pnpm/exe` build.

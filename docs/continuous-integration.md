@@ -11,7 +11,7 @@ Outside of GitHub Actions, which has [its own action](#github-actions), install 
 with the standalone script:
 
 ```sh
-curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
 Two things make this convenient in CI:
@@ -19,8 +19,8 @@ Two things make this convenient in CI:
 - **It needs no Node.js.** pnpm is a self-contained executable, and it can install
   the runtime for you afterwards with `pnpm runtime set node lts -g`, so a job
   does not need a Node.js image to begin with.
-- **It follows the project's version.** The bootstrap installs the latest pnpm 12,
-  then, if your `package.json` has a `packageManager` or
+- **It follows the project's version.** The bootstrap installs the newest stable
+  pnpm, then, if your `package.json` has a `packageManager` or
   `devEngines.packageManager` field, pnpm switches to that version on first use,
   so the pipeline does not pin a version in two places.
 
@@ -78,7 +78,7 @@ environment:
 
 install:
   - ps: $env:PATH = "$env:PNPM_HOME;$env:PNPM_HOME\bin;$env:PATH"
-  - ps: $env:PNPM_VERSION = "latest-12"; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+  - ps: Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
   - ps: pnpm install
 ```
 
@@ -104,7 +104,7 @@ steps:
     displayName: Cache pnpm
 
   - script: |
-      curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+      curl -fsSL https://get.pnpm.io/install.sh | sh -
       echo "##vso[task.prependpath]$(PNPM_HOME)/bin"
       "$(PNPM_HOME)/bin/pnpm" config set store-dir $(pnpm_config_cache)
     displayName: "Setup pnpm"
@@ -137,7 +137,7 @@ pipelines:
             - apt-get update && apt-get install -y --no-install-recommends ca-certificates curl
             - export PNPM_HOME="$HOME/.local/share/pnpm"
             - export PATH="$PNPM_HOME/bin:$PATH"
-            - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+            - curl -fsSL https://get.pnpm.io/install.sh | sh -
             - pnpm config set store-dir "$BITBUCKET_CLONE_DIR/.pnpm-store"
             - pnpm runtime set node lts -g
             - pnpm install
@@ -178,7 +178,7 @@ jobs:
       - run:
           name: Install pnpm package manager
           command: |
-            curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+            curl -fsSL https://get.pnpm.io/install.sh | sh -
             echo 'export PATH="$PNPM_HOME/bin:$PATH"' >> "$BASH_ENV"
             "$PNPM_HOME/bin/pnpm" config set store-dir .pnpm-store
       - run:
@@ -247,7 +247,7 @@ build:
     PNPM_HOME: "$CI_PROJECT_DIR/.pnpm"
   before_script:
     - export PATH="$PNPM_HOME/bin:$PATH"
-    - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+    - curl -fsSL https://get.pnpm.io/install.sh | sh -
     - pnpm config set store-dir .pnpm-store
   script:
     - pnpm install # install dependencies
@@ -278,7 +278,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -'
+                sh 'curl -fsSL https://get.pnpm.io/install.sh | sh -'
                 sh 'pnpm install'
             }
         }
@@ -311,7 +311,7 @@ blocks:
         - name: pnpm install
           commands:
             - export PATH="$PNPM_HOME/bin:$PATH"
-            - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+            - curl -fsSL https://get.pnpm.io/install.sh | sh -
             - checkout
             - cache restore node-$(checksum pnpm-lock.yaml)
             - pnpm install
@@ -335,7 +335,7 @@ env:
     - PNPM_HOME="$HOME/.local/share/pnpm"
     - PATH="$PNPM_HOME/bin:$PATH"
 before_install:
-  - curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=latest-12 sh -
+  - curl -fsSL https://get.pnpm.io/install.sh | sh -
   - pnpm config set store-dir ~/.pnpm-store
 install:
   - pnpm install
