@@ -299,6 +299,11 @@ const ossProjects = {
       logoUrl: "/img/users/nx.svg",
       alt: "Nx",
     },
+    {
+      name: "Mermaid",
+      logoUrl: "/img/users/mermaid.svg",
+      alt: "Mermaid",
+    },
   ],
 };
 
