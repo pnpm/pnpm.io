@@ -382,6 +382,17 @@ Added in: v10.27.0
 
 Allows ignoring the trust policy check for packages published more than the specified number of minutes ago. This is useful when enabling strict trust policies, as it allows older versions of packages (which may lack a process for publishing with signatures or provenance) to be installed without manual exclusion, assuming they are safe due to their age.
 
+### trustPolicyExcludePrune
+
+Added in: v12.4.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, `pnpm add`, `pnpm update`, and `pnpm remove` prune the entries of [`trustPolicyExclude`](#trustpolicyexclude) in `pnpm-workspace.yaml` that the freshly written lockfile no longer resolves: a version that is gone is dropped (an entry is removed once none of its versions remain), and an entry for a package that is no longer in the lockfile is removed too. Name patterns (`@myorg/*`) are always kept.
+
+The cleanup is skipped when the install's lockfile does not cover the whole workspace ([`sharedWorkspaceLockfile: false`](../workspaces.md#sharedworkspacelockfile)), since entries another project still needs would look stale.
+
 ### trustLockfile
 
 Added in: v11.3.0
