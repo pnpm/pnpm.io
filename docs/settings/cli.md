@@ -28,6 +28,32 @@ Controls colors in the output.
 Any logs at or higher than the given level will be shown.
 You can instead pass `--silent` to turn off all output logs.
 
+### progress
+
+* Default: **true**
+* Type: **Boolean**
+
+Controls dependency and download progress, including output such as:
+
+```text
+Progress: resolved 12, reused 10, downloaded 2, added 12
+```
+
+Set this to `false` to hide progress without hiding warnings, lifecycle script
+output, or command summaries.
+
+Disable progress for one command with `--no-progress`:
+
+```sh
+pnpm install --no-progress
+```
+
+To disable progress globally:
+
+```sh
+pnpm config set --global progress false
+```
+
 ### useBetaCli
 
 * Default: **false**
