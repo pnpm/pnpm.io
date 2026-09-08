@@ -142,6 +142,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [trustPolicy](./settings/dependency-resolution.md#trustpolicy)
 * [trustPolicyExclude](./settings/dependency-resolution.md#trustpolicyexclude)
 * [trustPolicyIgnoreAfter](./settings/dependency-resolution.md#trustpolicyignoreafter)
+* [trustPolicyExcludePrune](./settings/dependency-resolution.md#trustpolicyexcludeprune)
 * [trustLockfile](./settings/dependency-resolution.md#trustlockfile)
 * [blockExoticSubdeps](./settings/dependency-resolution.md#blockexoticsubdeps)
 * [registries](./settings/dependency-resolution.md#registries)
