@@ -215,15 +215,24 @@ valid one.
 }
 ```
 
-Every entry is authorized and verified before any of them is written, and the
-write is one journaled transaction: the release either lands whole or leaves
-nothing behind, and one interrupted by a crash is finished on the next startup
-rather than staying half-published. A read that arrives while the transaction
-applies can still see part of the release.
+Every entry is authorized and verified before any of them is written. Two
+different failures follow from that, so it is worth keeping them apart.
 
-If another writer has already published one of the files, that package is left
-out and reported with `409` while the rest of the release stands: the bytes that
-won the slot are someone else's published release.
+**A batch that fails a check publishes nothing.** Authorization, validation, and
+the version-conflict check all run up front, and any entry that fails one of them
+aborts the whole batch before a byte is written.
+
+**A batch that passes its checks is committed as one journaled transaction.** It
+lands whole or leaves nothing behind, and one interrupted by a crash is finished
+on the next startup rather than staying half-published. A read that arrives while
+the transaction applies can still see part of the release.
+
+The one case that ends in a partial release is losing a write race: another
+writer publishing the same file between the check and the commit. That entry is
+left out and reported with `409` while the rest of the release stands, because
+the bytes that won the slot are someone else's published release and overwriting
+them would be the worse outcome. Republishing the batch after bumping the
+conflicting version completes the release.
 
 An [image manifest](container-images.md) whose layers are already uploaded can
 ride along in the same batch. `GET /-/pnpr` advertises support as

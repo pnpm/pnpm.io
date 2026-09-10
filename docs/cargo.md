@@ -73,7 +73,14 @@ A crate pinned to a git revision, whether through `[patch.crates-io]` or a plain
 
 The store slot is keyed by the commit, so a second install links it without cloning again, offline included. `--frozen-lockfile` leaves the pinned revision untouched.
 
-A workspace whose resolution declares `[patch]` or `[replace]` is refused rather than resolved without them: `cargo metadata` does not report either table, so the lockfile would name the replaced package.
+A `[patch]` or `[replace]` table is honored when pnpm installs from a committed `Cargo.lock`, which is the usual way a patched workspace is set up. What pnpm cannot do is *resolve* one from scratch: `cargo metadata` reports neither table, so a lockfile pnpm generated would name the replaced package instead of the patched one. Rather than resolve it wrongly, pnpm refuses, and the error says what to do:
+
+```
+Cargo.toml declares [patch], which pnpm cannot resolve.
+Commit the Cargo.lock that `cargo generate-lockfile` writes for it.
+```
+
+With that lockfile committed, installs, `--frozen-lockfile`, and offline installs all work.
 
 ## Faster resolution through pnpr
 
