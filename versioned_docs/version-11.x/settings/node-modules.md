@@ -41,9 +41,9 @@ Added in: v11.8.0
 * Default: **false**
 * Type: **Boolean**
 
-When `true`, pnpm injects the generated `node_modules/.package-map.json` into pnpm-managed Node.js script environments by adding Node's `--experimental-package-map` option to `NODE_OPTIONS`.
+When `true`, pnpm writes `node_modules/.package-map.json` during isolated and hoisted installs and injects it into pnpm-managed Node.js script environments by adding Node's `--experimental-package-map` option to `NODE_OPTIONS`.
 
-The package map is generated during isolated and hoisted installs. This setting only controls whether pnpm passes the generated map to scripts.
+Nothing reads the map without this setting, so pnpm does not write one. An install that stops writing the map also removes one an earlier install left.
 
 CLI and environment configuration use the kebab-case name `node-experimental-package-map`.
 
