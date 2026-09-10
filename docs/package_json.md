@@ -272,9 +272,15 @@ However, `foo` is optional, but only to the required version specification.
 
 ## publishConfig
 
-It is possible to override some fields in the manifest before the package is
-packed.
-The following fields may be overridden:
+This field carries settings that change how a package is published:
+[`registry`](#publishconfigregistry), [`access`](#publishconfigaccess),
+[`directory`](#publishconfigdirectory),
+[`linkDirectory`](#publishconfiglinkdirectory), and
+[`executableFiles`](#publishconfigexecutablefiles). These are preserved in the
+published `package.json`.
+
+Additionally, `publishConfig` can be used to override several other fields in the
+manifest before the package is packed. The following fields may be overridden:
 
 * [`bin`](https://github.com/stereobooster/package.json#bin)
 * [`main`](https://github.com/stereobooster/package.json#main)
@@ -316,6 +322,54 @@ Will be published as:
     "version": "1.0.0",
     "main": "lib/index.js",
     "typings": "lib/index.d.ts"
+}
+```
+
+### publishConfig.registry
+
+Added in: v8.6.8
+
+The registry this package publishes to. It overrides the `registry` setting, any
+scope route in [`registries`](./settings/dependency-resolution.md#registries),
+and `pnpm publish --registry`.
+
+```json
+{
+  "name": "foo",
+  "version": "1.0.0",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}
+```
+
+Only the URL belongs here. pnpm matches it against the auth settings in
+[`.npmrc`](./npmrc.md), so the example above publishes with
+`//registry.npmjs.org/:_authToken=...`.
+
+Each package in a `pnpm publish -r` run goes to its own target registry, so one
+command can release a workspace to several registries.
+[`--batch`](./cli/publish.md#--batch) then sends one request per registry.
+
+### publishConfig.access
+
+Added in: v11.2.0
+
+Tells the registry whether the published package should be `public` or
+`restricted`. Same as
+[`pnpm publish --access`](./cli/publish.md#--access-publicrestricted).
+
+Left unset, pnpm sends no access level, so the registry applies its own default
+and the level of an already published package is left alone. Unscoped packages
+cannot be `restricted`.
+
+```json
+{
+  "name": "@acme/foo",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  }
 }
 ```
 
