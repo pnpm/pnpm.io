@@ -109,6 +109,12 @@ pnpm --filter "{packages/**}[origin/master]..." <cmd>
 pnpm --filter "...{packages/**}[origin/master]..." <cmd>
 ```
 
+The pattern language is the usual one: `*` and `?` match within one path
+segment, `**` crosses segments, and a character class such as `[ab]` matches one
+of the listed characters. Neither `*` nor `?` matches a name that begins with a
+dot, so `packages/*` skips `packages/.cache`. Name a dot-prefixed directory
+explicitly to select it.
+
 Or you may select all packages from a directory with names matching the given
 pattern:
 

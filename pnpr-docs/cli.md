@@ -5,6 +5,7 @@ title: CLI reference
 
 ```sh
 pnpr [OPTIONS]
+pnpr [OPTIONS] oci-gc --registry <name>
 ```
 
 ## Options
@@ -24,6 +25,35 @@ pnpr [OPTIONS]
 | `--disable-artifacts` | Disable the signed shared-artifact surface. Overrides `artifacts.enabled` independently of the resolver. |
 | `-h, --help` | Print help. |
 | `-V, --version` | Print version. |
+
+## Every flag has an environment variable
+
+Since v0.1.0-alpha.11, pnpr reads any option from an environment variable when
+the flag is omitted. The variable is the flag's name with a `PNPR_` prefix, so
+`--public-url` becomes `PNPR_PUBLIC_URL` and `--disable-resolver` becomes
+`PNPR_DISABLE_RESOLVER`. A flag given on the command line wins over its
+variable. Boolean flags accept `true`, `1`, `yes`, `on`, `false`, `0`, `no`,
+and `off`.
+
+```sh
+PNPR_LISTEN=0.0.0.0:7677 PNPR_PUBLIC_URL=https://registry.example.com pnpr
+```
+
+## Subcommands
+
+### oci-gc
+
+Added in: v0.1.0-alpha.11
+
+Reclaims [container image](container-images.md#reclaiming-space) blobs that no
+retained manifest references. Every writer sharing the store must be stopped for
+the whole run.
+
+| Flag | Description |
+| --- | --- |
+| `--registry <name>` | The concrete hosted OCI registry to collect, by its config name. Required. |
+| `--dry-run` | Report the candidates without deleting anything. |
+| `--min-age-secs <n>` | Keep blobs younger than this. Defaults to `86400`, so an interrupted push can still resume. `0` collects every unreferenced blob. |
 
 ## Logging
 

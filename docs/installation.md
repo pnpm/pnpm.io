@@ -9,6 +9,21 @@ pnpm 12 is a native executable and does not require Node.js after it is installe
 
 pnpm 12 is the current release line — the `latest` tag on npm points at it, so the commands below install pnpm 12 without naming a version.
 
+### Supported platforms
+
+pnpm 12 ships a prebuilt binary for each of these targets:
+
+| Operating system | Architectures |
+| --- | --- |
+| Linux (glibc) | x64, arm64, riscv64, ppc64le, s390x |
+| Linux (musl) | x64, arm64 |
+| macOS | arm64, x64 |
+| Windows | x64, arm64 |
+| FreeBSD | x64 |
+| Android | arm64, x64 |
+
+FreeBSD, ppc64le, s390x, RISC-V, and Android were added in v12.4.0. On a target with no binary, install the JavaScript [pnpm 11](https://www.npmjs.com/package/pnpm/v/11) instead.
+
 ## Using pnpm
 
 If you already have pnpm v11.10.0 or newer, update directly to pnpm 12:

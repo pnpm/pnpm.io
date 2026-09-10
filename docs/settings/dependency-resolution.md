@@ -309,9 +309,9 @@ Added in: v11.22.0
 * Default: **false**
 * Type: **Boolean**
 
-When set to `true`, `pnpm add`, `pnpm update`, and `pnpm remove` prune the entries of [`minimumReleaseAgeExclude`](#minimumreleaseageexclude) in `pnpm-workspace.yaml` that the freshly written lockfile no longer resolves: a version that is gone is dropped (an entry is removed once none of its versions remain), and an entry for a package that is no longer in the lockfile is removed too. Name patterns (`@myorg/*`) are always kept.
+When set to `true`, `pnpm install`, `pnpm add`, `pnpm update`, `pnpm remove`, and `pnpm dedupe` prune the entries of [`minimumReleaseAgeExclude`](#minimumreleaseageexclude) in `pnpm-workspace.yaml` that the freshly written lockfile no longer resolves: a version that is gone is dropped (an entry is removed once none of its versions remain), and an entry for a package that is no longer in the lockfile is removed too. Name patterns (`@myorg/*`) are always kept.
 
-The cleanup is skipped when the install's lockfile does not cover the whole workspace ([`sharedWorkspaceLockfile: false`](../workspaces.md#sharedworkspacelockfile)), since entries another project still needs would look stale.
+The cleanup is skipped when the install's lockfile does not cover the whole workspace ([`sharedWorkspaceLockfile: false`](../workspaces.md#sharedworkspacelockfile)), since entries another project still needs would look stale. Comments on the entries that are kept survive the rewrite.
 
 ### minimumReleaseAgeIgnoreMissingTime
 
@@ -339,7 +339,7 @@ Added in: v11.0.0
 
 Controls how pnpm behaves when no version of a dependency satisfies the [`minimumReleaseAge`](#minimumreleaseage) constraint within the requested range. When `false`, pnpm falls back to a version that doesn't meet the `minimumReleaseAge` constraint so installation can still succeed. When `true`, pnpm fails resolution instead.
 
-The default depends on whether you configured `minimumReleaseAge` yourself: if you set it explicitly (via `pnpm-workspace.yaml`, the CLI, or environment variables), strict mode is on by default so the setting is enforced. The built-in default of `minimumReleaseAge` (1440 minutes) is non-strict for backward compatibility.
+The default depends on whether you configured `minimumReleaseAge` yourself: if you set it explicitly (in `pnpm-workspace.yaml`, in the global `config.yaml`, through a `PNPM_CONFIG_*` variable, or on the command line), strict mode is on by default so the setting is enforced. The built-in default of `minimumReleaseAge` (1440 minutes) is non-strict for backward compatibility.
 
 ```yaml
 minimumReleaseAgeStrict: true
@@ -389,9 +389,9 @@ Added in: v12.4.0
 * Default: **false**
 * Type: **Boolean**
 
-When set to `true`, `pnpm add`, `pnpm update`, and `pnpm remove` prune the entries of [`trustPolicyExclude`](#trustpolicyexclude) in `pnpm-workspace.yaml` that the freshly written lockfile no longer resolves: a version that is gone is dropped (an entry is removed once none of its versions remain), and an entry for a package that is no longer in the lockfile is removed too. Name patterns (`@myorg/*`) are always kept.
+When set to `true`, `pnpm install`, `pnpm add`, `pnpm update`, `pnpm remove`, and `pnpm dedupe` prune the entries of [`trustPolicyExclude`](#trustpolicyexclude) in `pnpm-workspace.yaml` that the freshly written lockfile no longer resolves: a version that is gone is dropped (an entry is removed once none of its versions remain), and an entry for a package that is no longer in the lockfile is removed too. Name patterns (`@myorg/*`) are always kept.
 
-The cleanup is skipped when the install's lockfile does not cover the whole workspace ([`sharedWorkspaceLockfile: false`](../workspaces.md#sharedworkspacelockfile)), since entries another project still needs would look stale.
+The cleanup is skipped when the install's lockfile does not cover the whole workspace ([`sharedWorkspaceLockfile: false`](../workspaces.md#sharedworkspacelockfile)), since entries another project still needs would look stale. Comments on the entries that are kept survive the rewrite.
 
 ### trustLockfile
 

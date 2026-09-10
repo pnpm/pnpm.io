@@ -131,6 +131,10 @@ audit:
     - GHSA-vh95-rmgr-6w4m
 ```
 
+Since v11.26.0 and v12.4.0, ignored advisories are left out of the vulnerability
+total and the per-severity counts, and reported separately. When every advisory
+found is ignored, the summary says so rather than reporting a clean audit.
+
 ### audit.ignorePrune
 
 Added in: v12.0.0

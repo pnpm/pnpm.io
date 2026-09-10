@@ -132,6 +132,28 @@ catalogs:
     react-dom: ^18.2.0
 ```
 
+### Workspace dependencies in a catalog
+
+Added in: v11.26.0, v12.2.0
+
+A catalog entry may hold a [`workspace:` range](./workspaces.md#workspace-protocol-workspace), so the version a workspace dependency is linked by is written once too:
+
+```yaml title="pnpm-workspace.yaml"
+catalog:
+  '@example/utils': workspace:^
+```
+
+```json title="packages/example-app/package.json"
+{
+  "name": "@example/app",
+  "dependencies": {
+    "@example/utils": "catalog:"
+  }
+}
+```
+
+pnpm expands the `catalog:` reference to `workspace:^` and then links the workspace project, exactly as if the `package.json` had declared `workspace:^` itself. On publish both protocols are replaced, so the example above ships as `"^1.4.0"` when `@example/utils` is at 1.4.0.
+
 ## Publishing
 
 The `catalog:` protocol is removed when running `pnpm publish` or `pnpm pack`. This is similar to the [`workspace:` protocol](./workspaces.md#workspace-protocol-workspace), which is [also replaced on publish](./workspaces.md#publishing-workspace-packages).

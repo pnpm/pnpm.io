@@ -187,6 +187,12 @@ workspace packages can still be linked by using the `workspace:` range protocol.
 
 Packages are only linked if their versions satisfy the dependency ranges.
 
+`true` links a workspace project only where a project of the workspace declares
+it directly. A transitive dependency declared with a plain version range is
+still installed from the registry, whatever
+[`preferWorkspacePackages`](#preferworkspacepackages) says. Set `deep` to link
+workspace projects into subdependencies as well.
+
 ### injectWorkspacePackages
 
 * Default: **false**

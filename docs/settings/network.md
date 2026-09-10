@@ -46,6 +46,8 @@ The `.npmrc` also supports npm's legacy `proxy` setting, which is used as the fa
 
 A comma-separated string of domain extensions that a proxy should not be used for.
 
+An entry may be written with or without a leading dot: both `npmjs.org` and `.npmjs.org` bypass the proxy for the domain itself and for its subdomains.
+
 Empty, `false`, and `null` values behave as described for [`httpsProxy`](#httpsproxy).
 
 ### localAddress
@@ -127,8 +129,9 @@ The upper bound (in milliseconds) of the retry exponential backoff.
 * Default: **60000 (1 minute)**
 * Type: **Number**
 
-The maximum amount of time to wait for HTTP requests to connect and complete.
-This time should be enough to download the largest package over a reasonable connection.
+How long an HTTP request may go without making progress. The clock is reset on every chunk pnpm receives, so a large tarball on a slow connection is not cut off while data is still arriving; a stalled request is.
+
+Before v12.4.0, this bounded the whole request, which meant the value had to be large enough to download the largest package over the slowest connection you cared about.
 
 ### fetchWarnTimeoutMs
 

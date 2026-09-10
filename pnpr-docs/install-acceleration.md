@@ -62,6 +62,24 @@ For frozen restores with an already-fresh lockfile, pnpm can use
 `POST /-/pnpr/v0/verify-lockfile` to get only the server-side trust verdict
 instead of resolving again.
 
+## Cargo and Python
+
+Added in: v0.1.0-alpha.11
+
+`POST /-/pnpr/v0/resolve` takes an `ecosystem` field, so the same endpoint
+resolves [Cargo and Python](ecosystems.md) dependency graphs as well. Both are
+latency-bound in the same way npm is, and each has its own extra cost the server
+removes:
+
+- For **Cargo**, the client no longer fetches one sparse-index file per crate in
+  the graph.
+- For **Python**, the client no longer downloads a wheel to find out what it
+  requires.
+
+A `cargo.enabled` or `python.enabled` workspace with `pnprServer` set offloads
+those resolutions automatically. When the server does not serve an ecosystem's
+resolution, pnpm resolves it locally instead of failing.
+
 Since pnpr v0.1.0-alpha.9, `pnpm install --fix-lockfile` is forwarded as a
 repair request, including during filtered installs. The server regenerates
 broken lockfile metadata while retaining locked versions that remain

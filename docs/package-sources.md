@@ -42,6 +42,19 @@ pnpm add jsr:@hono/hono@latest
 
 This works just like installing from npm, but tells pnpm to resolve the package through JSR instead.
 
+### crates.io and PyPI
+
+Added in: v12.4.0 (pnpm v12 only)
+
+A `crate:` or `pypi:` prefix asks for a package of another ecosystem, once that ecosystem is enabled in `pnpm-workspace.yaml`:
+
+```sh
+pnpm add crate:serde
+pnpm add pypi:httpx
+```
+
+Such a dependency is recorded in that ecosystem's own manifest and lockfile, not in `package.json` or `pnpm-lock.yaml`. See [Cargo dependencies](./cargo.md) and [Python dependencies](./python.md).
+
 ### Named registries
 
 Added in: v11.1.0

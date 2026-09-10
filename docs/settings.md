@@ -63,6 +63,22 @@ packages:
 The root package is always included, even when custom location wildcards are
 used.
 
+A pattern may be written with a `./` prefix, may contain `.` and `..` segments,
+and may repeat slashes: `./packages/*` and `packages//*` select the same
+projects, and `!./packages/legacy` excludes the same directory that
+`!packages/legacy` does. A `*` never matches a name beginning with a dot, so
+`packages/*` skips `packages/.cache`; name such a directory explicitly to
+include it.
+
+:::note
+
+pnpm reads the workspace from `pnpm-workspace.yaml`, not from the `workspaces`
+field of the root `package.json`. Since v12.4.1, a root manifest that declares a
+non-empty `workspaces` array in a project with no `pnpm-workspace.yaml` gets a
+warning, because such an install silently links no project at all.
+
+:::
+
 Catalogs are also defined in the `pnpm-workspace.yaml` file. See [_Catalogs_](./catalogs.md) for details.
 
 ```yaml title="pnpm-workspace.yaml"
@@ -113,6 +129,13 @@ packageConfigs:
     modulesDir: "node_modules"
     saveExact: true
 ```
+
+Settings that shape resolution or the layout of `node_modules` (`overrides`,
+`hoist`, `modulesDir`, `saveExact`, `savePrefix`, and their neighbours) take
+effect per project only where each project has its own lockfile, that is with
+[`sharedWorkspaceLockfile: false`](./workspaces.md#sharedworkspacelockfile). A
+workspace on the default shared lockfile has one resolution for every project,
+so pnpm reports which entries it ignored instead of applying them silently.
 
 ## Settings
 
@@ -345,4 +368,7 @@ These settings are configured in `pnpm-workspace.yaml` as well, but are document
 * [audit.level](./cli/audit.md#auditlevel), [audit.ignore](./cli/audit.md#auditignore) and [audit.ignorePrune](./cli/audit.md#auditignoreprune)
 * [initVersion](./cli/init.md#initversion), [initLicense](./cli/init.md#initlicense) and [initAuthorName / initAuthorEmail / initAuthorUrl](./cli/init.md#initauthorname-initauthoremail-initauthorurl)
 * [legacyDirFiltering](./filtering.md#legacydirfiltering)
+* [tasks](./workspace-task-orchestration.md#configure-task-dependencies), [pipelines](./cli/pipeline.md#pipelines) and [pipelineBase](./cli/pipeline.md#pipelinebase)
+* [cargo.enabled](./cargo.md#cargoenabled) and [cargo.indexUrl](./cargo.md#cargoindexurl)
+* [python.enabled](./python.md#pythonenabled), [python.executable](./python.md#pythonexecutable), [python.indexUrl](./python.md#pythonindexurl), [python.extras](./python.md#pythonextras) and [python.groups](./python.md#pythongroups)
 * Authorization settings, which are read from [`.npmrc`](./npmrc.md)

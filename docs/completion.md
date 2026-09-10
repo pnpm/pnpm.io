@@ -27,6 +27,8 @@ To setup autocompletion for Fish, run:
 pnpm completion fish > ~/.config/fish/completions/pnpm.fish
 ```
 
+Since v12.4.0, the generated completions cover the [`pn` alias](./pnpm-cli.md#short-aliases) as well, in Bash, Fish, PowerShell, and Zsh.
+
 ## g-plane/pnpm-shell-completion
 
 [pnpm-shell-completion] is a shell plugin maintained by Pig Fang on Github.

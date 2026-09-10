@@ -223,7 +223,9 @@ Denials by package name are not restricted this way: `foo: false` blocks `foo` w
 
 **Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and are treated as unreviewed. By default, an error is printed ([`strictDepBuilds`](#strictdepbuilds) defaults to `true`). If `strictDepBuilds` is set to `false`, a warning is printed instead.
 
-During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](../cli/add.md) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
+During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](../cli/add.md#--allow-build) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
+
+**Patched packages:** since v12.4.0, a [patch](../cli/patch.md) that adds an install script or a `binding.gyp` makes the package buildable, and the build goes through the same approval. Until the package is allowed, it is listed under "Ignored build scripts".
 
 :::info Migrating from older settings
 

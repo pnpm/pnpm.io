@@ -25,6 +25,7 @@ Besides moving `pnpm-lock.yaml` to the newly resolved versions, `pnpm update` wr
 
 * In `package.json`, the range is moved onto the resolved version while the operator the dependency already declared is kept, so `^1.1.0` stays a caret range.
 * A dependency declared through the [`catalog:` protocol](../catalogs.md) is not rewritten in `package.json`. The catalog entry it points at is updated instead, in `pnpm-workspace.yaml`.
+* A dependency declared through the [`jsr:` protocol](../package-sources.md) keeps its `jsr:` prefix, and its range moves like an npm range.
 * A dependency declared through a dist-tag, such as `"foo": "latest"`, keeps tracking the tag. The tag stays in `package.json` and only the lockfile moves to the version behind it — with `--latest` as well.
 
 Pass [`--no-save`](#--no-save) to update the lockfile only and leave the declared ranges alone.
@@ -73,6 +74,10 @@ Updated actions are pinned to exact commit hashes, with their release tags prese
 ```yaml
 - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 ```
+
+Local actions are followed rather than looked up: a `./`-relative reference, and
+since v11.26.0 and v12.3.0 GitHub's self-repository spelling
+(`uses: $/.github/actions/setup`), resolve inside the repository.
 
 Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings/dependency-resolution.md#updategithubactionsserver) (added in v11.17.0).
 
@@ -173,6 +178,12 @@ Set [`update.changeset`](../settings/dependency-resolution.md#updatechangeset) t
 Added in: v11.16.0
 
 Also update the GitHub Actions referenced by the repository's workflow files. See [Updating GitHub Actions](#updating-github-actions).
+
+### Supply-chain policy flags
+
+Added in: v11.26.0, v12.3.0
+
+`pnpm update` accepts the same policy overrides as `pnpm install` and `pnpm add`: `--trust-lockfile`, `--no-trust-lockfile`, [`--trust-policy`](../settings/dependency-resolution.md#trustpolicy), [`--trust-policy-exclude`](../settings/dependency-resolution.md#trustpolicyexclude), and [`--trust-policy-ignore-after`](../settings/dependency-resolution.md#trustpolicyignoreafter), so a policy can be relaxed or tightened for a single run without editing `pnpm-workspace.yaml`.
 
 ### --filter &lt;package_selector\>
 

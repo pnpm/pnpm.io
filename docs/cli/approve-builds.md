@@ -21,6 +21,8 @@ pnpm approve-builds esbuild fsevents !core-js
 
 Prefix a package name with `!` to deny it. Only mentioned packages are affected; the rest are left untouched.
 
+Since v11.26.0 and v12.4.0, a decision is saved even when nothing is awaiting approval, so a policy can be written before the package is installed. A named package that is not awaiting approval is reported with a warning rather than an error, and is not rebuilt: it may not be installed yet, and rebuilding it would need a lockfile the project may not have. An argument that names no package at all is rejected before anything is written.
+
 During install, packages with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`.
 
 Since v11.23.0, writing `allowBuilds` also removes `onlyBuiltDependencies`, `onlyBuiltDependenciesFile`, `neverBuiltDependencies`, and `ignoredBuiltDependencies` from `pnpm-workspace.yaml`. `allowBuilds` replaced those settings in pnpm 11 and they have been ignored since, so a workspace migrated from pnpm 10 kept them around looking active.
