@@ -10,11 +10,17 @@
       "items": [
         "configuration",
         "storage",
-        "auth-backends"
+        "auth-backends",
+        "oidc"
       ]
     },
+    "ecosystems",
+    "container-images",
+    "discovery",
     "install-acceleration",
     "shared-side-effects-cache",
+    "compiler-cache",
+    "pipeline-runs",
     "endpoints",
     "license"
   ]

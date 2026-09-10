@@ -171,3 +171,13 @@ nodeDownloadMirrors:
   rc: https://npmmirror.com/mirrors/node-rc/
   nightly: https://npmmirror.com/mirrors/node-nightly/
 ```
+
+Since v12.4.0, a mirror is machine-level configuration as well: set it in the
+[global configuration file](../cli/config.md) with
+`pnpm config set --global node-download-mirrors`, or in the environment as
+`PNPM_CONFIG_NODE_DOWNLOAD_MIRRORS`, so every project on the machine downloads
+Node.js from it.
+
+Since v12.2.0, downloads from a mirror carry the npm registry credentials
+configured for that URL, including bearer tokens, basic auth, and `tokenHelper`,
+so a mirror behind an authenticating proxy works without a separate credential.

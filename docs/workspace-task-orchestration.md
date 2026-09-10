@@ -190,6 +190,12 @@ can prefix or aggregate it. Use [`--stream`](./cli/run.md#--stream) for immediat
 prefixed output or [`--aggregate-output`](./cli/run.md#--aggregate-output) to
 print each task's output together after it finishes.
 
+## Caching a task
+
+The `outputs`, `inputs`, `env`, `cache`, and `cargoTargetDir` keys of a task are
+read by [`pnpm pipeline`](./cli/pipeline.md#caching-a-task) only. A recursive
+`pnpm run` never restores a task from the cache.
+
 ## Commands that do not use `tasks`
 
 The `tasks` declarations configure recursive `run`. Recursive `exec` follows

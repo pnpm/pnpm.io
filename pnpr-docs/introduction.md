@@ -4,11 +4,18 @@ title: Introduction
 slug: /
 ---
 
-**pnpr** is a pnpm-compatible npm registry server, written in Rust. It speaks the
+**pnpr** is a pnpm-compatible registry server, written in Rust. It speaks the
 npm registry protocol, so any npm-compatible client (pnpm, npm, yarn) can talk to
 it. It hosts your own packages and proxies upstream registries such as
 `registry.npmjs.org`, with its own authentication and access controls — roughly
 the role [verdaccio](https://verdaccio.org/) plays in the JavaScript ecosystem.
+
+Since v0.1.0-alpha.11, one instance can serve more than npm. It also speaks the
+Cargo and Python protocols and the [OCI distribution
+API](container-images.md), so a workspace that ships a package, a crate, a
+Python distribution, and an image can [publish all four in one
+transaction](ecosystems.md#one-publish-for-a-workspace-that-spans-ecosystems).
+Users can sign in through [OpenID Connect](oidc.md).
 
 Every registry origin pnpr serves is a declared
 [registry](configuration.md#registries-and-defaultregistry) that claims the
@@ -36,8 +43,14 @@ configuration, and APIs may change between releases.
   fan it out to a whole team through pnpr's own authentication, so clients
   never handle the upstream credential.
 - **An install accelerator** — resolve a project's dependency graph server-side
-  and hand pnpm a ready-to-use lockfile. See
-  [Install acceleration](install-acceleration.md).
+  and hand pnpm a ready-to-use lockfile, for npm, Cargo, and Python
+  dependencies alike. See [Install acceleration](install-acceleration.md).
+- **A container image registry** — push and pull with `docker`, `podman`, or
+  `skopeo`, and cache pulls from Docker Hub and GHCR. See
+  [Container images](container-images.md).
+- **A build cache** — share a [Cargo compilation cache](compiler-cache.md)
+  between CI and developer machines, and keep the
+  [run records](pipeline-runs.md) of `pnpm pipeline`.
 
 ## How it relates to pnpm
 

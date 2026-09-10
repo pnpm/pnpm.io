@@ -10,6 +10,7 @@ Records a change intent: which packages a change affects, the bump type for each
 ```sh
 pnpm change [--bump <type>] [--summary <text>] [<pkg>...]
 pnpm change status
+pnpm change check
 ```
 
 Change intents are consumed later by [`pnpm version -r`](./version.md#recursive-releases). See [Release management](../versioning.md) for the whole workflow.
@@ -67,6 +68,18 @@ Release plan:
 ```
 
 The cause of each bump is one of `intent` (a change intent named the package), `dependencies` (a dependent was pulled in by propagation), `fixed` (a [fixed group](../versioning.md#fixed-groups) companion), or `epic` (an [epic](../versioning.md#epics) re-base).
+
+### check
+
+Added in: v12.4.0
+
+Validate the versions committed in the workspace against the [epic](../versioning.md#epics) bands and [fixed group](../versioning.md#fixed-groups) lockstep declared in `pnpm-workspace.yaml`.
+
+```sh
+pnpm change check
+```
+
+Unlike `pnpm change status`, which reports the release the pending intents produce, `check` looks only at the versions already in the manifests. It reads no intents, so it is the step to run on every pull request: a package whose version drifted out of its epic's band, or out of step with its fixed group, fails the command. Every violation is listed, including ones in packages the current release does not touch.
 
 ## Options
 

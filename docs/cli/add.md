@@ -16,6 +16,8 @@ By default, any new package is installed as a production dependency.
 | `pnpm add -g sax `                     | Install package globally           |
 | `pnpm add sax@next`                    | Install from the `next` tag        |
 | `pnpm add sax@3.0.0`                   | Specify version `3.0.0`            |
+| `pnpm add crate:serde`                 | Add a [Cargo](../cargo.md) crate   |
+| `pnpm add pypi:httpx`                  | Add a [Python](../python.md) package |
 
 ## Supported package sources
 
@@ -27,6 +29,7 @@ pnpm supports installing packages from various sources. See the [Supported packa
 - Local file system (tarballs and directories)
 - Remote tarballs
 - Git repositories (with semver, subdirectories, and more)
+- crates.io and PyPI, through the `crate:` and `pypi:` prefixes
 
 ## Adding a package manager or a runtime
 
@@ -43,6 +46,16 @@ writes `"packageManager": "yarn@4.18.0"`, and every other package manager is rec
 Globally, `pnpm add -g yarn` installs the current Yarn line rather than the Classic-only `yarn` package, and `pnpm add -g node@22` installs that Node.js release rather than a wrapper that downloads one.
 
 A specifier that locates a package rather than asking for a released version — `pnpm add yarn@npm:yarn@1.22.22`, `pnpm add yarn@yarnpkg/berry` — installs what it names, as an ordinary dependency.
+
+## Protocol-prefixed selectors
+
+A selector may carry the protocol in front of the name rather than after it:
+
+```sh
+pnpm add jsr:@scope/pkg
+pnpm add npm:pkg@^1.0.0
+pnpm add workspace:pkg@*
+```
 
 ## Options
 
@@ -103,7 +116,11 @@ Each space-separated package is installed into its own isolated directory. To bu
 
 ### --workspace
 
-Only adds the new dependency if it is found in the workspace.
+Only adds the new dependency if it is found in the workspace. The dependency is
+saved with the [`workspace:` protocol](../workspaces.md#workspace-protocol-workspace)
+and linked from the workspace project that provides it. When no workspace
+project provides the package, the command fails instead of falling back to the
+registry.
 
 
 ### --allow-build
@@ -119,6 +136,14 @@ pnpm --allow-build=esbuild add my-bundler
 ```
 
 This will run `esbuild`'s postinstall script and also add it to the `allowBuilds` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
+
+Since v12.4.0, prefixing a name with `!` denies the build instead:
+
+```
+pnpm add --allow-build=!core-js my-bundler
+```
+
+writes `allowBuilds: { core-js: false }`, so the package is never asked about again. Global installs (`pnpm add -g`) record the denial too.
 
 ### --filter &lt;package_selector\>
 

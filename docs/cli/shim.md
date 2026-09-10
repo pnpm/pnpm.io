@@ -66,6 +66,18 @@ If nothing in the project provides the command, the globally installed version r
 
 The [trust rules](../global-packages.md#trust) of project-aware global bins apply here too: an npm-published package manager is verified against npm's signature for its exact version and switches without asking, while Bun and Yarn 6 arrive as checksum-pinned platform archives and go through the confirmation prompt. That answer is remembered per project *and* per binary, so moving the project's pin to another version asks again.
 
+## The shim is a real executable
+
+Since v12.3.0, every project-aware global command pnpm writes is a native
+executable on every platform: the shims `pnpm shim add` creates, and the `node`,
+`deno`, and `bun` commands. On Windows that means `<name>.exe` instead of the
+`.cmd` and `.ps1` pair earlier pnpm 12 releases wrote.
+
+The practical difference is that a shell no longer sits between you and the
+command, so environment variables whose names are not valid shell identifiers
+survive the hop. Shims written by an earlier pnpm 12 are replaced on the next
+global install or `pnpm self-update`.
+
 ## Related
 
 * [Other package managers](../package-managers.md)

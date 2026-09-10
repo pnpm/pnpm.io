@@ -104,6 +104,14 @@ pnpm --allow-build=esbuild add my-bundler
 
 This will run `esbuild`'s postinstall script and also add it to the `allowBuilds` field of `pnpm-workspace.yaml`. So, `esbuild` will always be allowed to run its scripts in the future.
 
+Since v11.26.0, prefixing a name with `!` denies the build instead:
+
+```
+pnpm add --allow-build=!core-js my-bundler
+```
+
+writes `allowBuilds: { core-js: false }`, so the package is never asked about again. Global installs (`pnpm add -g`) record the denial too.
+
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)

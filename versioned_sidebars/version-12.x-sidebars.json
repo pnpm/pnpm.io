@@ -63,6 +63,7 @@
         "label": "Run scripts",
         "items": [
           "cli/run",
+          "cli/pipeline",
           "cli/test",
           "cli/exec",
           "cli/pnx",
@@ -185,6 +186,8 @@
       "registry-revisions",
       "workspaces",
       "workspace-task-orchestration",
+      "cargo",
+      "python",
       "catalogs",
       "config-dependencies",
       "aliases",

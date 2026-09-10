@@ -102,6 +102,10 @@ With the lead on `11.x`, members occupy majors `1100`–`1199`. Members move ind
 
 Membership is matched with pnpm's package selectors: name globs, `./`-prefixed directory globs, and `!`-prefixed negations. Selectors are evaluated in order and the last one to match decides, so a later include can re-admit a package an earlier negation excluded. The lead is never a member of its own band.
 
+## Checking committed versions
+
+[`pnpm change check`](./cli/change.md#check) validates the versions already committed in the workspace against the `versioning.epics` bands and the `versioning.fixed` groups, without reading any change intent. Run it in CI, next to the lint and test steps, so a version that drifted out of its band is caught on the pull request that introduced it rather than at release time.
+
 ## Changelogs
 
 By default (`versioning.changelog.storage: registry`) no `CHANGELOG.md` is committed. Each release's section is composed at publish time and packed into the published tarball on top of the previously published version's changelog. Consumed change intents are garbage-collected by a later `pnpm version -r` only once the registry confirms the version was published with its section.

@@ -65,8 +65,8 @@ The hosted store can instead live in an S3-compatible object store — see
 ## `registries` and `defaultRegistry`
 
 The `registries:` map is pnpr's **only routing surface**. Every addressable
-registry origin is a named registry, exposed as an npm registry at
-`https://<pnpr>/~<name>/`. There are three kinds:
+registry origin is a named registry, exposed at `https://<pnpr>/~<name>/`. There
+are three kinds:
 
 - **`hosted`** — a registry pnpr itself is the authoritative origin for. The
   only kind that accepts writes (publish, dist-tags, unpublish).
@@ -90,7 +90,16 @@ serves no registry and clients must address a `/~<name>/` URL.
 
 A registry name is served as the single URL path segment `/~<name>/`, so it
 must be one URL-safe segment: it cannot be empty, `.` or `..`, start with `.`,
-or contain `/`, `\`, `:`, `%`, `?`, `#`, whitespace, or control characters.
+or contain `/`, `\`, `:`, `%`, `?`, `#`, whitespace, or control characters. The
+`~` must arrive unencoded: `%7E` does not select the named registry.
+
+Since v0.1.0-alpha.11, a registry also declares which package ecosystem it
+serves, through `ecosystem:` (`npm`, `cargo`, `pypi`, or `oci`; npm by default).
+A server that serves more than one addresses them through `/npm/`, `/cargo/`,
+and `/pypi/` path prefixes, and registry names can be reused across ecosystems
+by grouping the entries under an ecosystem key. See
+[Cargo and Python registries](ecosystems.md) and
+[Container images](container-images.md).
 
 ### The `packages` map
 
@@ -336,6 +345,32 @@ Because teams live in the config, they are served read-only over npm's
 team endpoints, and any attempt to create or modify one through the API is
 refused — see [Team endpoints](endpoints.md#team-endpoints).
 
+## `oci`
+
+Size limits for the [container image](container-images.md) surface, and the
+Bearer challenge it offers:
+
+```yaml
+oci:
+  bearerAuth: false
+  maxBlobBytes: 10737418240   # 10 GiB
+  maxManifestBytes: 4194304   # 4 MiB
+```
+
+Both limits must be greater than zero.
+
+## `cors`
+
+The exact browser origins allowed to call pnpr across origins. Cross-origin
+access stays off when the block is absent or its allowlist is empty. See
+[Browsing and discovery](discovery.md).
+
+```yaml
+cors:
+  allowedOrigins:
+    - https://registry-ui.example.com
+```
+
 ## `auth`
 
 By default users are stored in an htpasswd file and tokens in a local SQLite
@@ -361,6 +396,10 @@ the htpasswd file.
 To share auth state across several stateless pnpr replicas, move users and
 tokens into a shared SQL database — see [Auth backends](auth-backends.md).
 
+An `auth.oidc` list configures OpenID Connect browser sign-in and keyless CI
+publishing alongside the password backend — see
+[OpenID Connect](oidc.md).
+
 ## `secret`
 
 ```yaml
@@ -374,13 +413,14 @@ least 16 bytes. When omitted, a fresh random secret is generated per process,
 which means private cache entries only survive for that process's lifetime —
 set an explicit secret to keep private caches warm across restarts.
 
-## Registry, resolver, and artifact surfaces
+## Registry, resolver, artifact, and pipeline surfaces {#registry-resolver-and-artifact-surfaces}
 
-pnpr exposes three independently deployable HTTP surfaces:
+pnpr exposes four independently deployable HTTP surfaces:
 
-- The **npm registry surface** — packument and tarball reads, publish,
+- The **registry surface** — package and tarball reads, publish,
   unpublish, dist-tags, and search, on the path-less base and on every
-  `/~<name>/` endpoint. It has no config toggle: it is served exactly when at
+  `/~<name>/` endpoint, for [every ecosystem](ecosystems.md) the config
+  declares. It has no config toggle: it is served exactly when at
   least one registry is declared under `registries:`. The CLI flag
   `--disable-registry` turns it off for one process.
 - The **resolver surface** — the pnpr install-accelerator routes
@@ -401,12 +441,32 @@ resolver:
 ```yaml
 artifacts:
   enabled: true
+  compilerCaches:
+    acme:
+      access: [ci-builder, alice, bob]
+      publish: ci-builder
 ```
 
-The CLI flag `--disable-artifacts` overrides this setting. With artifacts off,
-its routes are not mounted and the `GET /-/pnpr` handshake advertises an empty
-artifact-version list. The handshake itself is served when either the resolver
-or artifact surface is enabled, so an artifact-only tier is discoverable.
+  The CLI flag `--disable-artifacts` overrides this setting. With artifacts off,
+  its routes are not mounted and the `GET /-/pnpr` handshake advertises an empty
+  artifact-version list. The handshake itself is served when either the resolver
+  or artifact surface is enabled, so an artifact-only tier is discoverable.
+
+  `compilerCaches` declares the [Cargo compilation caches](compiler-cache.md)
+  this server hosts and who may read and publish to each.
+
+- The **pipeline run surface** — the endpoints that store and serve
+  [`pnpm pipeline` run records](pipeline-runs.md), a peer of the artifact store.
+  It is off by default:
+
+```yaml
+pipeline:
+  enabled: true
+  workspaces:
+    acme-app:
+      access: [team:platform]
+      publish: ci-builder
+```
 
 Something must be served: a config with no registries (or the registry
 surface disabled by flag), the resolver disabled, and artifacts disabled is a

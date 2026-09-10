@@ -28,11 +28,32 @@ is populated from the CLI options. In this case, you have the following options:
 1. explicitly set the env variable: `npm_config_target_arch=x64 pnpm install`
 1. force the unknown option with `--config.`: `pnpm install --config.target_arch=x64`
 
+## Boolean flags
+
+A boolean flag can be written on its own, negated with a `no-` prefix, or given an explicit value:
+
+```sh
+pnpm install --prod            # devDependencies are skipped
+pnpm install --no-prod         # devDependencies are installed
+pnpm install --prod=false      # the same, since v12.4.0
+pnpm install --prod=true       # the same as --prod
+```
+
+The `--config.` escape hatch takes a value the same way: `--config.trust-lockfile=false`.
+
 ## Options
 
 ### -C &lt;path\>, --dir &lt;path\>
 
 Run as if pnpm was started in `<path>` instead of the current working directory.
+
+### Which project a command acts on
+
+Run from a subdirectory of a project, a command acts on the nearest ancestor
+directory that has a manifest, so `pnpm bin` from `packages/app/src` reports
+paths under `packages/app`. Two commands stay where you are: `pnpm init`
+creates its manifest in the current directory, and `pnpm exec` runs the command
+there.
 
 ### -w, --workspace-root
 

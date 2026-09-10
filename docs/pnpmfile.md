@@ -105,6 +105,30 @@ export const hooks = {
 }
 ```
 
+#### What the hook receives
+
+Since v12.4.1, `config` is the resolved configuration: every setting pnpm will
+act on, wherever it came from, including `.npmrc`, the command line, and the
+built-in defaults. A setting nobody set is absent from the object rather than
+present as `null`.
+
+Two entries describe registry routing and credentials:
+
+* `registriesByScope` maps a scope (`@acme`, or `default` for the main
+  registry) to the registry URL packages of that scope are fetched from.
+  Rewriting the map redirects those fetches.
+* `configByUri` maps a registry URI to its credentials, the way pnpm 11
+  reports them.
+
+#### Which commands load the pnpmfile
+
+Since v12.3.0, `pnpm run`, `pnpm exec`, `pnpm rebuild`, the script
+shortcuts such as `pnpm test`, and `pnpm link`, `pnpm outdated`, `pnpm import`,
+`pnpm pack`, `pnpm publish`, and `pnpm stage publish` all load the pnpmfile
+before doing their work, so `updateConfig` settings such as `extraEnv` and
+`extraBinPaths` reach the processes they spawn and hook-provided catalogs
+resolve at pack time.
+
 ### `hooks.afterAllResolved(lockfile, context): lockfile | Promise<lockfile>`
 
 Allows you to mutate the lockfile output before it is serialized.

@@ -4,20 +4,29 @@ title: HTTP endpoints
 ---
 
 pnpr exposes a set of always-on endpoints (health, user accounts, and tokens)
-plus three surfaces:
+plus four surfaces:
 
 - **Registry surface** - npm-compatible package, publish, staged-publish, and
-  team endpoints. Served exactly when at least one registry is declared under
+  team endpoints, plus the [Cargo, Python, and image](ecosystems.md) protocols.
+  Served exactly when at least one registry is declared under
   [`registries:`](configuration.md#registries-and-defaultregistry);
   `--disable-registry` turns it off for one process. On a resolver-only server
   these routes aren't mounted at all — they answer `404`, not `403`.
 - **Resolver surface** (`resolver.enabled`) - pnpr install-accelerator
   endpoints under `/-/pnpr`.
 - **Shared-artifact surface** (`artifacts.enabled`) - signed artifact publish,
-  lookup, and blob endpoints under `/-/pnpr`. It may run without the resolver.
+  lookup, and blob endpoints under `/-/pnpr`, plus the
+  [compiler cache](compiler-cache.md). It may run without the resolver.
+- **Pipeline run surface** (`pipeline.enabled`) - the
+  [`pnpm pipeline` run records](pipeline-runs.md) under `/-/pnpr`.
 
-See [Configuration](configuration.md#registry-resolver-and-artifact-surfaces) for
-the config keys and [CLI reference](cli.md) for the command-line overrides.
+See [Configuration](configuration.md#registry-resolver-and-artifact-surfaces)
+for the config keys and [CLI reference](cli.md) for the command-line overrides.
+
+The tables below show npm paths on the path-less base. Each is equally available
+under a `/~<name>/` prefix and, on a server that declares more than one
+ecosystem, under `/npm/`. Cargo, Python, and image endpoints are documented on
+their own pages.
 
 ## Always available
 
@@ -60,9 +69,6 @@ Every request routes through the registry graph:
 - Served `dist.tarball` URLs are rewritten onto the configured `public_url`
   and stay canonical for the base the client addressed (path-less or
   `/~<name>/`), so lockfiles don't bake in a registry name.
-
-The endpoint tables below show path-less shapes; each is equally available
-under a `/~<name>/` prefix.
 
 ## pnpr protocol endpoints
 
@@ -122,6 +128,33 @@ organization's name must equal the authenticated username.
 | `PUT` | `/-/pnpr/v0/artifacts` | Stores one immutable opaque signed envelope and its inline content-addressed blobs in the authenticated organization's namespace. At most eight variants per input key; a different artifact whose compatible consumers overlap an existing variant gets `409 Conflict`. |
 | `POST` | `/-/pnpr/v0/artifacts/resolve` | One batched lookup for candidate input keys. Returns at most eight signed variants per key; scanned envelope bytes plus the serialized response share one 16 MiB budget. |
 | `POST` | `/-/pnpr/v0/artifacts/blob` | Reads one owner-scoped blob by its SHA-512 integrity. |
+| `GET` `HEAD` `PUT` | `/-/pnpr/v0/compiler-cache/{cache}/{key}` | One [Cargo compilation cache](compiler-cache.md) entry, over the subset of WebDAV sccache uses. `PROPFIND` answers for virtual parent directories. Added in v0.1.0-alpha.11. |
+
+### Cross-ecosystem endpoints
+
+Added in: v0.1.0-alpha.11
+
+These belong to no single ecosystem, so they stay at the root whatever prefixes
+the server mounts.
+
+| Method | Path | Description |
+| --- | --- | --- |
+| `PUT` | `/-/pnpr/v0/publish` | [Publish packages of any ecosystem](ecosystems.md#one-publish-for-a-workspace-that-spans-ecosystems) in one journaled transaction. Advertised as `publish: [0]` in the handshake. |
+| `GET` | `/-/pnpr/v0/registries` | The [registry directory](discovery.md#the-registry-directory): the named registries, ecosystem endpoints, and routing order the caller may see. |
+
+### Pipeline run endpoints
+
+Added in: v0.1.0-alpha.11
+
+Mounted when `pipeline.enabled` is true. See
+[Pipeline run records](pipeline-runs.md).
+
+| Method | Path | Description |
+| --- | --- | --- |
+| `PUT` | `/-/pnpr/v0/pipeline/runs` | Record one run. Requires `publish` on its workspace. |
+| `GET` | `/-/pnpr/v0/pipeline/runs` | Recent run summaries, newest first. Accepts `workspace` and `limit`. |
+| `GET` | `/-/pnpr/v0/pipeline/runs/{workspace}/{run_id}` | One run's full record, event stream included. |
+| `GET` | `/-/pnpr/v0/pipeline` | A static web viewer over the two read endpoints. |
 
 ## Registry read endpoints
 
@@ -138,7 +171,8 @@ are checked against the serving registry's matching
 | `GET` | `/{name}/-/{filename}` | Unscoped tarball. |
 | `GET` | `/@scope/{name}/-/{filename}` | Scoped tarball. |
 | `GET` | `/-/package/{package}/dist-tags` | Package `dist-tags` object. Use a percent-encoded scoped package name, for example `@scope%2Fname`. |
-| `GET` | `/-/v1/search?text=<query>&size=<n>` | npm search v1 shape. Searches locally hosted packages by package-name substring; search is local-only and never proxied upstream. Results are filtered by access policy. |
+| `GET` | `/-/v1/search?text=<query>&size=<n>` | npm search v1 shape. Searches locally hosted packages by package-name substring, and, since v0.1.0-alpha.11, the upstreams that opt in with [`search: true`](discovery.md). Results are filtered by access policy. Pass `browse=true` to page through hosted packages with no search term. |
+| `GET` | `/-/org/{scope}/package` | Packages of one organization, on registries that enable discovery. Added in v0.1.0-alpha.11. |
 | `GET` | `/-/tarballs/sha512/{digest}` | Immutable artifact by its base64url SHA-512 digest, added in v0.1.0-alpha.8. See [Registry revisions](/registry-revisions). |
 
 If the client sends `Accept: application/vnd.npm.install-v1+json`, pnpr
@@ -171,7 +205,7 @@ a hosted registry.
 | --- | --- | --- |
 | `PUT` | `/{name}` | Publish an unscoped package. Body is the npm publish document with `_attachments`. Requires `publish`. |
 | `PUT` | `/@scope/{name}` | Publish a scoped package. Body is the npm publish document with `_attachments`. Requires `publish`. |
-| `PUT` | `/-/pnpm/v1/publish` | pnpm batch publish. Body is `{"packages":[<publish document>, ...]}`. The batch is all-or-nothing and each package requires `publish`. |
+| `PUT` | `/-/pnpm/v1/publish` | pnpm batch publish. Body is `{"packages":[<publish document>, ...]}`. The batch is all-or-nothing and each package requires `publish`. For a release that spans ecosystems, use [`PUT /-/pnpr/v0/publish`](ecosystems.md#one-publish-for-a-workspace-that-spans-ecosystems) instead. |
 | `PUT` | `/{package}/-rev/{rev}` | Replace a packument, used by partial unpublish. Requires both `publish` and `unpublish`. Use a percent-encoded scoped package name, for example `@scope%2Fname`. |
 | `DELETE` | `/{package}/-rev/{rev}` | Remove an entire package, used by force unpublish. Requires `unpublish`. Use a percent-encoded scoped package name for scoped packages. |
 | `DELETE` | `/{name}/-/{filename}/-rev/{rev}` | Remove an unscoped tarball. Requires `unpublish`. |

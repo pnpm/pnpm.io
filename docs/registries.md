@@ -129,6 +129,10 @@ adds that machine-wide scope route to the global `registries` setting while it
 records the credential under `_auth`. A later login for the same scope moves the
 route rather than declaring it at two registries.
 
+Since v12.4.0, a registry configured in `.npmrc` outranks a route `pnpm login`
+saved in the global `config.yaml`, so logging in cannot redirect a project that
+names its registry explicitly.
+
 An entry that declares no routes describes a registry configured elsewhere — for example, the default registry set in `.npmrc`. Such an entry only takes effect when its URL is one the project actually resolves from; pnpm warns about entries that match no configured registry, since they would otherwise sit there inert (a stale URL, a scope that moved).
 
 Environment variables are **not** expanded in the URL keys of this setting, for the same reason they are not expanded in other [registry URLs in `pnpm-workspace.yaml`](./settings.md): the file is committed, and expanding env variables into a request destination could leak secrets to an attacker-controlled host. A key containing a `${...}` placeholder is ignored.
