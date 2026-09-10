@@ -99,14 +99,14 @@ The flag existed to print peer dependency issues. [`pnpm peers check`](/cli/peer
 pnpm peers check
 ```
 
-If a CI script calls `--resolution-only`, this is the one change on this page that stops a build instead of changing a result. Grep for it before you switch.
+If a CI script calls `--resolution-only`, replace it before switching to pnpm 12.
+
+## Explicit frozen-lockfile values
+
+`pnpm install --frozen-lockfile false` is no longer supported. Use `pnpm install --no-frozen-lockfile` to disable frozen-lockfile mode. To enable it, use `pnpm install --frozen-lockfile` without a separate `true` argument ([pnpm/pnpm#14741](https://github.com/pnpm/pnpm/issues/14741)).
 
 ## Trying it
 
 `latest` on npm still points at the pnpm 11 line, so install pnpm 12 from the `latest-12` tag. Homebrew, winget, Scoop, and Chocolatey don't offer it yet. [Installing pnpm 12](/installation) lists the ways to install it.
 
 Please [report any issues](https://github.com/pnpm/pnpm/issues) you run into.
-
-## Explicit frozen-lockfile values
-
-`pnpm install --frozen-lockfile false` is no longer supported. Use `pnpm install --no-frozen-lockfile` to disable frozen-lockfile mode. To enable it, use `pnpm install --frozen-lockfile` without a separate `true` argument ([pnpm/pnpm#14741](https://github.com/pnpm/pnpm/issues/14741)).
