@@ -66,6 +66,11 @@ the setting meant before it grew a remote tier. Writing without reading
 (`read: false, write: true`) populates a cache the run never consumes, which is
 what a job that warms one for others wants.
 
+Since v12.2.0, the `--side-effects-cache` and `--no-side-effects-cache` flags, and
+`PNPM_CONFIG_SIDE_EFFECTS_CACHE`, toggle the **local** cache only. A remote tier
+declared under `sideEffectsCache.remote` is left in place, so a run can turn the
+local cache off without losing the shared one.
+
 ### sideEffectsCacheReadonly
 
 * Default: **false**

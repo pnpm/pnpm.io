@@ -162,3 +162,7 @@ nodeDownloadMirrors:
   rc: https://npmmirror.com/mirrors/node-rc/
   nightly: https://npmmirror.com/mirrors/node-nightly/
 ```
+
+Since v11.26.0, downloads from a mirror carry the npm registry credentials
+configured for that URL, including bearer tokens, basic auth, and `tokenHelper`,
+so a mirror behind an authenticating proxy works without a separate credential.

@@ -33,15 +33,9 @@ Only remove the dependency from `optionalDependencies`.
 
 Only remove the dependency from `dependencies`.
 
-### --unsafe-perm
-
-Added in: v11.26.0
-
-Accepted for compatibility with `pnpm install`; see [`unsafePerm`](../settings/build.md#unsafeperm).
-
 ### Supply-chain policy flags
 
-Added in: v11.26.0, v12.3.0
+Added in: v12.3.0
 
 `pnpm remove` accepts the same policy overrides as `pnpm install` and `pnpm add`: `--trust-lockfile`, `--no-trust-lockfile`, [`--trust-policy`](../settings/dependency-resolution.md#trustpolicy), [`--trust-policy-exclude`](../settings/dependency-resolution.md#trustpolicyexclude), and [`--trust-policy-ignore-after`](../settings/dependency-resolution.md#trustpolicyignoreafter).
 

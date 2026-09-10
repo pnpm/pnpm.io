@@ -178,7 +178,6 @@ Since v12.4.0, a mirror is machine-level configuration as well: set it in the
 `PNPM_CONFIG_NODE_DOWNLOAD_MIRRORS`, so every project on the machine downloads
 Node.js from it.
 
-Downloads from a mirror carry the npm registry credentials configured for that
-URL, including bearer tokens, basic auth, and
-`tokenHelper`, so a mirror behind an authenticating
-proxy works without a separate credential.
+Since v12.2.0, downloads from a mirror carry the npm registry credentials
+configured for that URL, including bearer tokens, basic auth, and `tokenHelper`,
+so a mirror behind an authenticating proxy works without a separate credential.

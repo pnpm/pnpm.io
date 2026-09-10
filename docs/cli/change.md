@@ -71,7 +71,7 @@ The cause of each bump is one of `intent` (a change intent named the package), `
 
 ### check
 
-Added in: v11.26.0, v12.4.0
+Added in: v12.4.0
 
 Validate the versions committed in the workspace against the [epic](../versioning.md#epics) bands and [fixed group](../versioning.md#fixed-groups) lockstep declared in `pnpm-workspace.yaml`.
 

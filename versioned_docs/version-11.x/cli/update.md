@@ -63,6 +63,10 @@ Updated actions are pinned to exact commit hashes, with their release tags prese
 - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 ```
 
+Local actions are followed rather than looked up: a `./`-relative reference, and
+since v11.26.0 GitHub's self-repository spelling
+(`uses: $/.github/actions/setup`), resolve inside the repository.
+
 Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings/dependency-resolution.md#updategithubactionsserver) (added in v11.17.0).
 
 ## Options
@@ -162,6 +166,12 @@ Set [`update.changeset`](../settings/dependency-resolution.md#updatechangeset) t
 Added in: v11.16.0
 
 Also update the GitHub Actions referenced by the repository's workflow files. See [Updating GitHub Actions](#updating-github-actions).
+
+### Supply-chain policy flags
+
+Added in: v11.26.0
+
+`pnpm update` accepts the same policy overrides as `pnpm install` and `pnpm add`: `--trust-lockfile`, `--no-trust-lockfile`, [`--trust-policy`](../settings/dependency-resolution.md#trustpolicy), [`--trust-policy-exclude`](../settings/dependency-resolution.md#trustpolicyexclude), and [`--trust-policy-ignore-after`](../settings/dependency-resolution.md#trustpolicyignoreafter), so a policy can be relaxed or tightened for a single run without editing `pnpm-workspace.yaml`.
 
 ### --filter &lt;package_selector\>
 

@@ -7,7 +7,11 @@ Deploy a package from a workspace. During deployment, the files of the deployed 
 
 :::note
 
-By default, the deploy command only works with workspaces that have the `inject-workspace-packages` setting set to `true`. If you want to use deploy without "injected dependencies", use the `--legacy` flag or set `force-legacy-deploy` to `true`.
+Since v11.26.0, `pnpm deploy` no longer requires [`injectWorkspacePackages`](../workspaces.md#injectworkspacepackages). A linked workspace dependency is rewritten to a `file:` dependency in the dedicated deploy lockfile, and the peer dependencies it declares are bound to the deployed graph's own resolution.
+
+Where a peer resolves to more than one version in that graph, the binding is ambiguous, and the deploy fails with `ERR_PNPM_DEPLOY_AMBIGUOUS_PEER` naming the package, the peer, and the competing versions. Pin the peer to one version with an [`overrides`](../settings/dependency-resolution.md#overrides) entry, or turn `injectWorkspacePackages` on, which is the setting that decides between the candidates.
+
+Before v11.26.0 the command refused every non-injected workspace up front. `--legacy`, or `forceLegacyDeploy: true`, still selects the older implementation.
 
 :::
 

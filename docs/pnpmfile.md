@@ -122,7 +122,7 @@ Two entries describe registry routing and credentials:
 
 #### Which commands load the pnpmfile
 
-Since v11.26.0 and v12.3.0, `pnpm run`, `pnpm exec`, `pnpm rebuild`, the script
+Since v12.3.0, `pnpm run`, `pnpm exec`, `pnpm rebuild`, the script
 shortcuts such as `pnpm test`, and `pnpm link`, `pnpm outdated`, `pnpm import`,
 `pnpm pack`, `pnpm publish`, and `pnpm stage publish` all load the pnpmfile
 before doing their work, so `updateConfig` settings such as `extraEnv` and

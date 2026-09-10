@@ -134,7 +134,7 @@ catalogs:
 
 ### Workspace dependencies in a catalog
 
-Added in: v11.26.0, v12.2.0
+Added in: v12.2.0
 
 A catalog entry may hold a [`workspace:` range](./workspaces.md#workspace-protocol-workspace), so the version a workspace dependency is linked by is written once too:
 
