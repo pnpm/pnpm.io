@@ -89,25 +89,24 @@ pnpm brings its own runtime, so `Install-Product node` is no longer needed. Add
 
 ## Azure Pipelines
 
-On Azure Pipelines, you can use pnpm for installing and caching your dependencies by adding this to your `azure-pipelines.yml`:
+On Azure Pipelines, you can use pnpm for installing and caching your dependencies by adding this to your `azure-pipelines.yml`. The example below avoids a top-level `variables:` block, since that isn't supported in template files, so it also works when copied into a template:
 
 ```yaml title="azure-pipelines.yml"
-variables:
-  pnpm_config_cache: $(Pipeline.Workspace)/.pnpm-store
-  PNPM_HOME: $(Pipeline.Workspace)/.pnpm
-
 steps:
   - task: Cache@2
     inputs:
       key: 'pnpm | "$(Agent.OS)" | pnpm-lock.yaml'
-      path: $(pnpm_config_cache)
+      path: $(Pipeline.Workspace)/.pnpm-store
     displayName: Cache pnpm
 
   - script: |
       curl -fsSL https://get.pnpm.io/install.sh | sh -
-      echo "##vso[task.prependpath]$(PNPM_HOME)/bin"
-      "$(PNPM_HOME)/bin/pnpm" config set store-dir $(pnpm_config_cache)
+      echo "##vso[task.prependpath]$PNPM_HOME/bin"
+      "$PNPM_HOME/bin/pnpm" config set store-dir $pnpm_config_cache
     displayName: "Setup pnpm"
+    env:
+      PNPM_HOME: $(Pipeline.Workspace)/.pnpm
+      pnpm_config_cache: $(Pipeline.Workspace)/.pnpm-store
 
   - script: |
       pnpm install
@@ -116,7 +115,11 @@ steps:
 ```
 
 `task.prependpath` puts pnpm on `PATH` for the steps that follow; within the step
-that installs it, call it by its full path.
+that installs it, call it by its full path. `Cache@2`'s `path` input is evaluated
+by the task itself, so it uses the predefined `$(Pipeline.Workspace)` variable
+directly rather than a custom variable; the script steps get `PNPM_HOME` and
+`pnpm_config_cache` through `env:` instead, so they're read with shell syntax
+(`$PNPM_HOME`) rather than pipeline macro syntax (`$(PNPM_HOME)`).
 
 ## Bitbucket Pipelines
 
