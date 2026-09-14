@@ -34,6 +34,10 @@ Usage example:
 pnpm -r publish
 ```
 
+When used with `run`, `exec`, `test`, or `add`, tasks are run in topological
+order: a package runs after its workspace dependencies. Pass `--no-sort` or
+`--parallel` to disable this.
+
 ## Options
 
 ### --link-workspace-packages
