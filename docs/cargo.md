@@ -90,6 +90,10 @@ still applies. `--offline` requires the index and Git repositories needed for
 resolution to be cached. `--frozen-lockfile` does not generate a missing
 `Cargo.lock` or change an existing revision.
 
+Git resolution permits the `file`, `git`, `http`, `https`, and `ssh` protocols.
+pnpm preserves stricter Git protocol configuration and `GIT_ALLOW_PROTOCOL`
+settings. Unsupported transport helpers cannot run during lockfile resolution.
+
 ## Faster resolution through pnpr
 
 With [`pnprServer`](/pnpr/install-acceleration) set, pnpm asks the server to resolve the Cargo graph instead of fetching one sparse-index file per crate. A server that does not answer for Cargo makes pnpm fall back to resolving locally.
