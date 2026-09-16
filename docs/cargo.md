@@ -91,8 +91,8 @@ resolution to be cached. `--frozen-lockfile` does not generate a missing
 `Cargo.lock` or change an existing revision.
 
 Git resolution permits the `file`, `git`, `http`, `https`, and `ssh` protocols.
-pnpm preserves stricter Git protocol configuration and `GIT_ALLOW_PROTOCOL`
-settings. Unsupported transport helpers cannot run during lockfile resolution.
+When Cargo uses command-line Git fetching, pnpm preserves stricter protocol
+settings from the workspace Git configuration and `GIT_ALLOW_PROTOCOL`. Unsupported transport helpers cannot run during lockfile resolution.
 
 ## Faster resolution through pnpr
 
