@@ -68,6 +68,14 @@ This can also be set via the `runtime=false` config in `pnpm-workspace.yaml`.
 
 ## Options
 
+### --ignore-workspace
+
+Added in: v6.25.0
+
+Install the current project as a standalone project, without discovering a
+`pnpm-workspace.yaml` in a parent directory. The workspace's settings and other
+projects do not apply. See the [`--ignore-workspace` global option](../pnpm-cli.md#--ignore-workspace).
+
 ### --force
 
 Force reinstall dependencies: refetch packages modified in store, recreate a lockfile and/or modules directory created by a non-compatible version of pnpm. Install all optionalDependencies even they don't satisfy the current environment(cpu, os, arch).
