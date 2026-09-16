@@ -89,6 +89,12 @@ pnx --allow-build=esbuild my-bundler bundle
 
 The actual packages executed by `dlx` are allowed to run postinstall scripts by default. So if in the above example `my-bundler` has to be built before execution, it will be built.
 
+When a dependency's build scripts are skipped, `pnx` prompts you to approve them in an interactive terminal. This also applies when reusing a cached install that still has builds awaiting approval. Approved scripts run before the requested command.
+
+Approval decisions are saved in the isolated `pnx` cache. They do not change the calling project's build settings.
+
+Without an interactive terminal, unapproved build scripts remain skipped. Use `--allow-build` to allow the dependencies whose scripts the command needs.
+
 ### --shell-mode, -c
 
 Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
