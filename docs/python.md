@@ -37,7 +37,7 @@ A bare `name@version` is written as an exact pin (`httpx==0.28.1`). A requiremen
 
 ## The environment
 
-Each project with a `pyproject.toml` gets a `.venv` in its own directory. It is a symlink into `.pnpm/python-envs/`, and pnpm swaps the link atomically when the environment changes, so a failed install leaves the previous environment in place.
+Each project with a `pyproject.toml` gets a `.venv` in its own directory, unless its workspace [shares one](#sharing-one-environment). It is a symlink into `.pnpm/python-envs/`, and pnpm swaps the link atomically when the environment changes, so a failed install leaves the previous environment in place.
 
 pnpm refuses to touch a `.venv` it did not create, so an existing hand-made virtual environment is never replaced.
 
@@ -46,6 +46,28 @@ pnpm refuses to touch a `.venv` it did not create, so an existing hand-made virt
 Python requirement, marker, and lockfile semantics are kept separate from npm's and Cargo's. What is shared is the plumbing below them: the HTTP and authentication budget, artifact verification, and the store.
 
 `--lockfile-only`, `--frozen-lockfile`, and `--offline` apply to Python dependencies too.
+
+## Sharing one environment
+
+Added in: v12.5.0
+
+By default each project resolves its dependencies on its own and gets an environment of its own. The members of a [uv workspace](https://docs.astral.sh/uv/concepts/projects/workspaces/) can share one environment instead. Ask for it in the `pyproject.toml` that declares the workspace:
+
+```toml title="pyproject.toml"
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.pnpm.python]
+shared-environment = true
+```
+
+`pnpm install` then resolves every member as one graph into one `pylock.toml` and one `.venv` at the workspace root. Each member still selects its own extras and dependency groups, and the environment holds the union of them. Every member that builds a package is installed into it, and a member that another member requires through `[tool.uv.sources]` is installed as that source asks. One interpreter serves all of them: the first on the machine that every member's `requires-python` accepts, preferring the version the root's `.python-version` asks for.
+
+Two members that require versions of one distribution no release satisfies at once are refused, with an error naming the distribution and both members. Two members that declare the same distribution are refused too, because one environment holds one distribution of a name.
+
+Selecting any member with [`--filter`](./filtering.md) installs the whole shared environment. `pnpm add` in a member writes that member's `pyproject.toml` and the shared `pylock.toml`. [`pnpm run`](./cli/run.md) and [`pnpm exec`](./cli/exec.md) in a member, or in any directory under one, use the `.venv` at the workspace root.
+
+Sharing is decided per workspace, so a repository can share an environment where its projects agree and keep independent ones where they do not.
 
 ## Faster resolution through pnpr
 
