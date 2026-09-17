@@ -61,7 +61,7 @@ members = ["packages/*"]
 shared-environment = true
 ```
 
-`pnpm install` then resolves every member as one graph into one `pylock.toml` and one `.venv` at the workspace root. Each member still selects its own extras and dependency groups, and the environment holds the union of them. Every member that builds a package is installed into it, and a member that another member requires through `[tool.uv.sources]` is installed as that source asks. One interpreter serves all of them: the first on the machine that every member's `requires-python` accepts, preferring the version the root's `.python-version` asks for.
+`pnpm install` then resolves every member as one graph into one `pylock.toml` and one `.venv` at the workspace root. Each member still selects its own extras and dependency groups, and the environment holds the union of them. Every member that builds a package is installed into it, and a member that another member requires through `[tool.uv.sources]` is installed as that source asks. One interpreter serves all of them: the first on the machine that every member's `requires-python` accepts, preferring the version the root's `.python-version` asks for. Where the machine has none, pnpm installs one that every member accepts, as it does for a project on its own, unless `python.downloads` is `never`, in which case the install is refused.
 
 Two members that require versions of one distribution no release satisfies at once are refused, with an error naming the distribution and both members. Two members that declare the same distribution are refused too, because one environment holds one distribution of a name.
 
