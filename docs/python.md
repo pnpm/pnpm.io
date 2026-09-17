@@ -76,7 +76,7 @@ The [Simple Repository API](https://packaging.python.org/en/latest/specification
 
 ### Importing wheel files
 
-Python uses [packageImportMethod](./settings/node-modules.md#packageimportmethod) to import unchanged wheel files into project environments and isolated build environments. It uses the same methods and `auto` default as npm packages.
+Python uses [packageImportMethod](./settings/node-modules.md#packageimportmethod) to import unchanged wheel files into project environments. It uses the same methods and `auto` default as npm packages.
 
 Use `clone-or-copy` for copy-on-write clones with a copy fallback, or `copy` for independent files. `clone` requires filesystem support for cloning.
 
@@ -85,6 +85,8 @@ Use `clone-or-copy` for copy-on-write clones with a copy fallback, or `copy` for
 Hardlinked wheel files share writes with the store and other hardlinked environments. The `auto` method can select hardlinks. Use `clone-or-copy` or `copy` if installed files may be modified.
 
 :::
+
+Isolated build environments also use `packageImportMethod`, but replace `auto` and `hardlink` with `clone-or-copy` to keep build backend writes private.
 
 Generated metadata, entry-point scripts, and wheel scripts whose shebangs or permissions need changing remain private in every mode.
 
