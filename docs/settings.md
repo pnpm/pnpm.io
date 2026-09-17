@@ -370,5 +370,5 @@ These settings are configured in `pnpm-workspace.yaml` as well, but are document
 * [legacyDirFiltering](./filtering.md#legacydirfiltering)
 * [tasks](./workspace-task-orchestration.md#configure-task-dependencies), [pipelines](./cli/pipeline.md#pipelines) and [pipelineBase](./cli/pipeline.md#pipelinebase)
 * [cargo.enabled](./cargo.md#cargoenabled) and [cargo.indexUrl](./cargo.md#cargoindexurl)
-* [python.enabled](./python.md#pythonenabled), [python.executable](./python.md#pythonexecutable), [python.indexUrl](./python.md#pythonindexurl), [python.extras](./python.md#pythonextras) and [python.groups](./python.md#pythongroups)
+* [python.enabled](./python.md#pythonenabled), [python.executable](./python.md#pythonexecutable), [python.indexUrl](./python.md#pythonindexurl), [python.linkMode](./python.md#pythonlinkmode), [python.extras](./python.md#pythonextras) and [python.groups](./python.md#pythongroups)
 * Authorization settings, which are read from [`.npmrc`](./npmrc.md)

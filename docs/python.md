@@ -74,6 +74,31 @@ The interpreter pnpm probes and builds environments with.
 
 The [Simple Repository API](https://packaging.python.org/en/latest/specifications/simple-repository-api/) root pnpm resolves against.
 
+### python.linkMode
+
+* Default: **reflink**
+* Type: **copy | hardlink | reflink**
+
+How pnpm imports unchanged wheel files into project environments and isolated build environments.
+
+* `reflink` clones files using copy-on-write when the filesystem supports it. Writes stay private to each environment. pnpm falls back to copying when cloning is unavailable.
+* `copy` writes private copies of the files.
+* `hardlink` shares file inodes with the store. pnpm falls back to copying across filesystems.
+
+:::warning
+
+With `hardlink`, modifying an installed wheel file also changes the store file and other environments hardlinked to it. Use this mode only when installed wheel files will remain unchanged.
+
+:::
+
+Generated metadata, entry-point scripts, and wheel scripts whose shebangs need rewriting remain private in every mode.
+
+```yaml title="pnpm-workspace.yaml"
+python:
+  enabled: true
+  linkMode: reflink
+```
+
 ### python.extras
 
 * Default: **[]**
