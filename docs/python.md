@@ -47,6 +47,24 @@ Python requirement, marker, and lockfile semantics are kept separate from npm's 
 
 `--lockfile-only`, `--frozen-lockfile`, and `--offline` apply to Python dependencies too.
 
+## Selecting extras and dependency groups per project
+
+Workspace `python.extras` and `python.groups` are defaults. Each project selects only the names it defines, so members with different extras and groups can install together. For example, `groups: [dev, test]` selects both groups in a project that defines both, and only `dev` in a project that defines just `dev`.
+
+Override either list in the project's `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.pnpm.python]
+extras = ["cli"]
+groups = ["test"]
+```
+
+The lists override their workspace defaults independently. Omitting a list keeps its workspace default. An empty list disables that default for the project.
+
+Explicit project selections must exist in that project. Selected groups' `include-group` references must exist and cannot form cycles. Extra names follow Python's normalization rules, so `dev_tools` and `dev-tools` select the same extra. These rules also apply to extras obtained from dynamic build-backend metadata.
+
+Selections participate in locking. `--prod` and `--dev` choose which dependencies to install without changing the complete lockfile. A requirement on another project's extra, such as `library[cli]`, selects that distribution extra independently of `library`'s own installation settings.
+
 ## Faster resolution through pnpr
 
 With [`pnprServer`](/pnpr/install-acceleration) set, the server resolves the Python graph, so pnpm does not have to download a wheel to find out what it requires. A server that does not answer for Python makes pnpm fall back to resolving locally.
@@ -79,11 +97,11 @@ The [Simple Repository API](https://packaging.python.org/en/latest/specification
 * Default: **[]**
 * Type: **String[]**
 
-The [extras](https://packaging.python.org/en/latest/specifications/dependency-specifiers/#extras) of the project to install.
+The default [extras](https://packaging.python.org/en/latest/specifications/dependency-specifiers/#extras) to install in each project. Names a project does not define are skipped. `[tool.pnpm.python].extras` in the project's `pyproject.toml` overrides this list.
 
 ### python.groups
 
 * Default: **['dev']**
 * Type: **String[]**
 
-The [dependency groups](https://peps.python.org/pep-0735/) to install.
+The default [dependency groups](https://peps.python.org/pep-0735/) to install in each project. Names a project does not define are skipped. `[tool.pnpm.python].groups` in the project's `pyproject.toml` overrides this list.
