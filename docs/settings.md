@@ -283,6 +283,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [nodeVersion](./settings/cli.md#nodeversion)
 * [runtimeOnFail](./settings/cli.md#runtimeonfail)
 * [nodeDownloadMirrors](./settings/cli.md#nodedownloadmirrors)
+* [tools](./settings/cli.md#tools)
 
 ### Build Settings
 
@@ -368,8 +369,9 @@ These settings are configured in `pnpm-workspace.yaml` as well, but are document
 * [audit.level](./cli/audit.md#auditlevel), [audit.ignore](./cli/audit.md#auditignore) and [audit.ignorePrune](./cli/audit.md#auditignoreprune)
 * [initVersion](./cli/init.md#initversion), [initLicense](./cli/init.md#initlicense) and [initAuthorName / initAuthorEmail / initAuthorUrl](./cli/init.md#initauthorname-initauthoremail-initauthorurl)
 * [legacyDirFiltering](./filtering.md#legacydirfiltering)
+* [concurrencyGroups](./workspace-task-orchestration.md#concurrencygroups)
 * [tasks](./workspace-task-orchestration.md#configure-task-dependencies), [pipelines](./cli/pipeline.md#pipelines) and [pipelineBase](./cli/pipeline.md#pipelinebase)
-* [cargo.enabled](./cargo.md#cargoenabled) and [cargo.indexUrl](./cargo.md#cargoindexurl)
-* [python.enabled](./python.md#pythonenabled), [python.executable](./python.md#pythonexecutable), [python.indexUrl](./python.md#pythonindexurl), [python.extras](./python.md#pythonextras) and [python.groups](./python.md#pythongroups)
-* [python.extraIndexUrls](./python.md#pythonextraindexurls), [python.overrides](./python.md#pythonoverrides) and [python.constraints](./python.md#pythonconstraints)
+* [cargo.enabled](./cargo.md#cargoenabled) and [Cargo index](./cargo.md#cargo-index)
+* [python.enabled](./python.md#pythonenabled), [python.executable](./python.md#pythonexecutable), [Python indexes](./python.md#python-indexes), [python.extras](./python.md#pythonextras) and [python.groups](./python.md#pythongroups)
+* [python.versions](./python.md#pythonversions), [python.overrides](./python.md#pythonoverrides) and [python.constraints](./python.md#pythonconstraints)
 * Authorization settings, which are read from [`.npmrc`](./npmrc.md)

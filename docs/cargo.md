@@ -81,7 +81,7 @@ Git overrides are pinned to the commit Cargo resolves and vendored for offline
 builds.
 
 Workspaces with source overrides or direct Git dependencies use Cargo for
-resolution. This requires the default `cargo.indexUrl`. With a custom index,
+resolution. This requires the default crates.io sparse index. With a custom index,
 generate and commit `Cargo.lock` using Cargo before installing with pnpm.
 
 Cargo resolution reads only settings for artifact dependencies and Rust version
@@ -107,9 +107,14 @@ With [`pnprServer`](/pnpr/install-acceleration) set, pnpm asks the server to res
 
 Whether `pnpm install` resolves and installs the workspace's Cargo dependencies.
 
-### cargo.indexUrl
+### Cargo index
 
-* Default: **https://index.crates.io**
-* Type: **String**
+Since v12.5.0, declare a custom sparse index through [`registries`](./registries.md#ecosystem) with `ecosystem: cargo`. Without a declaration, pnpm uses `https://index.crates.io`. Only one Cargo index may be declared. `cargo.indexUrl` is no longer supported.
 
-The sparse index root pnpm resolves crates against.
+```yaml title="pnpm-workspace.yaml"
+cargo:
+  enabled: true
+registries:
+  https://crates.example.org/index/:
+    ecosystem: cargo
+```

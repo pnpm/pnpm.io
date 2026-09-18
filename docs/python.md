@@ -37,7 +37,9 @@ A bare `name@version` is written as an exact pin (`httpx==0.28.1`). A requiremen
 
 ## The environment
 
-Each project with a `pyproject.toml` gets a `.venv` in its own directory, unless its workspace [shares one](#sharing-one-environment). It is a symlink into `.pnpm/python-envs/`, and pnpm swaps the link atomically when the environment changes, so a failed install leaves the previous environment in place.
+Each discovered Python project gets a `.venv` in its own directory, unless its workspace [shares one](#sharing-one-environment). It is a symlink into `python-envs` in the pnpm store, and pnpm swaps the link atomically when the environment changes, so a failed install leaves the previous environment in place.
+
+Since v12.5.0, environments live in the store and each project keeps only its `.venv` link. The next install migrates links created by earlier releases. Old project-local `.pnpm/python-envs` directories are left in place and can be deleted once no running program uses them. With [`frozenStore`](./settings/store.md#frozenstore), environments remain under the project's `.pnpm/python-envs` instead.
 
 pnpm refuses to touch a `.venv` it did not create, so an existing hand-made virtual environment is never replaced.
 
@@ -47,7 +49,63 @@ Python requirement, marker, and lockfile semantics are kept separate from npm's 
 
 `--lockfile-only`, `--frozen-lockfile`, and `--offline` apply to Python dependencies too.
 
+## Project packages and local sources
+
+Added in: v12.5.0
+
+pnpm installs the project's own package editable when it declares `[build-system]`, making its imports and `[project.scripts]` commands available immediately. Source edits take effect without reinstalling. `[tool.uv].package` overrides whether the project is packaged. Dynamic metadata is read from the declared build backend. A project with only `requirements.txt` can also receive an environment and `pylock.toml`.
+
+Declare workspace and local dependencies in `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[project]
+name = "app"
+version = "0.1.0"
+dependencies = ["shared"]
+
+[tool.uv.sources]
+shared = { workspace = true }
+# Alternatively: shared = { path = "../shared", editable = true }
+```
+
+pnpm builds local packages with their declared backend. Editable installations follow source edits. A requirement naming a workspace project without a source declaration is refused instead of fetched from the index.
+
+Build requirements need approval under [`allowBuilds`](./settings/build.md#allowbuilds), using Package URL keys:
+
+```yaml title="pnpm-workspace.yaml"
+allowBuilds:
+  'pkg:pypi/hatchling': true
+```
+
+An unapproved backend is skipped, with a message naming the approval to add. Git sources and source distributions additionally need approval of `pkg:pypi/<distribution>`. pnpm can build a source distribution when no compatible wheel is published; its archive and SHA-256 are pinned in `pylock.toml`, and cached sources can be replayed offline. Direct wheel URLs and Git sources can be declared in `[tool.uv.sources]`; Git and URL sources cannot be installed editable.
+
+## Locking for multiple environments
+
+Added in: v12.5.0
+
+Use [`supportedArchitectures`](./settings/dependency-resolution.md#supportedarchitectures) and `python.versions` to resolve one `pylock.toml` for several platforms and interpreters:
+
+```yaml title="pnpm-workspace.yaml"
+supportedArchitectures:
+  - linux-x64-manylinux_2_28
+  - darwin-arm64
+  - win32-x64
+python:
+  enabled: true
+  versions: ['3.12', '3.13']
+```
+
+Every platform is paired with every Python version. The lockfile pins wheels and conditional packages for each environment. Installation selects the matching environment and rejects an interpreter outside the declared environments. Without either setting, pnpm locks for the interpreter running the install.
+
+## Filtering projects
+
+Project discovery honors `[tool.uv.workspace]` members. Outside an explicitly declared uv workspace, conventional example, demo, documentation, template, test, and fixture directories are skipped.
+
+Since v12.5.0, `pnpm install --filter <selector>` selects Python projects by name, path, or dependencies declared in `[tool.uv.sources]`. A Python project colocated with an npm workspace project is selected with that project. `--fail-if-no-match` accepts Python-only matches, and `pnpm add --filter <selector> pypi:<package>` writes to every selected project. Selecting a member of a shared environment installs the whole environment.
+
 ## Selecting extras and dependency groups per project
+
+Added in: v12.5.0
 
 Workspace `python.extras` and `python.groups` are defaults. Each project selects only the names it defines, so members with different extras and groups can install together. For example, `groups: [dev, test]` selects both groups in a project that defines both, and only `dev` in a project that defines just `dev`.
 
@@ -91,7 +149,7 @@ Sharing is decided per workspace, so a repository can share an environment where
 
 With [`pnprServer`](/pnpr/install-acceleration) set, the server resolves the Python graph, so pnpm does not have to download a wheel to find out what it requires. A server that does not answer for Python makes pnpm fall back to resolving locally.
 
-Python graphs configured with extra indexes, overrides, or constraints resolve locally. pnpr cannot represent these resolution settings.
+Python graphs configured with multiple indexes, overrides, constraints, or explicit target environments resolve locally. pnpr cannot represent these resolution settings.
 
 ## Settings
 
@@ -104,39 +162,28 @@ Whether `pnpm install` resolves and installs the project's Python dependencies.
 
 ### python.executable
 
-* Default: **python3** (**python** on Windows)
+* Default: **automatic selection per project**
 * Type: **String**
 
-The interpreter pnpm probes and builds environments with.
+An explicit interpreter to use for every project. When omitted, pnpm chooses an interpreter that satisfies each project's `requires-python`, preferring `.python-version` when present. If none fits, pnpm downloads a shared [python-build-standalone](https://github.com/astral-sh/python-build-standalone) interpreter. [`runtimeOnFail`](./settings/cli.md#runtimeonfail) controls this: the default and `download` allow downloads, `error` fails, and `warn` or `ignore` use an available interpreter despite the version mismatch. Offline installs cannot download an interpreter. Configure its download source with [`tools.python.mirror`](./settings/cli.md#tools).
 
-### python.indexUrl
+### Python indexes
 
-* Default: **https://pypi.org/simple/**
-* Type: **String**
-
-The [Simple Repository API](https://packaging.python.org/en/latest/specifications/simple-repository-api/) root pnpm resolves against. Indexes must support the Simple JSON API. HTML-only indexes are not supported.
-
-Python index credentials are configured separately from npm registry credentials. Credentials included in an index URL are scoped to that index's URL path and removed from lockfiles. Authenticated index caches are separated by a credential fingerprint. Raw credentials never appear in cache keys.
-
-### python.extraIndexUrls
-
-Added in: v12.5.0
-
-* Default: **[]**
-* Type: **String[]**
-
-Additional Simple JSON indexes to search, in listed order before `python.indexUrl`. The first index containing a distribution supplies its versions. pnpm does not combine versions from multiple indexes or try another index when the first one's versions do not satisfy a requirement.
-
-Only a 404 response tries the next index. Authentication errors and other failures stop resolution. Missing index pages are cached for offline resolution.
-
-Each configured index owns authentication for its URL path. An index without credentials is fetched anonymously, even when its path is beneath another authenticated index.
+Since v12.5.0, declare indexes through [`registries`](./registries.md#ecosystem), with `ecosystem: pypi`. Without a declaration, pnpm uses `https://pypi.org/simple/`. `python.indexUrl` and `python.extraIndexUrls` are not supported settings in v12.5.0.
 
 ```yaml title="pnpm-workspace.yaml"
 python:
   enabled: true
-  extraIndexUrls:
-    - https://packages.example.org/simple/
+registries:
+  https://packages.example.org/simple/:
+    ecosystem: pypi
+  https://pypi.org/simple/:
+    ecosystem: pypi
 ```
+
+Indexes must support the Simple JSON API; HTML-only indexes are not supported. pnpm searches indexes in declaration order. The first index containing a distribution supplies its versions; pnpm does not combine versions or fall back when those versions cannot satisfy a requirement. Only a 404 response tries the next index. Authentication errors and other failures stop resolution. Missing pages are cached for offline resolution.
+
+Configure credentials in [`.npmrc`](./npmrc.md), matched by origin, rather than putting them in a `registries` URL. Authenticated index caches use a credential fingerprint; raw credentials never appear in cache keys.
 
 ### python.overrides
 
@@ -206,3 +253,12 @@ The default [extras](https://packaging.python.org/en/latest/specifications/depen
 * Type: **String[]**
 
 The default [dependency groups](https://peps.python.org/pep-0735/) to install in each project. Names a project does not define are skipped. `[tool.pnpm.python].groups` in the project's `pyproject.toml` overrides this list.
+
+### python.versions
+
+Added in: v12.5.0
+
+* Default: **[]**
+* Type: **String[]**
+
+Python minor or full versions to lock for, such as `3.12` or `3.12.7`. An empty list uses the selected interpreter's version. See [locking for multiple environments](#locking-for-multiple-environments).
