@@ -103,7 +103,9 @@ concurrencyGroups:
   cargo: 2
 ```
 
-At most two tasks in `cargo` run at once across pnpm processes sharing the same state directory, including `pnpm pipeline`. Tasks wait when every slot is held. A nested `pnpm run` in the same group uses its parent's slot, avoiding a wait on itself. Slots are released when the process ends, including crashes.
+At most two tasks in `cargo` run at once across pnpm processes sharing the same [`stateDir`](./settings/other.md#statedir), including `pnpm pipeline`. Tasks wait when every slot is held. A nested `pnpm run` in the same group uses its parent's slot, avoiding a wait on itself. Slots are released when the process ends, including crashes.
+
+Changing `stateDir` creates a separate slot pool, so processes using different directories do not share the limit.
 
 Group limits supplement task `concurrency` and `--workspace-concurrency`. A missing or zero group limit does not restrict execution. Use the same limit in workspaces sharing a group: each process honors its own configured limit.
 
