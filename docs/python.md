@@ -149,6 +149,28 @@ pnpm also reads `[tool.uv]` `override-dependencies` and `constraint-dependencies
 
 These rules apply to project dependencies. They do not apply to isolated build-backend dependencies. Changing the index list, overrides, or constraints invalidates `pylock.toml`, and `--frozen-lockfile` rejects those changes.
 
+### Importing wheel files
+
+Python uses [packageImportMethod](./settings/node-modules.md#packageimportmethod) to import unchanged wheel files into project environments. It uses the same methods and `auto` default as npm packages.
+
+Use `clone-or-copy` for copy-on-write clones with a copy fallback, or `copy` for independent files. `clone` requires filesystem support for cloning.
+
+:::warning
+
+Hardlinked wheel files share writes with the store and other hardlinked environments. The `auto` method can select hardlinks. Use `clone-or-copy` or `copy` if installed files may be modified.
+
+:::
+
+Isolated build environments also use `packageImportMethod`, but replace `auto` and `hardlink` with `clone-or-copy` to keep build backend writes private.
+
+Generated metadata, entry-point scripts, and wheel scripts whose shebangs or permissions need changing remain private in every mode.
+
+```yaml title="pnpm-workspace.yaml"
+packageImportMethod: clone-or-copy
+python:
+  enabled: true
+```
+
 ### python.extras
 
 * Default: **[]**
