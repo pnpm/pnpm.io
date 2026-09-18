@@ -25,6 +25,8 @@ An entry may carry:
 | Field                                     | Type       | What it declares                                                     |
 |-------------------------------------------|------------|----------------------------------------------------------------------|
 | [`scopes`](#scopes)                       | `string[]` | The package scopes routed to this registry.                          |
+| [`ecosystem`](#ecosystem)                 | `string`   | The package ecosystem, `npm`, `cargo`, or `pypi`.                    |
+| [`packages`](#packages)                   | `string[]` | The Python package names or prefixes routed to this registry.       |
 | [`prefix`](#prefix)                       | `string`   | The bare-specifier prefix this registry answers to.                  |
 | [`serverType`](#servertype)               | `string`   | How the server lays out tarball URLs: `npm` or `artifactory`.        |
 | [`supportsTimeField`](#supportstimefield) | `boolean`  | Whether the server's abbreviated metadata carries the `time` field.  |
@@ -128,15 +130,29 @@ Select which package ecosystem the registry serves: `npm` (the default), `cargo`
 registries:
   https://internal.example/simple/:
     ecosystem: pypi
+    packages: ["company-*"]
   https://pypi.org/simple/:
     ecosystem: pypi
+    packages: ["*"]
   https://index.crates.io/:
     ecosystem: cargo
 ```
 
-Python indexes are searched in declaration order. The first index containing a package supplies it. pnpm tries the next index only after a 404 response. Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
+Python packages resolve exclusively from the index claiming their name through [`packages`](#packages). Declaration order has no effect, and a missing package or registry failure never falls back to another index. Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
 
 Credentials cannot appear in the URL key. Configure them in [`.npmrc`](./npmrc.md); they are matched by origin for all ecosystems. The npm-specific fields `scopes`, `prefix`, `serverType`, and `supportsTimeField` are refused for Cargo and PyPI entries.
+
+### packages
+
+For `ecosystem: pypi`, the distribution names served by this index. npm and Cargo entries do not accept `packages`.
+
+Use exact names such as `torch`, trailing-prefix patterns such as `company-*`, or `*` for the default index. `**` is also accepted as a catch-all. Names are case-insensitive, and runs of `.`, `_`, and `-` become `-`. Other wildcard forms are rejected.
+
+Exact names and prefixes take precedence over the default index. Overlapping names or prefixes assigned to different indexes and multiple defaults are rejected. The assigned index serves direct, transitive, and isolated build dependencies. Missing packages, incompatible versions, and registry errors never retry another index.
+
+Omitting `packages` declares a default index too. A single custom Python index therefore needs no patterns. When Python indexes are configured, an unclaimed package requires a declared default index. PyPI is not added implicitly. Changes to package routes invalidate Python lockfiles.
+
+See [Python indexes](./python.md#python-indexes) for an example with private packages and a PyPI default.
 
 ## Where the setting may live
 

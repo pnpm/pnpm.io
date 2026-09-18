@@ -171,17 +171,28 @@ An explicit interpreter to use for every project. When omitted, pnpm chooses an 
 
 Since v12.5.0, declare indexes through [`registries`](./registries.md#ecosystem), with `ecosystem: pypi`. Without a declaration, pnpm uses `https://pypi.org/simple/`. `python.indexUrl` and `python.extraIndexUrls` are not supported settings in v12.5.0.
 
+Assign package names to each index through [`packages`](./registries.md#packages). pnpm selects one authoritative index before requesting a package. Declaration order has no effect.
+
 ```yaml title="pnpm-workspace.yaml"
 python:
   enabled: true
 registries:
   https://packages.example.org/simple/:
     ecosystem: pypi
+    packages: ["company-*", "legacy-internal-package"]
+  https://download.pytorch.org/whl/cpu/:
+    ecosystem: pypi
+    packages: ["torch"]
   https://pypi.org/simple/:
     ecosystem: pypi
+    packages: ["*"]
 ```
 
-Indexes must support the Simple JSON API; HTML-only indexes are not supported. pnpm searches indexes in declaration order. The first index containing a distribution supplies its versions; pnpm does not combine versions or fall back when those versions cannot satisfy a requirement. Only a 404 response tries the next index. Authentication errors and other failures stop resolution. Missing pages are cached for offline resolution.
+`packages` accepts exact distribution names, a name prefix followed by `*`, and `*` for the default index. Names are case-insensitive, and runs of `.`, `_`, and `-` become `-`. Overlapping names or prefixes assigned to different indexes and multiple default indexes are configuration errors.
+
+A matched package resolves exclusively from its assigned index, including transitive dependencies and isolated build dependencies. A missing package, incompatible version, authentication error, or other registry failure stops resolution. pnpm does not retry another index. Indexes must support the Simple JSON API; HTML-only indexes are not supported. Missing pages are cached for offline resolution.
+
+Omitting `packages` also declares a default index, so a single custom index needs no patterns. Once Python indexes are configured, packages outside their claims require a declared default index. PyPI is not added implicitly. Routing changes invalidate Python lockfiles.
 
 Configure credentials in [`.npmrc`](./npmrc.md), matched by origin, rather than putting them in a `registries` URL. Authenticated index caches use a credential fingerprint; raw credentials never appear in cache keys.
 
