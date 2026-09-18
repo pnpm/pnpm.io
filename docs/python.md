@@ -11,7 +11,7 @@ Multi-ecosystem support is experimental. The settings and the layout it writes m
 
 :::
 
-pnpm can install a project's Python dependencies alongside its npm packages. One `pnpm install` resolves both graphs, shares the same connection budget and credentials, and stores every verified wheel in pnpm's content-addressable store, so a wheel fetched for one project is reused by the next.
+pnpm can install a project's Python dependencies alongside its npm packages. One `pnpm install` resolves both graphs, uses pnpm's connection budget, and stores every verified wheel in pnpm's content-addressable store, so a wheel fetched for one project is reused by the next.
 
 Turn it on in `pnpm-workspace.yaml`:
 
@@ -69,6 +69,8 @@ Selections participate in locking. `--prod` and `--dev` choose which dependencie
 
 With [`pnprServer`](/pnpr/install-acceleration) set, the server resolves the Python graph, so pnpm does not have to download a wheel to find out what it requires. A server that does not answer for Python makes pnpm fall back to resolving locally.
 
+Python graphs configured with extra indexes, overrides, or constraints resolve locally. pnpr cannot represent these resolution settings.
+
 ## Settings
 
 ### python.enabled
@@ -90,7 +92,62 @@ The interpreter pnpm probes and builds environments with.
 * Default: **https://pypi.org/simple/**
 * Type: **String**
 
-The [Simple Repository API](https://packaging.python.org/en/latest/specifications/simple-repository-api/) root pnpm resolves against.
+The [Simple Repository API](https://packaging.python.org/en/latest/specifications/simple-repository-api/) root pnpm resolves against. Indexes must support the Simple JSON API. HTML-only indexes are not supported.
+
+Python index credentials are configured separately from npm registry credentials. Credentials included in an index URL are scoped to that index's URL path and removed from lockfiles. Authenticated index caches are separated by a credential fingerprint. Raw credentials never appear in cache keys.
+
+### python.extraIndexUrls
+
+Added in: v12.5.0
+
+* Default: **[]**
+* Type: **String[]**
+
+Additional Simple JSON indexes to search, in listed order before `python.indexUrl`. The first index containing a distribution supplies its versions. pnpm does not combine versions from multiple indexes or try another index when the first one's versions do not satisfy a requirement.
+
+Only a 404 response tries the next index. Authentication errors and other failures stop resolution. Missing index pages are cached for offline resolution.
+
+Each configured index owns authentication for its URL path. An index without credentials is fetched anonymously, even when its path is beneath another authenticated index.
+
+```yaml title="pnpm-workspace.yaml"
+python:
+  enabled: true
+  extraIndexUrls:
+    - https://packages.example.org/simple/
+```
+
+### python.overrides
+
+Added in: v12.5.0
+
+* Default: **[]**
+* Type: **String[]**
+
+[PEP 508 registry requirements](https://packaging.python.org/en/latest/specifications/dependency-specifiers/) that replace matching dependency version requirements throughout the Python graph. Environment markers select where an override applies. An active override replaces the original extras with the extras it requests.
+
+An override does not add a dependency that the graph does not already require. URL requirements cannot be used as overrides. Version rules preserve Git or direct wheel sources already declared for a dependency.
+
+### python.constraints
+
+Added in: v12.5.0
+
+* Default: **[]**
+* Type: **String[]**
+
+PEP 508 registry requirements that narrow the permitted versions of matching Python dependencies. Constraints do not add dependencies or replace their version requirements. Environment markers select where a constraint applies, and URL requirements cannot be used as constraints.
+
+Overrides and constraints can be used together:
+
+```yaml title="pnpm-workspace.yaml"
+python:
+  enabled: true
+  overrides: ['urllib3>=2']
+  constraints: ['urllib3<3']
+```
+
+pnpm also reads `[tool.uv]` `override-dependencies` and `constraint-dependencies` from `pyproject.toml`. In a declared uv workspace, these lists come from the workspace root manifest. Otherwise, they come from each project's manifest. They are combined with the pnpm workspace settings.
+
+These rules apply to project dependencies. They do not apply to isolated build-backend dependencies. Changing the index list, overrides, or constraints invalidates `pylock.toml`, and `--frozen-lockfile` rejects those changes.
 
 ### python.extras
 
