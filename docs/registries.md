@@ -118,11 +118,31 @@ registries:
 
 This is the per-registry form of the [`registrySupportsTimeField`](./settings/other.md#registrysupportstimefield) setting. The fallback is decided per registry: one registry that needs full metadata no longer costs it at the others, and `registrySupportsTimeField` remains the answer for every registry the project does not describe.
 
+### ecosystem
+
+Added in: v12.5.0
+
+Select which package ecosystem the registry serves: `npm` (the default), `cargo`, or `pypi`.
+
+```yaml title="pnpm-workspace.yaml"
+registries:
+  https://internal.example/simple/:
+    ecosystem: pypi
+  https://pypi.org/simple/:
+    ecosystem: pypi
+  https://index.crates.io/:
+    ecosystem: cargo
+```
+
+Python indexes are searched in declaration order. The first index containing a package supplies it. pnpm tries the next index only after a 404 response. Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
+
+Credentials cannot appear in the URL key. Configure them in [`.npmrc`](./npmrc.md); they are matched by origin for all ecosystems. The npm-specific fields `scopes`, `prefix`, `serverType`, and `supportsTimeField` are refused for Cargo and PyPI entries.
+
 ## Where the setting may live
 
-The setting belongs in `pnpm-workspace.yaml` rather than `.npmrc` or the global config because the lockfile depends on it: one developer omitting tarball URLs that another reconstructs differently would break a frozen install.
+The server descriptions (`serverType` and `supportsTimeField`) belong in `pnpm-workspace.yaml` because the lockfile depends on them: one developer omitting tarball URLs that another reconstructs differently would break a frozen install.
 
-The [global configuration file](./cli/config.md) (`config.yaml`) may declare the *routes* — `scopes` and `prefix` — so that a scope or an alias like `work:` applies to every project on the machine. The server descriptions (`serverType` and `supportsTimeField`) are read only from `pnpm-workspace.yaml`, for the reason above.
+The [global configuration file](./cli/config.md) (`config.yaml`) may declare ecosystem indexes and the *routes* — `scopes` and `prefix` — so that a scope or an alias like `work:` applies to every project on the machine. The server descriptions (`serverType` and `supportsTimeField`) are read only from `pnpm-workspace.yaml`, for the reason above.
 
 Since v12.1.0, [`pnpm login --scope <scope>`](./cli/login.md#--scope-scope)
 adds that machine-wide scope route to the global `registries` setting while it
@@ -133,7 +153,7 @@ Since v12.4.0, a registry configured in `.npmrc` outranks a route `pnpm login`
 saved in the global `config.yaml`, so logging in cannot redirect a project that
 names its registry explicitly.
 
-An entry that declares no routes describes a registry configured elsewhere — for example, the default registry set in `.npmrc`. Such an entry only takes effect when its URL is one the project actually resolves from; pnpm warns about entries that match no configured registry, since they would otherwise sit there inert (a stale URL, a scope that moved).
+An npm entry that declares no routes describes a registry configured elsewhere — for example, the default registry set in `.npmrc`. Such an entry only takes effect when its URL is one the project actually resolves from; pnpm warns about entries that match no configured registry, since they would otherwise sit there inert (a stale URL, a scope that moved).
 
 Environment variables are **not** expanded in the URL keys of this setting, for the same reason they are not expanded in other [registry URLs in `pnpm-workspace.yaml`](./settings.md): the file is committed, and expanding env variables into a request destination could leak secrets to an attacker-controlled host. A key containing a `${...}` placeholder is ignored.
 

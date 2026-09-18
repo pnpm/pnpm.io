@@ -234,6 +234,24 @@ supportedArchitectures:
 
 Additionally, `supportedArchitectures` also supports specifying the `libc` of the system.
 
+#### Platform lists
+
+Added in: v12.5.0
+
+Instead of the `os`, `cpu`, and `libc` mapping, list the exact platforms to prepare:
+
+```yaml title="pnpm-workspace.yaml"
+supportedArchitectures:
+  - linux-x64
+  - linux-x64-musl
+  - darwin-arm64
+  - win32-x64
+```
+
+Each entry is `<os>-<cpu>`, optionally followed by a Linux C library, such as `linux-x64-manylinux_2_28`. Linux entries without a C library mean glibc. Rust target triples are accepted too: `x86_64-unknown-linux-gnu` is equivalent to `linux-x64`. `current` includes the platform running the install.
+
+The list prepares only the named platforms. The mapping form continues to work with its existing meaning. Python uses these targets together with [`python.versions`](../python.md#pythonversions) when locking for multiple environments.
+
 ### ignoredOptionalDependencies
 
 If an optional dependency has its name included in this array, it will be skipped. For example:
@@ -449,7 +467,7 @@ registries:
 
 The two shapes cannot be mixed in one map.
 
-Since v11.11.0, this setting may also be defined in the [global configuration file](../cli/config.md) (`config.yaml`), which is useful for registries that should apply to every project on the machine rather than to a single repository. Only the routes (`scopes` and `prefix`) are read from there; `serverType` and `supportsTimeField` shape the lockfile, so they are read only from `pnpm-workspace.yaml` — see [where the setting may live](../registries.md#where-the-setting-may-live).
+Since v11.11.0, this setting may also be defined in the [global configuration file](../cli/config.md) (`config.yaml`), which is useful for registries that should apply to every project on the machine rather than to a single repository. Ecosystem indexes and routes (`scopes` and `prefix`) are read from there; `serverType` and `supportsTimeField` shape the lockfile, so they are read only from `pnpm-workspace.yaml` — see [where the setting may live](../registries.md#where-the-setting-may-live).
 
 ### namedRegistries
 
@@ -511,7 +529,7 @@ The built-in URLs are also the prefixes that a tarball URL recorded in the lockf
 
 #### Reserved alias names
 
-Since v11.20.0, an alias that shadows a reserved dependency specifier prefix (`file`, `link`, `workspace`, `runtime`, `npm`, `jsr`, `git`, `github`, `gitlab`, `bitbucket`, `catalog`, `custom`, `http`, `https`, `ssh`) is rejected with `ERR_PNPM_RESERVED_NAMED_REGISTRY_NAME`. Previously such an alias was silently shadowed by the corresponding resolver. An alias must also start with a letter and contain only letters, digits, `.`, `_`, and `-`.
+Since v11.20.0, an alias that shadows a reserved dependency specifier prefix (`file`, `link`, `workspace`, `runtime`, `npm`, `jsr`, `git`, `github`, `gitlab`, `bitbucket`, `catalog`, `custom`, `http`, `https`, `ssh`) is rejected with `ERR_PNPM_RESERVED_NAMED_REGISTRY_NAME`. Since v12.5.0, `pkg` is also reserved, regardless of case, for Package URLs. Previously such an alias was silently shadowed by the corresponding resolver. An alias must also start with a letter and contain only letters, digits, `.`, `_`, and `-`.
 
 #### Named registries in the lockfile
 

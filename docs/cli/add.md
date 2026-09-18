@@ -57,6 +57,20 @@ pnpm add npm:pkg@^1.0.0
 pnpm add workspace:pkg@*
 ```
 
+## Package URLs
+
+Added in: v12.5.0
+
+`pnpm add` accepts [Package URLs](https://github.com/package-url/purl-spec) for npm, Cargo, and Python packages:
+
+```sh
+pnpm add pkg:npm/express@4.18.2
+pnpm add pkg:cargo/serde@1.0.188
+pnpm add pkg:pypi/requests@2.31.0
+```
+
+These save dependencies to `package.json`, `Cargo.toml`, and `pyproject.toml`, respectively. Cargo and Python use their ecosystem configuration. `pkg` is a reserved specifier prefix, regardless of case, and cannot be used as a named registry alias.
+
 ## Options
 
 ### --save-prod, -P, -p

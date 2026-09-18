@@ -9,3 +9,4 @@ Commands:
 * [cache delete](/cli/cache-delete.md)
 * [cache view](/cli/cache-view.md)
 * [cache path](/cli/cache-path.md)
+* [cache prune](/cli/cache-prune.md)

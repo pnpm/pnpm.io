@@ -144,7 +144,11 @@ This setting cannot be set in `pnpm-workspace.yaml` at the project level; set it
   * On Linux: **~/.local/state/pnpm**
 * Type: **path**
 
-The directory where pnpm creates the `pnpm-state.json` file that is currently used only by the update checker.
+The directory where pnpm stores machine-level state, including the update checker's `pnpm-state.json` file.
+
+Since v12.5.0, [task concurrency groups](../workspace-task-orchestration.md#concurrencygroups) also store their shared slot files under `stateDir/run-slots`. Processes must use the same `stateDir` to share group limits. Different state directories create independent slot pools, so their combined task count can exceed the configured limit.
+
+Set `stateDir` in the [global configuration file](../cli/config.md) or on the command line. It is ignored in project `pnpm-workspace.yaml` files.
 
 ### cacheDir
 

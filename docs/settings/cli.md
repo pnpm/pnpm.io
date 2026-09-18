@@ -154,7 +154,36 @@ Overrides the `onFail` field of [`devEngines.runtime`](../package_json.md#deveng
 runtimeOnFail: download
 ```
 
+Since v12.5.0, this setting also controls Python interpreter downloads when no installed interpreter satisfies a project. The unset default permits Python downloads. `warn` and `ignore` use an available interpreter even when it does not satisfy `requires-python`; `error` refuses the install.
+
+### tools
+
+Added in: v12.5.0
+
+* Default: **undefined**
+* Type: **Object**
+
+Configure download sources for the programs pnpm installs. Set `tools` in the [global configuration file](../cli/config.md) or as JSON in `PNPM_CONFIG_TOOLS`. Tool mirrors in `pnpm-workspace.yaml` are ignored.
+
+```yaml title="config.yaml"
+tools:
+  node:
+    mirror: https://mirror.example.com/node/download
+    channels:
+      nightly: https://nightly.example.com/
+  bun:
+    mirror: https://mirror.example.com/bun
+  python:
+    mirror: https://mirror.example.com/python-build-standalone/releases
+```
+
+`mirror` supplies the base URL for the tool's own download layout. Only `node`, `bun`, and `python` are accepted. Only Node.js supports `channels`: a channel entry overrides the mirror for that release channel, and other channels use `mirror`.
+
+`pnpm pack-app` downloads its embedded Node.js through `tools.node`. The legacy `node-mirror:<channel>` setting continues to work as a channel mirror.
+
 ### nodeDownloadMirrors
+
+For pnpm v12.5.0, prefer [`tools.node`](#tools) for machine-level mirrors. `nodeDownloadMirrors` remains supported for compatibility; `pnpm pack-app` uses only `tools.node`.
 
 Added in: v11.0.0
 

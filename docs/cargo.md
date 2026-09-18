@@ -56,10 +56,12 @@ Crates are recorded in `Cargo.lock`, never in `pnpm-lock.yaml`. The two lockfile
 ```yaml title="pnpm-workspace.yaml"
 cargo:
   enabled: true
-  indexUrl: https://index.crates.io
+registries:
+  https://index.crates.io/:
+    ecosystem: cargo
 ```
 
-`indexUrl` is the sparse index root. It defaults to crates.io. The registry a crate came from is recorded in `Cargo.lock`, and pnpm points Cargo's source replacement at that registry, so a local resolve and a [pnpr-accelerated](/pnpr/install-acceleration) one record the same source.
+Declare the sparse index through [`registries`](./registries.md#ecosystem) with `ecosystem: cargo`. Without a declaration, pnpm uses crates.io. The registry a crate came from is recorded in `Cargo.lock`, and pnpm points Cargo's source replacement at that registry, so a local resolve and a [pnpr-accelerated](/pnpr/install-acceleration) one record the same source.
 
 A dependency that names a third-party registry of its own (`registry = "..."` in `Cargo.toml`) is rejected: pnpm resolves one index per workspace.
 
@@ -73,14 +75,26 @@ A crate pinned to a git revision, whether through `[patch.crates-io]` or a plain
 
 The store slot is keyed by the commit, so a second install links it without cloning again, offline included. `--frozen-lockfile` leaves the pinned revision untouched.
 
-A `[patch]` or `[replace]` table is honored when pnpm installs from a committed `Cargo.lock`, which is the usual way a patched workspace is set up. What pnpm cannot do is *resolve* one from scratch: `cargo metadata` reports neither table, so a lockfile pnpm generated would name the replaced package instead of the patched one. Rather than resolve it wrongly, pnpm refuses, and the error says what to do:
+## Source overrides
 
-```
-Cargo.toml declares [patch], which pnpm cannot resolve.
-Commit the Cargo.lock that `cargo generate-lockfile` writes for it.
-```
+pnpm honors root Cargo.toml `[patch]` and `[replace]` overrides when generating
+`Cargo.lock` or adding, removing, and updating crates. Path overrides stay local.
+Git overrides are pinned to the commit Cargo resolves and vendored for offline
+builds.
 
-With that lockfile committed, installs, `--frozen-lockfile`, and offline installs all work.
+Workspaces with source overrides or direct Git dependencies use Cargo for
+resolution. This requires the default crates.io sparse index. With a custom index,
+generate and commit `Cargo.lock` using Cargo before installing with pnpm.
+
+Cargo resolution reads only settings for artifact dependencies and Rust version
+resolution from checkout `.cargo` configuration. User Cargo home configuration
+still applies. `--offline` requires the index and Git repositories needed for
+resolution to be cached. `--frozen-lockfile` does not generate a missing
+`Cargo.lock` or change an existing revision.
+
+Git resolution permits the `file`, `git`, `http`, `https`, and `ssh` protocols.
+When Cargo uses command-line Git fetching, pnpm preserves stricter protocol
+settings from the workspace Git configuration and `GIT_ALLOW_PROTOCOL`. Unsupported transport helpers cannot run during lockfile resolution.
 
 ## Faster resolution through pnpr
 
@@ -95,9 +109,14 @@ With [`pnprServer`](/pnpr/install-acceleration) set, pnpm asks the server to res
 
 Whether `pnpm install` resolves and installs the workspace's Cargo dependencies.
 
-### cargo.indexUrl
+### Cargo index
 
-* Default: **https://index.crates.io**
-* Type: **String**
+Since v12.5.0, declare a custom sparse index through [`registries`](./registries.md#ecosystem) with `ecosystem: cargo`. Without a declaration, pnpm uses `https://index.crates.io`. Only one Cargo index may be declared. `cargo.indexUrl` is no longer supported.
 
-The sparse index root pnpm resolves crates against.
+```yaml title="pnpm-workspace.yaml"
+cargo:
+  enabled: true
+registries:
+  https://crates.example.org/index/:
+    ecosystem: cargo
+```

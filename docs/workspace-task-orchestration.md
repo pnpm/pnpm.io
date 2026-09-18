@@ -88,6 +88,27 @@ This limit is separate from the workspace-wide
 A `build` waiting for one of its two slots does not occupy a workspace slot, so
 an unrelated ready task can still run.
 
+## concurrencyGroups
+
+Added in: v12.5.0
+
+Assign tasks to a `concurrencyGroup`, then give the group a machine-wide limit:
+
+```yaml title="pnpm-workspace.yaml"
+tasks:
+  test:rust:
+    concurrencyGroup: cargo
+    dependsOn: []
+concurrencyGroups:
+  cargo: 2
+```
+
+At most two tasks in `cargo` run at once across pnpm processes sharing the same [`stateDir`](./settings/other.md#statedir), including `pnpm pipeline`. Tasks wait when every slot is held. A nested `pnpm run` in the same group uses its parent's slot, avoiding a wait on itself. Slots are released when the process ends, including crashes.
+
+Changing `stateDir` creates a separate slot pool, so processes using different directories do not share the limit.
+
+Group limits supplement task `concurrency` and `--workspace-concurrency`. A missing or zero group limit does not restrict execution. Use the same limit in workspaces sharing a group: each process honors its own configured limit.
+
 ## Inspect the task graph
 
 Use `--dry-run` to resolve the graph without running scripts:
