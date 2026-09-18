@@ -134,15 +134,15 @@ registries:
     ecosystem: cargo
 ```
 
-Python indexes are searched in declaration order. The first index containing a package supplies it, and the last answers what earlier indexes did not have. Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
+Python indexes are searched in declaration order. The first index containing a package supplies it. pnpm tries the next index only after a 404 response. Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
 
 Credentials cannot appear in the URL key. Configure them in [`.npmrc`](./npmrc.md); they are matched by origin for all ecosystems. The npm-specific fields `scopes`, `prefix`, `serverType`, and `supportsTimeField` are refused for Cargo and PyPI entries.
 
 ## Where the setting may live
 
-The setting belongs in `pnpm-workspace.yaml` rather than `.npmrc` or the global config because the lockfile depends on it: one developer omitting tarball URLs that another reconstructs differently would break a frozen install.
+The server descriptions (`serverType` and `supportsTimeField`) belong in `pnpm-workspace.yaml` because the lockfile depends on them: one developer omitting tarball URLs that another reconstructs differently would break a frozen install.
 
-The [global configuration file](./cli/config.md) (`config.yaml`) may declare the *routes* — `scopes` and `prefix` — so that a scope or an alias like `work:` applies to every project on the machine. The server descriptions (`serverType` and `supportsTimeField`) are read only from `pnpm-workspace.yaml`, for the reason above.
+The [global configuration file](./cli/config.md) (`config.yaml`) may declare ecosystem indexes and the *routes* — `scopes` and `prefix` — so that a scope or an alias like `work:` applies to every project on the machine. The server descriptions (`serverType` and `supportsTimeField`) are read only from `pnpm-workspace.yaml`, for the reason above.
 
 Since v12.1.0, [`pnpm login --scope <scope>`](./cli/login.md#--scope-scope)
 adds that machine-wide scope route to the global `registries` setting while it

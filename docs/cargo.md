@@ -56,10 +56,12 @@ Crates are recorded in `Cargo.lock`, never in `pnpm-lock.yaml`. The two lockfile
 ```yaml title="pnpm-workspace.yaml"
 cargo:
   enabled: true
-  indexUrl: https://index.crates.io
+registries:
+  https://index.crates.io/:
+    ecosystem: cargo
 ```
 
-`indexUrl` is the sparse index root. It defaults to crates.io. The registry a crate came from is recorded in `Cargo.lock`, and pnpm points Cargo's source replacement at that registry, so a local resolve and a [pnpr-accelerated](/pnpr/install-acceleration) one record the same source.
+Declare the sparse index through [`registries`](./registries.md#ecosystem) with `ecosystem: cargo`. Without a declaration, pnpm uses crates.io. The registry a crate came from is recorded in `Cargo.lock`, and pnpm points Cargo's source replacement at that registry, so a local resolve and a [pnpr-accelerated](/pnpr/install-acceleration) one record the same source.
 
 A dependency that names a third-party registry of its own (`registry = "..."` in `Cargo.toml`) is rejected: pnpm resolves one index per workspace.
 
