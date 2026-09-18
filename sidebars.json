@@ -128,7 +128,8 @@
           "cli/cache-list-registries",
           "cli/cache-view",
           "cli/cache-delete",
-          "cli/cache-path"
+          "cli/cache-path",
+          "cli/cache-prune"
         ]
       },
       {
