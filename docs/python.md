@@ -37,7 +37,7 @@ A bare `name@version` is written as an exact pin (`httpx==0.28.1`). A requiremen
 
 ## The environment
 
-Each project with a `pyproject.toml` gets a `.venv` in its own directory. It is a symlink into `.pnpm/python-envs/`, and pnpm swaps the link atomically when the environment changes, so a failed install leaves the previous environment in place.
+Each project with a `pyproject.toml` gets a `.venv` in its own directory, unless its workspace [shares one](#sharing-one-environment). It is a symlink into `.pnpm/python-envs/`, and pnpm swaps the link atomically when the environment changes, so a failed install leaves the previous environment in place.
 
 pnpm refuses to touch a `.venv` it did not create, so an existing hand-made virtual environment is never replaced.
 
@@ -64,6 +64,28 @@ The lists override their workspace defaults independently. Omitting a list keeps
 Explicit project selections must exist in that project. Selected groups' `include-group` references must exist and cannot form cycles. Extra names follow Python's normalization rules, so `dev_tools` and `dev-tools` select the same extra. These rules also apply to extras obtained from dynamic build-backend metadata.
 
 Selections participate in locking. `--prod` and `--dev` choose which dependencies to install without changing the complete lockfile. A requirement on another project's extra, such as `library[cli]`, selects that distribution extra independently of `library`'s own installation settings.
+
+## Sharing one environment
+
+Added in: v12.5.0
+
+By default each project resolves its dependencies on its own and gets an environment of its own. The members of a [uv workspace](https://docs.astral.sh/uv/concepts/projects/workspaces/) can share one environment instead. Ask for it in the `pyproject.toml` that declares the workspace:
+
+```toml title="pyproject.toml"
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.pnpm.python]
+shared-environment = true
+```
+
+`pnpm install` then resolves every member as one graph into one `pylock.toml` and one `.venv` at the workspace root. Each member still selects its own extras and dependency groups, and the environment holds the union of them. Every member that builds a package is installed into it, and a member that another member requires through `[tool.uv.sources]` is installed as that source asks. One interpreter serves all of them: the first on the machine that every member's `requires-python` accepts, preferring the version the root's `.python-version` asks for. Where the machine has none, pnpm installs one that every member accepts, as it does for a project on its own, with [`runtimeOnFail`](./settings/cli.md#runtimeonfail) controlling what happens when no installed interpreter fits.
+
+Two members that require versions of one distribution no release satisfies at once are refused, with an error naming the distribution and both members. Two members whose own `[project]` tables name the same distribution are refused too, because one environment holds one distribution of a name. Members may require the same dependencies freely; the environment holds each once.
+
+Selecting any member with [`--filter`](./filtering.md) installs the whole shared environment. `pnpm add` in a member writes that member's `pyproject.toml` and the shared `pylock.toml`. [`pnpm run`](./cli/run.md) and [`pnpm exec`](./cli/exec.md) in a member, or in any directory under one, use the `.venv` at the workspace root.
+
+Sharing is decided per workspace, so a repository can share an environment where its projects agree and keep independent ones where they do not.
 
 ## Faster resolution through pnpr
 
