@@ -60,6 +60,21 @@ there.
 Run as if pnpm was started in the root of the [workspace](./workspaces.md)
 instead of the current working directory.
 
+### --ignore-workspace
+
+Added in: v6.25.0
+
+Run as if the current project were standalone. pnpm does not discover a
+`pnpm-workspace.yaml` in a parent directory, so the workspace's settings and
+other projects do not apply to the command.
+
+For example, this installs only the project in the current directory, even if
+it is located inside a workspace:
+
+```sh
+pnpm install --ignore-workspace
+```
+
 ## Commands
 
 For more information, see the documentation for individual CLI commands. Here is
