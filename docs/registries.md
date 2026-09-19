@@ -138,19 +138,23 @@ registries:
     ecosystem: cargo
 ```
 
-Python packages resolve exclusively from the index claiming their name through [`packages`](#packages). Declaration order has no effect, and a missing package or registry failure never falls back to another index. Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
+Since v12.5.1, a Python package resolves exclusively from the index claiming its name through [`packages`](#packages). Declaration order has no effect, and a missing package or registry failure never falls back to another index. (v12.5.0 instead searched the indexes in declaration order.) Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
 
 Credentials cannot appear in the URL key. Configure them in [`.npmrc`](./npmrc.md); they are matched by origin for all ecosystems. The npm-specific fields `scopes`, `prefix`, `serverType`, and `supportsTimeField` are refused for Cargo and PyPI entries.
 
 ### packages
 
-For `ecosystem: pypi`, the distribution names served by this index. npm and Cargo entries do not accept `packages`.
+Added in: v12.5.1
 
-Use exact names such as `torch`, trailing-prefix patterns such as `company-*`, or `*` for the default index. `**` is also accepted as a catch-all. Names are case-insensitive, and runs of `.`, `_`, and `-` become `-`. Other wildcard forms are rejected.
+For `ecosystem: pypi`, the distribution names this index serves. An npm or Cargo entry that sets `packages` is refused rather than silently ignored.
 
-Exact names and prefixes take precedence over the default index. Overlapping names or prefixes assigned to different indexes and multiple defaults are rejected. The assigned index serves direct, transitive, and isolated build dependencies. Missing packages, incompatible versions, and registry errors never retry another index.
+A pattern is an exact name such as `torch`, a name prefix followed by a single `*` such as `company-*`, or `*` (equivalently `**`) for the default index. Names are compared after Python name normalization: case is ignored and runs of `.`, `_`, and `-` collapse to `-`, so `Company_Tools` and `company-tools` are one claim. Any other wildcard shape, such as `company-**` or `@scope/*`, is rejected, as is an empty list.
 
-Omitting `packages` declares a default index too. A single custom Python index therefore needs no patterns. When Python indexes are configured, an unclaimed package requires a declared default index. PyPI is not added implicitly. Changes to package routes invalidate Python lockfiles.
+Exact names and prefixes take precedence over the default index; among themselves they never compete, because two patterns that can match the same name are refused with `ERR_PNPM_INVALID_SETTING`. That holds both across entries and inside one entry, so an entry claiming the default may claim nothing else, and only one index may be the default.
+
+The claiming index serves direct, transitive, and isolated build dependencies alike. A missing package, an incompatible version, an authentication error, or any other registry failure stops resolution; pnpm never retries another index.
+
+Omitting `packages` claims the default too, so a single custom Python index needs no patterns, and two indexes that both omit it are refused as two defaults. Once any Python index is declared, PyPI is not added implicitly: a package no index claims fails with `ERR_PNPM_UNCLAIMED_PYTHON_PACKAGE` unless one index is the default. Changing the routes invalidates Python lockfiles.
 
 See [Python indexes](./python.md#python-indexes) for an example with private packages and a PyPI default.
 
