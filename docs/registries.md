@@ -25,6 +25,8 @@ An entry may carry:
 | Field                                     | Type       | What it declares                                                     |
 |-------------------------------------------|------------|----------------------------------------------------------------------|
 | [`scopes`](#scopes)                       | `string[]` | The package scopes routed to this registry.                          |
+| [`ecosystem`](#ecosystem)                 | `string`   | The package ecosystem, `npm`, `cargo`, or `pypi`.                    |
+| [`packages`](#packages)                   | `string[]` | The Python package names or prefixes routed to this registry.       |
 | [`prefix`](#prefix)                       | `string`   | The bare-specifier prefix this registry answers to.                  |
 | [`serverType`](#servertype)               | `string`   | How the server lays out tarball URLs: `npm` or `artifactory`.        |
 | [`supportsTimeField`](#supportstimefield) | `boolean`  | Whether the server's abbreviated metadata carries the `time` field.  |
@@ -128,15 +130,33 @@ Select which package ecosystem the registry serves: `npm` (the default), `cargo`
 registries:
   https://internal.example/simple/:
     ecosystem: pypi
+    packages: ["company-*"]
   https://pypi.org/simple/:
     ecosystem: pypi
+    packages: ["*"]
   https://index.crates.io/:
     ecosystem: cargo
 ```
 
-Python indexes are searched in declaration order. The first index containing a package supplies it. pnpm tries the next index only after a 404 response. Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
+Since v12.5.1, a Python package resolves exclusively from the index claiming its name through [`packages`](#packages). Declaration order has no effect, and a missing package or registry failure never falls back to another index. (v12.5.0 instead searched the indexes in declaration order.) Cargo accepts one sparse index. With no declaration for an ecosystem, pnpm uses PyPI or crates.io. This replaces `python.indexUrl`, `python.extraIndexUrls`, and `cargo.indexUrl` in v12.5.0.
 
 Credentials cannot appear in the URL key. Configure them in [`.npmrc`](./npmrc.md); they are matched by origin for all ecosystems. The npm-specific fields `scopes`, `prefix`, `serverType`, and `supportsTimeField` are refused for Cargo and PyPI entries.
+
+### packages
+
+Added in: v12.5.1
+
+For `ecosystem: pypi`, the distribution names this index serves. An npm or Cargo entry that sets `packages` is refused rather than silently ignored.
+
+A pattern is an exact name such as `torch`, a name prefix followed by a single `*` such as `company-*`, or `*` (equivalently `**`) for the default index. Names are compared after Python name normalization: case is ignored and runs of `.`, `_`, and `-` collapse to `-`, so `Company_Tools` and `company-tools` are one claim. Any other wildcard shape, such as `company-**` or `@scope/*`, is rejected, as is an empty list.
+
+Exact names and prefixes take precedence over the default index; among themselves they never compete, because two patterns that can match the same name are refused with `ERR_PNPM_INVALID_SETTING`. That holds both across entries and inside one entry, so an entry claiming the default may claim nothing else, and only one index may be the default.
+
+The claiming index serves direct, transitive, and isolated build dependencies alike. A missing package, an incompatible version, an authentication error, or any other registry failure stops resolution; pnpm never retries another index.
+
+Omitting `packages` claims the default too, so a single custom Python index needs no patterns, and two indexes that both omit it are refused as two defaults. Once any Python index is declared, PyPI is not added implicitly: a package no index claims fails with `ERR_PNPM_UNCLAIMED_PYTHON_PACKAGE` unless one index is the default. Changing the routes invalidates Python lockfiles.
+
+See [Python indexes](./python.md#python-indexes) for an example with private packages and a PyPI default.
 
 ## Where the setting may live
 

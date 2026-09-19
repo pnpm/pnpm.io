@@ -171,17 +171,30 @@ An explicit interpreter to use for every project. When omitted, pnpm chooses an 
 
 Since v12.5.0, declare indexes through [`registries`](./registries.md#ecosystem), with `ecosystem: pypi`. Without a declaration, pnpm uses `https://pypi.org/simple/`. `python.indexUrl` and `python.extraIndexUrls` are not supported settings in v12.5.0.
 
+Since v12.5.1, assign package names to each index through [`packages`](./registries.md#packages). pnpm selects one authoritative index before requesting a package, so declaration order has no effect.
+
 ```yaml title="pnpm-workspace.yaml"
 python:
   enabled: true
 registries:
   https://packages.example.org/simple/:
     ecosystem: pypi
+    packages: ["company-*", "legacy-internal-package"]
+  https://download.pytorch.org/whl/cpu/:
+    ecosystem: pypi
+    packages: ["torch"]
   https://pypi.org/simple/:
     ecosystem: pypi
+    packages: ["*"]
 ```
 
-Indexes must support the Simple JSON API; HTML-only indexes are not supported. pnpm searches indexes in declaration order. The first index containing a distribution supplies its versions; pnpm does not combine versions or fall back when those versions cannot satisfy a requirement. Only a 404 response tries the next index. Authentication errors and other failures stop resolution. Missing pages are cached for offline resolution.
+`packages` accepts exact distribution names, a name prefix followed by a single `*`, and `*` or `**` for the default index. Names are compared after Python name normalization: case is ignored and runs of `.`, `_`, and `-` become `-`, so `Company_Tools` and `company-tools` are one claim. Any other wildcard shape, such as `company-**` or `@scope/*`, is rejected, as is an empty list.
+
+Two patterns that can match the same name are a configuration error, whether they sit in one entry or in two: an entry that claims the default may claim nothing else, and only one index may be the default.
+
+A matched package resolves exclusively from its assigned index, including transitive dependencies and isolated build dependencies. A missing package, incompatible version, authentication error, or other registry failure stops resolution. pnpm does not retry another index. Indexes must support the Simple JSON API; HTML-only indexes are not supported. Missing pages are cached for offline resolution.
+
+Omitting `packages` claims the default too, so a single custom index needs no patterns, and two indexes that both omit it are refused as two defaults. Once any Python index is declared, PyPI is not added implicitly: a package no index claims fails with `ERR_PNPM_UNCLAIMED_PYTHON_PACKAGE` unless one index is the default. Changing the routes invalidates Python lockfiles, and a `--frozen-lockfile` install then fails with `the Python index changed`.
 
 Configure credentials in [`.npmrc`](./npmrc.md), matched by origin, rather than putting them in a `registries` URL. Authenticated index caches use a credential fingerprint; raw credentials never appear in cache keys.
 
