@@ -195,9 +195,9 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 [Full reference →](./settings/node-modules.md#dependency-hoisting-settings)
 
 * [hoist](./settings/node-modules.md#hoist)
-* [hoistWorkspacePackages](./settings/node-modules.md#hoistworkspacepackages)
 * [hoistPattern](./settings/node-modules.md#hoistpattern)
 * [publicHoistPattern](./settings/node-modules.md#publichoistpattern)
+* [hoistWorkspacePackages](./settings/node-modules.md#hoistworkspacepackages)
 * [shamefullyHoist](./settings/node-modules.md#shamefullyhoist)
 * [hoistingLimits](./settings/node-modules.md#hoistinglimits)
 

@@ -234,13 +234,6 @@ Two things fall outside that: a `node` process you start yourself rather than th
 When `true`, all dependencies are hoisted to `node_modules/.pnpm/node_modules`. This makes
 unlisted dependencies accessible to all packages inside `node_modules`.
 
-### hoistWorkspacePackages
-
-* Default: **true**
-* Type: **boolean**
-
-When `true`, packages from the workspaces are symlinked to either `<workspace_root>/node_modules/.pnpm/node_modules` or to `<workspace_root>/node_modules` depending on other hoisting settings (`hoistPattern` and `publicHoistPattern`).
-
 ### hoistPattern
 
 * Default: **['\*']**
@@ -268,6 +261,8 @@ hoistPattern:
 - "*types*"
 - "!@types/react"
 ```
+
+In a workspace, the pattern is matched against the names of the workspace projects too, unless [`hoistWorkspacePackages`](#hoistworkspacepackages) is turned off.
 
 ### publicHoistPattern
 
@@ -302,6 +297,40 @@ publicHoistPattern:
 - "*types*"
 - "!@types/react"
 ```
+
+In a workspace, the pattern is matched against the names of the workspace projects too, unless [`hoistWorkspacePackages`](#hoistworkspacepackages) is turned off.
+
+### hoistWorkspacePackages
+
+* Default: **true**
+* Type: **boolean**
+
+When `true`, the projects of the workspace are hoisting candidates too, not only the packages that come from a registry.
+
+[`hoistPattern`](#hoistpattern) and [`publicHoistPattern`](#publichoistpattern) then decide where each project lands, exactly as they do for a registry dependency:
+
+* A project whose name matches `publicHoistPattern` is symlinked into `<workspace_root>/node_modules`.
+* A project whose name matches `hoistPattern` is symlinked into `<workspace_root>/node_modules/.pnpm/node_modules`.
+* A project whose name matches neither is not hoisted.
+
+Because `hoistPattern` defaults to `['*']`, the default is that every workspace project is symlinked into `<workspace_root>/node_modules/.pnpm/node_modules`.
+
+This is how a tool that resolves packages by name from the workspace root finds a project of the workspace. The usual case is ESLint loading a plugin that is developed in the same monorepo:
+
+```yaml
+publicHoistPattern:
+  - "*eslint*"
+```
+
+With that setting, a workspace project named `eslint-plugin-acme` appears at `<workspace_root>/node_modules/eslint-plugin-acme`, even if no `package.json` lists it as a dependency.
+
+Details worth knowing:
+
+* A project is matched by the `name` in its `package.json`, not by its directory name.
+* Every project of the workspace is a candidate, including a project that nothing else depends on. The workspace root project is never hoisted.
+* The symlink points at the project's own directory in the workspace, so there is nothing to keep in sync.
+* A name that a real dependency already claims wins. If a package with the same name is a dependency of any workspace project, that package is hoisted and the workspace project is not.
+* The setting only adds candidates. When `hoistPattern` and `publicHoistPattern` are both empty, nothing is hoisted at all, workspace projects included. Setting [`hoist`](#hoist) to `false` empties `hoistPattern`.
 
 ### shamefullyHoist
 
