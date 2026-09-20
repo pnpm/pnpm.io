@@ -391,13 +391,13 @@ In a workspace, the pattern is matched against the names of the workspace projec
 
 When `true`, the projects of the workspace are hoisting candidates too, not only the packages that come from a registry.
 
-[`hoistPattern`](#hoistpattern) and [`publicHoistPattern`](#publichoistpattern) then decide where each project lands, exactly as they do for a registry dependency:
+[`hoistPattern`](#hoistpattern) and [`publicHoistPattern`](#publichoistpattern) then decide where each project lands, exactly as they do for a registry dependency. `publicHoistPattern` is checked first, so a project matching both patterns goes to the root only:
 
 * A project whose name matches `publicHoistPattern` is symlinked into `<workspace_root>/node_modules`.
-* A project whose name matches `hoistPattern` is symlinked into `<workspace_root>/node_modules/.pnpm/node_modules`.
+* A project whose name matches only `hoistPattern` is symlinked into `<workspace_root>/node_modules/.pnpm/node_modules`.
 * A project whose name matches neither is not hoisted.
 
-Because `hoistPattern` defaults to `['*']`, the default is that every workspace project is symlinked into `<workspace_root>/node_modules/.pnpm/node_modules`.
+Because `hoistPattern` defaults to `['*']` and `publicHoistPattern` to `[]`, the default is that every workspace project is symlinked into `<workspace_root>/node_modules/.pnpm/node_modules`.
 
 This is how a tool that resolves packages by name from the workspace root finds a project of the workspace. The usual case is ESLint loading a plugin that is developed in the same monorepo:
 
@@ -413,7 +413,7 @@ Details worth knowing:
 * A project is matched by the `name` in its `package.json`, not by its directory name.
 * Every project of the workspace is a candidate, including a project that nothing else depends on. The workspace root project is never hoisted.
 * The symlink points at the project's own directory in the workspace, so there is nothing to keep in sync.
-* A name that a real dependency already claims wins. If a package with the same name is a dependency of any workspace project, that package is hoisted and the workspace project is not.
+* A direct dependency wins a name conflict. If a package with the same name is a direct dependency of any workspace project, that package is hoisted and the workspace project is not.
 * The setting only adds candidates. When `hoistPattern` and `publicHoistPattern` are both empty, nothing is hoisted at all, workspace projects included. Setting [`hoist`](#hoist) to `false` empties `hoistPattern`.
 
 ### shamefullyHoist
