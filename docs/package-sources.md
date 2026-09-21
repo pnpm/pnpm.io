@@ -219,6 +219,7 @@ For repositories on GitHub, GitLab, and Bitbucket, the specifier is an **identit
 kevva/is-positive
 github:kevva/is-positive
 git+https://github.com/kevva/is-positive.git
+https://github.com/kevva/is-positive.git
 git+ssh://git@github.com/kevva/is-positive.git
 ```
 
