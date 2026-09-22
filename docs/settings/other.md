@@ -25,6 +25,23 @@ This setting is ignored when the added package has a range specified. For
 instance, `pnpm add foo@2` will set the version of `foo` in `package.json` to
 `2`, regardless of the value of `savePrefix`.
 
+### saveTypes
+
+Added in: v12.6.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, `pnpm add` saves available `@types/*` packages in
+`devDependencies` alongside registry dependencies. Packages that declare bundled
+TypeScript types are skipped.
+
+```yaml title="pnpm-workspace.yaml"
+saveTypes: true
+```
+
+You can also pass it as a CLI flag: `pnpm add --save-types express`.
+
 ### tag
 
 * Default: **latest**
@@ -345,3 +362,35 @@ This setting explicitly tells pnpm whether the current environment is a CI (Cont
 import CatalogPrune from './_catalogPrune.mdx'
 
 <CatalogPrune />
+
+### macosBackup.excludeModulesDir
+
+Added in: v12.6.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true` on macOS, pnpm marks newly created `node_modules`, virtual-store, and similar directories with the `com.apple.metadata:com_apple_backup_excludeItem` extended attribute, so Time Machine skips them.
+
+Set it in the [global configuration file](../cli/config.md) or via the `PNPM_CONFIG_MACOS_BACKUP_EXCLUDE_MODULES_DIR` environment variable. This setting is ignored in project `pnpm-workspace.yaml` files and on non-macOS platforms.
+
+```yaml title="config.yaml"
+macosBackup:
+  excludeModulesDir: true
+```
+
+### macosBackup.excludeStoreDir
+
+Added in: v12.6.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true` on macOS, pnpm marks newly created package-store directories with the Time Machine exclusion attribute.
+
+Set it in the [global configuration file](../cli/config.md) or via the `PNPM_CONFIG_MACOS_BACKUP_EXCLUDE_STORE_DIR` environment variable. This setting is ignored in project `pnpm-workspace.yaml` files and on non-macOS platforms.
+
+```yaml title="config.yaml"
+macosBackup:
+  excludeStoreDir: true
+```

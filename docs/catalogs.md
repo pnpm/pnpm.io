@@ -154,6 +154,28 @@ catalog:
 
 pnpm expands the `catalog:` reference to `workspace:^` and then links the workspace project, exactly as if the `package.json` had declared `workspace:^` itself. On publish both protocols are replaced, so the example above ships as `"^1.4.0"` when `@example/utils` is at 1.4.0.
 
+### Local dependencies in a catalog
+
+Added in: v12.6.0
+
+Catalog entries can use the `file:` and `link:` protocols ([#8642](https://github.com/pnpm/pnpm/issues/8642)). A relative path or bare path in an entry is measured from the directory holding `pnpm-workspace.yaml`:
+
+```yaml title="pnpm-workspace.yaml"
+catalog:
+  my-lib: link:./packages/my-lib
+  my-tarball: file:./tarballs/foo.tgz
+```
+
+```json title="packages/example-app/package.json"
+{
+  "name": "@example/app",
+  "dependencies": {
+    "my-lib": "catalog:",
+    "my-tarball": "catalog:"
+  }
+}
+```
+
 ## Publishing
 
 The `catalog:` protocol is removed when running `pnpm publish` or `pnpm pack`. This is similar to the [`workspace:` protocol](./workspaces.md#workspace-protocol-workspace), which is [also replaced on publish](./workspaces.md#publishing-workspace-packages).

@@ -558,3 +558,19 @@ There is no setting to keep the old behavior — the old shape is the vulnerabil
 Every non-built-in alias that the lockfile references must stay declared — through `prefix` in [`registries`](#registries) or through `namedRegistries`. Reading an entry whose alias is gone fails with `ERR_PNPM_MISSING_NAMED_REGISTRY` rather than falling back to the default registry, since that would fetch a different package. Renaming an alias re-resolves the packages that used it.
 
 Tarball URLs that follow the standard registry layout are no longer written to the lockfile for named-registry packages; they are recomputed from the alias's declared URL on demand.
+
+### autoDedupe
+
+Added in: v12.6.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When set to `true`, `pnpm install` and `pnpm add` deduplicate compatible dependency versions during installation. If a dependency appears at multiple versions and one version satisfies every range in the workspace, pnpm picks that version for all of them.
+
+```yaml title="pnpm-workspace.yaml"
+autoDedupe: true
+```
+
+Frozen installs (`--frozen-lockfile`) leave the lockfile unchanged — deduplication only runs when the lockfile is being written.
+

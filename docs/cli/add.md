@@ -95,6 +95,27 @@ pnpm's default semver range operator.
 Using `--save-peer` will add one or more packages to `peerDependencies` and
 install them as dev dependencies.
 
+### --save-types
+
+Added in: v12.6.0
+
+Saves available `@types/*` packages in `devDependencies` alongside registry
+dependencies. Packages that declare bundled TypeScript types are skipped.
+
+```sh
+pnpm add express --save-types
+# saves express to dependencies, @types/express to devDependencies
+```
+
+Set `saveTypes: true` in `pnpm-workspace.yaml` to enable this by default.
+
+### --tilde
+
+Added in: v12.6.0
+
+Alias for `--save-prefix=~`. Saved dependencies will be configured with a tilde
+range (`~1.2.3`) instead of the default caret range (`^1.2.3`).
+
 ### --save-catalog
 
 Added in: v10.12.1
