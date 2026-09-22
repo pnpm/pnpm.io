@@ -63,6 +63,7 @@
         "label": "Run scripts",
         "items": [
           "cli/run",
+          "cli/tasks",
           "cli/pipeline",
           "cli/test",
           "cli/exec",
