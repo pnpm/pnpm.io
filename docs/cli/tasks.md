@@ -27,7 +27,7 @@ Lists the running (active holders) and waiting tasks across [concurrency groups]
 
 #### Examples
 
-Show all active concurrency groups across the machine:
+Show all active concurrency groups used by pnpm processes sharing the same [`stateDir`](../settings/other.md#statedir):
 
 ```sh
 pnpm tasks status
