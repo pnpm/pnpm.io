@@ -5,7 +5,7 @@ title: pnpm tasks
 
 Added in: v12.6.0
 
-Inspect tasks in concurrency groups.
+Inspect tasks in [concurrency groups](../workspace-task-orchestration.md#concurrencygroups).
 
 :::note
 
@@ -17,13 +17,13 @@ If your package or workspace defines a script named `"tasks"` in `package.json`,
 
 ### status
 
-Show running and waiting tasks in concurrency groups.
+Show running and waiting tasks in [concurrency groups](../workspace-task-orchestration.md#concurrencygroups).
 
 ```sh
 pnpm tasks status [groups...]
 ```
 
-Lists the running (active holders) and waiting tasks across concurrency groups, including how long each task has been running or waiting, its process ID, working directory, and its [task priority](../workspace-task-orchestration.md#task-priority).
+Lists the running (active holders) and waiting tasks across [concurrency groups](../workspace-task-orchestration.md#concurrencygroups), including how long each task has been running or waiting, its process ID, working directory, and its [task priority](../workspace-task-orchestration.md#task-priority).
 
 #### Examples
 
