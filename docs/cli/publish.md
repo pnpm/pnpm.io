@@ -79,9 +79,9 @@ registry.
 * Default: **0**
 * Type: **Number** (non-negative integer)
 
-Wait for each published version to appear in the registry's install metadata
-and for its tarball to return data. This helps release workflows handle registry
-delays, such as npm's [publish-time malware scanning](https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/).
+Wait for each published version to appear in the registry's install metadata.
+Then check that a `HEAD` request to its tarball URL returns HTTP `200`.
+This helps release workflows handle registry delays, such as npm's [publish-time malware scanning](https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/).
 A value of `0` disables the check.
 
 ```sh
@@ -101,12 +101,12 @@ If confirmation times out, the command fails with
 `ERR_PNPM_PUBLISH_AVAILABILITY_TIMEOUT`. The upload remains accepted and may
 become available later. Do not publish the same version again.
 With recursive publishing, `--report-summary` keeps accepted uploads in the
-summary when confirmation fails.
+summary if a later upload, availability check, or lifecycle script fails.
 
 `--dry-run` skips availability checks. A positive timeout cannot be combined
 with `pnpm stage publish`, because staged versions cannot be installed.
-The check reads only the first tarball data. It does not install the package
-or verify the complete archive.
+The check does not download the archive or install the package. It does not
+verify the archive's contents.
 
 Use [`publishWaitTimeout`](#publishwaittimeout) to set a default.
 
