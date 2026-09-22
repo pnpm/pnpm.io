@@ -20,6 +20,15 @@ Controls colors in the output.
   to use color codes. The default setting is almost always what you’ll want.
 * **never** - turns off colors. This is the setting used by `--no-color`.
 
+### progress
+
+Added in: v12.6.0
+
+* Default: **true**
+* Type: **Boolean**
+
+Controls whether dependency and download progress lines are printed during installation. When set to `false` (or `--no-progress` is passed), progress output is suppressed. Warnings, lifecycle script output, and the dependency summary are still printed.
+
 ### loglevel
 
 * Default: **info**
