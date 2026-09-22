@@ -572,12 +572,5 @@ When set to `true`, `pnpm install` and `pnpm add` deduplicate compatible depende
 autoDedupe: true
 ```
 
-You can also pass it as a CLI flag:
-
-```sh
-pnpm install --auto-dedupe
-pnpm add --auto-dedupe lodash
-```
-
 Frozen installs (`--frozen-lockfile`) leave the lockfile unchanged — deduplication only runs when the lockfile is being written.
 
