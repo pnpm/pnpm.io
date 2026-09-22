@@ -135,7 +135,7 @@ tasks:
 
 Added in: v12.6.0
 
-Lists running and waiting tasks in each concurrency group:
+[`pnpm tasks status`](./cli/tasks.md) lists running and waiting tasks in each concurrency group:
 
 ```sh
 pnpm tasks status
