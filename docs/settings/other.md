@@ -372,12 +372,12 @@ Added in: v12.6.0
 
 When set to `true` on macOS, pnpm marks newly created `node_modules`, virtual-store, and similar directories with the `com.apple.metadata:com_apple_backup_excludeItem` extended attribute, so Time Machine skips them.
 
-```yaml title="pnpm-workspace.yaml"
+Set it in the [global configuration file](../cli/config.md) or via the `PNPM_CONFIG_MACOS_BACKUP_EXCLUDE_MODULES_DIR` environment variable. This setting is ignored in project `pnpm-workspace.yaml` files and on non-macOS platforms.
+
+```yaml title="config.yaml"
 macosBackup:
   excludeModulesDir: true
 ```
-
-Can also be set via the `PNPM_CONFIG_MACOS_BACKUP_EXCLUDE_MODULES_DIR` environment variable. This setting is ignored on non-macOS platforms.
 
 ### macosBackup.excludeStoreDir
 
@@ -388,9 +388,9 @@ Added in: v12.6.0
 
 When set to `true` on macOS, pnpm marks newly created package-store directories with the Time Machine exclusion attribute.
 
-```yaml title="pnpm-workspace.yaml"
+Set it in the [global configuration file](../cli/config.md) or via the `PNPM_CONFIG_MACOS_BACKUP_EXCLUDE_STORE_DIR` environment variable. This setting is ignored in project `pnpm-workspace.yaml` files and on non-macOS platforms.
+
+```yaml title="config.yaml"
 macosBackup:
   excludeStoreDir: true
 ```
-
-Can also be set via the `PNPM_CONFIG_MACOS_BACKUP_EXCLUDE_STORE_DIR` environment variable. This setting is ignored on non-macOS platforms.
