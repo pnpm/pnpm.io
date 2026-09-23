@@ -74,6 +74,51 @@ changes.
 Try to publish packages even if their current version is already found in the
 registry.
 
+### --publish-wait-timeout &lt;milliseconds\>
+
+Added in: unreleased
+
+* Default: **0**
+* Type: **Number** (non-negative integer)
+
+Wait for the exact published version to appear in the registry's install metadata.
+Then check that a `HEAD` request to its tarball URL returns HTTP `200`.
+This helps release workflows handle registry delays, such as npm's [publish-time malware scanning](https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/).
+A value of `0` disables the check.
+
+```sh
+pnpm publish --publish-wait-timeout 600000
+pnpm -r publish --publish-wait-timeout 600000 --report-summary
+```
+
+The timeout is in milliseconds and includes registry requests and retry delays.
+Each package has its own timeout, including selected versions that already exist.
+For a new upload, the timeout starts after the registry accepts it.
+For an existing version, it starts when pnpm begins its availability check.
+With `--batch`, each uploaded registry group shares one timeout.
+
+Recursive publishing also checks selected versions that already exist in the
+registry. Without `--batch`, pnpm confirms availability before publishing dependent
+packages. With `--batch`, pnpm checks each registry group after its upload.
+The `publish` and `postpublish` scripts run after the corresponding check succeeds.
+
+If confirmation times out, the command fails with
+`ERR_PNPM_PUBLISH_AVAILABILITY_TIMEOUT`. The upload remains accepted and may
+become available later. Do not publish the same version again.
+Use [`--report-summary`](#--report-summary) with recursive publishing to record
+accepted uploads even if the command fails.
+
+Invalid registry responses or non-retryable HTTP errors, such as authentication
+failures, cause `ERR_PNPM_PUBLISH_AVAILABILITY_CHECK_FAILED`.
+
+`--dry-run` skips availability checks. `pnpm stage publish` ignores the configured
+default and rejects an explicit positive `--publish-wait-timeout`, because
+staged versions cannot be installed.
+The check does not download the archive or install the package. It does not
+verify the archive's contents.
+
+Use [`publishWaitTimeout`](#publishwaittimeout) to set a default.
+
 ### --batch
 
 Added in: v11.7.0
@@ -98,6 +143,15 @@ Keep the original `packageManager` field and publish lifecycle scripts in the pu
 ### --report-summary
 
 Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.
+
+:::note Unreleased
+
+Recursive publishing also records accepted uploads when a later upload,
+availability check, or lifecycle script fails. This applies whether or not
+waiting is enabled. The summary records accepted uploads, not confirmed
+availability.
+
+:::
 
 An example of a `pnpm-publish-summary.json` file:
 
@@ -153,6 +207,25 @@ For example:
 gitChecks: false
 publishBranch: production
 ```
+
+### publishWaitTimeout
+
+Added in: unreleased
+
+* Default: **0**
+* Type: **Number** (non-negative integer)
+
+Sets the default timeout in milliseconds for
+[`--publish-wait-timeout`](#--publish-wait-timeout-milliseconds).
+Configure it in `pnpm-workspace.yaml` or the global `config.yaml`:
+
+```yaml title="pnpm-workspace.yaml"
+publishWaitTimeout: 600000
+```
+
+The `PNPM_CONFIG_PUBLISH_WAIT_TIMEOUT` environment variable overrides the
+configuration files. The command-line option takes precedence over both,
+including `--publish-wait-timeout=0` to disable waiting for one command.
 
 ## Life Cycle Scripts
 
