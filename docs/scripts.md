@@ -48,7 +48,7 @@ To force the built-in command, use [`pnpm pm <name>`](./cli/pm.md).
 
 ### `pnpm:devPreinstall`
 
-Runs only on local `pnpm install`.
+Runs when `pnpm install` runs in the project itself, including in CI. It does not run when the package is installed as a dependency of another project.
 
 Runs before any dependency is installed.
 
