@@ -91,7 +91,8 @@ pnpm -r publish --publish-wait-timeout 600000 --report-summary
 
 The timeout is in milliseconds. It starts after the registry accepts an upload
 and includes requests and retry delays. It applies separately to each package,
-or to each registry group when using `--batch`.
+including selected versions that already exist. With `--batch`, each uploaded
+registry group has one deadline.
 
 Recursive publishing also checks selected versions that already exist in the
 registry. It confirms availability before publishing dependent packages.
@@ -103,8 +104,9 @@ become available later. Do not publish the same version again.
 With recursive publishing, `--report-summary` keeps accepted uploads in the
 summary if a later upload, availability check, or lifecycle script fails.
 
-`--dry-run` skips availability checks. A positive timeout cannot be combined
-with `pnpm stage publish`, because staged versions cannot be installed.
+`--dry-run` skips availability checks. `pnpm stage publish` ignores the configured
+default and rejects an explicit positive `--publish-wait-timeout`, because
+staged versions cannot be installed.
 The check does not download the archive or install the package. It does not
 verify the archive's contents.
 
