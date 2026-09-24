@@ -114,7 +114,7 @@ By default (`versioning.changelog.storage: registry`) no `CHANGELOG.md` is commi
 
 Set `versioning.changelog.storage: repository` to keep committed `CHANGELOG.md` files in every package instead.
 
-Private packages are never published, so no tarball could carry their changelog. Their releases always use `repository` storage, whatever is configured: the section is prepended to the package's committed `CHANGELOG.md`, and the consumed change intents are garbage-collected right away.
+Private packages are never published, so no tarball could carry their changelog. Their releases always use `repository` storage, whatever is configured: the section is prepended to the package's committed `CHANGELOG.md`, and the release counts as consumed without a registry confirmation. An intent file that also names other projects is still deleted only once all of them have released.
 
 ## The ledger
 
