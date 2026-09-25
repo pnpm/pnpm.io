@@ -12,6 +12,10 @@ Positional arguments are `name-pattern@version-range` identifiers, which will
 limit the results to only the packages named. For example,
 `pnpm list "babel-*" "eslint-*" semver@5`.
 
+Since v12.7.0, running `pnpm list` inside a workspace project lists only that
+project. Use [`--recursive`](#--recursive--r) or [`--filter`](#--filter-package_selector)
+to list other workspace projects.
+
 ## Options
 
 ### --recursive, -r

@@ -154,6 +154,16 @@ For example, the next command will run tests in all changed packages since
 pnpm --filter "...[origin/master]" test
 ```
 
+Since v11.28.0, pnpm compares against the commit where the current branch
+forked from `<since>` (their merge base), so projects changed only by newer
+commits on `<since>` are not selected. Uncommitted changes are still included.
+In a shallow clone that lacks the merge base, pnpm compares against `<since>`
+directly.
+
+A change to a version in a [catalog](./catalogs.md) in `pnpm-workspace.yaml`
+selects the projects that use that catalog entry. A project that files were
+moved out of is selected when Git detects the move as a rename.
+
 ### --fail-if-no-match
 
 Use this flag if you want the CLI to fail if no packages have matched the filters.
@@ -180,10 +190,22 @@ directory:
 pnpm --filter=!./lib <cmd>
 ```
 
+Since v11.28.0, selectors are applied in the order they are given. An exclusion
+removes projects selected by the selectors before it, and an inclusion after it
+can add excluded projects back. When the first selector is an exclusion, it
+starts from every project in the workspace. For instance, this runs a command
+in `a` but in no other project under `packages`:
+
+```sh
+pnpm --filter="!./packages/**" --filter=a <cmd>
+```
+
 ## Multiplicity
 
 When packages are filtered, every package is taken that matches at least one of
-the selectors. You can use as many filters as you want:
+the inclusion selectors, unless a later [exclusion](#excluding) removes it. When
+the first selector is an exclusion, filtering starts from every project in the
+workspace. You can use as many filters as you want:
 
 ```sh
 pnpm --filter ...foo --filter bar --filter baz... test

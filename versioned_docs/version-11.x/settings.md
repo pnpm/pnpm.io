@@ -134,6 +134,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
   * [update.githubActionsServer](./settings/dependency-resolution.md#updategithubactionsserver)
 * [supportedArchitectures](./settings/dependency-resolution.md#supportedarchitectures)
 * [ignoredOptionalDependencies](./settings/dependency-resolution.md#ignoredoptionaldependencies)
+* [forceIgnoresPlatform](./settings/dependency-resolution.md#forceignoresplatform)
 * [minimumReleaseAge](./settings/dependency-resolution.md#minimumreleaseage)
 * [minimumReleaseAgeExclude](./settings/dependency-resolution.md#minimumreleaseageexclude)
 * [minimumReleaseAgeExcludePrune](./settings/dependency-resolution.md#minimumreleaseageexcludeprune)

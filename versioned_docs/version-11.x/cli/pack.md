@@ -5,6 +5,13 @@ title: pnpm pack
 
 Create a tarball from a package.
 
+Since v11.28.0:
+
+* [`bundleDependencies`](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#bundledependencies) are included when using the isolated linker, including bundled workspace packages and the dependencies of each bundled package, and also when `publishConfig.directory` selects a build directory.
+* Symlinks that point to files or directories included in the package are kept. Symlinks that point outside the package are left out.
+* Executable permissions of the source files are preserved in the tarball.
+* When the project uses a `package.yaml` or `package.json5` manifest, its `files` field is honored and the tarball contains exactly one `package.json`.
+
 ## Options
 
 ### --recursive, -r

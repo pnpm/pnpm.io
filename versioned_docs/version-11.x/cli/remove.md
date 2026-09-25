@@ -7,6 +7,8 @@ Aliases: `rm`, `uninstall`, `un`
 
 Removes packages from `node_modules` and from the project's `package.json`.
 
+Since v11.28.0, `pnpm remove` runs the project's own `preuninstall`, `uninstall`, and `postuninstall` scripts. See [Uninstall scripts](../scripts.md#uninstall-scripts).
+
 ## Options
 
 ### --recursive, -r
@@ -16,6 +18,8 @@ dependencies) from every workspace package.
 
 When used not inside a workspace, removes a dependency (or dependencies) from
 every package found in subdirectories.
+
+Since v11.28.0, the command fails before any `package.json` is modified if a requested dependency is absent from every selected project. The check respects `--save-prod`, `--save-dev`, and `--save-optional`.
 
 ### --global, -g
 

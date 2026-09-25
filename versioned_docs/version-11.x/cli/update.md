@@ -143,6 +143,16 @@ Only update packages in `devDependencies`.
 
 Don't update packages in `optionalDependencies`.
 
+### --peer
+
+Added in: v11.28.0
+
+Also update the ranges in `peerDependencies`. Without this flag, `pnpm update` leaves `peerDependencies` unchanged.
+
+```sh
+pnpm update --peer react
+```
+
 ### --interactive, -i
 
 Show outdated dependencies and select which ones to update.

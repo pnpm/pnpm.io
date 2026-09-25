@@ -78,7 +78,9 @@ projects do not apply. See the [`--ignore-workspace` global option](../pnpm-cli.
 
 ### --force
 
-Force reinstall dependencies: refetch packages modified in store, recreate a lockfile and/or modules directory created by a non-compatible version of pnpm. Install all optionalDependencies even they don't satisfy the current environment(cpu, os, arch).
+Force reinstall dependencies: refetch packages modified in store, recreate a lockfile and/or modules directory created by a non-compatible version of pnpm. `--force` also lifts [`engineStrict`](../settings/cli.md#enginestrict).
+
+Since v12.7.0, `--force` no longer installs optional dependencies whose `os`, `cpu`, or `libc` do not match the host. Set [`forceIgnoresPlatform`](../settings/dependency-resolution.md#forceignoresplatform) to `true` to install them anyway.
 
 ### --offline
 
@@ -199,6 +201,30 @@ Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 
 Do not execute any scripts defined in the project `package.json` and its
 dependencies.
+
+### --allow-build
+
+Added in: v12.7.0
+
+Allow the named package to run its lifecycle scripts during this install, and
+record it in the [`allowBuilds`](../settings/build.md#allowbuilds) field of
+`pnpm-workspace.yaml` so it stays allowed. Prefix a name with `!` to deny its
+scripts instead. The option can be repeated:
+
+```sh
+pnpm install --allow-build=esbuild --allow-build='!core-js'
+```
+
+The quotes keep a POSIX shell from treating `!` as history expansion. In
+Windows `cmd.exe`, leave them out.
+
+writes:
+
+```yaml title="pnpm-workspace.yaml"
+allowBuilds:
+  esbuild: true
+  core-js: false
+```
 
 ### --filter &lt;package_selector>
 

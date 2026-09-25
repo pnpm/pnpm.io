@@ -77,6 +77,18 @@ By default, `pnpm deploy` will try creating a dedicated lockfile from a shared l
 
 Since v12.4.1, the legacy implementation prefers the versions the source workspace lockfile pins, wherever they still satisfy the deployed project's ranges.
 
+## What the deployed project gets
+
+Since v12.7.0:
+
+* The `packageManager` and `devEngines.packageManager` fields of the workspace
+  root `package.json` are copied into the deployed `package.json`, unless the
+  deployed project pins a package manager itself.
+* The virtual store is placed at [`virtualStoreDir`](../settings/node-modules.md#virtualstoredir),
+  resolved against the deploy directory. With the global virtual store enabled
+  or an absolute `virtualStoreDir`, it stays at `node_modules/.pnpm`.
+* The `prepare` script of the deployed project is not run.
+
 ## Files included in the deployed project
 
 By default, all the files of the project are copied during deployment but this can be modified in _one_ of the following ways which are resolved in order:

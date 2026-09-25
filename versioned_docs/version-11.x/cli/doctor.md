@@ -58,6 +58,8 @@ If neither reflink nor hardlink works, the check warns that installs will fall b
 
 Pings the configured registry with a 15-second timeout and reports the round-trip time. Fails if the registry cannot be reached or answers with an error status, which usually points at network, proxy, or auth configuration.
 
+Since v11.28.0, the check pings the configured default registry and sends the credentials configured for it. Before, it always pinged `https://registry.npmjs.org/`.
+
 Skipped with `--offline`.
 
 ### Install smoke test

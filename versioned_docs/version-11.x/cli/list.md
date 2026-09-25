@@ -19,6 +19,9 @@ limit the results to only the packages named. For example,
 Perform command on every package in subdirectories or on every workspace
 package, when executed inside a workspace.
 
+Since v11.28.0, running `pnpm list` inside a workspace package without
+`--recursive` or `--filter` lists only that package.
+
 ### --json
 
 Log output in JSON format.
