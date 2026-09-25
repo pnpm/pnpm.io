@@ -30,6 +30,8 @@ Values in the **user-level** auth files (`<pnpm config>/auth.ini` and the user `
 //registry.npmjs.org/:_authToken=${NPM_TOKEN}
 ```
 
+Since v11.28.0, npm's `${NAME?}` form is supported too. It expands to the value of `NAME`, or to an empty string without a warning when `NAME` is unset. pnpm warns when an empty environment variable removes an auth token, and the warning names the affected key.
+
 Since v11.5.3, environment variables are **not** expanded in the **project-level** `.npmrc` at the workspace root for the following settings:
 
 * registry and proxy URLs (`registry`, `@scope:registry`, proxy settings);
@@ -179,6 +181,8 @@ Precedence, from highest to lowest:
 4. `pnpm-workspace.yaml`
 
 Parsing is strict: a malformed value (bad JSON, wrong shape, an invalid registry URL or scope, or an unsupported credential field) fails fast with an error rather than being silently dropped.
+
+Since v11.28.0, environment variable placeholders such as `${NPM_TOKEN}` in an `authToken` value are expanded in both locations.
 
 ## Certificate Settings
 

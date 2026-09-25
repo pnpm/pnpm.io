@@ -53,3 +53,19 @@ Runs when `pnpm install` runs in the project itself, including in CI. It does no
 Runs before any dependency is installed.
 
 This script is executed only when set in the root project's `package.json`.
+
+Since v11.28.0, installs that skip `devDependencies`, such as `pnpm install --prod`, do not run it.
+
+### `preinstall` of the root project
+
+Since v11.28.0, the root project's `preinstall` script runs before dependencies are resolved and linked. A guard such as `npx only-allow pnpm` can therefore stop the install before pnpm populates `node_modules`.
+
+### `prepare`
+
+The root project's `prepare` script runs after `pnpm install`. It is skipped, since v11.28.0, by installs that skip `devDependencies` (such as `pnpm install --prod`), by `pnpm install` given package arguments, and for the project that [`pnpm deploy`](./cli/deploy.md) deploys.
+
+### Uninstall scripts
+
+Added in: v11.28.0
+
+[`pnpm remove`](./cli/remove.md) runs the project's own `preuninstall`, `uninstall`, and `postuninstall` scripts. `preuninstall` and `uninstall` run before dependencies are unlinked, and a failure in either aborts the removal. `postuninstall` runs after unlinking completes. The [`ignoreScripts`](./settings/build.md#ignorescripts) setting and `--lockfile-only` skip all three.

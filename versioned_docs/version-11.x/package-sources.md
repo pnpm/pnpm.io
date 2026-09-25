@@ -84,6 +84,9 @@ pnpm add ./some-directory
 When you install from a directory, a symlink will be created in the current
 project's `node_modules`, so it is the same as running `pnpm link`.
 
+Since v11.28.0, tarballs compressed with bzip2 can be installed too, both from
+local files and from remote URLs.
+
 ## Exotic sources
 
 Exotic sources are useful for development but may pose supply chain risks when used by transitive dependencies.
@@ -199,3 +202,12 @@ Installs from the `beta` branch and only the subdirectory at `/packages/simple-r
 #### How Git dependencies are resolved
 
 pnpm 11 keeps the specifier's transport as part of the recorded URL. Since v11.21.0 it records an SSH URL only when the specifier itself asks for one (`git+ssh://` or `git@host:...`): a shorthand like `owner/repo` resolves and records over HTTPS, so a lockfile written on a machine with SSH keys still installs on a CI runner without them. An SSH URL recorded by an older pnpm can be re-recorded over HTTPS with `pnpm update <package>`.
+
+Since v11.28.0, pnpm also fetches the committed submodules of a Git dependency.
+
+Since v11.28.0, pnpm runs `ssh` in batch mode when it fetches a Git dependency
+over SSH, so ssh cannot stop to ask for a key passphrase or a host key
+confirmation; the install fails with the ssh error instead. Load a key that
+needs a passphrase into an SSH agent before installing, and add the host to
+`known_hosts` first. An ssh command set through `GIT_SSH_COMMAND`, `GIT_SSH`, or
+the `core.sshCommand` Git setting is used as is.

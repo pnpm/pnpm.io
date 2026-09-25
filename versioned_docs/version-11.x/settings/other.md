@@ -193,6 +193,15 @@ dependencies. In this case, `NODE_PATH` must include both the project's root
 `node_modules` and the hoisted directory at `node_modules/.pnpm/node_modules` to
 ensure correct resolution.
 
+Since v11.28.0, when a project uses a custom [`modulesDir`], `NODE_PATH` also
+includes that directory, so a tool installed there can load CommonJS plugins
+installed next to it, the way it would from `node_modules`. When executables
+are symlinks (with [`preferSymlinkedExecutables`](#prefersymlinkedexecutables)
+or the hoisted linker), this applies to `pnpm run`, `pnpm exec`, `pnpm version`
+hooks, and the lifecycle scripts a project runs during install, but not to a
+symlinked tool started directly from a shell. A path that contains the
+platform's path-list separator (`:` or `;`) does not get this fallback.
+
 #### When to disable
 
 You may set this to `false` if you are certain that none of the CLI tools in your
@@ -202,6 +211,7 @@ virtual store. Disabling it produces slightly simpler command shims.
 [isolated `node_modules` layout]: ../symlinked-node-modules-structure.md
 [`import-local`]: https://github.com/sindresorhus/import-local
 [`hoistPattern`]: ./node-modules.md#hoistpattern
+[`modulesDir`]: ./node-modules.md#modulesdir
 [`enableGlobalVirtualStore`]: ./node-modules.md#enableglobalvirtualstore
 
 [`@yarnpkg/extensions`]: https://github.com/yarnpkg/berry/blob/master/packages/yarnpkg-extensions/sources/index.ts

@@ -160,6 +160,18 @@ For example, the next command will run tests in all changed packages since
 pnpm --filter "...[origin/master]" test
 ```
 
+Since v12.7.0, `<since>` is compared against the commit where the current
+branch forked from it (the merge base), so projects changed only by newer
+commits on `<since>` are not selected. Uncommitted changes are still included.
+In a shallow clone that lacks the merge base, pnpm compares against `<since>`
+directly.
+
+A project also counts as changed when:
+
+* a version it takes from a [catalog](catalogs.md) changes in
+  `pnpm-workspace.yaml`;
+* files were moved out of it and git detects the move as a rename.
+
 ### --fail-if-no-match
 
 Use this flag if you want the CLI to fail if no packages have matched the filters.
@@ -184,6 +196,13 @@ directory:
 
 ```sh
 pnpm --filter=!./lib <cmd>
+```
+
+Since v12.7.0, selectors are evaluated in the order they are given, so a later
+inclusion can bring back a project that an earlier exclusion removed:
+
+```sh
+pnpm --filter "!./packages/**" --filter @scope/core <cmd>
 ```
 
 ## Multiplicity

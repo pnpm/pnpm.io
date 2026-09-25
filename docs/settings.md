@@ -24,11 +24,13 @@ Authorization-related settings are handled via [`.npmrc`](./npmrc.md).
 
 :::
 
-Values in the configuration files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string.
+Values in the configuration files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string. Since v12.7.0, `${NAME?}` expands to an empty string without a warning when `NAME` isn't set, as in npm.
 
 :::warning
 
 Since v11.5.3, env variables are **not** expanded in settings of `pnpm-workspace.yaml` that define registry URLs: `registry` and the URL values of [`registries`](./settings/dependency-resolution.md#registries) and [`namedRegistries`](./settings/dependency-resolution.md#namedregistries). Values containing a `${...}` placeholder in these settings are ignored. In the [registry declaration shape](./registries.md) of `registries` (since v11.23.0), the URL is the key rather than the value, and the same rule applies to the keys. Because `pnpm-workspace.yaml` is committed to the repository, expanding env variables in registry URLs could be exploited by a malicious repository to leak secrets from the environment to an attacker-controlled registry. Configure dynamic registry URLs in a trusted location instead: the global configuration file or CLI options.
+
+Since v12.7.0, the same applies to `userAgent`: a `userAgent` in `pnpm-workspace.yaml` that contains a `${...}` placeholder is ignored, because the user agent is sent to the configured registry with every request.
 
 :::
 
@@ -157,6 +159,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
   * [update.githubActionsServer](./settings/dependency-resolution.md#updategithubactionsserver)
 * [supportedArchitectures](./settings/dependency-resolution.md#supportedarchitectures)
 * [ignoredOptionalDependencies](./settings/dependency-resolution.md#ignoredoptionaldependencies)
+* [forceIgnoresPlatform](./settings/dependency-resolution.md#forceignoresplatform)
 * [minimumReleaseAge](./settings/dependency-resolution.md#minimumreleaseage)
 * [minimumReleaseAgeExclude](./settings/dependency-resolution.md#minimumreleaseageexclude)
 * [minimumReleaseAgeExcludePrune](./settings/dependency-resolution.md#minimumreleaseageexcludeprune)

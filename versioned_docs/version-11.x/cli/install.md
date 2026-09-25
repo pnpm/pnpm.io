@@ -72,6 +72,8 @@ This can also be set via the `runtime=false` config in `pnpm-workspace.yaml`.
 
 Force reinstall dependencies: refetch packages modified in store, recreate a lockfile and/or modules directory created by a non-compatible version of pnpm. Install all optionalDependencies even they don't satisfy the current environment(cpu, os, arch).
 
+Since v11.28.0, set [`forceIgnoresPlatform`](../settings/dependency-resolution.md#forceignoresplatform) to `false` to keep skipping optional dependencies whose `os`, `cpu`, or `libc` do not match the host under `--force`.
+
 ### --offline
 
 * Default: **false**

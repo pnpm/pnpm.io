@@ -55,6 +55,8 @@ When an unknown command is used, pnpm will search for a script with the given na
 so `pnpm run lint` is the same as `pnpm lint`. If there is no script with the specified name,
 then pnpm will execute the command as a shell script, so you can do things like `pnpm eslint` (see [`pnpm exec`]).
 
+Since v11.28.0, this also works with `--filter` and `--recursive`: `pnpm -r eslint` runs the `eslint` script in the selected projects that have one, and when none of them has a script by that name, it runs the `eslint` command installed in their dependencies. `pnpm run` with `--filter` or `-r` still reports the missing script.
+
 [`pnpm install`]: ./cli/install.md
 [`pnpm add <pkg>`]: ./cli/add.md
 [`pnpm <cmd>`]: ./cli/run.md

@@ -180,6 +180,15 @@ export pnpm_config__auth='{"https://registry.npmjs.org":{"@":{"authToken":"npm-t
 
 Both `pnpm_config__auth` (lowercase) and `PNPM_CONFIG__AUTH` (all-caps, the convention some CI runners apply) are honored. If both are set, lowercase wins unless it is empty, in which case uppercase is used.
 
+Since v12.7.0, `authToken` values may reference environment variables using the `${NAME}` syntax, in both locations:
+
+```yaml
+_auth:
+  https://registry.npmjs.org:
+    "@":
+      authToken: ${NPM_TOKEN}
+```
+
 Each entry also infers a trusted registry route: `@` routes the default registry (and `pnpm add <pkg>` resolves there), and `@org` routes that scope. Because the credential and its destination host arrive in one trusted value, repo-controlled config cannot redirect the token to a different host.
 
 Since v12.1.0, `pnpm login` writes the token in this shape. An unscoped login

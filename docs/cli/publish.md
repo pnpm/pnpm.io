@@ -95,6 +95,27 @@ Added in: v11.3.0
 
 Keep the original `packageManager` field and publish lifecycle scripts in the published manifest instead of stripping them. The pnpm-specific `pnpm` field is still omitted.
 
+### --publish-wait-timeout &lt;milliseconds\>
+
+Added in: v12.7.0
+
+* Default: **0** (don't wait)
+* Type: **Number**
+
+After uploading a package, wait up to this many milliseconds for the published
+version and its tarball to become available from the registry. If they are not
+available in time, the command fails. `0` disables the check.
+
+When publishing recursively, pnpm confirms that a package is available before
+it publishes the packages that depend on it. With [`--batch`](#--batch), the
+timeout applies once per registry group.
+
+Set `publishWaitTimeout` in `pnpm-workspace.yaml` to configure a default:
+
+```yaml title="pnpm-workspace.yaml"
+publishWaitTimeout: 60000
+```
+
 ### --report-summary
 
 Save the list of published packages to `pnpm-publish-summary.json`. Useful when some other tooling is used to report the list of published packages.
@@ -115,6 +136,9 @@ An example of a `pnpm-publish-summary.json` file:
   ]
 }
 ```
+
+When a recursive publish fails after the registry accepted some of the
+uploads, the summary still lists the packages that were published.
 
 ### --dry-run
 
@@ -145,7 +169,7 @@ When publishing from a supported cloud CI/CD system, the package will be publicl
 
 ## Configuration
 
-You can also set `gitChecks`, `publishBranch` options in the `pnpm-workspace.yaml` file.
+You can also set `gitChecks`, `publishBranch`, and `publishWaitTimeout` options in the `pnpm-workspace.yaml` file.
 
 For example:
 

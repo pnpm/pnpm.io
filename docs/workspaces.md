@@ -12,6 +12,31 @@ root.
 
 [`pnpm-workspace.yaml`]: settings.md
 
+### Converting from the `workspaces` field
+
+Added in: v12.7.0
+
+A repository set up for npm, Yarn, or Bun lists its projects in the `workspaces`
+field of the root `package.json`. When such a repository has no
+`pnpm-workspace.yaml`, `pnpm install` creates one with the same patterns and
+links the listed projects on that same install:
+
+```json title="package.json"
+{
+  "workspaces": ["packages/*"]
+}
+```
+
+```yaml title="pnpm-workspace.yaml (created)"
+packages:
+  - packages/*
+```
+
+An existing `pnpm-workspace.yaml` is never changed, and nothing is created when
+`--ignore-workspace` is passed. If the `workspaces` field later lists different
+patterns than `packages` in `pnpm-workspace.yaml`, pnpm prints a warning, since
+only `pnpm-workspace.yaml` is read.
+
 :::tip
 
 If you are looking into monorepo management, you might also want to look into [Bit].

@@ -167,13 +167,34 @@ No shell hooks, `.bashrc` edits, or `use`-style commands are involved — the sh
 
 pnpm walks up from the current working directory to the nearest project that provides the command, then:
 
-* For the **runtimes** (`node`, `deno`, `bun`), only the manifest pin counts — [`devEngines.runtime`](./package_json.md#devenginesruntime), then `engines.runtime`. The pinned version is downloaded into the [global virtual store](./global-virtual-store.md) on demand and executed directly. The project's `node_modules/.bin` is never consulted for a runtime, so a dependency cannot supply the `node` you run.
+* For the **runtimes** (`node`, `deno`, `bun`), only a runtime pin counts — [`devEngines.runtime`](./package_json.md#devenginesruntime), then `engines.runtime`. For `node`, since v12.7.0, a `.node-version` or `.nvmrc` file also counts (see [below](#nvmrc-and-node-version)). The pinned version is downloaded into the [global virtual store](./global-virtual-store.md) on demand and executed directly. The project's `node_modules/.bin` is never consulted for a runtime, so a dependency cannot supply the `node` you run.
 * For the **[package managers](./package-managers.md)** (`npm`, `yarn`, `bun`), added in v12.0.0-rc.6, the project's `packageManager` or [`devEngines.packageManager`](./package_json.md#devenginespackagemanager) pin counts, and pnpm provisions that version on demand. The pin outranks a copy of that package manager installed globally, because it is the project's own statement of what installs it.
 * For **any other package**, the project's `node_modules/.bin/<name>` is used.
 
 Directories inside the pnpm home are skipped, since global installs are not projects.
 
 If the project provides nothing, or the lookup is declined, the globally installed version runs — commands never fail merely because dispatch did not apply.
+
+### `.nvmrc` and `.node-version`
+
+Added in: v12.7.0
+
+The `node` shim also reads the Node.js version from a `.node-version` or `.nvmrc`
+file, so projects set up for nvm, fnm, or n work without a `devEngines.runtime`
+entry:
+
+```text title=".nvmrc"
+22
+```
+
+The nearest directory that declares a Node.js runtime in any of these ways
+decides the version. Within one directory, `package.json` takes precedence
+over `.node-version`, which takes precedence over `.nvmrc`.
+
+Both files accept a version or range, optionally prefixed with `v`, as well as
+`node`, `stable`, `lts/*`, and LTS codenames such as `lts/jod`. Comments are
+ignored. A value that only nvm can act on, such as `system`, `default`, or a
+custom alias, is ignored, and the directory counts as unpinned.
 
 ### Trust
 

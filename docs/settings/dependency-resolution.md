@@ -262,6 +262,22 @@ ignoredOptionalDependencies:
 - "@esbuild/*"
 ```
 
+### forceIgnoresPlatform
+
+Added in: v12.7.0
+
+* Default: **false**
+* Type: **Boolean**
+
+When `true`, [`pnpm install --force`](../cli/install.md#--force) also installs
+optional dependencies whose `os`, `cpu`, or `libc` do not match the host. When
+`false`, `--force` refetches every package but still skips optional dependencies
+built for other platforms.
+
+pnpm v11 behaved as if this setting were `true`. To install optional
+dependencies for other platforms on purpose, prefer
+[`supportedArchitectures`](#supportedarchitectures).
+
 ### minimumReleaseAge
 
 Added in: v10.16.0

@@ -47,6 +47,10 @@ briefly slowing down the installation process.
 
 After pruning, pnpm displays the total size of removed files.
 
+Since v12.7.0, `pnpm store prune` also removes private copies of pnpm or a
+runtime that a killed pnpm process left behind. pnpm makes such a copy when a
+project pins a version that another pnpm process is installing at that moment.
+
 When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on the global virtual store's `links/` directory. Projects using the store are registered via symlinks in `{storeDir}/v11/projects/`, allowing pnpm to track active usage and safely remove unused packages from the global virtual store.
 
 [global virtual store]: ../settings/node-modules.md#enableglobalvirtualstore

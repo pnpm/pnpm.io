@@ -351,6 +351,20 @@ Each package in a `pnpm publish -r` run goes to its own target registry, so one
 command can release a workspace to several registries.
 [`--batch`](./cli/publish.md#--batch) then sends one request per registry.
 
+Since v12.7.0, a scoped package can also set its registry under the
+`@<scope>:registry` key. For a package in that scope, it takes precedence over
+`publishConfig.registry` and over the registry set for the scope in `.npmrc`:
+
+```json
+{
+  "name": "@acme/foo",
+  "version": "1.0.0",
+  "publishConfig": {
+    "@acme:registry": "https://npm.acme.example/"
+  }
+}
+```
+
 ### publishConfig.access
 
 Added in: v11.2.0

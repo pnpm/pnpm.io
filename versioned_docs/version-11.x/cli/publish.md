@@ -154,6 +154,19 @@ gitChecks: false
 publishBranch: production
 ```
 
+### Registry
+
+Since v11.28.0, a scoped package is published to the registry set by `publishConfig["@<scope>:registry"]` in its `package.json`. This takes precedence over the registry set for the same scope in `.npmrc` and over `publishConfig.registry`:
+
+```json title="package.json"
+{
+  "name": "@acme/utils",
+  "publishConfig": {
+    "@acme:registry": "https://npm.acme.example/"
+  }
+}
+```
+
 ## Life Cycle Scripts
 
 * `prepublishOnly`
