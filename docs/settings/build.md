@@ -42,6 +42,9 @@ You may want to disable this setting if:
 1. The install scripts modify files *outside* the package directory (pnpm cannot track or cache these changes).
 1. The scripts perform side effects that are unrelated to building the package.
 
+To keep only some packages out of the cache, list them under
+[`sideEffectsCacheExclude`](#sideeffectscacheexclude) instead.
+
 :::
 
 An object says the same thing in more detail, and is the canonical way to
@@ -150,6 +153,47 @@ either way. That is what lets a repository declare the org in
 config under whichever spelling it already used.
 
 :::
+
+### sideEffectsCacheExclude
+
+Added in: v12.8.0
+
+* Default: **undefined**
+* Type: **string[]**
+
+Packages whose builds never go through the side-effects cache. Use it for a
+package whose build output depends on the environment it runs in, such as a
+native addon compiled against `JAVA_HOME` or a system library. Without it, the
+first project on the machine to build such a package saves its output, and
+every later project restores that output, even when it would have built
+something different.
+
+```yaml title="pnpm-workspace.yaml"
+allowBuilds:
+  java: true
+sideEffectsCacheExclude:
+  - java
+  - '@native/*'
+  - 'sharp@1.0.0 || 2.0.0'
+```
+
+A listed package is built in every project that installs it. pnpm neither
+restores its build from the cache nor saves it there, locally or through
+[`sideEffectsCache.remote`](#sideeffectscacheremote). With the
+[global virtual store](./node-modules.md#enableglobalvirtualstore), each
+project also gets its own copy of the package, so a build in one project does
+not replace another project's build. This applies only to the listed package
+itself. Packages that depend on it still share their copies across projects,
+so such a copy may link to another project's build of the listed package.
+
+Entries use the same patterns as
+[`minimumReleaseAgeExclude`](./dependency-resolution.md#minimumreleaseageexclude):
+a package name, a scope pattern such as `@native/*`, or a name with an exact
+version or a `||` list of exact versions.
+
+The list only takes builds out of the cache. A package still needs
+[`allowBuilds`](#allowbuilds) to be built at all. Changing the list makes the
+next `pnpm install` run in full, even when nothing else changed.
 
 ### unsafePerm
 
