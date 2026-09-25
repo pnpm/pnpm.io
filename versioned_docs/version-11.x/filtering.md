@@ -60,6 +60,22 @@ dependencies:
 pnpm --filter "foo^..." test
 ```
 
+:::note Windows PowerShell
+
+When PowerShell invokes the `pnpm.cmd` launcher, `^` can be removed before pnpm
+receives the filter. For example, `foo^...` becomes `foo...`, which includes
+`foo` as well as its dependencies. To preserve the caret with this launcher,
+include literal double quotes inside a single-quoted PowerShell string:
+
+```powershell
+pnpm.cmd --filter '"foo^..."' test
+```
+
+The same quoting works with scoped package names. The PowerShell launcher
+`pnpm.ps1` and the native `pnpm.exe` accept the ordinary `"foo^..."` argument.
+
+:::
+
 ### --filter ...&lt;package_name>
 
 To select a package and its dependent packages (direct and non-direct), prefix
