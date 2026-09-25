@@ -381,5 +381,11 @@
     "infoLink": "https://nx.dev",
     "pinned": false,
     "width": 150
+  },
+  {
+    "caption": "Mermaid",
+    "image": "/img/users/mermaid.svg",
+    "infoLink": "https://mermaid.js.org",
+    "pinned": false
   }
 ]
