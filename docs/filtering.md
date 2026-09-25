@@ -208,7 +208,8 @@ pnpm --filter "!./packages/**" --filter @scope/core <cmd>
 ## Multiplicity
 
 When packages are filtered, every package is taken that matches at least one of
-the selectors. You can use as many filters as you want:
+the inclusion selectors, unless a later [exclusion](#excluding) removes it. You can
+use as many filters as you want:
 
 ```sh
 pnpm --filter ...foo --filter bar --filter baz... test

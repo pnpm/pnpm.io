@@ -12,12 +12,16 @@ Aliases: `ls`
 List licenses for installed packages.
 
 Since v12.7.0, running `pnpm licenses list` inside a workspace project lists only
-that project's dependencies. Use `--recursive` or [`--filter`](#--filter-package_selector)
+that project's dependencies. Use [`--recursive`](#--recursive--r) or [`--filter`](#--filter-package_selector)
 to include other workspace projects.
 
 Since v11.20.0, a package resolved from a [named registry](../settings/dependency-resolution.md#namedregistries) is reported separately from a package of the same name and version that came from another registry. The registry alias is shown next to the package name in the table output and is exposed as the `registryName` field with `--json`.
 
 ## Options
+
+### --recursive, -r
+
+List the licenses of the dependencies of every workspace project.
 
 ### --dev, -D
 

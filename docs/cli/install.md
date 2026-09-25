@@ -212,7 +212,7 @@ record it in the [`allowBuilds`](../settings/build.md#allowbuilds) field of
 scripts instead. The option can be repeated:
 
 ```sh
-pnpm install --allow-build=esbuild --allow-build=!core-js
+pnpm install --allow-build=esbuild --allow-build='!core-js'
 ```
 
 writes:
