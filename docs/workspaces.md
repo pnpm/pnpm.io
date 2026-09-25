@@ -359,3 +359,5 @@ preferredManifestFormat: json5
 ```
 
 The setting applies to the projects of the workspace, including the root project. It does not change how pnpm reads the manifests of dependencies. A directory without any manifest still gets a new `package.json`.
+
+This setting can only be set in `pnpm-workspace.yaml`. The global config file cannot set it.
