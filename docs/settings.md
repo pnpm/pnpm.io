@@ -364,6 +364,7 @@ These settings are configured in `pnpm-workspace.yaml` as well, but are document
 * [ignoreWorkspaceCycles](./workspaces.md#ignoreworkspacecycles)
 * [disallowWorkspaceCycles](./workspaces.md#disallowworkspacecycles)
 * [failIfNoMatch](./workspaces.md#failifnomatch)
+* [preferredManifestFormat](./workspaces.md#preferredmanifestformat)
 
 ### Settings documented elsewhere
 

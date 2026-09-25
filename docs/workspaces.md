@@ -342,3 +342,22 @@ For example, the following command will exit with a non-zero code because `bad-p
 ```sh
 pnpm --filter=bad-pkg-name test
 ```
+
+### preferredManifestFormat
+
+Added in: v12.8.0
+
+* Default: **json**
+* Type: **json**, **json5**, **yaml**
+
+Selects which manifest a workspace project uses when its directory contains more than one of `package.json`, `package.json5`, and `package.yaml`. pnpm reads and writes the preferred file. If the preferred file is missing, pnpm falls back to the usual order: `package.json`, then `package.json5`, then `package.yaml`.
+
+This lets a project keep its real manifest in `package.json5`, with comments, next to a stub `package.json` for tools that only read JSON:
+
+```yaml title="pnpm-workspace.yaml"
+preferredManifestFormat: json5
+```
+
+The setting applies to the projects of the workspace, including the root project. It does not change how pnpm reads the manifests of dependencies. A directory without any manifest still gets a new `package.json`.
+
+This setting can only be set in `pnpm-workspace.yaml`. The global config file cannot set it.
