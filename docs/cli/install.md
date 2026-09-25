@@ -215,6 +215,9 @@ scripts instead. The option can be repeated:
 pnpm install --allow-build=esbuild --allow-build='!core-js'
 ```
 
+The quotes keep a POSIX shell from treating `!` as history expansion. In
+Windows `cmd.exe`, leave them out.
+
 writes:
 
 ```yaml title="pnpm-workspace.yaml"

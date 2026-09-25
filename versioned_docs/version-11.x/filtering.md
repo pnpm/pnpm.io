@@ -203,8 +203,9 @@ pnpm --filter="!./packages/**" --filter=a <cmd>
 ## Multiplicity
 
 When packages are filtered, every package is taken that matches at least one of
-the inclusion selectors, unless a later [exclusion](#excluding) removes it. You can
-use as many filters as you want:
+the inclusion selectors, unless a later [exclusion](#excluding) removes it. When
+the first selector is an exclusion, filtering starts from every project in the
+workspace. You can use as many filters as you want:
 
 ```sh
 pnpm --filter ...foo --filter bar --filter baz... test
