@@ -1,0 +1,95 @@
+# pnpm
+
+> pnpm is a fast, disk space efficient package manager for JavaScript. It uses a content-addressable store to link packages instead of copying them, so a given package version is saved on disk only once.
+
+## Introduction
+
+- [Motivation](https://pnpm.io/motivation): Why pnpm exists and how it differs from npm and Yarn.
+- [Feature Comparison](https://pnpm.io/feature-comparison): How pnpm compares to npm and Yarn feature by feature.
+- [Installation](https://pnpm.io/installation): How to install pnpm on any platform.
+
+## Usage
+
+- [CLI Overview](https://pnpm.io/pnpm-cli): Introduction to the pnpm command line interface.
+- [Configuring](https://pnpm.io/configuring): How to configure pnpm for a project.
+- [Filtering](https://pnpm.io/filtering): Restricting commands to a subset of workspace packages.
+- [Scripts](https://pnpm.io/scripts): Running and hooking into package.json scripts.
+
+## CLI Commands
+
+### Manage dependencies
+- [add](https://pnpm.io/cli/add), [install](https://pnpm.io/cli/install), [update](https://pnpm.io/cli/update), [remove](https://pnpm.io/cli/remove), [link](https://pnpm.io/cli/link), [unlink](https://pnpm.io/cli/unlink), [import](https://pnpm.io/cli/import), [rebuild](https://pnpm.io/cli/rebuild), [prune](https://pnpm.io/cli/prune), [clean](https://pnpm.io/cli/clean), [ci](https://pnpm.io/cli/ci), [fetch](https://pnpm.io/cli/fetch), [install-test](https://pnpm.io/cli/install-test), [dedupe](https://pnpm.io/cli/dedupe)
+
+### Patch dependencies
+- [patch](https://pnpm.io/cli/patch), [patch-commit](https://pnpm.io/cli/patch-commit), [patch-remove](https://pnpm.io/cli/patch-remove)
+
+### Review dependencies
+- [audit](https://pnpm.io/cli/audit), [sbom](https://pnpm.io/cli/sbom), [list](https://pnpm.io/cli/list), [outdated](https://pnpm.io/cli/outdated), [why](https://pnpm.io/cli/why), [licenses](https://pnpm.io/cli/licenses), [peers](https://pnpm.io/cli/peers), [view](https://pnpm.io/cli/view), [search](https://pnpm.io/cli/search), [docs](https://pnpm.io/cli/docs), [bugs](https://pnpm.io/cli/bugs)
+
+### Run scripts
+- [run](https://pnpm.io/cli/run), [test](https://pnpm.io/cli/test), [exec](https://pnpm.io/cli/exec), [pnx](https://pnpm.io/cli/pnx), [create](https://pnpm.io/cli/create), [start](https://pnpm.io/cli/start), [approve-builds](https://pnpm.io/cli/approve-builds), [ignored-builds](https://pnpm.io/cli/ignored-builds)
+
+### Releasing
+- [change](https://pnpm.io/cli/change), [lane](https://pnpm.io/cli/lane), [version](https://pnpm.io/cli/version), [publish](https://pnpm.io/cli/publish), [stage](https://pnpm.io/cli/stage), [pack](https://pnpm.io/cli/pack), [dist-tag](https://pnpm.io/cli/dist-tag), [deprecate](https://pnpm.io/cli/deprecate), [unpublish](https://pnpm.io/cli/unpublish)
+
+### Registry
+- [login](https://pnpm.io/cli/login), [logout](https://pnpm.io/cli/logout), [whoami](https://pnpm.io/cli/whoami), [access](https://pnpm.io/cli/access), [owner](https://pnpm.io/cli/owner), [team](https://pnpm.io/cli/team), [star](https://pnpm.io/cli/star), [ping](https://pnpm.io/cli/ping)
+
+### Manage environments
+- [runtime](https://pnpm.io/cli/runtime), [env](https://pnpm.io/cli/env)
+
+### Manage cache
+- [cache-list](https://pnpm.io/cli/cache-list), [cache-list-registries](https://pnpm.io/cli/cache-list-registries), [cache-view](https://pnpm.io/cli/cache-view), [cache-delete](https://pnpm.io/cli/cache-delete)
+
+### Misc.
+- [self-update](https://pnpm.io/cli/self-update), [with](https://pnpm.io/cli/with), [pack-app](https://pnpm.io/cli/pack-app), [recursive](https://pnpm.io/cli/recursive), [store](https://pnpm.io/cli/store), [root](https://pnpm.io/cli/root), [bin](https://pnpm.io/cli/bin), [prefix](https://pnpm.io/cli/prefix), [setup](https://pnpm.io/cli/setup), [init](https://pnpm.io/cli/init), [deploy](https://pnpm.io/cli/deploy), [doctor](https://pnpm.io/cli/doctor), [pm](https://pnpm.io/cli/pm), [pkg](https://pnpm.io/cli/pkg), [repo](https://pnpm.io/cli/repo), [set-script](https://pnpm.io/cli/set-script), [config](https://pnpm.io/cli/config), [help](https://pnpm.io/cli/help)
+
+## Configuration
+
+- [package.json](https://pnpm.io/package_json): pnpm-specific fields in package.json.
+- [Settings](https://pnpm.io/settings): All settings for .npmrc.
+- [.npmrc](https://pnpm.io/npmrc): How pnpm reads npmrc files.
+- [pnpm-workspace.yaml](https://pnpm.io/pnpm-workspace_yaml): Configuring a pnpm workspace.
+- [.pnpmfile.cjs](https://pnpm.io/pnpmfile): Hooking into the dependency resolution process.
+
+## Features
+
+- [Package sources](https://pnpm.io/package-sources): Installing from the npm registry, Git, or the local filesystem.
+- [Workspaces](https://pnpm.io/workspaces): Managing multi-package repositories.
+- [Catalogs](https://pnpm.io/catalogs): Centralizing dependency version management across a workspace.
+- [Config dependencies](https://pnpm.io/config-dependencies): Distributing configuration as dependencies.
+- [Aliases](https://pnpm.io/aliases): Installing a package under a different name.
+- [Command completion](https://pnpm.io/completion): Enabling shell completion.
+- [Branch-specific lockfiles](https://pnpm.io/git_branch_lockfiles): Using different lockfiles per Git branch.
+- [Finders](https://pnpm.io/finders): Editor and tooling integrations for finding packages.
+- [Global packages](https://pnpm.io/global-packages): Installing packages globally.
+- [Global virtual store](https://pnpm.io/global-virtual-store): Sharing a virtual store across projects.
+- [Versioning](https://pnpm.io/versioning): How pnpm resolves and stores dependency versions.
+
+## Recipes
+
+- [Using changesets](https://pnpm.io/using-changesets): Version and changelog management with pnpm.
+- [Continuous Integration](https://pnpm.io/continuous-integration): Setting up pnpm on common CI providers.
+- [Supply chain security](https://pnpm.io/supply-chain-security): Hardening installs against supply chain attacks.
+- [TypeScript](https://pnpm.io/typescript): Using pnpm in TypeScript projects.
+- [Git](https://pnpm.io/git): Using pnpm with Git-based workflows.
+- [Git worktrees](https://pnpm.io/git-worktrees): Using pnpm across Git worktrees.
+- [Docker](https://pnpm.io/docker): Using pnpm inside Docker images.
+- [Podman](https://pnpm.io/podman): Using pnpm inside Podman containers.
+
+## Advanced
+
+- [Migration](https://pnpm.io/migration): Migrating from npm or Yarn to pnpm.
+- [Errors](https://pnpm.io/errors): Reference for pnpm error codes.
+- [Logos](https://pnpm.io/logos): Official pnpm brand assets.
+- [Limitations](https://pnpm.io/limitations): Known limitations of pnpm.
+- [Symlinked node_modules structure](https://pnpm.io/symlinked-node-modules-structure): How pnpm lays out node_modules.
+- [How peers are resolved](https://pnpm.io/how-peers-are-resolved): pnpm's algorithm for resolving peer dependencies.
+- [Uninstall](https://pnpm.io/uninstall): How to uninstall pnpm.
+- [pnpm vs npm](https://pnpm.io/pnpm-vs-npm): A detailed comparison with npm.
+
+## Optional
+
+- [FAQ](https://pnpm.io/faq): Frequently asked questions.
+- [Benchmarks](https://pnpm.io/feature-comparison): Performance and disk-usage comparisons with other package managers.
+- [Blog](https://pnpm.io/blog): Announcements and release notes.
