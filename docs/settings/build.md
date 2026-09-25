@@ -182,7 +182,9 @@ restores its build from the cache nor saves it there, locally or through
 [`sideEffectsCache.remote`](#sideeffectscacheremote). With the
 [global virtual store](./node-modules.md#enableglobalvirtualstore), each
 project also gets its own copy of the package, so a build in one project does
-not replace another project's build.
+not replace another project's build. This applies only to the listed package
+itself. Packages that depend on it still share their copies across projects,
+so such a copy may link to another project's build of the listed package.
 
 Entries use the same patterns as
 [`minimumReleaseAgeExclude`](./dependency-resolution.md#minimumreleaseageexclude):
