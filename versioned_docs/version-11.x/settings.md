@@ -9,7 +9,7 @@ import SettingsAnchorRedirect from '@site/src/components/SettingsAnchorRedirect'
 
 pnpm gets its configuration from the command line, environment variables, and `pnpm-workspace.yaml`.
 
-Only auth and registry settings are read from `.npmrc` files. All other settings are configured in `pnpm-workspace.yaml`. Settings that apply to the whole machine (like `storeDir`, `minimumReleaseAge`, or `packageImportMethod`) may also be set in the [global `config.yaml`](./configuring.md#global-configuration). Settings that affect the layout of `node_modules` or the lockfile (like `hoistPattern`, `publicHoistPattern`, `nodeLinker`, or `shamefullyHoist`) can only be set in `pnpm-workspace.yaml`.
+Only auth and registry settings are read from `.npmrc` files. All other settings are configured in `pnpm-workspace.yaml` or the [global `config.yaml`](./configuring.md#global-configuration). Some settings are limited to one of them: settings that define the structure of `node_modules` (like `hoistPattern`, `publicHoistPattern`, `nodeLinker`, or `shamefullyHoist`) can only be set in `pnpm-workspace.yaml`, while settings that name machine-level state (like `stateDir` or `pnpmHomeDir`) are not read from `pnpm-workspace.yaml`.
 
 The `pnpm config` command can be used to read and edit the contents of the project and global configuration files.
 

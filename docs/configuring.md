@@ -28,7 +28,9 @@ The global YAML config file (`config.yaml`) is located at one of the following p
 * On macOS: **~/Library/Preferences/pnpm/config.yaml**
 * On Linux: **~/.config/pnpm/config.yaml**
 
-The global `config.yaml` accepts only settings that apply to the whole machine, such as `storeDir`, `cacheDir`, `packageImportMethod`, `minimumReleaseAge`, network settings, and registries. Settings that change how dependencies are resolved or how `node_modules` is laid out, such as `nodeLinker`, `hoistPattern`, `publicHoistPattern`, `shamefullyHoist`, or `linkWorkspacePackages`, are project-only: they have to be set in `pnpm-workspace.yaml`, so that a project installs the same way on every machine. `pnpm config set --global` refuses project-only settings, and if they are written to `config.yaml` by hand, pnpm prints a warning and ignores them.
+Not every setting may be set in the global `config.yaml`. Settings that apply to the whole machine, such as `storeDir`, `cacheDir`, `packageImportMethod`, `minimumReleaseAge`, and network settings, may be set there. Settings that define the structure of a project's `node_modules` or workspace, such as `nodeLinker`, `hoistPattern`, `publicHoistPattern`, `shamefullyHoist`, or `linkWorkspacePackages`, are project-only: they have to be set in `pnpm-workspace.yaml`, so that the project installs the same way on every machine. Registry routes may be set globally, but the server descriptions `serverType` and `supportsTimeField` are read only from `pnpm-workspace.yaml` (see [Registries](./registries.md#where-the-setting-may-live)).
+
+`pnpm config set --global` refuses project-only settings with `ERR_PNPM_CONFIG_SET_UNSUPPORTED_YAML_CONFIG_KEY`. If they are written to `config.yaml` by hand, pnpm prints a warning that names them and ignores them.
 
 To share project-only settings across several projects, publish them as a [config dependency](./config-dependencies.md) and add it to each project.
 
