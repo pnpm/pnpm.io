@@ -6,7 +6,7 @@ title: Configuring
 pnpm settings are divided into two categories:
 
 - **Authentication and certificate settings** are stored in INI files. These contain sensitive credentials and should not be committed to your repository. See [Authentication Settings](./npmrc.md#auth-file-locations) for details.
-- **All other settings** are stored in YAML files: the project `pnpm-workspace.yaml` and the global `config.yaml`.
+- **All other settings** are stored in YAML files: the project `pnpm-workspace.yaml` and the global `config.yaml`. Some settings are project-only and are ignored in the global `config.yaml` (see [Global configuration](#global-configuration)).
 
 pnpm also no longer reads settings from the `pnpm` field of `package.json`. Settings should be defined in `pnpm-workspace.yaml`.
 
@@ -27,6 +27,10 @@ The global YAML config file (`config.yaml`) is located at one of the following p
 * On Windows: **~/AppData/Local/pnpm/config/config.yaml**
 * On macOS: **~/Library/Preferences/pnpm/config.yaml**
 * On Linux: **~/.config/pnpm/config.yaml**
+
+The global `config.yaml` accepts only settings that apply to the whole machine, such as `storeDir`, `cacheDir`, `packageImportMethod`, `minimumReleaseAge`, network settings, and registries. Settings that change how dependencies are resolved or how `node_modules` is laid out, such as `nodeLinker`, `hoistPattern`, `publicHoistPattern`, `shamefullyHoist`, or `linkWorkspacePackages`, are project-only: they have to be set in `pnpm-workspace.yaml`, so that a project installs the same way on every machine. `pnpm config set --global` refuses project-only settings, and if they are written to `config.yaml` by hand, pnpm prints a warning and ignores them.
+
+To share project-only settings across several projects, publish them as a [config dependency](./config-dependencies.md) and add it to each project.
 
 The global `rc` file (for registry and auth settings only) is at:
 
