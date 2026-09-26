@@ -16,6 +16,7 @@ By default, any new package is installed as a production dependency.
 | `pnpm add -g sax `                     | Install package globally           |
 | `pnpm add sax@next`                    | Install from the `next` tag        |
 | `pnpm add sax@3.0.0`                   | Specify version `3.0.0`            |
+| `pnpm add lodash@npm:awesome-lodash`   | Install `awesome-lodash` as `lodash` |
 | `pnpm add crate:serde`                 | Add a [Cargo](../cargo.md) crate   |
 | `pnpm add pypi:httpx`                  | Add a [Python](../python.md) package |
 
@@ -30,6 +31,29 @@ pnpm supports installing packages from various sources. See the [Supported packa
 - Remote tarballs
 - Git repositories (with semver, subdirectories, and more)
 - crates.io and PyPI, through the `crate:` and `pypi:` prefixes
+
+## Package aliases
+
+To install an npm package under a different local name, use an `npm:` alias:
+
+```sh
+pnpm add <alias>@npm:<package>
+pnpm add <alias>@npm:<package>@<version-or-tag>
+```
+
+The package after `npm:` may be scoped and versioned. For example:
+
+```sh
+pnpm add babel-core@npm:@babel/core@8.0.6
+```
+
+This writes `babel-core` as the dependency name while resolving
+`@babel/core@8.0.6` as the target package. The `npm:` part is the npm
+package-alias protocol, not a [named registry](../package-sources.md#named-registries);
+registry routing still follows the target package's default or scope-specific
+npm registry configuration.
+
+See [Aliases](../aliases.md) for more examples.
 
 ## Adding a package manager or a runtime
 

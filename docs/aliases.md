@@ -23,6 +23,25 @@ pnpm add lodash@npm:awesome-lodash
 No changes in code are needed. All the requires of `lodash` will now resolve to
 `awesome-lodash`.
 
+An npm alias selector has this form:
+
+```text
+<alias>@npm:<package>
+<alias>@npm:<package>@<version-or-tag>
+```
+
+The target package may be scoped. For example, this installs a specific version
+of `@babel/core` under the local name `babel-core`:
+
+```sh
+pnpm add babel-core@npm:@babel/core@8.0.6
+```
+
+The alias is the dependency name written to `package.json` and used by your
+code. The package after `npm:` is the package pnpm resolves. `npm:` here is the
+package-alias protocol, not a [named registry](./package-sources.md#named-registries);
+the target package still uses its default or scope-specific npm registry configuration.
+
 Sometimes you'll want to use two different versions of a package in your
 project. Easy:
 
