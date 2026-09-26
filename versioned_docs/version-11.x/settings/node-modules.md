@@ -89,6 +89,16 @@ mount a modules directory with FUSE: [@pnpm/mount-modules].
 
 [@pnpm/mount-modules]: https://www.npmjs.com/package/@pnpm/mount-modules
 
+### confirmModulesPurge
+
+* Default: **true**
+* Type: **Boolean**
+
+Controls whether pnpm asks for confirmation before removing the contents of an
+incompatible modules directory and reinstalling it from scratch. When `false`,
+pnpm recreates the modules directory without prompting. In CI, confirmation is
+disabled automatically.
+
 ### virtualStoreDir
 
 * Default: **node_modules/.pnpm**
