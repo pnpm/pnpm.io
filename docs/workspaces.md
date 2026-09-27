@@ -194,6 +194,7 @@ Here are a few of the most popular open source projects that use the workspace f
 | [Stimulus Components](https://github.com/stimulus-components/stimulus-components) | ![](https://img.shields.io/github/stars/stimulus-components/stimulus-components) | 2024-10-26 | [`8e100d5b2c02ad5bf0b965822880a60f543f5ec3`](https://github.com/stimulus-components/stimulus-components/commit/8e100d5b2c02ad5bf0b965822880a60f543f5ec3) |
 | [Serenity/JS](https://github.com/serenity-js/serenity-js) | ![](https://img.shields.io/github/stars/serenity-js/serenity-js) | 2025-01-01 | [`43dbe6f440d8dd81811da303e542381a17d06b4d`](https://github.com/serenity-js/serenity-js/commit/43dbe6f440d8dd81811da303e542381a17d06b4d) |
 | [kysely](https://github.com/kysely-org/kysely) | ![](https://img.shields.io/github/stars/kysely-org/kysely) | 2025-07-29 | [`5ac19105ddb17af310c67e004c11fa3345454b66`](https://github.com/kysely-org/kysely/commit/5ac19105ddb17af310c67e004c11fa3345454b66) |
+| [Angular](https://github.com/angular/angular) | ![](https://img.shields.io/github/stars/angular/angular) | 2025-07-31 | [`82cc576e6ffb3884d1fcf872b7050612601e5b5c`](https://github.com/angular/angular/commit/82cc576e6ffb3884d1fcf872b7050612601e5b5c) |
 
 ## Configuration
 
