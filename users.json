@@ -381,5 +381,12 @@
     "infoLink": "https://nx.dev",
     "pinned": false,
     "width": 150
+  },
+  {
+    "caption": "Angular",
+    "image": "/img/users/angular.svg",
+    "infoLink": "https://angular.dev",
+    "pinned": false,
+    "width": 130
   }
 ]
