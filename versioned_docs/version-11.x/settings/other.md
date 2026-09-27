@@ -139,7 +139,9 @@ own curated entries.
 When `resolutionMode` is set to `time-based`, dependencies will be resolved the following way:
 
 1. Direct dependencies will be resolved to their lowest versions. So if there is `foo@^1.1.0` in the dependencies, then `1.1.0` will be installed.
-1. Subdependencies will be resolved from versions that were published before the last direct dependency was published.
+1. Subdependencies will be resolved from versions that were published no later than one hour after the newest direct dependency. If none of those versions satisfies a subdependency's range, pnpm installs the lowest version that does.
+
+If [`minimumReleaseAge`](./dependency-resolution.md#minimumreleaseage) is also set, pnpm resolves subdependencies against whichever of the two cutoffs is earlier.
 
 With this resolution mode installations with warm cache are faster. It also reduces the chance of subdependency hijacking as subdependencies will be updated only if direct dependencies are updated.
 
