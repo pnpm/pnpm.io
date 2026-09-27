@@ -381,5 +381,12 @@
     "infoLink": "https://nx.dev",
     "pinned": false,
     "width": 150
+  },
+  {
+    "caption": "Extension.js",
+    "image": "/img/users/extensionjs.svg",
+    "infoLink": "https://extension.js.org",
+    "pinned": false,
+    "width": 150
   }
 ]
