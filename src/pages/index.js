@@ -299,6 +299,11 @@ const ossProjects = {
       logoUrl: "/img/users/nx.svg",
       alt: "Nx",
     },
+    {
+      name: "Angular",
+      logoUrl: "/img/users/angular.svg",
+      alt: "Angular",
+    },
   ],
 };
 
