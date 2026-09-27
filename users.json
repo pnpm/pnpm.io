@@ -381,5 +381,12 @@
     "infoLink": "https://nx.dev",
     "pinned": false,
     "width": 150
+  },
+  {
+    "caption": "Numonis",
+    "image": "/img/users/numonis.svg",
+    "infoLink": "https://numonis.com",
+    "pinned": false,
+    "width": 200
   }
 ]
