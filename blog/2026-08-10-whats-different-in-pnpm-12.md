@@ -8,7 +8,7 @@ tags: [release]
 
 pnpm 12 is a rewrite of pnpm in Rust, and it is stable. Upgrading should not feel like a migration. Apart from the differences below, it keeps the commands, flags, settings, and lockfile format of pnpm 11, and [the documentation](/motivation) applies to both versions.
 
-Seven things differ. Six of them change a result, and one, a removed flag, fails outright. This post collects them in one place.
+Eight things differ. Six of them change a result, and two reject command-line syntax that pnpm 11 accepted. This post collects them in one place.
 
 <!--truncate-->
 
@@ -99,7 +99,11 @@ The flag existed to print peer dependency issues. [`pnpm peers check`](/cli/peer
 pnpm peers check
 ```
 
-If a CI script calls `--resolution-only`, this is the one change on this page that stops a build instead of changing a result. Grep for it before you switch.
+If a CI script calls `--resolution-only`, replace it before switching to pnpm 12.
+
+## Explicit frozen-lockfile values
+
+`pnpm install --frozen-lockfile false` is no longer supported. Use `pnpm install --no-frozen-lockfile` to disable frozen-lockfile mode. To enable it, use `pnpm install --frozen-lockfile` without a separate `true` argument ([pnpm/pnpm#14741](https://github.com/pnpm/pnpm/issues/14741)).
 
 ## Trying it
 
