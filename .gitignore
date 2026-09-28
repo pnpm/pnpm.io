@@ -7,10 +7,6 @@ node_modules
 build
 i18n/**/*
 
-# generated files
-.docusaurus
-.cache-loader
-
 # misc
 .DS_Store
 .env.local
@@ -22,6 +18,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# the copy of docs/ that `pnpm crowdin-upload` uploads as the latest version
 versioned_docs/version-12.x
 
 .idea/

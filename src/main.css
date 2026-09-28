@@ -1,0 +1,12 @@
+body {
+  margin: 0;
+}
+
+/* The header of @pnpm/website.pnpm-website doesn't fit the narrowest phones:
+   the theme toggle ends up outside the screen and the page scrolls sideways.
+   Dropping the Bit.cloud link there makes room. */
+@media (max-width: 374px) {
+  header a[aria-label='Bit.cloud'] {
+    display: none;
+  }
+}

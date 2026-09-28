@@ -1,13 +1,6 @@
 allowBuilds:
   '@parcel/watcher': true
-  '@swc/core': true
-  core-js: false
-  core-js-pure: false
 minimumReleaseAge: 0
-
-publicHoistPattern:
-  - '@mdx-js/react'
-  - url-loader
 
 registries:
   https://node-registry.bit.cloud:
@@ -16,8 +9,3 @@ registries:
       - '@bitdesign'
       - '@teambit'
     serverType: npm
-
-packageExtensions:
-  '@docusaurus/core':
-    dependencies:
-      prism-react-renderer: '*'

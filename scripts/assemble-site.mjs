@@ -2,12 +2,11 @@ import { cpSync, existsSync, readdirSync, readFileSync, renameSync, rmSync } fro
 import path from 'node:path'
 
 // Vercel builds this site by running this script (see `buildCommand` in
-// vercel.json) instead of building Docusaurus, because the build itself
-// happens in CI: .github/workflows/deploy.yml builds every locale in its own
-// job — the default locale at the root of the tree, the other ones under their
-// own `/<locale>/` segment — and downloads all of those artifacts into
-// ARTIFACTS_DIR. All that is left here is to move them where Vercel looks for
-// them, so that `vercel build` still turns vercel.json into a deployment.
+// vercel.json) instead of building it, because the build itself happens in CI:
+// the build job of .github/workflows/deploy.yml builds the whole site, every
+// locale included, and the deploy job downloads it into ARTIFACTS_DIR. All that
+// is left here is to move it where Vercel looks for it, so that `vercel build`
+// still turns vercel.json into a deployment.
 
 const ARTIFACTS_DIR = path.resolve('.site-artifacts')
 const OUT_DIR = path.resolve('build')
@@ -36,8 +35,8 @@ if (isPopulated(ARTIFACTS_DIR)) {
     cpSync(ARTIFACTS_DIR, OUT_DIR, { recursive: true })
     rmSync(ARTIFACTS_DIR, { recursive: true, force: true })
   }
-  // A locale whose build job was skipped or whose artifact failed to download
-  // would silently disappear from the site, so make sure they all arrived.
+  // A locale missing from the build would silently disappear from the site,
+  // so make sure they are all there.
   const [defaultLocale, ...locales] = JSON.parse(readFileSync('locales.json', 'utf-8'))
     .map(({ locale }) => locale)
   const missing = locales.filter(locale => !existsSync(path.join(OUT_DIR, locale, 'index.html')))
@@ -48,8 +47,8 @@ if (isPopulated(ARTIFACTS_DIR)) {
 } else {
   fail(`Nothing to deploy: ${path.relative(process.cwd(), ARTIFACTS_DIR)} is empty.
 
-The site is built by the "Deploy" GitHub Actions workflow, one job per locale,
-and shipped from there with \`vercel deploy --prebuilt\`. Re-run that workflow
+The site is built by the "Deploy" GitHub Actions workflow and shipped from
+there with \`vercel deploy --prebuilt\`. Re-run that workflow
 instead of building from the Vercel dashboard. To build the whole site locally,
 run \`pnpm build\`.`)
 }
