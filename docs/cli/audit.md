@@ -102,7 +102,7 @@ Added in: v10.11.0
 
 Ignore a vulnerability by its GitHub advisory ID (GHSA). Before v11 this flag accepted CVE identifiers.
 
-The ID is saved in `pnpm-workspace.yaml`, which is created if missing, and no audit report is printed. It is added to [`audit.ignore`](#auditignore) if that list is already set, otherwise to `auditConfig.ignoreGhsas`.
+The ID is saved in `pnpm-workspace.yaml`, which is created if missing, and no audit report is printed. It is added to [`audit.ignore`](#auditignore) if that list is already set, otherwise to `auditConfig.ignoreGhsas`. pnpm 12 still reads `auditConfig.ignoreGhsas`, so the advisory stays ignored either way.
 
 ## Configuration
 
