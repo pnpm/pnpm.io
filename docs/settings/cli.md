@@ -128,8 +128,8 @@ See also [`pnpm with`](../cli/with.md) for running pnpm at a specific version wi
 * Default: **false**
 * Type: **Boolean**
 
-If this is enabled, running `pnpm install`/`pnpm add` from the project's root 
-folder will no longer error when `-w`/`--ignore-workspace-root-check` is not 
+If this is enabled, running `pnpm install`/`pnpm add` from the project's root
+folder will no longer error when `-w`/`--ignore-workspace-root-check` is not
 provided.
 
 ## Node.js Settings

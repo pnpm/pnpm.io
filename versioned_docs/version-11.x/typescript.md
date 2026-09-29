@@ -27,4 +27,3 @@ pnpm add @pnpm/plugin-types-fixer --config
 ```
 
 [`@pnpm/plugin-types-fixer`]: https://github.com/pnpm/plugin-types-fixer
-

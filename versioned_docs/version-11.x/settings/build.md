@@ -195,11 +195,11 @@ Added in: v10.3.0
 When `strictDepBuilds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
 
 ### allowBuilds
- 
+
 Added in: v10.26.0
- 
+
 A map of package matchers to explicitly allow (`true`) or disallow (`false`) script execution.
- 
+
 ```yaml
 allowBuilds:
   esbuild: true

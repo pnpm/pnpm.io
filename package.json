@@ -7,8 +7,8 @@
     "check-urls": "node scripts/check-urls.mjs",
     "download-translations": "node scripts/download-translations.mjs",
     "update-benchmarks": "node ./scripts/update-benchmarks.mjs",
-    "test": "node --test scripts/benchmarks/*.test.mjs",
-    "copy-docs": "shx rm -rf versioned_docs/version-12.x && shx cp -r docs versioned_docs/version-12.x",
+    "test": "node --test scripts/benchmarks/*.test.mjs scripts/sync-docs.test.mjs",
+    "copy-docs": "node scripts/copy-docs.mjs",
     "crowdin-upload": "pnpm copy-docs && crowdin upload sources --auto-update",
     "crowdin-status": "crowdin status translation --no-colors --no-progress",
     "generate-sponsors": "node scripts/generate-sponsors.mjs"
@@ -43,6 +43,7 @@
     "@vitejs/plugin-react": "6.1.1",
     "path-to-regexp": "6.3.0",
     "sass": "^1.95.1",
+    "semver": "7.7.4",
     "shx": "^0.3.4",
     "vite": "8.3.1"
   }

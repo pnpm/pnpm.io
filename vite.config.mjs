@@ -5,33 +5,30 @@ import react from '@vitejs/plugin-react'
 import { pnpmDocsPlugin } from '@pnpm/website.docs.docs-builder'
 import { DOCS_LOCALES } from '@pnpm/website.docs.docs-model'
 import { benchmarkDataPlugin } from './scripts/vite-benchmark-data.mjs'
+import { docsSourcePaths, readDocsVersions } from './scripts/docs-sources.mjs'
 
 const root = path.dirname(fileURLToPath(import.meta.url))
 const fromRoot = (...segments) => path.join(root, ...segments)
 
-// Latest first. The latest version is edited in docs/ and served without a
+// Latest first. The latest version is published from docs/ and served without a
 // version prefix (/motivation); older ones live in versioned_docs/ and are
 // served under their name (/11.x/motivation).
-const [latestVersion, ...olderVersions] = JSON.parse(readFileSync(fromRoot('versions.json'), 'utf8'))
+const [latestVersion, ...olderVersions] = readDocsVersions(root)
 
-// The same shapes the @pnpm/website.docs.versions.* packages export, pointed at
-// this repository instead of the copies inside those packages: this repository
-// is where the docs are edited, where Crowdin reads its sources from and where
-// "Edit this page" links lead.
 const versions = [
   {
     name: latestVersion,
     label: latestVersion,
     docsDir: fromRoot('docs'),
     sidebarsPath: fromRoot('sidebars.json'),
-    repoPath: 'docs',
+    repoPath: docsSourcePaths[latestVersion] ?? 'docs',
   },
   ...olderVersions.map((name) => ({
     name,
     label: name,
     docsDir: fromRoot('versioned_docs', `version-${name}`),
     sidebarsPath: fromRoot('versioned_sidebars', `version-${name}-sidebars.json`),
-    repoPath: `versioned_docs/version-${name}`,
+    repoPath: docsSourcePaths[name] ?? `versioned_docs/version-${name}`,
   })),
 ]
 
@@ -41,7 +38,7 @@ const pnprDocs = {
   docsDir: fromRoot('pnpr-docs'),
   sidebarsPath: fromRoot('sidebars-pnpr.json'),
   sidebarId: 'pnpr',
-  repoPath: 'pnpr-docs',
+  repoPath: docsSourcePaths.pnpr,
   section: {
     pluginId: 'pnpr',
     routeBasePath: 'pnpr',
@@ -83,6 +80,7 @@ export default {
     benchmarkDataPlugin(),
     pnpmDocsPlugin({
       versions,
+      editBaseUrls: Object.fromEntries(Object.keys(docsSourcePaths).map(name => [name, 'https://github.com/pnpm/pnpm/edit/main'])),
       sections: [pnprDocs],
       blog,
       locales,

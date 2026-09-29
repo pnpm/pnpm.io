@@ -19,6 +19,8 @@ jobs:
         uses: pnpm/setup@v2
       - name: Install dependencies
         run: pnpm install
+      - name: Test
+        run: pnpm test
       - name: Build
         # Without the translations, which are not part of a pull request:
         # every locale is built from the English sources. The same command

@@ -2,6 +2,8 @@ allowBuilds:
   '@parcel/watcher': true
 minimumReleaseAge: 0
 
+patchedDependencies:
+  '@pnpm/website.docs.docs-builder@0.1.1': patches/@pnpm__website.docs.docs-builder@0.1.1.patch
 registries:
   https://node-registry.bit.cloud:
     scopes:

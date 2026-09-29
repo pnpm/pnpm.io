@@ -589,4 +589,3 @@ autoDedupe: true
 ```
 
 Frozen installs (`--frozen-lockfile`) leave the lockfile unchanged — deduplication only runs when the lockfile is being written.
-
