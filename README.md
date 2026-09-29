@@ -37,6 +37,11 @@ frozen:
 1. Copy `docs/` to `versioned_docs/version-<previous>` and `sidebars.json` to
    `versioned_sidebars/version-<previous>-sidebars.json`.
 2. Add the new version to the top of [versions.json](versions.json).
+3. Replace `version-<previous>` with `version-<new>` in the `copy-docs` script of
+   [package.json](package.json) and in [.gitignore](.gitignore). That path is
+   the throwaway copy of `docs/` that `pnpm crowdin-upload` makes, and until
+   it is changed, the frozen docs of step 1 are ignored by git and overwritten
+   by the next upload.
 
 ## How to publish
 

@@ -1,5 +1,7 @@
 // Checks that the built site in build/ still serves every URL of the site it
-// replaces, either as a file or through a redirect or rewrite of vercel.json.
+// replaces, either as a file or through a redirect or rewrite of vercel.json
+// that leads to one. Redirects are applied the way Vercel applies them: the
+// first one that matches wins, even over a file of the same path.
 //
 //   node scripts/check-urls.mjs
 //       Checks the URLs of scripts/docusaurus-urls.txt, the pages of the
@@ -12,7 +14,7 @@
 import { existsSync, readFileSync, statSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { pathToRegexp } from 'path-to-regexp'
+import { compile, match } from 'path-to-regexp'
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const OUT_DIR = path.join(ROOT, 'build')
@@ -26,17 +28,15 @@ const sitemaps = process.argv.slice(2)
 const urls = sitemaps.length > 0 ? await urlsFromSitemaps(sitemaps) : urlsFromSnapshot()
 
 const vercel = JSON.parse(readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'))
-const routing = [...vercel.redirects, ...vercel.rewrites].map(({ source }) => ({ source, regexp: pathToRegexp(source) }))
+const redirects = vercel.redirects.map(rule)
+const rewrites = vercel.rewrites.map(rule)
 
 const missing = []
 let redirected = 0
 for (const url of urls) {
-  if (isBuilt(url)) continue
-  if (routing.some(({ regexp }) => regexp.test(url))) {
-    redirected++
-    continue
-  }
-  missing.push(url)
+  const served = serve(url)
+  if (served === 'missing') missing.push(url)
+  else if (served === 'routed') redirected++
 }
 
 console.log(`Checked ${urls.length} URLs: ${urls.length - redirected - missing.length} served from build/, ${redirected} redirected or rewritten by vercel.json.`)
@@ -62,6 +62,30 @@ async function urlsFromSitemaps (sources) {
     for (const [, loc] of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) urls.push(new URL(loc).pathname)
   }
   return urls
+}
+
+function rule ({ source, destination }) {
+  return { matches: match(source, { decode: decodeURIComponent }), destination }
+}
+
+// Whether a URL is served from a file, reaches one through vercel.json
+// ('routed'), or neither. A redirect to another site counts as served.
+function serve (url, hops = 0) {
+  if (hops > 10) return 'missing'
+  const target = applyRule(redirects, url) ?? (isBuilt(url) ? undefined : applyRule(rewrites, url))
+  if (target === undefined) return isBuilt(url) ? 'file' : 'missing'
+  if (/^https?:/.test(target)) return 'routed'
+  return serve(target, hops + 1) === 'missing' ? 'missing' : 'routed'
+}
+
+function applyRule (rules, url) {
+  for (const { matches, destination } of rules) {
+    const result = matches(url)
+    if (!result) continue
+    if (/^https?:/.test(destination)) return destination
+    return compile(destination, { encode: encodeURIComponent })(result.params) || '/'
+  }
+  return undefined
 }
 
 function isBuilt (url) {
