@@ -44,8 +44,8 @@ For more details about why this decision was made, see: https://github.com/nodej
 
 ## Does pnpm work across multiple hard drives or filesystems?
 
-The package store should be on the same disk as installations. 
-Otherwise packages will be copied, not linked. 
+The package store should be on the same disk as installations.
+Otherwise packages will be copied, not linked.
 This is due to a OS limitation in hard-linking. See [Issue #712](https://github.com/pnpm/pnpm/issues/712) for more details.
 
 pnpm functions differently based on the 2 cases below:
@@ -62,7 +62,7 @@ This severely reduces the benefits of pnpm.
 
 If the store path is not set, then multiple stores are created (one per each drive or filesystem).
 
-If installation is run on disk `D:`, the store will be created in `D:\.pnpm-store`. 
+If installation is run on disk `D:`, the store will be created in `D:\.pnpm-store`.
 If later the installation is run on disk `C:`, an independent store will be created in `C:\.pnpm-store`.
 The projects would still maintain the benefits of pnpm, but each drive may have redundant packages.
 

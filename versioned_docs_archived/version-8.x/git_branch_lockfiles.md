@@ -45,7 +45,7 @@ After that, all git branch lockfiles will be merged into one `pnpm-lock.yaml`
 
 pnpm allows you to specify `--merge-git-branch-lockfiles` by matching the current branch name.
 
-For instance, by the following setting in `.npmrc` file, `pnpm install` will merge all git branch lockfiles when 
+For instance, by the following setting in `.npmrc` file, `pnpm install` will merge all git branch lockfiles when
 running in the `main` branch and the branch name starts with `release`.
 
 ```ini

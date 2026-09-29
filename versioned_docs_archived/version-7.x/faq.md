@@ -70,7 +70,7 @@ location in another. See [Issue #712] for more details.
 
 pnpm functions differently in the 2 cases below:
 
-[Issue #712]: https://github.com/pnpm/pnpm/issues/712 
+[Issue #712]: https://github.com/pnpm/pnpm/issues/712
 
 ### Store path is specified
 

@@ -10,4 +10,3 @@ Prints the index file of a specific package from the store. The package is speci
 ```
 pnpm cat-index <pkg name>@<pkg version>
 ```
-

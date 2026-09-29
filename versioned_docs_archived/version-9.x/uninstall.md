@@ -36,4 +36,3 @@ rm -rf $(pnpm store path)
 
 If you used pnpm in non-primary disks, then you must run the above command in every disk, where pnpm was used.
 pnpm creates one store per disk.
-

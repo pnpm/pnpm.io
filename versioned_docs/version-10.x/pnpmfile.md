@@ -58,12 +58,12 @@ function readPackage(pkg, context) {
     }
     context.log('bar@1 => bar@2 in dependencies of foo')
   }
-  
+
   // This will change any packages using baz@x.x.x to use baz@1.2.3
   if (pkg.dependencies.baz) {
     pkg.dependencies.baz = '1.2.3';
   }
-  
+
   return pkg
 }
 
@@ -157,15 +157,15 @@ function beforePacking(pkg) {
   // Remove development-only fields from published package
   delete pkg.devDependencies
   delete pkg.scripts.test
-  
+
   // Add publication metadata
   pkg.publishedAt = new Date().toISOString()
-  
+
   // Modify package exports for production
   if (pkg.name === 'my-package') {
     pkg.main = './dist/index.js'
   }
-  
+
   return pkg
 }
 
@@ -282,4 +282,3 @@ if you use pnpm on projects that don't use pnpm as the primary package manager.
 :::
 
 [`pnpm patch`]: ./cli/patch.md
-

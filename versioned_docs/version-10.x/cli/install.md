@@ -42,13 +42,13 @@ has been removed would error.
 * Default: **false**
 * Type: **Boolean**
 
-If `true`, pnpm will not install any package listed in `devDependencies` and will remove 
+If `true`, pnpm will not install any package listed in `devDependencies` and will remove
 those insofar they were already installed.
 If `false`, pnpm will install all packages listed in `devDependencies` and `dependencies`.
 
 ### --dev, -D
 
-Only `devDependencies` are installed and `dependencies` are removed insofar they 
+Only `devDependencies` are installed and `dependencies` are removed insofar they
 were already installed.
 
 ### --no-optional

@@ -105,4 +105,3 @@ pnpm env list --remote 16
 ### --global, -g
 
 The changes are made systemwide.
-

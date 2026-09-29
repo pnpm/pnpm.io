@@ -652,4 +652,3 @@ if you use pnpm on projects that don't use pnpm as the primary package manager.
 :::
 
 [`pnpm patch`]: ./cli/patch.md
-

@@ -94,4 +94,3 @@ Other example use cases:
 * Detect packages requiring a minimum Node.js version.
 * List all dependencies that expose binaries.
 * Print funding URLs for all packages.
-

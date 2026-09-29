@@ -16,4 +16,3 @@ Directory in which `pnpm pack` will save tarballs. The default is the current wo
 * `prepack`
 * `prepare`
 * `postpack`
-

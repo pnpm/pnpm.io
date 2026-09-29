@@ -43,4 +43,3 @@ Remove the dependency only from `optionalDependencies`.
 ### --save-prod, -P
 
 Remove the dependency only from `dependencies`.
-

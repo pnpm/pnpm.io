@@ -42,12 +42,12 @@ function readPackage (pkg, context) {
     }
     context.log('bar@1 => bar@2 in dependencies of foo')
   }
-  
+
   // This will fix any dependencies on baz to 1.2.3
   if (pkg.dependencies.baz === '*') {
     pkg.dependencies.baz = '1.2.3';
   }
-  
+
   return pkg
 }
 ```

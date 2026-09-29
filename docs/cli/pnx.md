@@ -99,7 +99,7 @@ Without an interactive terminal, unapproved build scripts remain skipped. Use `-
 
 Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
 
-Example: 
+Example:
 
 ```
 pnx --package cowsay --package lolcatjs -c 'echo "hi pnpm" | cowsay | lolcatjs'

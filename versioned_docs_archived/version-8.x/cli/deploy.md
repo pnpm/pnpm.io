@@ -56,4 +56,3 @@ Packages in `devDependencies` won't be installed.
 ## Files included in the deployed project
 
 By default, all the files of the project are copied during deployment. The project's `package.json` may contain a "files" field to list the files and directories that should be copied.
-
