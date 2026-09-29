@@ -1,5 +1,6 @@
 import { execFileSync } from 'node:child_process'
-import { cpSync, mkdirSync, mkdtempSync, renameSync, rmSync } from 'node:fs'
+import { copyFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, renameSync, rmSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readDocsVersions } from './docs-sources.mjs'
@@ -20,6 +21,21 @@ export function copyDocsForTranslations (site) {
   }
 }
 
+const INSTALL_GUIDE_PACKAGE = '@pnpm/website.sections.install-guide'
+
+export function copyInstallGuideMessages (site) {
+  const packageDir = path.dirname(createRequire(path.join(site, 'package.json')).resolve(`${INSTALL_GUIDE_PACKAGE}/package.json`))
+  const source = ['install-guide.json', 'dist/install-guide.json']
+    .map((file) => path.join(packageDir, file))
+    .find((file) => existsSync(file))
+  if (!source) throw new Error(`${INSTALL_GUIDE_PACKAGE} has no install-guide.json in ${packageDir}`)
+  const target = path.join(site, 'i18n-sources', 'en', 'install-guide.json')
+  mkdirSync(path.dirname(target), { recursive: true })
+  copyFileSync(source, target)
+}
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  copyDocsForTranslations(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'))
+  const site = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+  copyDocsForTranslations(site)
+  copyInstallGuideMessages(site)
 }

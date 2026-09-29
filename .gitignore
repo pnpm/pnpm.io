@@ -21,6 +21,9 @@ yarn-error.log*
 # the copy of docs/ that `pnpm crowdin-upload` uploads as the latest version
 versioned_docs/version-12.x
 
+# the English strings of website components that `pnpm crowdin-upload` uploads
+i18n-sources/
+
 .idea/
 
 # vscode history
