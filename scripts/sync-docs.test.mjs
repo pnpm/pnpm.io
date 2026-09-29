@@ -6,7 +6,7 @@ import path from 'node:path'
 import { test } from 'node:test'
 import { syncDocs } from './sync-docs.mjs'
 import { docsSourcePaths } from './docs-sources.mjs'
-import { copyDocsForTranslations } from './copy-docs.mjs'
+import { copyDocsForTranslations, copyInstallGuideMessages } from './copy-docs.mjs'
 
 function fixture (t) {
   const root = mkdtempSync(path.join(os.tmpdir(), 'pnpm-docs-sync-'))
@@ -212,4 +212,31 @@ test('a repeated release restores a missing publication directory', t => {
   rmSync(path.join(f.site, 'docs'), { recursive: true })
   assert.equal(syncDocs(f), true)
   assert.equal(existsSync(path.join(f.site, 'docs/index.md')), true)
+})
+
+function installGuideSite (t, files) {
+  const site = mkdtempSync(path.join(os.tmpdir(), 'pnpm-install-guide-'))
+  t.after(() => rmSync(site, { recursive: true, force: true }))
+  writeFileSync(path.join(site, 'package.json'), '{}')
+  const pkg = path.join(site, 'node_modules/@pnpm/website.sections.install-guide')
+  mkdirSync(path.join(pkg, 'dist'), { recursive: true })
+  writeFileSync(path.join(pkg, 'package.json'), '{"name":"@pnpm/website.sections.install-guide"}')
+  for (const [file, content] of Object.entries(files)) writeFileSync(path.join(pkg, file), content)
+  return site
+}
+
+test('the install guide strings are staged for Crowdin, from the package root or dist/', t => {
+  const target = (site) => readFileSync(path.join(site, 'i18n-sources/en/install-guide.json'), 'utf8')
+  const both = installGuideSite(t, { 'install-guide.json': '{"root":{}}', 'dist/install-guide.json': '{"dist":{}}' })
+  copyInstallGuideMessages(both)
+  assert.equal(target(both), '{"root":{}}')
+  const distOnly = installGuideSite(t, { 'dist/install-guide.json': '{"dist":{}}' })
+  copyInstallGuideMessages(distOnly)
+  assert.equal(target(distOnly), '{"dist":{}}')
+})
+
+test('staging the install guide strings fails when the package has none', t => {
+  const site = installGuideSite(t, {})
+  assert.throws(() => copyInstallGuideMessages(site), /has no install-guide\.json/)
+  assert.equal(existsSync(path.join(site, 'i18n-sources')), false)
 })
