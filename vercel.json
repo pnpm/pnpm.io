@@ -44,6 +44,11 @@
       "permanent": true
     },
     {
+      "source": "/:version(2\\.x|3\\.x|4\\.x|5\\.x|6\\.x|7\\.x|8\\.x)/:splat*",
+      "destination": "/:splat*",
+      "permanent": true
+    },
+    {
       "source": "/en/:splat*",
       "destination": "/:splat*",
       "permanent": true
@@ -71,6 +76,36 @@
     {
       "source": "/pnpm-workspace_yaml",
       "destination": "/settings",
+      "permanent": true
+    },
+    {
+      "source": "/search",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/:locale(it|zh|ja|ko|pt|zh-TW|ru|uk|fr|tr|es|id)/search",
+      "destination": "/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/blog/authors",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/:locale(it|zh|ja|ko|pt|zh-TW|ru|uk|fr|tr|es|id)/blog/authors",
+      "destination": "/:locale/blog",
+      "permanent": false
+    },
+    {
+      "source": "/blog/tags/:tag/page/:page",
+      "destination": "/blog/tags/:tag",
+      "permanent": true
+    },
+    {
+      "source": "/:locale(it|zh|ja|ko|pt|zh-TW|ru|uk|fr|tr|es|id)/blog/tags/:tag/page/:page",
+      "destination": "/:locale/blog/tags/:tag",
       "permanent": true
     }
   ]

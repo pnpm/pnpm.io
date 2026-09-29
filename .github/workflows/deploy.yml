@@ -1,10 +1,9 @@
 name: Deploy
 
-# The site used to be built by Vercel's git integration, in a single build that
-# walked the 13 locales one after another — Docusaurus has no parallel mode.
-# Here every locale is built by its own job instead, and only the finished
-# static files are handed to Vercel (`vercel deploy --prebuilt`), so the wall
-# clock is the slowest single locale rather than the sum of all of them.
+# The site is built here rather than by Vercel's git integration, and only the
+# finished static files are handed to Vercel (`vercel deploy --prebuilt`). The
+# build job never sees the Vercel credentials, and the deploy job never runs the
+# build.
 
 on:
   push:
@@ -30,25 +29,12 @@ env:
   COREPACK_ENABLE_AUTO_PIN: 0
 
 jobs:
-  locales:
-    runs-on: ubuntu-latest
-    outputs:
-      locales: ${{ steps.read.outputs.locales }}
-    steps:
-      - uses: actions/checkout@v4
-      - id: read
-        run: echo "locales=$(jq -c '[.[].locale]' locales.json)" >> "$GITHUB_OUTPUT"
-
-  translations:
+  build:
     runs-on: ubuntu-latest
     environment: deploy
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/setup@v2
-      - name: Copy the current docs into the latest version
-        # Crowdin maps the translations of the latest docs version onto this
-        # copy, so it has to exist before the download below.
-        run: pnpm copy-docs
       - id: window
         run: echo "hour=$(date -u +%Y-%m-%dT%H)" >> "$GITHUB_OUTPUT"
       - name: Reuse a recent download
@@ -63,81 +49,42 @@ jobs:
           key: translations-${{ steps.window.outputs.hour }}
           restore-keys: translations-
       - name: Download the translations
-        if: steps.reuse.outputs.cache-hit != 'true'
-        # Crowdin refuses an export that comes too soon after the last one,
-        # and answers 429 rather than waiting, so give it a few chances.
-        id: download
-        continue-on-error: true
-        run: |
-          for attempt in 1 2 3; do
-            if pnpm exec crowdin download --no-progress --no-colors; then exit 0; fi
-            echo "Crowdin refused the export (attempt $attempt of 3)"
-            test "$attempt" = 3 || sleep $((attempt * 120))
-          done
-          exit 1
+        # Reuses a download younger than an hour, retries when Crowdin refuses
+        # the export (it answers 429 rather than waiting), falls back to the
+        # last download when it keeps refusing, and fails when a locale of
+        # locales.json has no translations: that locale would reach the site
+        # as an untranslated page.
+        id: translations
+        run: pnpm download-translations
         env:
           CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID || '302994' }}
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
       - name: Keep the download for the next deploys
-        if: steps.download.outcome == 'success'
+        if: steps.translations.outputs.source == 'downloaded'
         uses: actions/cache/save@v4
         with:
           path: i18n
           key: translations-${{ steps.window.outputs.hour }}
-      - name: Check that every locale arrived
-        # A locale missing here would build from the English sources and reach
-        # the site as an untranslated page.
-        env:
-          DOWNLOAD: ${{ steps.download.outcome }}
-        run: |
-          if [ "$DOWNLOAD" = 'failure' ]; then
-            echo '::warning::Crowdin would not export; deploying the translations of the last download.'
-          fi
-          missing=$(jq -r '.[] | select(.crowdinLanguage) | .locale' locales.json |
-            while read -r locale; do test -d "i18n/$locale" || echo "$locale"; done)
-          test -z "$missing" || { echo "No translations for: $missing"; exit 1; }
-      - uses: actions/upload-artifact@v4
-        with:
-          name: translations
-          path: i18n
-          retention-days: 1
-
-  build:
-    needs: [locales, translations]
-    runs-on: ubuntu-latest
-    environment: deploy
-    strategy:
-      # One broken locale shouldn't hide the state of the other twelve; the
-      # deploy job below refuses to ship an incomplete site anyway.
-      fail-fast: false
-      matrix:
-        locale: ${{ fromJSON(needs.locales.outputs.locales) }}
-    name: build (${{ matrix.locale }})
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          # `showLastUpdateTime` reads the dates from the git history.
-          fetch-depth: 0
-      - uses: pnpm/setup@v2
-      - run: pnpm copy-docs
-      - name: Collect the translations
-        uses: actions/download-artifact@v4
-        with:
-          name: translations
-          path: i18n
       - name: Build
-        run: pn node scripts/build-with-fallback.mjs --locale "$LOCALE"
+        # Every locale, version and page at once, into build/.
+        run: pnpm build
         env:
-          LOCALE: ${{ matrix.locale }}
+          # The build reads the translation progress of every language from
+          # Crowdin, for the language menu. It would also try to export the
+          # translations again when the download above is more than an hour
+          # old, which only happens when Crowdin just refused to export, so
+          # it doesn't get the token then.
+          CROWDIN_PERSONAL_TOKEN: ${{ steps.translations.outputs.source != 'stale' && secrets.CROWDIN_PERSONAL_TOKEN || '' }}
           # The /benchmarks page reads pnpm/benchmarks through the GitHub API
           # at build time. Unauthenticated, the API allows 60 requests an hour
-          # per address, which the locale builds running side by side on
-          # shared runners can exhaust — and then the page silently falls back
-          # to a bundled snapshot.
+          # per address, which shared runners can exhaust, and then the page
+          # falls back to a bundled snapshot.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check that every URL of the site is still served
+        run: pnpm check-urls
       - uses: actions/upload-artifact@v4
         with:
-          name: site-${{ matrix.locale }}
+          name: site
           path: build
           retention-days: 1
           # The files are already minified; compressing them again costs more
@@ -151,17 +98,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/setup@v2
-      - name: Collect every locale
+      - name: Collect the site
         uses: actions/download-artifact@v4
         with:
-          pattern: site-*
-          # Each locale occupies its own subtree, so they merge into the single
-          # directory the site is served from.
-          merge-multiple: true
+          name: site
           path: .site-artifacts
       - name: Deploy to Vercel
         # `vercel build` doesn't rebuild the site: vercel.json points its build
-        # command at scripts/assemble-site.mjs, which just moves the artifacts
+        # command at scripts/assemble-site.mjs, which just moves the artifact
         # into place. It is still needed to turn vercel.json into a deployment.
         run: |
           # esbuild, which the CLI depends on, has to run its install script.
@@ -175,8 +119,8 @@ jobs:
           fi
           vercel pull --yes --environment="$environment" --token="$VERCEL_TOKEN"
           vercel build $prod --token="$VERCEL_TOKEN"
-          # The assembled site has more files than Vercel's 15,000-file API
-          # limit, so upload it as one archive instead of individual files.
+          # The site has more files than Vercel's 15,000-file API limit, so
+          # upload it as one archive instead of individual files.
           url=$(vercel deploy --prebuilt --archive=tgz $prod --token="$VERCEL_TOKEN" | tail -n1)
           echo "Deployed $url" >> "$GITHUB_STEP_SUMMARY"
         env:

@@ -1,48 +1,30 @@
 {
-  "packageManager": "pnpm@12.3.0",
+  "packageManager": "pnpm@12.8.1",
   "scripts": {
-    "examples": "docusaurus-examples",
-    "copy-docs": "shx rm -rf versioned_docs/version-12.x && shx cp -r docs versioned_docs/version-12.x",
+    "dev": "vite",
+    "build": "vite build && node scripts/postbuild.mjs",
+    "preview": "vite preview",
+    "check-urls": "node scripts/check-urls.mjs",
+    "download-translations": "node scripts/download-translations.mjs",
     "update-benchmarks": "node ./scripts/update-benchmarks.mjs",
     "test": "node --test scripts/benchmarks/*.test.mjs",
-    "start": "pnpm copy-docs && docusaurus start",
-    "build": "pnpm copy-docs && node scripts/build-with-fallback.mjs",
-    "publish-gh-pages": "docusaurus-publish --skip-image-compression",
-    "write-translations": "shx rm -rf i18n/en && docusaurus write-translations",
-    "version": "docusaurus docs:version",
-    "rename-version": "docusaurus-rename-version",
-    "crowdin-upload": "pnpm write-translations && crowdin upload sources --auto-update",
-    "crowdin-download": "crowdin download",
+    "copy-docs": "shx rm -rf versioned_docs/version-12.x && shx cp -r docs versioned_docs/version-12.x",
+    "crowdin-upload": "pnpm copy-docs && crowdin upload sources --auto-update",
     "crowdin-status": "crowdin status translation --no-colors --no-progress",
-    "crowdin:sync": "pnpm copy-docs && pnpm crowdin-upload && pnpm crowdin-download --verbose",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "NODE_OPTIONS=--max-old-space-size=10000 docusaurus deploy",
-    "docusaurus": "docusaurus",
-    "update-progress": "ts-node ./scripts/translations.ts",
     "generate-sponsors": "node scripts/generate-sponsors.mjs"
   },
   "dependencies": {
-    "@algolia/client-search": "^4.23.2",
-    "@crowdin/cli": "4.14.2",
-    "@docusaurus/core": "3.10.2",
-    "@docusaurus/faster": "^3.9.1",
-    "@docusaurus/plugin-client-redirects": "3.10.2",
-    "@docusaurus/plugin-content-docs": "3.10.2",
-    "@docusaurus/preset-classic": "3.10.2",
     "@pnpm/design.pnpm-theme": "1.0.0",
     "@pnpm/website.benchmarks.benchmark-data": "0.0.3",
-    "@pnpm/website.pages.benchmarks-page": "0.0.3",
-    "@pnpm/website.pages.homepage": "1.0.3",
-    "@pnpm/website.sections.features": "1.0.3",
-    "@types/react": "^19.1.9",
-    "clsx": "^1.2.1",
-    "docusaurus-plugin-copy-page-button": "^0.6.1",
-    "docusaurus-plugin-sass": "^0.2.6",
-    "prism-react-renderer": "^2.4.1",
+    "@pnpm/website.docs.crowdin-translations": "0.1.0",
+    "@pnpm/website.docs.docs-builder": "0.1.0",
+    "@pnpm/website.docs.docs-model": "0.1.0",
+    "@pnpm/website.pages.benchmarks-page": "0.1.0",
+    "@pnpm/website.pages.homepage": "1.1.0",
+    "@pnpm/website.pnpm-website": "1.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "typescript": "^5.9.3",
-    "webpack": "^5.92.0"
+    "react-router-dom": "5.3.4"
   },
   "engines": {
     "node": "22"
@@ -55,12 +37,12 @@
     }
   },
   "devDependencies": {
-    "@crowdin/crowdin-api-client": "1.55.1",
-    "@docusaurus/types": "^3.9.1",
+    "@crowdin/cli": "4.14.2",
     "@types/node": "^20.12.2",
+    "@vitejs/plugin-react": "6.1.1",
+    "path-to-regexp": "6.3.0",
     "sass": "^1.95.1",
-    "sass-loader": "^16.0.6",
     "shx": "^0.3.4",
-    "ts-node": "10.9.2"
+    "vite": "8.3.1"
   }
 }
