@@ -25,6 +25,10 @@ files:
     translation: '/i18n/%locale%/**/%original_file_name%'
     languages_mapping: *languages_mapping
   -
+    source: '/i18n-sources/en/install-guide.json'
+    translation: '/i18n/%locale%/install-guide.json'
+    languages_mapping: *languages_mapping
+  -
     source: '/blog/**/*'
     translation: '/i18n/%locale%/docusaurus-plugin-content-blog/**/%original_file_name%'
     languages_mapping: *languages_mapping
