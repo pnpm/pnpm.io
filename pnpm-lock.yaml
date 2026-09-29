@@ -162,6 +162,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@pnpm/website.docs.docs-builder@0.1.1': 98f26f478554ee31c1adb0f50630c4fd13825e61c90f683b9cafe502b84e06d9
+
 importers:
 
   .:
@@ -177,7 +180,7 @@ importers:
         version: 0.1.0
       '@pnpm/website.docs.docs-builder':
         specifier: 0.1.1
-        version: 0.1.1(supports-color@8.1.1)
+        version: 0.1.1(patch_hash=98f26f478554ee31c1adb0f50630c4fd13825e61c90f683b9cafe502b84e06d9)(supports-color@8.1.1)
       '@pnpm/website.docs.docs-model':
         specifier: 0.1.0
         version: 0.1.0
@@ -221,6 +224,9 @@ importers:
       sass:
         specifier: ^1.95.1
         version: 1.103.1
+      semver:
+        specifier: 7.7.4
+        version: 7.7.4
       shx:
         specifier: ^0.3.4
         version: 0.3.4
@@ -2076,6 +2082,11 @@ packages:
   search-insights@2.17.3:
     resolution: {integrity: sha512-RQPdCYTa8A68uM2jwxoY842xDhvx3E5LFL1LxvxCNMev4o5mLuokczhzjAgGwUZBAmOKZknArSxLKmXtIi2AxQ==}
 
+  semver@7.7.4:
+    resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   send@0.19.2:
     resolution: {integrity: sha512-VMbMxbDeehAxpOtWJXlcUS5E8iXh6QmN+BkRX1GARS3wRaXEEgzCcB10gTQazO42tpNIya8xIyNx8fll1OFPrg==}
     engines: {node: '>= 0.8.0'}
@@ -2790,7 +2801,7 @@ snapshots:
     dependencies:
       fflate: 0.8.3
 
-  '@pnpm/website.docs.docs-builder@0.1.1(supports-color@8.1.1)':
+  '@pnpm/website.docs.docs-builder@0.1.1(patch_hash=98f26f478554ee31c1adb0f50630c4fd13825e61c90f683b9cafe502b84e06d9)(supports-color@8.1.1)':
     dependencies:
       '@pnpm/website.docs.crowdin-translations': 0.1.0
       '@pnpm/website.docs.docs-model': 0.1.0
@@ -2899,7 +2910,7 @@ snapshots:
       '@bitdev/react.app-types.vite-react': 2.1.10(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))
       '@pnpm/design.pnpm-theme': 1.0.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@pnpm/website.blog.blog-posts': 0.1.0
-      '@pnpm/website.docs.docs-builder': 0.1.1(supports-color@8.1.1)
+      '@pnpm/website.docs.docs-builder': 0.1.1(patch_hash=98f26f478554ee31c1adb0f50630c4fd13825e61c90f683b9cafe502b84e06d9)(supports-color@8.1.1)
       '@pnpm/website.docs.docs-model': 0.1.0
       '@pnpm/website.docs.pnpr-docs': 0.1.0
       '@pnpm/website.docs.versions.v10': 0.1.0
@@ -4362,6 +4373,8 @@ snapshots:
   scheduler@0.27.0: {}
 
   search-insights@2.17.3: {}
+
+  semver@7.7.4: {}
 
   send@0.19.2(supports-color@8.1.1):
     dependencies:

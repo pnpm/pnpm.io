@@ -1,0 +1,48 @@
+diff --git a/dist/vite-docs-plugin.d.ts b/dist/vite-docs-plugin.d.ts
+index d137fe0893efc6097abe0ddf65b3a84b40e891a4..0be6d02573f1c61d986e8c4f43011ffe4dc86d51 100644
+--- a/dist/vite-docs-plugin.d.ts
++++ b/dist/vite-docs-plugin.d.ts
+@@ -20,6 +20,8 @@ export type PnpmDocsPluginOptions = {
+     blog?: BlogSource;
+     /** Base of "Edit this page" links. */
+     editBaseUrl?: string;
++    /** Separate edit repository for blog posts. */
++    blogEditBaseUrl?: string;
+     /** Title suffix of pre-rendered pages. */
+     siteTitle?: string;
+ };
+diff --git a/dist/vite-docs-plugin.js b/dist/vite-docs-plugin.js
+index 4a8fdf8180937e27423995ff0364b18b4274439c..209543d72603660aad0905393f5b683c713f8cd4 100644
+--- a/dist/vite-docs-plugin.js
++++ b/dist/vite-docs-plugin.js
+@@ -44,7 +44,7 @@ export function pnpmDocsPlugin(options) {
+             defaultLocale: locales[0].code,
+             i18nDir,
+             translateUrl: TRANSLATE_URL,
+-            editBaseUrl: options.editBaseUrl ?? 'https://github.com/pnpm/pnpm.io/edit/main',
++            editBaseUrl: options.blogEditBaseUrl ?? options.editBaseUrl ?? 'https://github.com/pnpm/pnpm.io/edit/main',
+         })
+         : undefined;
+     const staticDirs = [...options.versions.map((v) => v.staticDir), options.blog?.staticDir].filter((d) => Boolean(d));
+diff --git a/vite-docs-plugin.ts b/vite-docs-plugin.ts
+index 5371e510e10fdcf4f6a2e6b49253df3ce049d5ed..8507f8a38cf020de5972b485cff8737fb8f4ae88 100644
+--- a/vite-docs-plugin.ts
++++ b/vite-docs-plugin.ts
+@@ -38,6 +38,8 @@ export type PnpmDocsPluginOptions = {
+   blog?: BlogSource;
+   /** Base of "Edit this page" links. */
+   editBaseUrl?: string;
++  /** Separate edit repository for blog posts. */
++  blogEditBaseUrl?: string;
+   /** Title suffix of pre-rendered pages. */
+   siteTitle?: string;
+ };
+@@ -93,7 +95,7 @@ export function pnpmDocsPlugin(options: PnpmDocsPluginOptions): VitePluginLike {
+         defaultLocale: locales[0].code,
+         i18nDir,
+         translateUrl: TRANSLATE_URL,
+-        editBaseUrl: options.editBaseUrl ?? 'https://github.com/pnpm/pnpm.io/edit/main',
++        editBaseUrl: options.blogEditBaseUrl ?? options.editBaseUrl ?? 'https://github.com/pnpm/pnpm.io/edit/main',
+       })
+     : undefined;
+   const staticDirs = [...options.versions.map((v) => v.staticDir), options.blog?.staticDir].filter((d): d is string => Boolean(d));

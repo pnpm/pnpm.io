@@ -2,10 +2,14 @@
 
 [![](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://stackblitz.com/~/github.com/pnpm/pnpm.io)
 
-The content of pnpm.io lives here: the docs (`docs/` for the latest version,
-`versioned_docs/` for older ones), the pnpr registry docs (`pnpr-docs/`), the
-blog (`blog/`) and the files served as they are (`static/`). The site around it
-is made of the components in the [pnpm.website](https://bit.cloud/pnpm/website)
+The blog (`blog/`), website application, translations, and deployment live here.
+Documentation is edited in [pnpm/pnpm](https://github.com/pnpm/pnpm/tree/main/docs).
+The `docs/`, `versioned_docs/`, `versioned_docs_archived/`, `pnpr-docs/`,
+sidebars, and `static/docs-assets/` here are generated publication copies. Do not
+edit them directly. "Edit this page" points to the source repository for docs
+and to this repository for blog posts.
+
+The site is made of the components in the [pnpm.website](https://bit.cloud/pnpm/website)
 scope on Bit Cloud, installed as npm packages and built with Vite:
 `@pnpm/website.pnpm-website` is the app, and the Vite plugin of
 `@pnpm/website.docs.docs-builder` turns the Markdown into the pages of every
@@ -29,19 +33,22 @@ translated, download the translations from Crowdin first:
 CROWDIN_PERSONAL_TOKEN=<token> pnpm download-translations
 ```
 
-## Adding a docs version
+## Documentation sources and versions
 
-When a new major version of pnpm comes out, the docs of the previous one get
-frozen:
+The source repository's release sync imports only the released product/version,
+builds this site, and pushes the generated changes here. `docs-sync.json` records
+which release and source commits each published tree came from. Keep it with the
+generated content when reviewing or reverting a sync.
 
-1. Copy `docs/` to `versioned_docs/version-<previous>` and `sidebars.json` to
-   `versioned_sidebars/version-<previous>-sidebars.json`.
-2. Add the new version to the top of [versions.json](versions.json).
-3. Replace `version-<previous>` with `version-<new>` in the `copy-docs` script of
-   [package.json](package.json) and in [.gitignore](.gitignore). That path is
-   the throwaway copy of `docs/` that `pnpm crowdin-upload` makes, and until
-   it is changed, the frozen docs of step 1 are ignored by git and overwritten
-   by the next upload.
+For local previews, run `node scripts/sync-docs.mjs /path/to/pnpm --preview`,
+then `pnpm build`. Preview imports replace all documentation copies without
+changing release state. Do not publish a development preview to production.
+
+See the [source repository's documentation guide](https://github.com/pnpm/pnpm/blob/main/docs/README.md)
+for release retries, corrections that do not require a package release, and
+adding a version. Keep existing Crowdin paths when changing the site layout.
+The builder patch adds a separate blog edit URL while documentation links point
+to pnpm/pnpm.
 
 ## How to publish
 

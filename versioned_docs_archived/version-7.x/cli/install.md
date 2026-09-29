@@ -14,7 +14,7 @@ Inside a [workspace], `pnpm install` installs all dependencies in all the
 projects. If you want to disable this behavior, set the `recursive-install`
 setting to `false`.
 
-![](/img/demos/pnpm-install.svg)
+![](/docs-assets/7.x/img/demos/pnpm-install.svg)
 
 [workspace]: ../workspaces.md
 
