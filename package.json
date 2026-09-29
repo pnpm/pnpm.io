@@ -22,6 +22,7 @@
     "@pnpm/website.pages.benchmarks-page": "0.1.0",
     "@pnpm/website.pages.homepage": "1.1.0",
     "@pnpm/website.pnpm-website": "1.1.0",
+    "@pnpm/website.sections.features": "1.0.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "5.3.4"
