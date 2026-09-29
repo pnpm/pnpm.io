@@ -191,10 +191,22 @@ function describeRoute (route) {
 function firstParagraph (html) {
   const content = html.split('<main class="docs-prerendered">')[1] ?? ''
   for (const [, paragraph] of content.matchAll(/<p>([\s\S]*?)<\/p>/g)) {
-    const text = decodeEntities(paragraph.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim()
+    const text = decodeEntities(stripTags(paragraph)).replace(/\s+/g, ' ').trim()
     if (text) return text.length > 300 ? `${text.slice(0, 297).replace(/\s+\S*$/, '')}...` : text
   }
   return undefined
+}
+
+// The result is escaped again wherever it is written, this only has to make
+// plain text of the paragraph.
+function stripTags (html) {
+  let text = html
+  let previous
+  do {
+    previous = text
+    text = text.replace(/<[^>]*>/g, '')
+  } while (text !== previous)
+  return text
 }
 
 function writeSitemaps (routes) {
