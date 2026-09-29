@@ -5,7 +5,7 @@
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import { PnpmTheme } from '@pnpm/design.pnpm-theme'
-import { Homepage } from '../../src/homepage/index.js'
+import { Homepage } from '@pnpm/website.pages.homepage'
 import { BenchmarksPage } from '@pnpm/website.pages.benchmarks-page'
 
 type PageProps =

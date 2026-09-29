@@ -21,6 +21,7 @@ import react from '@vitejs/plugin-react'
 import { fallbackBenchmarkData } from '@pnpm/website.benchmarks.benchmark-data'
 import { localizePath, parseBlogPath, parseDocsPath } from '@pnpm/website.docs.docs-model'
 import { BENCHMARK_DATA_CACHE } from './vite-benchmark-data.mjs'
+import viteConfig from '../vite.config.mjs'
 
 const SITE_URL = 'https://pnpm.io'
 const OUT_DIR = path.resolve('build')
@@ -51,6 +52,8 @@ async function prerenderAppPages () {
     configFile: false,
     logLevel: 'warn',
     plugins: [react()],
+    // The same homepage as the app's; see src/homepage/index.tsx.
+    resolve: viteConfig.resolve,
     // Bundle every dependency: the components import their styles.
     ssr: { noExternal: true },
     build: {
@@ -67,11 +70,13 @@ async function prerenderAppPages () {
   for (const locale of locales) {
     const home = localizePath('/', locale, manifest.locales)
     const messages = readJson(path.join(OUT_DIR, 'docs-data', locale, 'site.json')).code
+    const body = render(home, { page: 'home', basePath: home === '/' ? '' : home, messages })
+    checkSponsors(home, body)
     writePage(home, {
       locale,
       title: `${DEFAULT_DESCRIPTION} | pnpm`,
       description: DEFAULT_DESCRIPTION,
-      body: render(home, { page: 'home', basePath: home === '/' ? '' : home, messages }),
+      body,
     })
     const benchmarks = localizePath('/benchmarks', locale, manifest.locales)
     writePage(benchmarks, {
@@ -84,6 +89,16 @@ async function prerenderAppPages () {
   // Served by Vercel for every URL that has no file; the app shows its own
   // "Page not found" once it starts.
   writeFileSync(path.join(OUT_DIR, '404.html'), withMeta(template, { locale: 'en', title: 'Page Not Found | pnpm' }))
+}
+
+// The homepage package falls back to a list of sponsors of its own when it
+// isn't handed sponsors.json, so make sure that it was.
+function checkSponsors (route, html) {
+  const sponsors = Object.values(readJson(path.resolve('sponsors.json'))).flat()
+  const missing = sponsors.filter(({ name }) => !html.includes(`>${escapeHtml(name)}<`))
+  if (missing.length > 0) {
+    throw new Error(`The homepage at ${route} doesn't list these sponsors of sponsors.json: ${missing.map(({ name }) => name).join(', ')}`)
+  }
 }
 
 function writePage (route, page) {
