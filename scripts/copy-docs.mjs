@@ -21,8 +21,6 @@ export function copyDocsForTranslations (site) {
   }
 }
 
-// The strings of the install guide on the Installation page ship in the
-// component's package; Crowdin returns them as i18n/<locale>/install-guide.json.
 const INSTALL_GUIDE_PACKAGE = '@pnpm/website.sections.install-guide'
 
 export function copyInstallGuideMessages (site) {
