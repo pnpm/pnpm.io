@@ -238,7 +238,7 @@ Additionally, `supportedArchitectures` also supports specifying the `libc` of th
 
 The symptom that usually leads here: a native or platform-specific package was installed on one architecture and is then loaded on another, which fails with `invalid ELF header` on Linux, `not a valid Win32 application` on Windows, or a Mach-O load error on macOS. Copying a `node_modules` directory into an image or artifact built for a different platform produces exactly that, because the optional dependencies that get materialised are the installing machine's.
 
-The lockfile is not the part that has to change. Its entries keep each variant separate, with their own `cpu` and `os` constraints and `optional: true`, so installing on the target platform - or listing every target above - resolves the right one.
+The lockfile is not the part that has to change: its entries keep each variant separate, with their own `cpu` and `os` constraints and `optional: true`. Listing every target above is what makes an install materialise the variant belonging to another platform, but that covers packages which publish platform-specific optional dependencies. An addon compiled by its own install script is still compiled for the machine running the install, so it has to be installed or rebuilt on the target platform instead.
 
 :::
 
