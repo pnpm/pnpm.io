@@ -24,7 +24,7 @@ Added in: v2.12.0
 pnpm store add [<@scope>/]<pkg>...
 ```
 
-Adds new packages to the pnpm store directly.
+Adds new packages to the pnpm store directly. 
 Does not modify any projects or files outside the store.
 
 Usage examples:

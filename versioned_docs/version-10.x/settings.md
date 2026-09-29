@@ -648,10 +648,10 @@ Add the full URL to the package's tarball to every entry in `pnpm-lock.yaml`.
 * Default: **false**
 * Type: **Boolean**
 
-When set to `true`, the generated lockfile name after installation will be named
+When set to `true`, the generated lockfile name after installation will be named 
 based on the current branch name to completely avoid merge conflicts. For example,
 if the current branch name is `feature-foo`, the corresponding lockfile name will
-be `pnpm-lock.feature-foo.yaml` instead of `pnpm-lock.yaml`. It is typically used
+be `pnpm-lock.feature-foo.yaml` instead of `pnpm-lock.yaml`. It is typically used 
 in conjunction with the command line argument `--merge-git-branch-lockfiles` or by
 setting `mergeGitBranchLockfilesBranchPattern` in the `pnpm-workspace.yaml` file.
 
@@ -660,9 +660,9 @@ setting `mergeGitBranchLockfilesBranchPattern` in the `pnpm-workspace.yaml` file
 * Default: **null**
 * Type: **Array or null**
 
-This configuration matches the current branch name to determine whether to merge
-all git branch lockfile files. By default, you need to manually pass the
-`--merge-git-branch-lockfiles` command line parameter. This configuration allows
+This configuration matches the current branch name to determine whether to merge 
+all git branch lockfile files. By default, you need to manually pass the 
+`--merge-git-branch-lockfiles` command line parameter. This configuration allows 
 this process to be automatically completed.
 
 For instance:
@@ -1104,11 +1104,11 @@ Added in: v10.3.0
 When `strictDepBuilds` is enabled, the installation will exit with a non-zero exit code if any dependencies have unreviewed build scripts (aka postinstall scripts).
 
 ### allowBuilds
-
+ 
 Added in: v10.26.0
-
+ 
 A map of package matchers to explicitly allow (`true`) or disallow (`false`) script execution. This field replaces `onlyBuiltDependencies` and `ignoredBuiltDependencies` (which are also deprecated by this new setting), providing a single source of truth.
-
+ 
 ```yaml
 allowBuilds:
   esbuild: true
@@ -1117,7 +1117,7 @@ allowBuilds:
 ```
 
 **Default behavior:** Packages not listed in `allowBuilds` are disallowed by default and a warning is printed. If [`strictDepBuilds`](#strictdepbuilds) is set to `true`, an error will be printed instead.
-
+ 
 ### neverBuiltDependencies
 
 A list of package names that are NOT allowed to execute "preinstall", "install", and/or "postinstall" scripts during installation.

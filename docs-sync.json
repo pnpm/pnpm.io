@@ -8,10 +8,5 @@
     "version": "11.28.2",
     "releaseCommit": null,
     "docsCommit": null
-  },
-  "pnpr": {
-    "version": "0.1.0-alpha.14",
-    "releaseCommit": null,
-    "docsCommit": null
   }
 }

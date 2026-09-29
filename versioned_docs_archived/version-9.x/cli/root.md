@@ -10,3 +10,4 @@ Prints the effective modules directory.
 ### --global, -g
 
 The global package's modules directory is printed.
+

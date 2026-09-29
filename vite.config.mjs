@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 import { pnpmDocsPlugin } from '@pnpm/website.docs.docs-builder'
 import { DOCS_LOCALES } from '@pnpm/website.docs.docs-model'
 import { benchmarkDataPlugin } from './scripts/vite-benchmark-data.mjs'
+import { docsSourcePaths } from './scripts/docs-sources.mjs'
 
 const root = path.dirname(fileURLToPath(import.meta.url))
 const fromRoot = (...segments) => path.join(root, ...segments)
@@ -21,14 +22,14 @@ const versions = [
     label: latestVersion,
     docsDir: fromRoot('docs'),
     sidebarsPath: fromRoot('sidebars.json'),
-    repoPath: `docs/versions/${latestVersion}/docs`,
+    repoPath: docsSourcePaths[latestVersion] ?? 'docs',
   },
   ...olderVersions.map((name) => ({
     name,
     label: name,
     docsDir: fromRoot('versioned_docs', `version-${name}`),
     sidebarsPath: fromRoot('versioned_sidebars', `version-${name}-sidebars.json`),
-    repoPath: `docs/versions/${name}/docs`,
+    repoPath: docsSourcePaths[name] ?? `versioned_docs/version-${name}`,
   })),
 ]
 
@@ -38,7 +39,7 @@ const pnprDocs = {
   docsDir: fromRoot('pnpr-docs'),
   sidebarsPath: fromRoot('sidebars-pnpr.json'),
   sidebarId: 'pnpr',
-  repoPath: 'docs/versions/pnpr/docs',
+  repoPath: 'pnpr-docs',
   section: {
     pluginId: 'pnpr',
     routeBasePath: 'pnpr',
@@ -80,8 +81,7 @@ export default {
     benchmarkDataPlugin(),
     pnpmDocsPlugin({
       versions,
-      editBaseUrl: 'https://github.com/pnpm/pnpm/edit/main',
-      blogEditBaseUrl: 'https://github.com/pnpm/pnpm.io/edit/main',
+      editBaseUrls: Object.fromEntries(Object.keys(docsSourcePaths).map(name => [name, 'https://github.com/pnpm/pnpm/edit/main'])),
       sections: [pnprDocs],
       blog,
       locales,

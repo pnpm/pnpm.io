@@ -250,7 +250,7 @@ Define the authentication bearer token to use when accessing the specified
 registry. For example:
 
 ```sh
-//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+//registry.npmjs.org/:_authToken=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx 
 ```
 
 You may also use an environment variable. For example:

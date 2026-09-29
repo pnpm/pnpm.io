@@ -6,7 +6,7 @@ original_id: pnpm-install
 
 `pnpm install` is used to install all dependencies for a project.
 
-![](/docs-assets/2.x/img/demos/pnpm-install.svg)
+![](/img/demos/pnpm-install.svg)
 
 ## tl;dr
 

@@ -296,7 +296,7 @@ Added in: v1.34.0 (Renamed from `shamefully-flatten` in v4.0.0)
 
 By default, pnpm creates a semistrict `node_modules`. It means that your dependencies have access to undeclared dependencies
 but your code does not. With this layout, most of the packages in the ecosystem work with no issues.
-However, if some tooling only works when the hoisted dependencies are in the root of `node_modules`, you can set this config to `true`.
+However, if some tooling only works when the hoisted dependencies are in the root of `node_modules`, you can set this config to `true`. 
 
 ### strict-peer-dependencies
 

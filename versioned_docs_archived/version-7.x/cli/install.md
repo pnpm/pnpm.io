@@ -14,7 +14,7 @@ Inside a [workspace], `pnpm install` installs all dependencies in all the
 projects. If you want to disable this behavior, set the `recursive-install`
 setting to `false`.
 
-![](/docs-assets/7.x/img/demos/pnpm-install.svg)
+![](/img/demos/pnpm-install.svg)
 
 [workspace]: ../workspaces.md
 
@@ -50,14 +50,14 @@ will be requested from the server. To force full offline mode, use `--offline`.
 
 ### --prod, -P
 
-pnpm will not install any package listed in `devDependencies` and will remove
-those insofar they were already installed, if the `NODE_ENV` environment variable
+pnpm will not install any package listed in `devDependencies` and will remove 
+those insofar they were already installed, if the `NODE_ENV` environment variable 
 is set to production. Use this flag to instruct pnpm to ignore `NODE_ENV` and take
 its production status from this flag instead.
 
 ### --dev, -D
 
-Only `devDependencies` are installed and `dependencies` are removed insofar they
+Only `devDependencies` are installed and `dependencies` are removed insofar they 
 were already installed, regardless of the `NODE_ENV`.
 
 ### --no-optional

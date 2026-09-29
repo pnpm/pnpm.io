@@ -18,3 +18,4 @@ pnpm create react-app my-app
 Added in: v10.2.0
 
 A list of package names that are allowed to run postinstall scripts during installation.
+

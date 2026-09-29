@@ -91,10 +91,10 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-
+      
       - name: Install dependencies
         run: pnpm install
-
+      
       - name: Create and publish versions
         uses: changesets/action@v1
         with:

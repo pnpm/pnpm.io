@@ -28,12 +28,12 @@ and the other one with `baz@1.1.0`. To support these use cases, pnpm has to hard
 
 Normally, if a package does not have peer dependencies, it is hard linked to a `node_modules` folder next to symlinks of its dependencies.
 
-![](/docs-assets/3.x/img/how-peers-are-resolved/1.png)
+![](/img/how-peers-are-resolved/1.png)
 
 However, if `foo` has peer dependencies, there cannot be one single set of dependencies for it, so
 we create different sets, for different peer dependency resolutions:
 
-![](/docs-assets/3.x/img/how-peers-are-resolved/2.png)
+![](/img/how-peers-are-resolved/2.png)
 
 We create symlinks either to the `foo` that is inside `bar@1.0.0+baz@1.0.0/node_modules` or to the one in `bar@1.0.0+baz@1.1.0/node_modules`.
 As a consequence, the Node.js module resolver algorithm will find the correct peers.
@@ -46,4 +46,4 @@ peers of `framework@1.0.0`, so it becomes dependent from the peers of `framework
 Here's how it will look like in `node_modules/.registry.npmjs.org`, in case if `a@1.0.0` will need to appear twice in the project's
 `node_modules`, once resolved with `plugin@1.0.0` and once with `plugin@1.1.0`.
 
-![](/docs-assets/3.x/img/how-peers-are-resolved/4.png)
+![](/img/how-peers-are-resolved/4.png)

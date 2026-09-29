@@ -25,3 +25,4 @@ Approve all pending builds without interactive prompts.
 Added in: v10.4.0
 
 Approve dependencies of globally installed packages.
+

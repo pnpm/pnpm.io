@@ -51,3 +51,4 @@ When set to `global`, the performance is the same as setting the `--global` opti
 ### --json
 
 Show all the config settings in JSON format.
+

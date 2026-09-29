@@ -9,7 +9,7 @@ original_id: install
 In a CI environment, installation fails if a lockfile is present but needs an
 update.
 
-![](/docs-assets/4.x/img/demos/pnpm-install.svg)
+![](/img/demos/pnpm-install.svg)
 
 ## tl;dr
 

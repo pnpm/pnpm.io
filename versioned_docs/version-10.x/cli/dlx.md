@@ -65,7 +65,7 @@ The actual packages executed by `dlx` are allowed to run postinstall scripts by 
 
 Runs the command inside of a shell. Uses `/bin/sh` on UNIX and `\cmd.exe` on Windows.
 
-Example:
+Example: 
 
 ```
 pnpm --package cowsay --package lolcatjs -c dlx 'echo "hi pnpm" | cowsay | lolcatjs'

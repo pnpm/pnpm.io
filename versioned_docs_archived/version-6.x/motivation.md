@@ -5,7 +5,7 @@ title: Motivation
 
 ## Saving disk space and boosting installation speed
 
-[![](/docs-assets/6.x/img/cafs-illustration.jpg)](https://twitter.com/HemSays/status/1434921646083563525/photo/1)
+[![](/img/cafs-illustration.jpg)](https://twitter.com/HemSays/status/1434921646083563525/photo/1)
 
 When using npm or Yarn, if you have 100 projects using a dependency, you will
 have 100 copies of that dependency saved on disk. With pnpm, the dependency will be
@@ -26,7 +26,7 @@ projects and dependencies, and you have a lot faster installations!
 
 ## Creating a non-flat node_modules directory
 
-[![](/docs-assets/6.x/img/node-modules-structure.jpg)](https://twitter.com/xiaokedada/status/1471691763102679041/photo/1)
+[![](/img/node-modules-structure.jpg)](https://twitter.com/xiaokedada/status/1471691763102679041/photo/1)
 
 When installing dependencies with npm or Yarn Classic, all packages are hoisted to the root of the
 modules directory. As a result, source code has access to dependencies that are

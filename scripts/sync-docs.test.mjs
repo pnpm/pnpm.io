@@ -5,6 +5,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
 import { syncDocs } from './sync-docs.mjs'
+import { docsSourcePaths } from './docs-sources.mjs'
 
 function fixture (t) {
   const root = mkdtempSync(path.join(os.tmpdir(), 'pnpm-docs-sync-'))
@@ -13,11 +14,10 @@ function fixture (t) {
   const site = path.join(root, 'site')
   mkdirSync(site)
   writeFileSync(path.join(site, 'versions.json'), '["12.x","11.x","10.x"]')
-  for (const line of ['12.x', '11.x', '10.x', '9.x', 'pnpr']) {
-    const dir = path.join(source, 'docs/versions', line)
-    mkdirSync(path.join(dir, 'docs'), { recursive: true })
+  for (const [line, docsPath] of Object.entries(docsSourcePaths)) {
+    const dir = path.join(source, docsPath)
     mkdirSync(path.join(dir, 'static/img'), { recursive: true })
-    writeFileSync(path.join(dir, 'docs/index.md'), `# ${line}\n![image](/img/test.svg)\n`)
+    writeFileSync(path.join(dir, 'index.md'), `# ${line}\n![image](/img/test.svg)\n`)
     writeFileSync(path.join(dir, 'static/img/test.svg'), '<svg/>')
     writeFileSync(path.join(dir, 'sidebars.json'), '{"docs":["index"]}')
   }
@@ -53,18 +53,10 @@ test('older releases cannot replace newer documentation', t => {
   assert.equal(JSON.parse(readFileSync(path.join(f.site, 'docs-sync.json')))[f.line].version, '12.8.2')
 })
 
-test('pnpr prereleases update only pnpr and use semver ordering', t => {
-  const f = { ...fixture(t), line: 'pnpr', version: '0.1.0-alpha.15' }
-  syncDocs(f)
-  assert.equal(existsSync(path.join(f.site, 'docs')), false)
-  assert.equal(existsSync(path.join(f.site, 'pnpr-docs/index.md')), true)
-  assert.equal(syncDocs({ ...f, version: '0.1.0-alpha.9' }), false)
-})
-
 test('corrections survive rerunning the original release', t => {
   const f = fixture(t)
   syncDocs(f)
-  writeFileSync(path.join(f.source, 'docs/versions/12.x/docs/index.md'), 'corrected')
+  writeFileSync(path.join(f.source, 'pnpm/docs/index.md'), 'corrected')
   f.git('commit', '--quiet', '-am', 'docs: correction')
   const correction = f.git('rev-parse', 'HEAD')
   assert.equal(syncDocs({ ...f, docsCommit: correction }), true)
@@ -72,20 +64,28 @@ test('corrections survive rerunning the original release', t => {
   assert.equal(readFileSync(path.join(f.site, 'docs/index.md'), 'utf8'), 'corrected')
 })
 
-test('preview imports supported and archived versions without advancing release state', t => {
+test('preview imports only v11 and v12 without changing other content or release state', t => {
   const f = fixture(t)
-  for (const line of ['12.x', '11.x', '9.x', 'pnpr']) syncDocs({ ...f, line, preview: true })
+  for (const dir of ['versioned_docs/version-10.x', 'versioned_docs_archived/version-9.x', 'pnpr-docs', 'blog']) {
+    mkdirSync(path.join(f.site, dir), { recursive: true })
+    writeFileSync(path.join(f.site, dir, 'index.md'), dir)
+  }
+  for (const line of Object.keys(docsSourcePaths)) syncDocs({ ...f, line, preview: true })
   assert.equal(existsSync(path.join(f.site, 'versioned_docs/version-11.x/index.md')), true)
-  assert.equal(existsSync(path.join(f.site, 'versioned_docs_archived/version-9.x/index.md')), true)
+  for (const dir of ['versioned_docs/version-10.x', 'versioned_docs_archived/version-9.x', 'pnpr-docs', 'blog']) {
+    assert.equal(readFileSync(path.join(f.site, dir, 'index.md'), 'utf8'), dir)
+  }
   assert.equal(existsSync(path.join(f.site, 'docs-sync.json')), false)
+  assert.equal(existsSync(path.join(f.site, 'docs/sidebars.json')), false)
+  assert.equal(existsSync(path.join(f.site, 'docs/static')), false)
 })
 
 test('rejects mismatched versions, prereleases, unknown lines and symlinks before copying', t => {
   const f = fixture(t)
-  for (const change of [{ line: '../blog' }, { version: '11.0.0' }, { version: '12.9.0-beta.1' }, { line: '13.x', version: '13.0.0' }, { docsCommit: 'main' }]) {
+  for (const change of [{ line: '../blog' }, { line: 'pnpr' }, { line: '10.x' }, { line: '9.x' }, { version: '11.0.0' }, { version: '12.9.0-beta.1' }, { line: '13.x', version: '13.0.0' }, { docsCommit: 'main' }]) {
     assert.throws(() => syncDocs({ ...f, ...change }))
   }
-  symlinkSync(path.join(f.site, 'versions.json'), path.join(f.source, 'docs/versions/12.x/docs/leak.md'))
+  symlinkSync(path.join(f.site, 'versions.json'), path.join(f.source, 'pnpm/docs/leak.md'))
   assert.throws(() => syncDocs(f), /regular files/)
   assert.equal(existsSync(path.join(f.site, 'docs')), false)
 })
@@ -93,7 +93,7 @@ test('rejects mismatched versions, prereleases, unknown lines and symlinks befor
 
 test('asset rewriting preserves external URLs and filenames with a shared prefix', t => {
   const f = fixture(t)
-  writeFileSync(path.join(f.source, 'docs/versions/12.x/docs/index.md'), [
+  writeFileSync(path.join(f.source, 'pnpm/docs/index.md'), [
     '![local](/img/test.svg?size=small)',
     '![remote](https://example.com/img/test.svg)',
     '![other](/img/test.svg.png)',
@@ -105,4 +105,14 @@ test('asset rewriting preserves external URLs and filenames with a shared prefix
   assert.ok(rendered.includes('https://example.com/img/test.svg'))
   assert.ok(rendered.includes('(/img/test.svg.png)'))
   assert.ok(rendered.includes('src="/docs-assets/12.x/img/test.svg"'))
+})
+
+
+test('v11 releases update the versioned copy without changing v12', t => {
+  const f = fixture(t)
+  syncDocs(f)
+  const current = readFileSync(path.join(f.site, 'docs/index.md'), 'utf8')
+  syncDocs({ ...f, line: '11.x', version: '11.28.3' })
+  assert.match(readFileSync(path.join(f.site, 'versioned_docs/version-11.x/index.md'), 'utf8'), /# 11.x/)
+  assert.equal(readFileSync(path.join(f.site, 'docs/index.md'), 'utf8'), current)
 })

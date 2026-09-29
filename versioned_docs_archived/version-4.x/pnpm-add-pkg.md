@@ -7,7 +7,7 @@ original_id: pnpm-add-pkg
 Installs a package and any packages that it depends on.
 By default, any new package is installed as a prod dependency.
 
-![](/docs-assets/4.x/img/demos/pnpm-install-package.svg)
+![](/img/demos/pnpm-install-package.svg)
 
 ## tl;dr
 
