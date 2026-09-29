@@ -64,25 +64,26 @@ test('corrections survive rerunning the original release', t => {
   assert.equal(readFileSync(path.join(f.site, 'docs/index.md'), 'utf8'), 'corrected')
 })
 
-test('preview imports only v11 and v12 without changing other content or release state', t => {
+test('preview imports product docs without changing older versions, blog or release state', t => {
   const f = fixture(t)
-  for (const dir of ['versioned_docs/version-10.x', 'versioned_docs_archived/version-9.x', 'pnpr-docs', 'blog']) {
+  for (const dir of ['versioned_docs/version-10.x', 'versioned_docs_archived/version-9.x', 'blog']) {
     mkdirSync(path.join(f.site, dir), { recursive: true })
     writeFileSync(path.join(f.site, dir, 'index.md'), dir)
   }
   for (const line of Object.keys(docsSourcePaths)) syncDocs({ ...f, line, preview: true })
   assert.equal(existsSync(path.join(f.site, 'versioned_docs/version-11.x/index.md')), true)
-  for (const dir of ['versioned_docs/version-10.x', 'versioned_docs_archived/version-9.x', 'pnpr-docs', 'blog']) {
+  for (const dir of ['versioned_docs/version-10.x', 'versioned_docs_archived/version-9.x', 'blog']) {
     assert.equal(readFileSync(path.join(f.site, dir, 'index.md'), 'utf8'), dir)
   }
   assert.equal(existsSync(path.join(f.site, 'docs-sync.json')), false)
+  assert.equal(existsSync(path.join(f.site, 'pnpr-docs/index.md')), true)
   assert.equal(existsSync(path.join(f.site, 'docs/sidebars.json')), false)
   assert.equal(existsSync(path.join(f.site, 'docs/static')), false)
 })
 
 test('rejects mismatched versions, prereleases, unknown lines and symlinks before copying', t => {
   const f = fixture(t)
-  for (const change of [{ line: '../blog' }, { line: 'pnpr' }, { line: '10.x' }, { line: '9.x' }, { version: '11.0.0' }, { version: '12.9.0-beta.1' }, { line: '13.x', version: '13.0.0' }, { docsCommit: 'main' }]) {
+  for (const change of [{ line: '../blog' }, { line: '10.x' }, { line: '9.x' }, { version: '11.0.0' }, { version: '12.9.0-beta.1' }, { line: '13.x', version: '13.0.0' }, { docsCommit: 'main' }]) {
     assert.throws(() => syncDocs({ ...f, ...change }))
   }
   symlinkSync(path.join(f.site, 'versions.json'), path.join(f.source, 'pnpm/docs/leak.md'))
@@ -115,4 +116,14 @@ test('v11 releases update the versioned copy without changing v12', t => {
   syncDocs({ ...f, line: '11.x', version: '11.28.3' })
   assert.match(readFileSync(path.join(f.site, 'versioned_docs/version-11.x/index.md'), 'utf8'), /# 11.x/)
   assert.equal(readFileSync(path.join(f.site, 'docs/index.md'), 'utf8'), current)
+})
+
+
+test('pnpr alpha releases update only the registry docs and preserve semver ordering', t => {
+  const f = { ...fixture(t), line: 'pnpr', version: '0.1.0-alpha.15' }
+  syncDocs(f)
+  assert.equal(existsSync(path.join(f.site, 'docs')), false)
+  assert.equal(existsSync(path.join(f.site, 'pnpr-docs/index.md')), true)
+  assert.equal(existsSync(path.join(f.site, 'sidebars-pnpr.json')), true)
+  assert.equal(syncDocs({ ...f, version: '0.1.0-alpha.9' }), false)
 })

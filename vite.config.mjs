@@ -39,7 +39,7 @@ const pnprDocs = {
   docsDir: fromRoot('pnpr-docs'),
   sidebarsPath: fromRoot('sidebars-pnpr.json'),
   sidebarId: 'pnpr',
-  repoPath: 'pnpr-docs',
+  repoPath: docsSourcePaths.pnpr,
   section: {
     pluginId: 'pnpr',
     routeBasePath: 'pnpr',

@@ -3,11 +3,12 @@
 [![](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https://stackblitz.com/~/github.com/pnpm/pnpm.io)
 
 The blog (`blog/`), website application, translations, and deployment live here.
-The v12 documentation is edited in [pnpm/docs](https://github.com/pnpm/pnpm/tree/main/pnpm/docs)
-and the v11 documentation in [pnpm11/docs](https://github.com/pnpm/pnpm/tree/main/pnpm11/docs).
-The `docs/` and `versioned_docs/version-11.x/` trees, their sidebars, and their
-`static/docs-assets/` files here are generated publication copies. Do not edit
-those copies directly. V10, archived versions, pnpr docs, and the blog are still
+The v12 documentation is edited in [pnpm/docs](https://github.com/pnpm/pnpm/tree/main/pnpm/docs),
+the v11 documentation in [pnpm11/docs](https://github.com/pnpm/pnpm/tree/main/pnpm11/docs),
+and registry documentation in [pnpr/docs](https://github.com/pnpm/pnpm/tree/main/pnpr/docs).
+The `docs/`, `versioned_docs/version-11.x/`, and `pnpr-docs/` trees, their
+sidebars, and their `static/docs-assets/` files here are generated publication copies. Do not edit
+those copies directly. V10, archived versions, and the blog are still
 edited here. "Edit this page" points to the repository that owns each page.
 
 The site is made of the components in the [pnpm.website](https://bit.cloud/pnpm/website)
@@ -36,20 +37,20 @@ CROWDIN_PERSONAL_TOKEN=<token> pnpm download-translations
 
 ## Documentation sources and versions
 
-The source repository's release sync imports only the released pnpm version,
+The source repository's release sync imports only the released product/version,
 builds this site, and pushes the generated changes here. `docs-sync.json` records
 which release and source commits each published tree came from. Keep it with the
 generated content when reviewing or reverting a sync.
 
 For local previews, run `node scripts/sync-docs.mjs /path/to/pnpm --preview`,
-then `pnpm build`. Preview imports replace only the v11 and v12 documentation copies without
+then `pnpm build`. Preview imports replace only the v11, v12, and pnpr documentation copies without
 changing release state. Do not publish a development preview to production.
 
 See the [source repository's documentation guide](https://github.com/pnpm/pnpm/blob/main/DOCUMENTATION.md)
 for release retries, corrections that do not require a package release, and
 adding a version. Keep existing Crowdin paths when changing the site layout.
 The builder patch supports a separate edit URL per documentation version.
-`scripts/docs-sources.mjs` maps the v11 and v12 website versions to their source
+`scripts/docs-sources.mjs` maps v11, v12, and pnpr documentation to their source
 directories beside the corresponding implementations.
 
 ## How to publish

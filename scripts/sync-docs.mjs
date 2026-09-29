@@ -12,15 +12,15 @@ export function syncDocs ({ source, site = websiteRoot, line, version, releaseCo
   const sourceDir = path.join(source, docsSourcePaths[line])
   const versions = readJson(path.join(site, 'versions.json'))
   const latest = versions[0]
-  if (!versions.includes(line)) throw new Error(`Configure ${line} in versions.json before importing it`)
-  const docsPath = line === latest ? 'docs' : `versioned_docs/version-${line}`
-  const sidebarPath = line === latest ? 'sidebars.json' : `versioned_sidebars/version-${line}-sidebars.json`
+  if (line !== 'pnpr' && !versions.includes(line)) throw new Error(`Configure ${line} in versions.json before importing it`)
+  const docsPath = line === 'pnpr' ? 'pnpr-docs' : line === latest ? 'docs' : `versioned_docs/version-${line}`
+  const sidebarPath = line === 'pnpr' ? 'sidebars-pnpr.json' : line === latest ? 'sidebars.json' : `versioned_sidebars/version-${line}-sidebars.json`
   const statePath = path.join(site, 'docs-sync.json')
   const state = existsSync(statePath) ? readJson(statePath) : {}
 
   if (!preview) {
     if (!semver.valid(version)) throw new Error(`Invalid release version: ${version}`)
-    if (line !== `${semver.major(version)}.x` || semver.prerelease(version)) {
+    if (line !== 'pnpr' && (line !== `${semver.major(version)}.x` || semver.prerelease(version))) {
       throw new Error(`Release ${version} cannot update stable ${line} documentation`)
     }
     for (const commit of [releaseCommit, docsCommit]) {
