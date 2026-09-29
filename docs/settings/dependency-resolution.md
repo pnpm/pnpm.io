@@ -234,6 +234,14 @@ supportedArchitectures:
 
 Additionally, `supportedArchitectures` also supports specifying the `libc` of the system.
 
+:::note
+
+The symptom that usually leads here: a native or platform-specific package was installed on one architecture and is then loaded on another, which fails with `invalid ELF header` on Linux, `not a valid Win32 application` on Windows, or a Mach-O load error on macOS. Copying a `node_modules` directory into an image or artifact built for a different platform produces exactly that, because the optional dependencies that get materialised are the installing machine's.
+
+The lockfile is not the part that has to change. Its entries keep each variant separate, with their own `cpu` and `os` constraints and `optional: true`, so installing on the target platform - or listing every target above - resolves the right one.
+
+:::
+
 #### Platform lists
 
 Added in: v12.5.0
