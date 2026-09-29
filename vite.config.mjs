@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 import { pnpmDocsPlugin } from '@pnpm/website.docs.docs-builder'
 import { DOCS_LOCALES } from '@pnpm/website.docs.docs-model'
 import { benchmarkDataPlugin } from './scripts/vite-benchmark-data.mjs'
-import { docsSourcePaths } from './scripts/docs-sources.mjs'
+import { docsSourcePaths, readDocsVersions } from './scripts/docs-sources.mjs'
 
 const root = path.dirname(fileURLToPath(import.meta.url))
 const fromRoot = (...segments) => path.join(root, ...segments)
@@ -13,9 +13,8 @@ const fromRoot = (...segments) => path.join(root, ...segments)
 // Latest first. The latest version is published from docs/ and served without a
 // version prefix (/motivation); older ones live in versioned_docs/ and are
 // served under their name (/11.x/motivation).
-const [latestVersion, ...olderVersions] = JSON.parse(readFileSync(fromRoot('versions.json'), 'utf8'))
+const [latestVersion, ...olderVersions] = readDocsVersions(root)
 
-// Published copies are synced from pnpm/pnpm at release time.
 const versions = [
   {
     name: latestVersion,

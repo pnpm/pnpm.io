@@ -39,19 +39,48 @@ CROWDIN_PERSONAL_TOKEN=<token> pnpm download-translations
 
 The source repository's release sync imports only the released product/version,
 builds this site, and pushes the generated changes here. `docs-sync.json` records
-which release and source commits each published tree came from. Keep it with the
+the last release and source commits imported for each product. Keep it with the
 generated content when reviewing or reverting a sync.
 
 For local previews, run `node scripts/sync-docs.mjs /path/to/pnpm --preview`,
 then `pnpm build`. Preview imports replace only the v11, v12, and pnpr documentation copies without
-changing release state. Do not publish a development preview to production.
+changing release state. The source repository also provides an explicit manual
+publication from `main`; it publishes the current docs without advancing release
+state and may include documentation for unreleased changes.
 
 See the [source repository's documentation guide](https://github.com/pnpm/pnpm/blob/main/DOCUMENTATION.md)
 for release retries, corrections that do not require a package release, and
-adding a version. Keep existing Crowdin paths when changing the site layout.
+manual publication. Keep existing Crowdin paths when changing the site layout.
 The builder patch supports a separate edit URL per documentation version.
 `scripts/docs-sources.mjs` maps v11, v12, and pnpr documentation to their source
 directories beside the corresponding implementations.
+
+## Adding a major documentation version
+
+Changing `versions.json` alone is not a supported rollover. The importer,
+website build, and Crowdin copy check `currentDocsVersion` in
+`scripts/docs-sources.mjs` and stop if the latest version changes unexpectedly.
+Before changing that value:
+
+1. Freeze the outgoing `docs/` and `sidebars.json` as tracked files under
+   `versioned_docs/version-<line>/` and
+   `versioned_sidebars/version-<line>-sidebars.json`. Keep its existing scoped
+   assets and release state.
+2. Update `.gitignore` to track the frozen directory and ignore only the new
+   latest version's disposable Crowdin copy. Update Crowdin source configuration
+   for the new version. `pnpm copy-docs` refuses to overwrite tracked docs.
+3. Coordinate the managed source mappings, previews, and publication artifact
+   paths with pnpm/pnpm's sync workflow. Keep frozen versions out of development
+   previews unless they have a separate maintained source.
+4. Update `versions.json` and `currentDocsVersion` together, then test release
+   imports, previews, Crowdin copying, and the website build before merging.
+
+Release imports compare all source files and their Git blob hashes with
+`docsCommit`, including assets and sidebars, before copying them. Uncommitted,
+untracked, or ignored files in that product's source tree are rejected. Use
+`--preview` for working-tree edits. Imports stage their replacements before
+changing the published files; handled replacement errors restore the previous
+files. The release workflow only pushes after a successful build and URL check.
 
 ## How to publish
 
