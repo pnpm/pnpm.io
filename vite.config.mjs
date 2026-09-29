@@ -68,6 +68,12 @@ export default {
   // Everything in static/ is served from the web root, as Docusaurus did:
   // /img/... in the Markdown, /pnpm.js, the old /r/... redirect pages.
   publicDir: 'static',
+  resolve: {
+    alias: [
+      // The homepage with the content of this repository; see src/homepage/index.tsx.
+      { find: /^@pnpm\/website\.pages\.homepage$/, replacement: fromRoot('src/homepage/index.tsx') },
+    ],
+  },
   build: {
     // vercel.json serves this directory.
     outDir: 'build',
