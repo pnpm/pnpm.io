@@ -185,14 +185,14 @@ importers:
         specifier: 0.1.1
         version: 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.pages.homepage':
-        specifier: 1.2.1
-        version: 1.2.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+        specifier: 1.3.0
+        version: 1.3.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.pnpm-website':
-        specifier: 1.4.1
-        version: 1.4.1(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))
+        specifier: 1.5.0
+        version: 1.5.0(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))
       '@pnpm/website.sections.features':
-        specifier: 1.0.4
-        version: 1.0.4(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+        specifier: 1.1.0
+        version: 1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       react:
         specifier: ^19.1.1
         version: 19.2.8
@@ -207,8 +207,8 @@ importers:
         specifier: 4.14.2
         version: 4.14.2
       '@pnpm/website.sections.install-guide':
-        specifier: 0.1.1
-        version: 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+        specifier: 0.2.0
+        version: 0.2.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@types/node':
         specifier: ^20.12.2
         version: 20.19.43
@@ -689,20 +689,13 @@ packages:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/website.pages.blog-page@0.3.1':
-    resolution: {integrity: sha512-57i6i/bnWuYUb6PKtqcvypAcJVZEt6hEAjwXrFnh4IWytBGWGjo1tzv0opxpnVbIkUqWA97o/ij6hySpVHXN5A==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.blog-page/-/website.pages.blog-page-0.3.1.tgz}
+  '@pnpm/website.pages.blog-page@0.4.0':
+    resolution: {integrity: sha512-jF9+pn4R6uBzrUtN1ccR0M+OrBB3kuOXugSUzJSib82vKScDJrDKDhVkrPoU97yo4UCFF13wFwmLI8Z6jdCeeA==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.blog-page/-/website.pages.blog-page-0.4.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
       vitest: ^3.1.1
-
-  '@pnpm/website.pages.docs-page@0.2.2':
-    resolution: {integrity: sha512-kz8F8P5josc0X2JO5m1rqpOIdpwN44sKA1HY+BvExM3hGZ7vkyYW6O9NY7FCPWGaY8dwPuUU3wu5iO5gAQbxjw==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.docs-page/-/website.pages.docs-page-0.2.2.tgz}
-    peerDependencies:
-      '@testing-library/react': ^16.0.0
-      react: ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-router-dom: ^5.3.4
 
   '@pnpm/website.pages.docs-page@0.3.1':
     resolution: {integrity: sha512-ahKNNVtCkoqTWNIDhntr4145H8RcDrvVQQouoYrpUsN7kW8CfFOilNYTMKjgjOaHadj/m9GXOWlsevEXrBEKPQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.docs-page/-/website.pages.docs-page-0.3.1.tgz}
@@ -712,72 +705,84 @@ packages:
       react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.pages.homepage@1.2.1':
-    resolution: {integrity: sha512-n7T1TaZr6dkDXjDOVm5VXMWmd1N3vhDNIVtP0zRsGTOF9rYU7uKXgQOemQolpNJ2/AYe6YuLIuxMz3RBjS/J7A==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.homepage/-/website.pages.homepage-1.2.1.tgz}
+  '@pnpm/website.pages.homepage@1.3.0':
+    resolution: {integrity: sha512-7v1JmWTH4ZZQs/VHpQKZjlEMFFOXAXTuGCXlKrxLJonaEjeuVoZmO2gY+kFyTDZxz2vXRmZkQcpT6sZF1ZsZPw==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.homepage/-/website.pages.homepage-1.3.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.pnpm-website@1.4.1':
-    resolution: {integrity: sha512-zIqHE0yDgNly4fRkeQvrNI+jQVsjJVCl9D2q+ftXY3xCyOTLJneR4WIB1j10pQFOTum6/G4Al+FwW6Zrf4KF5g==, tarball: https://node-registry.bit.cloud/@pnpm/website.pnpm-website/-/website.pnpm-website-1.4.1.tgz}
+  '@pnpm/website.pnpm-website@1.5.0':
+    resolution: {integrity: sha512-2N8AkGYLLlsEmA6REYUy/labJquQwbylA7ZR+IPlU5HIFB7rVqi5ZndenQDBGCcz494+QCr9w9ItzhnyhrTQFQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.pnpm-website/-/website.pnpm-website-1.5.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.comparison@0.0.2':
-    resolution: {integrity: sha512-Flp8oKY8Pxq5qkOWaACVLbUHWYNB58bsuEP2luTfuF5dmPrVrwqaD7VW+va+G9+UDT2kpCVDuVtBhzRz5s0ndA==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.comparison/-/website.sections.comparison-0.0.2.tgz}
+  '@pnpm/website.sections.comparison@0.1.0':
+    resolution: {integrity: sha512-iExRpRMlsFTPgXpaA1W+c3iIKNNNFQnq72RdrVWBJzqL7J4+iJKpQJSu2yj0BduLUhnBRGZpCMBtmX+V8nPMuw==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.comparison/-/website.sections.comparison-0.1.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/website.sections.features@1.0.4':
-    resolution: {integrity: sha512-Q1NzShrYBCBcI71lFg3+LFPoUat71F9InlcTyfDMVQGjhk3PsvqY8N+ZrtDgM3B5wCJzok3R06Ihwb7PgPw4TQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.features/-/website.sections.features-1.0.4.tgz}
-    peerDependencies:
-      '@testing-library/react': ^16.0.0
-      react: ^17.0.0 || ^18.0.0 || ^19.0.0
-      react-router-dom: ^5.3.4
-
-  '@pnpm/website.sections.hero@1.0.2':
-    resolution: {integrity: sha512-/450M6zYa0N1HoJHhetUFM80AMNMvFHKNjdnZtbqJl32aq7evqdpyUW+GDyWY3akPuMIt7k4YQ0lfI3VWmYRjg==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.hero/-/website.sections.hero-1.0.2.tgz}
+  '@pnpm/website.sections.features@1.1.0':
+    resolution: {integrity: sha512-9AYZWutsi3DdHzxvJIvS2TdpzdMsOmo0b8WEm3Ehh+hJsezZOwY/yb5l8Zp1XVlVRrJu3Las8stFjH5osLQKSw==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.features/-/website.sections.features-1.1.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.how-it-works@0.0.2':
-    resolution: {integrity: sha512-niM1l+7QptbcolzXfuiBoouH5H0GdTvBcxq81tqSGm/w7RmZie0Ikd+8SL8jNvDd7XvgXZhFoAA8p14x7F461w==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.how-it-works/-/website.sections.how-it-works-0.0.2.tgz}
+  '@pnpm/website.sections.get-started-cta@0.1.0':
+    resolution: {integrity: sha512-o42xe/wyJLP90d/LHnvW1eOIaX8F4VpDWdIuTsoAoQWNLSOByHJI8AfBBBV17fAxao6sk2nb8Lj6apAI1puqEg==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.get-started-cta/-/website.sections.get-started-cta-0.1.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/website.sections.install-guide@0.1.1':
-    resolution: {integrity: sha512-YsCpcMtsHfXHX+cLLxAb8zHz84U/UbBQgJQW2Qxc4WHlXfAzXF87Kj5r/bZeiWPrcacERkVoalwbTpaxgFaQzA==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.install-guide/-/website.sections.install-guide-0.1.1.tgz}
-    peerDependencies:
-      '@testing-library/react': ^16.0.0
-      react: ^17.0.0 || ^18.0.0 || ^19.0.0
-
-  '@pnpm/website.sections.oss-projects@1.0.1':
-    resolution: {integrity: sha512-+xM1jwEHQldMCO0y6rzvWjP7gfOYPG6slnCOOmNbniCRrgWCyNShVfRmiODoqCLKIbvE/m9gUg0gpyiYptwnYw==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.oss-projects/-/website.sections.oss-projects-1.0.1.tgz}
+  '@pnpm/website.sections.hero@1.1.0':
+    resolution: {integrity: sha512-Ri+wV7Kk7DgdfSvewUDevadrHV3BU+b38SLOzPSyqL2dYRPJhq0tT7CC70Ayk89Gd23Q74fuyxwkteFjmp2HcA==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.hero/-/website.sections.hero-1.1.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.sections.quick-start@0.0.2':
-    resolution: {integrity: sha512-BYhXtiXhLGxF8fWP7l7qa65NEoeJXc9BeE7gcmYYORI4Zhg2rnEYvEK0ZkSQgkT4wO71UAO0QCPJG0I0Lw9Zeg==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.quick-start/-/website.sections.quick-start-0.0.2.tgz}
+  '@pnpm/website.sections.how-it-works@0.1.0':
+    resolution: {integrity: sha512-XwVsyqhG12CKUf0sZBg80gJ3w9w5L7Cj2tWwx6oMF7HVyg4s8iWgB7k7A2Cb+GCn5eK4Pn6kJD7npWODHD7cBw==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.how-it-works/-/website.sections.how-it-works-0.1.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/website.sections.release-highlights@0.1.1':
-    resolution: {integrity: sha512-LZ5WIe6RBZoKOD7iJn9tjcIgvwt0mXvOHFzl1ACRNs1A1YVJm57CPAmbna2I2MFLM8PiIlwHJxi1ujSYhrzpTA==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.release-highlights/-/website.sections.release-highlights-0.1.1.tgz}
+  '@pnpm/website.sections.install-guide@0.2.0':
+    resolution: {integrity: sha512-Egdq8HSktMy2bXYB2tKSOafbmX/lkeuYkPR5fn/RRLybpwK665SUwPkrm2P/Kl9Rj28SWiVJ3dLN4w5jVySx/g==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.install-guide/-/website.sections.install-guide-0.2.0.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@pnpm/website.sections.oss-projects@1.1.0':
+    resolution: {integrity: sha512-Oa7D6AuOBLmJuqpjvpYaiYnoPmq5OO6ALF7oBQcohuBRHW//qa0D0KHQ7Ijpn+tlkvT32HAzJWXOGuNCD0PoWA==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.oss-projects/-/website.sections.oss-projects-1.1.0.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-router-dom: ^5.3.4
+
+  '@pnpm/website.sections.quick-start@0.1.0':
+    resolution: {integrity: sha512-4HhesGMZVeIAb+Iz8azAKnzfZ0o7bHUllkt9hIg5nlNvanp6xCaRkMPxfC0J/mcd0WcJ+7AIE5QBUPrRvcdRLQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.quick-start/-/website.sections.quick-start-0.1.0.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  '@pnpm/website.sections.release-highlights@0.2.0':
+    resolution: {integrity: sha512-bomDQCDpd6Hu2H0sdaUA8gINWldJOiwkUkq5Xa69ig1SyMN2j8j+rIoqHci1IrytO5gspU1oYmsG3q5R9wgWAw==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.release-highlights/-/website.sections.release-highlights-0.2.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react-router-dom: ^5.3.4
       vitest: ^3.1.1
+
+  '@pnpm/website.sections.speed-highlights@0.1.0':
+    resolution: {integrity: sha512-x3YhFG5CGnl6g3pHovXkUHWbz0EbE9iajiXUByXakVrbGDQQulcsU3MIgduw4PPM3+4WyM4Z3GpWPmb0kae//g==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.speed-highlights/-/website.sections.speed-highlights-0.1.0.tgz}
+    peerDependencies:
+      '@testing-library/react': ^16.0.0
+      react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
   '@pnpm/website.sections.sponsors@1.0.3':
     resolution: {integrity: sha512-H34BPtM/kGpJg8Ew8vQYn3QjxNJNx7lem1V5e8EmbpB9wFkcYXsZhNmeyvCU+Y8C+imJ6F/UfWgCtsWoLFG8/A==, tarball: https://node-registry.bit.cloud/@pnpm/website.sections.sponsors/-/website.sections.sponsors-1.0.3.tgz}
@@ -800,11 +805,12 @@ packages:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       vitest: ^3.1.1
 
-  '@pnpm/website.ui.code-block@0.0.2':
-    resolution: {integrity: sha512-zFFIm62/PAdQfO2uYw5rr4p5uRU1maEJrxrdhU4asVURMcPa59bYkrjTjqCmOImahQTbMwFTqdKeAIRHdBdGtg==, tarball: https://node-registry.bit.cloud/@pnpm/website.ui.code-block/-/website.ui.code-block-0.0.2.tgz}
+  '@pnpm/website.ui.code-block@0.1.0':
+    resolution: {integrity: sha512-wOxXYEZon/P49XeqIUzf3OPNupbwHsdMnOYhjoGBCywobk6rUw0DcPKQUMXlKJkIST2EwRVnmRLMBKcSa1KSBg==, tarball: https://node-registry.bit.cloud/@pnpm/website.ui.code-block/-/website.ui.code-block-0.1.0.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
+      vitest: ^3.1.1
 
   '@pnpm/website.ui.docs-illustrations@0.1.1':
     resolution: {integrity: sha512-+0fldKIPWzfGBOuR16+vZZk6KWFV7MZWw7LI0A/Wu0QK/XU7F522LZ1LOOb11OAEDKDckwDCX5ZMlhyjl5yDRg==, tarball: https://node-registry.bit.cloud/@pnpm/website.ui.docs-illustrations/-/website.ui.docs-illustrations-0.1.1.tgz}
@@ -2904,22 +2910,16 @@ snapshots:
     transitivePeerDependencies:
       - react-router-dom
 
-  '@pnpm/website.pages.blog-page@0.3.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.pages.blog-page@0.4.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/website.docs.docs-model': 0.2.0
-      '@pnpm/website.pages.docs-page': 0.2.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.pages.docs-page': 0.3.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
       react: 19.2.8
       react-router-dom: 5.3.4(react@19.2.8)
-
-  '@pnpm/website.pages.docs-page@0.2.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
-    dependencies:
-      '@pnpm/website.docs.docs-model': 0.2.0
-      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      classnames: 2.5.1
-      react: 19.2.8
-      react-router-dom: 5.3.4(react@19.2.8)
+    transitivePeerDependencies:
+      - react-dom
 
   '@pnpm/website.pages.docs-page@0.3.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -2930,16 +2930,18 @@ snapshots:
       react-dom: 19.2.8(react@19.2.8)
       react-router-dom: 5.3.4(react@19.2.8)
 
-  '@pnpm/website.pages.homepage@1.2.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.pages.homepage@1.3.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.layouts.page-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.comparison': 0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.features': 1.0.4(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.hero': 1.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.how-it-works': 0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.oss-projects': 1.0.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.quick-start': 0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.release-highlights': 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.comparison': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.features': 1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.get-started-cta': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.hero': 1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.how-it-works': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.oss-projects': 1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.quick-start': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.release-highlights': 0.2.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.speed-highlights': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.sections.sponsors': 1.0.3(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.sections.testimonials': 1.0.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.sections.zero-bugs': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
@@ -2947,10 +2949,11 @@ snapshots:
       react: 19.2.8
       react-router-dom: 5.3.4(react@19.2.8)
     transitivePeerDependencies:
+      - react-dom
       - react-helmet
       - vitest
 
-  '@pnpm/website.pnpm-website@1.4.1(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))':
+  '@pnpm/website.pnpm-website@1.5.0(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))':
     dependencies:
       '@bitdev/react.app-types.vite-react': 2.1.10(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))
       '@pnpm/design.pnpm-theme': 1.0.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2964,10 +2967,10 @@ snapshots:
       '@pnpm/website.layout.footer': 1.0.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.layout.header': 1.1.2(@pnpm/design.pnpm-theme@1.0.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.pages.benchmarks-page': 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.pages.blog-page': 0.3.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.pages.blog-page': 0.4.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.pages.docs-page': 0.3.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.pages.homepage': 1.2.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.sections.install-guide': 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.pages.homepage': 1.3.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-helmet@6.1.0(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.sections.install-guide': 0.2.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@pnpm/website.ui.docs-illustrations': 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@pnpm/website.ui.docs-search': 0.1.2(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)(search-insights@2.17.3)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -2983,7 +2986,7 @@ snapshots:
       - vite
       - vitest
 
-  '@pnpm/website.sections.comparison@0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.comparison@0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
@@ -2993,7 +2996,7 @@ snapshots:
     transitivePeerDependencies:
       - react-router-dom
 
-  '@pnpm/website.sections.features@1.0.4(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.features@1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
@@ -3003,38 +3006,55 @@ snapshots:
       react: 19.2.8
       react-router-dom: 5.3.4(react@19.2.8)
 
-  '@pnpm/website.sections.hero@1.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.get-started-cta@0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.ui.code-block': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      classnames: 2.5.1
+      react: 19.2.8
+    transitivePeerDependencies:
+      - react-router-dom
+      - vitest
+
+  '@pnpm/website.sections.hero@1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.actions.cta-button': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/design.media.video-embed': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.ui.code-block': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@pnpm/website.ui.github-stars-button': 1.0.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
       react: 19.2.8
       react-router-dom: 5.3.4(react@19.2.8)
+    transitivePeerDependencies:
+      - vitest
 
-  '@pnpm/website.sections.how-it-works@0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.how-it-works@0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.ui.docs-illustrations': 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
       react: 19.2.8
     transitivePeerDependencies:
       - react-router-dom
 
-  '@pnpm/website.sections.install-guide@0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.install-guide@0.2.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@pnpm/website.ui.code-block': 0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.ui.code-block': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
       react: 19.2.8
+    transitivePeerDependencies:
+      - vitest
 
-  '@pnpm/website.sections.oss-projects@1.0.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.oss-projects@1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.content.image': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
@@ -3044,28 +3064,40 @@ snapshots:
       react: 19.2.8
       react-router-dom: 5.3.4(react@19.2.8)
 
-  '@pnpm/website.sections.quick-start@0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.quick-start@0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.heading': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@pnpm/design.typography.paragraph': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
-      '@pnpm/website.ui.code-block': 0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.ui.code-block': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
       react: 19.2.8
     transitivePeerDependencies:
       - react-router-dom
+      - vitest
 
-  '@pnpm/website.sections.release-highlights@0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.sections.release-highlights@0.2.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@pnpm/website.docs.docs-model': 0.2.0
-      '@pnpm/website.pages.blog-page': 0.3.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.pages.blog-page': 0.4.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
       react-router-dom: 5.3.4(react@19.2.8)
     transitivePeerDependencies:
       - react
+      - react-dom
+
+  '@pnpm/website.sections.speed-highlights@0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
+    dependencies:
+      '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)
+      '@pnpm/website.benchmarks.benchmark-data': 0.0.3
+      '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      classnames: 2.5.1
+      react: 19.2.8
+    transitivePeerDependencies:
+      - react-router-dom
 
   '@pnpm/website.sections.sponsors@1.0.3(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-router-dom@5.3.4(react@19.2.8))(react@19.2.8)':
     dependencies:
@@ -3095,7 +3127,7 @@ snapshots:
     transitivePeerDependencies:
       - react-router-dom
 
-  '@pnpm/website.ui.code-block@0.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
+  '@pnpm/website.ui.code-block@0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       classnames: 2.5.1
