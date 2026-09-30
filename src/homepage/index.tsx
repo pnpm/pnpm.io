@@ -2,8 +2,14 @@
 // vite.config.mjs). PnpmWebsite renders the homepage with only its locale and
 // translations, so the component falls back to the content it bundles, which
 // isn't kept up to date. This passes it the content kept in this repository
-// instead: the sponsors of sponsors.json, the testimonials, the OSS projects and
-// the star count of pnpm/pnpm. Drop it once PnpmWebsite takes this content.
+// instead: the sponsors of sponsors.json, the testimonials, the OSS projects,
+// the star count of pnpm/pnpm, and the translated hero and feature cards.
+// A section passed here replaces the package's content for it completely, so
+// content.tsx has to set every option the section should show (the feature
+// visuals, the hero's announcement). The sections this repository has no
+// content for (speed highlights, how it works, comparison, release highlights,
+// zero bugs, the closing call to action) are left to the package. Drop this
+// once PnpmWebsite takes this content.
 import { useEffect, useState } from 'react'
 import { Homepage as PackageHomepage } from '@pnpm/website.pages.homepage/dist/index.js'
 import type { HomepageProps } from '@pnpm/website.pages.homepage/dist/index.js'
@@ -12,7 +18,7 @@ import { features, hero, ossProjects, sponsors, testimonials } from './content.j
 export * from '@pnpm/website.pages.homepage/dist/index.js'
 
 function useGithubStarsCount () {
-  const [count, setCount] = useState<number | string>('33.4K')
+  const [count, setCount] = useState<number>(33400)
   useEffect(() => {
     fetch('https://api.github.com/repos/pnpm/pnpm')
       .then((res) => res.json())

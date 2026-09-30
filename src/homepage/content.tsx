@@ -1,3 +1,4 @@
+import type { JSX } from 'react'
 import {
   XIcon,
   NextJsIcon,
@@ -18,6 +19,8 @@ import {
   CacheIcon,
   PatchIcon,
   RuntimeIcon,
+  SpeedVisual,
+  DiskVisual,
 } from '@pnpm/website.sections.features'
 import sponsorData from '../../sponsors.json'
 
@@ -25,7 +28,7 @@ import sponsorData from '../../sponsors.json'
 // Docusaurus' <Translate> made them, so the Crowdin translations still apply.
 export type Translate = (text: string) => string
 
-export function hero (t: Translate, basePath: string, starsCount: number | string) {
+export function hero (t: Translate, basePath: string, starsCount: number) {
   // Crowdin keeps the Docusaurus title, which starts with "pnpm:".
   const title = t('pnpm: Save time. Save disk space. Supercharge your monorepos.').replace(/^pnpm\s*[:：]\s*/, '')
   return {
@@ -34,6 +37,14 @@ export function hero (t: Translate, basePath: string, starsCount: number | strin
     ctaText: t('Getting started'),
     ctaHref: `${basePath}/installation`,
     videoSrc: 'https://www.youtube-nocookie.com/embed/ZIKDJBrk56k',
+    videoLabel: t('Watch the intro'),
+    // installCommand is left out on purpose: the hero's default shows the
+    // install script of the visitor's OS.
+    announcement: {
+      badge: t('New'),
+      label: t('What’s different in pnpm 12'),
+      href: `${basePath}/blog/whats-different-in-pnpm-12`,
+    },
     starsLabel: 'Star',
     starsCount,
     githubHref: 'https://github.com/pnpm/pnpm',
@@ -49,6 +60,7 @@ export function features (t: Translate, basePath: string) {
         title: t('Blazing fast installs'),
         description: t('Resolution, fetching and linking happen in parallel instead of one stage at a time. On a warm store, an install is mostly just creating links.'),
         icon: <BoltIcon />,
+        visual: <SpeedVisual />,
         href: `${basePath}/benchmarks`,
         linkLabel: t('See the benchmarks'),
       },
@@ -56,6 +68,7 @@ export function features (t: Translate, basePath: string) {
         title: t('Saving disk space'),
         description: t('Files inside node_modules are hard-linked from a single content-addressable store. A hundred projects on the same version cost you one copy on disk.'),
         icon: <DiskIcon />,
+        visual: <DiskVisual />,
         href: `${basePath}/motivation`,
       },
       {
