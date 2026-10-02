@@ -16,3 +16,9 @@ export function readDocsVersions (site) {
   }
   return versions
 }
+
+/** Package whose composed changelog at the release tag is a line's release page. */
+export const releaseChangelogPackages = {
+  '11.x': 'pnpm',
+  '12.x': 'pacquet',
+}

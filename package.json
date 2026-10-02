@@ -7,7 +7,7 @@
     "check-urls": "node scripts/check-urls.mjs",
     "download-translations": "node scripts/download-translations.mjs",
     "update-benchmarks": "node ./scripts/update-benchmarks.mjs",
-    "test": "node --test scripts/benchmarks/*.test.mjs scripts/sync-docs.test.mjs",
+    "test": "node --test scripts/benchmarks/*.test.mjs scripts/sync-docs.test.mjs scripts/release-pages.test.mjs",
     "copy-docs": "node scripts/copy-docs.mjs",
     "crowdin-upload": "pnpm copy-docs && crowdin upload sources --auto-update",
     "crowdin-status": "crowdin status translation --no-colors --no-progress",
