@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, renameSync, writeFileSync } from 'node:fs'
+import { existsSync, linkSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import semver from 'semver'
 import { releaseChangelogPackages } from './docs-sources.mjs'
@@ -35,8 +35,16 @@ export function writeReleasePage ({ source, site, line, version, releaseCommit }
   const content = renderReleasePage({ changelog: git('show', object), version, date })
   mkdirSync(path.dirname(page), { recursive: true })
   const temporary = `${page}.${process.pid}.tmp`
-  writeFileSync(temporary, content)
-  renameSync(temporary, page)
+  try {
+    writeFileSync(temporary, content)
+    // Unlike a rename, a link fails if the page appeared since the check above.
+    linkSync(temporary, page)
+  } catch (error) {
+    if (error.code === 'EEXIST') return false
+    throw error
+  } finally {
+    rmSync(temporary, { force: true })
+  }
   return true
 }
 

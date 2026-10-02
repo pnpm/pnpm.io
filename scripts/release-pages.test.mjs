@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
@@ -105,6 +105,12 @@ test('keeps an existing page', t => {
   writeFileSync(path.join(f.site, 'blog/releases/12.9.0.md'), 'edited on the website')
   assert.equal(writeReleasePage({ ...f, line: '12.x', version: '12.9.0' }), false)
   assert.equal(readFileSync(path.join(f.site, 'blog/releases/12.9.0.md'), 'utf8'), 'edited on the website')
+})
+
+test('leaves no temporary file behind', t => {
+  const f = fixture(t, { 'pacquet@12.9.0.md': CHANGELOG })
+  assert.equal(writeReleasePage({ ...f, line: '12.x', version: '12.9.0' }), true)
+  assert.deepEqual(readdirSync(path.join(f.site, 'blog/releases')), ['12.9.0.md'])
 })
 
 test('skips a release without a composed changelog and pnpr releases', t => {
