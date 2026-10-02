@@ -73,6 +73,12 @@ pnpm 12.9.0 adds \`pnpm foo\`.
 `)
 })
 
+test('only a matching marker closes a code fence', () => {
+  const changelog = '## 12.9.1\n\n````md\n~~~\n```\n### Example\n````\n\n### Patch Changes\n'
+  const page = renderReleasePage({ changelog, version: '12.9.1', date: '2026-10-01' })
+  assert.match(page, /```\n### Example\n````\n\n<!-- truncate -->\n\n## Patch Changes\n$/)
+})
+
 test('a section without a lead paragraph has an empty excerpt', () => {
   const page = renderReleasePage({ changelog: '## 12.9.1\n\n### Patch Changes\n\n- Fixed a crash.\n', version: '12.9.1', date: '2026-10-01' })
   assert.match(page, /---\n\n<!-- truncate -->\n\n## Patch Changes\n/)

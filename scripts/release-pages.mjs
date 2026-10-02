@@ -1,10 +1,10 @@
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, renameSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import semver from 'semver'
 import { releaseChangelogPackages } from './docs-sources.mjs'
 
-const FENCE = /^\s*(```|~~~)/
+const FENCE = /^\s*(`{3,}|~{3,})(.*)$/
 const HEADING = /^#{1,6}\s/
 
 /**
@@ -32,8 +32,11 @@ export function writeReleasePage ({ source, site, line, version, releaseCommit }
     return false
   }
   const date = git('show', '-s', '--format=%cs', releaseCommit).trim()
+  const content = renderReleasePage({ changelog: git('show', object), version, date })
   mkdirSync(path.dirname(page), { recursive: true })
-  writeFileSync(page, renderReleasePage({ changelog: git('show', object), version, date }))
+  const temporary = `${page}.${process.pid}.tmp`
+  writeFileSync(temporary, content)
+  renameSync(temporary, page)
   return true
 }
 
@@ -44,11 +47,19 @@ export function writeReleasePage ({ source, site, line, version, releaseCommit }
 export function renderReleasePage ({ changelog, version, date }) {
   const lines = changelog.replace(/\r\n?/g, '\n').trim().split('\n')
   if (lines[0] !== `## ${version}`) throw new Error(`Expected the changelog to start with "## ${version}"`)
-  let inFence = false
+  let openFence
   let firstHeading = -1
   const body = lines.slice(1).map((text, index) => {
-    if (FENCE.test(text)) inFence = !inFence
-    if (inFence || !HEADING.test(text)) return text
+    const fence = FENCE.exec(text)
+    if (openFence) {
+      if (fence && fence[1][0] === openFence[0] && fence[1].length >= openFence.length && !fence[2].trim()) openFence = undefined
+      return text
+    }
+    if (fence) {
+      openFence = fence[1]
+      return text
+    }
+    if (!HEADING.test(text)) return text
     if (firstHeading < 0) firstHeading = index
     return text.startsWith('##') ? text.slice(1) : text
   })
