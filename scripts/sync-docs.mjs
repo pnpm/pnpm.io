@@ -4,6 +4,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import semver from 'semver'
 import { docsSourcePaths, readDocsVersions } from './docs-sources.mjs'
+import { writeReleasePage } from './release-pages.mjs'
 
 const websiteRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 
@@ -170,5 +171,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
     }
   } else {
     console.log(syncDocs({ source, line, version, releaseCommit, docsCommit }) ? `Updated ${line} docs to ${version}` : `Docs for ${line} are already current`)
+    if (writeReleasePage({ source, site: websiteRoot, line, version, releaseCommit })) console.log(`Wrote the ${version} release page`)
   }
 }
