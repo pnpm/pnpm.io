@@ -5,9 +5,9 @@
     "docsCommit": "5dafb0980042af99fb1aa24478d16f03b8474b50"
   },
   "11.x": {
-    "version": "11.28.2",
-    "releaseCommit": null,
-    "docsCommit": null
+    "version": "11.28.4",
+    "releaseCommit": "5dafb0980042af99fb1aa24478d16f03b8474b50",
+    "docsCommit": "5dafb0980042af99fb1aa24478d16f03b8474b50"
   },
   "pnpr": {
     "version": "0.1.0-alpha.14",
