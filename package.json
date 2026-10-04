@@ -1,5 +1,5 @@
 {
-  "packageManager": "pnpm@12.8.1",
+  "packageManager": "pnpm@12.9.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/postbuild.mjs",
@@ -20,8 +20,8 @@
     "@pnpm/website.docs.docs-builder": "0.3.0",
     "@pnpm/website.docs.docs-model": "0.2.0",
     "@pnpm/website.pages.benchmarks-page": "0.1.1",
-    "@pnpm/website.pages.homepage": "1.5.0",
-    "@pnpm/website.pnpm-website": "1.7.0",
+    "@pnpm/website.pages.homepage": "1.5.2",
+    "@pnpm/website.pnpm-website": "1.7.2",
     "@pnpm/website.sections.features": "1.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
