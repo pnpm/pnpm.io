@@ -182,14 +182,14 @@ importers:
         specifier: 0.2.0
         version: 0.2.0
       '@pnpm/website.pages.benchmarks-page':
-        specifier: 0.1.1
-        version: 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
+        specifier: 0.1.2
+        version: 0.1.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
       '@pnpm/website.pages.homepage':
         specifier: 1.5.4
         version: 1.5.4(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-helmet@6.1.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
       '@pnpm/website.pnpm-website':
-        specifier: 1.7.5
-        version: 1.7.5(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react-helmet@6.1.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))
+        specifier: 1.7.6
+        version: 1.7.6(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react-helmet@6.1.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))
       '@pnpm/website.sections.features':
         specifier: 1.1.0
         version: 1.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
@@ -598,8 +598,8 @@ packages:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@pnpm/website.benchmarks.benchmark-chart@0.0.3':
-    resolution: {integrity: sha512-AmDexBogTi6gOJsykN0H7jZkhN3w8nlNJSWzIU19vB999+ccZIvPnUO3qox2DP4OX9v81GWN0VRDbpjYw1qbZA==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-chart/-/website.benchmarks.benchmark-chart-0.0.3.tgz}
+  '@pnpm/website.benchmarks.benchmark-chart@0.0.4':
+    resolution: {integrity: sha512-sVjGQ9vXc/86ROqo2gRhV4m0xKoTGTO+vpKbr3p7dpZEdIIwZn7WjI+GvQV4/g9L0EvI8Q9Wz/6em3C8er/wOw==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-chart/-/website.benchmarks.benchmark-chart-0.0.4.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -607,8 +607,8 @@ packages:
   '@pnpm/website.benchmarks.benchmark-data@0.0.3':
     resolution: {integrity: sha512-d0YsdDpFgoE7jvfRcrtuyC4jB9RGHsSqdpLJgM5nQ7Lqpg6kBJrmYCZvsLYU9wQAfEao8io3IcQK+H3FUeT84Q==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-data/-/website.benchmarks.benchmark-data-0.0.3.tgz}
 
-  '@pnpm/website.benchmarks.benchmark-section@0.1.1':
-    resolution: {integrity: sha512-Q8QPVjm0AUUtA1zeYn8kxLop9jG1QxEItbgGwpVTrJbWFpoqcZ7/7JPpyW0O834Oyu29xiuDK41TxwNopYoT7w==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-section/-/website.benchmarks.benchmark-section-0.1.1.tgz}
+  '@pnpm/website.benchmarks.benchmark-section@0.1.2':
+    resolution: {integrity: sha512-7cogBOCkMcuOAesE8R7Nbw/Bwez6k6eLkuyyi4SXS1kHuLwIgh0DyybOam2nl85mMZ62ZMcVHyIUPMb+aVJ8YQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.benchmarks.benchmark-section/-/website.benchmarks.benchmark-section-0.1.2.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -683,8 +683,8 @@ packages:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.pages.benchmarks-page@0.1.1':
-    resolution: {integrity: sha512-ssTydhBx5+FMnuQuYgHuT1JGlzHyULiHVK8cUkgjf5XhEQmbKKz42tBJ03ZN9TOlr5rO25gJzyUPC9WvInMk2Q==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.benchmarks-page/-/website.pages.benchmarks-page-0.1.1.tgz}
+  '@pnpm/website.pages.benchmarks-page@0.1.2':
+    resolution: {integrity: sha512-wowGVmTR9etREjU9fEcQzNdxgtbIpkeTwFVsKQFTsLDLz73guzpDKSlcKyhD0URlWg3RoqRfircJH+v0m9SgQA==, tarball: https://node-registry.bit.cloud/@pnpm/website.pages.benchmarks-page/-/website.pages.benchmarks-page-0.1.2.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -712,8 +712,8 @@ packages:
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
       react-router-dom: ^5.3.4
 
-  '@pnpm/website.pnpm-website@1.7.5':
-    resolution: {integrity: sha512-kMznyKTXg7wS1Mw+xfb5H3fzbSvGx4ZQDQRzdn/rCexq50Vr2rIE5d45YP0+uD74r65iqps96z64BejndvoQGQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.pnpm-website/-/website.pnpm-website-1.7.5.tgz}
+  '@pnpm/website.pnpm-website@1.7.6':
+    resolution: {integrity: sha512-5s0yMmg4g0724Ng9SG+Z62T9S2NHO3jV1nD+yFscJiOVY3FRZ1f1KLnV1K83wqNOBNgxfRDrkbgAXJWpAhI0EQ==, tarball: https://node-registry.bit.cloud/@pnpm/website.pnpm-website/-/website.pnpm-website-1.7.6.tgz}
     peerDependencies:
       '@testing-library/react': ^16.0.0
       react: ^17.0.0 || ^18.0.0 || ^19.0.0
@@ -2815,7 +2815,7 @@ snapshots:
       classnames: 2.5.1
       react: 19.3.0
 
-  '@pnpm/website.benchmarks.benchmark-chart@0.0.3(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)':
+  '@pnpm/website.benchmarks.benchmark-chart@0.0.4(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@pnpm/website.benchmarks.benchmark-data': 0.0.3
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -2823,10 +2823,10 @@ snapshots:
 
   '@pnpm/website.benchmarks.benchmark-data@0.0.3': {}
 
-  '@pnpm/website.benchmarks.benchmark-section@0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)':
+  '@pnpm/website.benchmarks.benchmark-section@0.1.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@pnpm/design.layouts.section-layout': 1.0.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
-      '@pnpm/website.benchmarks.benchmark-chart': 0.0.3(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
+      '@pnpm/website.benchmarks.benchmark-chart': 0.0.4(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
       '@pnpm/website.benchmarks.benchmark-data': 0.0.3
       '@pnpm/website.benchmarks.benchmark-table': 0.0.3(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
       '@pnpm/website.benchmarks.benchmark-totals': 0.1.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
@@ -2920,10 +2920,10 @@ snapshots:
     transitivePeerDependencies:
       - '@pnpm/design.pnpm-theme'
 
-  '@pnpm/website.pages.benchmarks-page@0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)':
+  '@pnpm/website.pages.benchmarks-page@0.1.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)':
     dependencies:
       '@pnpm/website.benchmarks.benchmark-data': 0.0.3
-      '@pnpm/website.benchmarks.benchmark-section': 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
+      '@pnpm/website.benchmarks.benchmark-section': 0.1.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
       '@pnpm/website.benchmarks.benchmarks-hero': 0.0.3(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react@19.3.0)
       '@testing-library/react': 16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       react: 19.3.0
@@ -2974,7 +2974,7 @@ snapshots:
       - react-helmet
       - vitest
 
-  '@pnpm/website.pnpm-website@1.7.5(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react-helmet@6.1.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))':
+  '@pnpm/website.pnpm-website@1.7.6(@algolia/client-search@5.57.0)(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react-helmet@6.1.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)(search-insights@2.17.3)(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))':
     dependencies:
       '@bitdev/react.app-types.vite-react': 2.1.10(supports-color@8.1.1)(vite@8.3.1(@types/node@20.19.43)(jiti@1.21.7)(sass@1.103.1)(terser@5.51.2)(yaml@2.9.1))
       '@pnpm/design.pnpm-theme': 1.0.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -2987,7 +2987,7 @@ snapshots:
       '@pnpm/website.docs.versions.v12': 0.2.2
       '@pnpm/website.layout.footer': 1.0.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
       '@pnpm/website.layout.header': 1.1.2(@pnpm/design.pnpm-theme@1.0.1(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
-      '@pnpm/website.pages.benchmarks-page': 0.1.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
+      '@pnpm/website.pages.benchmarks-page': 0.1.2(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
       '@pnpm/website.pages.blog-page': 0.5.1(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
       '@pnpm/website.pages.docs-page': 0.4.0(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
       '@pnpm/website.pages.homepage': 1.5.4(@testing-library/react@16.3.3(@testing-library/dom@10.4.1)(@types/react@19.2.18)(react-dom@19.3.0(react@19.3.0))(react@19.3.0))(react-dom@19.3.0(react@19.3.0))(react-helmet@6.1.0(react@19.3.0))(react-router-dom@5.3.4(react@19.3.0))(react@19.3.0)
