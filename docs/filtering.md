@@ -19,8 +19,7 @@ pnpm --filter <package_selector> <command>
 ### --filter &lt;package_name>
 
 To select an exact package, just specify its name (`@scope/pkg`) or use a
-pattern to select a set of packages (`@scope/*`). In package-name patterns,
-`*` matches any number of characters and `?` matches exactly one character.
+pattern to select a set of packages (`@scope/*`).
 
 Examples:
 

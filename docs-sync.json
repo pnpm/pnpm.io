@@ -1,8 +1,8 @@
 {
   "12.x": {
-    "version": "12.9.1",
-    "releaseCommit": "5dafb0980042af99fb1aa24478d16f03b8474b50",
-    "docsCommit": "5dafb0980042af99fb1aa24478d16f03b8474b50"
+    "version": "12.10.0",
+    "releaseCommit": "68112bada403c589d360a22ae0f1c50f8b7ab576",
+    "docsCommit": "68112bada403c589d360a22ae0f1c50f8b7ab576"
   },
   "11.x": {
     "version": "11.28.4",
