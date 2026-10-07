@@ -6,7 +6,7 @@ pnpm's experimental loaded linker lets Node.js load JavaScript and JSON directly
 
 This is an experimental install mode. Enable it persistently in `pnpm-workspace.yaml` so install and execution commands use the same layout:
 
-```yaml
+```yaml title="pnpm-workspace.yaml"
 nodeLinker:
   type: loaded
   excluded:
@@ -29,7 +29,7 @@ The loader is embedded in the pnpm executable and needs no separately installed 
 
 ## Running an application
 
-The loader requires Node.js 26.10.0 or later. After a CAS install, run Node directly with:
+The loader requires Node.js 24.18.0 or a later 24.x release, or Node.js 26.2.0 or later. On other versions, every Node.js process that preloads it stops with `ERR_PNPM_LOADER_UNSUPPORTED_NODE`. After a CAS install, run Node directly with:
 
 ```sh
 node --import ./node_modules/.pnpm/.store-loader.mjs app.mjs
