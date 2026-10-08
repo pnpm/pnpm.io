@@ -108,6 +108,14 @@ npx get-pnpm
 
 Node.js 22.13 or newer is needed to run this installer, but not to run pnpm afterwards.
 
+## Using pkgx
+
+If you have pkgx installed, you can install pnpm using the following command:
+
+```
+pkgx install pnpm
+```
+
 :::tip
 
 Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).
