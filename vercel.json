@@ -8,13 +8,22 @@
   },
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=86400"
+          "value": "public, max-age=31536000, immutable"
         }
       ]
+     },
+     {
+       "source": "/((?!assets/).*)",
+       "headers": [
+         {
+           "key": "Cache-Control",
+           "value": "public, max-age=0, must-revalidate"
+         }
+       ]
     }
   ],
   "rewrites": [
