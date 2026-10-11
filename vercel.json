@@ -88,6 +88,16 @@
       "permanent": true
     },
     {
+      "source": "/users",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:locale(it|zh|ja|ko|pt|zh-TW|ru|uk|fr|tr|es|id)/users",
+      "destination": "/:locale",
+      "permanent": true
+    },
+    {
       "source": "/search",
       "destination": "/",
       "permanent": false
