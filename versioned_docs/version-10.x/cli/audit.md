@@ -20,7 +20,7 @@ Or alternatively, run `pnpm audit --fix`.
 If you want to tolerate some vulnerabilities as they don't affect your project, you may use the [`auditConfig.ignoreCves`] setting.
 
 [overrides]: ../settings.md#overrides
-[`auditConfig.ignoreCves`]: ../settings.md#auditconfigignorecves
+[`auditConfig.ignoreCves`]: #auditconfigignorecves
 
 ## Options
 
