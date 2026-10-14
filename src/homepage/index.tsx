@@ -38,7 +38,7 @@ export function Homepage ({ messages = {}, basePath = '', ...props }: HomepagePr
     items: testimonials.items.map((item) => ({
       ...item,
       platformIcon: (
-        <a href={(item as any).url} target="_blank" rel="noreferrer" style={{ display: 'inline-flex' }}>
+        <a aria-label={`View ${item.authorName}'s post on X`} href={(item as any).url} target="_blank" rel="noreferrer" style={{ display: 'inline-flex' }}>
           {item.platformIcon}
         </a>
       ),
