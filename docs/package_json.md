@@ -9,6 +9,8 @@ across all major Node.js package managers, including pnpm.
 
 In addition to the traditional `package.json` format, pnpm also supports `package.json5` (via [json5]) and `package.yaml` (via [js-yaml]).
 
+When a directory contains more than one of these files, pnpm uses the first one found in the order `package.json`, `package.json5`, `package.yaml`. In a workspace, the [`preferredManifestFormat`](./workspaces.md#preferredmanifestformat) setting changes which one comes first.
+
 [json5]: https://www.npmjs.com/package/json5
 [js-yaml]: https://www.npmjs.com/package/@zkochan/js-yaml
 
