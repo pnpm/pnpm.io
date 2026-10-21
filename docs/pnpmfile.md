@@ -9,6 +9,10 @@ pnpm lets you hook directly into the installation process via special functions
 By default, `.pnpmfile.mjs` should be located in the same directory as the
 lockfile. For instance, in a [workspace](workspaces.md) with a shared lockfile,
 `.pnpmfile.mjs` should be in the root of the monorepo.
+In a workspace where each project has its own lockfile
+(`sharedWorkspaceLockfile: false`), each project runs the hooks of the
+pnpmfile in its own directory, then those of the pnpmfile in the root of the
+monorepo.
 
 ## Hooks
 
@@ -120,6 +124,35 @@ Two entries describe registry routing and credentials:
   the command line.
 * `configByUri` maps a registry URI to its credentials, the way pnpm 11
   reports them.
+
+#### Registry routing
+
+Returning `registriesByScope` replaces the routing map. Scopes omitted from
+the returned map use its `default` registry, or the previously configured main
+registry if `default` is omitted. The built-in `@jsr` route remains unless
+explicitly overridden. This hook changes the fallback registry:
+
+```js title=".pnpmfile.mjs"
+export const hooks = {
+  updateConfig (config) {
+    return {
+      ...config,
+      registriesByScope: {
+        default: 'https://registry.example.com/',
+      },
+    }
+  },
+}
+```
+
+To preserve existing scope routes while changing one route, spread
+`...config.registriesByScope` into the returned map before the overrides.
+
+Hooks written for pnpm before v11.23.0 return the routing map as
+`registries`. That name now refers to the [`registries` setting](settings/dependency-resolution.md#registries),
+which merges per key with existing configuration. Returning
+`registries: { default: ... }` therefore changes the main registry but leaves
+scope routes from `.npmrc` in place.
 
 #### Settings given on the command line
 
