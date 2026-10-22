@@ -55,18 +55,24 @@ You may also selectively ignore these errors using the [peerDependencyRules.igno
 
 This error happens when installation cannot be performed without changes to the lockfile. This might happen in a CI environment if someone has changed a `package.json` file in the repository without running `pnpm install` afterwards. Or someone forgot to commit the changes to the lockfile.
 
-To fix this error, just run `pnpm install` and commit the changes to the lockfile.
+To fix this error, run `pnpm install` and commit the changes to the lockfile.
 
 ## ERR\_PNPM\_TARBALL\_INTEGRITY
 
 This error indicates that the downloaded package's tarball did not match the expected integrity checksum.
 
-If you use the npm registry (`registry.npmjs.org`), then this probably means that the integrity in your lockfile is incorrect.
+If you use the npm registry (`registry.npmjs.org`), then this usually means that the integrity in your lockfile is incorrect.
 This might happen if a lockfile had badly resolved merge conflicts.
 
 If you use a registry that allows to override existing versions of a package, then it might mean that in your local metadata cache you have the integrity checksum of an older version of the package. In this case, you should run `pnpm store prune`. This command will remove your local metadata cache. Then you can retry the command that failed.
 
 But also be careful and verify that the package is downloaded from the right URL. The URL should be printed in the error message.
+
+## ERR_PNPM_REGISTRY_NAME_MISMATCH
+
+The registry answered a request for one package with the metadata of a different package. pnpm stops instead of installing the package under a name the registry was not asked about.
+
+Check that the registry configured for the package, or for its scope, is correct. A misconfigured proxy or a registry that serves the wrong document can cause this error.
 
 ## ERR_PNPM_MISMATCHED_RELEASE_CHANNEL
 
@@ -78,7 +84,7 @@ For example:
 
 To fix this error, either remove the release channel prefix or correct the version suffix.
 
-Note that it is not allowed to specify node versions like `lts/Jod`.
+It is not allowed to specify node versions like `lts/Jod`.
 The correct syntax for stable release is strictly X.Y.Z or release/X.Y.Z.
 
 ## ERR_PNPM_INVALID_NODE_VERSION

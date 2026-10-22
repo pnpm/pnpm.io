@@ -23,12 +23,6 @@ Since v11.27.1, a dependency whose specifier comes from a [`packageExtensions`](
 
 An exact pin from one of those sources is left as it is. When that pin is a vulnerable version, `pnpm audit --fix=update` warns and points at `pnpm audit --fix`, which writes an override. An override is applied after `packageExtensions` and `readPackage`, so it replaces a specifier those supply.
 
-Since v11.25.0, [`--patches`](#--patches) changes no version and no declared range, refreshing only
-which registry artifact each locked version resolves to. That still rewrites
-lockfile metadata — the `integrity`, the `revision`, and the package snapshot
-around them — because artifact revisions may declare different dependencies. See
-[Registry revisions](../registry-revisions.md).
-
 ## Updating to a specific version
 
 Since v11.23.0, `pnpm update <name>@<version>` fails with `ERR_PNPM_UPDATE_VERSION_ON_INDIRECT_DEP` when the package is not a direct dependency of any selected project. There is nowhere to record the version in that case; pin a transitive dependency through [`overrides`](../settings/dependency-resolution.md#overrides) instead. Ranges and tags are unaffected.
@@ -71,7 +65,7 @@ Local actions are followed rather than looked up: a `./`-relative reference, and
 since v11.26.0 GitHub's self-repository spelling
 (`uses: $/.github/actions/setup`), resolve inside the repository.
 
-Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read — for example, an action in a private repository — are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings/dependency-resolution.md#updategithubactionsserver) (added in v11.17.0).
+Checking for updates runs `git ls-remote` against every referenced repository. Actions whose refs cannot be read (for example, an action in a private repository) are skipped with a warning. If the actions are hosted on a different GitHub server (such as a GitHub Enterprise Server), set [`update.githubActionsServer`](../settings/dependency-resolution.md#updategithubactionsserver) (added in v11.17.0).
 
 ## Options
 
@@ -95,30 +89,6 @@ pnpm --recursive update typescript@latest
 Update the dependencies to their latest stable version as determined by their `latest` tags (potentially upgrading the packages across major versions) as long as the version range specified in `package.json` is lower than the `latest` tag (i.e. it will not downgrade prereleases).
 
 Since v11.27.1, `--latest` does not move a dependency past a specifier supplied by `packageExtensions`, a `readPackage` hook, or an override. The lockfile stays inside that specifier.
-
-### --patches
-
-Added in: v11.25.0
-
-Refresh [registry revisions](../registry-revisions.md) without changing any
-package version: for every locked registry package, pnpm resolves current
-metadata for the same `name@version`, and adopts the artifact the registry
-selects now if that changed. Versions and declared ranges are left alone, but the
-lockfile entry is rewritten as a whole — `integrity`, `revision`, and the package
-snapshot around them — since revisions may declare different dependencies.
-
-Cannot be combined with package selectors, `--latest`, `--interactive`, or
-`--global` (`ERR_PNPM_PATCHES_WITH_SELECTOR`). Each of those narrows or redirects
-what an update targets — a subset of packages, the newest versions, an
-interactive choice, the global installation — and `--patches` is defined as
-covering every locked package of the current project at its current version.
-
-### --pnpr-server &lt;url\>
-
-Added in: v11.25.0
-
-Offload the resolution of a `--patches` refresh to a [pnpr](/pnpr) server, the
-way [`pnprServer`](/pnpr/install-acceleration) does for an install.
 
 ### --global, -g
 
@@ -173,7 +143,7 @@ Don't update the ranges in `package.json`.
 
 Added in: v11.16.0
 
-After the update completes, write a [change intent](../versioning.md) — a changesets-compatible `.changeset/*.md` file — declaring a `patch` bump for every workspace package whose `dependencies` or `optionalDependencies` were changed by the update, and a `major` bump when its `peerDependencies` changed. Packages that consume an updated catalog entry via the `catalog:` protocol are included. Private packages, packages without a name, and packages listed in the `ignore` array of `.changeset/config.json` are skipped. If `.changeset/config.json` does not exist, a warning is printed and no changeset is generated.
+After the update completes, write a [change intent](../versioning.md) (a changesets-compatible `.changeset/*.md` file) declaring a `patch` bump for every workspace package whose `dependencies` or `optionalDependencies` were changed by the update, and a `major` bump when its `peerDependencies` changed. Packages that consume an updated catalog entry via the `catalog:` protocol are included. Private packages, packages without a name, and packages listed in the `ignore` array of `.changeset/config.json` are skipped. If `.changeset/config.json` does not exist, a warning is printed and no changeset is generated.
 
 Set [`update.changeset`](../settings/dependency-resolution.md#updatechangeset) to `true` in `pnpm-workspace.yaml` to enable this behavior by default, and use `--no-changeset` to override the setting for one update.
 

@@ -11,7 +11,9 @@ If your config dependency is named following the `pnpm-plugin-*`, `@*/pnpm-plugi
 
 Config dependencies must come from an npm registry. pnpm verifies them against their registry before installing them, so installing a new or changed config dependency offline requires cached registry metadata. A config dependency pinned with `version+integrity` keeps that integrity as its pin. [`minimumReleaseAge`](./settings/dependency-resolution.md#minimumreleaseage) applies to config dependencies that are not pinned with `version+integrity`. pnpm installs them before any `updateConfig` hook runs, so a [`minimumReleaseAgeExclude`](./settings/dependency-resolution.md#minimumreleaseageexclude) entry added by a hook does not cover them.
 
-## How to Add a Config Dependency
+Removing a package from `configDependencies` removes its installed link and unused lockfile entries on the next `pnpm install`. This also applies when you remove the entire setting. Run without `--frozen-lockfile` to update the lockfile after changing the declarations.
+
+## How to add a config dependency
 
 Config dependencies are defined in your `pnpm-workspace.yaml`. Their integrity checksums are stored in `pnpm-lock.yaml` (in a dedicated [env lockfile document](./lockfile.md)).
 
@@ -24,7 +26,7 @@ configDependencies:
 
 **Important:**
 
-* Config dependencies **cannot** have their own regular `dependencies`. They **can** declare `optionalDependencies`, but only one level deep — `optionalDependencies` of `optionalDependencies` are ignored.
+* Config dependencies **cannot** have their own regular `dependencies`. They **can** declare `optionalDependencies`, but only one level deep. `optionalDependencies` of `optionalDependencies` are ignored.
 * Config dependencies **cannot** define lifecycle scripts (like `preinstall`, `postinstall`, etc.).
 
 ### Platform-specific binaries via `optionalDependencies`
@@ -33,11 +35,11 @@ A config dependency may ship platform-specific binaries via `optionalDependencie
 
 The env lockfile records all platform variants regardless of host platform, so the lockfile stays portable across machines.
 
-Each entry in `optionalDependencies` must be declared with an **exact** version (e.g. `"1.2.3"`) — ranges (`"^1.0.0"`, `"~1.0.0"`) and tags (`"latest"`) are rejected. This keeps config-dep installs reproducible: the resolved subdep can't drift between machines for a parent that's pinned by integrity.
+Each entry in `optionalDependencies` must be declared with an **exact** version (e.g. `"1.2.3"`). Ranges (`"^1.0.0"`, `"~1.0.0"`) and tags (`"latest"`) are rejected. This keeps config-dep installs reproducible: the resolved subdep can't drift between machines for a parent that's pinned by integrity.
 
 ## Usage
 
-### Installing Dependencies Used in Hooks
+### Installing dependencies used in hooks
 
 Config dependencies are installed **before** hooks from your [`.pnpmfile.mjs`] are loaded, allowing you to import logic from config packages.
 
@@ -53,9 +55,9 @@ export const hooks = {
 
 [`.pnpmfile.mjs`]: ./pnpmfile.md
 
-### Updating pnpm Settings Dynamically
+### Updating pnpm settings dynamically
 
-Using the [`updateConfig`] hook, you can dynamically update pnpm’s settings using config dependencies.
+Using the [`updateConfig`] hook, you can dynamically update pnpm's settings using config dependencies.
 
 For example, the following `pnpmfile` adds a new [catalog] entry to pnpm's configuration:
 
@@ -96,7 +98,7 @@ This makes it easy to maintain and share centralized configuration and dependenc
 [`updateConfig`]: ./pnpmfile.md#hooksupdateconfigconfig-config--promiseconfig
 [catalog]: ./catalogs.md
 
-### Loading Patch Files
+### Loading patch files
 
 You can reference [patch files] stored inside config dependencies.
 
