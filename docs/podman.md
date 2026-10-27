@@ -3,7 +3,7 @@ id: podman
 title: Working with Podman
 ---
 
-## Sharing Files Between a Container and the Host Btrfs Filesystem
+## Sharing files between a container and the host Btrfs filesystem
 
 :::note
 
@@ -11,7 +11,7 @@ This method only works on copy-on-write filesystems supported by Podman, such as
 
 :::
 
-Podman support copy-on-write filesystems like Btrfs. With Btrfs, container runtimes create actual Btrfs subvolumes for their mounted volumes. pnpm can leverage this behavior to reflink the files between different mounted volumes.
+Podman support copy-on-write filesystems like Btrfs. With Btrfs, container runtimes create actual Btrfs subvolumes for their mounted volumes. pnpm can use this behavior to reflink the files between different mounted volumes.
 
 To share files between the host and the container, mount the store directory and the `node_modules` directory from the host to the container. This allows pnpm inside the container to naturally reuse the files from the host as reflinks.
 
@@ -33,10 +33,10 @@ WORKDIR /app
 VOLUME [ "/pnpm-store", "/app/node_modules" ]
 RUN pnpm config --global set store-dir /pnpm-store
 
-# You may need to copy more files than just package.json in your code
-COPY package.json /app/package.json
+# You may need to copy more files than these in your code
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /app/
 
-RUN pnpm install
+RUN pnpm install --frozen-lockfile
 RUN pnpm run build
 ```
 

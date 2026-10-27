@@ -7,14 +7,14 @@ The manifest file of a package. It contains all the package's metadata,
 including dependencies, title, author, et cetera. This is a standard preserved
 across all major Node.js package managers, including pnpm.
 
-In addition to the traditional `package.json` format, pnpm also supports `package.json5` (via [json5]) and `package.yaml` (via [js-yaml]).
+In addition to the traditional `package.json` format, pnpm also supports `package.json5` (in [JSON5] format) and `package.yaml` (in [YAML] format).
 
-[json5]: https://www.npmjs.com/package/json5
-[js-yaml]: https://www.npmjs.com/package/@zkochan/js-yaml
+[JSON5]: https://json5.org/
+[YAML]: https://yaml.org/
 
 :::note
 
-Since v11, pnpm no longer reads settings from the `pnpm` field of `package.json`. Settings must be defined in `pnpm-workspace.yaml` instead. See [Configuring](./configuring.md).
+pnpm does not read settings from the `pnpm` field of `package.json`. Define settings in `pnpm-workspace.yaml` instead. See [Configuring](./configuring.md).
 
 :::
 
@@ -42,8 +42,6 @@ installed as a dependency.
 
 ## engines.runtime
 
-Added in: v10.21.0
-
 Specifies the Node.js runtime required by a dependency. When declared, pnpm will automatically install the specified Node.js version.
 
 ```json title="package.json"
@@ -66,8 +64,6 @@ When a package declares a runtime:
 This is particularly useful for dependencies that require specific Node.js versions to function correctly.
 
 ## devEngines.runtime
-
-Added in: v10.14
 
 Allows to specify one or more JavaScript runtime engines used by the project. Supported runtimes are Node.js, Deno, and Bun.
 
@@ -116,9 +112,23 @@ To override the declared `onFail` behavior without editing the manifest, use the
 
 Since v12.0.0-rc.2, a bare `node` (or `deno`/`bun`) run from inside the project also follows this pin, not just scripts. This can be turned off with the [`globalShims`](./settings/other.md#globalshims) setting, or skipped for a single command with `PNPM_SHIM_BYPASS=1`. See [project-aware global bins](./global-packages.md#project-aware-global-bins).
 
-## devEngines.packageManager
+## packageManager
 
-Added in: v11.0.0
+Names the project's package manager and its exact version:
+
+```json title="package.json"
+{
+  "packageManager": "pnpm@12.0.0"
+}
+```
+
+When a command runs with a different pnpm version, pnpm switches to the pinned
+one, as set by [`pmOnFail`](./settings/cli.md#pmonfail). To allow a range of
+versions, use [`devEngines.packageManager`](#devenginespackagemanager). See
+[Package managers](./package-managers.md#declaring-the-package-manager-of-a-project)
+for other package managers.
+
+## devEngines.packageManager
 
 Allows specifying the pnpm version via `devEngines.packageManager` in `package.json`. Unlike the `packageManager` field, this supports version ranges. The resolved version is stored in `pnpm-lock.yaml` under `packageManagerDependencies` and reused if it still satisfies the range.
 
@@ -142,7 +152,7 @@ When pnpm 12 is declared via the legacy `packageManager` field and [`pmOnFail`](
 
 :::
 
-Since v12.0.0-rc.6, the field can also name [another package manager](./package-managers.md) — `npm`, `yarn` or `bun` — which is what `pnpm add npm@11` writes. For those, nothing is recorded in `pnpm-lock.yaml`: `packageManagerDependencies` holds pnpm's own pin, and another package manager is pinned in an environment lockfile of its own under the pnpm home.
+Since v12.0.0-rc.6, the field can also name [another package manager](./package-managers.md) (`npm`, `yarn` or `bun`), which is what `pnpm add npm@11` writes. For those, nothing is recorded in `pnpm-lock.yaml`: `packageManagerDependencies` holds pnpm's own pin, and another package manager is pinned in an environment lockfile of its own under the pnpm home.
 
 To override the `onFail` behavior without editing the manifest, see the [`pmOnFail`](./settings/cli.md#pmonfail) setting.
 
@@ -154,7 +164,7 @@ Additional meta information used for dependencies declared inside `dependencies`
 
 If this is set to `true` for a dependency that is a local workspace package, that package will be installed by creating a hard linked copy in the virtual store (`node_modules/.pnpm`).
 
-If this is set to `false` or not set, then the dependency will instead be installed by creating a `node_modules` symlink that points to the package's source directory in the workspace.  This is the default, as it is faster and ensures that any modifications to the dependency will be immediately visible to its consumers.
+If this is set to `false` or not set, then the dependency will instead be installed by creating a `node_modules` symlink that points to the package's source directory in the workspace. This is the default, as it is faster and ensures that any modifications to the dependency will be immediately visible to its consumers.
 
 For example, suppose the following `package.json` is a local workspace package:
 
@@ -207,13 +217,13 @@ Whereas the `package.json` of `form` could be configured as follows:
 
 With these changes, we say that `button` is an "injected dependency" of `card` and `form`.  When `button` imports `react`, it will resolve to `react@16` in the context of `card`, but resolve to `react@17` in the context of `form`.
 
-Because injected dependencies produce copies of their workspace source directory, these copies must be updated somehow whenever the code is modified; otherwise, the new state will not be reflected for consumers. When building multiple projects with a command such as `pnpm --recursive run build`, this update must occur after each injected package is rebuilt but before its consumers are rebuilt. For simple use cases, it can be accomplished by invoking `pnpm install` again, perhaps using a `package.json` lifecycle script such as `"prepare": "pnpm run build"` to rebuild that one project.  Third party tools such as [pnpm-sync](https://www.npmjs.com/package/pnpm-sync-lib) and [pnpm-sync-dependencies-meta-injected](https://www.npmjs.com/package/pnpm-sync-dependencies-meta-injected) provide a more robust and efficient solution for updating injected dependencies, as well as watch mode support.
+Because injected dependencies produce copies of their workspace source directory, these copies must be updated somehow whenever the code is modified; otherwise, the new state will not be reflected for consumers. When building multiple projects with a command such as `pnpm --recursive run build`, this update must occur after each injected package is rebuilt but before its consumers are rebuilt. For simple use cases, it can be accomplished by invoking `pnpm install` again, perhaps using a `package.json` lifecycle script such as `"prepare": "pnpm run build"` to rebuild that one project. The [`syncInjectedDepsAfterScripts`](./workspaces.md#syncinjecteddepsafterscripts) setting refreshes the injected copies after the listed scripts run, and while they run. Third party tools such as [pnpm-sync](https://www.npmjs.com/package/pnpm-sync-lib) and [pnpm-sync-dependencies-meta-injected](https://www.npmjs.com/package/pnpm-sync-dependencies-meta-injected) also update injected dependencies, with watch mode support.
 
 ## peerDependencies
 
 Peer dependency values are normally semver ranges (`^1.0.0`), or a [`workspace:`](./workspaces.md#workspace-protocol-workspace) or [`catalog:`](./catalogs.md) specifier.
 
-Since v11.14.0, a peer dependency may also be declared with a specifier that carries a scheme:
+A peer dependency may also be declared with a specifier that carries a scheme:
 
 ```json title="package.json"
 {
@@ -228,7 +238,7 @@ Since v11.14.0, a peer dependency may also be declared with a specifier that car
 
 Accepted forms are a [named-registry](./settings/dependency-resolution.md#namedregistries) spec (`<registry>:<version>`), an `npm:` alias, and a `file:`, git, or URL spec.
 
-Such a specifier is matched against the semver range it carries — `work:5.x.x` is checked as `5.x.x` and `npm:other-lib@^5` as `^5`. A specifier that carries no version, such as `file:../lib-c`, is matched against `*`, so any version satisfies it. Meanwhile the original specifier is what selects the package when [`autoInstallPeers`](./settings/peer-dependencies.md#autoinstallpeers) installs a missing peer, so the peer is fetched from the aliased name, registry, or source you named.
+Such a specifier is matched against the semver range it carries: `work:5.x.x` is checked as `5.x.x` and `npm:other-lib@^5` as `^5`. A specifier that carries no version, such as `file:../lib-c`, is matched against `*`, so any version satisfies it. Meanwhile the original specifier is what selects the package when [`autoInstallPeers`](./settings/peer-dependencies.md#autoinstallpeers) installs a missing peer, so the peer is fetched from the aliased name, registry, or source you named.
 
 Bare `name@version` values are still rejected with `ERR_PNPM_INVALID_PEER_DEPENDENCY_SPECIFICATION`, as they are almost always a mistake:
 
@@ -268,17 +278,19 @@ For example:
 }
 ```
 
-Note that even though `bar` was not specified in `peerDependencies`, it is
+Even though `bar` was not specified in `peerDependencies`, it is
 marked as optional. pnpm will therefore assume that any version of bar is fine.
-However, `foo` is optional, but only to the required version specification.
+A missing `foo` causes no warning either, but an installed `foo` whose version
+does not satisfy `1` still produces a peer dependency warning.
 
 ## publishConfig
 
 This field carries settings that change how a package is published:
 [`registry`](#publishconfigregistry), [`access`](#publishconfigaccess),
 [`directory`](#publishconfigdirectory),
-[`linkDirectory`](#publishconfiglinkdirectory), and
-[`executableFiles`](#publishconfigexecutablefiles). These are preserved in the
+[`linkDirectory`](#publishconfiglinkdirectory),
+[`executableFiles`](#publishconfigexecutablefiles), and
+[`@<scope>:registry`](#publishconfigregistry). These are preserved in the
 published `package.json`.
 
 Additionally, `publishConfig` can be used to override several other fields in the
@@ -297,8 +309,8 @@ manifest before the package is packed. The following fields may be overridden:
 * [`typesVersions`](https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html#version-selection-with-typesversions)
 * cpu
 * os
-* `engines` (Added in v10.22.0)
-* [`name`](#publishconfigname) (Added in v11.18.0)
+* `engines`
+* [`name`](#publishconfigname)
 
 To override a field, add the publish version of the field to `publishConfig`.
 
@@ -328,8 +340,6 @@ Will be published as:
 ```
 
 ### publishConfig.registry
-
-Added in: v8.6.8
 
 The registry this package publishes to. It overrides the `registry` setting, any
 scope route in [`registries`](./settings/dependency-resolution.md#registries),
@@ -369,8 +379,6 @@ Since v12.7.0, a scoped package can also set its registry under the
 
 ### publishConfig.access
 
-Added in: v11.2.0
-
 Tells the registry whether the published package should be `public` or
 `restricted`. Same as
 [`pnpm publish --access`](./cli/publish.md#--access-publicrestricted).
@@ -391,8 +399,6 @@ cannot be `restricted`.
 
 ### publishConfig.name
 
-Added in: v11.18.0
-
 Publishes the package under a different name than the one its manifest carries in the workspace. This is for a project whose published name is already taken by a sibling project, which otherwise has to be renamed by a build step just before publishing.
 
 ```json title="package.json"
@@ -405,7 +411,7 @@ Publishes the package under a different name than the one its manifest carries i
 }
 ```
 
-Only the published artifact is renamed — dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
+Only the published artifact is renamed. Dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
 
 ### publishConfig.executableFiles
 

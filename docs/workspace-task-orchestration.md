@@ -116,7 +116,7 @@ Added in: v12.6.0
 * Default: **0**
 * Type: **Integer**
 
-Waiting tasks take available slots in order of descending `priority`, with higher values running first. When `priority` is not specified, it defaults to `0`. A task with `priority: 10` therefore has higher priority than an unconfigured task and runs before it, while negative priorities run after. When two tasks have the same priority, arrival order breaks the tie.
+Tasks waiting for a slot of their [concurrency group](#concurrencygroups) take free slots in order of descending `priority`, with higher values running first. When `priority` is not specified, it defaults to `0`. A task with `priority: 10` therefore has higher priority than an unconfigured task and runs before it, while negative priorities run after. When two tasks have the same priority, arrival order breaks the tie.
 
 ```yaml title="pnpm-workspace.yaml"
 tasks:
@@ -204,14 +204,14 @@ the cycle's members, and may run them in any order relative to each other.
 The named package's requested task is the resume point.
 
 pnpm records which tasks pass as a recursive `run` or `exec` proceeds. When that
-record belongs to the same invocation — the same selected projects, command,
-arguments, and execution-affecting settings (including script bodies for
-`run`) — `--resume-from` skips exactly the tasks the record says passed,
+record belongs to the same invocation (the same selected projects, command,
+arguments, and execution-affecting settings, including script bodies for
+`run`), `--resume-from` skips exactly the tasks the record says passed,
 wherever they sit in the graph, and runs everything else. A record left by a
 different invocation is ignored rather than trusted.
 
-Without a usable record — a first run, a run interrupted before any task
-passed, or a `node_modules` directory pnpm cannot write to — pnpm falls back to
+Without a usable record (a first run, a run interrupted before any task
+passed, or a `node_modules` directory pnpm cannot write to), pnpm falls back to
 graph position: it omits the resume point's transitive dependencies, treating
 them as already completed, but still runs the resume task, its dependents, and
 unrelated tasks in the selected graph. That assumption holds after a failed run

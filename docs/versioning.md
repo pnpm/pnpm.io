@@ -3,11 +3,9 @@ id: versioning
 title: Release management
 ---
 
-Added in: v11.13.0
-
 pnpm can version and release a workspace on its own, without a separate release tool. The workflow has two halves:
 
-1. As you work, [`pnpm change`](./cli/change.md) records **change intents** — small markdown files in `.changeset/` saying which packages a change affects, how each should be bumped, and a summary that becomes the changelog entry. These are committed alongside the change.
+1. As you work, [`pnpm change`](./cli/change.md) records **change intents**: small markdown files in `.changeset/` saying which packages a change affects, how each should be bumped, and a summary that becomes the changelog entry. These are committed alongside the change.
 2. At release time, the bare [`pnpm version -r`](./cli/version.md#recursive-releases) consumes the pending intents: it bumps versions across the workspace, propagates to dependents, writes changelogs, and records what it consumed in a committed ledger.
 
 Intent files use the [changesets](https://github.com/changesets/changesets) format, so an existing `.changeset/` directory keeps working. See [Using Changesets with pnpm](./using-changesets.md) if you would rather keep using the Changesets CLI.
@@ -42,11 +40,11 @@ pnpm version -r
 
 This applies the release plan: every package named by an intent is bumped, and so is every package that depends on it through a `workspace:` range. Preview it first with `--dry-run`, and narrow it with `--filter`.
 
-Because a recursive run can bump many packages to different versions, no git commit or tag is created — there is no single version to tag. Commit the result yourself, then publish with `pnpm publish -r`.
+Because a recursive run can bump many packages to different versions, no git commit or tag is created, because there is no single version to tag. Commit the result yourself, then publish with `pnpm publish -r`.
 
 ### First releases
 
-Since v11.16.0, the first release of a package publishes the version written in its manifest verbatim, instead of bumping off it. `pnpm version -r` and `pnpm change status` check the registry for each release's current version; when that version is not yet published, the package debuts at it and its pending change intents apply only from the next release. A newly added package seeded at `1100.0.0` with a `minor` intent is therefore published as `1100.0.0` rather than skipping straight to `1100.1.0`.
+The first release of a package publishes the version written in its manifest verbatim. `pnpm version -r` and `pnpm change status` check the registry for each release's current version; when that version is not yet published, the package debuts at it and its pending change intents apply only from the next release. A newly added package seeded at `1100.0.0` with a `minor` intent is therefore published as `1100.0.0` rather than skipping straight to `1100.1.0`.
 
 Private packages (`"private": true`) are never published, so they skip this registry check: their pending change intents are always applied on top of the version in their manifest.
 
@@ -73,7 +71,7 @@ Where two workspace projects publish the same name, a project can be referenced 
 
 ### Fixed groups
 
-Packages listed together in `versioning.fixed` always release at one shared version — the highest current version in the group, bumped by the largest bump any member needs. A fixed group must move between lanes together, and must sit entirely inside or entirely outside an epic.
+Packages listed together in `versioning.fixed` always release at one shared version: the highest current version in the group, bumped by the largest bump any member needs. A fixed group must move between lanes together, and must sit entirely inside or entirely outside an epic.
 
 ### Lanes
 
@@ -89,7 +87,7 @@ See [`pnpm lane`](./cli/lane.md) for how the prerelease versions are computed.
 
 ### Epics
 
-An epic ties a group of member packages to a lead package, constraining every member's major version to a band derived from the lead's major: while the lead is on major `M`, members live in `M*100` … `M*100+99`.
+An epic ties a group of member packages to a lead package, constraining every member's major version to a band derived from the lead's major: while the lead is on major `M`, members live in `M*100` to `M*100+99`.
 
 ```yaml title="pnpm-workspace.yaml"
 versioning:
@@ -100,7 +98,7 @@ versioning:
         - '!./packages/private-*'
 ```
 
-With the lead on `11.x`, members occupy majors `1100`–`1199`. Members move independently inside the band — patch, minor, and even a `major` intent that stays in-band. A bump that would carry a member past the band ceiling is rejected until the lead advances its own major. When a release plan takes the lead to a new stable major, every member re-bases to the band floor in the same plan.
+With the lead on `11.x`, members occupy majors `1100` to `1199`. Members move independently inside the band: patch, minor, and even a `major` intent that stays in-band. A bump that would carry a member past the band ceiling is rejected until the lead advances its own major. When a release plan takes the lead to a new stable major, every member re-bases to the band floor in the same plan.
 
 Membership is matched with pnpm's package selectors: name globs, `./`-prefixed directory globs, and `!`-prefixed negations. Selectors are evaluated in order and the last one to match decides, so a later include can re-admit a package an earlier negation excluded. The lead is never a member of its own band.
 
@@ -127,4 +125,4 @@ Private packages are never published, so no tarball could carry their changelog.
     - calm-cats-resolve
 ```
 
-Consumption is tracked per project: an intent file is deleted only once every project it names has released. This is what makes cherry-picks and merge-backs between release branches safe — a release branch that has already consumed an intent will not consume it again when the commit is merged forward, and a package on a lane can half-consume an intent whose prose still has a stable release to compose.
+Consumption is tracked per project: an intent file is deleted only once every project it names has released. This is what makes cherry-picks and merge-backs between release branches safe. A release branch that has already consumed an intent will not consume it again when the commit is merged forward, and a package on a lane can half-consume an intent whose prose still has a stable release to compose.

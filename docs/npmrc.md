@@ -17,7 +17,7 @@ On your machine, log in to the registry:
 pnpm login
 ```
 
-pnpm saves the token in the global `config.yaml`, under [`_auth`](#_auth).
+pnpm saves the token in `<pnpm config>/auth.ini`.
 
 In CI, pass the token through an environment variable:
 
@@ -35,13 +35,13 @@ INI files in npm's `.npmrc` format hold the
 file, the first file in this list wins:
 
 1. `<workspace root>/.npmrc`, the project file. Add it to `.gitignore`.
-2. `<pnpm config>/auth.ini`. `pnpm config set` writes auth keys here.
+2. `<pnpm config>/auth.ini`. `pnpm login` and `pnpm config set` write auth
+   keys here.
 3. `~/.npmrc`, so credentials you set up for npm keep working. To read a
    different file, use the [`npmrcAuthFile`](./settings/other.md#npmrcauthfile)
    setting.
 
 The global `<pnpm config>/config.yaml` holds the [`_auth`](#_auth) setting.
-`pnpm login` saves tokens there.
 
 The `<pnpm config>` directory is:
 
@@ -91,7 +91,7 @@ pnpm sends `ORG_A_TOKEN` for `@org-a/*` packages and `ORG_B_TOKEN` for
 if it is set.
 
 `pnpm login --registry=https://npm.pkg.github.com --scope=@org-a` saves a
-scoped token under [`_auth`](#_auth) in the global `config.yaml`.
+scoped token in `auth.ini`.
 
 ### &lt;URL&gt;&#58;tokenHelper
 
@@ -173,15 +173,9 @@ routing depends on where the entry comes from:
    `registries` setting chooses a registry. The token is still sent to its own
    URL.
 
-`pnpm login` writes here:
-
-* An unscoped login adds an `"@"` entry. It does not change the `registry`
-  setting.
-* A scoped login adds an `"@org"` entry and adds the scope to that URL in the
-  global `registries` setting. Logging the same scope in to another registry
-  moves both.
-* `pnpm logout` removes the tokens pnpm wrote to `config.yaml` and `auth.ini`.
-  It keeps the registry settings.
+From v12.1.0 to v12.15.0, `pnpm login` saved tokens here. Since v12.16.0 it
+saves them in `auth.ini` and removes the token it replaces from `_auth`.
+`pnpm logout` removes tokens from both files.
 
 ## Environment variables in auth settings
 
@@ -268,7 +262,7 @@ Like the token settings, these go in `.npmrc` or `auth.ini`.
 
 ### ca
 
-* Default: **The npm CA certificate**
+* Default: **null** (the system trust store)
 * Type: **String, Array or null**
 
 The certificate authority (CA) certificate to trust for TLS connections to the
@@ -285,7 +279,9 @@ ca[]="..."
 ca[]="..."
 ```
 
-Set it to `null` to trust only the well-known CAs.
+A `ca` or `cafile` replaces the default trusted CAs. When it is `null`, pnpm
+trusts the CAs in the operating system's trust store. If pnpm cannot load the
+system trust store, it trusts the Mozilla CA set built into pnpm.
 
 See also [`strictSsl`](./settings/network.md#strictssl).
 
@@ -296,6 +292,12 @@ See also [`strictSsl`](./settings/network.md#strictssl).
 
 The path to a file with one or more CA certificates. Use it instead of `ca` to
 keep the certificates in a file.
+
+### NODE_EXTRA_CA_CERTS
+
+The path to a PEM file with extra CA certificates, set as an environment
+variable. pnpm adds them to the trusted CAs: the system trust store, or `ca` or
+`cafile` when one is set. pnpm ignores a missing or unreadable file.
 
 ### &lt;URL&gt;&#58;ca
 
