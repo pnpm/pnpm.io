@@ -51,6 +51,8 @@ COPY --from=pruned /app/pruned .
 ENTRYPOINT ["node", "index.js"]
 ```
 
+A deployed symlink to a directory inside the project is kept even if the directory is not deployed. A link into `node_modules` resolves to the dependency installed in the output directory. A symlink to a file that is not deployed is replaced by a copy of the file.
+
 ## Options
 
 ### --force
@@ -87,11 +89,13 @@ By default, `pnpm deploy` will try creating a dedicated lockfile from a shared l
 
 ## Files included in the deployed project
 
-By default, all the files of the project are copied during deployment but this can be modified in _one_ of the following ways which are resolved in order:
+By default, pnpm copies the files that `pnpm pack` would include. They are selected in _one_ of the following ways, resolved in order:
 
 1. The project's `package.json` may contain a "files" field to list the files and directories that should be copied.
 2. If there is an `.npmignore` file in the application directory then any files listed here are ignored.
 3. If there is a `.gitignore` file in the application directory then any files listed here are ignored.
+
+To copy every file of the project, set [`deployAllFiles`](../settings/other.md#deployallfiles) to `true`.
 
 Since v11.28.0, symlinks that point to files or directories included in the deployed project are kept as symlinks.
 

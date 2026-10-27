@@ -34,9 +34,6 @@ If you `pnpm add` a package and you don't provide a specific version, then it
 will install the package at the version registered under the tag from this
 setting.
 
-This also sets the tag that is added to the `package@version` specified by the
-`pnpm tag` command if no explicit tag is given.
-
 ### globalDir
 
 * Default:
@@ -81,8 +78,7 @@ This setting cannot be set in `pnpm-workspace.yaml` at the project level; set it
 * Default:
   * If the **$XDG_STATE_HOME** env variable is set, then **$XDG_STATE_HOME/pnpm**
   * On Windows: **~/AppData/Local/pnpm-state**
-  * On macOS: **~/.pnpm-state**
-  * On Linux: **~/.local/state/pnpm**
+  * On macOS and Linux: **~/.local/state/pnpm**
 * Type: **path**
 
 The directory where pnpm creates the `pnpm-state.json` file that is currently used only by the update checker.
@@ -247,7 +243,7 @@ When the check finds that nothing changed, pnpm skips the install, including the
 
 ### requiredScripts
 
-Scripts listed in this array will be required in each project of the workspace. Otherwise, `pnpm -r run <script name>` will fail.
+Scripts listed in this array are required in each project selected by `pnpm -r run <script name>`. Otherwise, the run fails.
 
 ```yaml title="pnpm-workspace.yaml"
 requiredScripts:

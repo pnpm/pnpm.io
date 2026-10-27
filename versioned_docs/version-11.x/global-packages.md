@@ -54,6 +54,8 @@ pnpm add -g eslint,prettier
 
 Here `eslint` and `prettier` form a single install group. Removing either with `pnpm remove -g` removes the whole group.
 
+`pnpm add -g <pkg>` replaces every existing group that contains `<pkg>`. After `pnpm add -g eslint`, the `eslint,prettier` group is gone, and so are `prettier` and its bins. To keep the group, add it again as a whole (`pnpm add -g eslint,prettier`), or use `pnpm update -g`.
+
 The two forms can be mixed. For example:
 
 ```sh
@@ -74,19 +76,17 @@ The contents of `{pnpmHomeDir}/global/v11/` look like:
 │   ├── pnpm-lock.yaml    ← lockfile for this install group
 │   └── node_modules/
 │       ├── <pkg>/        ← top-level dep, symlinked into the global virtual store
-│       └── .pnpm/
+│       └── .pnpm/        ← the group's install state
 ├── {hash-B}              → symlink → ./{hash-B-target}/
-├── {hash-B-target}/      ← another isolated install dir
-└── store/                ← shared global virtual store
-    └── ...
+└── {hash-B-target}/      ← another isolated install dir
 ```
 
 - The `{hash}` entries are symlinks; pnpm scans for them to enumerate active installs.
 - The targets are real directories that act as ordinary pnpm projects. Each has its own `package.json` and lockfile.
-- The shared `store/` directory holds the [global virtual store](./global-virtual-store.md). Each install group's direct dependencies (the entries at the root of its `node_modules/`) are symlinks into that store, so the actual package contents are shared rather than copied per group.
+- By default, the package contents live in the [global virtual store](./global-virtual-store.md) at `{storeDir}/links`, outside this directory. Each install group's direct dependencies (the entries at the root of its `node_modules/`) are symlinks into that store, so install groups that depend on the same package share one copy. With `virtualStoreType: project`, each install group keeps its packages in its own `node_modules/.pnpm`.
 - Bin shims live in `{pnpmHomeDir}/bin/` and point through the appropriate install group's `node_modules`.
 
-When a package is removed or its install group is replaced, the hash symlink is updated and orphaned target directories are eventually cleaned up by `pnpm store prune`.
+When a package is removed or its install group is replaced, the hash symlink is updated. Orphaned target directories older than five minutes are removed at the start of the next `pnpm add -g`, `pnpm update -g`, or `pnpm self-update`.
 
 ## Listing global packages
 

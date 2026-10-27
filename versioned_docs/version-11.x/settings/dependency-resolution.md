@@ -564,17 +564,25 @@ packages:
 
 Before v11.20.0, packages were keyed by `name@version` alone, so the same name and version served by two registries collapsed onto a single entry and whichever resolved first decided the tarball that every consumer got. That is a package-substitution risk: a package you expect from your private registry could be installed from another registry that publishes the same name and version, with nothing in the lockfile to reveal it. Registry-qualified keys give each registry its own entry and pin which one a dependency came from.
 
-The lockfile format version is unchanged, and qualified keys appear only for packages resolved from a named registry, including the built-in `gh:` and `npmjs:` aliases, which need no `namedRegistries` entry. A project that installs nothing through an alias sees no difference, and older pnpm versions keep reading the file.
+The lockfile format version is unchanged, and qualified keys appear only for packages resolved from a named registry, including the built-in `gh:` and `npmjs:` aliases, which need no `namedRegistries` entry. A project that declares no prefix and installs nothing through an alias sees no difference, and older pnpm versions keep reading the file.
+
+The key names the registry a package resolved from, not the way its dependency was written. A registry that declares a prefix, through `prefix` in [`registries`](#registries) or through `namedRegistries`, keys every package resolved from it with that prefix: one written as `work:^1.0.0`, one written as a plain range whose scope `registries` routes to that URL, and one the default registry serves when the prefix points at it. A plain range and a prefixed specifier that reach one registry therefore share one `packages:` entry and one copy in `node_modules/.pnpm`, so a published package that depends on `@work/util` by a plain range shares the copy your project installs through `work:`. The built-in `gh:` and `npmjs:` aliases qualify only the specifiers that spell them: routing a scope to `registry.npmjs.org` does not turn its keys into `npmjs:` keys unless you declare that prefix yourself. The same name and version served by two registries still get two entries.
+
+When several prefixes declare one registry, its packages are keyed by the lexicographically smallest prefix, so `work:^1.0.0` and `zeta:^1.0.0` pointing at one URL record `foo@work:1.0.0`. The specifier in `package.json` is left as written.
 
 :::caution
 
 If any dependency is installed through an alias, your first non-frozen install on v11.20.0 or newer re-keys those entries, which shows up as a lockfile diff. Commit it. That diff is the fix being applied. Review it too: an entry that moves to a registry you did not expect is worth investigating.
+
+The same applies when a scope you route reaches a registry that also declares a prefix: the next `pnpm install` moves the scope-routed entries under the prefix and merges them with the prefixed ones. A frozen install keeps installing the lockfile as recorded.
 
 Have everyone working on the project move to v11.20.0 or newer first. An older pnpm reads the re-keyed lockfile fine, and frozen installs are unaffected, but it does not produce registry-qualified keys itself: any install that updates the lockfile writes those entries back to the old shape, and the next install on a current pnpm re-qualifies them. The lockfile then flips back and forth, and while it is in the old shape the project is exposed again. Because the lockfile format version is deliberately unchanged, pnpm cannot detect this and warn you.
 
 There is no setting to keep the old behavior. The old shape is the vulnerability.
 
 :::
+
+A plain key records no registry, so pnpm remembers in the workspace state (`node_modules/.pnpm-workspace-state-v1.json`) which registry each scope routed to when it last resolved the lockfile. When you route a scope to another registry, the next `pnpm install` resolves that scope's packages and their dependencies again from the new registry, at the locked versions it serves, and picks another version in range for a locked version it does not serve. A frozen install keeps installing the lockfile as recorded. Without that record, as in a fresh clone, pnpm reads the plain keys as resolved from the registries configured now. Only scope routes are tracked this way: changing the default registry, which is routinely a switch between mirrors, does not resolve anything again.
 
 Every non-built-in alias that the lockfile references must stay declared, through `prefix` in [`registries`](#registries) or through `namedRegistries`. Reading an entry whose alias is gone fails with `ERR_PNPM_MISSING_NAMED_REGISTRY` rather than falling back to the default registry, since that would fetch a different package. Renaming an alias re-resolves the packages that used it.
 

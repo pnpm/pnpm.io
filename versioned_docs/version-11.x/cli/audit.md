@@ -21,6 +21,8 @@ If you want to tolerate some vulnerabilities as they don't affect your project, 
 
 Since v11, `pnpm audit` queries the registry's `/-/npm/v1/security/advisories/bulk` endpoint. The response does not include CVE identifiers, so advisories are filtered by GitHub advisory ID (GHSA) instead. If you previously listed CVEs under `auditConfig.ignoreCves`, replace each entry with the corresponding `GHSA-xxxx-xxxx-xxxx` value (shown in the `More info` column of `pnpm audit` output) under [`audit.ignore`].
 
+The command exits with code `1` when an advisory at or above the [audit level](#--audit-level-severity) remains after ignored advisories are removed. This also applies to `--ignore` and `--ignore-unfixable`, which save the IDs first.
+
 [overrides]: ../settings/dependency-resolution.md#overrides
 [`audit.ignore`]: #auditignore
 
@@ -44,7 +46,7 @@ The command exits with code `1` if any package has an invalid signature, or if a
 
 ### --audit-level &lt;severity\>
 
-* Type: **low**, **moderate**, **high**, **critical**
+* Type: **info**, **low**, **moderate**, **high**, **critical**
 * Default: **low**
 
 Only print advisories with severity greater than or equal to `<severity>`.
@@ -63,7 +65,7 @@ When [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseag
 
 Added in: v11.0.0
 
-Review the advisories selected by `--fix` and pick which ones to apply. Only usable together with `--fix`.
+Review the advisories selected by `--fix` and pick which ones to apply. Implies `--fix=override` when `--fix` is not given.
 
 ### --json
 
@@ -120,7 +122,7 @@ audit:
 ### audit.level
 
 * Default: **low**
-* Type: **low**, **moderate**, **high**, **critical**
+* Type: **info**, **low**, **moderate**, **high**, **critical**
 
 Only print advisories with severity greater than or equal to this level. Same as the [`--audit-level`](#--audit-level-severity) flag.
 
