@@ -25,6 +25,12 @@
       "alt": "CodeRabbit",
       "url": "https://coderabbit.ai/",
       "width": 220
+    },
+    {
+      "name": "Cloudflare",
+      "logo": "cloudflare_min.svg",
+      "url": "https://www.cloudflare.com/",
+      "width": 160
     }
   ],
   "gold": [
@@ -77,6 +83,12 @@
       "logo": "latitude_min.svg",
       "url": "https://latitude.so/",
       "width": 160
+    },
+    {
+      "name": "Syntax",
+      "logo": "syntaxfm.svg",
+      "url": "https://syntax.fm/",
+      "width": 90
     }
   ],
   "silver": [
