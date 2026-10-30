@@ -62,13 +62,16 @@ A value of `0` or less means the number of available CPU cores minus its absolut
 * Default: **true**
 * Type: **Boolean**
 
-If true, stops when a task throws an error.
+If true, stops when a task throws an error. The tasks that are still running
+are stopped too. On Unix they receive `SIGTERM`, and those still running two
+seconds later receive `SIGKILL`. On Windows they are ended at once, together
+with every process they started.
 
 `--no-bail` is accepted only by `run`, `exec`, `test`, `start`, `stop`, `rebuild`, `install-test`, and the `pnpm <script>` shorthand. Other commands reject it.
 
-This config does not affect the exit code.
-Even if `--no-bail` is used, all tasks will finish but if any of the tasks fail,
-the command will exit with a non-zero code.
+With `--no-bail`, tasks that depend on a failed task are skipped and independent tasks keep running.
+This config does not affect the exit code: if any task fails, the command exits with a non-zero code.
+See [`--no-bail`](../workspace-task-orchestration.md#--no-bail).
 
 Example (run tests in every package, continue if tests fail in one of them):
 ```sh
