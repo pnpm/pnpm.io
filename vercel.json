@@ -38,11 +38,6 @@
   ],
   "redirects": [
     {
-      "source": "/11.x/:splat*",
-      "destination": "/:splat*",
-      "permanent": false
-    },
-    {
       "source": "/12.x/:splat*",
       "destination": "/:splat*",
       "permanent": false
