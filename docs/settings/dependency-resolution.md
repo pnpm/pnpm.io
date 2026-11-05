@@ -200,6 +200,8 @@ update:
 
 Patterns are also supported, so you may ignore any packages from a scope: `@babel/*`.
 
+The ignored packages still update when you name them, as in `pnpm update load-json-file`. They stay unchanged when every selector is negated, as in `pnpm update '!webpack'`.
+
 #### update.changeset
 
 * Default: **false**
@@ -283,7 +285,9 @@ supportedArchitectures:
   - win32-x64
 ```
 
-Each entry is `<os>-<cpu>`, optionally followed by a Linux C library, such as `linux-x64-manylinux_2_28`. Linux entries without a C library mean glibc. Rust target triples are accepted too: `x86_64-unknown-linux-gnu` is equivalent to `linux-x64`. `current` includes the platform running the install.
+Each entry is a platform tag, the same tags a package's [`publishConfig.variants`](../package_json.md#publishconfigvariants) entries name: `<os>-<cpu>`, then for Linux `musl` when the platform uses musl, then the floors and ABI the platform has, such as `linux-x64-manylinux_2_28` (glibc 2.28), `darwin-arm64-macos_14_0`, `win32-x64-windows_10_0`, `linux-x64-napi8`, or `linux-x64-node127` (a Node.js ABI). `<os>` and `<cpu>` are Node.js names, so `freebsd-x64` and `linux-loong64` are platforms too. Linux entries without a C library mean glibc.
+
+The spellings pnpm accepted before platform tags still work: `glibc` or `gnu` for the C library, other names of an architecture such as `amd64`, a `musllinux_<major>_<minor>` wheel baseline, and Rust target triples, so `x86_64-unknown-linux-gnu` is equivalent to `linux-x64`. `current` includes the platform running the install. Python resolves for the Linux, macOS, and Windows platforms of the list and reports the others.
 
 The list prepares only the named platforms. The mapping form continues to work with its existing meaning. Python uses these targets together with [`python.versions`](../python.md#pythonversions) when locking for multiple environments.
 
@@ -342,6 +346,8 @@ For example, the following setting ensures that only packages released at least 
 ```yaml title="pnpm-workspace.yaml"
 minimumReleaseAge: 1440
 ```
+
+A registry declared [`serverType: pnpr`](../registries.md#servertype) supports a `minimumReleaseAge` of at most 43200 minutes (30 days).
 
 ### minimumReleaseAgeExclude
 
@@ -587,9 +593,11 @@ packages:
 
 Keyed by `name@version` alone, the same name and version served by two registries would collapse onto a single entry, and whichever resolved first would decide the tarball that every consumer got. That is a package-substitution risk: a package you expect from your private registry could be installed from another registry that publishes the same name and version, with nothing in the lockfile to reveal it. Registry-qualified keys give each registry its own entry and pin which one a dependency came from.
 
-The lockfile format version is unchanged, and qualified keys appear only for packages resolved from a named registry, including the built-in `gh:` and `npmjs:` aliases, which need no `namedRegistries` entry. A project that declares no prefix and installs nothing through an alias sees no difference, and older pnpm versions keep reading the file.
+The lockfile format version is unchanged, and qualified keys appear only for packages resolved from a named registry, including the built-in `gh:` and `npmjs:` aliases, which need no `namedRegistries` entry. Most packages from the default registry keep plain keys, as described below. A project that declares no prefix and installs nothing through an alias sees no difference, and older pnpm versions keep reading the file.
 
-The key names the registry a package resolved from, not the way its dependency was written. A registry that declares a prefix, through `prefix` in [`registries`](#registries) or through `namedRegistries`, keys every package resolved from it with that prefix: one written as `work:^1.0.0`, one written as a plain range whose scope `registries` routes to that URL, and one the default registry serves when the prefix points at it. A plain range and a prefixed specifier that reach one registry therefore share one `packages:` entry and one copy in `node_modules/.pnpm`, so a published package that depends on `@work/util` by a plain range shares the copy your project installs through `work:`. The built-in `gh:` and `npmjs:` aliases qualify only the specifiers that spell them: routing a scope to `registry.npmjs.org` does not turn its keys into `npmjs:` keys unless you declare that prefix yourself. The same name and version served by two registries still get two entries.
+The key names the registry a package resolved from, not the way its dependency was written. A registry that declares a prefix, through `prefix` in [`registries`](#registries) or through `namedRegistries`, keys every package resolved from it with that prefix: one written as `work:^1.0.0` and one written as a plain range whose scope `registries` routes to that URL. A plain range and a prefixed specifier that reach one registry therefore share one `packages:` entry and one copy in `node_modules/.pnpm`, so a published package that depends on `@work/util` by a plain range shares the copy your project installs through `work:`. The built-in `gh:` and `npmjs:` aliases qualify only the specifiers that spell them, unless you declare that prefix yourself. The same name and version served by two registries still get two entries.
+
+Packages from the default registry, the one the `registry` setting names, keep plain keys. That includes packages installed through a prefix that points at the default registry, such as `npmjs` pointed at the npm mirror your `registry` setting uses. A plain range and such a prefixed specifier share the plain entry. The exception is a package whose scope `registries` routes to another registry: `npmjs:@work/util` is keyed `@work/util@npmjs:<version>` when `@work` routes elsewhere.
 
 When several prefixes declare one registry, its packages are keyed by the lexicographically smallest prefix, so `work:^1.0.0` and `zeta:^1.0.0` pointing at one URL record `foo@work:1.0.0`. The specifier in `package.json` is left as written.
 

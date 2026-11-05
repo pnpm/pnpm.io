@@ -98,12 +98,57 @@ When publishing recursively (`pnpm -r publish`), send all selected packages to t
 
 The target registry has to implement the batch publish endpoint ([pnpr](https://github.com/pnpm/pnpm/tree/main/pnpr) does); registries that don't are reported with an `ERR_PNPM_BATCH_PUBLISH_UNSUPPORTED` error. The batch is processed all-or-nothing: if any package in the batch fails validation, none of the packages are published.
 
+A package that declares [`publishConfig.variants`](../package_json.md#publishconfigvariants) can be published in a batch to a registry declared with [`serverType: pnpr`](../registries.md#servertype). In such a batch, pnpm first uploads the archives it packed for every package to the registry's staging area, and checks that the registry still holds each archive another job uploaded with [`--upload-variant`](#--upload-variant-target). The batch then references all of them by integrity. One batch references at most 256 archives per registry; a batch with variants that needs more fails with `ERR_PNPM_BATCH_PUBLISH_TOO_MANY_ARCHIVES`.
+
 The selected packages are grouped by the registry each one
 publishes to, and one request is sent per group. Every package in a group must
 authenticate with the same credential. A scope-specific token shared across the
 group is fine, and mismatched credentials for one registry are rejected *before*
 anything is published, rather than after part of the release went out. The
 `publish` and `postpublish` scripts run after each completed group.
+
+### --no-variants
+
+Publish only the archive that targets `any` of a package that declares [`publishConfig.variants`](../package_json.md#publishconfigvariants). Without it, pnpm refuses to publish such a package to a registry that is not declared with `serverType: pnpr`, because a version published without its variants can't get them later.
+
+### --upload-variant &lt;target\>
+
+Pack the archive of the [`publishConfig.variants`](../package_json.md#publishconfigvariants) entry that lists this target, upload it to the registry's staging area, and print `<target>=<integrity>`. Nothing is published: a later `pnpm publish --variant-integrity` publishes the version with it. Can be repeated, and `any` uploads the archive of every other host.
+
+This lets each job of a CI matrix upload the archive it built. Every job must publish as the same account, which trusted publishing gives every job of a workflow. Uploading the same archive again renews it. The registry keeps an uploaded archive for a day.
+
+```sh
+value=$(pnpm publish --upload-variant linux-x64-musl)
+```
+
+With `--json`, pnpm prints the package's name and version, and each archive's tag, targets, and integrity.
+
+### --variant-integrity &lt;target\>=&lt;integrity\>
+
+Publish the version from archives other jobs uploaded with `--upload-variant`, given by the values they printed. Repeat it once per entry of `publishConfig.variants`, the `any` entry included, naming each by any one of its targets. With `--recursive`, name the package first: `<name>~<target>=<integrity>`.
+
+pnpm packs none of the archives of a package that a value names. Before publishing, it checks that every entry has exactly one value and that the registry still holds each archive for this account. It fails naming the archive whose upload job has to run again. With `--recursive`, a selected package that no value names is packed and published as usual, and each value must name exactly one selected, publishable project.
+
+### --release-notes &lt;file\>
+
+A file of release notes to send to a registry declared with [`serverType: pnpr`](../registries.md#servertype). The publish fails when the file does not exist. Publishing one package, the notes are its version notes. Publishing several packages with `--batch`, they are the notes of the whole release.
+
+In a workspace that uses [pnpm's versioning](../versioning.md#release-notes-on-pnpr), give the summary to `pnpm version -r --release-notes` instead: `pnpm version -r` composes every note of the release, and `pnpm publish` fails with `ERR_PNPM_RELEASE_NOTES_FROM_VERSIONING` when `--release-notes` is given for packages it composed notes for.
+
+Without this option, pnpm sends each package's notes for the version it publishes:
+
+- In a workspace that uses [pnpm's versioning](../versioning.md#release-notes-on-pnpr), the notes composed from its change intents.
+- Otherwise, the section of the package's `CHANGELOG.md` under the heading of the version, as changesets (`## 1.4.0`) and Keep a Changelog (`## [1.4.0] - 2026-10-28`) write it, without the heading itself.
+
+pnpm prints where each package's notes came from. Notes are at most 64 KiB and may not contain control characters other than line feed and tab, or bidirectional override characters. pnpm checks this before anything is uploaded. Registries not declared with `serverType: pnpr` receive no notes.
+
+### --no-release-notes
+
+Send no release notes.
+
+### --publication-name &lt;name\>
+
+The name of the release that `--batch` publishes to a registry declared with `serverType: pnpr`, such as `v12.0.0`. It may contain letters, digits, `.`, `_`, `+`, and `-`, is at most 214 bytes long, and is not a number, since a number names a release by its identifier. In a workspace that uses pnpm's versioning, the release is named after the version of its epic lead or its one fixed group by default.
 
 ### --skip-manifest-obfuscation
 
@@ -204,6 +249,16 @@ When publishing from a supported cloud CI/CD system, the package will be publicl
 Under trusted publishing, pnpm attaches provenance to a public package from a public repository on its own.
 Use `--no-provenance` (or `--provenance=false`) to publish without it, for example from a self-hosted runner.
 Use [`provenance`](#provenance) to set a default.
+
+For a package with [`publishConfig.variants`](../package_json.md#publishconfigvariants), one statement names every archive the publish supplies: the archive that targets `any` and each platform variant, including those other jobs uploaded with `--upload-variant`. A version without an `any` archive gets one that the registry generates for npm clients, and the statement does not name it. `--upload-variant` itself does not sign provenance.
+
+Running a publish to a registry declared with [`serverType: pnpr`](../registries.md#servertype) again is safe, with or without provenance. A rerun that signs provenance again sends a new statement, so the registry answers that the version is already published. pnpm then reports the version as published only when all of these hold:
+
+- the version's release record names the same archives, the archive that targets `any` and each platform variant;
+- when the rerun signs provenance, the version has a statement naming every one of those archives;
+- the dist-tag the publish sets points at the version.
+
+Otherwise it fails with `ERR_PNPM_PUBLISHED_RELEASE_DIFFERS` and names what differs. A version without an `any` archive is compared by its variants only.
 
 ### --filter &lt;package_selector\>
 
