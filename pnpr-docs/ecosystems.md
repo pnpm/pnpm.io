@@ -12,7 +12,8 @@ registry.
 
 ## Addressing an ecosystem
 
-When more than one ecosystem is configured, a path prefix selects it:
+Each ecosystem is served under its own path prefix, however many are
+configured:
 
 | Ecosystem | Prefix |
 | --- | --- |
@@ -22,13 +23,13 @@ When more than one ecosystem is configured, a path prefix selects it:
 | Container images | `/oci/` |
 
 `/<ecosystem>/~<name>/` addresses a named registry and `/<ecosystem>/` the
-ecosystem's default. A server that configures only one ecosystem omits the
-prefix entirely, so existing npm URLs keep working unchanged.
+ecosystem's default. Adding an ecosystem to a server therefore changes no URL
+an existing client uses.
 
-Two things sit outside the prefixes. Container image registries answer at
-`/v2/` on the host root whatever else is configured, because a client derives
-that path from the image reference itself. And the endpoints that belong to no
-single ecosystem stay at the root: `/-/ping`, the `/-/pnpr/v0/` protocols
+Two things sit outside the prefixes. The default container image registry
+answers at `/v2/` on the host root, because a client derives that path from the
+image reference itself. And the endpoints that belong to no single ecosystem
+sit on the root: `/-/ping`, the `/-/pnpr/v0/` protocols
 (resolve, verify-lockfile, shared artifacts, pipeline runs, and the
 cross-ecosystem publish), and the account endpoints that mint and manage tokens.
 
@@ -121,11 +122,12 @@ sources resolve within their own group and cannot cross into another, and each
 ecosystem gets its own default. Access rules, teams, upstream credentials, and
 caches belong to the individual registry.
 
-A grouped hosted registry defaults to the storage namespace
-`<ecosystem>~<name>`. Set `org` explicitly to keep an existing namespace when
-moving a flat registry into a group, `org: ''` included for the flat storage
-root. Two hosted registries still cannot share a namespace. The flat
-configuration format and its shared `defaultRegistry: main` remain supported.
+A grouped hosted registry defaults its `org` to its own `<name>`, and each
+ecosystem stores its packages under its own `<ecosystem>/` directory in that
+namespace. Set `org` explicitly to choose another namespace (`org: ''` for the
+default namespace). Two hosted registries of the same ecosystem cannot share an
+`org` namespace. The flat configuration format and its shared
+`defaultRegistry: main` remain supported.
 
 ## Cargo
 
@@ -197,10 +199,12 @@ index points downloads at.
 
 ## One publish for a workspace that spans ecosystems
 
-`PUT /-/pnpr/v0/publish` publishes packages of any ecosystem in a single
-transaction. Each entry names its `ecosystem`, and an entry without one is an
-npm publish document, so the body the npm batch endpoint already takes is a
-valid one.
+`PUT /-/pnpr/v0/publish` (also mounted under `/npm/-/pnpr/v0/publish` and a
+named npm registry's `/npm/~<registry>/-/pnpr/v0/publish` for
+`pnpm publish --batch`) publishes packages of any ecosystem in a single
+transaction. Under a named registry, its npm entries are published through that
+registry. Each entry names its `ecosystem`, and an entry without one is an
+npm publish document, so an npm-only batch body is already a valid one.
 
 ```json
 {
@@ -222,21 +226,92 @@ different failures follow from that, so it is worth keeping them apart.
 the version-conflict check all run up front, and any entry that fails one of them
 aborts the whole batch before a byte is written.
 
-**A batch that passes its checks is committed as one journaled transaction.** It
-lands whole or leaves nothing behind, and one interrupted by a crash is finished
-on the next startup rather than staying half-published. A read that arrives while
-the transaction applies can still see part of the release.
+**A batch that passes its checks is committed as one transaction.** It commits
+as one generation of its org, so it lands whole or leaves nothing behind, and a
+read sees the whole release or none of it:
 
-The one case that ends in a partial release is losing a write race: another
-writer publishing the same file between the check and the commit. That entry is
-left out and reported with `409` while the rest of the release stands, because
-the bytes that won the slot are someone else's published release and overwriting
-them would be the worse outcome. Republishing the batch after bumping the
-conflicting version completes the release.
+- Losing a write race, to another writer publishing the same file between the
+  check and the commit, fails the whole batch with `409`, and nothing is
+  published. The bytes that won the slot are someone else's published release,
+  and overwriting them would be the worse outcome. Republishing the batch after
+  bumping the conflicting version completes the release.
+- Every entry must belong to the same org. A batch that spans orgs is refused.
+- A retry gets the original response back. A client sends an
+  `Idempotency-Key` header, or the digest of the whole request serves as the
+  key. Reusing a key for a different request answers `409`. pnpr keeps the
+  outcome for 7 days. A retry needs current publish permission like any
+  publish. A caller whose permission was revoked since gets `403` and can
+  read the outcome from the publication or the package.
+- The commit is recorded as a publication. A top-level `"name": "v2.0.0"`
+  field in the body names it. The name must be unique within the org, at most
+  214 bytes long, and not a decimal number, which would read as a publication
+  id.
+  See [publication endpoints](endpoints.md#publication-endpoints).
+- A top-level `"notes"` field is the publication's release note, and a
+  `"notes"` field in an npm, Cargo, or Python entry is the note of the version
+  it publishes. pnpr stores them with the release. A note breaking the
+  [content rules](endpoints.md#release-note-endpoints) rejects the whole
+  batch.
 
 An [image manifest](container-images.md) whose layers are already uploaded can
 ride along in the same batch. `GET /-/pnpr` advertises support as
-`publish: [0]`. The npm-only `PUT /-/pnpm/v1/publish` stays where it is.
+`publish: [0]`.
+
+### Staged archives {#staged-archives}
+
+A publisher can upload each archive on its own before the publish that
+references it, so one request body need not carry a whole release:
+
+```text
+PUT /-/pnpr/v0/artifacts/blob?integrity=sha512-…
+```
+
+The route is also mounted under `/npm/` and a named npm registry's
+`/npm/~<registry>/`. A staged archive belongs to the account that uploaded it,
+whichever of these addresses it went through.
+
+`HEAD` on the same URL tells whether the archive is staged already, so a
+resumed release uploads only what is missing. An upload is stored only if its
+bytes match the integrity, and uploading stored bytes again is a no-op that
+renews them.
+
+`pnpm publish -r --batch` does this against a registry declared with
+`serverType: pnpr`: it uploads every archive the registry does not hold yet,
+two at a time, then sends a batch that references them. One commit references
+at most 256 staged archives, so a batch of more packages carries its archives
+inline.
+
+A staged archive is not published and no registry route serves it. It belongs
+to the account that uploaded it, and only a publish by that account can claim
+it. It expires 24 hours after its last upload, and pnpr removes expired
+archives at startup and every hour. One archive is at most 100 MiB, and one
+account holds at most 256 archives and 2 GiB that no publish has claimed. An
+upload reserves its size before its bytes arrive, so uploads running in
+parallel count against those limits together, and an upload that stopped
+gives its reservation back after an hour.
+
+An npm publish document, in a batch or on its own, references a staged archive
+by putting its `integrity` in the attachment in place of `data`:
+
+```json
+"_attachments": {
+  "ui-2.0.0.tgz": { "integrity": "sha512-…", "length": 4096 }
+}
+```
+
+pnpr reads the archive while it stages the publish and verifies it against
+the version's `dist` as it verifies an inline archive. Once a publish commits,
+the archives it claimed stop counting against the account, and the next sweep
+removes them. One publish names at most 256 staged archives and 2 GiB of
+them, each reference counted. An archive the publishing account has not staged, or one
+that has expired, fails the whole publish with `400`, and nothing of it is
+published. A retry of a
+committed request gets the recorded outcome without reading its archives
+again, so it succeeds even after they are gone. A version's
+[platform variants](endpoints.md#platform-variants) can be staged the same
+way. A sigstore bundle and a publish
+[held for approval](endpoints.md#staged-publishing-endpoints) carry their bytes
+inline.
 
 ## JSR
 

@@ -65,7 +65,7 @@ exchange their pnpr credential at `/v2/token` for a five-minute token scoped to
 actions the caller already has; the parent credential's revocation, read-only
 flag, and network restrictions all still apply. Anonymous tokens can pull public
 repositories. Scoped tokens reach neither the other pnpr APIs nor the whole
-catalog. Use the same [`secret:`](configuration.md#secret) and registry
+catalog. Use the same [`secret:`](configuration.md#secret-and-secrets) and registry
 configuration on every replica so their tokens interoperate.
 
 ## Uploads and limits
@@ -83,9 +83,9 @@ oci:
 The blob limit applies to a whole resumable upload, mounted layers included, and
 also bounds an uncached upstream download.
 
-The manifest write is the point a release becomes visible. It goes through the
-same publish journal as every other ecosystem, so it either lands whole or
-leaves nothing behind. A blob no manifest references is invisible rather than
+The manifest write is the point a release becomes visible. It commits the
+metadata the same way every other ecosystem's publish does, so it either lands
+whole or leaves nothing behind. A blob no manifest references is invisible rather than
 half-published, which also means unreferenced blobs accumulate until they are
 collected.
 
@@ -141,11 +141,9 @@ pnpr -c config.yaml oci-gc --registry images --dry-run
 pnpr -c config.yaml oci-gc --registry images
 ```
 
-`--registry` takes the concrete hosted OCI registry's config name. The command
-recovers the local publish journal before scanning, so recover journals on every
-replica's scratch volume before collecting shared storage, and keep writers
+`--registry` takes the concrete hosted OCI registry's config name. Keep writers
 stopped for the whole scan and deletion. `--dry-run` reports candidates without
-deleting them. `--min-age-secs` defaults to `86400`, which preserves recent
+deleting them. `--min-age` defaults to `1d`, which preserves recent
 uploads so an interrupted push can resume; set it to zero to collect every
 unreferenced blob.
 
@@ -162,7 +160,7 @@ any retained manifest or index is refused. A stored deletion marker blocks
 concurrent manifest publication, and a generation counter rejects publishes
 staged before the deletion. If a deletion is interrupted, stop all writers and
 run `oci-gc` without `--dry-run` to finish it and unblock the repository;
-recovering an explicit deletion ignores `--min-age-secs`. Every replica sharing a
+recovering an explicit deletion ignores `--min-age`. Every replica sharing a
 store must run this version before online deletion is used.
 
 ## Caching Docker Hub and GHCR

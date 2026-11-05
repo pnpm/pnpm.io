@@ -10,6 +10,10 @@
       "items": [
         "configuration",
         "storage",
+        "backup-and-restore",
+        "tls-and-reverse-proxy",
+        "cloudflare",
+        "webhooks",
         "auth-backends",
         "oidc",
         "scim"

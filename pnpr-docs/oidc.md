@@ -107,9 +107,14 @@ and `npm logout` revokes it. Sessions live in memory and disappear on restart,
 so a multi-replica deployment needs affinity for both the login flow and the
 authenticated requests that follow. They do not appear in `npm token list`. The
 [web UI](web-ui.md) lists these providers on its sign-in screen and returns to
-the UI after sign-in. This sign-in URL is separate from the npm CLI's
-`npm login` web protocol. An OIDC
-session cannot yet be exchanged for an [OCI scoped bearer token](container-images.md#authentication).
+the UI after sign-in.
+
+`pnpm login` and `npm login` use this flow automatically via `/-/v1/login`. The
+CLI opens the browser to sign in and polls until authentication completes. If no
+OIDC provider declares `login:`, `/-/v1/login` returns `404` and the CLI falls back
+to username and password authentication (`/-/user/org.couchdb.user:{name}`).
+
+An OIDC session cannot yet be exchanged for an [OCI scoped bearer token](container-images.md#authentication).
 
 ## GitHub Actions keyless publishing
 
@@ -168,22 +173,48 @@ steps:
       token=$(jq -er '.value' <<< "$response")
       echo "::add-mask::$token"
       export NODE_AUTH_TOKEN="pnpr_workload_${token}"
-      npm publish --registry=https://registry.example/~private/
+      npm publish --registry=https://registry.example/npm/~private/
 ```
 
 The project's `.npmrc` holds only the environment reference:
 
 ```ini title=".npmrc"
-//registry.example/~private/:_authToken=${NODE_AUTH_TOKEN}
+//registry.example/npm/~private/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
-On a server with more than one ecosystem, use `/npm/~private/` in both places.
+The credential permits:
 
-The credential permits ordinary `PUT` publications to the configured packages
-through that named registry and nothing else. It cannot read packages, unpublish,
-change dist-tags separately, manage accounts, publish batches, or reach other
-pnpr services. Request the token after building so it stays valid through the
+- ordinary `PUT` publications to the configured packages through that named
+  registry;
+- [staging archives](ecosystems.md#staged-archives) with `PUT` and `HEAD` on
+  `/-/pnpr/v0/artifacts/blob`, under the server root, the npm base, or the
+  named registry's address;
+- batch commits to `/-/pnpr/v0/publish` at the same addresses, when every entry
+  is an npm package of the configured ones that resolves to that named
+  registry.
+
+Every job of a workflow that exchanges its token for the same binding is the
+same account, so archives one job stages can be committed by another. The
+credential cannot read packages, unpublish, change dist-tags separately, manage
+accounts, or reach other pnpr services. Request the token after building so it stays valid through the
 publish request; its issuer's expiry applies to every request.
+
+## Keys
+
+Every block rejects unknown keys.
+
+| Key | Required | Description |
+| --- | --- | --- |
+| `name` | yes | Provider name, used in the `/-/oidc/<name>/` URLs. |
+| `issuer` | yes | The provider's issuer URL. |
+| `audience` | yes | The expected `aud` claim. For browser sign-in, the client ID. |
+| `login.clientSecret` | no | Client secret for browser sign-in. Omit for public clients with PKCE. |
+| `login.users` | yes, with `login` | Bindings of `subject`, `username`, and optional `claims`. |
+| `login.groups.claim` | no | The ID-token claim that lists groups. Defaults to `groups`. |
+| `login.groups.teams` | yes, with `groups` | Grants of `group`, `registry`, and `team`. See [Teams from groups](#teams-from-groups). |
+| `workloads[].identity` | yes | A binding of `subject`, `username`, and optional `claims`. |
+| `workloads[].registry` | yes | The hosted npm registry the workload publishes to. |
+| `workloads[].packages` | yes | The exact package names the workload may publish. |
 
 ## Validation and operations
 
