@@ -10,3 +10,12 @@ body {
     display: none;
   }
 }
+
+/* Fix unreadable notice text contrast in dark mode (pnpm/pnpm.io#988) */
+:root[data-theme='dark'] [class*='notice'] {
+  color: var(--colors-text-primary, #E0E0E0);
+}
+
+:root[data-theme='dark'] [class*='notice'] a {
+  color: var(--colors-text-link, #F69220);
+}
