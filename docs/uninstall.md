@@ -29,7 +29,7 @@ You might also want to clean the `PNPM_HOME` env variable in your shell configur
 In PowerShell:
 
 ```powershell
-Remove-Item -Recurse -Force $env:PNPM_HOME
+Remove-Item -Recurse -Force -LiteralPath $env:PNPM_HOME
 ```
 
 You may also want to remove the `PNPM_HOME` environment variable from your user environment and delete it from your `Path`:
@@ -57,7 +57,7 @@ rm -rf "$(pnpm store path)"
 In PowerShell:
 
 ```powershell
-Remove-Item -Recurse -Force (pnpm store path)
+Remove-Item -Recurse -Force -LiteralPath (pnpm store path)
 ```
 
 If you used pnpm in non-primary disks, then you must run the above command in every disk, where pnpm was used.
@@ -69,6 +69,6 @@ directory, the store is a `.pnpm-store` directory near the root of the disk, or
 
 pnpm also writes to these directories. Remove them too:
 
-- the cache directory, see [`cacheDir`](./settings/other.md#cachedir) for its default location
-- the state directory, see [`stateDir`](./settings/other.md#statedir) for its default location
-- the directory of the global configuration file, see [Global configuration](./configuring.md#global-configuration)
+* the cache directory, see [`cacheDir`](./settings/other.md#cachedir) for its default location
+* the state directory, see [`stateDir`](./settings/other.md#statedir) for its default location
+* the directory of the global configuration file, see [Global configuration](./configuring.md#global-configuration)

@@ -29,7 +29,7 @@ You might also want to clean the `PNPM_HOME` env variable in your shell configur
 In PowerShell:
 
 ```powershell
-Remove-Item -Recurse -Force $env:PNPM_HOME
+Remove-Item -Recurse -Force -LiteralPath $env:PNPM_HOME
 ```
 
 You may also want to remove the `PNPM_HOME` environment variable from your user environment and delete it from your `Path`:
@@ -57,7 +57,7 @@ rm -rf "$(pnpm store path)"
 In PowerShell:
 
 ```powershell
-Remove-Item -Recurse -Force (pnpm store path)
+Remove-Item -Recurse -Force -LiteralPath (pnpm store path)
 ```
 
 If you used pnpm in non-primary disks, then you must run the above command in every disk, where pnpm was used.
