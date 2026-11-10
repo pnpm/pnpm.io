@@ -29,12 +29,13 @@ store directly without modifying any projects or files outside of the store.
 pnpm store add express@4
 ```
 
-It also takes package tarballs that were downloaded some other way. This
-prepares the store for an install without network access, such as a sandboxed
-build that downloads its sources ahead of time:
+It also takes package tarballs or directories of tarballs that were downloaded
+some other way, searching directories recursively for `.tgz`, `.tar.gz`, and
+`.tar` archives. This prepares the store for an install without network access,
+such as a sandboxed build that downloads its sources ahead of time:
 
 ```sh
-pnpm store add ./tarballs/*.tgz
+pnpm store add ./tarballs
 pnpm install --offline --frozen-lockfile
 ```
 
@@ -98,7 +99,11 @@ project pins a version that another pnpm process is installing at that moment.
 
 Without the global virtual store, an install with `--frozen-store` or `enableModulesDir: false` does not write the registry. Neither do `--lockfile-only` and `--dry-run` installs.
 
-When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on the global virtual store's `links/` directory. It walks the registered projects to find the packages still in use and removes the rest. If no registered project links into `links/`, prune leaves it unchanged.
+`pnpm store prune` removes the directory-clone cache used by local installs on macOS. Installed packages remain available, and later installs recreate the cache as needed. The cache requires the store and project to be on the same volume. A frozen store uses per-file imports when its cache is missing.
+
+When the [global virtual store] is enabled, `pnpm store prune` also performs mark-and-sweep garbage collection on its `links/` directory. It walks the registered projects to find the packages still in use and removes the rest. If no registered project links into `links/`, prune leaves it unchanged.
+
+Pruning stops if a dependency link cannot be read.
 
 [global virtual store]: ../settings/node-modules.md#enableglobalvirtualstore
 
