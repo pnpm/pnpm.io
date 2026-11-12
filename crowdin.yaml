@@ -31,10 +31,6 @@ files:
     translation: '/i18n/%locale%/install-guide.json'
     languages_mapping: *languages_mapping
   -
-    source: '/blog/**/*'
-    translation: '/i18n/%locale%/docusaurus-plugin-content-blog/**/%original_file_name%'
-    languages_mapping: *languages_mapping
-  -
     source: '/versioned_docs/**/*'
     translation: '/i18n/%locale%/docusaurus-plugin-content-docs/**/%original_file_name%'
     languages_mapping: *languages_mapping
