@@ -70,7 +70,6 @@ const BLOG_OPTIONS = {
   'sidebar.title': 'All posts',
 }
 
-/** Calls `fn` with a translate function and collects the keys and English texts it is asked for. */
 function record (fn) {
   const messages = {}
   fn((group, key, fallback) => {
@@ -83,7 +82,6 @@ function record (fn) {
   return messages
 }
 
-/** The navbar and footer labels, collected by building the navigation of every part of the site. */
 async function navigationMessages () {
   const navigation = await import('@pnpm/website.pnpm-website/dist/site-navigation.js')
   const messages = record((translate) => {
@@ -98,7 +96,6 @@ async function navigationMessages () {
   return messages
 }
 
-/** The keys of code.json that the search asks for, which all need an English text in THEME_MESSAGES. */
 async function checkSearchKeys (site) {
   const websiteDir = path.dirname(createRequire(path.join(site, 'package.json')).resolve('@pnpm/website.pnpm-website/package.json'))
   const searchDir = path.dirname(createRequire(path.join(websiteDir, 'package.json')).resolve('@pnpm/website.ui.docs-search/package.json'))
@@ -109,10 +106,7 @@ async function checkSearchKeys (site) {
   if (missing.length > 0) throw new Error(`No English text for the search strings: ${missing.join(', ')}`)
 }
 
-/**
- * The homepage strings: the texts passed to `t()` in src/homepage/content.tsx,
- * which are their own keys, as with Docusaurus' <Translate>.
- */
+// The homepage texts are their own keys, as with Docusaurus' <Translate>.
 function homepageMessages (site) {
   const source = readFileSync(path.join(site, 'src', 'homepage', 'content.tsx'), 'utf8')
   const texts = [...source.matchAll(/\bt\('((?:[^'\\]|\\.)*)'\)/g)].map(([, text]) => text.replace(/\\(.)/g, '$1'))
@@ -120,7 +114,6 @@ function homepageMessages (site) {
   return Object.fromEntries(texts.map((text) => [text, text]))
 }
 
-/** The sidebar category labels of a docs version. */
 function sidebarMessages (sidebarsPath) {
   const messages = {}
   buildSidebar(JSON.parse(readFileSync(sidebarsPath, 'utf8')), {
