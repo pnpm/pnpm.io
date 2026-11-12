@@ -117,7 +117,8 @@ runs it whenever the sources change on the default branch.
 `pnpm write-translations` (part of `pnpm crowdin-upload`) writes the English
 strings of the navbar, footer, homepage, blog, search and docs sidebar
 categories to `i18n/en/`, with the keys and file layout Docusaurus'
-`write-translations` used. The pnpr docs are not translated.
+`write-translations` used. The pnpr docs, the blog posts and the release pages
+(`blog/releases/`) are not translated.
 
 ## Algolia Search
 

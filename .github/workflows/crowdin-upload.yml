@@ -10,7 +10,6 @@ on:
     paths:
       - 'docs/**'
       - 'versioned_docs/**'
-      - 'blog/**'
       - 'sidebars.json'
       - 'versioned_sidebars/**'
       - 'versions.json'
