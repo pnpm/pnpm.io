@@ -111,7 +111,13 @@ Crowdin uses for each of them.
 Crowdin reads the sources listed in [crowdin.yaml](crowdin.yaml).
 `pnpm crowdin-upload` uploads them, including a copy of `docs/` as the latest
 version, which is where the build looks for the translations of the latest
-docs first.
+docs first. The [Crowdin upload workflow](.github/workflows/crowdin-upload.yml)
+runs it whenever the sources change on the default branch.
+
+`pnpm write-translations` (part of `pnpm crowdin-upload`) writes the English
+strings of the navbar, footer, homepage, blog, search and docs sidebar
+categories to `i18n/en/`, with the keys and file layout Docusaurus'
+`write-translations` used. The pnpr docs are not translated.
 
 ## Algolia Search
 

@@ -1,0 +1,51 @@
+name: Crowdin upload
+
+# Uploads the English sources listed in crowdin.yaml to Crowdin, so that new
+# and changed pages, and the strings of the navbar, footer, homepage and docs
+# sidebars, can be translated without waiting for someone to upload them by hand.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'versioned_docs/**'
+      - 'blog/**'
+      - 'sidebars.json'
+      - 'versioned_sidebars/**'
+      - 'versions.json'
+      - 'src/homepage/**'
+      - 'crowdin.yaml'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'scripts/copy-docs.mjs'
+      - 'scripts/write-translations.mjs'
+  workflow_dispatch:
+
+concurrency:
+  group: crowdin-upload
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  COREPACK_ENABLE_AUTO_PIN: 0
+
+jobs:
+  upload:
+    # A manual run from another branch would replace the sources on Crowdin
+    # with that branch's, and the deploy environment hands its token to any ref.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: deploy
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/setup@v2
+      - run: pnpm install
+      - run: pnpm crowdin-upload
+        env:
+          CROWDIN_PROJECT_ID: ${{ vars.CROWDIN_PROJECT_ID || '302994' }}
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
