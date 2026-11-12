@@ -34,6 +34,9 @@ env:
 
 jobs:
   upload:
+    # A manual run from another branch would replace the sources on Crowdin
+    # with that branch's, and the deploy environment hands its token to any ref.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment: deploy
     steps:

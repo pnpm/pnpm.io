@@ -139,8 +139,11 @@ function writeMessages (file, messages) {
   writeFileSync(file, `${JSON.stringify(json, null, 2)}\n`)
 }
 
-export async function writeTranslations (site) {
-  const target = path.join(site, 'i18n', 'en')
+/**
+ * @param site - the root of this repository.
+ * @param target - where to write the files; Crowdin uploads them from i18n/en.
+ */
+export async function writeTranslations (site, target = path.join(site, 'i18n', 'en')) {
   const navigation = await navigationMessages()
   await checkSearchKeys(site)
   const files = {
