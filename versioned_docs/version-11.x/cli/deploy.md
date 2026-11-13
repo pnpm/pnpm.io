@@ -7,7 +7,7 @@ Deploy a package from a workspace. During deployment, the files of the deployed 
 
 :::note
 
-Since v11.26.0, `pnpm deploy` no longer requires [`injectWorkspacePackages`](../workspaces.md#injectworkspacepackages). A linked workspace dependency is rewritten to a `file:` dependency in the dedicated deploy lockfile. The peer dependencies it declares are bound the way an injected install binds them: to the version its parent provides. If the parent does not depend on the peer, pnpm looks further up, to the deployed project. A peer that no ancestor provides is bound to the deployed graph's own resolution.
+Since v11.26.0, `pnpm deploy` no longer requires [`injectWorkspacePackages`](../workspaces.md#injectworkspacepackages). A linked workspace dependency is rewritten to a `file:` dependency in the dedicated deploy lockfile. The peer dependencies it declares are bound the way an injected install binds them: to the version its parent provides. If the parent does not depend on the peer, pnpm looks further up, to the deployed project. A peer that no ancestor provides is bound to the deployed graph's own resolution. This includes optional peers declared only in [`peerDependenciesMeta`](../package_json.md#peerdependenciesmeta).
 
 The binding is ambiguous when the ancestors provide more than one package or version, or when no ancestor provides the peer and the deployed graph holds more than one version. The deploy then fails with `ERR_PNPM_DEPLOY_AMBIGUOUS_PEER`, naming the package, the peer, and the competing resolutions. Pin the peer to one version with an [`overrides`](../settings/dependency-resolution.md#overrides) entry, or turn `injectWorkspacePackages` on, which is the setting that decides between the candidates.
 
@@ -52,6 +52,12 @@ ENTRYPOINT ["node", "index.js"]
 ```
 
 A deployed symlink to a directory inside the project is kept even if the directory is not deployed. So is a symlink to a missing path inside the project, such as a link into a removed `node_modules`. A link into `node_modules` resolves to the dependency installed in the output directory. A symlink to a file that is not deployed is replaced by a copy of the file.
+
+To deploy without registry metadata, keep the source lockfile and populate the
+store with `pnpm install` or `pnpm fetch` before running `pnpm deploy --offline`.
+This also works with per-project lockfiles and `--legacy`. Use `--trust-lockfile`
+if deployment should skip supply-chain policy checks on the locked dependencies.
+New or changed dependencies may still require registry metadata.
 
 ## Options
 
@@ -107,6 +113,8 @@ Since v11.28.0:
 * The virtual store is created at [`virtualStoreDir`](../settings/node-modules.md#virtualstoredir), resolved against the deploy directory. A deploy from a shared lockfile records `virtualStoreDir` in the deployed `pnpm-workspace.yaml`. With the global virtual store enabled or an absolute `virtualStoreDir`, the deploy uses `node_modules/.pnpm`.
 * The `prepare` script of the deployed project is not run.
 * `--package-import-method` passed on the command line is respected.
+
+Since v11.28.12, a workspace project that the deploy installs as a `file:` dependency runs its build scripts. pnpm approves it by its dependency path in the [`allowBuilds`](../settings/build.md#allowbuilds) setting. An `allowBuilds` entry that denies the project still applies. A project with [`publishConfig.directory`](../package_json.md#publishconfigdirectory) is installed from that directory, and its build scripts run only if the directory is inside the project and not inside `node_modules`.
 
 ## Configuration
 

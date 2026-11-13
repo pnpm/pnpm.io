@@ -5,9 +5,9 @@
     "docsCommit": "b8d388835f9a40ee1ac53fbc2d4b58c3ebfa5600"
   },
   "11.x": {
-    "version": "11.28.11",
-    "releaseCommit": "0470052291b2ba369be93a9b696e0a0097722ba5",
-    "docsCommit": "0470052291b2ba369be93a9b696e0a0097722ba5"
+    "version": "11.28.12",
+    "releaseCommit": "b8d388835f9a40ee1ac53fbc2d4b58c3ebfa5600",
+    "docsCommit": "b8d388835f9a40ee1ac53fbc2d4b58c3ebfa5600"
   },
   "pnpr": {
     "version": "0.1.0-alpha.20",

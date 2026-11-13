@@ -13,9 +13,17 @@ When `true`, any missing non-optional peer dependencies are automatically instal
 
 #### Optional peer dependencies
 
-pnpm installs a missing optional peer dependency only if the workspace already has a version of it that satisfies the optional peer range. In that case, pnpm resolves the optional peer to that version. That version can come from any project in the workspace, including another project's `devDependencies`. For example, if one project depends on `webpack` and another has `webpack-cli` in its `devDependencies`, both projects get the `webpack` instance that has `webpack-cli` as its optional peer.
+pnpm installs a missing optional peer dependency only if a version of it that satisfies the optional peer range is already installed. In that case, pnpm resolves the optional peer to that version.
 
-pnpm also resolves optional peers this way when [`dedupePeerDependents`](#dedupepeerdependents) is `true`. To stop it, set both `autoInstallPeers` and `dedupePeerDependents` to `false`.
+When [`dedupePeerDependents`](#dedupepeerdependents) is `true`, that version can come from any project in the workspace, including another project's `devDependencies`. For example, if one project depends on `webpack` and another has `webpack-cli` in its `devDependencies`, both projects get the `webpack` instance that has `webpack-cli` as its optional peer.
+
+When `dedupePeerDependents` is `false`, that version must come from the project's own dependencies. The workspace root's dependencies also count if [`resolvePeersFromWorkspaceRoot`](#resolvepeersfromworkspaceroot) is `true`.
+
+pnpm skips that version if installing it would leave the project with an unmet peer dependency. This covers the version's own peers, the required peers that pnpm would install with it, and their peers in turn. `dedupePeerDependents` does not give the skipped peer back to the project by sharing another project's instance of the package that declares it.
+
+pnpm also resolves optional peers this way when `autoInstallPeers` is `false` and `dedupePeerDependents` is `true`. To stop it, set both settings to `false`.
+
+When selecting a workspace provider for a new project, pnpm prefers compatible optional peer versions already pinned in the lockfile.
 
 #### Version conflicts
 
@@ -24,6 +32,8 @@ If there are conflicting version requirements for a peer dependency from differe
 #### Conflict resolution
 
 In case of a version conflict, you'll need to evaluate which version of the peer dependency to install yourself, or update the dependencies to align their peer dependency requirements.
+
+With `autoInstallPeersFromHighestMatch: true`, pnpm treats conflicting semver ranges as alternatives for automatic installation. Conflicting paths, aliases, or tags leave the peer dependency missing. Identical non-semver specifiers are preserved.
 
 ### dedupePeerDependents
 
