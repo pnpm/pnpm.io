@@ -101,7 +101,7 @@ Every platform is paired with every Python version. The lockfile pins wheels and
 
 ## Filtering projects
 
-Project discovery honors `[tool.uv.workspace]` members. Outside an explicitly declared uv workspace, conventional example, demo, documentation, template, test, and fixture directories are skipped.
+Project discovery honors `[tool.uv.workspace]` members. A `pyproject.toml` that declares a workspace without a `[project]` table is not a project, so pnpm ignores a `requirements.txt` beside it. Outside an explicitly declared uv workspace, conventional example, demo, documentation, template, test, and fixture directories are skipped.
 
 Since v12.5.0, `pnpm install --filter <selector>` selects Python projects by name, path, or dependencies declared in `[tool.uv.sources]`. A Python project colocated with an npm workspace project is selected with that project. `--fail-if-no-match` accepts Python-only matches, and `pnpm add --filter <selector> pypi:<package>` writes to every selected project. Selecting a member of a shared environment installs the whole environment.
 
@@ -153,7 +153,7 @@ pnpm reads what each release requires from the metadata file the index publishes
 
 ### Faster resolution through pnpr
 
-With [`pnprServer`](/pnpr/install-acceleration) set, the server resolves the Python graph, so pnpm does not read the index to find out what each release requires. A server that does not answer for Python makes pnpm fall back to resolving locally.
+With [`pnprServer`](/pnpr/install-acceleration) set, the server resolves the Python graph, so pnpm does not read the index to find out what each release requires. pnpm resolves locally if the server does not answer for Python, or if it refuses a setting or lockfile format the request uses. pnpm also resolves locally if the graph needs a package that only this machine can resolve, such as one from an explicit source or one whose metadata comes only from building its source distribution. Other server errors stop the install.
 
 Python graphs configured with multiple indexes, overrides, constraints, or explicit target environments resolve locally. pnpr cannot represent these resolution settings.
 
