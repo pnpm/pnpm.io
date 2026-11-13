@@ -12,7 +12,14 @@ them on to run a registry UI on its own origin.
 cors:
   allowedOrigins:
     - https://registry-ui.example.com
+```
 
+Upstream discovery is a setting of the
+[stored registries](configuration.md#registries-in-the-database). Store a
+registries document such as this one with
+[`pnpr registries import`](cli.md#registries):
+
+```yaml title="registries.yaml"
 registries:
   local:
     type: hosted
@@ -47,8 +54,8 @@ results and are exact across every participating source.
 
 Search includes locally hosted packages and upstreams with `search: true`. If
 no upstream opts in, a package available only upstream will not appear in search
-results. Hosted npm search results include maintainer usernames and omit the
-external package-page link.
+results. Hosted npm search results include maintainer and publisher usernames
+and omit the external package-page link.
 
 ## Browsing without a search term
 
@@ -79,12 +86,9 @@ host root.
 
 Each entry carries its `name`, its `kind` (`hosted`, `upstream`, or `router`),
 and its `ecosystem`; the identity is the pair `(ecosystem, name)`. Concrete
-registries report their namespace `patterns` and routers their ordered
+registries report their claimed `patterns` and routers their ordered
 `sources`, and either field is `null` when the caller's access rules do not
-permit disclosing it. A hosted registry also reports
-`teamsManagedBy` and `rulesManagedBy` (`config` or `api`, see
-[Managing teams through the API](configuration.md#managing-teams-through-the-api)
-and [Changing rules through the API](configuration.md#changing-rules-through-the-api)).
-The top-level `admin` flag says whether the caller is one of the `auth.admins`.
+permit disclosing it. The top-level `admin` flag says whether the caller is one of the `auth.admins`,
+and `registryAdmin` whether the caller is one of the `auth.registryAdmins`.
 Upstream addresses, credentials, storage paths, and package access rules are
 never returned. Responses are private and must not be cached.

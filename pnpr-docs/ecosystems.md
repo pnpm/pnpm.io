@@ -42,9 +42,10 @@ sends it as written.
 Give a hosted or upstream registry an `ecosystem:`; npm is the default. A router
 may list sources of every ecosystem, because a request only ever sees the
 sources that speak its own protocol, so one router can be the default target for
-all of them.
+all of them. Store the registries with
+[`pnpr registries import`](cli.md#registries):
 
-```yaml title="pnpr.yaml"
+```yaml title="registries.yaml"
 registries:
   local:
     type: hosted
@@ -57,7 +58,7 @@ registries:
   crates:
     type: hosted
     ecosystem: cargo
-    org: crates
+    namespace: crates
     packages:
       my-crate: {}
   crates-io:
@@ -68,7 +69,7 @@ registries:
   python:
     type: hosted
     ecosystem: pypi
-    org: python
+    namespace: python
     packages:
       my-package: {}
   pypi-org:
@@ -86,48 +87,28 @@ defaultRegistry: main
 For a `cargo` upstream, `url` is a sparse index root; for `pypi`, a Simple API
 root.
 
-### Reusing a name across ecosystems
+### Defaults for each ecosystem
 
-Group the registries under an ecosystem key to give each protocol its own
-registry of the same name:
+Registry names are unique across the stored registries. Declare every registry
+directly under `registries:` and select its protocol with `ecosystem:`.
+Nesting registries under ecosystem keys is rejected.
 
-```yaml title="pnpr.yaml"
-registries:
-  npm:
-    internal:
-      type: hosted
-      packages:
-        '@example/*': {}
-    public:
-      type: upstream
-      url: https://registry.npmjs.org/
-      public: true
-    main:
-      type: router
-      sources: [internal, public]
-  cargo:
-    internal:
-      type: hosted
-    main:
-      type: router
-      sources: [internal]
+`defaultRegistry` can name a shared router, as above, or select a target for
+each ecosystem:
 
+```yaml title="registries.yaml"
 defaultRegistry:
-  npm: main
-  cargo: main
+  npm: local
+  cargo: crates
+  pypi: python
 ```
 
-`/npm/~internal` and `/cargo/~internal` are then independent registries. Router
-sources resolve within their own group and cannot cross into another, and each
-ecosystem gets its own default. Access rules, teams, upstream credentials, and
-caches belong to the individual registry.
+Each target must serve the selected ecosystem. A default does not change a
+registry's ecosystem or storage namespace.
 
-A grouped hosted registry defaults its `org` to its own `<name>`, and each
-ecosystem stores its packages under its own `<ecosystem>/` directory in that
-namespace. Set `org` explicitly to choose another namespace (`org: ''` for the
-default namespace). Two hosted registries of the same ecosystem cannot share an
-`org` namespace. The flat configuration format and its shared
-`defaultRegistry: main` remain supported.
+Hosted registries use the [default storage namespace](storage.md#layout) when
+`namespace` is omitted. Set `namespace` to choose another namespace. Two hosted
+registries of the same ecosystem cannot share a `namespace`.
 
 ## Cargo
 
@@ -163,17 +144,30 @@ publishing new versions.
 crates it hosts. Each result reports the crate's newest release that is not
 yanked; a crate whose releases are all yanked reports its newest release.
 
+The account that first publishes a crate becomes its [owner](#package-owners).
+`cargo owner` lists, adds, and removes owners.
+
 ## Python
+
+Hosted wheel uploads expose their validated core metadata at
+`<filename>.metadata`. The Simple API advertises its SHA-256 in JSON and HTML,
+so installers can resolve dependencies without downloading the whole wheel.
 
 A Python registry serves the Simple Repository API at `/pypi/simple/` (PEP 503
 HTML and PEP 691 JSON, chosen by `Accept`), files at
 `/pypi/files/<project>/<filename>`, and accepts uploads on the legacy API at
-`/pypi/legacy/`. A named registry answers under `/pypi/~<name>/...`.
+`/pypi/legacy/`. A named registry answers under `/pypi/~<name>/...`. The
+account that first uploads to a project becomes its [owner](#package-owners).
 
 ```sh
 pip install --index-url https://pnpr.example.com/pypi/simple/ my-package
 twine upload --repository-url https://pnpr.example.com/pypi/legacy/ dist/*
 ```
+
+Upload errors include the reason in the HTTP/1 status line, so twine displays
+it without `--verbose`. Long reasons and reasons containing non-ASCII or
+control characters remain in the response body. HTTP/2 carries the reason
+only in the body.
 
 Use `__token__` as the username and a pnpr token as the password, the PyPI
 convention.
@@ -205,6 +199,39 @@ Administrators listed in `auth.admins` can remove a file with
 and makes downloads return 404. Stored archive bytes are retained. These routes
 also work under a named registry's base URL. Deleted filenames cannot be uploaded again.
 
+## Package owners
+
+A hosted crate, Python project, or image repository records the accounts that
+own it, starting with the account that first publishes it. Under the default
+[`publish` rule](configuration.md#the-packages-map), only its owners and the
+`auth.admins` can publish to it.
+
+Owners and `auth.admins` can add and remove owners. Anyone who can read the
+package can list them. A package keeps at least one owner.
+
+| Ecosystem | Owners URL |
+| --- | --- |
+| Cargo | `/cargo/api/v1/crates/<crate>/owners` |
+| Python | `/pypi/owners/<project>` |
+| OCI | `/oci/owners/<repository>` |
+
+A named registry answers under its base, such as
+`/pypi/~<name>/owners/<project>`. Each URL takes the requests `cargo owner`
+sends to crates.io:
+
+- `GET` lists the owners: `{"users": [{"id": 1, "login": "alice", "name": "alice"}]}`.
+- `PUT` with `{"users": ["bob"]}` adds owners by account name.
+- `DELETE` with `{"users": ["alice"]}` removes them.
+
+An owner whose account was deleted is listed by its account ID, and is removed
+by that ID.
+
+```sh
+cargo owner --registry pnpr --add bob demo
+curl -X PUT -H "Authorization: Bearer $PNPR_TOKEN" \
+  -d '{"users":["bob"]}' https://pnpr.example.com/pypi/owners/my-package
+```
+
 ## Proxying crates.io and PyPI
 
 Cargo and Python proxies restrict downloads and redirects to their configured
@@ -213,7 +240,7 @@ allowlist. The official crates.io and PyPI upstreams also permit their download
 hosts, `static.crates.io` and `files.pythonhosted.org`. A custom registry that
 serves downloads from a separate host needs that host declared:
 
-```yaml title="pnpr.yaml"
+```yaml title="registries.yaml"
 routes:
   public:
     - registry: https://downloads.example.com/
@@ -254,15 +281,16 @@ the version-conflict check all run up front, and any entry that fails one of the
 aborts the whole batch before a byte is written.
 
 **A batch that passes its checks is committed as one transaction.** It commits
-as one generation of its org, so it lands whole or leaves nothing behind, and a
-read sees the whole release or none of it:
+as one generation of its namespace, so it lands whole or leaves nothing behind,
+and a read sees the whole release or none of it:
 
 - Losing a write race, to another writer publishing the same file between the
   check and the commit, fails the whole batch with `409`, and nothing is
   published. The bytes that won the slot are someone else's published release,
   and overwriting them would be the worse outcome. Republishing the batch after
   bumping the conflicting version completes the release.
-- Every entry must belong to the same org. A batch that spans orgs is refused.
+- Every entry must belong to the same namespace. A batch that spans namespaces
+  is refused.
 - A retry gets the original response back while none of its published npm versions
   have been unpublished and none of its published OCI manifests have been deleted
   by digest. Retrying cannot restore an unpublished npm version. After deletion
@@ -275,9 +303,9 @@ read sees the whole release or none of it:
   publish. A caller whose permission was revoked since gets `403` and can
   read the outcome from the publication or the package.
 - The commit is recorded as a publication. A top-level `"name": "v2.0.0"`
-  field in the body names it. The name must be unique within the org, at most
-  214 bytes long, and not a decimal number, which would read as a publication
-  id.
+  field in the body names it. The name must be unique within the namespace, at
+  most 214 bytes long, and not a decimal number, which would read as a
+  publication id.
   See [publication endpoints](endpoints.md#publication-endpoints).
 - A top-level `"notes"` field is the publication's release note, and a
   `"notes"` field in an npm, Cargo, or Python entry is the note of the version
@@ -289,14 +317,23 @@ An [image manifest](container-images.md) whose layers are already uploaded can
 ride along in the same batch. `GET /-/pnpr` advertises support as
 `publish: [0]`.
 
+Individual publishes to one package serialize their metadata updates. With a
+remote database, each commit also waits for database round trips.
+A publisher using the HTTP API can include several versions in one npm
+publish document to commit them together. A batch accepts one document per
+package.
+
 ### Staged archives {#staged-archives}
 
 A publisher can upload each archive on its own before the publish that
 references it, so one request body need not carry a whole release:
 
 ```text
-PUT /-/pnpr/v0/artifacts/blob?integrity=sha512-…
+PUT /-/pnpr/v0/publish/archives/sha512-…
 ```
+
+The integrity is one percent-encoded path segment, so its `/`, `+`, and `=`
+are sent as `%2F`, `%2B`, and `%3D`.
 
 The route is also mounted under `/npm/` and a named npm registry's
 `/npm/~<registry>/`. A staged archive belongs to the account that uploaded it,
@@ -323,7 +360,7 @@ parallel count against those limits together, and an upload that stopped
 gives its reservation back after an hour.
 
 The bytes stay in the hosted store and their records in the
-[metadata database](storage.md#sqlite-metadata). A sweep records an expired
+[database](storage.md#database). A sweep records an expired
 archive as taken, in a transaction that holds only while no upload renewed it
 since, before it removes the bytes. An upload of the same bytes afterwards
 stores them anew under another key, so a renewal that races the sweep keeps

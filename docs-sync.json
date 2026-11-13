@@ -10,8 +10,8 @@
     "docsCommit": "0470052291b2ba369be93a9b696e0a0097722ba5"
   },
   "pnpr": {
-    "version": "0.1.0-alpha.19",
-    "releaseCommit": "f4afab20988dc20b747e97c48388f901258d0fcb",
-    "docsCommit": "f4afab20988dc20b747e97c48388f901258d0fcb"
+    "version": "0.1.0-alpha.20",
+    "releaseCommit": "20fec500d46d25cbe11f9c8417b30b74a8dfe020",
+    "docsCommit": "20fec500d46d25cbe11f9c8417b30b74a8dfe020"
   }
 }
