@@ -135,6 +135,15 @@ function isAncestor (repo, older, newer) {
   }
 }
 
+export function previewDocs ({ source, site, lines = [] }) {
+  for (const line of lines) {
+    if (!Object.hasOwn(docsSourcePaths, line)) throw new Error(`Invalid documentation line: ${line}`)
+  }
+  for (const line of lines.length ? lines : Object.keys(docsSourcePaths)) {
+    syncDocs({ source, site, line, preview: true })
+  }
+}
+
 function readJson (file) {
   return JSON.parse(readFileSync(file, 'utf8'))
 }
@@ -164,11 +173,9 @@ function copyDocs (source, target) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [source, line, version, releaseCommit, docsCommit] = process.argv.slice(2)
-  if (!source || !line) throw new Error('Usage: node scripts/sync-docs.mjs SOURCE LINE VERSION RELEASE_SHA DOCS_SHA | SOURCE --preview')
+  if (!source || !line) throw new Error('Usage: node scripts/sync-docs.mjs SOURCE LINE VERSION RELEASE_SHA DOCS_SHA | SOURCE --preview [LINE...]')
   if (line === '--preview') {
-    for (const name of Object.keys(docsSourcePaths)) {
-      syncDocs({ source, line: name, preview: true })
-    }
+    previewDocs({ source, lines: process.argv.slice(4) })
   } else {
     console.log(syncDocs({ source, line, version, releaseCommit, docsCommit }) ? `Updated ${line} docs to ${version}` : `Docs for ${line} are already current`)
     if (writeReleasePage({ source, site: websiteRoot, line, version, releaseCommit })) console.log(`Wrote the ${version} release page`)

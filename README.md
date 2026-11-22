@@ -44,7 +44,9 @@ generated content when reviewing or reverting a sync.
 
 For local previews, run `node scripts/sync-docs.mjs /path/to/pnpm --preview`,
 then `pnpm build`. Preview imports replace only the v11, v12, and pnpr documentation copies without
-changing release state. The source repository also provides an explicit manual
+changing release state. List lines after `--preview`, such as `--preview 12.x pnpr`,
+to import only those. The other lines keep the copies committed here, so a
+checkout of one pnpm branch can preview the lines it holds. The source repository also provides an explicit manual
 publication from `main`; it publishes the current docs without advancing release
 state and may include documentation for unreleased changes.
 
