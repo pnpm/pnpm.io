@@ -77,6 +77,12 @@ Example:
 pnx --package cowsay --package lolcatjs -c 'echo "hi pnpm" | cowsay | lolcatjs'
 ```
 
+### --minimum-release-age &lt;minutes\>, --minimum-release-age-exclude &lt;package-spec\>
+
+Added in: v11.28.14
+
+Set [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) and [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) for this run, as they do for [`pnpm install`](./install.md).
+
 ### --silent, -s
 
 Only the output of the executed command is printed.
@@ -89,3 +95,5 @@ Since v11.0.0, `pnx` (and its `pnpm dlx` / `pnpx` aliases) honors the project-le
 * [`trustPolicy`](../settings/dependency-resolution.md#trustpolicy), [`trustPolicyExclude`](../settings/dependency-resolution.md#trustpolicyexclude), [`trustPolicyIgnoreAfter`](../settings/dependency-resolution.md#trustpolicyignoreafter)
 
 This means `pnx` will refuse to execute freshly published or insufficiently trusted packages the same way a regular `pnpm install` would.
+
+`pnx` ignores other project-local execution, hook, and directory settings in the current directory (`pnpmfile`, `globalPnpmfile`, `configDependencies`, `scriptShell`, `cacheDir`, `storeDir`, `ignoreScripts`, `overrides`, `packageExtensions`, and `patchedDependencies`), while keeping user-level global configuration active.

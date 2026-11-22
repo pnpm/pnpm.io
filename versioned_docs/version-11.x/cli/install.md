@@ -109,6 +109,8 @@ Don't read or generate a `pnpm-lock.yaml` file.
 
 When used, only updates `pnpm-lock.yaml` and `package.json`. Nothing gets written to the `node_modules` directory.
 
+With `trustLockfile` enabled, pnpm can reuse locked Git commits for unchanged dependencies when resolving an unrelated change.
+
 ### --dry-run
 
 Added in: v11.8.0
@@ -149,6 +151,8 @@ present.
 This setting is `true` by default in [CI environments]. pnpm detects a CI environment with the [ci-info](https://github.com/watson/ci-info) package. Set `CI=false` to turn detection off.
 
 [CI environments]: https://github.com/watson/ci-info#supported-ci-tools
+
+When verifying a locked tarball online, pnpm asks the registry for fresh package metadata once if the cached metadata omits the locked version.
 
 ### --no-frozen-lockfile
 
@@ -194,6 +198,22 @@ Creates a flat `node_modules` structure, similar to that of `npm` or `yarn`.
 
 Do not execute any scripts defined in the project `package.json` and its
 dependencies.
+
+### --minimum-release-age &lt;minutes\>
+
+Added in: v11.28.14
+
+Sets [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) for this run, overriding the configured value. The value is in minutes. As with a configured value, it turns on [`minimumReleaseAgeStrict`](../settings/dependency-resolution.md#minimumreleaseagestrict) unless that setting is configured. A value that is not a non-negative number is an error.
+
+### --minimum-release-age-exclude &lt;package-spec\>
+
+Added in: v11.28.14
+
+Sets [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) for this run, replacing the configured list. Repeat the option to exclude several packages:
+
+```sh
+pnpm install --minimum-release-age 1440 --minimum-release-age-exclude react --minimum-release-age-exclude webpack@5.98.0
+```
 
 ### --filter &lt;package_selector>
 

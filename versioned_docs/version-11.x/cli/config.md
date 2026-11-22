@@ -63,7 +63,7 @@ Since v11.22.0, `pnpm config set` refuses to write a setting to a project's `pnp
 
 ### get &lt;key>
 
-Print the config value for the provided key.
+Print the config value at the provided property path.
 
 The `key` can be a simple key:
 
@@ -96,7 +96,7 @@ Remove the config key from the config file.
 
 Show all the config settings. Output is a JSON object.
 
-Auth-related settings are hidden from the output; use `pnpm config get <key>` to read them explicitly.
+`pnpm config list` masks tokens, usernames, passwords, TLS private keys, and credentials in proxy URLs. `pnpm config get` fails when asked for a protected auth setting.
 
 :::note
 

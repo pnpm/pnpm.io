@@ -30,6 +30,8 @@ Defines what linker should be used for installing Node packages.
 * **pnp** - no `node_modules`. Plug'n'Play is an innovative strategy for Node that is [used by Yarn Berry][pnp]. It is recommended to also set `symlink` setting to `false` when using `pnp` as
 your linker.
 
+With `nodeLinker: pnp`, root projects and workspace projects resolve their declared dependencies through `.pnp.cjs`. Local `file:` directory dependencies are supported, including packages that declare `exports`. Workspace projects with the same name retain separate dependency sets. When [`lockfileDir`](./store.md#lockfiledir) is configured, `pnpm run` and `pnpm exec` load `.pnp.cjs` from that directory.
+
 [pnp]: https://yarnpkg.com/features/pnp
 [--preserve-symlinks]: https://nodejs.org/api/cli.html#cli_preserve_symlinks
 [`"bundledDependencies"`]: https://docs.npmjs.com/cli/v8/configuring-npm/package-json#bundleddependencies
@@ -97,8 +99,10 @@ mount a modules directory with FUSE: [@pnpm/mount-modules].
 Controls whether pnpm asks for confirmation before removing the contents of an
 incompatible modules directory and reinstalling it from scratch. When `false`,
 pnpm recreates the modules directory without prompting. In CI, confirmation is
-disabled automatically. If confirmation is enabled without a TTY and CI is not
-detected, pnpm aborts with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`.
+disabled automatically. If confirmation is enabled without a TTY, pnpm proceeds
+without prompting when the modules directory is a regular `node_modules`
+directory directly inside the project. For a custom or symlinked modules
+directory, pnpm aborts with `ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_UNSAFE`.
 
 ### virtualStoreDir
 

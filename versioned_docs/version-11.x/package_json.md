@@ -12,7 +12,7 @@ In addition to the traditional `package.json` format, pnpm also supports `packag
 If a directory contains more than one of these files, pnpm uses `package.json`, then `package.json5`, then `package.yaml`. Since v11.28.0, workspace discovery follows the same order and finds one project per directory.
 
 [json5]: https://www.npmjs.com/package/json5
-[js-yaml]: https://www.npmjs.com/package/@zkochan/js-yaml
+[js-yaml]: https://www.npmjs.com/package/js-yaml
 
 :::note
 
@@ -343,7 +343,7 @@ Publishes the package under a different name than the one its manifest carries i
 }
 ```
 
-Only the published artifact is renamed. Dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
+In a packed dependent, a shorthand such as `workspace:^` or a relative path such as `workspace:../foo-v2` uses the dependency's published name. Dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
 
 ### publishConfig.executableFiles
 
