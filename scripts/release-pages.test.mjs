@@ -89,14 +89,20 @@ test('rejects a changelog for another version', () => {
 })
 
 test('writes the page from the line\'s changelog at the release commit', t => {
-  const f = fixture(t, { 'pacquet@12.9.0.md': CHANGELOG, 'pnpm@11.29.0.md': CHANGELOG.replaceAll('12.9.0', '11.29.0') })
-  writeFileSync(path.join(f.source, '.changeset/changelogs/pacquet@12.9.0.md'), 'uncommitted')
+  const f = fixture(t, { 'pnpm@12.9.0.md': CHANGELOG, 'pnpm@11.29.0.md': CHANGELOG.replaceAll('12.9.0', '11.29.0') })
+  writeFileSync(path.join(f.source, '.changeset/changelogs/pnpm@12.9.0.md'), 'uncommitted')
   assert.equal(writeReleasePage({ ...f, line: '12.x', version: '12.9.0' }), true)
   const page = readFileSync(path.join(f.site, 'blog/releases/12.9.0.md'), 'utf8')
   assert.match(page, /^---\ntitle: pnpm 12.9.0\n.*\ndate: 2026-10-01\n/s)
   assert.match(page, /pnpm 12.9.0 adds/)
   assert.equal(writeReleasePage({ ...f, line: '11.x', version: '11.29.0' }), true)
   assert.match(readFileSync(path.join(f.site, 'blog/releases/11.29.0.md'), 'utf8'), /title: pnpm 11.29.0/)
+})
+
+test('reads a 12.x changelog parked under the former package name', t => {
+  const f = fixture(t, { 'pacquet@12.9.0.md': CHANGELOG })
+  assert.equal(writeReleasePage({ ...f, line: '12.x', version: '12.9.0' }), true)
+  assert.match(readFileSync(path.join(f.site, 'blog/releases/12.9.0.md'), 'utf8'), /pnpm 12.9.0 adds/)
 })
 
 test('keeps an existing page', t => {
