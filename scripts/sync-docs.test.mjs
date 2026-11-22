@@ -4,7 +4,7 @@ import fs, { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSy
 import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
-import { syncDocs } from './sync-docs.mjs'
+import { selectPreviewLines, syncDocs } from './sync-docs.mjs'
 import { docsSourcePaths } from './docs-sources.mjs'
 import { copyDocsForTranslations, copyInstallGuideMessages } from './copy-docs.mjs'
 
@@ -239,4 +239,10 @@ test('staging the install guide strings fails when the package has none', t => {
   const site = installGuideSite(t, {})
   assert.throws(() => copyInstallGuideMessages(site), /has no install-guide\.json/)
   assert.equal(existsSync(path.join(site, 'i18n-sources')), false)
+})
+
+test('a preview imports every line unless lines are named', () => {
+  assert.deepEqual(selectPreviewLines([]), Object.keys(docsSourcePaths))
+  assert.deepEqual(selectPreviewLines(['12.x', 'pnpr']), ['12.x', 'pnpr'])
+  assert.throws(() => selectPreviewLines(['12.x', '13.x']), /Invalid documentation line: 13.x/)
 })

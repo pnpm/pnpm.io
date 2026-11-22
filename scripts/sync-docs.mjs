@@ -135,6 +135,18 @@ function isAncestor (repo, older, newer) {
   }
 }
 
+/**
+ * The documentation lines a preview imports: the named ones, or every line
+ * when none is named. A line left out keeps the site's committed copy.
+ */
+export function selectPreviewLines (lines) {
+  if (!lines.length) return Object.keys(docsSourcePaths)
+  for (const line of lines) {
+    if (!Object.hasOwn(docsSourcePaths, line)) throw new Error(`Invalid documentation line: ${line}`)
+  }
+  return lines
+}
+
 function readJson (file) {
   return JSON.parse(readFileSync(file, 'utf8'))
 }
@@ -164,9 +176,9 @@ function copyDocs (source, target) {
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const [source, line, version, releaseCommit, docsCommit] = process.argv.slice(2)
-  if (!source || !line) throw new Error('Usage: node scripts/sync-docs.mjs SOURCE LINE VERSION RELEASE_SHA DOCS_SHA | SOURCE --preview')
+  if (!source || !line) throw new Error('Usage: node scripts/sync-docs.mjs SOURCE LINE VERSION RELEASE_SHA DOCS_SHA | SOURCE --preview [LINE...]')
   if (line === '--preview') {
-    for (const name of Object.keys(docsSourcePaths)) {
+    for (const name of selectPreviewLines(process.argv.slice(4))) {
       syncDocs({ source, line: name, preview: true })
     }
   } else {
