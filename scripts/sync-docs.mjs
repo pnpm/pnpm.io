@@ -136,15 +136,16 @@ function isAncestor (repo, older, newer) {
 }
 
 /**
- * The documentation lines a preview imports: the named ones, or every line
- * when none is named. A line left out keeps the site's committed copy.
+ * Imports the named documentation lines for a preview, or every line when
+ * none is named. A line left out keeps the site's committed copy.
  */
-export function selectPreviewLines (lines) {
-  if (!lines.length) return Object.keys(docsSourcePaths)
+export function previewDocs ({ source, site, lines = [] }) {
   for (const line of lines) {
     if (!Object.hasOwn(docsSourcePaths, line)) throw new Error(`Invalid documentation line: ${line}`)
   }
-  return lines
+  for (const line of lines.length ? lines : Object.keys(docsSourcePaths)) {
+    syncDocs({ source, site, line, preview: true })
+  }
 }
 
 function readJson (file) {
@@ -178,9 +179,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const [source, line, version, releaseCommit, docsCommit] = process.argv.slice(2)
   if (!source || !line) throw new Error('Usage: node scripts/sync-docs.mjs SOURCE LINE VERSION RELEASE_SHA DOCS_SHA | SOURCE --preview [LINE...]')
   if (line === '--preview') {
-    for (const name of selectPreviewLines(process.argv.slice(4))) {
-      syncDocs({ source, line: name, preview: true })
-    }
+    previewDocs({ source, lines: process.argv.slice(4) })
   } else {
     console.log(syncDocs({ source, line, version, releaseCommit, docsCommit }) ? `Updated ${line} docs to ${version}` : `Docs for ${line} are already current`)
     if (writeReleasePage({ source, site: websiteRoot, line, version, releaseCommit })) console.log(`Wrote the ${version} release page`)

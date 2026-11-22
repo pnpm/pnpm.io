@@ -4,7 +4,7 @@ import fs, { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, symlinkSy
 import os from 'node:os'
 import path from 'node:path'
 import { test } from 'node:test'
-import { selectPreviewLines, syncDocs } from './sync-docs.mjs'
+import { previewDocs, syncDocs } from './sync-docs.mjs'
 import { docsSourcePaths } from './docs-sources.mjs'
 import { copyDocsForTranslations, copyInstallGuideMessages } from './copy-docs.mjs'
 
@@ -241,8 +241,30 @@ test('staging the install guide strings fails when the package has none', t => {
   assert.equal(existsSync(path.join(site, 'i18n-sources')), false)
 })
 
-test('a preview imports every line unless lines are named', () => {
-  assert.deepEqual(selectPreviewLines([]), Object.keys(docsSourcePaths))
-  assert.deepEqual(selectPreviewLines(['12.x', 'pnpr']), ['12.x', 'pnpr'])
-  assert.throws(() => selectPreviewLines(['12.x', '13.x']), /Invalid documentation line: 13.x/)
+test('a preview of named lines leaves the other lines untouched', t => {
+  const f = fixture(t)
+  rmSync(path.join(f.source, 'pnpm11/docs'), { recursive: true })
+  const kept = {
+    'versioned_docs/version-11.x/index.md': 'committed 11.x page',
+    'versioned_sidebars/version-11.x-sidebars.json': '{"docs":["committed"]}',
+    'static/docs-assets/11.x/img/test.svg': '<svg id="committed"/>',
+    'docs-sync.json': '{"11.x":{"version":"11.29.0"}}',
+  }
+  for (const [file, content] of Object.entries(kept)) {
+    mkdirSync(path.dirname(path.join(f.site, file)), { recursive: true })
+    writeFileSync(path.join(f.site, file), content)
+  }
+  assert.throws(() => previewDocs({ source: f.source, site: f.site }), /ENOENT/)
+  previewDocs({ source: f.source, site: f.site, lines: ['12.x', 'pnpr'] })
+  for (const [file, content] of Object.entries(kept)) {
+    assert.equal(readFileSync(path.join(f.site, file), 'utf8'), content)
+  }
+  assert.match(readFileSync(path.join(f.site, 'docs/index.md'), 'utf8'), /^# 12.x/)
+  assert.match(readFileSync(path.join(f.site, 'pnpr-docs/index.md'), 'utf8'), /^# pnpr/)
+})
+
+test('a preview rejects an unknown line before importing any', t => {
+  const f = fixture(t)
+  assert.throws(() => previewDocs({ source: f.source, site: f.site, lines: ['12.x', '13.x'] }), /Invalid documentation line: 13.x/)
+  assert.equal(existsSync(path.join(f.site, 'docs')), false)
 })
