@@ -135,10 +135,6 @@ function isAncestor (repo, older, newer) {
   }
 }
 
-/**
- * Imports the named documentation lines for a preview, or every line when
- * none is named. A line left out keeps the site's committed copy.
- */
 export function previewDocs ({ source, site, lines = [] }) {
   for (const line of lines) {
     if (!Object.hasOwn(docsSourcePaths, line)) throw new Error(`Invalid documentation line: ${line}`)
