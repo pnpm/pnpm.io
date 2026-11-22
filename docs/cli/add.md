@@ -216,6 +216,20 @@ pnpm add --allow-build=!core-js my-bundler
 
 writes `allowBuilds: { core-js: false }`, so the package is never asked about again. Global installs (`pnpm add -g`) record both kinds of decision under [`globalPackagesConfig.permissions`](../configuring.md#settings-for-global-packages) in the global `config.yaml`.
 
+Since v12.23.0, the option takes a comma-separated list as well as being repeatable:
+
+```sh
+pnpm add my-bundler --allow-build=esbuild,sharp
+```
+
+Pass a git or tarball key in its own `--allow-build`. A value that contains one is not split at its commas.
+
+### --minimum-release-age &lt;minutes\>, --minimum-release-age-exclude &lt;package-spec\>
+
+Added in: v12.23.0
+
+Set [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) and [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) for this run, as they do for [`pnpm install`](./install.md).
+
 ### --lockfile-only
 
 Update `package.json` and `pnpm-lock.yaml` without downloading dependencies or writing `node_modules`.

@@ -21,9 +21,16 @@ manifest.
 When publishing a pre-built tarball, pnpm rejects manifests, README files, and
 archive metadata larger than 64 MiB.
 
-When publishing a package inside a [workspace](../workspaces.md), the LICENSE file
-from the root of the workspace is packed with the package (unless the package
-has a license of its own).
+When publishing a package inside a [workspace](../workspaces.md), the `LICENSE`,
+`LICENCE`, or `COPYING` file from the root of the workspace is packed with the
+package (unless the package has a license file of its own).
+
+A package that is not private cannot list a private workspace package in
+`dependencies`, because the private package is never published. Publishing
+such a package fails with `ERR_PNPM_PRIVATE_WORKSPACE_DEPENDENCY`. List the
+private package in `devDependencies` instead, bundle it by listing it in
+`bundleDependencies` with it installed, or remove the dependency in a
+[`beforePacking`](../pnpmfile.md#hooksbeforepackingpkg-pkg--promisepkg) hook.
 
 You may override some fields before publish, using the
 [publishConfig] field in `package.json`.
@@ -47,7 +54,7 @@ Show information in JSON format.
 ### --tag &lt;tag\>
 
 Publishes the package with the given tag. By default, `pnpm publish` updates
-the `latest` tag.
+the tag set by the [`tag`](../settings/other.md#tag) setting, or `latest`.
 
 For example:
 
@@ -58,9 +65,32 @@ pnpm publish --tag next
 pnpm add foo@next
 ```
 
+### --new-version &lt;version\>
+
+Set the `version` field in `package.json` to the given version before
+publishing. The version must be valid semver. A leading `v` is removed.
+
+```sh
+pnpm publish --new-version 1.2.3-alpha.12 --tag alpha
+```
+
+This does what `pnpm version <version> --no-git-tag-version` followed by
+`pnpm publish` does. No commit or tag is created, and the version lifecycle
+scripts don't run. The change to `package.json` is written after the git checks
+and is kept after publishing, even with `--dry-run`.
+If `publishConfig.directory` points at a directory that already has a
+`package.json`, that manifest gets the new version too.
+
+With `--recursive`, every selected workspace package gets the new version,
+including private packages, which are still not published. Workspace
+dependencies on the updated packages are published with the new version.
+
+It can't be used when publishing a tarball.
+
 ### --access &lt;public|restricted\>
 
 Tells the registry whether the published package should be public or restricted.
+It overrides the [`access`](#access) setting.
 
 ### --no-git-checks
 
@@ -102,36 +132,12 @@ When publishing recursively (`pnpm -r publish`), send all selected packages to t
 
 The target registry has to implement the batch publish endpoint ([pnpr](https://github.com/pnpm/pnpm/tree/main/pnpr) does); registries that don't are reported with an `ERR_PNPM_BATCH_PUBLISH_UNSUPPORTED` error. The batch is processed all-or-nothing: if any package in the batch fails validation, none of the packages are published.
 
-A package that declares [`publishConfig.variants`](../package_json.md#publishconfigvariants) can be published in a batch to a registry declared with [`serverType: pnpr`](../registries.md#servertype). In such a batch, pnpm first uploads the archives it packed for every package to the registry's staging area, and checks that the registry still holds each archive another job uploaded with [`--upload-variant`](#--upload-variant-target). The batch then references all of them by integrity. One batch references at most 256 archives per registry; a batch with variants that needs more fails with `ERR_PNPM_BATCH_PUBLISH_TOO_MANY_ARCHIVES`.
-
 The selected packages are grouped by the registry each one
 publishes to, and one request is sent per group. Every package in a group must
 authenticate with the same credential. A scope-specific token shared across the
 group is fine, and mismatched credentials for one registry are rejected *before*
 anything is published, rather than after part of the release went out. The
 `publish` and `postpublish` scripts run after each completed group.
-
-### --no-variants
-
-Publish only the archive that targets `any` of a package that declares [`publishConfig.variants`](../package_json.md#publishconfigvariants). Without it, pnpm refuses to publish such a package to a registry that is not declared with `serverType: pnpr`, because a version published without its variants can't get them later.
-
-### --upload-variant &lt;target\>
-
-Pack the archive of the [`publishConfig.variants`](../package_json.md#publishconfigvariants) entry that lists this target, upload it to the registry's staging area, and print `<target>=<integrity>`. Nothing is published: a later `pnpm publish --variant-integrity` publishes the version with it. Can be repeated, and `any` uploads the archive of every other host.
-
-This lets each job of a CI matrix upload the archive it built. Every job must publish as the same account, which trusted publishing gives every job of a workflow. Uploading the same archive again renews it. The registry keeps an uploaded archive for a day.
-
-```sh
-value=$(pnpm publish --upload-variant linux-x64-musl)
-```
-
-With `--json`, pnpm prints the package's name and version, and each archive's tag, targets, and integrity.
-
-### --variant-integrity &lt;target\>=&lt;integrity\>
-
-Publish the version from archives other jobs uploaded with `--upload-variant`, given by the values they printed. Repeat it once per entry of `publishConfig.variants`, the `any` entry included, naming each by any one of its targets. With `--recursive`, name the package first: `<name>~<target>=<integrity>`.
-
-pnpm packs none of the archives of a package that a value names. Before publishing, it checks that every entry has exactly one value and that the registry still holds each archive for this account. It fails naming the archive whose upload job has to run again. With `--recursive`, a selected package that no value names is packed and published as usual, and each value must name exactly one selected, publishable project.
 
 ### --release-notes &lt;file\>
 
@@ -254,15 +260,13 @@ Under trusted publishing, pnpm attaches provenance to a public package from a pu
 Use `--no-provenance` (or `--provenance=false`) to publish without it, for example from a self-hosted runner.
 Use [`provenance`](#provenance) to set a default.
 
-For a package with [`publishConfig.variants`](../package_json.md#publishconfigvariants), one statement names every archive the publish supplies: the archive that targets `any` and each platform variant, including those other jobs uploaded with `--upload-variant`. A version without an `any` archive gets one that the registry generates for npm clients, and the statement does not name it. `--upload-variant` itself does not sign provenance.
-
 Running a publish to a registry declared with [`serverType: pnpr`](../registries.md#servertype) again is safe, with or without provenance. A rerun that signs provenance again sends a new statement, so the registry answers that the version is already published. pnpm then reports the version as published only when all of these hold:
 
-- the version's release record names the same archives, the archive that targets `any` and each platform variant;
-- when the rerun signs provenance, the version has a statement naming every one of those archives;
+- the version's release record names the same archive;
+- when the rerun signs provenance, the version has a statement naming that archive;
 - the dist-tag the publish sets points at the version.
 
-Otherwise it fails with `ERR_PNPM_PUBLISHED_RELEASE_DIFFERS` and names what differs. A version without an `any` archive is compared by its variants only.
+Otherwise it fails with `ERR_PNPM_PUBLISHED_RELEASE_DIFFERS` and names what differs.
 
 ### --filter &lt;package_selector\>
 
@@ -270,7 +274,7 @@ Otherwise it fails with `ERR_PNPM_PUBLISHED_RELEASE_DIFFERS` and names what diff
 
 ## Configuration
 
-You can also set `gitChecks`, `publishBranch`, `publishWaitTimeout`, and `provenance` options in the `pnpm-workspace.yaml` file.
+You can also set `gitChecks`, `publishBranch`, `publishWaitTimeout`, `provenance`, and `access` options in the `pnpm-workspace.yaml` file.
 
 For example:
 
@@ -323,6 +327,23 @@ provenance: false
 ```
 
 The `PNPM_CONFIG_PROVENANCE` environment variable overrides the
+configuration files. The command-line option takes precedence over both.
+
+### access
+
+* Default: **undefined**
+* Type: **public**, **restricted**
+
+Sets the default for [`--access`](#--access-publicrestricted).
+When unset, pnpm uses `publishConfig.access` from the package's
+`package.json`. When set, it takes precedence over `publishConfig.access`.
+Configure it in `pnpm-workspace.yaml` or the global `config.yaml`:
+
+```yaml title="pnpm-workspace.yaml"
+access: restricted
+```
+
+The `PNPM_CONFIG_ACCESS` environment variable overrides the
 configuration files. The command-line option takes precedence over both.
 
 ## Life cycle scripts

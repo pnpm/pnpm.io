@@ -16,6 +16,7 @@ When used without arguments, updates all dependencies.
 |----------------------|--------------------------------------------------------------------------|
 |`pnpm up`             | Updates all dependencies, adhering to ranges specified in `package.json` |
 |`pnpm up --latest`    | Updates all dependencies to their latest versions                        |
+|`pnpm up --tag next`  | Updates all dependencies to the versions behind their `next` tags        |
 |`pnpm up foo@2`       | Updates `foo` to the latest version on v2                                |
 |`pnpm up "@babel/*"` | Updates all dependencies under the `@babel` scope                        |
 
@@ -31,6 +32,9 @@ Besides moving `pnpm-lock.yaml` to the newly resolved versions, `pnpm update` wr
 * A runtime (`node`, `deno`, `bun` declared in `devEngines.runtime`, `engines.runtime`, or through the `runtime:` / `tool:` protocol) and a package manager (`pnpm`, `npm`, `yarn`, `bun` declared in `devEngines.packageManager` or `packageManager`) are updated too, and their new versions or ranges are written back to `package.json` (and `pnpm-lock.yaml` when the pin is recorded there). An `engines.pnpm` range moves with the pnpm pin, the way [`pnpm self-update`](./self-update.md) moves it.
 * When [`cargo.enabled`](../cargo.md#cargoenabled) is `true`, Cargo dependencies in `Cargo.toml` and `Cargo.lock` are updated too. Pass `crate:<name>` (or `crate:<name>@<req>`) to target specific crates.
 * When [`python.enabled`](../python.md#pythonenabled) is `true`, Python dependencies in `pyproject.toml` and `pylock.toml` are updated too. Pass `pypi:<name>` (or `pypi:<requirement>`) to target specific Python distributions.
+
+Recursive and filtered updates include standalone Python and Cargo workspace members. Python name patterns ignore case and treat runs of dots, underscores, and hyphens as one hyphen. Cargo selectors match both the dependency alias and the crate name.
+
 * Since v12.6.0, a dependency whose specifier comes from a [`packageExtensions`](../settings/dependency-resolution.md#packageextensions) entry, a [`readPackage`](../pnpmfile.md#hooks) hook, or an [`override`](../settings/dependency-resolution.md#overrides) is not written to `package.json`. The lockfile keeps that specifier. `pnpm update` and `pnpm audit --fix=update` still move it inside the range.
 
 An exact pin from one of those sources is left as it is. When that pin is a vulnerable version, `pnpm audit --fix=update` warns and points at `pnpm audit --fix`, which writes an override. An override is applied after `packageExtensions` and `readPackage`, so it replaces a specifier those supply.
@@ -116,6 +120,8 @@ Update the dependencies to their latest stable version as determined by their `l
 
 Since v12.6.0, `--latest` does not move a dependency past a specifier supplied by `packageExtensions`, a `readPackage` hook, or an override. The lockfile stays inside that specifier.
 
+Since v12.23.0, `pnpm update --latest <name>` moves the override keyed by the bare name of a dependency it selects. The override keeps its range style, so `1.0.0` becomes the new exact version and `^1.0.0` becomes `^<new version>`. The `package.json` entry stays as it is. `pnpm update --interactive --latest` does the same for the dependencies you select. pnpm prints a warning when it cannot move the override, for example an `npm:` alias, a `$` reference, or a `catalog:` value. `--latest` without selectors leaves overrides alone.
+
 A Cargo requirement keeps its operator when updated, so `~1.0` becomes `~1.1`
 and `=1.0.0` stays exact. A requirement with only an upper bound, such as `<2`,
 is kept while the new version matches it, and becomes a caret requirement, such
@@ -131,6 +137,30 @@ name, such as `1.4rc1` for `==1.*`, adds a clause that names it, as in
 `==1.*,>=1.4rc1`. `savePrefix` and `saveExact` do not apply to Python
 requirements.
 
+### --tag &lt;tag\>
+
+Added in: v12.23.0
+
+Update the dependencies to the version behind the given dist-tag, and write
+that version to `package.json` with the range operator the dependency already
+declares. The tag's version is used even when it is lower than the installed
+version. `pnpm up --tag next foo` does the same as `pnpm up foo@next`.
+
+A dependency that tracks a dist-tag, such as `"foo": "latest"`, is switched to
+the given tag. A dependency declared through the `catalog:`, `workspace:`, or
+`npm:` protocol, through a named registry, or as a path or git URL, is not
+rewritten. Config dependencies are not updated. A package that does not publish
+the tag fails the update.
+
+With `--global`, a package that does not publish the tag keeps its range, and
+the other packages are updated. A global package also keeps its installed
+version when the tag's version is lower.
+
+The value must be a dist-tag name. A version or a range, such as `1.2.3` or
+`*`, is rejected (`ERR_PNPM_UPDATE_INVALID_TAG`). `--tag` cannot be combined
+with `--latest`, `--workspace`, `--patches`, or a selector that names a
+version, such as `foo@2` (`ERR_PNPM_TAG_WITH_SPEC`).
+
 ### --patches
 
 Added in: v12.0.0
@@ -142,8 +172,8 @@ selects now if that changed. Versions and declared ranges are left alone, but th
 lockfile entry is rewritten as a whole (`integrity`, `revision`, and the package
 snapshot around them), since revisions may declare different dependencies.
 
-Cannot be combined with package selectors, `--latest`, `--interactive`, or
-`--global` (`ERR_PNPM_PATCHES_WITH_SELECTOR`).
+Cannot be combined with package selectors, `--latest`, `--tag`, `--interactive`,
+or `--global` (`ERR_PNPM_PATCHES_WITH_SELECTOR`).
 
 ### --pnpr-server &lt;url\>
 
@@ -191,7 +221,7 @@ Also update packages in `peerDependencies`. It cannot be combined with `--intera
 
 ### --save-exact, -E
 
-With `--latest`, write the resolved version to `package.json` without a range operator.
+With `--latest` or `--tag`, write the resolved version to `package.json` without a range operator. A dependency that already declares a `^`, `~`, or exact range keeps that operator.
 
 ### --lockfile-only
 
@@ -207,7 +237,21 @@ Show outdated dependencies and select which ones to update.
 
 For a package from a registry declared with [`serverType: pnpr`](../registries.md#servertype), the release notes between the installed and the offered version are shown below the list while the package is under the cursor.
 
+With [`trustPolicy: no-downgrade`](../settings/dependency-resolution.md#trustpolicy), the list of dependencies offers only versions the trust policy accepts, and it has a `Trust` column. The `--global` list of package groups has no such column. The column names the strongest trust evidence of the offered version: `staged publish`, `trusted publisher`, `provenance`, or `none`. If a package in [`trustPolicyExclude`](../settings/dependency-resolution.md#trustpolicyexclude) is offered a version with weaker evidence than the installed one, the cell is yellow and also names the installed version's evidence.
+
 Combined with `--global`, each [isolated install group](../global-packages.md#isolated-installations) is presented as one selectable item: packages that share a global installation update together as a unit.
+
+### --long
+
+Show package homepage or repository URLs in the interactive update list:
+
+```sh
+pnpm update --interactive --long
+```
+
+The URL column is hidden by default. This option fetches full package metadata
+and only affects `--interactive`. It cannot be combined with `--global`, which
+selects package groups.
 
 ### --no-save
 
@@ -232,6 +276,12 @@ Also update the GitHub Actions referenced by the repository's workflow files. Se
 Added in: v12.3.0
 
 `pnpm update` accepts the same policy overrides as `pnpm install` and `pnpm add`: `--trust-lockfile`, `--no-trust-lockfile`, [`--trust-policy`](../settings/dependency-resolution.md#trustpolicy), [`--trust-policy-exclude`](../settings/dependency-resolution.md#trustpolicyexclude), and [`--trust-policy-ignore-after`](../settings/dependency-resolution.md#trustpolicyignoreafter), so a policy can be relaxed or tightened for a single run without editing `pnpm-workspace.yaml`.
+
+### --minimum-release-age &lt;minutes\>, --minimum-release-age-exclude &lt;package-spec\>
+
+Added in: v12.23.0
+
+Set [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) and [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) for this run, as they do for [`pnpm install`](./install.md).
 
 ### --cpu, --os, --libc, --ignore-scripts, --ignore-pnpmfile
 

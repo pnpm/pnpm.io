@@ -55,7 +55,7 @@ Python requirement, marker, and lockfile semantics are kept separate from npm's 
 
 Added in: v12.5.0
 
-pnpm installs the project's own package editable when it declares `[build-system]`, making its imports and `[project.scripts]` commands available immediately. Source edits take effect without reinstalling. `[tool.uv].package` overrides whether the project is packaged. Dynamic metadata is read from the declared build backend. A project with only `requirements.txt` can also receive an environment and `pylock.toml`.
+pnpm installs the project's own package editable when it declares `[build-system]`, making its imports and `[project.scripts]` commands available immediately. Source edits take effect without reinstalling. `[tool.uv].package` overrides whether the project is packaged. Dynamic metadata is read from the declared build backend. A project with only `requirements.txt` can also receive an environment and `pylock.toml`. If its directory already has a `.venv` that pnpm did not create, `pnpm install` leaves that project alone and prints a warning. Remove the `.venv` to let pnpm install the requirements.
 
 Declare workspace and local dependencies in `pyproject.toml`:
 
@@ -121,7 +121,9 @@ groups = ["test"]
 
 The lists override their workspace defaults independently. Omitting a list keeps its workspace default. An empty list disables that default for the project.
 
-Explicit project selections must exist in that project. Selected groups' `include-group` references must exist and cannot form cycles. Extra names follow Python's normalization rules, so `dev_tools` and `dev-tools` select the same extra. These rules also apply to extras obtained from dynamic build-backend metadata.
+Explicit project selections must exist in that project. Selected groups' `include-group` references must exist and cannot form cycles. Extra and dependency group names follow Python's normalization rules, so `dev_tools` and `dev-tools` match. This also applies to extras obtained from dynamic build-backend metadata.
+
+To use `pnpm add -D pypi:<name>`, select the `dev` group directly or include it from a selected group.
 
 Selections participate in locking. `--prod` and `--dev` choose which dependencies to install without changing the complete lockfile. A requirement on another project's extra, such as `library[cli]`, selects that distribution extra independently of `library`'s own installation settings.
 

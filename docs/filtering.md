@@ -167,7 +167,9 @@ This selector requires Git 2.24 or newer.
 A project also counts as changed when:
 
 * a version it takes from a [catalog](catalogs.md) changes in
-  `pnpm-workspace.yaml`;
+  `pnpm-workspace.yaml`, including a catalog entry that an
+  [`overrides`](./settings/dependency-resolution.md#overrides) entry points
+  its dependency at;
 * files were moved out of it and git detects the move as a rename.
 
 ### --fail-if-no-match
@@ -240,6 +242,8 @@ To set it for every command, use the `testPattern` setting in
 * Type: **string[]**
 
 ## --changed-files-ignore-pattern &lt;glob>
+
+Prefix a pattern with `!` to keep matching files. A later pattern can override an earlier match.
 
 Allows to ignore changed files by glob patterns when filtering for changed projects since the specified commit/branch.
 

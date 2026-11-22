@@ -122,6 +122,15 @@ overrides:
   "react-dom>react:peer": "-"
 ```
 
+### warnUnusedOverrides
+
+* Default: **true**
+* Type: **Boolean**
+
+When `true`, an install that resolves the whole dependency graph warns about every entry in [`overrides`](#overrides) that matched no dependency, in one line such as `2 overrides matched no dependency: foo, parent>child`.
+
+Only the entries that `pnpm-workspace.yaml` or a local file it includes declares are reported. Entries a config dependency or an `updateConfig` hook adds are not. Convergence overrides are not reported either, since pnpm warns about them when they go stale, and neither are removal overrides (`"-"`), which leave nothing to match against.
+
 ### packageExtensions
 
 The `packageExtensions` fields offer a way to extend the existing package definitions with additional information. For example, if `react-redux` should have `react-dom` in its `peerDependencies` but it has not, it is possible to patch `react-redux` using `packageExtensions`:
@@ -285,11 +294,11 @@ supportedArchitectures:
   - win32-x64
 ```
 
-Each entry is a platform tag, the same tags a package's [`publishConfig.variants`](../package_json.md#publishconfigvariants) entries name: `<os>-<cpu>`, then for Linux `musl` when the platform uses musl, then the floors and ABI the platform has, such as `linux-x64-manylinux_2_28` (glibc 2.28), `darwin-arm64-macos_14_0`, `win32-x64-windows_10_0`, `linux-x64-napi8`, or `linux-x64-node127` (a Node.js ABI). `<os>` and `<cpu>` are Node.js names, so `freebsd-x64` and `linux-loong64` are platforms too. Linux entries without a C library mean glibc.
+Each entry is a platform tag: `<os>-<cpu>`, then for Linux `musl` when the platform uses musl, then the floors and ABI the platform has, such as `linux-x64-manylinux_2_28` (glibc 2.28), `darwin-arm64-macos_14_0`, `win32-x64-windows_10_0`, `linux-x64-napi8`, or `linux-x64-node127` (a Node.js ABI). `<os>` and `<cpu>` are Node.js names, so `freebsd-x64` and `linux-loong64` are platforms too. Linux entries without a C library mean glibc.
 
 The spellings pnpm accepted before platform tags still work: `glibc` or `gnu` for the C library, other names of an architecture such as `amd64`, a `musllinux_<major>_<minor>` wheel baseline, and Rust target triples, so `x86_64-unknown-linux-gnu` is equivalent to `linux-x64`. `current` includes the platform running the install. Python resolves for the Linux, macOS, and Windows platforms of the list and reports the others.
 
-A setting that names exactly one platform, without `current`, also decides which [platform variant](../registries.md#servertype) of a package pnpm links: that platform's, not the host's. A list names one by one entry; the mapping form names one when `os` and `cpu` each hold one value, an unset `libc` being the host's C library. The list prepares only the named platforms. The mapping form continues to work with its existing meaning. Python uses these targets together with [`python.versions`](../python.md#pythonversions) when locking for multiple environments.
+The list prepares only the named platforms. The mapping form continues to work with its existing meaning. Python uses these targets together with [`python.versions`](../python.md#pythonversions) when locking for multiple environments.
 
 ### optional
 
@@ -408,6 +417,23 @@ The setting also governs [`trustPolicy`](#trustpolicy), which reads the same pub
 
 The opt-in covers a registry that cannot date its releases, not a package a registry says it never published: during [lockfile verification](../supply-chain-security.md), a lockfile entry missing from a packument that does date every version it lists remains a hard failure.
 
+### referenceTime
+
+* Default: **undefined**
+* Type: **String** (an RFC 3339 timestamp)
+
+The reference time used to evaluate time-dependent settings. When unset, pnpm uses the current time. Currently, this applies to [`minimumReleaseAge`](#minimumreleaseage) and [`trustPolicyIgnoreAfter`](#trustpolicyignoreafter), during both resolution and [lockfile verification](../supply-chain-security.md).
+
+A fixed reference time keeps these age thresholds unchanged between runs. It does not freeze registry metadata or affect timeouts, retries, or cache expiration.
+
+Set it in `pnpm-workspace.yaml` or with the `PNPM_CONFIG_REFERENCE_TIME` environment variable. The global `config.yaml` does not apply it. In `pnpm-workspace.yaml`, a value that is not a timestamp, or is more than 10 minutes later than the current time, fails the command. From any other source, such a value is ignored with a warning. A job that advances the time should write one safely in the past, such as the start of the current day.
+
+While a `minimumReleaseAge` cutoff, or a `trustPolicyIgnoreAfter` window under `trustPolicy: no-downgrade`, counts back from the setting, an install that uses [`pnprServer`](/pnpr/install-acceleration#enabling-it) resolves locally.
+
+```yaml title="pnpm-workspace.yaml"
+referenceTime: "2026-11-01T00:00:00Z"
+```
+
 ### minimumReleaseAgeStrict
 
 * Default: **true** if [`minimumReleaseAge`](#minimumreleaseage) is explicitly configured, **false** otherwise
@@ -420,6 +446,8 @@ The default depends on whether you configured `minimumReleaseAge` yourself: if y
 ```yaml title="pnpm-workspace.yaml"
 minimumReleaseAgeStrict: true
 ```
+
+When resolving through a pnpr server, strict mode fails the request if no mature version matches. In non-strict mode, pnpm adds fallback versions selected by the server to `minimumReleaseAgeExclude` in `pnpm-workspace.yaml`.
 
 ### trustPolicy
 
@@ -470,7 +498,7 @@ The cleanup is skipped when the install's lockfile does not cover the whole work
 * Default: **false**
 * Type: **Boolean**
 
-When `true`, `pnpm install` skips the supply-chain verification pass that re-applies [`minimumReleaseAge`](#minimumreleaseage) and [`trustPolicy`](#trustpolicy) to every entry in the loaded lockfile. The install treats the lockfile as already trusted.
+When `true`, `pnpm install` skips the supply-chain verification pass that re-applies [`minimumReleaseAge`](#minimumreleaseage), [`trustPolicy`](#trustpolicy), and [`blockExoticSubdeps`](#blockexoticsubdeps) to every entry in the loaded lockfile. The install treats the lockfile as already trusted.
 
 Useful in environments where the lockfile is effectively part of the trusted base: closed-source projects where every commit comes from a trusted author. A poisoned lockfile (one a contributor authored under a weaker policy than CI enforces) can slip through, so leave this `false` whenever outside collaborators can edit the lockfile.
 
@@ -481,13 +509,15 @@ On large workspaces the verification pass holds per-package registry metadata in
 * Default: **true**
 * Type: **Boolean**
 
-When set to `true`, only direct dependencies (those listed in your root `package.json`) may use exotic sources (like git repositories or direct tarball URLs). All transitive dependencies must be resolved from a trusted source, such as the configured registry, local file paths, workspace links, or trusted GitHub repositories (node, bun, deno).
+When set to `true`, only direct dependencies (those listed in your root `package.json`) may use exotic sources (like git repositories or direct tarball URLs). All transitive dependencies must be resolved from a trusted source, such as the configured registry, workspace packages, or trusted GitHub repositories (node, bun, deno). Non-local packages cannot resolve host filesystem paths (`file:` or `link:`) outside their own package archive unless rewritten by workspace `overrides`, `packageExtensions`, or `.pnpmfile.cjs`.
 
 This setting helps secure the dependency supply chain by preventing transitive dependencies from pulling in code from untrusted locations.
 
 Exotic sources include:
 * Git repositories (`git+ssh://...`)
 * Direct URL links to tarballs (`https://.../package.tgz`)
+
+A pnpr server does not fetch exotic subdependencies. With [`pnprServer`](#pnprserver) set and `blockExoticSubdeps: false`, pnpm resolves locally.
 
 ### registries
 
@@ -638,7 +668,7 @@ This can also be configured via the `--config.pnprServer=<url>` command-line opt
 
 If the server refuses a setting the install uses, or cannot return the lockfile format pnpm reads, pnpm prints a warning and resolves locally.
 
-When `pnprServer` is set, authentication headers configured for the pnpr server URL in `.npmrc` (for example, `//pnpr.example.com/:_authToken=...`) are automatically sent to authenticate requests to the server.
+When `pnprServer` is set, authentication headers configured for the pnpr server URL in `.npmrc` (for example, `//pnpr.example.com/:_authToken=...`) authenticate requests to the server over HTTPS or loopback HTTP.
 
 When remote resolution fails, pnpm reports the server's `ERR_PNPR_` error code and reason.
 

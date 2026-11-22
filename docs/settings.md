@@ -24,7 +24,7 @@ Authorization-related settings are handled via [`.npmrc`](./npmrc.md).
 
 :::
 
-Values in the configuration files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string. Since v12.7.0, `${NAME?}` expands to an empty string without a warning when `NAME` isn't set, as in npm.
+Values in the configuration files may contain env variables using the `${NAME}` syntax. The env variables may also be specified with default values. Using `${NAME-fallback}` will return `fallback` if `NAME` isn't set. `${NAME:-fallback}` will return `fallback` if `NAME` isn't set, or is an empty string. Since v12.7.0, `${NAME?}` expands to an empty string without a warning when `NAME` isn't set, as in npm. Since v12.23.0, a reference to an unset or empty variable without a fallback fails with [`ERR_PNPM_CONFIG_UNRESOLVED_ENV_VAR`](./errors.md#err_pnpm_config_unresolved_env_var).
 
 :::warning
 
@@ -146,6 +146,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [overrides](./settings/dependency-resolution.md#overrides)
   * [Convergence overrides](./settings/dependency-resolution.md#convergence-overrides)
   * [Overriding peer dependencies](./settings/dependency-resolution.md#overriding-peer-dependencies)
+* [warnUnusedOverrides](./settings/dependency-resolution.md#warnunusedoverrides)
 * [packageExtensions](./settings/dependency-resolution.md#packageextensions)
 * [allowedDeprecatedVersions](./settings/dependency-resolution.md#alloweddeprecatedversions)
 * [update](./settings/dependency-resolution.md#update)
@@ -161,6 +162,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 * [minimumReleaseAgeExclude](./settings/dependency-resolution.md#minimumreleaseageexclude)
 * [minimumReleaseAgeExcludePrune](./settings/dependency-resolution.md#minimumreleaseageexcludeprune)
 * [minimumReleaseAgeIgnoreMissingTime](./settings/dependency-resolution.md#minimumreleaseageignoremissingtime)
+* [referenceTime](./settings/dependency-resolution.md#referencetime)
 * [minimumReleaseAgeStrict](./settings/dependency-resolution.md#minimumreleaseagestrict)
 * [trustPolicy](./settings/dependency-resolution.md#trustpolicy)
 * [trustPolicyExclude](./settings/dependency-resolution.md#trustpolicyexclude)
@@ -333,6 +335,7 @@ Every setting is listed below, grouped by topic. Follow a setting to read its do
 
 * [versioning.fixed](./settings/versioning.md#versioningfixed)
 * [versioning.ignore](./settings/versioning.md#versioningignore)
+* [versioning.includePrivatePackages](./settings/versioning.md#versioningincludeprivatepackages)
 * [versioning.maxBump](./settings/versioning.md#versioningmaxbump)
 * [versioning.lanes](./settings/versioning.md#versioninglanes)
 * [versioning.epics](./settings/versioning.md#versioningepics)
@@ -397,7 +400,7 @@ These settings are configured in `pnpm-workspace.yaml` as well, but are document
 
 ### Settings documented elsewhere
 
-* [publishBranch](./cli/publish.md#publishbranch) and [publishWaitTimeout](./cli/publish.md#publishwaittimeout)
+* [publishBranch](./cli/publish.md#publishbranch), [publishWaitTimeout](./cli/publish.md#publishwaittimeout) and [access](./cli/publish.md#access)
 * [patchedDependencies](./cli/patch.md#patcheddependencies)
 * [pnpmfile](./pnpmfile.md#pnpmfile), [globalPnpmfile](./pnpmfile.md#globalpnpmfile) and [ignorePnpmfile](./pnpmfile.md#ignorepnpmfile)
 * [audit.level](./cli/audit.md#auditlevel), [audit.ignore](./cli/audit.md#auditignore) and [audit.ignorePrune](./cli/audit.md#auditignoreprune)

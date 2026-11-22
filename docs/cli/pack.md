@@ -25,6 +25,15 @@ Without `files`, pnpm reads `.npmignore`, falling back to `.gitignore`.
 Negated ignore patterns can re-include default exclusions such as `*.orig` and
 `npm-debug.log`. Root lockfiles and `.npmrc` stay excluded.
 
+## Private workspace dependencies
+
+A package that is not private cannot list a private workspace package in
+`dependencies`, because the private package is never published. Packing
+such a package fails with `ERR_PNPM_PRIVATE_WORKSPACE_DEPENDENCY`. List the
+private package in `devDependencies` instead, bundle it by listing it in
+`bundleDependencies` with it installed, or remove the dependency in a
+[`beforePacking`](../pnpmfile.md#hooksbeforepackingpkg-pkg--promisepkg) hook.
+
 ## Options
 
 ### --recursive, -r
@@ -45,11 +54,9 @@ The gzip compression level of the tarball, from `0` to `9`. Values outside that 
 
 ### --json
 
-Log output in JSON format. Each archive written has an `integrity`, its SHA-512 in SRI form, and a `size` in bytes. A platform variant's archive also has its `tag`, and every archive of a package that declares `publishConfig.variants` has its `targets`. A dry run writes no archive, so it prints neither `integrity` nor `size`.
+Log output in JSON format. Each archive written has an `integrity`, its SHA-512 in SRI form, and a `size` in bytes. A dry run writes no archive, so it prints neither.
 
-### --variant &lt;target\>
-
-Pack only the archive of the [`publishConfig.variants`](../package_json.md#publishconfigvariants) entry that lists this target, such as `--variant linux-x64-musl`. `--variant any` packs the archive of every other host. Can be repeated. Without it, `pnpm pack` writes every archive the package declares, each platform variant as `<name>-<version>~<tag>.tgz`.
+The `manifest` field holds the `package.json` that goes into the tarball, after `publishConfig` and the other publish-time changes are applied. Run `pnpm pack --dry-run --json` to preview it without writing a tarball. A dry run still runs `prepack` and `prepare`, unless `--ignore-scripts` is passed.
 
 ### --filter &lt;package_selector\>
 

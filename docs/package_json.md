@@ -436,7 +436,7 @@ Publishes the package under a different name than the one its manifest carries i
 }
 ```
 
-Only the published artifact is renamed. Dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
+In a packed dependent, a shorthand such as `workspace:^` or a relative path such as `workspace:../foo-v2` uses the dependency's published name. Dependents, `pnpm-lock.yaml`, and release tooling keep addressing the project by its manifest name. The new name reaches the packed manifest, the tarball filename, and everything that addresses the package at the registry: the already-published check of `pnpm publish -r`, its registry selection, and the release-planning probes of `pnpm change status` and `pnpm version -r`.
 
 ### publishConfig.executableFiles
 
@@ -489,45 +489,3 @@ For example:
   }
 }
 ```
-
-### publishConfig.variants
-
-* Type: **Array**
-
-Publishes the version as several archives, one per platform, to a registry
-declared with `serverType: pnpr`. pnpm installs the archive that fits the
-host. Each entry describes one archive:
-
-* `targets`: the platform tags the archive runs on, such as `linux-x64`,
-  `linux-x64-musl`, `darwin-arm64-macos_11_0`, or `win32-x64-napi8`. The entry
-  that targets `any` is the archive of every other host, the one npm and other
-  clients install.
-* `files`: patterns of the files only this archive holds. Every file no entry
-  claims goes into every archive.
-* `manifest`: fields that replace the package's fields in this archive's
-  `package.json`. `null` removes a field.
-
-```json title="package.json"
-{
-  "name": "example-cli",
-  "version": "4.0.0",
-  "bin": { "example-cli": "bin/example-cli.js" },
-  "publishConfig": {
-    "variants": [
-      { "targets": ["any"], "files": ["lib/**"] },
-      {
-        "targets": ["linux-x64", "linux-x64-musl"],
-        "files": ["native/linux-x64/example-cli"],
-        "manifest": { "bin": { "example-cli": "native/linux-x64/example-cli" } }
-      }
-    ]
-  }
-}
-```
-
-A platform variant is named by its targets, sorted and joined with `+`, such
-as `linux-x64+linux-x64-musl`. A target appears in one entry only. Without an
-`any` entry, the version has no archive for other hosts, and installing it
-there fails. A platform variant can't run install scripts or have a
-`binding.gyp`, and an entry's `manifest` can't set `name`, `version`, or peer
-dependencies.

@@ -34,7 +34,7 @@ The command exits with code `1` when an advisory at or above the [audit level](#
 pnpm audit signatures
 ```
 
-Verifies the ECDSA registry signatures of installed packages against the public keys published by each registry at `/-/npm/v1/keys`. Scoped registries configured via [`registries`](../settings/dependency-resolution.md#registries) are respected; registries that don't publish signing keys are skipped.
+Verifies the ECDSA registry signatures of installed registry packages against the public keys each registry publishes at `/-/npm/v1/keys`. pnpm respects scoped and prefix-routed registries configured via [`registries`](../settings/dependency-resolution.md#registries), and skips registries that do not publish signing keys as well as tarball, git, and directory dependencies.
 
 Signatures are verified against the package integrity recorded in the lockfile. A package without recorded integrity cannot pass verification.
 
@@ -59,7 +59,11 @@ Add overrides to the `pnpm-workspace.yaml` file to force non-vulnerable versions
 
 Use `--fix=update` to fix vulnerabilities by updating the vulnerable packages in the lockfile instead of adding overrides.
 
-When [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) is set, `--fix` also adds the minimum patched version of each advisory to [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) in `pnpm-workspace.yaml`, so the security fix can be installed without waiting for the release age window.
+When [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) would block the minimum patched version, `--fix` adds it to [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) in `pnpm-workspace.yaml` so it can be installed.
+
+### --no-add-release-age-exclusions
+
+Skip automatic additions to `minimumReleaseAgeExclude` for both fix methods and interactive fixes. The release age policy can still block recently published patches unless an existing exclusion allows them. If the resolver selects a patch that the age policy blocks, `--fix=update` can exit with `ERR_PNPM_NO_MATURE_MATCHING_VERSION`. With `--fix=update`, the update still follows [`minimumReleaseAgeExcludePrune`](../settings/dependency-resolution.md#minimumreleaseageexcludeprune).
 
 ### --interactive, -i
 

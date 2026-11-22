@@ -308,6 +308,8 @@ This setting allows the checking of the state of dependencies before running scr
 - `error` - Throws an error if `node_modules` is not up to date.
 - `false` - Disables dependency checks.
 
+Changing [`trustLockfile`](./dependency-resolution.md#trustlockfile) alone does not trigger a dependency reinstall before a script runs. An explicit `pnpm install` verifies the lockfile when that setting is off.
+
 When the command is filtered, for example `pnpm --filter foo run build`, the check covers the selected projects and the workspace projects they depend on, and the install it runs is filtered the same way.
 
 ### strictDepBuilds
@@ -331,6 +333,8 @@ allowBuilds:
   nx@21.6.0: false
 ```
 
+A denial also covers a package from a [named registry](../package-sources.md#named-registries), so `nx@21.6.0: false` blocks `nx@work:21.6.0` too. An approval by name or version covers the default registry only. Approve a named-registry package by its exact key, such as `nx@work:21.6.5: true`.
+
 **Git-hosted packages:** a package name on its own never approves builds for a git or tarball dependency, because the name alone does not identify the artifact. Approve one either by its exact resolved path (including the commit) or by its repository URL:
 
 ```yaml title="pnpm-workspace.yaml"
@@ -351,7 +355,7 @@ Denials by package name are not restricted this way: `foo: false` blocks `foo` w
 
 During install, dependencies with ignored builds that are not yet listed in `allowBuilds` are automatically added to `pnpm-workspace.yaml` with a placeholder value, so you can manually set them to `true` or `false`. The [`--allow-build`](../cli/add.md#--allow-build) flag on `pnpm add` and `pnpm approve-builds` writes its entries here as well.
 
-**Patched packages:** since v12.4.0, a [patch](../cli/patch.md) that adds an install script or a `binding.gyp` makes the package buildable, and the build goes through the same approval. Until the package is allowed, it is listed under "Ignored build scripts".
+**Patched packages:** since v12.4.0, a [patch](../cli/patch.md) that adds an install script or a `binding.gyp` makes the package buildable, and the build goes through the same approval. When `strictDepBuilds` is `false`, an unapproved package appears under "Packages awaiting approval". When `strictDepBuilds` is `true`, the install fails with `ERR_PNPM_IGNORED_BUILDS`.
 
 :::info Migrating from older settings
 

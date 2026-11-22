@@ -127,6 +127,8 @@ Don't read or generate a `pnpm-lock.yaml` file.
 
 When used, only updates `pnpm-lock.yaml` and `package.json`. Nothing gets written to the `node_modules` directory.
 
+When resolving an unrelated change, pnpm can reuse Git commits already recorded in the lockfile for unchanged direct and transitive dependencies.
+
 ### --lockfile-dir &lt;dir\>
 
 The directory in which `pnpm-lock.yaml` is created. Several projects can share one lockfile. It cannot be combined with `--global`.
@@ -168,6 +170,8 @@ This setting is `true` by default in [CI environments]. pnpm detects a CI enviro
 
 [CI environments]: https://github.com/watson/ci-info#supported-ci-tools
 
+When verifying a locked tarball online, pnpm asks the registry for fresh package metadata once if the cached metadata omits the locked version.
+
 ### --no-frozen-lockfile
 
 Allows lockfile updates during installation. This is the inverse of `--frozen-lockfile`.
@@ -187,6 +191,22 @@ Skip verifying the lockfile against supply-chain policies. `--no-trust-lockfile`
 ### --auto-dedupe
 
 Deduplicate compatible dependency versions during installation. `--no-auto-dedupe` turns it off when the configuration turns it on. See [`autoDedupe`](../settings/dependency-resolution.md#autodedupe).
+
+### --minimum-release-age &lt;minutes\>
+
+Added in: v12.23.0
+
+Sets [`minimumReleaseAge`](../settings/dependency-resolution.md#minimumreleaseage) for this run, overriding the configured value. The value is in minutes. As with a configured value, it turns on [`minimumReleaseAgeStrict`](../settings/dependency-resolution.md#minimumreleaseagestrict) unless that setting is configured. A value that is not a non-negative number is an error.
+
+### --minimum-release-age-exclude &lt;package-spec\>
+
+Added in: v12.23.0
+
+Sets [`minimumReleaseAgeExclude`](../settings/dependency-resolution.md#minimumreleaseageexclude) for this run, replacing the configured list. Repeat the option to exclude several packages:
+
+```sh
+pnpm install --minimum-release-age 1440 --minimum-release-age-exclude react --minimum-release-age-exclude webpack@5.98.0
+```
 
 ### --merge-git-branch-lockfiles
 
@@ -282,11 +302,15 @@ Added in: v12.7.0
 Allow the named package to run its lifecycle scripts during this install, and
 record it in the [`allowBuilds`](../settings/build.md#allowbuilds) field of
 `pnpm-workspace.yaml` so it stays allowed. Prefix a name with `!` to deny its
-scripts instead. The option can be repeated:
+scripts instead. The option can be repeated or, since v12.23.0, take a
+comma-separated list:
 
 ```sh
 pnpm install --allow-build=esbuild --allow-build='!core-js'
 ```
+
+Pass a git or tarball key in its own `--allow-build`. A value that contains one
+is not split at its commas.
 
 The quotes keep a POSIX shell from treating `!` as history expansion. In
 Windows `cmd.exe`, leave them out.

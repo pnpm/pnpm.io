@@ -12,13 +12,20 @@ when [`cargo.enabled`](../cargo.md#cargoenabled) is `true`), and Python packages
 `true`). The check can be limited to a subset of the declared dependencies,
 runtimes, or package managers by providing arguments, including `crate:<name>`
 for Cargo crates and `pypi:<name>` for Python packages. Patterns support `*`
-wildcards, and a leading `!` excludes matching names.
+wildcards, and a leading `!` excludes matching names. Python selectors ignore case and treat runs of dots, underscores, and hyphens as one hyphen. Cargo selectors match both the dependency alias and the crate name.
 
 `pnpm outdated` exits with code 1 when any dependency is outdated.
 Without a lockfile, the `Current` column shows the version installed in
 `node_modules`. If the dependency is not installed, it shows the lowest version
 allowed by the declared range. Cargo and Python checks still require their
 ecosystem lockfiles.
+
+The `Latest` column shows the highest of the version the declared specifier
+resolves to and the version the `latest` dist-tag points to. If the installed
+version is a prerelease, pnpm also considers the dist-tag that points to the
+newest version of the same prerelease channel, such as `next` pointing to
+`3.0.0-rc.1` when `3.0.0-rc.0` is installed. `pnpm update --latest` does not
+follow prerelease channel dist-tags.
 
 Examples:
 ```sh

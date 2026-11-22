@@ -26,11 +26,13 @@ package, when executed inside a workspace.
 Workspace projects are listed in dependency order: a project appears after the
 workspace projects it depends on. Pass [`--no-sort`](./recursive.md#--no-sort) to
 keep workspace order, or [`--reverse`](./recursive.md#--reverse) to list
-dependents first.
+dependents first. Combine `--no-sort` with `--reverse` to list projects in reverse workspace order.
 
 ### --json
 
-Log output in JSON format.
+Log output in JSON format. The `unsavedDependencies` field lists packages
+present in the project's own modules directory that its lockfile entry does
+not record.
 
 ### --long
 
@@ -39,6 +41,10 @@ Show extended information. `pnpm ll` and `pnpm la` are shorthands for `pnpm list
 ### --lockfile-only
 
 Read package information from the lockfile instead of checking the actual `node_modules` directory. This is useful for quickly inspecting what would be installed without requiring a full installation.
+
+With `--find-by`, finder callbacks can read manifests from the configured store
+even when `node_modules` is absent. Run `pnpm fetch` first if the packages have
+not been downloaded.
 
 ### --parseable
 
