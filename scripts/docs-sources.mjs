@@ -17,8 +17,12 @@ export function readDocsVersions (site) {
   return versions
 }
 
-/** Package whose composed changelog at the release tag is a line's release page. */
+/**
+ * Packages whose composed changelog at the release tag is a line's release
+ * page, in lookup order. 12.x tags cut before the wrapper's workspace package
+ * was renamed hold `pacquet@<version>.md`.
+ */
 export const releaseChangelogPackages = {
-  '11.x': 'pnpm',
-  '12.x': 'pacquet',
+  '11.x': ['pnpm'],
+  '12.x': ['pnpm', 'pacquet'],
 }

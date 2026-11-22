@@ -14,8 +14,8 @@ const HEADING = /^#{1,6}\s/
  * @returns whether a page was written.
  */
 export function writeReleasePage ({ source, site, line, version, releaseCommit }) {
-  const packageName = releaseChangelogPackages[line]
-  if (!packageName) return false
+  const packageNames = releaseChangelogPackages[line]
+  if (!packageNames) return false
   if (!semver.valid(version) || semver.prerelease(version) || line !== `${semver.major(version)}.x`) {
     throw new Error(`Release ${version} has no ${line} release page`)
   }
@@ -23,12 +23,19 @@ export function writeReleasePage ({ source, site, line, version, releaseCommit }
   const page = path.join(site, 'blog/releases', `${version}.md`)
   if (existsSync(page)) return false
   const git = (...args) => execFileSync('git', args, { cwd: source, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] })
-  const changelogPath = `.changeset/changelogs/${packageName}@${version}.md`
-  const object = `${releaseCommit}:${changelogPath}`
-  try {
-    git('cat-file', '-e', object)
-  } catch {
-    console.warn(`::warning::No ${changelogPath} at ${releaseCommit}; skipping the ${version} release page`)
+  const changelogPaths = packageNames.map(packageName => `.changeset/changelogs/${packageName}@${version}.md`)
+  const object = changelogPaths
+    .map(changelogPath => `${releaseCommit}:${changelogPath}`)
+    .find(candidate => {
+      try {
+        git('cat-file', '-e', candidate)
+        return true
+      } catch {
+        return false
+      }
+    })
+  if (!object) {
+    console.warn(`::warning::No ${changelogPaths.join(' or ')} at ${releaseCommit}; skipping the ${version} release page`)
     return false
   }
   const date = git('show', '-s', '--format=%cs', releaseCommit).trim()
