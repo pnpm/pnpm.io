@@ -146,15 +146,18 @@ Resolve responses no longer carry a separate capability header.
 `overrides`, `lockfile`, `frozenLockfile`, `preferFrozenLockfile`,
 `ignoreManifestCheck`, `trustLockfile`, `minimumReleaseAge`,
 `minimumReleaseAgeExclude`, `minimumReleaseAgeIgnoreMissingTime`,
-`trustPolicy`, `trustPolicyExclude`, `trustPolicyIgnoreAfter`, and
-`fixLockfile`. A repair request regenerates broken
+`trustPolicy`, `trustPolicyExclude`, `trustPolicyIgnoreAfter`,
+`injectWorkspacePackages`, `dedupeInjectedDeps`, `ignoredOptionalDependencies`,
+`updateChecksums`, and `fixLockfile`. Each project in `projects` can carry its
+`dependenciesMeta`. A repair request regenerates broken
 lockfile metadata while retaining compatible locked versions, including for a
 filtered install.
 
 The server refuses a request that has a field it does not know. The `400`
 response carries the code `ERR_PNPR_UNSUPPORTED_REQUEST_FIELD`, because an
 ignored field could be a setting that changes the resolution. The same applies
-to fields inside `projects` and to Cargo and Python requests.
+to fields inside `projects` and to Cargo and Python requests. The server does
+not fetch exotic subdependencies, so it refuses `blockExoticSubdeps` too.
 
 `acceptedLockfileFormats` lists the lockfile formats the client reads. The
 server refuses a request that lists none it renders with
@@ -306,8 +309,6 @@ are checked against the serving registry's matching
 | `GET` | `/@scope/{name}` | Scoped package packument. |
 | `GET` | `/{name}/{version-or-tag}` | Unscoped version manifest by exact version or dist-tag. |
 | `GET` | `/@scope/{name}/{version-or-tag}` | Scoped version manifest by exact version or dist-tag. |
-| `GET` | `/{name}@{version}/variants/{tag}` | Unscoped [platform variant](#platform-variants) tar. |
-| `GET` | `/@scope/{name}@{version}/variants/{tag}` | Scoped platform variant tar. |
 | `GET` | `/{name}/{version}+r{revision}` | Unscoped release record. See [pnpr's package document](#pnprs-package-document). |
 | `GET` | `/@scope/{name}/{version}+r{revision}` | Scoped release record. |
 | `GET` | `/{name}/{version}+r{revision}/evidence` | Unscoped release record's evidence. See [Release record logs](#release-record-logs). |
@@ -423,7 +424,10 @@ Each version's entry may have:
 Below [`splitThreshold`](configuration.md#packagedocuments), every entry has
 its `manifest`. Above it, only every dist-tag target and the highest release of
 each major version (of each minor version below 1.0) keep theirs. Every other
-version's manifest and facts are in its release record, at
+version's manifest and facts are in its release record, with two exceptions.
+Hosted tar routes keep every manifest inline to give clients the served tar's
+integrity. A version also stays inline if a tag or exact version occupies its
+release record URL. Release records are available at
 `/{name}/{version}+r{revision}`:
 
 ```json
@@ -461,19 +465,18 @@ has:
 
 `interpretation` is the profile the manifest was derived under, and `inputs`
 are the digests it was derived from: the `.tgz` as published, and its
-`package.json` and `npm-shrinkwrap.json` by their paths in the archive. Each
-platform variant in `variants` has `inputs` of its own, and a `purl`: the
-record's with a `variant` qualifier naming its tag, with `+` written `%2B`, such
-as `pkg:npm/fast-thing@1.5.0?variant=linux-x64%2Blinux-x64-musl`. A registry with
-`tarballs: tar` serves the record with the tar's `integrity`.
+`package.json` and `npm-shrinkwrap.json` by their paths in the archive. On hosted tar routes the record's
+`integrity` covers the published `.tgz`. The version manifest's
+`dist.integrity` covers the served tar.
 
 Revision `0` is the original artifact, also of a version without registry
-revisions. A release record never changes once pnpr has verified the archive
-it describes, so from then on it is served with
-`Cache-Control: public, max-age=31536000, immutable`. Before that, it has no
-`Cache-Control` header, since verifying the archive can add `fileCount`,
-`unpackedSize`, `requiresBuild`, and `bins`. A package closed to anonymous
+revisions. Hosted records accepted at publish time are served with
+`Cache-Control: public, max-age=31536000, immutable`. Synthesized records
+can gain archive facts, and their URLs can later name an upstream version or
+tag. A package closed to anonymous
 callers gets `Cache-Control: private, no-store` for its records.
+An existing dist-tag or upstream version ending in `+r<N>` returns its npm
+version document.
 `/{name}/{version}` keeps serving the selected revision in npm's format.
 
 ### Release record logs
@@ -495,7 +498,8 @@ several, serves no log.
 Anyone who may read a package of the namespace reads its checkpoint and
 hash tiles. An entry bundle names every package logged with it, so only a
 caller who may read every package of the namespace gets the entry bundles;
-anyone else gets a 404 for every bundle. When some package is closed to
+anyone else gets a 404 for every bundle. If a registry narrows its package
+patterns and stops claiming a logged name, its entry bundles also return 404. When some package is closed to
 anonymous callers, these responses are `Cache-Control: private, no-store`.
 
 A record's evidence, `/{name}/{version}+r{revision}/evidence`, is read as the
@@ -542,6 +546,10 @@ a hosted registry.
 | `DELETE` | `/@scope/{name}@{version}` | Unpublish a scoped version, as above. Requires `delete`. Legacy `/@scope/{name}@{version}/-rev/{rev}` is also accepted. |
 | `DELETE` | `/{name}/-/{filename}` | Unpublish the unscoped version the tarball belongs to, as above. Requires `delete`. Legacy `/{name}/-/{filename}/-rev/{rev}` is also accepted. |
 | `DELETE` | `/@scope/{name}/-/{filename}` | Unpublish the scoped version the tarball belongs to, as above. Requires `delete`. Legacy `/@scope/{name}/-/{filename}/-rev/{rev}` is also accepted. |
+| `PUT` | `/-/package/{package}/owners` | Add a maintainer by username with `{"user":"<username>"}`. Requires an owner or administrator with the `annotate` grant. |
+| `DELETE` | `/-/package/{package}/owners/{user}` | Remove a maintainer under the same permissions. Each package must keep at least one maintainer. |
+| `PUT`, `DELETE` | `/-/user/v1/star` | Add or remove the signed-in user's star for a readable hosted package. The body is `{"name":"<package>"}`. |
+| `GET` | `/-/user/v1/star`, `/-/user/{user}/stars` | List the account's starred packages that the caller can read through this registry. |
 | `PUT` | `/-/package/{package}/dist-tags/{tag}` | Add or update a dist-tag. Body is a JSON string naming a published version, for example `"1.0.0"`. Names that parse as semver ranges and targets that are missing or unpublished return `400`. Requires `annotate`. |
 | `DELETE` | `/-/package/{package}/dist-tags/{tag}` | Remove a dist-tag. Removing `latest` while published versions exist returns `400`. Requires `annotate`. |
 
@@ -550,85 +558,19 @@ name and target rules. A package-document update cannot remove `latest` while
 published versions remain.
 
 Unpublishing a version removes every dist-tag pointing at it. If `latest`
-pointed at it and versions remain, `latest` moves to the highest remaining
-version. npm visibility and collaborator endpoints return `404` with the
+pointed at it, pnpr restores the most recent former `latest` that is still
+published. If none remains, pnpr picks the highest remaining stable version,
+or the highest prerelease if only prereleases remain. When `latest` moves, the
+package README and its filename follow the new target.
+
+npm visibility and collaborator endpoints return `404` with the
 `ERR_PNPR_UNSUPPORTED_ROUTE` code.
 
+An npm publish document must list at least one version.
 Every key under `versions` and its manifest's `version` must be valid SemVer.
 pnpr rejects an invalid version with `400`, including versions in DELETE requests.
 Publish version keys with build metadata, such as `1.0.0+build.5`, return `400`
 with a message explaining that build metadata cannot be published.
-
-### Packument revisions
-
-A hosted package's full metadata document includes `_rev`. A partial unpublish
-PUT must use that value in `/{package}/-rev/{rev}`. If the body also includes
-`_rev`, it must match the path. A stale revision returns `409` without removing
-versions. Read the package metadata again before retrying.
-
-A deprecation PUT to `/{package}` must include the current `_rev`. It changes
-only the versions' `deprecated` fields. Dist-tags and other package metadata
-stay unchanged. A missing or stale `_rev` returns `409`.
-
-### Platform variants
-
-A hosted version can carry platform variants: archives that pnpm links in
-place of the version's own archive on the platforms they declare. Each variant
-is a complete package whose `package.json` has the version's `name` and
-`version` and declares its platforms as platform tags:
-
-```json
-{ "name": "fast-thing", "version": "1.4.0", "variant": { "platforms": ["linux-x64", "linux-x64-musl"] } }
-```
-
-A tag is `<os>-<cpu>`, then optionally `musl` or a glibc floor
-(`manylinux_2_28`), a macOS or Windows floor (`macos_11_0`, `windows_10_0`), an
-N-API floor (`napi8`) or a Node.js or Electron ABI (`node127`, `electron130`);
-or `wasm32`. Only the canonical form is accepted.
-
-A variant's tag is its platforms' tags, sorted and joined with `+`, such as
-`linux-x64+linux-x64-musl`, and at most 128 bytes long. The publish document
-attaches each variant as `<basename>-<version>~<tag>.tgz`, with the `.tgz`'s
-`integrity` beside its `data`, or with `integrity` alone for an archive
-[staged](ecosystems.md#staged-archives) before the publish, so a version's
-archives are not bounded by one request body.
-pnpr rejects the version when a variant:
-
-- has another `name` or `version`, or other `peerDependencies` or
-  `peerDependenciesMeta`, than the version;
-- requires a build;
-- has no `variant` field, one that does not parse, or an `os`, `cpu`, or
-  `libc` field;
-- declares platforms that give another tag than the one that names it;
-- lists a platform another variant lists;
-- is attached for a version the publish document does not describe, or
-  without an `integrity`.
-
-A version published with a provenance statement (its `.sigstore` attachment) is
-rejected unless the statement names every archive of the version: the `.tgz`
-that `dist.tarball` names by the version's PURL, such as `pkg:npm/%40acme/fast@1.0.0`, and each
-variant's `.tgz` by its PURL with the `variant` qualifier, each with its SHA-512.
-
-A variant may differ from the version in its files, dependencies, bundled
-dependencies, `bin`, `main`, `exports`, and `engines`. pnpr serves a
-variant's tar at `/{name}@{version}/variants/{tag}`, and at
-`/{name}@{version}+r{revision}/variants/{tag}` while that revision is selected.
-
-Only [pnpr's package document](#pnprs-package-document) and release records
-list the variants, under `variants`: each with its `tag`, structured
-`platforms`, tar `integrity`, sizes, `bins`, and a `manifest` of the fields
-that differ from the version's (`null` for a removed field). npm's documents
-do not list them, so npm clients install the version's own archive, its
-`any` archive.
-
-A version can also be published with variants only: its publish document has
-no `dist` and no `<basename>-<version>.tgz` attachment. pnpr then generates the
-archive npm's documents point to, a `package.json` that lists the union of the
-variants' `os`, `cpu`, and Linux `libc`, so npm reports an unsupported platform
-instead of installing an empty package. pnpr's package document and the release
-record describe such a version without a top-level `integrity`, by the manifest
-its variants share: their peer dependencies, and each dependency every variant
-declares with the same specifier.
 
 Publishing a version that already exists is a `409`. On the S3 backend, where
 several stateless replicas can write to one bucket, concurrent writers are
@@ -638,6 +580,24 @@ changed is rejected with a `409`; a dist-tag write instead replays its mutation
 against the fresh packument, and reports `409` only if it keeps losing. Either
 way no writer's update is silently discarded. See
 [Packument revisions](#packument-revisions) and [Storage backends](storage.md#concurrent-writers).
+
+### Packument revisions
+
+Fetch `/{package}?write=true` to get a hosted package's current full metadata
+document and its `_rev`, even when requesting install metadata. This read requires
+an authenticated account with `publish` or `annotate` access. It includes
+versions hidden from install metadata by OSV advisories. The response
+carries `Cache-Control: private, no-store`.
+
+Whole-package deletes, partial unpublishes, and maintainer updates through a
+revision URL must use that value in `/{package}/-rev/{rev}`. If the body also
+includes `_rev`, it must match the path. A stale revision returns `409` without
+changing the package. Read the package metadata again before retrying.
+
+A deprecation PUT to `/{package}` must include the current `_rev`. It changes
+only the versions' `deprecated` fields. Set `deprecated` to a string to
+deprecate a version. An empty string clears the deprecation. Dist-tags and other package metadata
+stay unchanged. A missing or stale `_rev` returns `409`.
 
 ### Publish-time manifest verification {#publish-time-manifest-verification}
 
@@ -698,6 +658,10 @@ archive's exact `package.json` and `npm-shrinkwrap.json` bytes:
 
 A staged publish is verified when it is approved.
 
+A version published with a provenance statement (its `.sigstore` attachment) is
+rejected unless the statement names the `.tgz` that `dist.tarball` names: by the
+version's PURL, such as `pkg:npm/%40acme/fast@1.0.0`, with its SHA-512.
+
 ## Staged publishing endpoints
 
 These implement the server half of [`pnpm stage`](https://pnpm.io/cli/stage), npm's
@@ -716,6 +680,10 @@ then, and is where a version conflict is caught. pnpr raises no
 one-time-password challenge of its own at either point. The `--otp` flag on
 `pnpm stage approve` is for registries that do.
 
+When different authenticated accounts stage and approve a version, pnpr records
+the approver and reports `stagedPublish` trust. The same account can complete
+both steps. In that case the version retains its other trust evidence.
+
 A stage id is a v4 UUID drawn from the OS CSPRNG, so the id itself acts as an
 unguessable handle. Held publish bodies live under a reserved `.staged/` namespace in
 the hosted store (both the filesystem and S3 backends). Approval records live
@@ -728,7 +696,7 @@ in the database. A record is only visible through the same base it was created w
 | `GET` | `/-/stage` | List held records, oldest first. Accepts `page` (zero-based, defaults to `0`), `perPage` (defaults to `100`, clamped to `1` to `100`), and `package` (exact name filter). Returns `{"items":[...],"page":...,"perPage":...,"total":...}`. |
 | `GET` | `/-/stage/{id}` | One held record. Requires `publish` on the record's package. |
 | `GET` | `/-/stage/{id}/tarball` | The held tarball as `application/octet-stream`, for inspection before approval. Requires `publish`. |
-| `POST` | `/-/stage/{id}/approve` | Publish the held document and drop the record. Empty body; returns `201` with `{"ok":true}`. Requires `publish`. |
+| `POST` | `/-/stage/{id}/approve` | Publish the held document and its version notes, then drop the record. Empty body; returns `201` with `{"ok":true}`. Requires `publish`. |
 | `DELETE` | `/-/stage/{id}` | Reject: delete the record and its tarball without publishing. Returns `204`. Requires `publish`. |
 
 Each record carries `id`, `packageName`, `version`, `tag`, `createdAt`,
@@ -758,6 +726,8 @@ teams are the same under every scope.
 | `DELETE` | `/-/team/{scope}/{team}` | Destroy a team. Returns `200`. |
 | `PUT` | `/-/team/{scope}/{team}/user` | Add a member. The body is `{"user": "<username>"}`. Returns `201`. |
 | `DELETE` | `/-/team/{scope}/{team}/user` | Remove a member by `{"user": "<username>"}` or `{"userId": "<account-id>"}`. Account IDs also remove deleted members. Returns `204`, also when the user was not a member. A username with no account returns `404`. |
+
+With `?format=cli`, the team list returns strings of the form `scope:team` and the member list returns usernames.
 
 [Changes](configuration.md#managing-teams-through-the-api) are accepted only
 under a scope that an npm hosted registry serves:
@@ -909,9 +879,9 @@ and `routes.public` keys, as JSON. A `{name}` is a key of
 - Replacing the whole document and restoring a version work while the stored
   document cannot be loaded, so they repair it.
 
-With the default account file store, each replica keeps its own accounts, so an
+With the default SQLite database, each replica keeps its own accounts, so an
 account change reaches only the replica that served it. Use a
-[shared auth backend](auth-backends.md) to run several replicas.
+[shared database](auth-backends.md) to run several replicas.
 
 ## Error responses
 

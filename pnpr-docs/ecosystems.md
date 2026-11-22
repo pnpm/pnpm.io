@@ -110,6 +110,10 @@ Hosted registries use the [default storage namespace](storage.md#layout) when
 `namespace` is omitted. Set `namespace` to choose another namespace. Two hosted
 registries of the same ecosystem cannot share a `namespace`.
 
+Cargo and Python uploads must contain only regular files and directories with relative paths.
+Each path must be unique when compared without regard to ASCII case. Path components
+may not be empty or end in a space or period.
+
 ## Cargo
 
 A Cargo registry serves a sparse index at `/cargo/index/` and the crates API at
@@ -187,7 +191,7 @@ The project list at `/pypi/simple/` enumerates hosted projects only.
 Uploads must be valid wheel, `.tar.gz`, or `.zip` archives. The root
 `METADATA` in a wheel's `.dist-info` directory or the root `PKG-INFO` in a
 source distribution must name the same project and version as the filename
-and upload form.
+and upload form. The decompressed archive size limit is 512 MiB.
 
 Publishers can yank a file with `PUT /pypi/files/<project>/<filename>/yank`
 and a JSON body such as `{"reason":"Broken release"}`. A JSON body is required. An empty object yanks
@@ -206,7 +210,8 @@ own it, starting with the account that first publishes it. Under the default
 [`publish` rule](configuration.md#the-packages-map), only its owners and the
 `auth.admins` can publish to it.
 
-Owners and `auth.admins` can add and remove owners. Anyone who can read the
+Owners and `auth.admins` can add and remove owners when a grant gives them
+`annotate` on the package. Anyone who can read the
 package can list them. A package keeps at least one owner.
 
 | Ecosystem | Owners URL |
@@ -383,9 +388,7 @@ them, each reference counted. An archive the publishing account has not staged, 
 that has expired, fails the whole publish with `400`, and nothing of it is
 published. A retry of a
 committed request gets the recorded outcome without reading its archives
-again, so it succeeds even after they are gone. A version's
-[platform variants](endpoints.md#platform-variants) can be staged the same
-way. A sigstore bundle and a publish
+again, so it succeeds even after they are gone. A sigstore bundle and a publish
 [held for approval](endpoints.md#staged-publishing-endpoints) carry their bytes
 inline.
 

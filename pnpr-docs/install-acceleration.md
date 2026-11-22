@@ -134,6 +134,9 @@ refused too, unless it is the `--public-url` origin or
 
 ## Private registries {#private-registries}
 
+When resolving from its own npm, Cargo, or PyPI registry, pnpr uses the caller's
+read grants for both registry reads and cached metadata.
+
 Clients never forward their upstream registry credentials to pnpr. Instead, a
 private registry is configured server-side as an
 [upstream registry](configuration.md#upstream-registries) with a server-owned
@@ -162,12 +165,13 @@ reads hosted packages and named upstreams such as `/npm/~internal/` inside the
 server, using the caller's access permissions. Upstream credentials are sent
 only to the configured upstream, never to `public_url` or its reverse proxy.
 
-The resolution cache is **authorization-aware**: a resolution that touched
-only public routes is cached once and shared by every caller, while a
-resolution that touched private routes is keyed by the access it required and
-is only replayed for callers who still hold that access at the current
-upstream credential. Rotating an upstream credential automatically moves new
-resolutions to a fresh cache namespace.
+The resolution and lockfile-verdict caches are **authorization-aware**. pnpr
+caches an entry that touched only public routes once and shares it across
+callers. An entry that touched private routes records the access it required,
+and pnpr replays it only for callers who still hold that access at the current
+upstream credential. Reloading grants clears cached resolutions and verdicts,
+and rotating an upstream credential moves new entries to a fresh cache
+namespace.
 
 ## Enabling it
 

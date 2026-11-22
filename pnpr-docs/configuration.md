@@ -280,8 +280,11 @@ authenticate to pnpr with their own tokens and never see the upstream
 credential. Declaring a `packages:` map on a private upstream also
 bounds what that credential can be used for: a caller can't pull arbitrary
 public names through it. pnpr never forwards a client's credentials upstream,
-and the server-owned credential is only ever attached over the upstream's own
-scheme (an `https://` registry's token is never sent over plain `http://`).
+and sends configured headers only to the selected upstream.
+Upstreams with `auth` or `headers` require HTTPS or loopback HTTP.
+This also applies to networks listed in `routes.allowedPrivateNetworks`.
+The resolver uses custom headers when it fetches npm, Cargo, and Python package metadata for resolution
+and lockfile verification.
 
 Each upstream gets its own cache namespace: a `public` upstream uses a stable,
 secret-free namespace shared across restarts, while a private upstream's cache
@@ -483,7 +486,9 @@ once:
 The `local` registry pnpr stores on first start gives `read` to
 `$authenticated`, not `$all`. Nobody is given `delete` by default. Change a
 default grant like any other. Removing a registry takes it out of every grant
-and removes a grant left with no registry.
+and removes a grant left with no registry. Restoring an earlier revision
+creates no default grants, so a removed registry that a restore brings back
+serves nobody until a grant covers it.
 
 ### Managing grants {#managing-grants}
 
@@ -777,11 +782,11 @@ Can be specified as an integer number of seconds (e.g. `10`) or with a duration 
 packumentTtl: 30s
 ```
 
-A request for a version, its tarball, or its manifest that the fresh packument
-does not list refetches the packument, at most once a minute per package. A
-version published upstream after the fetch is then served without waiting for
-the TTL. Within a minute of the last fetch or refetch attempt, pnpr answers
-`404` for an unlisted version without asking the upstream.
+When a cached packument is at least a minute old, a request for an unlisted
+version or its tarball triggers an upstream refresh. If the refresh fails,
+pnpr returns the upstream error and the next request can retry immediately.
+A package metadata request with `Cache-Control: no-cache` revalidates even a
+fresh packument. Fetching from the upstream requires the `cache` grant.
 
 ## `maxTarballSize`
 
@@ -828,7 +833,7 @@ packageDocuments:
 
 | Field | Meaning |
 | --- | --- |
-| `splitThreshold` | The size of a package's document with every manifest inline above which only the versions a resolution likely picks keep their manifests. pnpr decides on every read, so a document can go back below it, for example when a publish after a long gap drops the publish times that fall out of the window. Defaults to `64KiB`. |
+| `splitThreshold` | The size of a package's document with every manifest inline above which only the versions a resolution likely picks keep their manifests. pnpr decides on every read, so a document can go back below it, for example when a publish after a long gap drops the publish times that fall out of the window. See the [package document](endpoints.md#pnprs-package-document) for versions that always keep their manifests. Defaults to `64KiB`. |
 | `publishTimeWindow` | How far back from a package's last publish its versions keep their publish times. Defaults to `30d`, which is also the shortest window pnpr accepts. |
 
 ## `releaseRecords`
@@ -982,7 +987,7 @@ pnpr derives a key for each purpose from its secret:
 
 Each secret must be at least 16 bytes. Quote a secret that YAML would read as a
 number, such as `secret: "${PNPR_SECRET}"` for an all-digit value. Changing the `cache` secret orphans the
-private cache entries keyed with the old one. `pnpr cache gc` removes them.
+private cache entries keyed with the old one. `pnpr cache-gc` removes them.
 
 When no `cache` secret is configured, pnpr generates a random one for a single
 run on an empty local cache directory. pnpr refuses to start without one when
