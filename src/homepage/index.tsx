@@ -33,12 +33,23 @@ function useGithubStarsCount () {
 export function Homepage ({ messages = {}, basePath = '', ...props }: HomepageProps) {
   const t = (text: string) => messages[text] || text
   const starsCount = useGithubStarsCount()
+  const linkTestimonials = {
+    ...testimonials,
+    items: testimonials.items.map((item) => ({
+      ...item,
+      platformIcon: (
+        <a aria-label={`View ${item.authorName}'s post on X`} href={(item as any).url} target="_blank" rel="noreferrer" style={{ display: 'inline-flex' }}>
+          {item.platformIcon}
+        </a>
+      ),
+    })),
+  }
   return (
     <PackageHomepage
       hero={hero(t, basePath, starsCount)}
       features={features(t, basePath)}
       sponsors={sponsors(t)}
-      testimonials={testimonials}
+      testimonials={linkTestimonials}
       ossProjects={ossProjects(t)}
       {...props}
       messages={messages}
