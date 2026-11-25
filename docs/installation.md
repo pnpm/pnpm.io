@@ -135,6 +135,14 @@ You can also install the `pnpm` package globally with npm, which needs Node.js 1
 npm install -g pnpm@latest
 ```
 
+## Using pkgx
+
+If you have pkgx installed, you can install pnpm using the following command:
+
+```
+pkgx install pnpm
+```
+
 :::tip
 
 Do you wanna use pnpm on CI servers? See: [Continuous Integration](./continuous-integration.md).
