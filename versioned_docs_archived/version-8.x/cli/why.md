@@ -48,10 +48,6 @@ Only display the dependency tree for packages in `devDependencies`.
 
 Display only dependencies within a specific depth.
 
-### --only-projects
-
-Display only dependencies that are also projects within the workspace.
-
 ### --filter &lt;package_selector\>
 
 [Read more about filtering.](../filtering.md)
