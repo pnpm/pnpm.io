@@ -119,6 +119,8 @@ curl -fsSL https://get.pnpm.io/install.sh | env PNPM_NO_MODIFY_PATH=1 sh -
 $env:PNPM_NO_MODIFY_PATH='1'; Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
 ```
 
+See package name for your system package manager at [Repology](https://repology.org/project/pnpm/versions).
+
 ## Using npm
 
 ```sh
