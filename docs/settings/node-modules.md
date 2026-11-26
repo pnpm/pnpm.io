@@ -383,7 +383,7 @@ Using a global virtual store can speed up installations when a warm cache is ava
 
 To support hoisted dependencies when using a global virtual store, pnpm relies on the `NODE_PATH` environment variable. This allows Node.js to resolve packages from the hoisted `node_modules` directory. Node.js does not respect `NODE_PATH` for ESM imports, so every process pnpm spawns for the project (`pnpm run`, `pnpm exec`, lifecycle scripts, and the tools `pnpm dlx` runs) receives both `NODE_PATH` and a `NODE_OPTIONS` `--import` flag that registers a resolve hook restoring `NODE_PATH` lookups for ESM. A dependency that imports a package **not declared in its own `package.json`** (which is considered bad practice) resolves for CommonJS and ESM alike.
 
-Two things fall outside that: a `node` process you start yourself rather than through pnpm, and a project that sets [`extendNodePath`](./other.md#extendnodepath) to `false`, which turns the whole `NODE_PATH` mechanism off and takes the resolve hook with it. Use [packageExtensions] to declare the missing dependencies if you need them to resolve in either case.
+When you start `node` outside pnpm, or set [`extendNodePath`](./other.md#extendnodepath) to `false`, pnpm does not add the global virtual store's `NODE_PATH` entries or ESM resolve hook to the process environment. Use [packageExtensions] to declare missing dependencies in either case. This also helps [TypeScript resolve undeclared imports](../global-virtual-store.md#limitations).
 
 :::
 
@@ -416,6 +416,8 @@ Tells pnpm which packages should be hoisted to `node_modules/.pnpm/node_modules`
 default, all packages are hoisted - however, if you know that only some flawed
 packages have phantom dependencies, you can use this option to exclusively hoist
 the phantom dependencies (recommended).
+
+With the default virtual store, adding a direct dependency to the workspace root removes its hidden hoist link on the next full install. An external virtual store can keep the link to resolve that dependency.
 
 For instance:
 

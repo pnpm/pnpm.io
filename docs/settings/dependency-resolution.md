@@ -11,7 +11,7 @@ dependency graph, including peer dependencies. This is useful for enforcing all 
 version of a dependency, backporting a fix, replacing a dependency with a fork, or
 removing an unused dependency.
 
-The overrides field can only be set at the root of the project.
+The overrides field can only be set at the root of the project. A relative `file:` override is resolved from that root. The lockfile may use a shorter relative path to the same directory.
 
 An example of the `overrides` field:
 
@@ -26,7 +26,7 @@ overrides:
 You may specify the package the overridden dependency belongs to by
 separating the package selector from the dependency selector with a ">", for
 example `qar@1>zoo` will only override the `zoo` dependency of `qar@1`, not for
-any other dependencies.
+any other dependencies. A selector can name only one parent.
 
 Both the parent selector and the target selector support `*` wildcard patterns on package names:
 
@@ -35,6 +35,35 @@ overrides:
   "@esbuild/*:optional": "-"
   "@mui/*>react:peer": "^17.0.0 || ^18.0.0"
 ```
+
+#### Override key syntax
+
+Tools that read `overrides` can parse each key using this [ABNF grammar](https://www.rfc-editor.org/rfc/rfc5234). The `%s` prefix marks [case-sensitive literals](https://www.rfc-editor.org/rfc/rfc7405).
+
+```abnf
+override-key = [package-selector ">"] package-selector [dependency-type]
+package-selector = package-name ["@" specifier]
+package-name = ["@" 1*name-char "/"] 1*name-char
+name-char = ALPHA / DIGIT / "-" / "_" / "." / "!" / "~" / "*" / "'" / "(" / ")"
+specifier = <possibly empty dependency specifier containing no colon>
+dependency-type = %s":prod" / %s":optional" / %s":peer"
+```
+
+Apply these rules to the decoded YAML key:
+
+1. Trim surrounding whitespace. A `>` separates parent and target when it has a preceding character other than an ASCII space, `|`, or `@`. Reject keys with more than one such separator. Trim the parent and target separately.
+2. Read a dependency type only at the end of the target. Within each package selector, the first `@` after the initial character introduces the specifier. This preserves the leading `@` of a scoped name.
+3. An unscoped name cannot start with `.`, `-`, or `_`, or equal `node_modules` or `favicon.ico` (case-insensitive). In a scoped name, the part after `/` cannot start with `.`.
+4. Keep an absent specifier distinct from an empty one. An empty specifier is valid only for a [convergence override](#convergence-overrides) on a single package name without a wildcard or dependency type.
+
+| Key | Parent | Target | Target specifier | Dependency type |
+| --- | --- | --- | --- | --- |
+| `leaf@>1` | absent | `leaf` | `>1` | absent |
+| `top@>=1>leaf:peer` | `top` with specifier `>=1` | `leaf` | absent | `peer` |
+| `@scope/*:optional` | absent | `@scope/*` | absent | `optional` |
+| `leaf@` | absent | `leaf` | empty | absent |
+
+For example, `top:peer>leaf` is invalid because the suffix is on the parent. `top>middle>leaf` is invalid because it names two parents.
 
 #### Dependency-type selectors
 
@@ -121,6 +150,19 @@ packageExtensions:
 overrides:
   "react-dom>react:peer": "-"
 ```
+
+#### overrides.rules and overrides.unused
+
+Put selectors under `overrides.rules` to configure unused overrides alongside them. Use `rules: {}` for an empty map. Without `rules`, a key named `unused` refers to a package.
+
+```yaml title="pnpm-workspace.yaml"
+overrides:
+  unused: ignore
+  rules:
+    example-tool: ^2.0.0
+```
+
+`overrides.unused` accepts `warn` (the default) or `ignore`. The warning follows the same rules as `warnUnusedOverrides`. When a file sets both, `overrides.unused` wins.
 
 ### warnUnusedOverrides
 
@@ -384,7 +426,7 @@ minimumReleaseAgeExclude:
 - '@myorg/*'
 ```
 
-You may also exempt specific versions (or a list of specific versions using a disjunction with `||`). This allows pinning exceptions to mature-time rules:
+You may also exempt specific versions (or a list of specific versions using a disjunction with `||`). Exact versions ignore SemVer build metadata. For example, an exception for `1.0.0-rc.1+build.7` matches `1.0.0-rc.1`.
 
 ```yaml title="pnpm-workspace.yaml"
 minimumReleaseAge: 1440
@@ -463,7 +505,7 @@ The check also covers the pnpm version a project pins in `packageManager` or `de
 * Default: **[]**
 * Type: **string[]**
 
-A list of package selectors that should be excluded from the trust policy check. This allows you to install specific packages or versions even if they don't satisfy the `trustPolicy` requirement.
+A list of package selectors that should be excluded from the trust policy check. This allows you to install specific packages or versions even if they don't satisfy the `trustPolicy` requirement. Exact versions ignore SemVer build metadata.
 
 For example:
 

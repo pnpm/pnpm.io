@@ -47,6 +47,8 @@ Both projects symlink directly to the same location in the global virtual store.
 
 In the global virtual store, each package directory is named by the hash of its dependency graph. Two projects that use `lodash@4.17.21` with the same transitive dependency tree will point to the exact same directory. If the dependency trees differ (e.g., different peer dependencies), pnpm creates separate entries. This is conceptually similar to how [NixOS manages packages](https://nixos.org/guides/how-nix-works/) using dependency graph hashes.
 
+Each checkout gets its own directory for an injected workspace package or a local directory dependency. Packages that depend on it, directly or transitively, also get checkout-specific directories so their links resolve within that checkout.
+
 ## When to use it
 
 The global virtual store is most useful when you have multiple checkouts of the same project on disk. For example, when using [git worktrees for multi-agent development](./git-worktrees.md). In that scenario, each worktree gets a nearly free `node_modules` because all the real package content already exists in the shared store.
@@ -57,7 +59,8 @@ It also speeds up installations across unrelated projects on the same machine, s
 
 - **CI environments**: In CI, caches are typically absent, so there's no warm global store to benefit from. The global virtual store is generally not useful in CI.
 - **Shared trust domain**: The global virtual store and the content-addressable store are shared writable state. Use them only for projects, users, and jobs that trust each other, and protect the store path with filesystem permissions.
-- **ESM hoisting**: pnpm uses the `NODE_PATH` environment variable to support hoisted dependencies with the global virtual store, and Node.js does not respect `NODE_PATH` for ESM imports. Every process pnpm spawns for the project (`pnpm run`, `pnpm exec`, and lifecycle scripts) also gets a `NODE_OPTIONS` `--import` flag registering a resolve hook that restores those lookups, so a dependency importing a package it does not declare resolves under ESM too ([#9618](https://github.com/pnpm/pnpm/issues/9618)). A `node` process started outside pnpm does not get that environment, and setting [`extendNodePath`](./settings/other.md#extendnodepath) to `false` turns the whole `NODE_PATH` mechanism off, resolve hook included; declare the missing dependencies with [packageExtensions](./settings/dependency-resolution.md#packageextensions) if you need them to resolve in either case.
+- **ESM hoisting**: pnpm uses the `NODE_PATH` environment variable to support hoisted dependencies with the global virtual store, and Node.js does not respect `NODE_PATH` for ESM imports. Every process pnpm spawns for the project (`pnpm run`, `pnpm exec`, and lifecycle scripts) also gets a `NODE_OPTIONS` `--import` flag registering a resolve hook that restores those lookups, so a dependency importing a package it does not declare resolves under ESM too ([#9618](https://github.com/pnpm/pnpm/issues/9618)). See the [global virtual store settings](./settings/node-modules.md#enableglobalvirtualstore) for how to resolve these imports when starting `node` outside pnpm or setting `extendNodePath` to `false`.
+- **TypeScript resolution**: TypeScript uses its own module resolver and does not consult `NODE_PATH` or Node.js resolve hooks. If an installed package imports an undeclared dependency, even a type check run through `pnpm exec` can fail with `TS2307` ("Cannot find module"). In `pnpm-workspace.yaml`, use [packageExtensions](./settings/dependency-resolution.md#packageextensions) to add the missing package to the importing package's `dependencies`, then run `pnpm install` again.
 
 :::note
 

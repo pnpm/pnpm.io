@@ -42,6 +42,30 @@ A registry signs the integrity of a package's `.tgz`. When the lockfile pins tar
 
 The command exits with code `1` if any package has an invalid signature, or if a registry advertises signing keys but a package was published without a signature. Combine with `--json` to get machine-readable output.
 
+### deprecations
+
+```sh
+pnpm audit deprecations
+```
+
+Lists the installed packages that their registry marks as deprecated, with the message the publisher left. Each package shows the projects that depend on it directly, or a chain of packages that brings it in. When the package has a version that is not deprecated, the newest one is named.
+
+pnpm reads registry metadata from its cache when that metadata is less than 5 minutes old, so right after an install no requests are needed. Older metadata is checked against the registry, so a package deprecated since then is reported. Tarball, git, and directory dependencies are skipped.
+
+The command exits with code `1` if any installed package is deprecated. `--prod`, `--dev`, `--no-optional`, `--json`, `--ignore-registry-errors`, and workspace filters apply to it.
+
+### engines
+
+```sh
+pnpm audit engines
+```
+
+Lists the installed packages that don't support the current Node.js version or platform, with what each one wants. Each package shows the projects that depend on it directly, or a chain of packages that brings it in. These are the packages an install warns about.
+
+pnpm checks the packages against the Node.js version an install uses: the [`nodeVersion`](../settings/cli.md#nodeversion) setting, the Node.js version the lockfile pins for the root project, or the system Node.js. The platform includes [`supportedArchitectures`](../settings/dependency-resolution.md#supportedarchitectures). An optional dependency that an install skips is not listed. The command reads the lockfile and makes no registry requests.
+
+The command exits with code `1` if any installed package is incompatible. `--prod`, `--dev`, `--no-optional`, `--json`, and workspace filters apply to it.
+
 ## Options
 
 ### --audit-level &lt;severity\>

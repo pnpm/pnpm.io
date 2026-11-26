@@ -312,6 +312,8 @@ Changing [`trustLockfile`](./dependency-resolution.md#trustlockfile) alone does 
 
 When the command is filtered, for example `pnpm --filter foo run build`, the check covers the selected projects and the workspace projects they depend on, and the install it runs is filtered the same way.
 
+After a frozen or filtered install has handled a scope registry change for the selected projects, the next command can reuse that install. Run an unfiltered `pnpm install --no-frozen-lockfile` to resolve dependencies under the new registry settings.
+
 ### strictDepBuilds
 
 * Default: **true**
@@ -333,7 +335,7 @@ allowBuilds:
   nx@21.6.0: false
 ```
 
-A denial also covers a package from a [named registry](../package-sources.md#named-registries), so `nx@21.6.0: false` blocks `nx@work:21.6.0` too. An approval by name or version covers the default registry only. Approve a named-registry package by its exact key, such as `nx@work:21.6.5: true`.
+Exact versions in package matchers ignore SemVer build metadata. A denial also covers a package from a [named registry](../package-sources.md#named-registries), so `nx@21.6.0: false` blocks `nx@work:21.6.0` too. An approval by name or version covers the default registry only. Approve a named-registry package by its exact key, such as `nx@work:21.6.5: true`.
 
 **Git-hosted packages:** a package name on its own never approves builds for a git or tarball dependency, because the name alone does not identify the artifact. Approve one either by its exact resolved path (including the commit) or by its repository URL:
 
@@ -413,19 +415,42 @@ A `skills` list names the only skills of the package that pnpm links, and a skil
 
 A build decision is written to `permissions` only when the file already has a `permissions` setting. Otherwise it is written to `allowBuilds`, which older pnpm versions read too.
 
+#### permissions.rules and permissions.unused
+
+To choose how pnpm handles unmatched rules, put the package selectors under `permissions.rules` and set `permissions.unused` alongside it.
+
+```yaml title="pnpm-workspace.yaml"
+permissions:
+  unused: warn
+  rules:
+    example-tool:
+      skills: true
+```
+
+`warn` (the default) reports selectors in `permissions` or `allowBuilds` that match no dependency during a full workspace resolution. Both `warn` and `ignore` keep the permissions for future installs. The warning covers the workspace and locally included files. It skips rules supplied by config dependencies or added by an `updateConfig` hook.
+
+
 ### skills.dirs
 
 Added in: v12.11.0
 
-* Default: **the agent skill directories that exist in the workspace root, plus the one of the agent running pnpm**
+* Default: **the agent skill directories detected under the workspace root for projects or the home directory for global packages, plus the directory of the agent running pnpm**
 * Type: **String[]**
 
-The directories, relative to the workspace root, that pnpm links approved [agent skills](../agent-skills.md) into. When set, it replaces the detected directories, and pnpm creates the ones that are missing. The first time a project approves a skill, `pnpm approve` lists the detected directories and asks which ones to link into, recording the answer here.
+The directories that pnpm links approved [agent skills](../agent-skills.md) into. In a project, paths are relative to the workspace root. In `globalPackagesConfig` in the global `config.yaml`, paths are relative to the home directory and must stay inside it. When set, it replaces the detected directories, and pnpm creates the ones that are missing. The first time skills are approved, `pnpm approve` or `pnpm approve -g` lists the detected directories and asks which ones to link into, recording the selected directories here. If you select no directories, pnpm keeps using the detected directories.
 
 ```yaml title="pnpm-workspace.yaml"
 skills:
   dirs:
     - .claude/skills
+```
+
+```yaml title="config.yaml"
+globalPackagesConfig:
+  skills:
+    dirs:
+      - .agents/skills
+      - .claude/skills
 ```
 
 An empty list turns agent skills off. pnpm stops offering them for approval and removes the ones it linked.
